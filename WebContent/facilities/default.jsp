@@ -35,8 +35,6 @@
 		<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-12">
-
-
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title">예약 내역</h3>
@@ -94,8 +92,8 @@
 						</table>
 						<div class="row" style="padding: 15px"></div>
 						<div class="row">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-3">
+							<div class="col-md-1"></div>
+							<div class="col-md-3">
 								<div class="form-group">
 									<select class="form-control">
 										<option>option 1</option>
@@ -106,9 +104,9 @@
 									</select>
 								</div>
 							</div>
-							<div class="col-xs-4">
+							<div class="col-md-4">
 								<div class="box-tools">
-									<div class="input-group input-group-sm" style="width: 200px;">
+									<div class="input-group input-group-sm" >
 										<input type="text" name="table_search" class="form-control"
 											placeholder="Search">
 
@@ -120,7 +118,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-4">
+							<div class="col-md-4">
 								<ul class="pagination pagination-sm">
 									<li><a href="#">&laquo;</a></li>
 									<li><a href="#">1</a></li>
@@ -129,6 +127,14 @@
 									<li><a href="#">&raquo;</a></li>
 								</ul>
 							</div>
+						</div>
+						<div class="row">
+						<div class="col-md-4">
+						</div>
+						
+						<div class="col-md-4">
+						<button type="button" class="btn btn-block btn-info btn-flat">예약 취소</button>
+						</div>
 						</div>
 						<!-- /.box-body -->
 
