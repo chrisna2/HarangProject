@@ -55,17 +55,30 @@
            <!-- Default box -->
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Title</h3>
+              <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse" ><i class="fa fa-minus"></i></button>
+              <h1 class="box-title">국문인의 밤</h1>
               <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
                
               </div>
             </div>
             <div class="box-body">
-              Start creating your amazing application!
+            
+                  참가신청 기간 : xx월 xx일 ~ yy월 yy일<br>
+			행사 기간 : zz월 zz일 ~ zz월 ZZ일   <br>      
+ 			지급 포인트 : 1000 <br>
+ 			<hr/>
+ 			하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을
+ 			하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을
+ 			하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을
+ 			하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을
+ 			하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을
+ 			하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을
+ 			
             </div><!-- /.box-body -->
             <div class="box-footer">
-              Footer
+          
+                    <button type="submit" class="btn btn-primary">참가신청</button>
+                 
             </div><!-- /.box-footer-->
           </div><!-- /.box -->
 
@@ -73,16 +86,16 @@
             <div class="col-xs-12">
               <div class="box">
               <div class="box-header">
-                  <h3 class="box-title">하랑 도전 리스트!</h3>
+                  <h3 class="box-title">학사 일정</h3>
                    <div class="box-tools">
                     <div class="input-group">
                       <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                       <select class="form-control input-sm pull-right" style="width: 150px;">
-                        <option>도전 번호</option>
-                        <option>도전 이름</option>
-                        <option>도전 기관</option>
-                        <option>도전 보상</option>
-                        <option>성공 여부</option>
+                        <option></option>
+                        <option>포인트 지급</option>
+                        <option>학과</option>
+                        <option>제목</option>
+                       
                       </select>
                       <div class="input-group-btn">
                         <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
@@ -93,39 +106,49 @@
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Reason</th>
+                      <th>번호</th>
+                      <th>학과</th>
+                      <th>시작일</th>
+                      <th>제목</th>
+                      <th>참가학년</th>
+                      <th>포인트 지급</th>
+                      
                     </tr>
                     <tr>
                       <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="label label-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <td>[국문과]</td>
+                      <td>2017년 6월 8일</td>
+                      <td><a href = "#" class="" style = "color:black">국문인의 밤</a></td>
+                      <td>전체</td>
+                      <td>Y</td>
+                     
                     </tr>
                     <tr>
                       <td>219</td>
-                      <td>Alexander Pierce</td>
-                      <td>11-7-2014</td>
-                      <td><span class="label label-warning">Pending</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <td>[국문과]</td>
+                      <td>2017년 4월 30일</td>
+                      <td><a href = "#" class="" style = "color:black">국문과 체육대회</a></td>
+                      <td>전체 학년</td>
+                      <td>Y</td>
+                      
                     </tr>
                     <tr>
                       <td>657</td>
-                      <td>Bob Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="label label-primary">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <td>[전체]</td>
+                      <td>2017년 5월 20일</td>
+                     <td><a href = "#" class="" style = "color:black">성공취업 세미나</a></td>
+                      <td>3,4 학년</td>
+                      <td>Y</td>
+                      
                     </tr>
                     <tr>
                       <td>175</td>
-                      <td>Mike Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="label label-danger">Denied</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <td>[전체]</td>
+                      <td>2017년 3월 8일</td>
+                      <td><a href = "#" class="" style = "color:black">신입생을 위한 도서관 이용 교육</a></td>
+                      <td>1 학년</td>
+                      <td>Y</td>
+                      
                     </tr>
                   </table>
                 </div><!-- /.box-body -->
