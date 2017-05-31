@@ -6,7 +6,7 @@
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
-     <title>기본 값 페이지</title>
+     <title>학비 포인트 제로!</title>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -30,7 +30,7 @@
            <!-- 너비 사이즈 수정  : col-->
            <div class="col-md-12">
         
-              <div class="info-box bg-red-gradient">
+              <div class="info-box bg-black-gradient">
                 <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">당신의 다음 학기 학비</span>
@@ -44,8 +44,8 @@
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
         
-            <div class="box box-primary">
-                <div class="box-header bg-blue-gradient">
+            <div class="box box-black">
+                <div class="box-header bg-black-gradient">
                   <h3 class="box-title">당신의 포인트!</h3>
                 </div>
                 
@@ -54,21 +54,21 @@
                 
                 <div class="box-body">
                   <div class="input-group">
-                    <span class="input-group-addon bg-blue-gradient"><i class="fa fa-money"></i> 보유 포인트</span>
+                    <span class="input-group-addon bg-black-gradient"><i class="fa fa-money"></i> 보유 포인트</span>
                     <input type="text" name="c_point" class="form-control" value="999999" readonly="readonly">
-                    <span class="input-group-addon bg-blue-gradient">포인트</span>
+                    <span class="input-group-addon bg-black-gradient">포인트</span>
                   </div>
                   <br>
                   <div class="input-group">
-                    <span class="input-group-addon bg-blue-gradient"><i class="fa fa-money"></i> 등록금 감면</span>
+                    <span class="input-group-addon bg-black-gradient"><i class="fa fa-money"></i> 등록금 감면</span>
                     <input type="text" name="c_point" class="form-control" placeholder="당신의 포인트를 입력 하세요" required="required">
-                    <span class="input-group-addon bg-blue-gradient">포인트</span>
+                    <span class="input-group-addon bg-black-gradient">포인트</span>
                   </div>
                   <br>
                  </div><!-- /.box-body -->
                 
-                  <div class="box-footer bg-blue-gradient" align="right">
-                    <input type="submit" class="btn btn-success" value="학비 포인트 감면">
+                  <div class="box-footer bg-black-gradient" align="center">
+                    <input type="submit" class="btn btn-default" value="★ ☆ ★ ☆ ★ 학비 포인트 감면 ★ ☆ ★ ☆ ★">
                 </div>
                 </form>
               </div><!-- /.box -->
