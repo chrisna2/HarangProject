@@ -30,135 +30,194 @@
 		</ol>
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
+
 	<section class="content">
 		<!-- 세로 길이 수정 -->
 		<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-12">
-				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title">예약 내역</h3>
+				+            <!-- 리스트 사용시  -->
+ +             <div class="box">
+ +                <div class="box-header">
+ +                  <h3 class="box-title">1학년 1학기 수업 목록</h3>
+ +                   <div class="box-tools pull-right">
+ +                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+ +                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+ +                  </div>
+ +                </div><!-- /.box-header -->
+ +                <div class="box-body">
+ +                  <table class="table table-bordered table-striped">
+ +                    <thead>
+ +                      <tr>
+ +                        <th>수업 번호</th>
+ +                        <th>주요 학과</th>
+ +                        <th>필수 여부</th>
+ +                        <th>수업 명</th>
+ +                        <th>대상 학년</th>
+ +                        <th>수업 요일</th>
+ +                        <th>수업 시간</th>
+ +                        <th>교수님</th>
+ +                        <th>강의실</th>
+ +                        <th>이수 학점</th>
+ +                        <th>시간표 등록</th>
+ +                      </tr>
+ +                    </thead>
+ +                    <tbody>
+ +                      <tr>
+ +                        <td>l000000001</td>
+ +                        <td>교양</td>
+ +                        <td>필수</td>
+ +                        <td>교양 영어 1</td>
+ +                        <td>1학년</td>
+ +                        <td>수요일</td>
+ +                        <td>1~3</td>
+ +                        <td>Daniel Harny</td>
+ +                        <td>멀티관 306호</td>
+ +                        <td>3</td>
+ +                        <td><input type="button" class="btn btn-primary" value="시간표 등록"></td>
+ +                      </tr>
+ +                      <tr>
+ +                        <td>l000000002</td>
+ +                        <td>교양</td>
+ +                        <td>필수</td>
+ +                        <td>교양 영어 1</td>
+ +                        <td>1학년</td>
+ +                        <td>수요일</td>
+ +                        <td>1~3</td>
+ +                        <td>Daniel Harny</td>
+ +                        <td>멀티관 306호</td>
+ +                        <td>3</td>
+ +                        <td><input type="button" class="btn btn-primary" value="시간표 등록"></td>
+ +                      </tr>
+ +                      <tr>
+ +                        <td>l000000003</td>
+ +                        <td>교양</td>
+ +                        <td>필수</td>
+ +                        <td>교양 영어 1</td>
+ +                        <td>1학년</td>
+ +                        <td>수요일</td>
+ +                        <td>1~3</td>
+ +                        <td>Daniel Harny</td>
+ +                        <td>멀티관 306호</td>
+ +                        <td>3</td>
+ +                        <td><input type="button" class="btn btn-primary" value="시간표 등록"></td>
+ +                      </tr>
+ +                      <tr>
+ +                        <td>l000000004</td>
+ +                        <td>교양</td>
+ +                        <td>필수</td>
+ +                        <td>교양 영어 1</td>
+ +                        <td>1학년</td>
+ +                        <td>수요일</td>
+ +                        <td>1~3</td>
+ +                        <td>Daniel Harny</td>
+ +                        <td>멀티관 306호</td>
+ +                        <td>3</td>
+ +                        <td><input type="button" class="btn btn-danger" value="등록 취소"></td>
+ +                      </tr>
+ +                      <tr>
+ +                        <td>l000000005</td>
+ +                        <td>교양</td>
+ +                        <td>필수</td>
+ +                        <td>교양 영어 1</td>
+ +                        <td>1학년</td>
+ +                        <td>수요일</td>
+ +                        <td>1~3</td>
+ +                        <td>Daniel Harny</td>
+ +                        <td>멀티관 306호</td>
+ +                        <td>3</td>
+ +                        <td><input type="button" class="btn btn-primary" value="시간표 등록"></td>
+ +                      </tr>
+ +                      <tr>
+ +                        <td>l000000006</td>
+ +                        <td>교양</td>
+ +                        <td>필수</td>
+ +                        <td>교양 영어 1</td>
+ +                        <td>1학년</td>
+ +                        <td>수요일</td>
+ +                        <td>1~3</td>
+ +                        <td>Daniel Harny</td>
+ +                        <td>멀티관 306호</td>
+ +                        <td>3</td>
+ +                        <td><input type="button" class="btn btn-primary" value="시간표 등록"></td>
+ +                      </tr>
+ +                    </tbody>
+ +                  </table>
+ +                </div><!-- /.box-body -->
+ +                 <div class="box-footer clearfix">
+ +                       <ul class="pagination pagination-sm no-margin pull-right">
+ +                            <li><a href="#">&laquo;</a></li>
+ +                            <li><a href="#">1</a></li>
+ +                            <li><a href="#">2</a></li>
+ +                            <li><a href="#">3</a></li>
+ +                            <li><a href="#">4</a></li>
+ +                            <li><a href="#">5</a></li>
+ +                            <li><a href="#">&raquo;</a></li>
+ +                         </ul>
+ +                    <!-- 검색 폼 -->    
+ +                    <form action="">
+ +                      <div class="input-group">
+ +                          <select class="form-control input-sm pull-left" style="width: 150px;">
+ +                            <option>거래 날짜</option>
+ +                            <option>거래 내용</option>
+ +                            <option>포인트</option>
+ +                            <option>출금 대상</option>
+ +                            <option>입금 대상</option>
+ +                          </select>
+ +                          <input type="text" name="table_search" class="form-control input-sm  pull-left" style="width: 150px;" placeholder="Search"/>
+ +                         <div class="input-group-btn  pull-left">
+ +                            <button class="btn btn-sm btn-primary"> 검색 <i class="fa fa-search"></i></button>
+ +                         </div>
+ +                      </div>
+ +                    </form>
+ +                </div>
+ +              </div>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<!-- 세로 길이 수정 -->
+		<div class="row">Different Width
+			<!-- 너비 사이즈 수정  : col-->
+			<div class="col-md-12">
+				<!-- general form elements disabled -->
+				<div class="box box-warning">
+					<div class="box-header with-border">
+						<h3 class="box-title">취소 내용</h3>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th>예약번호</th>
-									<th>시설</th>
-									<th>호수</th>
-									<th>예약날짜</th>
-									<th>예약시간</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>운동장</td>
-									<td>대운동장</td>
-									<td>2017.5.30</td>
-									<td>6-9시</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>2017.6.2</td>
-									<td>2-4시</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>스터디룸</td>
-									<td>A</td>
-									<td>2017.6.5</td>
-									<td>10-12시</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>스터디룸</td>
-									<td>B</td>
-									<td>2017.6.10</td>
-									<td>6-9시</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>스터디룸</td>
-									<td>C</td>
-									<td>2017.5.30</td>
-									<td>6-9시</td>
-								</tr>
-							</tbody>
-
-						</table>
-						<div class="row" style="padding: 15px"></div>
-						<div class="row">
-							<div class="col-md-1"></div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<select class="form-control">
-										<option>option 1</option>
-										<option>option 2</option>
-										<option>option 3</option>
-										<option>option 4</option>
-										<option>option 5</option>
-									</select>
-								</div>
+						<form role="form">
+							<!-- text input -->
+							<div class="form-group">
+								<label>예약번호</label> <input type="text"
+									class="form-control" placeholder="Enter ..." disabled>
 							</div>
-							<div class="col-md-4">
-								<div class="box-tools">
-									<div class="input-group input-group-sm" >
-										<input type="text" name="table_search" class="form-control"
-											placeholder="Search">
-
-										<div class="input-group-btn">
-											<button type="submit" class="btn btn-default">
-												<i class="fa fa-search"></i>
-											</button>
-										</div>
-									</div>
-								</div>
+							<div class="form-group">
+								<label>시설명</label> <input type="text"
+									class="form-control" placeholder="Enter ..." disabled>
 							</div>
-							<div class="col-md-4">
-								<ul class="pagination pagination-sm">
-									<li><a href="#">&laquo;</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">&raquo;</a></li>
-								</ul>
+							<div class="form-group">
+								<label>호수</label> <input type="text"
+									class="form-control" placeholder="Enter ..." disabled>
 							</div>
-						</div>
-						<div class="row">
-						<div class="col-md-4">
-						</div>
-						
-						<div class="col-md-4">
-						<button type="button" class="btn btn-block btn-info btn-flat">예약 취소</button>
-						</div>
-						</div>
-						<!-- /.box-body -->
 
-
-						<!-- 
-					<div style="border: 3px solid gold;
-								float: left; height: auto;
-								width: 200px; 
-								margin: 15px 25px 15px 0px;">
-					 -->
-
-
-
+						</form>
 					</div>
-					<!-- /.box -->
-
-
+					<!-- /.box-body -->
 				</div>
-				<!-- /.col -->
+				<!-- /.box -->
 			</div>
-			<!-- /.row -->
-	</section>
-	<!-- /. 작업 공간 끝! -->
-	<!------------------------------------------------------------------------------------------------------------------->
+		</div>
+	</div>
+
+
+
+</section>
+<!-- /. 작업 공간 끝! -->
+
+<!------------------------------------------------------------------------------------------------------------------->
 </div>
 <!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
 
