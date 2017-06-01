@@ -6,7 +6,7 @@
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
-<title>기본 값 페이지</title>
+<title>내 예약 내역(사용자 )</title>
 <style>
 .pagination {
 	display: inline-block;
@@ -200,14 +200,28 @@
 									<label>예약시간</label> <input type="text" class="form-control"
 										placeholder="Enter ..." disabled>
 								</div>
-							</div>
-
-							<div class="row" align="center">
-								<input type="button" class="btn btn-primary"
-									style="width: 200px" value="결정">
+								<div class="form-group col-md-4">
+									<label>환불포인트</label> <input type="text" class="form-control"
+										placeholder="5000" disabled>
+								</div>
 							</div>
 						</form>
 						<!-- /.box-body -->
+						<!-- box-footer -->
+						<div class="box-footer">
+												<div class="row" align="center">
+							<div class="col-md-3 btn-group">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary" value="예약취소">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block  btn-primary" value="다시 선택">
+							</div>
+						</div>
+						
+						</div>
+						<!-- /.box-footer -->
 					</div>
 					<!-- /.box -->
 				</div>
