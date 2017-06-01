@@ -102,47 +102,59 @@
 					<div class="box-footer">
 						<!-- 페이징 -->
 						<div class="row" align="center">
-						<ul class="pagination pagination-sm no-margin ">
-							<li><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
+							<ul class="pagination pagination-sm no-margin">
+								<li><a href="#">&laquo;</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">&raquo;</a></li>
+							</ul>
 						</div>
-						
+
 						<!-- 셀렉트  -->
-						          <form action="">
-                      <div class="input-group">
-                          <select class="form-control input-sm pull-left" style="width: 150px;">
-                            <option>시설종류</option>
-                            <option>시설명</option>
-                            <option>호수</option>
-                            <option>예약시간</option>
-                          </select>
-                          <input type="text" name="table_search" class="form-control input-sm  pull-left" style="width: 150px;" placeholder="Search"/>
-                         <div class="input-group-btn  pull-left">
-                            <button class="btn btn-sm btn-primary"> 검색 <i class="fa fa-search"></i></button>
-                         </div>
-                      </div>
-                    </form>
-                </div>
-              </div><!-- /.box -->
+						
+						<form action="">
+						<div class="row">
+							<div class="col-md-3" align="center">
+								<select class="form-control input-sm pull-left"
+									style="width: 150px;">
+									<option>시설종류</option>
+									<option>시설명</option>
+									<option>호수</option>
+									<option>예약시간</option>
+								</select>
+							</div>
+							<div class="col-md-3" align="center">
+								<input type="text" name="table_search"
+									class="form-control input-sm  pull-left" style="width: 150px;"
+									placeholder="Search" />
+								<div class="input-group-btn  pull-left">
+									<button class="btn btn-sm btn-primary">
+										검색 <i class="fa fa-search"></i>
+									</button>
+								</div>
+							</div>
+							</div>
+						</form>
+						
+					</div>
+				</div>
+				<!-- /.box -->
 			</div>
 			<!-- /.col -->
 		</div>
 		<!-- /.row -->
 
-	<!-- -------취소 시설 선택후 표기되는 정보------- -->
+		<!-- -------취소 시설 선택후 표기되는 정보------- -->
 		<!-- 세로 길이 수정 -->
 		<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-12">
 				<!-- box -->
 				<div class="box box-warning">
-				<!--  box-header -->
+					<!--  box-header -->
 					<div class="box-header">
 						<h3 class="box-title">취소 사항</h3>
 						<div class="box-tools pull-right">
@@ -155,7 +167,7 @@
 						</div>
 					</div>
 					<!-- /.box-header -->
-					
+
 					<!-- box-body -->
 					<div class="box-body">
 						<form role="form">
