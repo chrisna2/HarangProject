@@ -7,6 +7,10 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <title>시설 추가(관리자)</title>
+	<style>
+		hr{border:none; 
+		   border:1px solid #E6E6E6;}
+	</style>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
 <div class="content-wrapper">
@@ -286,10 +290,7 @@
 							</div>
 							<br>
 							<div class="col-md-12">
-							<style>
-							hr{border:none; 
-							   border:1px solid #E6E6E6;}
-							</style>
+							
 							<hr/>
 							</div>
 						</div>
