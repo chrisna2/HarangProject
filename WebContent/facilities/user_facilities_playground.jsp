@@ -23,9 +23,6 @@
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
 							</button>
-							<button class="btn btn-box-tool" data-widget="remove">
-								<i class="fa fa-times"></i>
-							</button>
 						</div>
 					</div>
 
@@ -40,6 +37,42 @@
 			<!-- /.col -->
 		</div>
 		<!-- /.row -->
+		
+		<!-- faclities.select -->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- faclities.select.box-->
+				<div class="box">
+					<!-- faclities.select.box header -->
+					<div class="box-header">
+						<h3 class="box-title">예약 상세 선택</h3>
+						<div class="box-tools pull-right">
+							<button class="btn btn-box-tool" data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+						</div>
+					
+					</div>
+					<!-- faclities.select.box body -->
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-6">11111</div>
+							<div class="col-md-6">11111</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">2222</div>
+						</div>
+					</div>
+					<!-- faclities.select.box footer  -->
+					<div class="box-footer">
+						<div class="row">
+							<div class="col-md-6">33333</div>
+							<div class="col-md-6">33333</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</section>
 	<!-- /.content -->
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
