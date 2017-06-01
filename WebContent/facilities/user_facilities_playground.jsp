@@ -11,6 +11,18 @@
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
 <!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
+        <section class="content-header">
+          <h1>
+             	운동장 예약
+            <small>[현재 입력할 내용이 없습니다.]</small>
+          </h1>
+          <ol class="breadcrumb">
+          <!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
+            <li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
+            <li class="active">운동장 예약[현재 입력할 내용이 없습니다.]</li>
+          </ol>
+        </section>
+<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
 	<section class="content">
 		<div class="row">
 			<!-- 달력의 크기 조정 -->
@@ -42,10 +54,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- faclities.select.box-->
-				<div class="box">
+				<div class="box box-primary">
 					<!-- faclities.select.box header -->
 					<div class="box-header">
-						<h3 class="box-title">예약 상세 선택</h3>
+						<h3 class="box-title">예약 시간 선택</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
@@ -55,41 +67,177 @@
 					</div>
 					<!-- faclities.select.box body -->
 					<div class="box-body">
+						<!-- 시설 정보 [위에 선택 정보 받아옴]  -->
 						<div class="row">
-							<div class="col-md-6">11111</div>
-							<div class="col-md-6">11111</div>
+ 
+							<div class="col-md-4">
+								<label>시설명</label>								
+								<input type="text" 
+									   class="form-control"
+									   placeholder="운동장  중앙회관 옆 농구장" 
+									   style="width: 150px" disabled>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+							 			<label>시설정보</label> 
+                  						<textarea class="form-control" 
+                  								  rows="3" 
+                  								  placeholder="운동장" 
+                  								  disabled
+                  								  style="width: 250px">
+                  						</textarea>
+                					</div>
+							</div>
+							<div class="col-md-4">
+								<label>대여 포인트</label> 
+								<input type="text" 
+									   class="form-control"
+									   placeholder="100포인트" 
+									   style="width: 150px" disabled>
+							</div>
 						</div>
+						<!-- 날짜 선택줄 -->
 						<div class="row">
-							<div class="col-md-12">2222</div>
+							<div class="col-md-12" align="center">
+								<label>시간 선택</label>
+							</div>
+							<div class="col-md-12" align="center">
+								
+								<div class="btn-group" data-toggle="buttons"> 
+				                    <label class="btn btn-warning active"> 
+				                        <input type="checkbox" autocomplete="off"> 8시
+				                    </label> 
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 9시
+				                    </label> 
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 10시
+				                    </label> 
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 11시
+				                    </label> 
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 12시
+				                    </label> 
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 13시
+				                    </label> 
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 14시
+				                    </label> 
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 15시
+				                    </label>
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 16시
+				                    </label>
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 17시
+				                    </label>
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 18시
+				                    </label>
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 19시
+				                    </label>
+				                    <label class="btn btn-primary"> 
+				                        <input type="checkbox" autocomplete="off"> 20시
+				                    </label>
+				                    
+				                 </div>
+							</div>
 						</div>
 					</div>
 					<!-- faclities.select.box footer  -->
 					<div class="box-footer">
-						<div class="row">
-							<div class="col-md-6">33333</div>
-							<div class="col-md-6">33333</div>
+						<div class="row" align="center">
+							<div class="col-md-3 btn-group">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary" value="확인">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary" value="다시 선택">
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<!-- 최종 결제 부분 -->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- 최종결제 box -->
+				<div class="box box-primary">
+					<!-- 최종결제 box-header -->
+					<div class="box-header">
+						<h3 class="box-title">결제</h3>
+						<div class="box-tools pull-right">
+							<button class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					
+					<!-- 최종결제 box-body -->
+					<div class="box-body">
+						<div class="row ">
+							<!-- 사용 시간 -->
+							<div class="col-md-3">
+									<label>사용시간</label>								
+									<input type="text" 
+										   class="form-control"
+										   placeholder="17시간" 
+										   style="width: 150px" disabled>
+							</div>
+							<!-- 보유 포인트 -->
+							<div class="col-md-3">
+									<label>보유 포인트</label>								
+									<input type="text" 
+										   class="form-control"
+										   placeholder="30000" 
+										   style="width: 150px" disabled>
+							</div>
+							<!-- 차감 포인트 -->
+							<div class="col-md-3">
+									<label>차감 포인트</label>								
+									<input type="text" 
+										   class="form-control"
+										   placeholder="15000" 
+										   style="width: 150px" disabled>
+							</div>
+							
+							<!-- 결제 후 포인트-->
+							<div class="col-md-3">
+									<label>결제후 잔여 포인트</label>								
+									<input type="text" 
+										   class="form-control"
+										   placeholder="15000" 
+										   style="width: 150px" disabled>
+							</div>
+						</div>
+					</div>
+					
+					<!-- 최종결제 box-footer -->
+					<div class="box-footer">
+						<div class="row" align="center">
+							<div class="col-md-3 btn-group">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary" value="결제">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block  btn-primary" value="다시 선택">
+							</div>
+						</div>
+					</div>
+					
+				</div>	
+			</div>
+		</div>	
 	</section>
 	<!-- /.content -->
-<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-        <section class="content">
-          <!-- 세로 길이 수정 -->
-          <div class="row">
-           <!-- 너비 사이즈 수정  : col-->
-           <div class="col-md-12">
-        
-        
-        
-
-
-
-              </div><!-- /.col -->
-           </div><!-- /.row -->
-        </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
       
