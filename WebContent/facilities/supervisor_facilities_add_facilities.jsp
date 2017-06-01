@@ -244,6 +244,101 @@
 		</div>
 		<!-- 시설추가 끝-->
 
+		<!-- 시설수정 시작-->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Box -->
+				<div class="box box-primary">
+					<!-- Box header -->
+					<div class="box-header">
+						<h3 class="box-title">시설 수정</h3>
+						<div class="box-tools pull-right">
+							<button class="btn btn-box-tool" data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+						</div>
+					</div>
+
+					<!-- Box body -->
+					<div class="box-body">
+
+						<!-- 운동장/스터디룸 선택 -->
+						<div class="row">
+							<div class="col-md-2">
+								<label>번호</label> <input type="text" class="form-control"
+									placeholder="F0001" disabled>
+							</div>
+							<div class="col-md-2">
+								<label>시설종류</label> <input type="text" class="form-control"
+									placeholder="운동장" disabled>
+							</div>
+
+							<!-- 시설명(첫번째 카테고리) 선택 -->
+							<div class="col-md-4">
+								<label>시설명</label> <input type="text" class="form-control"
+									placeholder="족구장" disabled>
+							</div>
+
+							<!-- 호수(두번째 카테고리) 선택 -->
+							<div class="col-md-4">
+								<label>호수</label> <input type="text" class="form-control"
+									placeholder="예술조형대학 옆" disabled>
+							</div>
+							<br>
+							<div class="col-md-12">
+							<style>
+							hr{border:none; 
+							   border:1px solid #E6E6E6;}
+							</style>
+							<hr/>
+							</div>
+						</div>
+						
+
+						<div class="row">
+							<div class="form-group col-md-4">
+								<label>시설종류</label> <select class="form-control">
+									<option>운동장</option>
+									<option>스터디룸</option>
+								</select>
+							</div>
+
+							<!-- 시설명 입력 -->
+							<div class="col-md-4">
+								<label>시설명</label> <input type="text" class="form-control"
+									placeholder="수정할 내용을 입력하세요">
+							</div>
+
+							<!-- 호수 입력 -->
+							<div class="col-md-4">
+								<label>호수</label> <input type="text" class="form-control"
+									placeholder="수정할 내용을 입력하세요">
+							</div>
+						</div>
+
+						
+					</div>
+
+					<!-- Box footer -->
+					<div class="box-footer">
+						<div class="row" align="center">
+							<div class="col-md-3 btn-group"></div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary"
+									value="추가">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary"
+									value="리셋">
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 시설수정 끝-->
+
 	</section>
 	<!-- /. 작업 공간 끝! -->
 	<!------------------------------------------------------------------------------------------------------------------->
