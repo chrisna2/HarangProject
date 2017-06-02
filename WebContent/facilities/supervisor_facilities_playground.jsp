@@ -345,9 +345,49 @@ hr {
 									placeholder="운동장" disabled>
 							</div>
 						</div>
+<<<<<<< HEAD
 					</div>
 					<!-- 3-2. box-footer -->
 					<div class="box-footer">
+=======
+						<br>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<label>시설명</label> <select class="form-control">
+									<option>농구장</option>
+									<option>족구장</option>
+									<option>테니스장</option>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label>호수</label> <select class="form-control">
+									<option>공과대학 옆</option>
+									<option>조형예술대학 옆</option>
+									<option>중앙회관 옆</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<label>행사 내용</label> <input type="text" class="form-control"
+									placeholder="축제 1일차" >
+							</div>
+						</div>
+					</div>
+					<!-- 3-2. box-footer -->
+					<div class="box-footer">
+						<div class="row">
+							<div class="col-md-3 btn-group"></div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary"
+									value="추가">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block  btn-primary"
+									value="다시 선택">
+							</div>
+						</div>
+>>>>>>> refs/remotes/origin/KimSungji
 					</div>
 				</div>
 				<!-- /. 3-2 box -->
