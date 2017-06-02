@@ -71,67 +71,216 @@
 			</div>
 
 		</div>
-		
-		
-		
-		<!--  댓글 1 -->
+
+
+
 		<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-9">
 				<div class="box" id="reply">
 
-					<div class="box-header">
-						<span class="badge bg-green">익명 asdlxdi</span>
+					<div class="box-body">
+						<!--  댓글 1 -->
+						<div class="box-header">
+							<span class="badge bg-green">익명 asdlxdi</span>
+						</div>
+
+						<div class="box-body">여기에 댓글 넣고 댓글댓글를알;일 여기에 댓글 넣고 댓글댓글를알;일
+							여기에 댓글 넣고 댓글댓글를알;일 여기에 댓글 넣고 댓글댓글를알;일</div>
+						<!-- /.box-body -->
+						<div class="box-footer ">
+							<p align="right">
+								<button type="button" class="btn btn-success btn-xs">수정</button>
+								<button type="button" class="btn btn-success btn-xs">삭제</button>
+
+							</p>
+
+						</div>
+
+						<!-- 댓글1끝 -->
+						<!--  댓글 2 -->
+
+						<div class="box" id="reply">
+
+							<div class="box-header">
+								<span class="badge bg-green">익명 zxcvdfdf</span>
+							</div>
+
+							<div class="box-body">두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
+								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
+								댓글글그그르망두 번째 댓글글그그르망</div>
+							<!-- /.box-body -->
+							<div class="box-footer ">
+								<p align="right">
+									<button type="button" class="btn btn-success btn-xs">수정</button>
+									<button type="button" class="btn btn-success btn-xs">삭제</button>
+
+								</p>
+
+							</div>
+
+						</div>
+						<!-- 댓글2 끝 -->
+						<!--  댓글 3 -->
+
+						<div class="box" id="reply">
+
+							<div class="box-header">
+								<span class="badge bg-green">익명 fdf3</span>
+							</div>
+
+							<div class="box-body">세 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
+								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
+								댓글글그그르망두 번째 댓글글그그르망</div>
+							<!-- /.box-body -->
+							<div class="box-footer ">
+								<p align="right">
+									<button type="button" class="btn btn-success btn-xs">수정</button>
+									<button type="button" class="btn btn-success btn-xs">삭제</button>
+
+								</p>
+
+							</div>
+
+						</div>
+						<!-- 댓글3 끝 -->
+						<!--  댓글 4 -->
+
+						<div class="box" id="reply">
+
+							<div class="box-header">
+								<span class="badge bg-green">익명 zxdf4</span>
+							</div>
+
+							<div class="box-body">4 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
+								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
+								댓글글그그르망두 번째 댓글글그그르망</div>
+							<!-- /.box-body -->
+							<div class="box-footer ">
+								<p align="right">
+									<button type="button" class="btn btn-success btn-xs">수정</button>
+									<button type="button" class="btn btn-success btn-xs">삭제</button>
+
+								</p>
+
+							</div>
+
+						</div>
+						<!-- 댓글4 끝 -->
+						<!--  댓글 5 -->
+
+						<div class="box" id="reply">
+
+							<div class="box-header">
+								<span class="badge bg-green">익명 zdfdf5</span>
+							</div>
+
+							<div class="box-body">5 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
+								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
+								댓글글그그르망두 번째 댓글글그그르망</div>
+							<!-- /.box-body -->
+							<div class="box-footer ">
+								<p align="right">
+									<button type="button" class="btn btn-success btn-xs">수정</button>
+									<button type="button" class="btn btn-success btn-xs">삭제</button>
+
+								</p>
+
+							</div>
+
+						</div>
+						<!-- 댓글5 끝 -->
+						<!--  댓글 6 -->
+
+						<div class="box" id="reply">
+
+							<div class="box-header">
+								<span class="badge bg-green">익명vdfdf6</span>
+							</div>
+
+							<div class="box-body">6 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
+								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
+								댓글글그그르망두 번째 댓글글그그르망</div>
+							<!-- /.box-body -->
+							<div class="box-footer ">
+								<p align="right">
+									<button type="button" class="btn btn-success btn-xs">수정</button>
+									<button type="button" class="btn btn-success btn-xs">삭제</button>
+
+								</p>
+
+							</div>
+
+						</div>
+						<!-- 댓글6 끝 -->
+						<!--  댓글 7 -->
+
+						<div class="box" id="reply">
+
+							<div class="box-header">
+								<span class="badge bg-green">익명 fdf7</span>
+							</div>
+
+							<div class="box-body">7 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
+								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
+								댓글글그그르망두 번째 댓글글그그르망</div>
+							<!-- /.box-body -->
+							<div class="box-footer ">
+								<p align="right">
+									<button type="button" class="btn btn-success btn-xs">수정</button>
+									<button type="button" class="btn btn-success btn-xs">삭제</button>
+
+								</p>
+
+							</div>
+
+						</div>
+						<!-- 댓글2 끝 -->
+
 					</div>
+					<!--  여기까지가 기존 댓글 들어가는 부분 -->
 
-					<div class="box-body">여기에 댓글 넣고 댓글댓글를알;일 여기에 댓글 넣고 댓글댓글를알;일
-						여기에 댓글 넣고 댓글댓글를알;일 여기에 댓글 넣고 댓글댓글를알;일</div>
-					<!-- /.box-body -->
-					<div class="box-footer ">
-						<p align = "right">
-							<button type="button" class="btn btn-success btn-xs">수정</button>
-							<button type="button" class="btn btn-success btn-xs">삭제</button>
+					<!-- 여기부터 새 댓글 작성창 -->
+					<div class="box-footer">
 
-						</p>
+						<div class="box" id="reply">
+
+							<div class="box-header">
+								<span class="badge bg-blue">익명 qwersdf123</span>
+							</div>
+
+							<div class="box-body">
+
+								<div class="form-group">
+									
+									<textarea class="form-control" rows="3" placeholder="댓글을 입력 해 주세요"></textarea>
+								</div>
+
+
+
+							</div>
+							<!-- /.box-body -->
+							<div class="box-footer ">
+								<p align="right">
+									<button type="button" class="btn btn-success btn-xs">등록</button>
+
+
+								</p>
+
+							</div>
+
+						</div>
+
+
+
 
 					</div>
-					<!-- /.box-body -->
+					<!-- 여기까지 새 댓글 작성창 -->
 				</div>
-
-				<br> <br>
 			</div>
-
 		</div>
-		<!-- 댓글1끝 -->
-		<!--  댓글 2 -->
-		<div class="row">
-			<!-- 너비 사이즈 수정  : col-->
-			<div class="col-md-9">
-				<div class="box" id="reply">
 
-					<div class="box-header">
-						<span class="badge bg-green">익명 zxcvdfdf</span>
-					</div>
 
-					<div class="box-body">두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망</div>
-					<!-- /.box-body -->
-					<div class="box-footer ">
-						<p align = "right">
-							<button type="button" class="btn btn-success btn-xs">수정</button>
-							<button type="button" class="btn btn-success btn-xs">삭제</button>
-
-						</p>
-
-					</div>
-					<!-- /.box-body -->
-				</div>
-
-				<br> <br>
-			</div>
-
-		</div>
-		<!-- 댓글2끝 -->
-		
 		<!-- 컨텐츠 헤더 끝-->
 
 		<!--  여기부터 본문 -->
@@ -146,7 +295,7 @@
 						<div class="box-tools">
 							<div class="input-group">
 
-								<button type="button" class="btn btn-primary pull-right">일정등록</button>
+								<button type="button" class="btn btn-primary pull-right">글쓰기</button>
 							</div>
 						</div>
 					</div>
@@ -211,7 +360,8 @@
 					<div class="box-footer clearfix">
 
 
-						<button type="button" class="btn btn-danger pull-left">삭제</button>
+					<button type="button" class="btn btn-success pull-left btn-xs">공지등록</button>
+						<button type="button" class="btn btn-danger pull-left btn-xs">삭제</button>
 
 
 
