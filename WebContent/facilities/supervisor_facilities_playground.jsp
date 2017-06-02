@@ -334,7 +334,16 @@ hr {
 					</div>
 					<!-- 3-2. box-body -->
 					<div class="box-body">
+						<!--  3-2. 선택날짜/시설종류 -->
 						<div class="row">
+							<div class="col-md-4">
+								<label>날짜</label> <input type="text" class="form-control"
+									placeholder="2017년 5월 16일" disabled>
+							</div>
+							<div class="col-md-4">
+								<label>시설종류</label> <input type="text" class="form-control"
+									placeholder="운동장" disabled>
+							</div>
 						</div>
 					</div>
 					<!-- 3-2. box-footer -->
