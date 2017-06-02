@@ -20,16 +20,16 @@
           <ol class="breadcrumb">
           <!-- 페이지 기록 메인에서 부터 현재 페이지 까지의 경로 나열 -->
             <li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
-            <li class="active">기본값 페이지[현재 페이지]</li>
+            <li class="active">강의평가 메인페이지[현재 페이지]</li>
           </ol>
         </section>
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
         <section class="content">
         
          <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10">
             
-            	<div class="col-md-12">
+            	<div class="col-md-10">
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">내 강의평가</h3>
@@ -65,19 +65,13 @@
              
    
         
-        	<div class="col-md-12">
+        	<div class="col-md-10">
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">전체 강의평가 게시글</h3>
                     <!-- select -->
-                   
-                     
-                  
                    <div class="box-tools">
-                   	
-                   	
-                   	 
-                   	
+                  
                     <div class="input-group">
                     	
                    
@@ -106,7 +100,7 @@
                   <table class="table">
                     <tr>
                       <th>평가번호</th>
-                      <th>제목</th>
+                      <th>강의명</th>
                       <th>만족도</th>
                       <th >강의년도</th>
                        <th>강의학기</th>
@@ -117,7 +111,7 @@
                       <td>1.</td>
                       <td>Update software</td>
                       <td>
-                       <span class="badge bg-red">55%</span>
+               			      ☆☆☆☆☆
                       </td>
                       <td>2016년도</td>
                   
@@ -127,10 +121,11 @@
                     </tr>
                     <tr>
                       <td>2.</td>
-                      <td>Clean database</td>
+             			
                       <td>
-                       <span class="badge bg-light-blue">95%</span>
+                      Update software
                       </td>
+                      <td>	        ★☆☆☆☆</td>
                       <td>2014년도</td>
                   
                       <td>2학기</td>
