@@ -326,7 +326,7 @@
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
 								<input type="button" class="btn btn-block btn-primary"
-									value="추가">
+									value="수정">
 							</div>
 							<div class="col-md-3 btn-group">
 								<input type="button" class="btn btn-block btn-primary"

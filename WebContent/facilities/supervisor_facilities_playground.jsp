@@ -333,9 +333,13 @@ hr {
 						</div>
 					</div>
 					<!-- 3-2. box-body -->
-					<div class="box-body"></div>
+					<div class="box-body">
+						<div class="row">
+						</div>
+					</div>
 					<!-- 3-2. box-footer -->
-					<div class="box-footer"></div>
+					<div class="box-footer">
+					</div>
 				</div>
 				<!-- /. 3-2 box -->
 			</div>
