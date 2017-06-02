@@ -23,14 +23,16 @@
           </ol>
         </section>
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-        <section class="content">
-        <div class="row">
-        	<div class="col-xs-12">
-
+	<section class="content">
+		<div class="row">
+			<div class="col-md-12">
 				<div class="box">
-					<div class="col-xs-6 box-header">
-						<!-- <h3 class="box-title">Hover Data Table</h3> -->
-						<div class="input-group margin">
+					<div class="box-header"></div>
+					<!-- box-header -->
+					<div class="box-body">
+							<div class="row">
+								<div class="col-sm-12">
+								<div class="col-xs-6 input-group no-margin">
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-info.btn-flat">
 									<i class="fa fa-search"></i>
@@ -39,160 +41,78 @@
 							<!-- /btn-group -->
 							<input type="text" class="form-control">
 						</div>
-                    <button type="button" class="btn btn-block btn-default" >등록</button>
-					</div>
-
-
-					<div class="box-body">
-						<div id="example2_wrapper"
-							class="dataTables_wrapper form-inline dt-bootstrap">
-							<div class="row">
-								<div class="col-sm-6"></div>
-								<div class="col-sm-6"></div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<table id="example2"
-										class="table table-bordered table-hover dataTable" role="grid"
-										aria-describedby="example2_info">
-										<thead>
+						<div class="col-xs-1 no-margin pull-right">
+						<button type="button" class="btn btn-block btn-default" >등록</button>
+						</div>
+									<table id="example2" class="table table-bordered table-hover dataTable">
 											<tr role="row">
-												<th class="sorting_asc" tabindex="0"
-													aria-controls="example2" rowspan="1" colspan="1"
-													aria-sort="ascending">거래번호</th>
-												<th class="sorting" tabindex="0" aria-controls="example2"
-													rowspan="1" colspan="1">도서명</th>
-												<th class="sorting" tabindex="0" aria-controls="example2"
-													rowspan="1" colspan="1">저자</th>
-												<th class="sorting" tabindex="0" aria-controls="example2"
-													rowspan="1" colspan="1">출판사</th>
-												<th class="sorting" tabindex="0" aria-controls="example2"
-													rowspan="1" colspan="1">희망 포인트</th>
+												<th style="width: 50px">거래번호</th>
+												<th style="width: 40%">도서명</th>
+												<th>저자</th>
+												<th>출판사</th>
+												<th>희망 포인트</th>
 											</tr>
-										</thead>
-										<tbody>
-
-											<tr role="row" class="odd">
-												<td class="sorting_1">1</td>
+											<tr>
+												<td>1</td>
 												<td>시나공 정보처리기사 필기</td>
 												<td>길벗알앤디</td>
 												<td>길벗</td>
 												<td>3000</td>
 											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">2</td>
-												<td>Firefox 1.5</td>
-												<td>Win 98+ / OSX.2+</td>
-												<td>1.8</td>
+											<tr>
+												<td>2</td>
+												<td>JavaScript+jQuery 정복</td>
+												<td>김상형</td>
+												<td>한빛미디어</td>
 												<td>A</td>
 											</tr>
-											<tr role="row" class="odd">
-												<td class="sorting_1">3</td>
-												<td>Firefox 2.0</td>
-												<td>Win 98+ / OSX.2+</td>
-												<td>1.8</td>
+											<tr>
+												<td>3</td>
+												<td>JSP&Servlet</td>
+												<td>성윤정</td>
+												<td>로드북</td>
 												<td>A</td>
 											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">4</td>
-												<td>Firefox 3.0</td>
-												<td>Win 2k+ / OSX.3+</td>
-												<td>1.9</td>
+											<tr>
+												<td>4</td>
+												<td>지윤이의 하루</td>
+												<td>서지윤</td>
+												<td>쥬니미디어</td>
 												<td>A</td>
 											</tr>
-											<tr role="row" class="odd">
-												<td class="sorting_1">5</td>
-												<td>Camino 1.0</td>
-												<td>OSX.2+</td>
-												<td>1.8</td>
+											<tr>
+												<td>5</td>
+												<td>마음의 소리</td>
+												<td>조석</td>
+												<td>네이버</td>
 												<td>A</td>
 											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">6</td>
-												<td>Camino 1.5</td>
-												<td>OSX.3+</td>
-												<td>1.8</td>
-												<td>A</td>
-											</tr>
-											<tr role="row" class="odd">
-												<td class="sorting_1">7</td>
-												<td>Netscape 7.2</td>
-												<td>Win 95+ / Mac OS 8.6-9.2</td>
-												<td>1.7</td>
-												<td>A</td>
-											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">8</td>
-												<td>Netscape Browser 8</td>
-												<td>Win 98SE+</td>
-												<td>1.7</td>
-												<td>A</td>
-											</tr>
-											<tr role="row" class="odd">
-												<td class="sorting_1">9</td>
-												<td>Netscape Navigator 9</td>
-												<td>Win 98+ / OSX.2+</td>
-												<td>1.8</td>
-												<td>A</td>
-											</tr>
-											<tr role="row" class="even">
-												<td class="sorting_1">10</td>
-												<td>Mozilla 1.0</td>
-												<td>Win 95+ / OSX.1+</td>
-												<td>1</td>
-												<td>A</td>
-											</tr>
-										</tbody>
 									</table>
 								</div>
-							</div>
+							</div> <!-- row -->
 							<div class="row">
-								<div class="col-sm-5">
-									<div class="dataTables_info" id="example2_info" role="status"
-										aria-live="polite">Showing 1 to 10 of 57 entries</div>
-								</div>
+								<div class="col-sm-5"></div>
 								<div class="col-sm-7">
-									<div class="dataTables_paginate paging_simple_numbers"
-										id="example2_paginate">
+									<div class="dataTables_paginate paging_simple_numbers">
 										<ul class="pagination">
-											<li class="paginate_button previous disabled"
-												id="example2_previous"><a href="#"
-												aria-controls="example2" data-dt-idx="0" tabindex="0">Previous</a>
-											</li>
-											<li class="paginate_button active"><a href="#"
-												aria-controls="example2" data-dt-idx="1" tabindex="0">1</a>
-											</li>
-											<li class="paginate_button "><a href="#"
-												aria-controls="example2" data-dt-idx="2" tabindex="0">2</a>
-											</li>
-											<li class="paginate_button "><a href="#"
-												aria-controls="example2" data-dt-idx="3" tabindex="0">3</a>
-											</li>
-											<li class="paginate_button "><a href="#"
-												aria-controls="example2" data-dt-idx="4" tabindex="0">4</a>
-											</li>
-											<li class="paginate_button "><a href="#"
-												aria-controls="example2" data-dt-idx="5" tabindex="0">5</a>
-											</li>
-											<li class="paginate_button "><a href="#"
-												aria-controls="example2" data-dt-idx="6" tabindex="0">6</a>
-											</li>
-											<li class="paginate_button next" id="example2_next"><a
-												href="#" aria-controls="example2" data-dt-idx="7"
-												tabindex="0">Next</a></li>
+											<li><a href="#">Previous</a></li>
+											<li><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a>
+											<li><a href="#">Next</a></li>
 										</ul>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div><!-- body -->
 					</div>
 				</div>
+			</div><!-- row -->
+	</section>
 
-			</div>
-        </div>
-        </section><!-- /. 작업 공간 끝! -->
-<!------------------------------------------------------------------------------------------------------------------->        
-      </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
+	<!-- /. 작업 공간 끝! -->
+	<!------------------------------------------------------------------------------------------------------------------->
+	</div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
