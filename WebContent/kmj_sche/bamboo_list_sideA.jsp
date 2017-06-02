@@ -5,13 +5,13 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <%@ include file="../include/header.jsp"%>
-<title>대나무숲 리스트+컨텐츠 관리자페이지</title>
+<title>대나무숲 리스트 관리자페이지</title>
 </head>
 
 <div class="content-wrapper">
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
-		<h1>대나무숲 리스트+컨텐츠 관리자페이지</h1>
+		<h1>대나무숲 리스트 관리자페이지</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
 			<li class="active">대나무숲</li>
@@ -38,7 +38,7 @@
 						<div class="box-tools">
 							<div class="input-group">
 
-								<button type="button" class="btn btn-primary pull-right">글쓰기</button>
+								<button type="button" class="btn btn-primary pull-right btn-sm">글쓰기</button>
 							</div>
 						</div>
 					</div>
@@ -61,39 +61,38 @@
 								<td>익명asdf</td>
 								<td>2017년 6월 8일</td>
 								<td><a href="#" class="" style="color: black">조장 나현기는 보아라</a></td>
-								<td>전체</td>
-								<td align="center">Y</td>
+								<td>500</td>
+								<td>20</td>
 
 							</tr>
 							<tr>
 								<td><input type="checkbox" /></td>
 								<td>219</td>
-								<td>[국문과]</td>
+								<td>익명 zsdf</td>
 								<td>2017년 4월 30일</td>
-								<td><a href="#" class="" style="color: black">국문과 체육대회</a></td>
-								<td>전체 학년</td>
-								<td align="center">Y</td>
+								<td><a href="#" class="" style="color: black">익명글 23232ㅁㄴㅇㄹ</a></td>
+								<td>100</td>
+								<td>50</td>
 
 							</tr>
 							<tr>
 								<td><input type="checkbox" /></td>
 								<td>657</td>
-								<td>[전체]</td>
+								<td>익명zdfq</td>
 								<td>2017년 5월 20일</td>
-								<td><a href="#" class="" style="color: black">성공취업 세미나</a></td>
-								<td>3,4 학년</td>
-								<td align="center">Y</td>
+								<td><a href="#" class="" style="color: black">익명 ㄴㅇㅁㅇㄴㄻㅇ</a></td>
+								<td>10</td>
+								<td>5</td>
 
 							</tr>
 							<tr>
 								<td><input type="checkbox" /></td>
 								<td>175</td>
-								<td>[전체]</td>
+								<td>익명 azxc</td>
 								<td>2017년 3월 8일</td>
-								<td><a href="#" class="" style="color: black">신입생을 위한
-										도서관 이용 교육</a></td>
-								<td>1 학년</td>
-								<td align="center">Y</td>
+								<td><a href="#" class="" style="color: black">익명글글글</a></td>
+								<td>1589</td>
+								<td>1111</td>
 
 							</tr>
 						</table>
