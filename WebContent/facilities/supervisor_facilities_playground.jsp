@@ -13,7 +13,7 @@
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
 		<h1>
-			운동장 관리 
+			운동장 관리
 			<!--  <small>[페이지 소개]</small> -->
 		</h1>
 		<ol class="breadcrumb">
@@ -24,13 +24,13 @@
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
 	<section class="content">
-		
-		<!-- 1번째 테이블 [전체예약 내역]-->
+
+		<!-- 첫번째 단시작 [1. 전체 예약 내역]-->
 		<div class="row">
 			<div class="col-md-12">
 				<!-- 상단 1.전체예약 내역 테이블 box -->
 				<div class="box box-primary">
-					<!-- 상단 테이블 box-header -->
+					<!-- 1  상단 테이블 box-header -->
 					<div class="box-header">
 						<h3 class="box-title">전체 예약 내역</h3>
 						<div class="box-tools pull-right">
@@ -39,30 +39,183 @@
 							</button>
 						</div>
 					</div>
-					<!-- 상단 테이블 box-body -->
+					<!-- 1 상단 테이블 box-body -->
 					<div class="box-body">
 						<!-- 테이블  -->
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>예약 번호</th>
+									<th>시설 종류</th>
+									<th>시설명</th>
+									<th>호수</th>
+									<th>예약날짜</th>
+									<th>행사내용</th>
+									<th>일정취소</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>l00001</td>
+									<td>운동장</td>
+									<td>농구장</td>
+									<td>중앙회관옆</td>
+									<td>2017년 5월 25일</td>
+									<th>공과대학 통합 농구대회</th>
+									<td><input type="button" class="btn btn-primary"
+										value="선택"></td>
+								</tr>
+								<tr>
+									<td>l00001</td>
+									<td>운동장</td>
+									<td>농구장</td>
+									<td>중앙회관옆</td>
+									<td>2017년 5월 25일</td>
+									<th>공과대학 통합 농구대회</th>
+									<td><input type="button" class="btn btn-primary"
+										value="선택"></td>
+								</tr>
+							</tbody>
+						</table>
 						<!-- /.테이블 -->
 					</div>
-					<!-- 상단 테이블 box-footer -->
+					<!-- 1 상단 테이블 box-footer -->
 					<div class="box-footer">
 						<!-- 테이블.버튼 -->
+						<!-- 페이징 -->
+						<div class="row" align="center">
+							<ul class="pagination pagination-sm no-margin">
+								<li><a href="#">&laquo;</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">&raquo;</a></li>
+							</ul>
+						</div>
+
+						<!-- 셀렉트  -->
+						<form action="">
+							<div class="row">
+								<div class="col-md-3" align="center">
+									<select class="form-control input-sm pull-left"
+										style="width: 150px;">
+										<option>예약번호</option>
+										<option>시설 종류</option>
+										<option>시설명</option>
+										<option>호수</option>
+										<option>예약날짜</option>
+										<option>행사내용</option>
+									</select>
+								</div>
+								<div class="col-md-3" align="center">
+									<input type="text" name="table_search"
+										class="form-control input-sm  pull-left" style="width: 150px;"
+										placeholder="Search" />
+									<div class="input-group-btn  pull-left">
+										<button class="btn btn-sm btn-primary">
+											검색 <i class="fa fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
 						<!-- /.테이블.버튼 -->
 					</div>
 				</div>
-				<!-- /.box -->
+				<!-- /.1 box -->
 			</div>
 		</div>
-		
-		<!-- 두번째단 시작 [Left : 1.학사일정List / right : 2.예약수정]-->
+
+		<!-- 두번째 단시작 [2. 일정 취소  확인] -->
 		<div class="row">
-			
-			<!-- Left 열-->
-			<div class="col-md-6">
-				<!-- 2-1.학사일정 List -->
-				<!-- box -->
+			<div class="col-md-12">
+				<!-- 2. 일정취소 확인 -->
 				<div class="box box-primary">
-					<!--  box-header -->
+					<!-- 2.box header-->
+					<div class="box-header">
+						<h3 class="box-title">일정 취소 확인</h3>
+						<div class="box-tools pull-right">
+							<button class="btn btn-box-tool" data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+						</div>
+						
+					</div>
+					
+					<!-- 2.box body-->
+					<div class="box-body">
+						<!-- 2. 1단 -->
+						<div class="row ">
+							<!-- 일정번호  -->
+							<div class="col-md-3">
+								<label>예약번호</label> <input type="text" class="form-control"
+									placeholder="A71201" style="width: 100px" disabled>
+							</div>
+							<!-- 시설종류  -->
+							<div class="col-md-3">
+								<label>시설종류</label> <input type="text" class="form-control"
+									placeholder="운동장" style="width: 100px" disabled>
+							</div>
+							<!-- 시설명  -->
+							<div class="col-md-3">
+								<label>시설명</label> <input type="text" class="form-control"
+									placeholder="농구장" style="width: 100px" disabled>
+							</div>
+							
+							<!-- 호수  -->
+							<div class="col-md-3">
+								<label>호수</label> <input type="text" class="form-control"
+									placeholder="광과대학 옆" style="width: 120px" disabled>
+							</div>
+						</div>
+						
+						<br><br>
+						<!-- 2. 2단 -->
+						<div class="row">
+						
+							<!-- 시설종류  -->
+							<div class="col-md-3">
+							<label>날짜</label> <input type="text" class="form-control"
+									placeholder="2017.5.12" style="width: 200px" disabled>
+							</div>
+							
+							<div class="col-md-9">
+							<label>행사내용</label> <input type="text" class="form-control"
+									placeholder="...." style="width: 450px" disabled>
+							</div>
+						</div>
+					</div>
+					
+					
+					<!-- 2.box footer-->
+					<div class="box-footer">
+						<div class="row" align="center">
+							<div class="col-md-3 btn-group"></div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary"
+									value="삭제">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block  btn-primary"
+									value="다시 선택">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 두번째단 시작 [Left : 3-1.학사일정List / right : 3-2.예약수정]-->
+		<div class="row">
+
+			<!-- 3-1.Left 열 / 행 넓이 설정---->
+			<div class="col-md-6">
+				<!-- 3-1.학사일정 List -->
+				<!-- 3-1.box -->
+				<div class="box box-primary">
+					<!--  2-1 box-header -->
 					<div class="box-header">
 						<h3 class="box-title">학사일정</h3>
 						<div class="box-tools pull-right">
@@ -71,24 +224,28 @@
 							</button>
 						</div>
 					</div>
-					
-					<!-- box-body -->
-					<div class="box-body">
-					</div>		
-					
-					<!-- box-footer -->
-					<div class="box-footer">
-					</div>
+
+					<!-- 3-1 box-body -->
+					<div class="box-body"></div>
+						<!-- 3-1-1. -->
+							<div class="row">
+							</div>
+						<!-- 3-1-2. -->
+							<div class="row">
+							</div>
+						
+					<!-- 3-1 box-footer -->
+					<div class="box-footer"></div>
 				</div>
 				<!-- /.box -->
 			</div>
 			<!-- Left 열 끝 -->
-				
-			<!-- Right 열 -->
+
+			<!-- 3-2.Right 열  / 행 넓이 설정-->
 			<div class="col-md-6">
-				<!-- box -->
+				<!-- 3-2 box -->
 				<div class="box box-primary">
-					<!--  box-header -->
+					<!-- 3-2 box-header -->
 					<div class="box-header">
 						<h3 class="box-title">시설 사용 입력</h3>
 						<div class="box-tools pull-right">
@@ -97,20 +254,18 @@
 							</button>
 						</div>
 					</div>
-					
-					<!-- box-body -->
-					<div class="box-body">
-					</div>		
-					
-					<!-- box-footer -->
-					<div class="box-footer">
-					</div>
+
+					<!-- 3-2 box-body -->
+					<div class="box-body"></div>
+
+					<!-- 3-2 box-footer -->
+					<div class="box-footer"></div>
 
 				</div>
-				<!-- /.box -->
-				</div>
+				<!-- /. 3-2 box -->
 			</div>
-		
+		</div>
+
 	</section>
 	<!------------------------------------------------------------------------------------------------------------------->
 </div>
