@@ -192,14 +192,14 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="../dist/img/TL.jpg" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">나현기 - 팀장</span>
+                  <span class="hidden-xs">나현기 - 국문학과</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- 회원 사진 -->
                   <li class="user-header">
                     <img src="../dist/img/TL.jpg" class="img-circle" alt="User Image" />
                     <p>
-                        나현기 - 팀장
+                        나현기 - 국문학과
                       <small>Member since Nov. 2017</small>
                     </p>
                   </li>
