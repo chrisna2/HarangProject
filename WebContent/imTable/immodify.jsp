@@ -13,8 +13,8 @@
 <!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
         <section class="content-header">
           <h1>
-             	기본값 페이지 [페이지 제목]
-            <small>[페이지 소개]</small>
+             	강의평가 수정
+            <small></small>
           </h1>
           <ol class="breadcrumb">
           <!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
@@ -30,9 +30,9 @@
            <div class="col-md-12">
         
          <div class="box-header">
-                  <h3 class="box-title">강의평가 작성</h3>
+                 
                 </div>
-                <div class="box-body">
+                <div class="box-body" >
                   <div class="input-group">
                     <span class="input-group-addon">강의명</span>
                     <input type="text" class="form-control" placeholder="강의명">
@@ -51,60 +51,75 @@
                   </div>
                     <div class="input-group">
                     <span class="input-group-addon">만족도</span>
-                    	<table align="center">
-                    	<tr align="center"> <td>☆☆☆☆☆</td> &nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>★☆☆☆☆ </td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>★★☆☆☆</td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>  ★★★☆☆</td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>  ★★★★☆ </td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>★★★★★</td>
-                    	</tr>
-                    	<tr align="center"> 
-                    	<td>
-                    	 <input type="radio" name="r3" class="flat-red" style="width: 20px; heigh:30px;"/>
-                    	</td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>
-                    	 <input type="radio" name="r3" class="flat-red"/>
-                    	</td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>
-                    	 <input type="radio" name="r3" class="flat-red"/>
-                    	</td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>
-                    	 <input type="radio" name="r3" class="flat-red"/>
-                    	</td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	<td>
-                    	 <input type="radio" name="r3" class="flat-red"/>
-                    	  </td>&nbsp;&nbsp;&nbsp;&nbsp;
-                    	  <td>
-                    	 <input type="radio" name="r3" class="flat-red"/>
-                    	 </td>
-                    	 </tr>
-                		</table>
+                    	
+                    	
+                    	  <select class="form-control input-sm pull-right" >
+                        <option>☆☆☆☆☆</option>
+                        <option>★☆☆☆☆</option>
+                        <option>★★☆☆☆</option>
+                        <option>★★★☆☆</option>
+                        <option>★★★★☆ </option>
+                        <option>★★★★★</option>
+                       
+                      </select>
+                    	
+                    	
+                		
                  	 </div>
                    <div class="input-group">
                     <span class="input-group-addon">과제</span>
-                    <input type="text" class="form-control" placeholder="과제">
+                 	  <select class="form-control input-sm pull-right" >
+                        <option>없음</option>
+                        <option>적음</option>
+                        <option>보통</option>
+                        <option>많음</option>  
+                      </select>
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">출결</span>
-                    <input type="text" class="form-control" placeholder="출결">
+                       <select class="form-control input-sm pull-right" >
+                        <option>전자출결</option>
+                        <option>직접호명</option>   
+                      </select>
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">조모임</span>
-                    <input type="text" class="form-control" placeholder="조모임">
+                      <select class="form-control input-sm pull-right" >
+                        <option>없음</option>
+                        <option>적음</option>
+                        <option>보통</option>
+                        <option>많음</option>  
+                       
+                      </select>
                   </div> <div class="input-group">
                     <span class="input-group-addon">시험횟수</span>
-                    <input type="text" class="form-control" placeholder="시험횟수">
+                      <select class="form-control input-sm pull-right" >
+                         <option>0회</option>
+                        <option>1회</option>
+                        <option>2회</option>
+                        <option>3회</option>  
+                       
+                      </select>
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">총평</span>
                     <input type="text" class="form-control" placeholder="총평">
                   </div>
                   
+                 
+                  
         	
         		</div>
         	
-		
+			 <div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<button class="btn btn-block btn-primary">수정</button>
+						</div>
+						<div class="col-md-2">	
+							<button class="btn btn-block btn-danger">취소</button>
+                  		</div>
+                  	</div>
 
 
 
