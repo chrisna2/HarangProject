@@ -7,6 +7,12 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <title>운동장(관리자)</title>
+<style>
+hr {
+	border: none;
+	border: 1px solid #E6E6E6;
+}
+</style>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
 <div class="content-wrapper">
@@ -22,7 +28,7 @@
 			<li class="active">운동장 관리</li>
 		</ol>
 	</section>
-<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
+	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
 	<section class="content">
 
 		<!-- 첫번째 단시작 [ 1. 전체 예약 내역 ]-->
@@ -171,8 +177,7 @@
 							</div>
 						</div>
 
-						<br>
-						<br>
+						<br> <br>
 						<!-- 2. 2단 -->
 						<div class="row">
 
@@ -227,9 +232,16 @@
 					<!-- 3-1. box-body -->
 					<div class="box-body">
 						<!-- 3-1. 시작 -->
-							<!-- 사용자 편의를 위한.. 운동장 표시 -->
+						<!--첫줄 날짜 선택 -->
+						<!-- 날짜 선택 제목 -->
 						<div class="row">
-							<!-- 시설명(첫번째 카테고리) 선택 -->
+							<div class="col-md-12" align="left">
+								<h4>날짜 선택</h4>
+							</div>
+						</div>
+						<div class="row">
+
+							<!-- 월 선택 -->
 							<div class="form-group col-md-4">
 								<label>월 선택</label> <select class="form-control">
 									<option>5</option>
@@ -237,7 +249,7 @@
 								</select>
 							</div>
 
-							<!-- 호수(두번째 카테고리) 선택 -->
+							<!-- 일 선택 -->
 							<div class="form-group col-md-4">
 								<label>일 선택</label> <select class="form-control">
 									<option>1</option>
@@ -246,25 +258,67 @@
 									<option>4</option>
 								</select>
 							</div>
-							
+
 							<br>
 							<div class="col-md-4">
-							<input type="button" class="btn btn-block btn-primary"
-									value="확인">
+								<input type="button" class="btn btn-block btn-primary"
+									value="검색">
 							</div>
-							
+
 						</div>
-						
+
+						<!--검색 결과 테이블 / 기본은 전체 행사 출력 -->
+						<hr />
+						<div class="row">
+							<div class="col-md-12" align="left">
+								<h4>일정 확인</h4>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<!-- 검색 결과 테이블 -->
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>행사날짜</th>
+											<th>행사명</th>
+											<th>시설명</th>
+											<th>호수</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>2017.6.13</td>
+											<td>축제 1일차</td>
+											<td>농구장</td>
+											<td>중앙회관옆</td>
+										</tr>
+										<tr>
+											<td>2017.6.13</td>
+											<td>축제 1일차</td>
+											<td>농구장</td>
+											<td>중앙회관옆</td>
+										</tr>
+										<tr>
+											<td>2017.6.13</td>
+											<td>축제 1일차</td>
+											<td>농구장</td>
+											<td>중앙회관옆</td>
+										</tr>
+									</tbody>
+								</table>
+
+							</div>
+						</div>
 						<!-- 3-1. 종료  -->
 					</div>
 					<!-- 3-1. box-footer -->
-					<div class="box-footer">
-					
-					</div>	
+					<div class="box-footer"></div>
 				</div>
 				<!-- /. 3-1 box -->
 			</div>
-			
+
 			<!-- 3-2.시설 학사 일정 추가  행 넓이 설정---->
 			<div class="col-md-6">
 				<!-- 3-2.시설 학사 일정 추가 List / box -->
@@ -279,18 +333,16 @@
 						</div>
 					</div>
 					<!-- 3-2. box-body -->
-					<div class="box-body">
-					</div>
+					<div class="box-body"></div>
 					<!-- 3-2. box-footer -->
-					<div class="box-footer">
-					</div>	
+					<div class="box-footer"></div>
 				</div>
 				<!-- /. 3-2 box -->
 			</div>
 		</div>
-				
+
 	</section>
-<!------------------------------------------------------------------------------------------------------------------->
+	<!------------------------------------------------------------------------------------------------------------------->
 </div>
 <!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
 
