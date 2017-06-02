@@ -29,6 +29,9 @@
            <!-- 너비 사이즈 수정  : col-->
            <div class="col-md-12">
   
+  
+  			
+  
         
            <!-- Default box -->
           <div class="box">
