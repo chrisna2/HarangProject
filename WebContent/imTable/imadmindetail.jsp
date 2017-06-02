@@ -16,10 +16,8 @@
 		<div class="row">
 
 			<div class="col-md-7">
-				<h1>강의평가 상세 페이지</h1>
-				<div class="col-md-2">
-					<button class="btn btn-block btn-primary">신고</button>
-				</div>
+				<h1>관리자 강의평가 상세 페이지</h1>
+				
 			</div>
 		</div>
 
@@ -29,13 +27,17 @@
 		<ol class="breadcrumb">
 			<!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
 			<li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
-			<li class="active">기본값 페이지[현재 페이지]</li>
+			<li class="active">관리자 강의평가 상세 페이지[현재 페이지]</li>
 		</ol>
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-	<section class="content">
-		<!-- 세로 길이 수정 -->
-		<div class="row">
+	 <section class="content">
+        
+         <div class="row">
+            <div class="col-md-10">
+            
+ 
+			<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-10">
 
@@ -116,7 +118,10 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-4"></div>
+						<div class="col-md-2"></div>
+						<div class="col-md-3">
+							<button class="btn btn-block btn-primary">글 삭제</button>
+						</div>
 						<div class="col-md-3">
 							<button class="btn btn-block btn-primary">뒤로가기</button>
 						</div>
@@ -127,16 +132,64 @@
 
 
 				</div>
+		<div class="col-md-10">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">신고내역</h3>
+                    <!-- select -->
+                 
+                </div><!-- /.box-header -->
+                <div class="box-body no-padding">
+                  <table class="table">
+                    <tr>
+                      <th>신고번호</th>
+                      <th>작성자</th>
+                  
+                        <th>신고내용</th>
+                    </tr>
+                    <tr>
+                      <td>1.</td>
+                      <td>Update software</td>
+                      <td>
+               			      ☆☆☆☆☆
+                      </td>
+                   
+                    </tr>
+                    <tr>
+                      <td>2.</td>
+             			
+                      <td>
+                      Update software
+                      </td>
+                      <td>	        ★☆☆☆☆</td>
 
+                    </tr>
+                   
+                    
+                    
+                   
+                  </table>
+               
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+        </div>
+        
+        
+        
+        
+        
+           </div>
+                
+              </div><!-- /.box -->
 
 
 
 			</div>
 		</div>
-		<!-- /.col -->
-</div>
-<!-- /.row -->
-</section>
+
+
+
+        </section><!-- /. 작업 공간 끝! -->
 <!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->
 </div>
