@@ -4,7 +4,7 @@
 
 <!-- daterange picker -->
 <link href="../plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/header_a.jsp" %>
 
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 브라우저 제목 -->
