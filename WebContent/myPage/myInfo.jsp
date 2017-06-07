@@ -28,7 +28,7 @@
           <!-- 세로 길이 수정 -->
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
-           <div class="col-md-10">
+           <div class="col-md-9">
            
              <!-- Input addon -->
               <div class="box box-black">

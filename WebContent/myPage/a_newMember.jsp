@@ -4,7 +4,7 @@
 
 <!-- daterange picker -->
 <link href="../plugins/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
-<%@ include file="../include/header_a.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 브라우저 제목 -->
@@ -31,7 +31,7 @@
           <!-- 세로 길이 수정 -->
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
-           <div class="col-md-10">
+           <div class="col-md-9">
            
              <!-- Input addon -->
               <div class="box box-black">

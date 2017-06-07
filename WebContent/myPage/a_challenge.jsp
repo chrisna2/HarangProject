@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ include file="../include/header_a.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -27,7 +27,7 @@
           <!-- 세로 길이 수정 -->
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
-           <div class="col-md-12">
+           <div class="col-md-9">
            
            <!-- 리스트 사용시  -->
             <div class="box">

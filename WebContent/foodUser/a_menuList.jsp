@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 <!-- 페이지 헤드 라인 : 제목 -->
  <head>
      <title>학식 메뉴 조회</title>
@@ -26,13 +26,16 @@
   <!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
         <section class="content-header">
           <h1>
-                         학식 메뉴 조회
-            <small>오늘 뭐 먹지? 고민 말고 하랑 레스토랑!</small>
+                         학식 메뉴 등록 수정
           </h1>
+          <br>
+          <button class="btn btn-sm btn-primary col-md-9">신규 메뉴 등록</button>
+          <br>
+          <br>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
-            <li><a href="#"> 하랑 레스토랑</a></li>
-            <li class="active"> 학식 메뉴 조회</li>
+            <li><a href="#"> 하랑 레스토랑 관리</a></li>
+            <li class="active"> 학식 메뉴 등록 수정</li>
           </ol>
         </section>
  <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>       
@@ -54,7 +57,7 @@
              <!-- 리스트 사용시  -->
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">식권 구매</h3>
+                  <h3 class="box-title">신규 메뉴 등록</h3>
                    <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -67,17 +70,61 @@
                 
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 제목</span>
-                    <input type="text" name="m_addr1" class="form-control" value="스시" readonly="readonly">
+                    <input type="text" name="m_addr1" class="form-control" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 판매일</span>
-                    <input type="text" name="m_addr1" class="form-control" value="2017-06-22" readonly="readonly">
+                    <input type="text" name="m_addr1" id="date1" class="form-control" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 상세 정보</span>
-                    <textarea class="form-control" rows="10" readonly="readonly">
+                    <textarea class="form-control" rows="10" required="required">
+                    </textarea>
+                   </div>
+                    <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 식권  판매 포인트</span>
+                    <input type="text" name="m_addr1" class="form-control" required="required">
+                    <span class="input-group-addon bg-gray"> 포인트</span>
+                  </div>
+                  <br>
+                </div><!-- /.box-body -->
+                 <div class="box-footer clearfix" align="right">
+                      <input type="submit" class="btn btn-gray" value="닫기">
+                      <input type="submit" class="btn btn-success" value="메뉴 등록">
+                </div>
+                </form>
+              </div><!-- /.box -->
+              
+               <!-- 리스트 사용시  -->
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">메뉴 수정</h3>
+                   <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div><!-- /.box-header -->
+                 <!-- form 시작 -->
+                <form role="form">
+                
+                <div class="box-body">
+                
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 제목</span>
+                    <input type="text" name="m_addr1" class="form-control" value="초밥" required="required">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 판매일</span>
+                    <input type="text" name="m_addr2" id="date2" value="06/23/2017" class="form-control" required="required">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 상세 정보</span>
+                    <textarea class="form-control" rows="10" required="required">
   [3일간의 일식 파티! : 한정 메뉴] 
     새우 초밥
     광어 초밥
@@ -88,24 +135,24 @@
     한치 초밥
     등등.... 30가지 초밥을 골라 먹을 수 있음
                        
-    원산지 : 모두 국내산                             
+    원산지 : 모두 국내산                            
                     </textarea>
                    </div>
                     <br>
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 식권  구매 포인트</span>
-                    <input type="text" name="m_addr1" class="form-control" value="6000" readonly="readonly">
+                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 식권  판매 포인트</span>
+                    <input type="text" name="m_addr1" class="form-control" value="6000" required="required">
                     <span class="input-group-addon bg-gray"> 포인트</span>
                   </div>
                   <br>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix" align="right">
                       <input type="submit" class="btn btn-gray" value="닫기">
-                      <input type="submit" class="btn btn-success" value="구매">
+                      <input type="submit" class="btn btn-warning" value="메뉴 수정">
+                      <input type="submit" class="btn btn-danger" value="메뉴 삭제">
                 </div>
                 </form>
               </div><!-- /.box -->
-              
               
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -113,6 +160,16 @@
 <!-- 푸터(footer) 삽입 [지우지 마세여] --------------------------------------------------------------------------------------> 
       </div><!-- /.content-wrapper -->
 <%@ include file="../include/footer.jsp" %>
+<!-- 날짜 입력  -->
+    <script src="../plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script>
+    $(function() {
+        $( "#date1" ).datepicker({
+        });
+        $( "#date2" ).datepicker({
+        });
+    });
+    </script>
 
 <!-- ★★★Ajax를 배우면 이해 할 수 있는 곳 : 여기에 데이터를 삽입합니다. -->
     <script type="text/javascript">

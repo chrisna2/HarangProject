@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -13,8 +13,8 @@
 <!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
       <section class="content-header">
           <h1>
-                         식권 구매 내역
-            <small>당신이 구매한 식권의 흔적</small>
+                         식권 판매 내역
+            <small>현재 날짜 : 2017-06-06</small>
           </h1>
           <ol class="breadcrumb">
           <!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
@@ -33,17 +33,16 @@
             <!-- 리스트 사용시  -->
              <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">식권 구매 조회</h3>
+                  <h3 class="box-title">식권 판매량 조회</h3>
                    <div class="box-tools">
                     <form action="">
                      <div class="input-group">
                        <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
 	                      <select class="form-control input-sm pull-right" style="width: 150px;">
-	                        <option>구매 날짜</option>
 	                        <option>메뉴 판매일</option>
 	                        <option>메뉴</option>
-	                        <option>구매 포인트</option>
-	                        <option>사용 여부</option>
+	                        <option>판매 포인트</option>
+	                        <option>판매량 </option>
 	                      </select>
 	                      <div class="input-group-btn">
                         <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
@@ -56,48 +55,42 @@
                   <table class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>식권 구매일</th>
                         <th>메뉴 판매일</th>
                         <th>메뉴</th>
-                        <th>구매 포인트</th>
-                        <th>사용 여부</th>
+                        <th>판매 포인트</th>
+                        <th>판매량</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr class="text-blue">
-                        <td>2017-06-05</td>
                         <td>2017-06-09</td>
                         <td>철판 볶음</td>
                         <td>6000p</td>
-                        <td>미사용</td>
+                        <td>150</td>
                       </tr>
-                      <tr class="text-red">
-                        <td>2017-06-05</td>
+                      <tr class="text-blue">
                         <td>2017-06-08</td>
                         <td>김치찌게</td>
                         <td>6000p</td>
-                        <td>환불처리</td>
+                        <td>121</td>
                       </tr>
                       <tr class="text-blue">
-                        <td>2017-06-05</td>
                         <td>2017-06-07</td>
                         <td>청라면</td>
                         <td>6000p</td>
-                        <td>미사용</td>
+                        <td>100</td>
                       </tr>
-                      <tr class="text-blue">
-                        <td>2017-06-05</td>
+                      <tr class="text-green">
                         <td>2017-06-06</td>
                         <td>유린기</td>
                         <td>5000p</td>
-                        <td>미사용</td>
+                        <td>250</td>
                       </tr>
                       <tr class="text-black">
                         <td>2017-06-05</td>
-                        <td>2017-06-05</td>
                         <td>청라면</td>
                         <td>6000p</td>
-                        <td>사용</td>
+                        <td>300</td>
                       </tr>
                   </table>
                 </div><!-- /.box-body -->

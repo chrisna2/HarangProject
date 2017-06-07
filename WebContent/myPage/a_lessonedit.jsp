@@ -2,25 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ include file="../include/header_a.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
-     <title>수업 등록 수정</title>
+     <title>수업 수정</title>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
 <!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
         <section class="content-header">
           <h1>
-             	수업 신규 등록
+             	수업 수정
           </h1>
          <ol class="breadcrumb">
           <!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
             <li><a href="#"><i class="fa fa-dashboard"></i> 관리자 메인</a></li>
             <li><a href="#"> 사이트 관리</a></li>
             <li><a href="#"> 수업 등록 수정</a></li>
-            <li class="active"> 수업 신규 등록</li>
+            <li class="active"> 수업 수정</li>
           </ol>
         </section>
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
@@ -28,12 +28,12 @@
           <!-- 세로 길이 수정 -->
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
-           <div class="col-md-12">
+           <div class="col-md-9">
            
              <div class="box">
                 <form action="">
                 <div class="box-header">
-                    <h3 class="box-title">수업 개설</h3>
+                    <h3 class="box-title">수업 수정</h3>
                 </div>
                 <div class="box-body">
                      <div class="input-group">
@@ -108,7 +108,8 @@
                     </div>
                 </div>
                 <div class="box-footer clearfix" align="right">
-                    <button type="submit" class="btn btn-success"> 신규 등록  </button>
+                    <button type="submit" class="btn btn-danger"> 수업 삭제</button>
+                    <button type="submit" class="btn btn-primary"> 수업 수정</button>
                 </div>
            </form>
             </div>

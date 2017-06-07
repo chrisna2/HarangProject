@@ -46,7 +46,7 @@
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo"><img src="../dist/img/Logo.png" class="img-circle" alt="User Image" width="40" height="40"/>&nbsp;<b>하랑</b>대학교</a>
+        <a href="#" class="logo"><img src="../dist/img/Logo.png" class="img-circle" alt="User Image" width="40" height="40"/>&nbsp;하랑 대학교</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -250,6 +250,7 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> 수강 시간표!</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> 포인트 거래 내역</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> 학비 포인트 제로!</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> 쪽지 함</a></li>
               </ul>
               <!-- 하위 메뉴 끝 -->
             </li>
