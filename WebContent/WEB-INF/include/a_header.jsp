@@ -245,23 +245,16 @@
               </a>
               <!-- 하위 메뉴 시작 -->
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 회원 정보 조회</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 스팩 업 관리</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 스팩 목록 관리</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 강의 목록 관리</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 포인트 관리 시스템</a></li>
+                <li><a href="/HarangProject/myPage?cmd=AmemList"><i class="fa fa-circle-o"></i> 회원 정보 조회</a></li>
+                <li><a href="/HarangProject/myPage?cmd=Achallenge"><i class="fa fa-circle-o"></i> 스팩 업 관리</a></li>
+                <li><a href="/HarangProject/myPage?cmd=AspecList"><i class="fa fa-circle-o"></i> 스팩 목록 관리</a></li>
+                <li><a href="/HarangProject/myPage?cmd=Alesson"><i class="fa fa-circle-o"></i> 강의 목록 관리</a></li>
+                <li><a href="/HarangProject/myPage?cmd=ApointCheck"><i class="fa fa-circle-o"></i> 포인트 관리 시스템</a></li>
                 <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-circle-o"></i> 관리자 쪽지함</a></li>
               </ul>
               <!-- 하위 메뉴 끝 -->
             </li>
            <!-- 상위 메뉴 끝 -->
-            <li class="threeview">
-              <a href="#">
-                <i class="fa fa-calendar"></i>
-                <span>학사 일정 관리</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-            </li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-share-square-o"></i>
@@ -281,8 +274,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 메뉴 등록/수정</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 식권 판매 내역</a></li>
+                <li><a href="/HarangProject/food?cmd=Amenu"><i class="fa fa-circle-o"></i> 메뉴 등록/수정</a></li>
+                <li><a href="/HarangProject/food?cmd=Aticket"><i class="fa fa-circle-o"></i> 식권 판매 내역</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -308,14 +301,18 @@
             </li>
             <li>
               <a href="#">
-                <i class="fa fa-group"></i><span>하랑 대나무 숲 관리</span>
-                <i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-calendar"></i>
+                <span>학사 일정 관리</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="/HarangProject/bamboo?cmd=A_BB_LIST">
+                <i class="fa fa-group"></i><span>하랑 대나무 숲 관리</span>
+              </a>
+            </li>
+            <li>
+              <a href="/HarangProject/schedule?cmd=A_SCH_LIST">
                 <i class="fa fa-book"></i> <span>하랑딘 24 관리</span>
-                <i class="fa fa-angle-left pull-right"></i>
               </a>
             </li>
           </ul>

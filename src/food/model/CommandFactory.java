@@ -19,9 +19,17 @@ public class CommandFactory {
 			
 			return new MenuCommand();
 		}
+		if(cmd.equals("Amenu")){
+			
+			return new AdminMenuCommand();
+		}
 		if(cmd.equals("ticket")){
 			
 			return new TicketCommand();
+		}
+		if(cmd.equals("Aticket")){
+			
+			return new AdminTicketCommand();
 		}
 		else{
 			
