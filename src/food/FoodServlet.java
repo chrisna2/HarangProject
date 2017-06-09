@@ -1,4 +1,4 @@
-package myPage;
+package food;
 
 import java.io.IOException;
 
@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import myPage.model.CommandFactory;
-import myPage.model.CommandInterface;
+import food.model.CommandFactory;
+import food.model.CommandInterface;
 
 
-@WebServlet("/myPage")
-public class TimetableServlet extends HttpServlet {
+@WebServlet("/food")
+public class FoodServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -30,7 +30,6 @@ public class TimetableServlet extends HttpServlet {
 		
 		//요거 한줄이면 아~~주 깔끔하게 떨어진다. if문도 사라짐
 		command = CommandFactory.newInstance().createCommand(cmd);
-		
 		
 		//중복되는 새로 고침을 막기 위함
 		String state =(String)request.getSession().getAttribute("STATE");

@@ -75,7 +75,7 @@
                 <div class="box-body" align="center">
                 
 	                <h2>
-	                                         하랑 <img src="../dist/img/Logo.png" class="img-circle" alt="User Image" width="75" height="75"/> 식당
+	                                         하랑 <img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="75" height="75"/> 식당
 	                </h2>
 	                    <!-- 여기다 코드 벨류 입력 DB 데이터 -->
 		                <input type="hidden" id="barcodeValue" value="4566464879872313" onload="generateBarcode();">
@@ -112,7 +112,7 @@
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
-    <script type="text/javascript" src="../plugins/barcode/jquery-barcode.js"></script>
+    <script type="text/javascript" src="plugins/barcode/jquery-barcode.js"></script>
     <script type="text/javascript">
       function generateBarcode(){
         var value = $("#barcodeValue").val();

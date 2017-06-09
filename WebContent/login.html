@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>하랑대학교 | 로그인</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.2 -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome Icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- iCheck -->
+    <link href="plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="login-page">
+    <div class="login-box">
+      <div class="login-logo">
+         <img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="75" height="75"/><br>
+        <a href="#"><b>하랑</b>대학교</a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">커뮤니티에 접속하시려면 로그인을 하세요</p>
+        <form action="index2.html" method="post">
+          <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="학번"/>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" placeholder="비밀번호"/>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+          </div>
+          <div class="row">
+            <div class="col-xs-8">    
+            </div><!-- /.col -->
+            <div class="col-xs-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-unlock"></i>  로그인</button>
+            </div><!-- /.col -->
+          </div>
+        </form>
+
+        <a href="#">비밀번호 찾기</a><br>
+        <a href="register.html" class="text-center">커뮤니티 회원으로 정식 가입</a>
+
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+    
+    
+   <h2>내 정보</h2>
+	   <ul>
+	    <li><a href="/HarangProject/myPage?cmd=myinfo">내 정보 조회</a></li>
+	   </ul>
+   
+   <h2>하랑 레스토랑</h2>
+	   <ul>
+	    <li><a href="/HarangProject/food?cmd=menu">학생 메뉴 조회</a></li>
+	   </ul>
+    <!-- jQuery 2.1.3 -->
+    <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- iCheck -->
+    <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+    <script>
+      $(function () {
+        $('input').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_square-blue',
+          increaseArea: '20%' // optional
+        });
+      });
+    </script>
+  </body>
+</html>

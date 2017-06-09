@@ -174,7 +174,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="user image"/>
+                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="user image"/>
                           </div>
                           <h4>
                                                          김민준
@@ -191,13 +191,13 @@
               <!--회원 개인정보 요약 형태 -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../dist/img/TL.jpg" class="user-image" alt="User Image"/>
+                  <img src="dist/img/TL.jpg" class="user-image" alt="User Image"/>
                   <span class="hidden-xs">나현기 - 국문학과</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- 회원 사진 -->
                   <li class="user-header">
-                    <img src="../dist/img/TL.jpg" class="img-circle" alt="User Image" />
+                    <img src="dist/img/TL.jpg" class="img-circle" alt="User Image" />
                     <p>
                         나현기 - 국문학과
                       <small>Member since Nov. 2017</small>
@@ -261,11 +261,6 @@
                 <span>학사일정</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 1</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 2</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 3</a></li>
-              </ul>
             </li>
             <li class="treeview">
               <a href="#">
@@ -307,9 +302,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 1</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 2</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 3</a></li>
+                <li><a href="/HarangProject/parttime?cmd=PMAIN"><i class="fa fa-circle-o"></i> 알바 모집</a></li>
+                <li><a href="/HarangProject/parttime?cmd=DMAIN"><i class="fa fa-circle-o"></i> 대타 모집</a></li>
+                <li><a href="/HarangProject/parttime?cmd=MYPAGE"><i class="fa fa-circle-o"></i> 내가 쓴 글</a></li>
               </ul>
             </li>
             <li>
@@ -317,22 +312,12 @@
                 <i class="fa fa-group"></i><span>하랑 대나무 숲</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 1</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 2</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 3</a></li>
-              </ul>
             </li>
             <li>
               <a href="#">
                 <i class="fa fa-book"></i> <span>하랑딘 24</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 1</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 2</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 3</a></li>
-              </ul>
             </li>
           </ul>
         </section>

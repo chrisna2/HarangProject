@@ -1,4 +1,4 @@
-package myPage.model;
+package food.model;
 
 public class CommandFactory {
 
@@ -15,14 +15,13 @@ public class CommandFactory {
 	
 	public CommandInterface createCommand(String cmd){
 		
-		System.out.println(cmd);
-		
-		if(cmd.equals("myinfo")){
+		if(cmd.equals("menu")){
 			
-			return new MyinfoCommand();
+			return new MenuCommand();
 			
 		}
 		else{
+			
 			return null;
 		}
 		
