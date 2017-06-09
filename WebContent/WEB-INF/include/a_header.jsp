@@ -250,6 +250,7 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> 스팩 목록 관리</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> 강의 목록 관리</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> 포인트 관리 시스템</a></li>
+                <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-circle-o"></i> 관리자 쪽지함</a></li>
               </ul>
               <!-- 하위 메뉴 끝 -->
             </li>

@@ -250,7 +250,7 @@
                 <li><a href="#"><i class="fa fa-circle-o"></i> 수강 시간표!</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> 포인트 거래 내역</a></li>
                 <li><a href="#"><i class="fa fa-circle-o"></i> 학비 포인트 제로!</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 쪽지 함</a></li>
+                <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-circle-o"></i> 쪽지 함</a></li>
               </ul>
               <!-- 하위 메뉴 끝 -->
             </li>
