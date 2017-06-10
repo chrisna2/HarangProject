@@ -6,6 +6,13 @@
     },
     "outline": {
       
+    },
+    "bootstrap": {
+      
     }
-  }
+  },
+  "libs": [
+    "browser",
+    "jquery"
+  ]
 }

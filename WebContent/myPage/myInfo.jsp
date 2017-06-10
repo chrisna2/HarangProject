@@ -35,10 +35,8 @@
                 <div class="box-header">
                   <h3 class="box-title">개인 정보 수정</h3>
                 </div>
-                
                 <!-- form 시작 -->
                 <form role="form">
-                
                 <div class="box-body">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-picture-o"></i> 이미지</span>
@@ -129,7 +127,6 @@
                     <input type="submit" class="btn btn-primary" value="개인정보 수정">
                 </div>
                 </form>
-                
               </div><!-- /.box -->
               
               <!-- 페이지 단위 -->
