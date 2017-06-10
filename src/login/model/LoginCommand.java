@@ -29,7 +29,7 @@ public class LoginCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		/*String url = "";
+		String url = "";
 		
 		pool = DBConnectionMgr.getInstance();
 		
@@ -63,8 +63,7 @@ public class LoginCommand implements CommandInterface {
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt,rs);
 		}			
-*/		
-		return "/WEB-INF/login/main.jsp";
+		return url;
 		
 	}
 
