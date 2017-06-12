@@ -134,6 +134,16 @@
                  <li>admin side</li>
                  <li><a href="/HarangProject/facil?cmd=A_SCH_LIST">학사일정 관리자 메인</a></li>
               </ul>
+              
+            <h4>학사일정</h4>
+            <ul>
+                 <li>user side</li>
+                 <li><a href="/HarangProject/schedule?cmd=U_SCH_LIST">학사일정 메인 페이지</a></li>
+                 <li>admin side</li>
+                 <li><a href="/HarangProject/schedule?cmd=A_SCH_LIST">학사일정 관리자 메인</a></li>
+              </ul>
+              
+              
              </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
         
