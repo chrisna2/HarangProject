@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 public class AFacilManagerCommand implements CommandInterface {
 
 	@Override
-	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	public Object processCommand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		return "/WEB-INF/facil/a_facilities_manager.jsp";
 	}
 

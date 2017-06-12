@@ -6,12 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AfacilmainCommand implements CommandInterface {
+public class AfacilAddDelCommand implements CommandInterface {
 
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return "/WEB-INF/facil/a_facilities_main.jsp";
+		return "/WEB-INF/facil/a_facilities_adddel.jsp";
 	}
 
 }

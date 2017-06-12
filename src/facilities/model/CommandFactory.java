@@ -32,8 +32,8 @@ public class CommandFactory {
 		}
 
 		// 관리자 관리 페이지, 메인
-		else if(cmd.equals("AFacilMain")){
-			return new AfacilmainCommand();
+		else if(cmd.equals("AFacilAddDel")){
+			return new AfacilAddDelCommand();
 		}
 
 		// 관리자 운동장 관리
