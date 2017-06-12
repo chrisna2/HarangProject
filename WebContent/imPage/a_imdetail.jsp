@@ -41,9 +41,12 @@
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-10">
 
-				<div class="box-header"></div>
-				<div class="box-body">
 
+			<div class="box box-black">
+                <div class="box-header">
+                  <h3 class="box-title">개인 정보 수정</h3>
+                </div>
+				<div class="box-body">
 					<div class="row">
 						<div class="col-md-5 form-group">
 							<label>작성자</label> <input type="text" class="form-control"
@@ -125,27 +128,29 @@
 						<div class="col-md-3">
 							<button class="btn btn-block btn-primary">뒤로가기</button>
 						</div>
-
-
 					</div>
-
-
-
 				</div>
+			</div>
+				
+				
 		<div class="col-md-10">
+		
               <div class="box">
+              
                 <div class="box-header">
                   <h3 class="box-title">신고내역</h3>
-                    <!-- select -->
-                 
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
                 </div><!-- /.box-header -->
+                
                 <div class="box-body no-padding">
                   <table class="table">
                     <tr>
                       <th>신고번호</th>
                       <th>작성자</th>
-                  
-                        <th>신고내용</th>
+                      <th>신고내용</th>
                     </tr>
                     <tr>
                       <td>1.</td>
@@ -165,13 +170,11 @@
 
                     </tr>
                    
-                    
-                    
-                   
                   </table>
-               
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+              
+              
         </div>
         
         
