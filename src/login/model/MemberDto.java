@@ -5,11 +5,11 @@ import java.util.Date;
 public class MemberDto {
 
 	private String m_id;
-	private Date m_regdate;
+	private String m_regdate;
 	private String m_pw;
 	private int m_grade;
 	private String m_name;
-	private Date m_birth;
+	private String m_birth;
 	private String m_dept;
 	private String m_mail;
 	private String m_photo;
@@ -24,11 +24,17 @@ public class MemberDto {
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	public Date getM_regdate() {
+	public String getM_regdate() {
 		return m_regdate;
 	}
-	public void setM_regdate(Date m_regdate) {
+	public void setM_regdate(String m_regdate) {
 		this.m_regdate = m_regdate;
+	}
+	public String getM_birth() {
+		return m_birth;
+	}
+	public void setM_birth(String m_birth) {
+		this.m_birth = m_birth;
 	}
 	public String getM_pw() {
 		return m_pw;
@@ -47,12 +53,6 @@ public class MemberDto {
 	}
 	public void setM_name(String m_name) {
 		this.m_name = m_name;
-	}
-	public Date getM_birth() {
-		return m_birth;
-	}
-	public void setM_birth(Date m_birth) {
-		this.m_birth = m_birth;
 	}
 	public String getM_dept() {
 		return m_dept;
