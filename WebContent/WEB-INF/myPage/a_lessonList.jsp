@@ -16,7 +16,7 @@
              	수업 등록 수정
           </h1>
          <br>
-         <input type="submit" class="btn btn-success col-md-12 col-xs-12" value="수업 신규 등록">
+         <input type="submit" class="btn btn-success col-md-9 col-xs-9" value="수업 신규 등록">
          <br>
          <br>
          <ol class="breadcrumb">

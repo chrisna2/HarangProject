@@ -8,8 +8,10 @@ import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
 public class LoginCommand implements CommandInterface {
@@ -28,6 +30,8 @@ public class LoginCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		
 		String url = "";
 		
 		pool = DBConnectionMgr.getInstance();
@@ -36,8 +40,10 @@ public class LoginCommand implements CommandInterface {
 		String input_id = request.getParameter("m_id");
 		String input_pw = request.getParameter("m_pw");
 		
-		String sql = "select m_pw, m_dept, m_mail, m_tel, m_addr from tbl_member where m_id = ?";
+		String sql = "select m_pw, m_name, m_dept, m_mail, m_tel, m_addr, m_point, m_photo, m_fee, m_grade, m_birth, m_regdate "
+				+ "from tbl_member where m_id = ?";
 		
+		MemberDTO mdto = new MemberDTO();
 		
 		// DB 연결 접속
 		try {
@@ -49,21 +55,44 @@ public class LoginCommand implements CommandInterface {
 			rs.next();
 			
 			String m_pw = rs.getString("m_pw");
+			String m_name = rs.getString("m_name");
 			String m_dept = rs.getString("m_dept");
 			String m_mail = rs.getString("m_mail");
 			String m_tel = rs.getString("m_tel");
 			String m_addr = rs.getString("m_addr");
+			long m_point = rs.getLong("m_point");
+			String m_photo = rs.getString("m_photo");
+			int m_fee = rs.getInt("m_fee");
+			int m_grade = rs.getInt("m_grade");
+			String m_birth = rs.getString("m_birth");
+			String m_regdate = rs.getString("m_regdate");
 			
+			mdto.setM_id(input_id);
+			mdto.setM_name(m_name);
+			mdto.setM_dept(m_dept);
+			mdto.setM_mail(m_mail);
+			mdto.setM_tel(m_tel);
+			mdto.setM_addr(m_addr);
+			mdto.setM_point(m_point);
+			mdto.setM_photo(m_photo);
+			mdto.setM_fee(m_fee);
+			mdto.setM_grade(m_grade);
+			mdto.setM_birth(m_birth);
+			mdto.setM_regdate(m_regdate);
+		
 			//일반 회원 일때
 			if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && !m_mail.isEmpty() && !m_tel.isEmpty() && !m_addr.isEmpty()){
+				session.setAttribute("member", mdto);
 				url="/WEB-INF/login/main.jsp";
 			}
 			//관리자 일때.
 			else if(input_pw.equals(m_pw) && m_dept.equals("관리자")){
+				session.setAttribute("admin", mdto);
 				url="/WEB-INF/login/a_main.jsp";
 			}
 			//신규 회원 일때.
 			else if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && m_mail.isEmpty() && m_tel.isEmpty() && m_addr.isEmpty()){
+				session.setAttribute("newbee", mdto);
 				url="/WEB-INF/login/regform.jsp";
 			}
 			//비밀번호가 틀렸을때.

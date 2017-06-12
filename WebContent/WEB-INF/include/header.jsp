@@ -60,7 +60,7 @@
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-money"></i>&nbsp;&nbsp;
-                    999999 포인트
+                    ${member.m_point } 포인트
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">오늘 3번의 거래 기록이 있습니다.</li>
@@ -192,15 +192,15 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="dist/img/TL.jpg" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">나현기 - 국문학과</span>
+                  <span class="hidden-xs">${member.m_name } -  ${member.m_dept }</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- 회원 사진 -->
                   <li class="user-header">
                     <img src="dist/img/TL.jpg" class="img-circle" alt="User Image" />
                     <p>
-                        나현기 - 국문학과
-                      <small>Member since Nov. 2017</small>
+                        ${member.m_name } - ${member.m_dept }
+                      <small>Member since ${member.m_regdate }</small>
                     </p>
                   </li>
                   <!-- 개인정보 창 -->

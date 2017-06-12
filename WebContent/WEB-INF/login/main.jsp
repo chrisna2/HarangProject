@@ -28,19 +28,21 @@
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
            <div class="col-md-12">
+       
         
         
-        
- <h3>메인 페이지 작성</h3>
+ <h3>학생 세션 데이터 테스트</h3>
  
-  1. 자기의 파트와 관련된 이름으로 개인 폴더를 만드세요.<br>
-  2. default/default.jsp 파일을 복사 하시고. 파일명을 바꾸세요.<br>
-  3. 현재 이 글이 있는 장소가 실제 작업 장소 입니다.<br>
-&nbsp;&nbsp;class="content"가 있는 섹션 안입니다.<br>
-&nbsp;&nbsp;여기서 페이지 디자인 작업을 하시면 되겠습니다.<br>
-※내용을 숙지 하셨다면 이 내용은 지우셔도 됩니다.<br>
-
-
+ <b>학번</b> ${member.m_id}<br>
+ <b>이름</b> ${member.m_name}<br>
+ <b>학과</b> ${member.m_dept}<br>
+ <b>학년</b> ${member.m_grade}<br>
+ <b>이메일</b> ${member.m_mail}<br>
+ <b>주소</b> ${member.m_addr}<br>
+ <b>전화번호</b> ${member.m_tel}<br>
+ <b>포인트</b> ${member.m_point}<br>
+ <b>등록금</b> ${member.m_fee}<br>
+ 
 
               </div><!-- /.col -->
            </div><!-- /.row -->

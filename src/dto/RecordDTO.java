@@ -1,0 +1,44 @@
+package dto;
+
+public class RecordDTO {
+
+	private String r_regdate;
+	private int r_point;
+	private String r_content;
+	private String m_giver;
+	private String m_haver;
+	
+	public String getR_regdate() {
+		return r_regdate;
+	}
+	public void setR_regdate(String r_regdate) {
+		this.r_regdate = r_regdate;
+	}
+	public int getR_point() {
+		return r_point;
+	}
+	public void setR_point(int r_point) {
+		this.r_point = r_point;
+	}
+	public String getR_content() {
+		return r_content;
+	}
+	public void setR_content(String r_content) {
+		this.r_content = r_content;
+	}
+	public String getM_giver() {
+		return m_giver;
+	}
+	public void setM_giver(String m_giver) {
+		this.m_giver = m_giver;
+	}
+	public String getM_haver() {
+		return m_haver;
+	}
+	public void setM_haver(String m_haver) {
+		this.m_haver = m_haver;
+	}
+	
+	
+	
+}

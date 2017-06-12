@@ -60,7 +60,7 @@
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-money"></i>&nbsp;&nbsp;
-                    999999 포인트
+                    ${admin.m_point} 포인트
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">오늘 3번의 거래 기록이 있습니다.</li>
@@ -192,15 +192,15 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">관리자 A</span>
+                  <span class="hidden-xs">${admin.m_name } - ${admin.m_dept}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- 회원 사진 -->
                   <li class="user-header">
                     <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                       관리자 A
-                      <small>Member since Nov. 2017</small>
+                      ${admin.m_name } - ${admin.m_dept}
+                      <small>Member since  ${admin.m_regdate}</small>
                     </p>
                   </li>
                   <!-- 개인정보 창 -->

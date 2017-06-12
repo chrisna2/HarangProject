@@ -1,8 +1,6 @@
-package login.model;
+package dto;
 
-import java.util.Date;
-
-public class MemberDto {
+public class MemberDTO {
 
 	private String m_id;
 	private String m_regdate;
@@ -16,7 +14,7 @@ public class MemberDto {
 	private String m_addr;
 	private String m_tel;
 	private int m_fee;
-	private int m_point;
+	private long m_point;
 	
 	public String getM_id() {
 		return m_id;
@@ -90,10 +88,10 @@ public class MemberDto {
 	public void setM_fee(int m_fee) {
 		this.m_fee = m_fee;
 	}
-	public int getM_point() {
+	public long getM_point() {
 		return m_point;
 	}
-	public void setM_point(int m_point) {
+	public void setM_point(long m_point) {
 		this.m_point = m_point;
 	}
 	
