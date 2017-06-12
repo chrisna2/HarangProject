@@ -12,7 +12,7 @@ public class FacilSRreservCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		return "/WEB-INF/facil/a_menuList.jsp";
+		return "/WEB-INF/facil/facilities_studyroom.jsp";
 	}
 
 }

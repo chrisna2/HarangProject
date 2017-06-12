@@ -18,6 +18,7 @@ public class CommandFactory {
 		
 		// 사용자 메인
 		if(cmd.equals("FacilMain")){
+			System.out.println("if_FacilMain 접근");
 			return new FacilMainCommand();
 		}	
 
@@ -26,12 +27,12 @@ public class CommandFactory {
 			return new FacilPGreservCommand();
 		}
 
-		// 사용자 운동장 예약
+		// 사용자 스터디룸 예약
 		else if(cmd.equals("FacilSRreserv")){
 			return new FacilSRreservCommand();
 		}
 
-		// 관리자 관리 페이지, 메인
+		// 관리자 시설 추가/삭제
 		else if(cmd.equals("AFacilAddDel")){
 			return new AfacilAddDelCommand();
 		}
@@ -46,7 +47,7 @@ public class CommandFactory {
 			return new AFacilSRCommand();
 		}
 		
-		// 사용자 시설 예약 취소
+		// 관리자 사용자 시설 예약 취소
 		else if(cmd.equals("AFacilManager")){
 			return new AFacilManagerCommand();
 		}

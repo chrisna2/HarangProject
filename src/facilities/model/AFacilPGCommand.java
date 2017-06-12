@@ -12,7 +12,7 @@ public class AFacilPGCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		return "/WEB-INF/facil/a_menuList.jsp";
+		return "/WEB-INF/facil/a_facilities_pg_schedule.jsp";
 	}
 
 }
