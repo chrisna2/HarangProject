@@ -1,0 +1,39 @@
+package harangdin;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import harangdin.model.CommandFactory;
+import harangdin.model.CommandInterface;
+
+@WebServlet("/harangdin")
+public class HarangdinServlet extends HttpServlet {
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String cmd = request.getParameter("cmd");
+		String url = null;
+		
+		CommandInterface command = null;
+		
+		//요거 한줄이면 아~~주 깔끔하게 떨어진다. if문도 사라짐
+		command = CommandFactory.newInstance().createCommand(cmd);
+		
+		url = (String)command.processCommand(request, response);
+		
+		RequestDispatcher view = request.getRequestDispatcher(url);
+		view.forward(request, response);
+	}
+	
+}

@@ -127,6 +127,13 @@
                  <li>admin side</li>
                  <li><a href="/HarangProject/schedule?cmd=A_SCH_LIST">학사일정 관리자 메인</a></li>
               </ul>
+              <h4>하랑딘24</h4>
+            <ul>
+                 <li>user side</li>
+                 <li><a href="/HarangProject/harangdin?cmd=main">하랑딘 메인 페이지</a></li>
+                 <li>admin side</li>
+                 <li><a href="/HarangProject/harangdin?cmd=adminMain">하랑딘 관리자 메인</a></li>
+              </ul>
              </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
         
