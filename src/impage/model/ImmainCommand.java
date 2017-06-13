@@ -12,7 +12,8 @@ public class ImmainCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		return "/WEB-INF/impage/immain.jsp";
+		System.out.println("z");
+		return "/WEB-INF/imPage/immain.jsp";
 	}
 
 }

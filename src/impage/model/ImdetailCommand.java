@@ -12,7 +12,7 @@ public class ImdetailCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		return "/WEB-INF/impage/imdetail.jsp";
+		return "/WEB-INF/imPage/imdetail.jsp";
 	}
 
 }

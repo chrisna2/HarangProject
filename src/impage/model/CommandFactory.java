@@ -31,7 +31,7 @@ public class CommandFactory {
 			
 			return new ImmodifyCommand();
 		}
-		if(cmd.equals("alist")){
+		if(cmd.equals("amain")){
 			
 			return new ImalistCommand();
 		}

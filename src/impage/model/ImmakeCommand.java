@@ -12,7 +12,7 @@ public class ImmakeCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		return "/WEB-INF/impage/immake.jsp";
+		return "/WEB-INF/imPage/immake.jsp";
 	}
 
 }
