@@ -33,6 +33,7 @@ public class AspecListCommand implements CommandInterface {
 		
 		ArrayList list = new ArrayList();
 		pool = DBConnectionMgr.getInstance();
+		
 		String sql ="SELECT * FROM tbl_certificate;";
 		
 		try {
@@ -46,10 +47,12 @@ public class AspecListCommand implements CommandInterface {
 
 				
 				CertiDTO dto = new CertiDTO();
+				
 				dto.setC_num(rs.getString("c_num"));
 				dto.setC_name(rs.getString("c_name"));
 				dto.setC_agency(rs.getString("c_agency"));
 				dto.setC_point(rs.getInt("c_point"));
+				
 				list.add(dto);
 
 				
