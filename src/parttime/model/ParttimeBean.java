@@ -32,7 +32,7 @@ public class ParttimeBean {
 	}
 	
 	/**
-	 * 알바 모집 게시판 Getter 메서드.
+	 * DB에서 알바 모집 게시판의 모든 글 정보를 가져오는 함수
 	 */
 	public ArrayList getParttimeList(){
 		ArrayList list = new ArrayList();
@@ -75,6 +75,12 @@ public class ParttimeBean {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * @param p_num 
+	 * 		    글번호
+	 * @return 지원자수 
+	 */
 	public int getCnt_apply(String p_num){
 		int cnt_apply=0;
 		
@@ -92,12 +98,55 @@ public class ParttimeBean {
 			}
 			
 		}catch(Exception err){
-			System.out.println("getParttimeList() : " + err);
+			System.out.println("getCnt_apply() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);
 		}
 		
 		return cnt_apply;
+	}
+	
+	/**
+	 * 
+	 * @param p_num
+	 * 		  글번호
+	 * @return 해당 글의 모든 정보
+	 */
+	public ParttimeDto getParttime(String p_num){
+		ParttimeDto dto = new ParttimeDto();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_parttime where p_num=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, p_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				dto.setP_num(rs.getString("p_num"));
+				dto.setP_title(rs.getString("p_title"));
+				dto.setP_regdate(rs.getDate("p_regdate"));
+				dto.setP_deadline(rs.getDate("p_deadline"));
+				dto.setP_wage(rs.getInt("p_wage"));
+				dto.setP_term(rs.getString("p_term"));
+				dto.setP_content(rs.getString("p_content"));
+				dto.setP_tel(rs.getString("p_tel"));
+				dto.setP_daycode(rs.getString("p_daycode"));
+				dto.setP_location(rs.getString("p_location"));
+				dto.setP_header(rs.getString("p_header"));
+				dto.setM_id(rs.getString("m_id"));
+				dto.setP_cnt(rs.getInt("p_cnt"));
+			}
+			
+		}catch(Exception err){
+			System.out.println("getParttime() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		return dto;
 	}
 }

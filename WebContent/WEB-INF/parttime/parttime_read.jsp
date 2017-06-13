@@ -38,40 +38,54 @@
                     <div class="row">
 	                    <div class="col-md-3 form-group">
 	                      <label>머릿말</label>	                      
-		                    <input type="text" value="[모집중]" readonly="readonly"/>		                		                  
+		                    <input type="text" value="${info.p_header}" readonly="readonly"/>		                		                  
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>제목</label>
-                      <input type="text" class="form-control" value="**과 과사무실 조교 모집합니다." readonly="readonly"/>
+                      <input type="text" class="form-control" value="${info.p_title}" readonly="readonly"/>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>장소</label>
-	                      <input type="text" class="form-control" value="**과 과사무실" readonly="readonly"/>
+	                      <input type="text" class="form-control" value="${info.p_location}" readonly="readonly"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>마감일</label>	                      
-	                      <input type="text" class="form-control pull-right" id="reservation" readonly="readonly"/>                    
+	                      <input type="text" class="form-control pull-right" value="${info.p_deadline}" readonly="readonly"/>                    
 	                    </div>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>시급</label>
-	                      <input type="text" class="form-control" value="ex) 7000원" readonly="readonly"/>
+	                      <input type="text" class="form-control" value="${info.p_wage}원" readonly="readonly"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>근무기간</label>
-	                      <input type="text" class="form-control" value="ex) 6개월, 1년 ..." readonly="readonly"/>
+	                      <input type="text" class="form-control" value="${info.p_term}" readonly="readonly"/>
 	                    </div>
                     </div>
                     <div class="form-group">
-                      <label>요일</label>
-                      <input type="text" class="form-control" placeholder="Enter ..."/>
+                      <label>요일</label><br>
+                      <div class="btn-group" data-toggle="buttons">
+	                      <label class="btn btn-primary"> <input type="checkbox" id="mon" autocomplete="off" > 월</label> 
+	                      &nbsp;&nbsp;&nbsp;
+	                      <label class="btn btn-primary"> <input type="checkbox" id="tue" autocomplete="off"> 화</label> 
+	                      &nbsp;&nbsp;&nbsp;
+	                      <label class="btn btn-primary"> <input type="checkbox" id="wed" autocomplete="off"> 수</label> 
+	                      &nbsp;&nbsp;&nbsp;
+	                      <label class="btn btn-primary"> <input type="checkbox" id="thu" autocomplete="off"> 목</label> 
+	                      &nbsp;&nbsp;&nbsp;
+	                      <label class="btn btn-primary"> <input type="checkbox" id="fri" autocomplete="off"> 금</label> 
+	                      &nbsp;&nbsp;&nbsp;
+	                      <label class="btn btn-primary"> <input type="checkbox" id="sat" autocomplete="off"> 토</label> 
+	                      &nbsp;&nbsp;&nbsp;
+	                      <label class="btn btn-primary"> <input type="checkbox" id="sun" autocomplete="off"> 일</label> 			
+                      </div>
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" value="ex)010-1234-5678 or email@naver.com" readonly="readonly"/>
+                      <input type="text" class="form-control" value="${info.p_tel}" readonly="readonly"/>
                     </div>
                     
 					<div class='box'>
@@ -80,9 +94,7 @@
 		                </div><!-- /.box-header -->
 		                <div class='box-body pad'>
 		                  <form>
-		                    <textarea class="form-control" id="editor1" name="editor1" rows="10" cols="120" readonly="readonly">
-		                       	※ 구체적인 요일/시간 정보	                       	                 
-		                    </textarea>
+		                    <textarea class="form-control" id="editor1" name="editor1" rows="10" cols="120" readonly="readonly">${info.p_content}</textarea>
 		                  </form>
 		                </div>
               		</div><!-- /.box -->
@@ -98,7 +110,7 @@
               <div class="row">
               	<div class="col-md-10"></div>
               	<div class="col-md-2">
-              		<button class="btn btn-block btn-warning">목록</button>
+              		<button class="btn btn-block btn-warning" onclick="javascript:fnList()">목록</button>
               	</div>
               </div>
               <br>
@@ -131,7 +143,21 @@
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      
+      <form name="list" method="post" action="/HarangProject/parttime?cmd=PMAIN">
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
+<script>
+$.urlParam = function(name){
+    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+    return results[1] || 0;
+}
+
+function fnList(){
+	document.list.submit();
+}
+
+</script>

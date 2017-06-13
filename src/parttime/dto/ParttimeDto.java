@@ -3,21 +3,29 @@ package parttime.dto;
 import java.util.Date;
 
 public class ParttimeDto {
-	private String p_num;
-	private String p_title;
-	private Date p_regdate;
-	private Date p_deadline;
-	private int p_wage;
-	private String p_term;
-	private String p_content;
-	private String p_tel;
-	private String p_daycode;
-	private String p_location;
-	private String p_header;
-	private int p_cnt;
-	private String m_id;
-	private int cnt_apply;
+	private int list_num; //게시판 글번호
+	private String p_num; //DB 글번호
+	private String p_title; //글제목
+	private Date p_regdate; //등록날짜
+	private Date p_deadline; //마감일
+	private int p_wage; //시급
+	private String p_term; //기간
+	private String p_content; //본문내용
+	private String p_tel; //연락처
+	private String p_daycode; //알바날짜(코드처리) 7자리 0 OR 1
+	private String p_location; //장소
+	private String p_header; //머리말
+	private int p_cnt; //조회수
+	private String m_id; //글쓴이
+	private int cnt_apply; //지원자수
 	
+	
+	public int getList_num() {
+		return list_num;
+	}
+	public void setList_num(int list_num) {
+		this.list_num = list_num;
+	}
 	public String getP_num() {
 		return p_num;
 	}
