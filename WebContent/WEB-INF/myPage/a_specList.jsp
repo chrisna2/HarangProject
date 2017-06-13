@@ -1,12 +1,25 @@
 <%@page import="dto.CertiDTO"%>
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
+
+
+
+
+
+
 <!-- 페이지 헤드 라인 : 제목 -->
+
+
+
+
 <head>
+
+	
+
      <title>스펙 목록</title>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
@@ -17,7 +30,7 @@
              	스펙 목록
           </h1>
          <br>
-         <button class="btn btn-sm btn-primary col-xs-12 col-md-12 col-lg-12">신규 자격증 등록</button>
+         <button class="btn btn-sm btn-primary col-xs-9 col-md-9 col-lg-9">신규 자격증 등록</button>
          <br>
          <br>
          <ol class="breadcrumb">
@@ -40,16 +53,38 @@
                   <h3 class="box-title">스펙 목록</h3>
                    <div class="box-tools">
                     <div class="input-group">
-                      <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-                      <select class="form-control input-sm pull-right" style="width: 150px;">
-                        <option>자격증 번호</option>
-                        <option>자격증 이름</option>
-                        <option>발급 기관</option>
-                        <option>도전 보상</option>
+                    
+                  <form action="/HarangProject/myPage?cmd=AspecList" name="search" method="post">  
+                      <input type="text" name= keyfiled class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                      <select class="form-control input-sm pull-right" style="width: 150px" name=keyword>
+                     
+                       
+                        <option value="c_num"
+                        <c:choose>
+                        <c:when test="${requestScope.keyword eq 'c_num' }">
+                        selected="selected"
+                         </c:when>
+                         </c:choose>>자격증 번호</option>
+                        <option value="c_name"   <c:choose>
+                        <c:when test="${requestScope.keyword eq 'c_name' }">
+                        selected="selected"
+                         </c:when>
+                         </c:choose>>자격증 이름</option>
+                        <option value="c_agency"   <c:choose>
+                        <c:when test="${requestScope.keyword eq 'c_agency' }">
+                        selected="selected"
+                         </c:when>
+                         </c:choose>>발급 기관</option>
+                        <option value="c_point"   <c:choose>
+                        <c:when test="${requestScope.keyword eq 'c_point' }">
+                        selected="selected"
+                         </c:when>
+                         </c:choose>>도전 보상</option>
                       </select>
                       <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                       </div>
+                     </form>
                     </div>
                   </div>
                 </div><!-- /.box-header -->
@@ -65,17 +100,19 @@
                       </tr>
                     </thead>
                     <tbody>
+                    
                       <c:forEach var="aspec" items="${requestScope.aspeclist}">
                       <tr>
                     
                         <td>${aspec.c_num}</td>
                         <td>${aspec.c_name }</td>
                         <td>${aspec.c_agency}</td>
-                        <td>${aspec.c_point}</td>
+                        <td>${aspec.c_point}P</td>
                         <td><input type="button" class="btn btn-primary" value="확인"></td>
                      
                       </tr>
                      </c:forEach>
+                    
                     	<tr>
                     	
                    
@@ -109,8 +146,9 @@
                 </div>
                 
                 <!-- form 시작 -->
-                <form role="form">
                 
+                <form role="form" action="/HarangProject/myPage?cmd=AspecList" method="post">
+              
                 <div class="box-body">
                  <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-bolt"></i> 자격증 이름</span>
@@ -119,7 +157,7 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 발급 기관</span>
-                    <input type="text" name="c_num" class="form-control" required="required">
+                    <input type="text" name="c_agency" class="form-control" required="required">
                   </div>
                   <br>
                   <div class="input-group">
@@ -134,6 +172,7 @@
                     <input type="button" class="btn" value="닫기">
                     <input type="submit" class="btn btn-primary" value="신규 등록">
                 </div>
+                
                 </form>
               </div><!-- /.box -->
                   
@@ -149,26 +188,28 @@
                 
                 <!-- form 시작 -->
                 <form role="form2">
-                
+                	
                 <div class="box-body">
                  <div class="input-group">
+                  <c var="read" item="${requestScope.read}">
                     <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 자격증 번호</span>
-                    <input type="text" name="c_num" class="form-control" value="c000000004" readonly="readonly">
+                    <input type="text" name="c_num" class="form-control" value="${read.c_num }" readonly="readonly">
+                    </c>
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-bolt"></i> 자격증 이름</span>
-                    <input type="text" name="c_name" class="form-control" value="정보처리 기사" required="required">
+                    <input type="text" name="c_name" class="form-control" value="${read.c_name }" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 발급 기관</span>
-                    <input type="text" name="c_agency" class="form-control" value="한국산업인력공단" required="required">
+                    <input type="text" name="c_agency" class="form-control" value="" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-money"></i> 보상 포인트</span>
-                    <input type="text" name="c_point" class="form-control" value="600000" required="required">
+                    <input type="text" name="c_point" class="form-control" value="" required="required">
                     <span class="input-group-addon">포인트</span>
                   </div>
                   <br>
