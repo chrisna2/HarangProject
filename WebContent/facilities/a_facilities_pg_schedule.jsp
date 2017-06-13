@@ -345,11 +345,11 @@ hr {
 									placeholder="운동장" disabled>
 							</div>
 						</div>
-<<<<<<< HEAD
+
 					</div>
 					<!-- 3-2. box-footer -->
 					<div class="box-footer">
-=======
+
 						<br>
 						<div class="row">
 							<div class="form-group col-md-4">
@@ -387,7 +387,7 @@ hr {
 									value="다시 선택">
 							</div>
 						</div>
->>>>>>> refs/remotes/origin/KimSungji
+
 					</div>
 				</div>
 				<!-- /. 3-2 box -->
