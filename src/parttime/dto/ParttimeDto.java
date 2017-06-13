@@ -1,4 +1,4 @@
-package parttime;
+package parttime.dto;
 
 import java.util.Date;
 
@@ -14,7 +14,9 @@ public class ParttimeDto {
 	private String p_daycode;
 	private String p_location;
 	private String p_header;
+	private int p_cnt;
 	private String m_id;
+	private int cnt_apply;
 	
 	public String getP_num() {
 		return p_num;
@@ -82,11 +84,23 @@ public class ParttimeDto {
 	public void setP_header(String p_header) {
 		this.p_header = p_header;
 	}
+	public int getP_cnt() {
+		return p_cnt;
+	}
+	public void setP_cnt(int p_cnt) {
+		this.p_cnt = p_cnt;
+	}
 	public String getM_id() {
 		return m_id;
 	}
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
+	}
+	public int getCnt_apply() {
+		return cnt_apply;
+	}
+	public void setCnt_apply(int cnt_apply) {
+		this.cnt_apply = cnt_apply;
 	}
 	
 }
