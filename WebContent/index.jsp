@@ -13,7 +13,7 @@
     <link href="dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
     <link href="plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
-    <style tyle="text/css">
+    <style >
         html,
         body {
             margin:0;
