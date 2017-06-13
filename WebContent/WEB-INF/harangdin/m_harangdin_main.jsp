@@ -56,46 +56,20 @@
 												<th>출판사</th>
 												<th>희망 포인트</th>
 											</tr>
+											
+										<c:forEach items="${adminmain}" var="i" varStatus="k">
+											
 											<tr>
 												<td><input type="checkbox" name="check"/></td>
-												<td>1</td>
-												<td>시나공 정보처리기사 필기</td>
-												<td>길벗알앤디</td>
-												<td>길벗</td>
-												<td>3000</td>
+												<td>${i.b_num }</td>
+												<td>${i.b_name }</td>
+												<td>${i.b_writer }</td>
+												<td>${i.b_pub }</td>
+												<td>${i.b_want }</td>
 											</tr>
-											<tr>
-												<td><input type="checkbox" name="check"/></td>
-												<td>2</td>
-												<td>JavaScript+jQuery 정복</td>
-												<td>김상형</td>
-												<td>한빛미디어</td>
-												<td>A</td>
-											</tr>
-											<tr>
-												<td><input type="checkbox" name="check"/></td>
-												<td>3</td>
-												<td>JSP&Servlet</td>
-												<td>성윤정</td>
-												<td>로드북</td>
-												<td>A</td>
-											</tr>
-											<tr>
-												<td><input type="checkbox" name="check"/></td>
-												<td>4</td>
-												<td>지윤이의 하루</td>
-												<td>서지윤</td>
-												<td>쥬니미디어</td>
-												<td>A</td>
-											</tr>
-											<tr>
-												<td><input type="checkbox" name="check"/></td>
-												<td>5</td>
-												<td>마음의 소리</td>
-												<td>조석</td>
-												<td>네이버</td>
-												<td>A</td>
-											</tr>
+											
+										</c:forEach>
+											
 									</table>
 									
 								</div>
