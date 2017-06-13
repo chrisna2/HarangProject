@@ -73,38 +73,38 @@
                        <input type="file" id="exampleInputFile" required="required">
                     </span>
                     <span class="input-group-addon bg-gray">
-                        <img src="dist/img/TL.jpg" class="img-rounded" height="120" width="90" alt="User Image"/>
+                        <img src="" class="img-rounded" height="120" width="90" alt="User Image"/>
                     </span>
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-smile-o"></i> 이름</span>
-                    <input type="text" name="m_name" class="form-control" value="나현기" readonly="readonly">
+                    <input type="text" name="m_name" class="form-control" value="${newbee.m_name}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 학번</span>
-                    <input type="text" name="m_num" class="form-control" value="201701008" readonly="readonly">
+                    <input type="text" name="m_num" class="form-control" value="${newbee.m_id}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa  fa-unlock-alt"></i> 비밀번호 등록</span>
-                    <input type="password" name="m_num" class="form-control" required="required">
+                    <input type="password" name="m_pw" class="form-control" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa  fa-unlock-alt"></i> 비밀번호 확인</span>
-                    <input type="password" name="m_num" class="form-control" required="required">
+                    <input type="password" name="m_pw2" class="form-control" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-sitemap"></i> 학과</span>
-                    <input type="text" name="m_dept" class="form-control" value="국어국문학과" readonly="readonly">
+                    <input type="text" name="m_dept" class="form-control" value="${newbee.m_dept}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-star"></i> 생년월일</span>
-                    <input type="text" name="m_birth" class="form-control" value="1991-03-21" readonly="readonly">
+                    <input type="text" name="m_birth" class="form-control" value="${newbee.m_birth}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">

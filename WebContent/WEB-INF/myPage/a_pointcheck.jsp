@@ -6,15 +6,14 @@
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
-     <title>기본 값 페이지</title>
+     <title>하랑 대학교 | 관리자 포인트 체크</title>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
 <!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
       <section class="content-header">
           <h1>
-                         포인트 거래 내역
-            <small>당신이 사용한 포인트의 흔적</small>
+                         관리자 포인트 체크
           </h1>
           <ol class="breadcrumb">
           <!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
@@ -63,30 +62,16 @@
                       </tr>
                     </thead>
                     <tbody>
+                     <c:forEach var="mem" items="${requestScope.mList}" varStatus="i" >
                       <tr>
-                        <td>201602001</td>
-                        <td>박중훈</td>
-                        <td>정보통신학과</td>
-                        <td>2학년</td>
-                        <td>200000p</td>
+                        <td>${mem.m_id}</td>
+                        <td>${mem.m_name}</td>
+                        <td>${mem.m_dept}</td>
+                        <td>${mem.m_grade}학년</td>
+                        <td>${mem.m_point}p</td>
                         <td><input type="button" class="btn btn-primary" value="조회"></td>
                       </tr>
-                      <tr>
-                        <td>201602002</td>
-                        <td>박희정</td>
-                        <td>정보통신학과</td>
-                        <td>2학년</td>
-                        <td>300000p</td>
-                        <td><input type="button" class="btn btn-primary" value="조회"></td>
-                      </tr>
-                      <tr>
-                        <td>201602003</td>
-                        <td>박보람</td>
-                        <td>정보통신학과</td>
-                        <td>2학년</td>
-                        <td>200000p</td>
-                        <td><input type="button" class="btn btn-primary" value="조회"></td>
-                      </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

@@ -34,6 +34,7 @@ public class MyPageServlet extends HttpServlet {
 		url = (String)command.processCommand(request, response);
 		
 		RequestDispatcher view = request.getRequestDispatcher(url);
+		
 		view.forward(request, response);
 		
 	}
