@@ -24,7 +24,7 @@
 		<!-- 컨텐츠 헤더부분. 제목. 작성일. 작성자. 추천/비추천 수 표시 -->
 
 
-		
+
 		<!--  여기부터 본문 -->
 
 		<!-- 세로 길이 수정 -->
@@ -33,67 +33,63 @@
 			<div class="col-md-9">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">학사 일정</h3>
+						<h3 class="box-title">대나무숲</h3>
 						<div class="box-tools">
+								<form action="/HarangProject/bamboo?cmd=U_BB_POST" name="bbpost"
+							method="post">
 							<div class="input-group">
-
-								<button type="button" class="btn btn-primary pull-right btn-sm">글쓰기</button>
+								<button type="submit" 
+								 class="btn btn-primary pull-right btn-sm">글쓰기</button>
+								
 							</div>
+							</form>
 						</div>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
+
+
 							<tr>
-								
+
 								<th>번호</th>
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>제목</th>
 								<th>추천수</th>
-								<th> 비추천수</th>
+								<th>비추천수</th>
 
 							</tr>
+
+							
+							<c:if test="${bblist != null }">
+							<c:forEach var="i" begin="0" end="${bblist.size()-1 }">
+
+								<tr>
+									<td>${bblist[i].bb_num}</td>
+									<td>${bblist[i].bb_nickname}</td>
+									<td>${bblist[i].bb_regdate}</td>
+									<td><a href="#" class="" style="color: black">${bblist[i].bb_title}</a></td>
+									<td>${bblist[i].bb_count}</td>
+									<td>20</td>
+								</tr>
+
+
+							</c:forEach>
+							</c:if>
+							<!-- 
 							<tr>
 							
-								<td>183</td>
-								<td>익명asdf</td>
-								<td>2017년 6월 8일</td>
-								<td><a href="#" class="" style="color: black">조장 나현기는 보아라</a></td>
-								<td>500</td>
+								<td>${bbdto.bb_num}</td>
+								<td>${bbdto.bb_nickname}</td>
+								<td>${bbdto.bb_regdate}</td>
+								<td><a href="#" class="" style="color: black">${bbdto.bb_title}</a></td>
+								<td>${bbdto.bb_count}</td>
 								<td>20</td>
 
 							</tr>
-							<tr>
-								
-								<td>219</td>
-								<td>익명 zsdf</td>
-								<td>2017년 4월 30일</td>
-								<td><a href="#" class="" style="color: black">익명글 23232ㅁㄴㅇㄹ</a></td>
-								<td>100</td>
-								<td>50</td>
+							 -->
 
-							</tr>
-							<tr>
-								
-								<td>657</td>
-								<td>익명zdfq</td>
-								<td>2017년 5월 20일</td>
-								<td><a href="#" class="" style="color: black">익명 ㄴㅇㅁㅇㄴㄻㅇ</a></td>
-								<td>10</td>
-								<td>5</td>
-
-							</tr>
-							<tr>
-								
-								<td>175</td>
-								<td>익명 azxc</td>
-								<td>2017년 3월 8일</td>
-								<td><a href="#" class="" style="color: black">익명글글글</a></td>
-								<td>1589</td>
-								<td>1111</td>
-
-							</tr>
 						</table>
 					</div>
 					<!-- /.box-body -->
@@ -101,7 +97,7 @@
 					<div class="box-footer clearfix">
 
 
-						
+
 
 
 
@@ -113,32 +109,37 @@
 							<li><a href="#">&raquo;</a></li>
 						</ul>
 
-						<div class="input-group">
-							<input type="text" name="table_search"
-								class="form-control input-sm pull-right" style="width: 150px;"
-								placeholder="Search" /> <select
-								class="form-control input-sm pull-right" style="width: 150px;">
-								<option></option>
-								<option>포인트 지급</option>
-								<option>학과</option>
-								<option>제목</option>
+						<form action="/HarangProject/bamboo?cmd=BB_LIST" name="search"
+							method="post">
+							<div class="input-group">
 
-							</select>
-							<div class="input-group-btn">
-								<button class="btn btn-sm btn-default">
-									<i class="fa fa-search"></i>
-								</button>
+								<select name="sOption" class="form-control input-sm"
+									style="width: 150px;">
+									
+									<option value="bb_title">제목</option>
+									<option value="bb_content">내용</option>
+
+								</select> 
+								<input type="text" name="table_search"
+									class="form-control input-sm" style="width: 150px;"
+									placeholder="Search" />
+								
+									<button class="btn btn-sm btn-default pull-left">
+										<i class="fa fa-search"></i>
+									</button>
+								
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
-				<!-- /.box -->
 			</div>
-
+			<!-- /.box -->
 		</div>
 
 	</section>
 </div>
+
+
 <!-- /.col -->
 
 <!-- /.content-wrapper -->

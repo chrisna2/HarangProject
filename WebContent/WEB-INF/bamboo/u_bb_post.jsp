@@ -29,7 +29,7 @@
 			<!-- 세로 길이 수정 -->
 			<div class="row">
 				<!-- 너비 사이즈 수정  : col-->
-				<div class="col-md-12">
+				<div class="col-md-9">
 
 					<div class='box box-info'>
 						<div class='box-header'>
@@ -41,6 +41,13 @@
 								<label>제목</label> <input type="text" class="form-control"
 									placeholder="제목을 입력 해 주세요" />
 							</div>
+							
+							<div class="form-group">
+								<label>닉네임</label> <input type="text" class="form-control"
+									placeholder="닉네임을 입력 해 주세요" />
+							</div>
+							
+							
 
 							
 							
