@@ -3,7 +3,7 @@ package dto;
 public class RecordDTO {
 
 	private String r_regdate;
-	private int r_point;
+	private long r_point;
 	private String r_content;
 	private String m_giver;
 	private String m_haver;
@@ -14,10 +14,10 @@ public class RecordDTO {
 	public void setR_regdate(String r_regdate) {
 		this.r_regdate = r_regdate;
 	}
-	public int getR_point() {
+	public long getR_point() {
 		return r_point;
 	}
-	public void setR_point(int r_point) {
+	public void setR_point(long r_point) {
 		this.r_point = r_point;
 	}
 	public String getR_content() {

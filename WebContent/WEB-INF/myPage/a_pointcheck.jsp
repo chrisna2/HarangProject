@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
@@ -69,7 +68,7 @@
                         <td>${mem.m_dept}</td>
                         <td>${mem.m_grade}학년</td>
                         <td>${mem.m_point}p</td>
-                        <td><input type="button" class="btn btn-primary" value="조회"></td>
+                        <td><a class="btn btn-primary" href="/HarangProject/myPage?cmd=ApointCheck&check_id=${mem.m_id}">조회</a></td>
                       </tr>
                       </c:forEach>
                     </tbody>
@@ -87,10 +86,11 @@
               </div><!-- /.box -->
         
         
+        <c:if test="${requestScope.pList != null}">
             <!-- 리스트 사용시  -->
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">나현기 포인트 거래 목록</h3>
+                  <h3 class="box-title">${requestScope.pName} 포인트 거래 목록</h3>
                    <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -108,34 +108,26 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="text-red">
-                        <td>2017-07-21</td>
-                        <td>식권 구매</td>
-                        <td>5000 포인트 출금</td>
-                        <td>나현기</td>
-                        <td>학교 식당 관리자</td>
-                      </tr>
-                      <tr class="text-green">
-                        <td>2017-06-15</td>
-                        <td>스펙업[정보처리기사]</td>
-                        <td>600000 포인트 입금</td>
-                        <td>학교 포인트 관리자</td>
-                        <td>나현기</td>
-                      </tr>
-                      <tr class="text-red">
-                        <td>2017-06-12</td>
-                        <td>학자금 포인트 감면</td>
-                        <td>400000 포인트 감면 </td>
-                        <td>나현기</td>
-                        <td>학교 포인트 관리자</td>
-                      </tr>
-                      <tr class="text-green">
-                        <td>2017-05-15</td>
-                        <td>교내 경시 대회 우승</td>
-                        <td>1000000 포인트 입금</td>
-                        <td>학교 포인트 관리자</td>
-                        <td>나현기</td>
-                      </tr>
+                      <c:forEach items="${requestScope.pList}" var="p" varStatus="i">
+                        <c:if test="${requestScope.pName eq p.m_giver}">
+	                       <tr class="text-red">
+	                        <td>${p.r_regdate}</td>
+	                        <td>${p.r_content}</td>
+	                        <td>${p.r_point}</td>
+	                        <td>${p.m_giver}</td>
+	                        <td>${p.m_haver}</td>
+	                      </tr>
+	                     </c:if>
+	                     <c:if test="${requestScope.pName eq p.m_haver}">
+                           <tr class="text-green">
+                            <td>${p.r_regdate}</td>
+                            <td>${p.r_content}</td>
+                            <td>${p.r_point}</td>
+                            <td>${p.m_giver}</td>
+                            <td>${p.m_haver}</td>
+                          </tr>
+	                     </c:if>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
@@ -167,11 +159,10 @@
                     </form>
                 </div>
               </div><!-- /.box -->
-              
             <!-- 리스트 사용시  -->
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">나현기 회원의 포인트 수정</h3>
+                  <h3 class="box-title">${requestScope.pName} 회원의 포인트 수정</h3>
                    <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -179,7 +170,8 @@
                 </div><!-- /.box-header -->
                  <!-- form 시작 -->
                 <form role="form">
-                
+                <input type="text" name="m_giver" value="${sessionScope.admin.m_id}">
+                <input type="text" name="m_haver" value="${sessionScope.admin.m_id}">
                 <div class="box-body">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 사유</span>
                     <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
@@ -198,7 +190,7 @@
                 </div>
                 </form>
               </div><!-- /.box -->
-              
+            </c:if>
               
               </div><!-- /.col -->
            </div><!-- /.row -->
