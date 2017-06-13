@@ -262,9 +262,10 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 운동장 목록 관리</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 스터디룸 목록 관리</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 예약 내역</a></li>
+                <li><a href="/HarangProject/facil?cmd=AFacilAddDel"><i class="fa fa-circle-o"></i> 관리자 시설 추가/삭제</a></li>
+                <li><a href="/HarangProject/facil?cmd=AFacilPG"><i class="fa fa-circle-o"></i> 관리자 운동장 일정 추가</a></li>
+                <li><a href="/HarangProject/facil?cmd=AFacilSR"><i class="fa fa-circle-o"></i> 관리자 스터디룸 일정 추가</a></li>
+                <li><a href="/HarangProject/facil?cmd=AFacilManager"><i class="fa fa-circle-o"></i> 관리자 사용자 일정 취소</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -280,17 +281,6 @@
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-check-square-o"></i> <span>강의 평가 관리</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 1</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 2</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 3</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
                 <i class="fa fa-briefcase"></i> <span>알바 하랑 관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -300,7 +290,12 @@
               </ul>
             </li>
             <li>
-              <a href="#">
+              <a href="/HarangProject/impage?cmd=amain">
+                <i class="fa fa-check-square-o"></i><span>강의 평가 관리</span>
+              </a>
+            </li>
+            <li>
+              <a href="/HarangProject/schedule?cmd=A_SCH_LIST">
                 <i class="fa fa-calendar"></i>
                 <span>학사 일정 관리</span>
               </a>
@@ -311,7 +306,7 @@
               </a>
             </li>
             <li>
-              <a href="/HarangProject/schedule?cmd=A_SCH_LIST">
+              <a href="/HarangProject/harangdin?cmd=adminMain">
                 <i class="fa fa-book"></i> <span>하랑딘 24 관리</span>
               </a>
             </li>

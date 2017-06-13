@@ -262,9 +262,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 운동장 예약</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 스터디룸 예약</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 예약 내역</a></li>
+                <li><a href="/HarangProject/facil?cmd=FacilMain"><i class="fa fa-circle-o"></i> 사용자 매인</a></li>
+                <li><a href="/HarangProject/facil?cmd=FacilPGreserv"><i class="fa fa-circle-o"></i> 운동장 예약</a></li>
+                <li><a href="/HarangProject/facil?cmd=FacilSRreserv"><i class="fa fa-circle-o"></i> 스터디룸 예약</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -280,17 +280,6 @@
             </li>
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-check-square-o"></i> <span>강의 평가</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 1</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 2</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> 하위메뉴 3</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
                 <i class="fa fa-briefcase"></i> <span>알바 하랑</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -299,6 +288,11 @@
                 <li><a href="/HarangProject/parttime?cmd=DMAIN"><i class="fa fa-circle-o"></i> 대타 모집</a></li>
                 <li><a href="/HarangProject/parttime?cmd=MYPAGE"><i class="fa fa-circle-o"></i> 내가 쓴 글</a></li>
               </ul>
+            </li>
+            <li>
+              <a href="/HarangProject/impage?cmd=main">
+                <i class="fa fa-check-square-o"></i><span>강의 평가</span>
+              </a>
             </li>
             <li>
               <a href="/HarangProject/schedule?cmd=U_SCH_LIST">
@@ -311,7 +305,7 @@
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="/HarangProject/harangdin?cmd=main">
                 <i class="fa fa-book"></i> <span>하랑딘 24</span>
               </a>
             </li>

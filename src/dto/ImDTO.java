@@ -12,6 +12,7 @@ public class ImDTO {
 	String lm_hw;
 	String lm_attend;
 	String comment;
+	
 	public String getLm_num() {
 		return lm_num;
 	}

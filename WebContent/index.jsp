@@ -127,6 +127,34 @@
                  <li>admin side</li>
                  <li><a href="/HarangProject/schedule?cmd=A_SCH_LIST">학사일정 관리자 메인</a></li>
               </ul>
+                 <h4>강의평가</h4>
+                <ul>
+                 <li>user side</li>
+                 <li><a href="/HarangProject/impage?cmd=main">강의평가 메인 페이지</a></li>
+                 <li>admin side</li>
+                 <li><a href="/HarangProject/impage?cmd=amain">강의평가 관리자 메인</a></li>
+              </ul>
+                 <h4>하랑딘24</h4>
+            <ul>
+                 <li>user side</li>
+                 <li><a href="/HarangProject/harangdin?cmd=main">하랑딘 메인 페이지</a></li>
+                 <li>admin side</li>
+                 <li><a href="/HarangProject/harangdin?cmd=adminMain">하랑딘 관리자 메인</a></li>
+              </ul>
+                   
+            <h4>시설관리</h4>
+            <ul>
+                 <li>user side</li>
+                 <li><a href="/HarangProject/facil?cmd=FacilMain">사용자 메인</a></li>
+                 <li><a href="/HarangProject/facil?cmd=FacilPGreserv">사용자 운동장 예약</a></li>
+                 <li><a href="/HarangProject/facil?cmd=FacilSRreserv">사용자 스터디룸 예약</a></li>
+                 
+                 <li>admin side</li>
+                 <li><a href="/HarangProject/facil?cmd=AFacilAddDel">관리자 시설 추가/삭제 </a></li>
+                 <li><a href="/HarangProject/facil?cmd=AFacilPG">관리자 운동장 일정 추가 </a></li>
+                 <li><a href="/HarangProject/facil?cmd=AFacilSR">관리자 스터디룸 일정 추가 </a></li>
+                 <li><a href="/HarangProject/facil?cmd=AFacilManager">관리자 사용자 일정 취소 </a></li>
+              </ul>
              </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
         
