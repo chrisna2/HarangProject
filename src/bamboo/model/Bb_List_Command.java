@@ -40,8 +40,7 @@ public class Bb_List_Command implements CommandInterface
 
 			String sql = "select * from tbl_bamboo order by bb_num asc";
 
-			// 복붙 할 때 테이블 이름 바꿔주는 것 잊지 말자.
-
+			
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
