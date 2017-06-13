@@ -91,13 +91,18 @@
 	                    <option>거래</option>
 	                    <option>기부 완료</option>
 	                  </select>
-	                </div>   
                 </div>
 
                 <!-- textarea -->
                 <div class="form-group">
                   <label>판매 도서 정보</label>
                   <textarea class="form-control" rows="5" placeholder="도서에 관한 간단한 소개 혹은 도서의 상태에 관한 정보 등을 작성해 주세요."></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputFile">판매 도서 사진</label>
+                  <input type="file" id="exampleInputFile">
+
+                  <p class="help-block">해당 도서의 표지 사진을 올려주세요 </p>
                 </div>
 
               </form>
