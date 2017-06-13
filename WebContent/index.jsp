@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>ÇÏ¶û´ëÇÐ±³ | ·Î±×ÀÎ</title>
+    <title>í•˜ëž‘ëŒ€í•™êµ | ë¡œê·¸ì¸</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -43,117 +43,117 @@
         <!-- Logo -->
         <a href="#" class="logo">
         <img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="40" height="40"/>
-        &nbsp;<b>ÇÏ¶û</b> ´ëÇÐ±³</a>
+        &nbsp;<b>í•˜ëž‘</b> ëŒ€í•™êµ</a>
         <!-- Header Navbar: style can be found in header.less -->
    </header>
     <div class="login-box">
       <div class="login-logo">
          <img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="75" height="75"/><br>
-        <a href="#"><b>ÇÏ¶û</b>´ëÇÐ±³</a>
+        <a href="#"><b>í•˜ëž‘</b>ëŒ€í•™êµ</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Ä¿¹Â´ÏÆ¼¿¡ Á¢¼ÓÇÏ½Ã·Á¸é ·Î±×ÀÎÀ» ÇÏ¼¼¿ä</p>
+        <p class="login-box-msg">ì»¤ë®¤ë‹ˆí‹°ì— ì ‘ì†í•˜ì‹œë ¤ë©´ ë¡œê·¸ì¸ì„ í•˜ì„¸ìš”</p>
         <form name="login" action="/HarangProject/login" method="post">
           <input type="hidden" name="cmd" value="login"/>
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" name="m_id" placeholder="ÇÐ¹ø" required="required"/>
+            <input type="text" class="form-control" name="m_id" placeholder="í•™ë²ˆ" required="required"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" name="m_pw" placeholder="ºñ¹Ð¹øÈ£" required="required"/>
+            <input type="password" class="form-control" name="m_pw" placeholder="ë¹„ë°€ë²ˆí˜¸" required="required"/>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
             <div class="col-xs-8">    
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-unlock"></i> ·Î±×ÀÎ</button>
+              <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-unlock"></i> ë¡œê·¸ì¸</button>
             </div><!-- /.col -->
           </div>
         </form>
-        <a href="#">ºñ¹Ð¹øÈ£ Ã£±â</a><br>
+        <a href="#">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a><br>
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
-    <!-- ¿Ï¼º½Ã ÃÖÁ¾ »èÁ¦ -->
+    <!-- ì™„ì„±ì‹œ ìµœì¢… ì‚­ì œ -->
     <div class="login-box">
       <div class="login-box-body">
-           <h3>ÀÎµ¦½º</h3>
-           <h4>³» Á¤º¸</h4>
+           <h3>ì¸ë±ìŠ¤</h3>
+           <h4>ë‚´ ì •ë³´</h4>
                <ul>
                 <li>user side</li>
-                <li><a href="/HarangProject/myPage?cmd=myinfo">³» Á¤º¸ Á¶È¸</a></li>
-                <li><a href="/HarangProject/myPage?cmd=specUp">½ºÆå¾÷!</a></li>
-                <li><a href="/HarangProject/myPage?cmd=timeTable">¼ö°­ ½Ã°£Ç¥!</a></li>
-                <li><a href="/HarangProject/myPage?cmd=pointList">Æ÷ÀÎÆ® °Å·¡ ³»¿ª</a></li>
-                <li><a href="/HarangProject/myPage?cmd=pointZero">Æ÷ÀÎÆ® Á¦·Î</a></li>
-                <li><a href="/HarangProject/message?cmd=INBOX">ÂÊÁöÇÔ(°ü¸®ÀÚ °³¹ßÀÚ °øÅë) </a></li>
+                <li><a href="/HarangProject/myPage?cmd=myinfo">ë‚´ ì •ë³´ ì¡°íšŒ</a></li>
+                <li><a href="/HarangProject/myPage?cmd=specUp">ìŠ¤íŽ™ì—…!</a></li>
+                <li><a href="/HarangProject/myPage?cmd=timeTable">ìˆ˜ê°• ì‹œê°„í‘œ!</a></li>
+                <li><a href="/HarangProject/myPage?cmd=pointList">í¬ì¸íŠ¸ ê±°ëž˜ ë‚´ì—­</a></li>
+                <li><a href="/HarangProject/myPage?cmd=pointZero">í¬ì¸íŠ¸ ì œë¡œ</a></li>
+                <li><a href="/HarangProject/message?cmd=INBOX">ìª½ì§€í•¨(ê´€ë¦¬ìž ê°œë°œìž ê³µí†µ) </a></li>
                 <li>admin side</li>
-                <li><a href="/HarangProject/myPage?cmd=AmemList">È¸¿ø¸í´Ü</a></li>
-                <li><a href="/HarangProject/myPage?cmd=Achallenge">½ºÆå ¾÷ °ü¸®</a></li>
-                <li><a href="/HarangProject/myPage?cmd=AspecList">ÀÚ°ÝÁõ °ü¸®</a></li>
-                <li><a href="/HarangProject/myPage?cmd=Alesson">°­ÀÇ¸ñ·Ï °ü¸®</a></li>
-                <li><a href="/HarangProject/myPage?cmd=ApointCheck">Æ÷ÀÎÆ® °ü¸®</a></li>
+                <li><a href="/HarangProject/myPage?cmd=AmemList">íšŒì›ëª…ë‹¨</a></li>
+                <li><a href="/HarangProject/myPage?cmd=Achallenge">ìŠ¤íŽ™ ì—… ê´€ë¦¬</a></li>
+                <li><a href="/HarangProject/myPage?cmd=AspecList">ìžê²©ì¦ ê´€ë¦¬</a></li>
+                <li><a href="/HarangProject/myPage?cmd=Alesson">ê°•ì˜ëª©ë¡ ê´€ë¦¬</a></li>
+                <li><a href="/HarangProject/myPage?cmd=ApointCheck">í¬ì¸íŠ¸ ê´€ë¦¬</a></li>
                </ul>
-           <h4>ÇÏ¶û ·¹½ºÅä¶û</h4>
+           <h4>í•˜ëž‘ ë ˆìŠ¤í† ëž‘</h4>
                <ul>
                 <li>user side</li>
-                <li><a href="/HarangProject/food?cmd=menu">ÇÐ½Ä ¸Þ´º Á¶È¸</a></li>
-                <li><a href="/HarangProject/food?cmd=ticket">½Ä±Ç ±¸¸Å ³»¿ª</a></li>
+                <li><a href="/HarangProject/food?cmd=menu">í•™ì‹ ë©”ë‰´ ì¡°íšŒ</a></li>
+                <li><a href="/HarangProject/food?cmd=ticket">ì‹ê¶Œ êµ¬ë§¤ ë‚´ì—­</a></li>
                 <li>admin side</li>
-                <li><a href="/HarangProject/food?cmd=Amenu">ÇÐ½Ä ¸Þ´º ¼öÁ¤</a></li>
-                <li><a href="/HarangProject/food?cmd=Aticket">½Ä±Ç ÆÇ¸Å ³»¿ª</a></li>
+                <li><a href="/HarangProject/food?cmd=Amenu">í•™ì‹ ë©”ë‰´ ìˆ˜ì •</a></li>
+                <li><a href="/HarangProject/food?cmd=Aticket">ì‹ê¶Œ íŒë§¤ ë‚´ì—­</a></li>
                </ul>
-           <h4>¾Ë¹Ù ÇÏ¶û</h4> 
+           <h4>ì•Œë°” í•˜ëž‘</h4> 
                <ul>
                  <li>user side</li>
-                 <li><a href="/HarangProject/parttime?cmd=PMAIN">¾Ë¹Ù ¸ðÁý</a></li>
-                 <li><a href="/HarangProject/parttime?cmd=DMAIN">´ëÅ¸ ¸ðÁý</a></li>
-                 <li><a href="/HarangProject/parttime?cmd=MYPAGE">³»°¡ ¾´ ±Û</a></li>
+                 <li><a href="/HarangProject/parttime?cmd=PMAIN">ì•Œë°” ëª¨ì§‘</a></li>
+                 <li><a href="/HarangProject/parttime?cmd=DMAIN">ëŒ€íƒ€ ëª¨ì§‘</a></li>
+                 <li><a href="/HarangProject/parttime?cmd=MYPAGE">ë‚´ê°€ ì“´ ê¸€</a></li>
                  <li>admin side</li>
-                 <li><a href="/HarangProject/parttime?cmd=PMAIN">¾Ë¹Ù ¸ðÁý °ü¸®</a></li>
-                 <li><a href="/HarangProject/parttime?cmd=DMAIN">´ëÅ¸ ¸ðÁý °ü¸®</a></li>
+                 <li><a href="/HarangProject/parttime?cmd=PMAIN">ì•Œë°” ëª¨ì§‘ ê´€ë¦¬</a></li>
+                 <li><a href="/HarangProject/parttime?cmd=DMAIN">ëŒ€íƒ€ ëª¨ì§‘ ê´€ë¦¬</a></li>
                </ul>
-            <h4>´ë³ª¹« ½£</h4>
+            <h4>ëŒ€ë‚˜ë¬´ ìˆ²</h4>
             <ul>
                  <li>user side</li>
-                 <li><a href="/HarangProject/bamboo?cmd=BB_LIST">¸ÞÀÎ ÆäÀÌÁö</a></li>
+                 <li><a href="/HarangProject/bamboo?cmd=BB_LIST">ë©”ì¸ íŽ˜ì´ì§€</a></li>
                  <li>admin side</li>
-                 <li><a href="/HarangProject/bamboo?cmd=A_BB_LIST">°Ô½ÃÆÇ °ü¸®ÀÚ ¸ÞÀÎ</a></li>
+                 <li><a href="/HarangProject/bamboo?cmd=A_BB_LIST">ê²Œì‹œíŒ ê´€ë¦¬ìž ë©”ì¸</a></li>
               </ul>
-            <h4>ÇÐ»çÀÏÁ¤</h4>
+            <h4>í•™ì‚¬ì¼ì •</h4>
             <ul>
                  <li>user side</li>
-                 <li><a href="/HarangProject/schedule?cmd=U_SCH_LIST">ÇÐ»çÀÏÁ¤ ¸ÞÀÎ ÆäÀÌÁö</a></li>
+                 <li><a href="/HarangProject/schedule?cmd=U_SCH_LIST">í•™ì‚¬ì¼ì • ë©”ì¸ íŽ˜ì´ì§€</a></li>
                  <li>admin side</li>
-                 <li><a href="/HarangProject/schedule?cmd=A_SCH_LIST">ÇÐ»çÀÏÁ¤ °ü¸®ÀÚ ¸ÞÀÎ</a></li>
+                 <li><a href="/HarangProject/schedule?cmd=A_SCH_LIST">í•™ì‚¬ì¼ì • ê´€ë¦¬ìž ë©”ì¸</a></li>
               </ul>
-                 <h4>°­ÀÇÆò°¡</h4>
+                 <h4>ê°•ì˜í‰ê°€</h4>
                 <ul>
                  <li>user side</li>
-                 <li><a href="/HarangProject/impage?cmd=main">°­ÀÇÆò°¡ ¸ÞÀÎ ÆäÀÌÁö</a></li>
+                 <li><a href="/HarangProject/impage?cmd=main">ê°•ì˜í‰ê°€ ë©”ì¸ íŽ˜ì´ì§€</a></li>
                  <li>admin side</li>
-                 <li><a href="/HarangProject/impage?cmd=amain">°­ÀÇÆò°¡ °ü¸®ÀÚ ¸ÞÀÎ</a></li>
+                 <li><a href="/HarangProject/impage?cmd=amain">ê°•ì˜í‰ê°€ ê´€ë¦¬ìž ë©”ì¸</a></li>
               </ul>
-                 <h4>ÇÏ¶ûµò24</h4>
+                 <h4>í•˜ëž‘ë”˜24</h4>
             <ul>
                  <li>user side</li>
-                 <li><a href="/HarangProject/harangdin?cmd=main">ÇÏ¶ûµò ¸ÞÀÎ ÆäÀÌÁö</a></li>
+                 <li><a href="/HarangProject/harangdin?cmd=main">í•˜ëž‘ë”˜ ë©”ì¸ íŽ˜ì´ì§€</a></li>
                  <li>admin side</li>
-                 <li><a href="/HarangProject/harangdin?cmd=adminMain">ÇÏ¶ûµò °ü¸®ÀÚ ¸ÞÀÎ</a></li>
+                 <li><a href="/HarangProject/harangdin?cmd=adminMain">í•˜ëž‘ë”˜ ê´€ë¦¬ìž ë©”ì¸</a></li>
               </ul>
                    
-            <h4>½Ã¼³°ü¸®</h4>
+            <h4>ì‹œì„¤ê´€ë¦¬</h4>
             <ul>
                  <li>user side</li>
-                 <li><a href="/HarangProject/facil?cmd=FacilMain">»ç¿ëÀÚ ¸ÞÀÎ</a></li>
-                 <li><a href="/HarangProject/facil?cmd=FacilPGreserv">»ç¿ëÀÚ ¿îµ¿Àå ¿¹¾à</a></li>
-                 <li><a href="/HarangProject/facil?cmd=FacilSRreserv">»ç¿ëÀÚ ½ºÅÍµð·ë ¿¹¾à</a></li>
+                 <li><a href="/HarangProject/facil?cmd=FacilMain">ì‚¬ìš©ìž ë©”ì¸</a></li>
+                 <li><a href="/HarangProject/facil?cmd=FacilPGreserv">ì‚¬ìš©ìž ìš´ë™ìž¥ ì˜ˆì•½</a></li>
+                 <li><a href="/HarangProject/facil?cmd=FacilSRreserv">ì‚¬ìš©ìž ìŠ¤í„°ë””ë£¸ ì˜ˆì•½</a></li>
                  
                  <li>admin side</li>
-                 <li><a href="/HarangProject/facil?cmd=AFacilAddDel">°ü¸®ÀÚ ½Ã¼³ Ãß°¡/»èÁ¦ </a></li>
-                 <li><a href="/HarangProject/facil?cmd=AFacilPG">°ü¸®ÀÚ ¿îµ¿Àå ÀÏÁ¤ Ãß°¡ </a></li>
-                 <li><a href="/HarangProject/facil?cmd=AFacilSR">°ü¸®ÀÚ ½ºÅÍµð·ë ÀÏÁ¤ Ãß°¡ </a></li>
-                 <li><a href="/HarangProject/facil?cmd=AFacilManager">°ü¸®ÀÚ »ç¿ëÀÚ ÀÏÁ¤ Ãë¼Ò </a></li>
+                 <li><a href="/HarangProject/facil?cmd=AFacilAddDel">ê´€ë¦¬ìž ì‹œì„¤ ì¶”ê°€/ì‚­ì œ </a></li>
+                 <li><a href="/HarangProject/facil?cmd=AFacilPG">ê´€ë¦¬ìž ìš´ë™ìž¥ ì¼ì • ì¶”ê°€ </a></li>
+                 <li><a href="/HarangProject/facil?cmd=AFacilSR">ê´€ë¦¬ìž ìŠ¤í„°ë””ë£¸ ì¼ì • ì¶”ê°€ </a></li>
+                 <li><a href="/HarangProject/facil?cmd=AFacilManager">ê´€ë¦¬ìž ì‚¬ìš©ìž ì¼ì • ì·¨ì†Œ </a></li>
               </ul>
              </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
@@ -163,7 +163,7 @@
           <b>Version</b> 2.0
         </div>
         <strong>Web Copyright &copy; 2017 The Center Team.</strong> All rights reserved.<br>
-        <Strong>ÆÀÀå : ³ªÇö±â, ºÎÆÀÀå : ¾çÇý¹Î, ÆÀ¿ø : ±è¼ºÁö, ±è¹ÎÁØ, ¼­ÁöÀ±, ¹ÚÁÖ¼± </Strong><br>
+        <Strong>íŒ€ìž¥ : ë‚˜í˜„ê¸°, ë¶€íŒ€ìž¥ : ì–‘í˜œë¯¼, íŒ€ì› : ê¹€ì„±ì§€, ê¹€ë¯¼ì¤€, ì„œì§€ìœ¤, ë°•ì£¼ì„  </Strong><br>
         <strong>Template Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
      </footer>
     </div><!-- .\ wrapper --> 
