@@ -1,3 +1,4 @@
+<%@page import="dto.CertiDTO"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -64,48 +65,24 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <c:forEach var="aspec" items="${requestScope.aspeclist}">
                       <tr>
-                        <td>c000000001</td>
+                    
+                        <td>${aspec.c_num}</td>
                         <td>토익 800점 이상</td>
                         <td>ETS</td>
                         <td>200000p</td>
                         <td><input type="button" class="btn btn-primary" value="확인"></td>
+                     
                       </tr>
-                      <tr>
-                        <td>c000000002</td>
-                        <td>토익 900점 이상</td>
-                        <td>ETS</td>
-                        <td>400000p</td>
-                        <td><input type="button" class="btn btn-primary" value="확인"></td>
-                      </tr>
-                      <tr>
-                        <td>c000000003</td>
-                        <td>토익 만점</td>
-                        <td>ETS</td>
-                        <td>600000p</td>
-                        <td><input type="button" class="btn btn-primary" value="확인"></td>
-                      </tr>
-                      <tr>
-                        <td>c000000004</td>
-                        <td>정보처리산업기사</td>
-                        <td>한국산업인력공단</td>
-                        <td>400000p</td>
-                        <td><input type="button" class="btn btn-primary" value="확인"></td>
-                      </tr>
-                      <tr>
-                        <td>c000000005</td>
-                        <td>정보처리기사</td>
-                        <td>한국산업인력공단</td>
-                        <td>600000p</td>
-                        <td><input type="button" class="btn btn-primary" value="확인"></td>
-                      </tr>
-                      <tr>
-                        <td>c000000006</td>
-                        <td>공인 회계사</td>
-                        <td>한국회계법인</td>
-                        <td>600000p</td>
-                        <td><input type="button" class="btn btn-primary" value="확인"></td> 
-                      </tr>
+                     </c:forEach>
+                    	<tr>
+                    	
+                   
+                    	
+                    	<td></td>
+                    	</tr>
+                     
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

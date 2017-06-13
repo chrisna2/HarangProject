@@ -12,7 +12,7 @@ public class ImalistCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		return "/WEB-INF/impage/imadminlist.jsp";
+		return "/WEB-INF/imPage/a_imlist.jsp";
 	}
 
 }
