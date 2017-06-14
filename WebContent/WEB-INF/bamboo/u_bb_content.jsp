@@ -29,15 +29,15 @@
 			<div class="col-md-9">
 				<div class="box" id="bamcon">
 					<div class="box-header">
-						<h1 class="box-title">${bbcon.bb_title}</h1>
+						<font size = "6">${bbcon.bb_title}</font>
 						<span class="badge bg-green pull-right"> ${bbcon.bb_regdate}<br>
 							${bbcon.bb_nickname}<br> <br> <span class="badge bg-blue"><i
 								class="fa fa-thumbs-o-up"></i> 추천수 들어갈 곳</span> <span class="badge bg-red"><i
 								class="fa fa-thumbs-o-down"></i> 비추천수 들어갈 곳</span>
-						</span> <br> <br> <br>
-						<hr />
+						</span> 
 
 					</div>
+						
 					<div class="box-body">${bbcon.bb_content} //${bbcon.m_id} ${sessionScope.member.m_id}</div>
 					<!-- /.box-body -->
 					<div class="box-footer ">
