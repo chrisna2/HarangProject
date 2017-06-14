@@ -101,7 +101,7 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-4">
-							<button class="btn btn-block btn-primary">지원하기</button>
+							<button class="btn btn-block btn-primary" onclick="fnApply()">지원하기</button>
 						</div>					
                   	</div>
                   </form>
@@ -147,6 +147,11 @@
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
       </form>
+      <form name="apply" method="post" action="/HarangProject/parttime?cmd=PAPPLY">
+      	<input type="hidden" name="p_num" value="${list.p_num}"/>
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
@@ -158,6 +163,9 @@ $.urlParam = function(name){
 
 function fnList(){
 	document.list.submit();
+}
+function fnApply(){
+	document.apply.submit();
 }
 
 </script>
