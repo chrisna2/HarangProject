@@ -29,35 +29,27 @@
 			<div class="col-md-9">
 				<div class="box" id="bamcon">
 					<div class="box-header">
-						<h1 class="box-title">조장 나현기는 보아라</h1>
-						<span class="badge bg-green pull-right"> 작성일 : 2017-06-02<br>
-							작성자 : 익명 Axdjp21<br> <br> <span class="badge bg-blue"><i
-								class="fa fa-thumbs-o-up"></i> 500</span> <span class="badge bg-red"><i
-								class="fa fa-thumbs-o-down"></i> 20</span>
-						</span> <br> <br> <br>
-						<hr />
+						<font size = "6">${bbcon.bb_title}</font>
+						<span class="badge bg-green pull-right"> ${bbcon.bb_regdate}<br>
+							${bbcon.bb_nickname}<br> <br> <span class="badge bg-blue"><i
+								class="fa fa-thumbs-o-up"></i> 추천수 들어갈 곳</span> <span class="badge bg-red"><i
+								class="fa fa-thumbs-o-down"></i> 비추천수 들어갈 곳</span>
+						</span> 
 
 					</div>
-					<div class="box-body">하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고
-						있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수
-						있는 것이다 석가는 무엇을 하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상!
-						이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다
-						석가는 무엇을 하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한
-						가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 하는
-						온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다
-						사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 하는 온갖 과실이 어디
-						있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고
-						간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 하는 온갖 과실이 어디 있으랴? 이상! 우리의
-						청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써
-						용감하고 굳세게 살 수 있는 것이다 석가는 무엇을</div>
+						
+					<div class="box-body">${bbcon.bb_content} //${bbcon.m_id} ${sessionScope.member.m_id}</div>
 					<!-- /.box-body -->
 					<div class="box-footer ">
+						
+						<!-- 아이디 검사 해서 본인일 경우만 출력되도록 if문 처리 -->
+						<c:if test="${bbcon.m_id eq sessionScope.member.m_id  }">
 						<div class="pull-right">
 							<button type="button" class="btn btn-success btn-xs">수정</button>
 							<button type="button" class="btn btn-success btn-xs">삭제</button>
 
 						</div>
-
+						</c:if>
 
 						<div align="center">
 							<button type="button" class="btn btn-primary">추천</button>

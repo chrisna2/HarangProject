@@ -1,5 +1,7 @@
 package dto;
 
+import java.sql.Date;
+
 public class BambooDTO {
 
 	
@@ -9,7 +11,7 @@ public class BambooDTO {
 		private String bb_notice;
 		private String bb_title;
 		private String bb_content;
-		private String bb_regdate;
+		private Date bb_regdate;
 		private int bb_count;
 		private String bb_nickname;
 		public String getBb_num() {
@@ -42,10 +44,10 @@ public class BambooDTO {
 		public void setBb_content(String bb_content) {
 			this.bb_content = bb_content;
 		}
-		public String getBb_regdate() {
+		public Date getBb_regdate() {
 			return bb_regdate;
 		}
-		public void setBb_regdate(String bb_regdate) {
+		public void setBb_regdate(Date bb_regdate) {
 			this.bb_regdate = bb_regdate;
 		}
 		public int getBb_count() {
@@ -60,6 +62,7 @@ public class BambooDTO {
 		public void setBb_nickname(String bb_nickname) {
 			this.bb_nickname = bb_nickname;
 		}
+		
 		
 		
 

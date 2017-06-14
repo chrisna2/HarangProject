@@ -1,11 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <%@ include file="../include/header.jsp"%>
 <title>대나무숲 리스트 사용자페이지</title>
+
+
+
+
 </head>
 
 <div class="content-wrapper">
@@ -52,12 +57,12 @@
 
 							<tr>
 
-								<th>번호</th>
+								
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>제목</th>
-								<th>추천수</th>
-								<th>비추천수</th>
+								<th>조회수</th>
+								
 
 							</tr>
 
@@ -66,12 +71,12 @@
 							<c:forEach var="i" begin="0" end="${bblist.size()-1 }">
 
 								<tr>
-									<td>${bblist[i].bb_num}</td>
+									
 									<td>${bblist[i].bb_nickname}</td>
-									<td>${bblist[i].bb_regdate}</td>
-									<td><a href="#" class="" style="color: black">${bblist[i].bb_title}</a></td>
+									<td><fmt:formatDate value="${bblist[i].bb_regdate}" pattern="yyyy-MM-dd"/></td>
+									<td><a href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bblist[i].bb_num}"  style= "color: black" >${bblist[i].bb_title}</a></td>
 									<td>${bblist[i].bb_count}</td>
-									<td>20</td>
+									
 								</tr>
 
 
@@ -138,6 +143,9 @@
 
 	</section>
 </div>
+
+
+
 
 
 <!-- /.col -->
