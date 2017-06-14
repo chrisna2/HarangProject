@@ -41,12 +41,18 @@
 							<!-- /btn-group -->
 							<input type="text" class="form-control">
 						</div>
+						<div class="col-sm-2.5 no-margin pull-right">
+									<button type="button" class="btn btn-info.btn-flat">
+										<i class="fa fa-user"></i> AdminPage</button>
+								</div>
 						<div class="col-xs-1 no-margin pull-right">
 						<button type="button" class="btn btn-block btn-default" >등록</button>
 						</div>
 						<div class="col-xs-1 no-margin pull-right">
 							<button class="btn btn-block btn-default">삭제</button>
 						</div>
+						
+						
 									<table id="example2" class="table table-bordered table-hover dataTable">
 											<tr role="row">
 												<th></th>
