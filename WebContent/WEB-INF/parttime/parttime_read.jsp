@@ -67,20 +67,23 @@
                     </div>
                     <div class="form-group">
                       <label>요일</label><br>
-                      <div class="btn-group" data-toggle="buttons">
-	                      <label class="btn btn-primary"> <input type="checkbox" id="mon" autocomplete="off" > 월</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="tue" autocomplete="off"> 화</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="wed" autocomplete="off"> 수</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="thu" autocomplete="off"> 목</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="fri" autocomplete="off"> 금</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="sat" autocomplete="off"> 토</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="sun" autocomplete="off"> 일</label> 			
+                      <div>
+                      
+                      <!-- 성지 : 보고배워라 -->
+                      	  <c:forEach var="i" begin="0" end="6" step="1">
+                      	  	<c:choose>
+	                      	  	<c:when test="${daycode[i] == 1}">
+		                      		<input type="checkbox" checked="checked" disabled="disabled" > ${day[i]}
+		                      		&nbsp;&nbsp;&nbsp;
+		                      	</c:when>
+		                      	<c:otherwise>
+		                      		<input type="checkbox" disabled="disabled"> ${day[i]}
+		                      		&nbsp;&nbsp;&nbsp;
+		                      	</c:otherwise>
+	                      	</c:choose>
+	                      </c:forEach>
+	                 <!-- 끝 -->
+	                      
                       </div>
                     </div>
                     <div class="form-group">
@@ -148,7 +151,7 @@
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
       </form>
       <form name="apply" method="post" action="/HarangProject/parttime?cmd=PAPPLY">
-      	<input type="hidden" name="p_num" value="${list.p_num}"/>
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
       </form>

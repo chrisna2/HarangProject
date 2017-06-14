@@ -228,8 +228,8 @@ public class ParttimeBean {
 			con = pool.getConnection();
 			
 			String sql="INSERT INTO tbl_parttime_member(p_num, m_id, pm_reason, "
-					+ "pm_career, pm_wanttime, pm_regdate, pm_choice) "
-					+ "VALUES(?,?,?,?,?,sysdate,'N')";
+					+ "pm_career, pm_wanttime, pm_choice) "
+					+ "VALUES(?,?,?,?,?,'N')";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, p_num);

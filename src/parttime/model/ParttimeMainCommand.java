@@ -46,7 +46,7 @@ public class ParttimeMainCommand implements CommandInterface{
 		}
 		
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수, 네번째는 블록당 페이지 개수!!
-		PagingDto paging = pbean.Paging(list.size(),5, nowPage,5, nowBlock);
+		PagingDto paging = pbean.Paging(list.size(),10, nowPage,5, nowBlock);
 		
 		// parameter 보내기
 		req.setAttribute("list", list);
