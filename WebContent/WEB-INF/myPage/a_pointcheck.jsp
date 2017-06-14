@@ -185,7 +185,7 @@
                   </div>
                 </div><!-- /.box-header -->
                  <!-- form 시작 -->
-                <form role="form" name="updatepoint" method="post">
+                <form role="form" id="updatepoint" method="post">
                 <div class="box-body">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 사유</span>
                     <textarea class="form-control" name="r_content" rows="3" placeholder="Enter ..."></textarea>
@@ -199,8 +199,8 @@
                   <br>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix" align="center">
-                      <input type="button" class="btn btn-danger col-md-6 col-xs-6" value="차감합니다!">
-                      <input type="button" class="btn btn-success col-md-6 col-xs-6" value="추가합니다!">
+                      <input type="button" id="minus" class="btn btn-danger col-md-6 col-xs-6" value="차감합니다!">
+                      <input type="button" id="plus" class="btn btn-success col-md-6 col-xs-6" value="추가합니다!">
                 </div>
                 </form>
               </div><!-- /.box -->
@@ -252,13 +252,16 @@ function goPage(nowPage){
     document.getElementById("page").value = nowPage;
     document.getElementById("goPage").submit();
 }
-/////////////////////////////끝//////////////////////////////////
-function fnRead(p_num){
-    document.getElementById("p_num").value = p_num;
-    document.read.submit();
+
+$(document).ready(function(){
+    $("#plus").click(function() {
+        $("#updatepoint").
+        
+    	
+    });
+
+
+	
 }
-
-
-
 
 </script>

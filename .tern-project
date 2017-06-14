@@ -1,13 +1,10 @@
 {
   "ecmaVersion": 5,
   "plugins": {
-    "guess-types": {
+    "es_modules": {
       
     },
-    "outline": {
-      
-    },
-    "bootstrap": {
+    "browser-extension": {
       
     }
   },

@@ -102,7 +102,7 @@ public class mainCommand implements CommandInterface {
 				PagingBean pbean = new PagingBean();
 				
 				// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-				PagingDto paging = pbean.Paging(list.size(),5, nowPage, nowBlock);
+				PagingDto paging = pbean.Paging(list.size(),5, nowPage,10, nowBlock);
 						
 				// parameter 보내기
 				request.setAttribute("paging", paging);
