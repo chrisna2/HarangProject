@@ -6,8 +6,22 @@ public class RecordDTO {
 	private long r_point;
 	private String r_content;
 	private String m_giver;
+	private String m_givername;
 	private String m_haver;
+	private String m_havername;
 	
+	public String getM_givername() {
+		return m_givername;
+	}
+	public void setM_givername(String m_givername) {
+		this.m_givername = m_givername;
+	}
+	public String getM_havername() {
+		return m_havername;
+	}
+	public void setM_havername(String m_havername) {
+		this.m_havername = m_havername;
+	}
 	public String getR_regdate() {
 		return r_regdate;
 	}

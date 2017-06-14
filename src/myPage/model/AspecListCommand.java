@@ -52,6 +52,7 @@ public class AspecListCommand implements CommandInterface {
 		
 		String keyword = request.getParameter("keyword");
 		String keyfiled = request.getParameter("keyfiled");
+		
 		if (null==(keyfiled)) {
 		
 			sql = "SELECT * FROM tbl_certificate order by c_num";
