@@ -2,10 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
-
 
 
 
@@ -55,7 +54,7 @@
                     <div class="input-group">
                     
                   <form action="/HarangProject/myPage?cmd=AspecList" name="search" method="post">  
-                      <input type="text" name= keyfiled class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                      <input type="text" name= keyfield class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                       <select class="form-control input-sm pull-right" style="width: 150px" name=keyword>
                      
                        
@@ -101,18 +100,29 @@
                     </thead>
                     <tbody>
                     
-                      <c:forEach var="aspec" items="${requestScope.aspeclist}">
+                   <c:choose>
+						<c:when test="${fn:length(aspeclist) eq 0}">
+						</c:when>
+          				<c:otherwise>
+                      <c:forEach var="aspec" items="${requestScope.aspeclist}"
+                       begin="${paging.beginPerPage}"  end="${paging.beginPerPage + paging.numPerPage -1}">
                       <tr>
                     
                         <td>${aspec.c_num}</td>
                         <td>${aspec.c_name }</td>
                         <td>${aspec.c_agency}</td>
                         <td>${aspec.c_point}P</td>
-                        <td><input type="button" class="btn btn-primary" value="확인"></td>
-                     
+                        <td><a href="/HarangProject/myPage?cmd=AspecList&c_num=${aspec.c_num}" >
+                        			확인
+								</a>
+								
+							</td>
+							
+                        
                       </tr>
                      </c:forEach>
-                    
+                   </c:otherwise>
+                   </c:choose>
                     	<tr>
                     	
                    
@@ -124,13 +134,17 @@
                   </table>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix">
-                  <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                  </ul>
+                 <ul class="pagination pagination-sm no-margin pull-right">
+							<c:if test="${paging.nowBlock > 0}">
+							<li><a href="javascript:prevPage()">&laquo;</a></li>
+							</c:if>
+						  <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+							<li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+						  </c:forEach>
+						  	<c:if test="${paging.totalBlock > paging.nowBlock +1}">
+							<li><a href="javascript:nextPage()">&raquo;</a></li>
+							</c:if>
+						</ul>
                 </div>
               </div><!-- /.box -->
 		          
@@ -176,8 +190,11 @@
                 </form>
               </div><!-- /.box -->
                   
+                  
+                  
+                <c:if test="${requestScope.read !=null }">
                    <!-- 도전 확인  -->
-              <div class="box box-black">
+              <div class="box box-black" id="a">
                 <div class="box-header">
                   <h3 class="box-title">자격증 정보 수정</h3>
                   <div class="box-tools pull-right">
@@ -187,14 +204,14 @@
                 </div>
                 
                 <!-- form 시작 -->
-                <form role="form2">
-                	
+                <form role="form2" name="read" action="/HarangProject/myPage?cmd=AspecList" method="post">
+                	<input type="hidden" name="${read.c_num}" />
                 <div class="box-body">
                  <div class="input-group">
-                  <c var="read" item="${requestScope.read}">
+                 
                     <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 자격증 번호</span>
                     <input type="text" name="c_num" class="form-control" value="${read.c_num }" readonly="readonly">
-                    </c>
+                    
                   </div>
                   <br>
                   <div class="input-group">
@@ -204,30 +221,106 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 발급 기관</span>
-                    <input type="text" name="c_agency" class="form-control" value="" required="required">
+                    <input type="text" name="c_agency" class="form-control" value="${read.c_agency }" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-money"></i> 보상 포인트</span>
-                    <input type="text" name="c_point" class="form-control" value="" required="required">
+                    <input type="text" name="c_point" class="form-control" value="${read.c_point }" required="required">
                     <span class="input-group-addon">포인트</span>
                   </div>
                   <br>
                 </div><!-- /.box-body -->
                   <div class="box-footer" align="right">
                     <input type="button" class="btn" value="닫기">
-                    <input type="button" class="btn btn-danger" value="삭제">
-                    <input type="submit" class="btn btn-primary" value="수정">
+                    <input type="button" class="btn btn-danger" value="삭제" data-widget="remove">
+                    <input type="submit" class="btn btn-primary" value="수정"  >
                 </div>
                 </form>
               </div><!-- /.box   -->
-                
-		          
+                </c:if>
+               
+		         
               </div><!-- /.col -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
       
+
+	
+	
+<!-- 페이징 관련 폼 ----------------------------------------------------------------------->
+<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/myPage?cmd=AspecList">
+	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/myPage?cmd=AspecList">
+	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
+</form>
+<!-- 페이징 : 해당 페이지로 이동하는 폼 -->
+<form id="goPage" method="post" action="/HarangProject/myPage?cmd=AspecList">
+	<input type="hidden" name="nowPage" value="" id="page"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
+
+<!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
+<!-- 글 읽기 -->
+<form name="read" method="post" action="/HarangProject/myPage?cmd=AspecList">
+	<input type="hidden" name="c_num" value="${read.c_num }" id="c_num"/>
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
+
+	
+<form name="frmRead" method="post" action="/HarangProject/myPage?cmd=AspecList">
+		<input type="hidden" name="c_num" /> <input type="hidden"
+			name="keyfiled" value="keyfield" /> <input type="hidden"
+			name="keyword" value="keyword" />
+
+	</form>	
+	
+	
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+
+
+<!-- --------------------------------------------------------------------------------------------------- -->
+<script>
+///////////////// 페이지 관련 javascript function////////////////////
+function prevPage(){
+	document.getElementById("prevPage").submit();
+}
+function nextPage(){
+	document.getElementById("nextPage").submit();
+}
+function goPage(nowPage){
+	document.getElementById("page").value = nowPage;
+	document.getElementById("goPage").submit();
+}
+
+
+
+/////////////////////////////끝//////////////////////////////////
+
+//function fnRead(p_num){
+//	document.getElementById("p_num").value = p_num;
+//	document.read.submit();
+//}
+
+
+
+//글읽기
+function fnRead(c_num) {
+	document.frmRead.c_num.value = c_num;
+	document.frmRead.submit();
+}
+
+
+
+</script>
+
+
