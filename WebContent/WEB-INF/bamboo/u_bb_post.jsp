@@ -24,7 +24,8 @@
 		</ol>
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-	<form>
+	<form action="/HarangProject/bamboo?cmd=U_BB_POST_COMPLETE" name="bbpostcomplete"
+							method="post">
 		<section class="content">
 			<!-- 세로 길이 수정 -->
 			<div class="row">
@@ -39,12 +40,12 @@
 
 							<div class="form-group">
 								<label>제목</label> <input type="text" class="form-control"
-									placeholder="제목을 입력 해 주세요" />
+									placeholder="제목을 입력 해 주세요" name = "bb_title" />
 							</div>
 							
 							<div class="form-group">
 								<label>닉네임</label> <input type="text" class="form-control"
-									placeholder="닉네임을 입력 해 주세요" />
+									placeholder="닉네임을 입력 해 주세요" name = "bb_nickname"/>
 							</div>
 							
 							
@@ -63,7 +64,7 @@
 
 						<div class='box-body pad'>
 
-							<textarea id="editor1" name="editor1" rows="10" cols="80">
+							<textarea id="editor1" name="bb_content" rows="10" cols="80">
                                             본문을 입력 해 주세요.
                     </textarea>
 						</div>
@@ -71,10 +72,10 @@
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-2">
-								<button class="btn btn-block btn-primary">등록</button>
+								<button type = "submit" class="btn btn-block btn-primary">등록</button>
 							</div>
 							<div class="col-md-2">
-								<button class="btn btn-block btn-danger">취소</button>
+								<a class="btn btn-block btn-danger" href="/HarangProject/bamboo?cmd=BB_LIST">취소</a>
 							</div>
 						</div>
 

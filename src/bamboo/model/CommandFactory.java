@@ -48,6 +48,10 @@ public class CommandFactory
 		{
 			return new A_Bb_List_Command();
 		}
+		else if(cmd.equals("U_BB_POST_COMPLETE"))
+		{
+			return new U_Bb_Post_Complete_Command();
+		}
 		
 		else
 		{

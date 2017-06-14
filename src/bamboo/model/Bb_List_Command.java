@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.BambooDTO;
+import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
 public class Bb_List_Command implements CommandInterface 
@@ -26,7 +27,7 @@ public class Bb_List_Command implements CommandInterface
 		try {
 			pool = DBConnectionMgr.getInstance();
 		} catch (Exception err) {
-			System.out.println("DBCP ¿ŒΩ∫≈œΩ∫ ¬¸¡∂ Ω«∆– : " + err);
+			System.out.println("DBCP Ïó∞Í≤∞Ïã§Ìå® : " + err);
 		}
 	}
 	
@@ -36,6 +37,12 @@ public class Bb_List_Command implements CommandInterface
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) 
 	{
 		HttpSession session = req.getSession();
+		
+		MemberDTO mdto = (MemberDTO)session.getAttribute("member");
+		String m_id = mdto.getM_id();
+		
+		//System.out.println("Bb_List_CommandÏóêÏÑú Test : " + m_id);
+		
 		ArrayList list = new ArrayList();
 		try {
 			con = pool.getConnection();
@@ -48,21 +55,17 @@ public class Bb_List_Command implements CommandInterface
 			//(!sOption.equals("") || !sOption.equals(null)) && (!table_search.equals("") || !sOption.equals(null))	
 				sql = "select * from harang.tbl_bamboo";
 				pstmt = con.prepareStatement(sql);
-				System.out.println(sql);
+				//System.out.println(sql);
 				}
-				
-						
+								
 			else {
 						
 				
 				sql = "SELECT * FROM harang.tbl_bamboo where " +sOption+ " like '%"+table_search+"%'";
 				pstmt = con.prepareStatement(sql);
-				System.out.println(sql);
+				//System.out.println(sql);
 				
 			}
-			
-			
-
 			
 			rs = pstmt.executeQuery();
 
@@ -74,7 +77,7 @@ public class Bb_List_Command implements CommandInterface
 				bbdto.setBb_notice(rs.getString("bb_notice"));
 				bbdto.setBb_title(rs.getString("bb_title"));
 				bbdto.setBb_content(rs.getString("bb_content").replace("\n", "<br>"));
-				bbdto.setBb_regdate(rs.getString("bb_regdate"));
+				bbdto.setBb_regdate(rs.getDate("bb_regdate"));
 				bbdto.setBb_count(rs.getInt("bb_count"));
 				bbdto.setBb_nickname(rs.getString("bb_nickname"));
 
@@ -87,20 +90,13 @@ public class Bb_List_Command implements CommandInterface
 			}
 
 		} catch (Exception err) {
-			System.out.println("Bb_Listø°º≠ ø¿∑˘");
+			System.out.println("Bb_List_CommandÏóêÏÑú Ïò§Î•ò");
 			err.printStackTrace();
 
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
 
-				
-
-
-
- 
-
 		return "/WEB-INF/bamboo/u_bb_list.jsp";
-
 	}
 }
