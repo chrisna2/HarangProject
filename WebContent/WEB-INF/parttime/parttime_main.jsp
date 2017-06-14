@@ -33,6 +33,7 @@
 						<h3 class="box-title"></h3>
 					</div>
 					<!-- /.box-header -->
+					
 					<div class="box-body">
 						<table id = "example1" class="table table-bordered table-striped">
 							<tr>
@@ -49,6 +50,7 @@
 							<!-- 맨위에  taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" 추가해주세요!! -->
 							<c:choose>
 								<c:when test="${fn:length(list) eq 0}">
+								게시물이 없습니다.
 								</c:when>
 								<c:otherwise>
 									<c:forEach items="${list}" var="list" 

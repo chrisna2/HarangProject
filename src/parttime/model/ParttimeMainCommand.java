@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dto.MemberDTO;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 import parttime.dto.ParttimeDto;
@@ -18,7 +20,9 @@ public class ParttimeMainCommand implements CommandInterface{
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException{
 		req.setCharacterEncoding("utf-8");
 		// Session에 저장된 로그인 정보를 받아온다.
-		String m_id = (String)req.getSession().getAttribute("m_id");
+		HttpSession session = req.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		String m_id = member.getM_id();
 		
 		// 페이징 관련 parameter 받아오기
 		int nowPage=0, nowBlock=0;
@@ -41,8 +45,8 @@ public class ParttimeMainCommand implements CommandInterface{
 			list.set(i, dto);
 		}
 		
-		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-		PagingDto paging = pbean.Paging(list.size(),5, nowPage, nowBlock);
+		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수, 네번째는 블록당 페이지 개수!!
+		PagingDto paging = pbean.Paging(list.size(),5, nowPage,5, nowBlock);
 		
 		// parameter 보내기
 		req.setAttribute("list", list);

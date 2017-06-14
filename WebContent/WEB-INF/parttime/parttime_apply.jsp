@@ -26,7 +26,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-10">
-				<!-- general form elements disabled -->
+				<!-- 기본 정보 -->
 				<div class="box box-warning">
 					<div class="box-header">
 						<h3 class="box-title">기본 신상 정보</h3>
@@ -40,11 +40,11 @@
 							<div class="col-md-9">
 								<div class="form-group">
 									<label>이름</label><br> 
-									<input type="text" class="form-control" value="김철수" readonly="readonly" />
+									<input type="text" class="form-control" value="${member.m_name}" readonly="readonly" />
 								</div>
 								<div class="form-group">
 									<label>생년월일</label> 
-									<input type="text" class="form-control" value="901225" readonly="readonly" />
+									<input type="text" class="form-control" value="${member.m_birth}" readonly="readonly" />
 								</div>
 								<div class="form-group">
 									<label>나이</label> 
@@ -52,17 +52,25 @@
 								</div>
 							</div>
 							<div class="col">
-								<img src="/HarangProject/WebContent/dist/img/photo1.png"/>
+								<img src="${member.m_photo}"/>
 							</div>
 							</div>
+							
 								<div class="form-group">
 									<label>학번</label> 
-									<input type="text" class="form-control" value="2009540018" readonly="readonly" />
-								</div>				
+									<input type="text" class="form-control" value="${member.m_id}" readonly="readonly" />
+								</div>	
 								<div class="form-group">
 									<label>연락처</label> 
-									<input type="text" class="form-control" value="010-1111-2222" readonly="readonly" />
-								</div>
+									<div class="radio form-group">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" name="contact" checked="checked" onclick="javascript:fnRadio(${member.m_tel}, ${member.m_mail});"/>핸드폰번호
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="radio" name="contact" onclick="javascript:fnRadio(${member.m_tel}, ${member.m_mail});"/>이메일
+									</div>
+									<input type="text" class="form-control" id = "contact" value="${member.m_tel}" readonly="readonly" />
+								</div>				
+								
 							
 							
 						</form>
@@ -70,6 +78,10 @@
 				</div><!-- /.box -->
 			</div><!--/.col (right) -->
 		</div>
+		<!-- 기본정보 끝 -->
+						
+		<!-- 상세정보 -->
+		
 			<br>
 			<div class="row">
 				<div class="col-md-10">
@@ -79,24 +91,28 @@
 								상세 정보 <small>지원동기와 구체적인 요일/시간 정보를 작성해주세요.</small>
 							</h3>
 						</div><!-- /.box-header -->
-						<div class='box-body pad'>
-							<form>
+											<div class='box-body pad'>
+							<form id="apply" method="post" action="/HarangProject/parttime?cmd=MYREAD">
+								<input type="hidden" name="p_num" value="${p_num}"/>
+								<input type="hidden" name="nowPage" value="${nowPage}"/>
+      							<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      							<input type="hidden" name="read" value="no"/>
 							<label>지원 동기</label>
-								<textarea class="form-control" row="10" >
+								<textarea class="form-control" name="pm_reason" row="10" >
 ※ 구체적인 요일/시간을 작성해주세요.	                       	                 
 		                    	</textarea>
-							</form>
+							
 							<br>
-							<form>
+							
 								<label>경력사항</label><br>
-								<textarea class="form-control" row="5">
+								<textarea class="form-control" name="pm_career" row="5">
 본인의 알바 경험을 자유롭게 작성해주세요.
 								</textarea>
-							</form>
+							
 							<br>
-							<form>
+							
 								<label>희망 근무 시간</label><br>
-								<textarea class="form-control" row="5">
+								<textarea class="form-control" name="pm_wanttime" row="5">
 희망 근무 시간을 구체적으로 작성해주세요.
 								</textarea>
 							</form>
@@ -106,19 +122,13 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-primary">지원 완료</button>
+							<button class="btn btn-block btn-primary" onclick="fnApply()">지원 완료</button>
 						</div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-danger">취소</button>
+							<button class="btn btn-block btn-danger" onclick="fnCancel()">취소</button>
 						</div>
 					</div>
-					
-					<div class="row">
-						<div class="col-md-10"></div>
-						<div class="col-md-2">
-							<button class="btn btn-block btn-warning">돌아가기</button>
-						</div>
-					</div>
+		
 			</div>
 		</div>
 	</section>
@@ -126,6 +136,9 @@
 	<!------------------------------------------------------------------------------------------------------------------->
 </div>
 <!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
+<form id="cancel" method="post" action="/HarangProject/parttime?cmd=PREAD">
+	<input type="hidden" name="p_num" value="${p_num}"/>
+</form>
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
@@ -183,4 +196,31 @@
 		//bootstrap WYSIHTML5 - text editor
 		$(".textarea").wysihtml5();
 	});
+</script>
+<script>
+	function fnRadio(tel, email){
+		var contact = document.getElementByName("contact");
+		var text = document.getElementById("contact");
+		if(contact[0].checked == true){
+			text.value = tel;
+		}else{
+			text.value = email;
+		}
+	}
+	
+	function fnCancel(){
+		if(conform("정말 취소하시겠습니까?") == true){
+			document.cancel.submit();
+		}else{
+			return;
+		}
+	}
+	
+	function fnApply(){
+		if(conform("지금 제출하시면 수정이 불가합니다.\n정말 제출하시겠습니까?") == true){
+			document.apply.submit();
+		}else{
+			return;
+		}
+	}
 </script>
