@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
 <%@ include file="../include/header.jsp" %>
@@ -38,40 +39,57 @@
                     <div class="row">
 	                    <div class="col-md-3 form-group">
 	                      <label>머릿말</label>	                      
-		                    <input type="text" value="[모집중]" readonly="readonly"/>		                		                  
+		                    <input type="text" value="${info.p_header}" readonly="readonly"/>		                		                  
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>제목</label>
-                      <input type="text" class="form-control" value="**과 과사무실 조교 모집합니다." readonly="readonly"/>
+                      <input type="text" class="form-control" value="${info.p_title}" readonly="readonly"/>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>장소</label>
-	                      <input type="text" class="form-control" value="**과 과사무실" readonly="readonly"/>
+	                      <input type="text" class="form-control" value="${info.p_location}" readonly="readonly"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>마감일</label>	                      
-	                      <input type="text" class="form-control pull-right" id="reservation" readonly="readonly"/>                    
+	                      <input type="text" class="form-control pull-right" value="${info.p_deadline}" readonly="readonly"/>                    
 	                    </div>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>시급</label>
-	                      <input type="text" class="form-control" value="ex) 7000원" readonly="readonly"/>
+	                      <input type="text" class="form-control" value="${info.p_wage}원" readonly="readonly"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>근무기간</label>
-	                      <input type="text" class="form-control" value="ex) 6개월, 1년 ..." readonly="readonly"/>
+	                      <input type="text" class="form-control" value="${info.p_term}" readonly="readonly"/>
 	                    </div>
                     </div>
                     <div class="form-group">
-                      <label>요일</label>
-                      <input type="text" class="form-control" placeholder="Enter ..."/>
+                      <label>요일</label><br>
+                      <div>
+                      
+                      <!-- 성지 : 보고배워라 -->
+                      	  <c:forEach var="i" begin="0" end="6" step="1">
+                      	  	<c:choose>
+	                      	  	<c:when test="${daycode[i] == 1}">
+		                      		<input type="checkbox" checked="checked" disabled="disabled" > ${day[i]}
+		                      		&nbsp;&nbsp;&nbsp;
+		                      	</c:when>
+		                      	<c:otherwise>
+		                      		<input type="checkbox" disabled="disabled"> ${day[i]}
+		                      		&nbsp;&nbsp;&nbsp;
+		                      	</c:otherwise>
+	                      	</c:choose>
+	                      </c:forEach>
+	                 <!-- 끝 -->
+	                      
+                      </div>
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" value="ex)010-1234-5678 or email@naver.com" readonly="readonly"/>
+                      <input type="text" class="form-control" value="${info.p_tel}" readonly="readonly"/>
                     </div>
                     
 					<div class='box'>
@@ -80,16 +98,14 @@
 		                </div><!-- /.box-header -->
 		                <div class='box-body pad'>
 		                  <form>
-		                    <textarea class="form-control" id="editor1" name="editor1" rows="10" cols="120" readonly="readonly">
-		                       	※ 구체적인 요일/시간 정보	                       	                 
-		                    </textarea>
+		                    <textarea class="form-control" id="editor1" name="editor1" rows="10" cols="120" readonly="readonly">${info.p_content}</textarea>
 		                  </form>
 		                </div>
               		</div><!-- /.box -->
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-4">
-							<button class="btn btn-block btn-danger">삭제</button>
+							<button class="btn btn-block btn-primary" onclick="fnDelete()">삭제하기</button>
 						</div>					
                   	</div>
                   </form>
@@ -98,18 +114,89 @@
               <div class="row">
               	<div class="col-md-10"></div>
               	<div class="col-md-2">
-              		<button class="btn btn-block btn-warning">목록</button>
+              		<button class="btn btn-block btn-warning" onclick="javascript:fnList()">목록</button>
               	</div>
               </div>
               <br>
-              <!-- 댓글창  collapse -->
+              
+                
+                 <div class='box box-danger'>
+                <div class='box-header'>
+                  <h3 class='box-title'>지원자 목록</h3><br><br>
+                  <small>나의 게시글에 지원한 사람들의 목록입니다. 채용하고자 하는 사람을 체크하고 채용버튼을 누르면 자동으로 쪽지가 전송됩니다.</small>
+                  
+                  <!-- tools box -->
+                  <div class="pull-right box-tools">
+                    <button class="btn btn-danger btn-sm" data-widget='collapse' data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                  </div><!-- /. tools -->
+                </div><!-- /.box-header -->
+                <div class="box-body">              
+						<table id = "example1" class="table table-bordered table-striped">
+							<tr>
+								<th style="width: 10px">#</th>
+								<th>지원자</th>
+								<th>이력서</th>
+								<th>지원날짜</th>
+								<th>pick</th>
+							</tr>
+							<c:choose>
+								<c:when test="${fn:length(resume) eq 0}">
+								지원자가 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${resume}" var="resume" 
+											   begin="${a_paging.beginPerPage}" 
+											   end="${a_paging.beginPerPage + a_paging.numPerPage -1}" 
+											   varStatus="status">
+										<tr>
+											<td>${resume.list_num}</td>
+											<td>${resume.m_name}</td>
+											<td><button class="btn btn-danger btn-sm" onclick="fnResume(${resume.m_id})">이력서 보기</button></td>
+											<td>${resume.pm_regdate}</td>
+											<td>
+											<c:choose>
+												<c:when test="${resume.pm_choice eq 'Y'}">
+													채용 확정
+												</c:when>
+												<c:otherwise>
+													<button class="btn btn-sm btn-danger" onclick="fnPick(${resume.m_id})">채용하기</button>
+												</c:otherwise>
+											</c:choose>
+											</td>
+										</tr>
+									</c:forEach>
+							</c:otherwise>
+							</c:choose>
+							
+						</table>
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer clearfix">
+						<ul class="pagination pagination-sm no-margin pull-left">
+							<c:if test="${a_paging.nowBlock > 0}">
+							<li><a href="javascript:prevPage()">&laquo;</a></li>
+							</c:if>
+						  <c:forEach var="i" begin="0" end="${a_paging.pagePerBlock-1}" step="1">
+						  	<!-- if문 추가 : 20170615 -->
+						  	<c:if test="${a_paging.nowBlock*a_paging.pagePerBlock+i < a_paging.totalPage}" >
+							<li><a href="javascript:goPage('${a_paging.nowBlock*a_paging.pagePerBlock+i}')">${a_paging.nowBlock*a_paging.pagePerBlock+(i+1)}</a></li>
+						  	</c:if>
+						  	<!-- 끝 -->
+						  </c:forEach>
+						  	<c:if test="${a_paging.totalBlock > a_paging.nowBlock +1}">
+							<li><a href="javascript:nextPage()">&raquo;</a></li>
+							</c:if>
+						</ul>
+					</div>
+                </div>
+                
+                <!-- 댓글창  collapse -->
               <div class='box box-success'>
                 <div class='box-header'>
                   <h3 class='box-title'>댓글 <small>이 게시글에 댓글을 달아주세요.</small></h3>
                   <!-- tools box -->
                   <div class="pull-right box-tools">
                     <button class="btn btn-success btn-sm" data-widget='collapse' data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-success btn-sm" data-widget='remove' data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
                   </div><!-- /. tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -131,7 +218,58 @@
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      
+      <form name="list" method="post" action="/HarangProject/parttime?cmd=PMAIN">
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
+      <form name="del" method="post" action="/HarangProject/parttime?cmd=PMAIN">
+      	<input type="hidden" name="delete" value="OK"/>
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
+      <form name="resume" method="post" action="/HarangProject/parttime?cmd=PRESUME">
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
+      	<input type="hidden" name="m_id" value="" id="resume_id"/>
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+    	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+    	<input type="hidden" name="a_nowPage" value="${a_paging.nowPage}"/>
+		<input type="hidden" name="a_nowBlock" value="${a_paging.nowBlock}"/>
+      </form>
+      <form name="pick" method="post" action="/HarangProject/parttime?cmd=PREAD">
+      	<input type="hidden" name="a_nowPage" value="${a_paging.nowPage}"/>
+		<input type="hidden" name="a_nowBlock" value="${a_paging.nowBlock}"/>
+		<input type="hidden" name="nowPage" value="${nowPage}"/>
+    	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+		<input type="hidden" name="p_num" value="${p_num}"/>
+		<input type="hidden" name="choice" value="Y"/> 
+		<input type="hidden" name="choice_id" value="" id="choice_id"/>
+      </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
+<script>
+function fnList(){
+	document.list.submit();
+}
+function fnDelete(){
+	if(confirm("지금 글을 삭제하면 복구할 수 없습니다.\n정말 삭제하시겠습니까?") == true){
+		document.del.submit();
+	}else{
+		return;
+	}
+}
+function fnResume(m_id){
+	document.getElementById("resume_id").value = m_id;
+	document.resume.submit();
+}
+function fnPick(m_id){
+	if(confirm("채용하기 버튼을 누른 후에는 취소할 수 없습니다.\n정말 채용하시겠습니까?\n(지원자에게 채용확정 메시지가 전송됩니다.)") == true){
+		document.getElementById("choice_id").value = m_id;
+		document.pick.submit();
+	}else{
+		return;
+	}
+}
+
+</script>

@@ -15,6 +15,7 @@ public class MemberDTO {
 	private String m_tel;
 	private int m_fee;
 	private long m_point;
+	private int m_age;
 	
 	public String getM_id() {
 		return m_id;
@@ -94,5 +95,12 @@ public class MemberDTO {
 	public void setM_point(long m_point) {
 		this.m_point = m_point;
 	}
+	public int getM_age() {
+		return m_age;
+	}
+	public void setM_age(int m_age) {
+		this.m_age = m_age;
+	}
+	
 	
 }

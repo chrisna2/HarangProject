@@ -33,7 +33,6 @@
                   <small>내가 작성한 알바 모집 공고입니다.</small>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -53,30 +52,7 @@
 								<td>100</td>
 								<td>20</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>[모집중] 학관 카페 파트타임 모집<br>시급 : 6500원 업무 : 바리스타/서비스
-								</td>
-								<td>2017-05-25</td>
-								<td>45</td>
-								<td>5</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>[마감] 하랑대학교 안전지킴이 알바<br>시급 : 6500원 업무 : 서비스
-								</td>
-								<td>2017-05-15</td>
-								<td>64</td>
-								<td>20</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>[마감] 학관 식당 설거지 알바<br>시급 : 6500원 업무 : 설거지
-								</td>
-								<td>2017-05-29</td>
-								<td>15</td>
-								<td>3</td>
-							</tr>
+							
 						</table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
@@ -98,7 +74,6 @@
                   <small>내가 작성한 대타 모집 공고입니다.</small>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -118,30 +93,7 @@
 								<td>100</td>
 								<td>20</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>[모집중] 학관 카페 파트타임 모집<br>시급 : 6500원 업무 : 바리스타/서비스
-								</td>
-								<td>2017-05-25</td>
-								<td>45</td>
-								<td>5</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>[마감] 하랑대학교 안전지킴이 알바<br>시급 : 6500원 업무 : 서비스
-								</td>
-								<td>2017-05-15</td>
-								<td>64</td>
-								<td>20</td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td>[마감] 학관 식당 설거지 알바<br>시급 : 6500원 업무 : 설거지
-								</td>
-								<td>2017-05-29</td>
-								<td>15</td>
-								<td>3</td>
-							</tr>
+							
 						</table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
@@ -162,7 +114,6 @@
                   <small>내가 지원한 알바 목록입니다.</small>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -186,16 +137,7 @@
 								<td>10</td>
 								<td>Y</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>[모집중] 학관 카페 파트타임 모집<br>시급 : 6500원 업무 : 바리스타/서비스
-								</td>
-								<td>카페사장</td>
-								<td>2017-05-25</td>
-								<td><button class="btn btn-block btn-success">이력서</button></td>
-								<td>4</td>
-								<td>N</td>
-							</tr>
+							
 						</table>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
@@ -217,7 +159,6 @@
                   <small>내가 지원한 대타 목록입니다.</small>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -241,15 +182,7 @@
 								<td>10</td>
 								<td>Y</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>[모집중] 학관 카페 파트타임 모집<br>시급 : 6500원 업무 : 바리스타/서비스
-								</td>
-								<td>카페사장</td>
-								<td>2017-05-25</td>
-								<td><button class="btn btn-block btn-danger">이력서</button></td>
-								<td>4</td>
-								<td>N</td>
+							
 							</tr>
 						</table>
                 </div><!-- /.box-body -->
