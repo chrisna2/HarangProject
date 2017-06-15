@@ -3,7 +3,9 @@ package message.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import dto.MessageDTO;
 import harang.dbcp.DBConnectionMgr;
 
 /**
@@ -56,5 +58,42 @@ public class MessageBean {
 		}finally{
 			pool.freeConnection(con,pstmt);
 		}
+	}
+
+	public ArrayList getGivenMessageList(String m_id){
+		ArrayList inboxlist = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_text WHERE m_reader=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MessageDTO msg = new MessageDTO();
+				msg.setT_num(rs.getString("t_num"));
+				msg.setT_title(rs.getString("t_title"));
+				msg.setT_content(rs.getString("t_content"));
+				msg.setT_send_date(rs.getString("t_send_date"));
+				msg.setT_read_date(rs.getString("t_read_date"));
+				msg.setT_send_del(rs.getString("t_send_del"));
+				msg.setT_read_del(rs.getString("t_read_del"));
+				msg.setM_sender(rs.getString("m_sender"));
+				msg.setM_reader(rs.getString("m_reader"));
+				
+				inboxlist.add(msg);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getGivenMessageList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	
+		return inboxlist;
 	}
 }
