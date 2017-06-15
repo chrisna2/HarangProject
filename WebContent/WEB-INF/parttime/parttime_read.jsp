@@ -67,20 +67,23 @@
                     </div>
                     <div class="form-group">
                       <label>요일</label><br>
-                      <div class="btn-group" data-toggle="buttons">
-	                      <label class="btn btn-primary"> <input type="checkbox" id="mon" autocomplete="off" > 월</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="tue" autocomplete="off"> 화</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="wed" autocomplete="off"> 수</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="thu" autocomplete="off"> 목</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="fri" autocomplete="off"> 금</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="sat" autocomplete="off"> 토</label> 
-	                      &nbsp;&nbsp;&nbsp;
-	                      <label class="btn btn-primary"> <input type="checkbox" id="sun" autocomplete="off"> 일</label> 			
+                      <div>
+                      
+                      <!-- 성지 : 보고배워라 -->
+                      	  <c:forEach var="i" begin="0" end="6" step="1">
+                      	  	<c:choose>
+	                      	  	<c:when test="${daycode[i] == 1}">
+		                      		<input type="checkbox" checked="checked" disabled="disabled" > ${day[i]}
+		                      		&nbsp;&nbsp;&nbsp;
+		                      	</c:when>
+		                      	<c:otherwise>
+		                      		<input type="checkbox" disabled="disabled"> ${day[i]}
+		                      		&nbsp;&nbsp;&nbsp;
+		                      	</c:otherwise>
+	                      	</c:choose>
+	                      </c:forEach>
+	                 <!-- 끝 -->
+	                      
                       </div>
                     </div>
                     <div class="form-group">
@@ -100,9 +103,22 @@
               		</div><!-- /.box -->
 					<div class="row">
 						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<button class="btn btn-block btn-primary" onclick="fnApply()">지원하기</button>
-						</div>					
+			
+						<c:choose>
+							<c:when test="${applied eq 'N' || empty applied}">
+							<div class="col-md-4">
+								<button class="btn btn-block btn-primary" onclick="fnApply()">지원하기</button>
+							</div>		
+							</c:when>
+							<c:otherwise>
+							<div class="col-md-2">
+								<button class="btn btn-block btn-primary" disabled="disabled">지원완료</button>
+							</div>
+							<div class="col-md-2">
+								<button class="btn btn-block btn-primary" onclick="fnCancel()">지원취소</button>
+							</div>
+							</c:otherwise>
+						</c:choose>			
                   	</div>
                   </form>
                 </div><!-- /.box-body -->
@@ -148,24 +164,31 @@
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
       </form>
       <form name="apply" method="post" action="/HarangProject/parttime?cmd=PAPPLY">
-      	<input type="hidden" name="p_num" value="${list.p_num}"/>
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
+      <form name="cancel" method="post" action="/HarangProject/parttime?cmd=PREAD">
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      	<input type="hidden" naem="cancel" value="OK"/>
       </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
 <script>
-$.urlParam = function(name){
-    var results = new RegExp('[\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
-    return results[1] || 0;
-}
-
 function fnList(){
 	document.list.submit();
 }
 function fnApply(){
 	document.apply.submit();
 }
-
+function fnCancel(){
+	if(confirm("작성한 이력서가 삭제됩니다.\n정말 지원을 취소하시겠습니까?") == true){
+		document.cancel.submit();
+	}else{
+		return;
+	}
+}
 </script>

@@ -62,12 +62,6 @@
 								</div>	
 								<div class="form-group">
 									<label>연락처</label> 
-									<div class="radio form-group">
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="contact" checked="checked" onclick="javascript:fnRadio(${member.m_tel}, ${member.m_mail});"/>핸드폰번호
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<input type="radio" name="contact" onclick="javascript:fnRadio(${member.m_tel}, ${member.m_mail});"/>이메일
-									</div>
 									<input type="text" class="form-control" id = "contact" value="${member.m_tel}" readonly="readonly" />
 								</div>				
 								
@@ -92,7 +86,7 @@
 							</h3>
 						</div><!-- /.box-header -->
 											<div class='box-body pad'>
-							<form id="apply" method="post" action="/HarangProject/parttime?cmd=MYREAD">
+							<form name="apply" method="post" action="/HarangProject/parttime?cmd=PREAD">
 								<input type="hidden" name="p_num" value="${p_num}"/>
 								<input type="hidden" name="nowPage" value="${nowPage}"/>
       							<input type="hidden" name="nowBlock" value="${nowBlock}"/>
@@ -136,8 +130,11 @@
 	<!------------------------------------------------------------------------------------------------------------------->
 </div>
 <!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-<form id="cancel" method="post" action="/HarangProject/parttime?cmd=PREAD">
+<form name="cancel" method="post" action="/HarangProject/parttime?cmd=PREAD">
 	<input type="hidden" name="p_num" value="${p_num}"/>
+	<input type="hidden" name="nowPage" value="${nowPage}"/>
+    <input type="hidden" name="nowBlock" value="${nowBlock}"/>
+    <input type="hidden" name="read" value="no"/>
 </form>
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
@@ -198,18 +195,9 @@
 	});
 </script>
 <script>
-	function fnRadio(tel, email){
-		var contact = document.getElementByName("contact");
-		var text = document.getElementById("contact");
-		if(contact[0].checked == true){
-			text.value = tel;
-		}else{
-			text.value = email;
-		}
-	}
 	
 	function fnCancel(){
-		if(conform("정말 취소하시겠습니까?") == true){
+		if(confirm("정말 취소하시겠습니까?") == true){
 			document.cancel.submit();
 		}else{
 			return;
@@ -217,7 +205,7 @@
 	}
 	
 	function fnApply(){
-		if(conform("지금 제출하시면 수정이 불가합니다.\n정말 제출하시겠습니까?") == true){
+		if(confirm("지금 제출하시면 수정이 불가합니다.\n정말 제출하시겠습니까?") == true){
 			document.apply.submit();
 		}else{
 			return;

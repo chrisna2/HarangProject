@@ -39,15 +39,15 @@
 								<div class="col-md-9">
 									<div class="form-group">
 										<label>이름</label><br> 
-										<input type="text" class="form-control" value="김철수" readonly="readonly" />
+										<input type="text" class="form-control" value="${applicant.m_name}" readonly="readonly" />
 									</div>
 									<div class="form-group">
 										<label>생년월일</label> 
-										<input type="text" class="form-control" value="901225" readonly="readonly" />
+										<input type="text" class="form-control" value="${applicant.m_birth}" readonly="readonly" />
 									</div>
 									<div class="form-group">
 										<label>나이</label> 
-										<input type="text" class="form-control" value="28" readonly="readonly" />
+										<input type="text" class="form-control" value="${applicant.m_age}" readonly="readonly" />
 									</div>
 								</div>
 								<div class="col">
@@ -56,31 +56,25 @@
 							</div>
 							<div class="form-group">
 								<label>학번</label> 
-								<input type="text" class="form-control" value="2009540018" readonly="readonly" />
+								<input type="text" class="form-control" value="${applicant.m_id}" readonly="readonly" />
 							</div>				
 							<div class="form-group">
 								<label>연락처</label> 
-								<input type="text" class="form-control" value="010-1111-2222" readonly="readonly" />
+								<input type="text" class="form-control" value="${applicant.m_tel}" readonly="readonly" />
 							</div>
 							<div class="form-group">
 									<label>지원 동기</label>
-									<textarea class="form-control"  readonly="readonly">
-열심히 일하겠습니다!!	                       	                 
-			                    	</textarea>
+									<textarea class="form-control" readonly="readonly">${resume.pm_reason}</textarea>
 							</div>
 							<br>
 							<div class="form-group">
 								<label>경력사항</label><br>
-								<textarea class="form-control"  readonly="readonly">
-편의점 알바 6개월
-								</textarea>
+								<textarea class="form-control"readonly="readonly">${resume.pm_career}</textarea>
 							</div>
 							<br>
 							<div class="form-group">
 								<label>희망 근무 시간</label><br>
-								<textarea class="form-control"  readonly="readonly">
-월수금 6-10시 가능합니다.
-								</textarea>
+								<textarea class="form-control" readonly="readonly">${resume.pm_wanttime}</textarea>
 							</div>
 					
 					<div class="row">
@@ -96,7 +90,7 @@
 					<div class="row">
 						<div class="col-md-10"></div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-warning">목록</button>
+							<button class="btn btn-block btn-warning" onclick="fnList()">목록</button>
 						</div>
 					</div>
 			</div>
@@ -105,6 +99,13 @@
 	<!-- /. 작업 공간 끝! -->
 	<!------------------------------------------------------------------------------------------------------------------->
 </div>
+<form name="list" method="post" action="/HarangProject/parttime?cmd=PREAD">
+	<input type="hidden" name="a_nowPage" value="${a_nowPage}"/>
+	<input type="hidden" name="a_nowBlock" value="${a_nowBlock}"/>
+	<input type="hidden" name="nowPage" value="${nowPage}"/>
+    <input type="hidden" name="nowBlock" value="${nowBlock}"/>
+	<input type="hidden" name="p_num" value="${p_num}"/>
+</form>
 <!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
@@ -163,4 +164,9 @@
 		//bootstrap WYSIHTML5 - text editor
 		$(".textarea").wysihtml5();
 	});
+</script>
+<script>
+	function fnList(){
+		document.list.submit();
+	}
 </script>

@@ -28,6 +28,7 @@
             height:60px;
             background:#ffffff;
         }
+        
         footer {
             position:relative;
             bottom:0;

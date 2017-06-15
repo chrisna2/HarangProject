@@ -1,8 +1,8 @@
-package parttime.dto;
+package dto;
 
 import java.util.Date;
 
-public class ParttimeDto {
+public class ParttimeDTO {
 	private int list_num; //게시판 글번호
 	private String p_num; //DB 글번호
 	private String p_title; //글제목

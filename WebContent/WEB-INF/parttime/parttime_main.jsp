@@ -28,13 +28,18 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-10">
-				<div class="box">
+				<div class="box box-info">
 					<div class="box-header">
 						<h3 class="box-title"></h3>
 					</div>
 					<!-- /.box-header -->
 					
 					<div class="box-body">
+						<div class="row">
+						<div class="col-md-2">
+							<button class="btn btn-sm btn-block btn-info" onclick="fnPost()">글쓰기</button>
+						</div>					
+                  	</div>
 						<table id = "example1" class="table table-bordered table-striped">
 							<tr>
 								<th style="width: 10px">#</th>
@@ -85,7 +90,11 @@
 							<li><a href="javascript:prevPage()">&laquo;</a></li>
 							</c:if>
 						  <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+						  	<!-- if문 추가 : 20170615 -->
+						  	<c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
 							<li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+						  	</c:if>
+						  	<!-- 끝 -->
 						  </c:forEach>
 						  	<c:if test="${paging.totalBlock > paging.nowBlock +1}">
 							<li><a href="javascript:nextPage()">&raquo;</a></li>
@@ -135,7 +144,11 @@
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
 <!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
-
+<!-- 글 쓰기 -->
+<form name="post" method="post" action="/HarangProject/parttime?cmd=PPOST">
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
 
 <!-- 글 읽기 -->
 <form name="read" method="post" action="/HarangProject/parttime?cmd=PREAD">
@@ -164,6 +177,10 @@ function goPage(nowPage){
 function fnRead(p_num){
 	document.getElementById("p_num").value = p_num;
 	document.read.submit();
+}
+
+function fnPost(){
+	document.post.submit();
 }
 
 </script>
