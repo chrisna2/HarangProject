@@ -18,6 +18,12 @@ public class CommandFactory {
 		else if(cmd.equals("adminMain")){
 			return new AdminMainCommand();
 		}
+		else if(cmd.equals("regist")){
+			return new RegistCommand();
+		}
+		else if(cmd.equals("mypage")){
+			return new MyPageCommand();
+		}
 		else{
 			return null;
 		}

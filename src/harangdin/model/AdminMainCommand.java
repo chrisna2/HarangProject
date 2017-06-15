@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import dto.BookDTO;
 import harang.dbcp.DBConnectionMgr;
+import paging.PagingBean;
+import paging.dto.PagingDto;
 
 public class AdminMainCommand implements CommandInterface {
 	
@@ -28,23 +30,32 @@ public class AdminMainCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList list = list();
-			
-		request.setAttribute("adminmain", list);
-		
-		
-		
+		list(request);
+
 		return "/WEB-INF/harangdin/m_harangdin_main.jsp";
 	}
 	
-	
-	
-	public ArrayList list(){
+	public void list(HttpServletRequest request){
+		
+		String sql;
 		
 		ArrayList list = new ArrayList();
+		
+		String keyword = request.getParameter("keyword");
+		String keyfield = request.getParameter("keyfield");
+		
+		System.out.println(keyword +"." + keyfield);
+		
+		if(keyword == null || keyword.equals("")){
+			sql = "SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book order by b_regdate desc";			
+		}
+		else{
+			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book"
+					+ " where " + keyfield + " like '%" + keyword + "%' order by b_regdate desc";
+		}
+		
 		pool = DBConnectionMgr.getInstance();
 		
-		String sql = "SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book";
 		
 		try {
 			
@@ -74,8 +85,24 @@ public class AdminMainCommand implements CommandInterface {
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt,rs);
 		}
+
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("keyfield", keyfield);
+		request.setAttribute("mharangdinmain", list);
 		
-		return list;
+		//페이징 관련 parameter 받아오기
+		int nowPage=0, nowBlock=0;
+		if(request.getParameter("nowPage") != null){nowPage = Integer.parseInt(request.getParameter("nowPage"));}
+		if(request.getParameter("nowBlock") != null){nowBlock = Integer.parseInt(request.getParameter("nowBlock"));}
+
+		// DB 연동 함수를 쓰기 위해 인스턴스 생성
+		PagingBean pbean = new PagingBean();
+				
+		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
+		PagingDto paging = pbean.Paging(list.size(),5, nowPage, 3, nowBlock);
+						
+		// parameter 보내기
+		request.setAttribute("paging", paging);
 		
 	}
 
