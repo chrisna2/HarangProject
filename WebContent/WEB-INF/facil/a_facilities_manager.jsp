@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -7,6 +7,14 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <title>사용 예약 취소 추가(관리자)</title>
+<script>
+	//스크롤 이동 JQuery
+	function fnMove(){
+		var offset = $("#confirm72").offset();
+		$('html, body').animate({scrollTop : offset.top}, 1200)
+	}
+
+</script>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
 <div class="content-wrapper">
@@ -39,10 +47,12 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
+					<form method="post" action="/HarangProject/facil?cmd=AFacilManager">
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
 									<th>예약 번호</th>
+									<th>예약한 날짜</th>
 									<th>학번[ID]</th>
 									<th>시설 종류</th>
 									<th>시설명</th>
@@ -53,42 +63,27 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>l00001</td>
-									<td>20120501</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-								<tr>
-									<td>l00002</td>
-									<td>20120501</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-								<tr>
-									<td>l00003</td>
-									<td>20120501</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-
+							 	<c:forEach items="${requestScope.list}" var="p" varStatus="i">
+									<tr class="text-blue">
+										<td>${p.pgm_num}</td>
+										<td>${p.pgm_regdate}</td>
+										<td>${p.m_id}</td>
+										<td>운동장</td>
+										<td>${p.pg_type}</td>
+										<td>${p.pg_name}</td>
+										<td>${p.pgm_date}</td>
+										<td>${p.pgm_timecode}</td>
+										<td>
+											<input type="submit" class="btn btn-primary"
+											value="선택">
+											<input type="hidden" value="${p.pgm_num}" name="delete">
+										</td>
+									</tr>
+									
+								</c:forEach>
 							</tbody>
 						</table>
+						</form>
 					</div>
 					<!-- /.box-body -->
 
@@ -108,33 +103,79 @@
 						</div>
 
 						<!-- 셀렉트  -->
-						
-						<form action="">
-						<div class="row">
-							<div class="col-md-3" align="center">
-								<select class="form-control input-sm pull-left"
-									style="width: 150px;">
-									<option>예약번호</option>
-									<option>학번[ID]</option>
-									<option>시설종류</option>
-									<option>시설명</option>
-									<option>호수</option>
-									<option>예약날짜</option>
-								</select>
-							</div>
-							<div class="col-md-3" align="center">
-								<input type="text" name="table_search"
-									class="form-control input-sm  pull-left" style="width: 150px;"
-									placeholder="Search" />
-								<div class="input-group-btn  pull-left">
-									<button class="btn btn-sm btn-primary">
-										검색 <i class="fa fa-search"></i>
-									</button>
+
+						<form action="/HarangProject/facil?cmd=AFacilManager" name="search" method="post">
+							<div class="row">
+								
+								<div class="col-md-3" align="center">
+									<select 
+										class="form-control input-sm pull-left"
+										style="width: 150px"
+										name="keyword">
+										<option value="pgm_num" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_num'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약번호</option>
+										
+										<option value="pgm_regdate" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_regdate'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약한 날짜</option>	
+										
+										<option value="m_id" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'm_id'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>학번[ID]</option>
+										
+										<!-- 이중 셀렉문 pgm_type인지 체크-->
+										<option value="p.pg_type" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'p.pg_type'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>시설명</option>
+										
+										<!-- 이중 셀렉문 pgm_name인지 체크-->
+										<option value="p.pg_name" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'p.pg_name'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>호수</option>
+										
+										<option value="pgm_date" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_date'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약날짜</option>
+										
+									</select>
+								</div>
+								
+								<div class="col-md-3" align="center">
+									<input type="text" 
+										   name="keyfiled"
+										   class="form-control input-sm  pull-left" 
+										   style="width: 150px;"
+										   placeholder="Search" />
+									<div class="input-group-btn  pull-left">
+										<button
+											type="submit" 
+											class="btn btn-sm btn-primary">
+											검색 <i class="fa fa-search"></i>
+										</button>
+									</div>
 								</div>
 							</div>
-							</div>
 						</form>
-						
+
 					</div>
 				</div>
 				<!-- /.box -->
@@ -145,7 +186,7 @@
 
 		<!-- -------취소 시설 선택후 표기되는 정보------- -->
 		<!-- 세로 길이 수정 -->
-		<div class="row">
+		<div class="row" id="confirm72">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-12">
 				<!-- box -->
@@ -167,7 +208,7 @@
 					<!-- box-body -->
 					<div class="box-body">
 						<form role="form">
-							<div class="row">
+							<div class="row" >
 
 								<!-- text input -->
 								<div class="form-group col-md-4">
@@ -205,28 +246,29 @@
 										placeholder="5000" disabled>
 								</div>
 							</div>
-							
+
 							<div class="row">
 								<div class="col-md-6">
 									<label>예약 취소 사유</label> <input type="text" class="form-control"
-									placeholder="취소사유를 입력하세요">
+										placeholder="취소사유를 입력하세요">
 								</div>
 							</div>
 						</form>
 						<!-- /.box-body -->
 						<!-- box-footer -->
 						<div class="box-footer">
-												<div class="row" align="center">
-							<div class="col-md-3 btn-group">
+							<div class="row" align="center">
+								<div class="col-md-3 btn-group"></div>
+								<div class="col-md-3 btn-group">
+									<input type="button" class="btn btn-block btn-primary"
+										value="예약취소">
+								</div>
+								<div class="col-md-3 btn-group">
+									<input type="button" class="btn btn-block  btn-primary"
+										value="다시 선택">
+								</div>
 							</div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary" value="예약취소">
-							</div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block  btn-primary" value="다시 선택">
-							</div>
-						</div>
-						
+
 						</div>
 						<!-- /.box-footer -->
 					</div>
