@@ -42,6 +42,7 @@ public class JoinCommand implements CommandInterface {
 		/**
 		 * 사진 올리는 작업
 		 */
+		/////////////////////////////////////////////////////////////////////////////
 		String realPath = request.getServletContext().getRealPath("upload");
 		int maxSize = 1024 * 1024 * 1024; 
 		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
@@ -52,6 +53,7 @@ public class JoinCommand implements CommandInterface {
 			File file = multi.getFile(name);
 			photoName = "upload/"+multi.getFilesystemName(name);
 		}
+		/////////////////////////////////////////////////////////////////////////////
 		
 		try{
 			con = pool.getConnection();

@@ -19,6 +19,10 @@ public class CommandFactory {
 			
 			return new LoginCommand();
 		}
+		else if(cmd.equals("join")){
+			
+			return new JoinCommand();
+		}
 		else{
 			
 			return null;
