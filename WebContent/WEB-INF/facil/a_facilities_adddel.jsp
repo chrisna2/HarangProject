@@ -53,26 +53,32 @@
 									<th>시설 종류</th>
 									<th>시설명</th>
 									<th>호수</th>
-									<th>선택</th>
+									<th>수정</th>
+									<th>삭제</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>l00001</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-								<tr>
-									<td>l00002</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
+							 	<c:forEach items="${requestScope.list}" var="p" varStatus="i">
+									<tr class="text-blue">
+										<td>${p.pg_num}</td>
+										<td>운동장</td>
+										<td>${p.pg_type}</td>
+										<td>${p.pg_name}</td>
+										<td>
+										<form method="post" action="/HarangProject/facil?cmd=AFacilAddDel">
+											<input type="hidden" name="delete" value="${p.pg_num}">
+											<input type="submit" class="btn btn-primary" value="삭제">
+										</form>
+										</td>
+										<td>
+										<form method="post" action="/HarangProject/facil?cmd=AFacilAddDel">
+											<input type="hidden" name="Modified" value="${p.pg_num}">
+											<input type="submit" class="btn btn-primary" value="수정">
+										</form>
+										</td>
+									</tr>
+									
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>
@@ -148,20 +154,20 @@
 						<!-- 사용자 편의를 위한.. 운동장 표시 -->
 						<div class="row">
 							<div class="col-md-4">
-								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="운동장" disabled>
+								<label>시설 번호</label> <input type="text" class="form-control"
+									placeholder="${pgdto.pg_num}" disabled>
 							</div>
 
 							<!-- 시설명(첫번째 카테고리) 선택 -->
 							<div class="col-md-4">
 								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="족구장" disabled>
+									placeholder="${pgdto.pg_type}" disabled>
 							</div>
 
 							<!-- 호수(두번째 카테고리) 선택 -->
 							<div class="col-md-4">
 								<label>호수</label> <input type="text" class="form-control"
-									placeholder="예술조형대학 옆" disabled>
+									placeholder="${pgdto.pg_name}" disabled>
 							</div>
 						</div>
 					</div>

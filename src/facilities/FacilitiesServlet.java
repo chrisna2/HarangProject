@@ -21,9 +21,6 @@ public class FacilitiesServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
 		doPost(req, resp);
-		System.out.println("FacilitiesServlet doGet 접속 성공");
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,8 +35,5 @@ public class FacilitiesServlet extends HttpServlet {
 
 		RequestDispatcher view = req.getRequestDispatcher(url);
 		view.forward(req, resp);
-		
-		System.out.println("FacilitiesServlet doPost 접속 성공");
-		
 	}
 }

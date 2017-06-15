@@ -47,7 +47,7 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-					<form method="post" action="/HarangProject/facil?cmd=AFacilManager">
+					
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -74,16 +74,17 @@
 										<td>${p.pgm_date}</td>
 										<td>${p.pgm_timecode}</td>
 										<td>
-											<input type="submit" class="btn btn-primary"
-											value="선택">
-											<input type="hidden" value="${p.pgm_num}" name="delete">
+										<form method="post" action="/HarangProject/facil?cmd=AFacilManager">
+											<input type="hidden" name="delete" value="${p.pgm_num}">
+											<input type="submit" class="btn btn-primary" value="선택">
+										</form>
 										</td>
 									</tr>
 									
 								</c:forEach>
 							</tbody>
 						</table>
-						</form>
+						
 					</div>
 					<!-- /.box-body -->
 
@@ -207,39 +208,39 @@
 
 					<!-- box-body -->
 					<div class="box-body">
-						<form role="form">
+						 <form role="form2" >
 							<div class="row" >
 
 								<!-- text input -->
 								<div class="form-group col-md-4">
 									<label>예약번호</label> <input type="text" class="form-control"
-										placeholder="Enter ..." disabled>
+										placeholder="${pgdto.pgm_num} 맞게 들어감?" disabled>
 								</div>
 								<div class="form-group col-md-4">
 									<label>학번[ID]</label> <input type="text" class="form-control"
-										placeholder="2005331605" disabled>
+										placeholder="${pgdto.m_id}" disabled>
 								</div>
 
 							</div>
 							<div class="row">
 								<div class="form-group col-md-4">
 									<label>시설종류</label> <input type="text" class="form-control"
-										placeholder="Enter ..." style="width: 200px" disabled>
+										placeholder="운동장" style="width: 200px" disabled>
 								</div>
 								<div class="form-group col-md-4">
 									<label>시설명</label> <input type="text" class="form-control"
-										placeholder="Enter ..." style="width: 200px" disabled>
+										placeholder="${pgdto.pg_type}" style="width: 200px" disabled>
 								</div>
 								<div class="form-group col-md-4">
 									<label>호수</label> <input type="text" class="form-control"
-										placeholder="Enter ..." style="width: 100px" disabled>
+										placeholder="${pgdto.pg_name}" style="width: 100px" disabled>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="form-group col-md-4">
 									<label>예약시간</label> <input type="text" class="form-control"
-										placeholder="Enter ..." disabled>
+										placeholder="${pgdto.pgm_date}" disabled>
 								</div>
 								<div class="form-group col-md-4">
 									<label>환불포인트</label> <input type="text" class="form-control"
@@ -264,7 +265,7 @@
 										value="예약취소">
 								</div>
 								<div class="col-md-3 btn-group">
-									<input type="button" class="btn btn-block  btn-primary"
+									<input type="reset" class="btn btn-block  btn-primary"
 										value="다시 선택">
 								</div>
 							</div>
