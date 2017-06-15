@@ -23,12 +23,12 @@
           </ol>
         </section>
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
+       <input type="hidden" name="result" id="result" value="${requestScope.result}">
         <section class="content">
           <!-- 세로 길이 수정 -->
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
            <div class="col-md-9">
-            
              <!-- 리스트 사용시  -->
             <div class="box">
                 <div class="box-header">
@@ -186,7 +186,16 @@
                 </div><!-- /.box-header -->
                  <!-- form 시작 -->
                 <form role="form" id="updatepoint" method="post">
+                <input type="hidden" name="member_id" value="${requestScope.checkid}">
+                <input type="hidden" name="admin_id" value="${admin.m_id}">
+                <input type="hidden" name="a_point" value="${admin.m_point}">
                 <div class="box-body">
+                  <div class="input-group">
+                    <span class="input-group-addon bg-gray"><i class="fa fa-location-arrow"></i>회원 포인트</span>
+                    <input type="text" name="m_point" value="${requestScope.pPoint}" class="form-control" readonly="readonly">
+                    <span class="input-group-addon bg-gray"> 포인트에서</span>
+                  </div>
+                  <br>
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 사유</span>
                     <textarea class="form-control" name="r_content" rows="3" placeholder="Enter ..."></textarea>
                     <span class="input-group-addon"> 사유로 인해</span>
@@ -199,6 +208,7 @@
                   <br>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix" align="center">
+                      <input type="hidden" name="check" id="check">
                       <input type="button" id="minus" class="btn btn-danger col-md-6 col-xs-6" value="차감합니다!">
                       <input type="button" id="plus" class="btn btn-success col-md-6 col-xs-6" value="추가합니다!">
                 </div>
@@ -255,13 +265,17 @@ function goPage(nowPage){
 
 $(document).ready(function(){
     $("#plus").click(function() {
-        $("#updatepoint").
-        
-    	
+        $("#check").val("plus");
+        $("#updatepoint")
+        .attr("action", "/HarangProject/myPage?cmd=ApointCheck")
+        .submit();
     });
-
-
-	
-}
+    $("#minus").click(function() {
+        $("#check").val("minus");
+        $("#updatepoint")
+        .attr("action", "/HarangProject/myPage?cmd=ApointCheck")
+        .submit();
+    });
+});
 
 </script>

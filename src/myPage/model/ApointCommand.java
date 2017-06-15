@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import dto.MemberDTO;
@@ -19,7 +20,7 @@ import paging.dto.PagingDto;
 
 /**
  * 관리자 포인트 조회 페이지
- * @author YOO
+ * @author 나현기
  */
 public class ApointCommand implements CommandInterface {
 	
@@ -38,10 +39,28 @@ public class ApointCommand implements CommandInterface {
 			throws ServletException, IOException {
 		
 		String checkid = request.getParameter("check_id");
+		String pointcheck = request.getParameter("check");
+		
 		
 		if(!(checkid == null)){
-			prseonName(request);
+			prseonInfo(request);
 			personList(request);
+		}
+		
+		
+		if(!(pointcheck == null)){
+			
+			if(pointcheck.equals("plus")){
+				System.out.println(pointcheck);
+				String result = plusPoint(request);
+				request.setAttribute("result", result);
+				
+			}
+			else if(pointcheck.equals("minus")){
+				System.out.println(pointcheck);
+				String result = minusPoint(request);
+				request.setAttribute("result", result);
+			}
 		}
 		
 		memList(request);
@@ -55,11 +74,12 @@ public class ApointCommand implements CommandInterface {
 	 * @param checkid
 	 * @return
 	 */
-	public void prseonName(HttpServletRequest request){
+	public void prseonInfo(HttpServletRequest request){
 		
 		String checkid = request.getParameter("check_id");
 		String checkName = "";
-		String sql = "select m_name from tbl_member where m_id = ?";
+		int m_point = 0;
+		String sql = "select m_name, m_point from tbl_member where m_id = ?";
 		
 		try {
 			pool = DBConnectionMgr.getInstance();
@@ -70,6 +90,7 @@ public class ApointCommand implements CommandInterface {
 			
 			rs.next();
 			checkName = rs.getString("m_name");
+			m_point = rs.getInt("m_point");
 		} 
 		catch (Exception e) {
 			System.out.println( "a_pointcheck.jsp : " + e);
@@ -78,10 +99,9 @@ public class ApointCommand implements CommandInterface {
 			// DBCP 접속해제
 			pool.freeConnection(con, pstmt, rs);
 		}
-		
 		request.setAttribute("pName",  checkName);
+		request.setAttribute("pPoint",  m_point);
 	}
-	
 	
 	/**
 	 * 회원 개인의 거래 기록 검색
@@ -97,7 +117,7 @@ public class ApointCommand implements CommandInterface {
 		String sql = "select r_regdate, r_content, r_point, m_giver, m_haver, "+
 				"(select m_name from tbl_member where m_id = m_giver) as m_givername, "+
 				"(select m_name from tbl_member where m_id = m_haver) as m_havername  "+
-				"from tbl_record where m_giver = ? or  m_haver = ? ";
+				"from tbl_record where m_giver = ? or  m_haver = ? order by r_regdate desc";
 		
 		try {
 			pool = DBConnectionMgr.getInstance();
@@ -199,9 +219,130 @@ public class ApointCommand implements CommandInterface {
 			if(request.getParameter("nowBlock") != null){nowBlock = Integer.parseInt(request.getParameter("nowBlock"));}
 		PagingBean pbean = new PagingBean();
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-		PagingDto paging = pbean.Paging(mlist.size(),10, nowPage, 10,  nowBlock);
+		PagingDto paging = pbean.Paging(mlist.size(),10, nowPage,10,  nowBlock);
 		//페이징 정보 보내기
 		request.setAttribute("paging", paging);
 	}
 
+	
+	public String plusPoint(HttpServletRequest request){
+		
+		long m_point = Long.parseLong(request.getParameter("m_point"));
+		long a_point = Long.parseLong(request.getParameter("a_point"));
+		String r_content = request.getParameter("r_content");
+		int r_point = Integer.parseInt(request.getParameter("r_point"));
+		String member_id = request.getParameter("member_id");
+		String admin_id = request.getParameter("admin_id");
+		
+		if(a_point < r_point){
+			
+			return "overpoint";
+			
+		}
+		
+		
+		//거래 기록 입력 쿼리
+		String sql1 = "INSERT INTO tbl_record (r_point, r_content, m_giver, m_haver) VALUES (?, ?, ?, ?)";
+		//주는 포인트 빼기
+		String sql2 = "UPDATE tbl_member SET m_point= m_point - ? WHERE m_id = ? ";
+		//받는 포인트 더하기
+		String sql3 = "UPDATE tbl_member SET m_point= m_point + ? WHERE m_id = ? ";
+
+		pool = DBConnectionMgr.getInstance();
+		
+		try {
+			con = pool.getConnection();
+			
+			//거래기록 입력
+			pstmt = con.prepareStatement(sql1);
+			pstmt.setInt(1, r_point);
+			pstmt.setString(2, r_content);
+			pstmt.setString(3, admin_id);
+			pstmt.setString(4, member_id);
+			pstmt.executeUpdate();
+			
+			//포인트 빼기
+			pstmt = con.prepareStatement(sql2);
+			pstmt.setInt(1, r_point);
+			pstmt.setString(2, admin_id);
+			pstmt.executeUpdate();
+			
+			//포인트 더하기
+			pstmt = con.prepareStatement(sql3);
+			pstmt.setInt(1, r_point);
+			pstmt.setString(2, member_id);
+			pstmt.executeUpdate();
+			
+		} 
+		catch (Exception e) {
+			System.out.println( "a_pointcheck.jsp : " + e);
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt);
+		}		
+		
+		return "complete";
+	}
+	
+	public String minusPoint(HttpServletRequest request){
+		
+		long m_point = Long.parseLong(request.getParameter("m_point"));
+		long a_point = Long.parseLong(request.getParameter("a_point"));
+		String r_content = request.getParameter("r_content");
+		int r_point = Integer.parseInt(request.getParameter("r_point"));
+		String member_id = request.getParameter("member_id");
+		String admin_id = request.getParameter("admin_id");
+		
+
+		if(m_point < r_point){
+			
+			return "overpoint";
+			
+		}
+		
+		
+		//거래 기록 입력 쿼리
+		String sql1 = "INSERT INTO tbl_record (r_point, r_content, m_giver, m_haver) VALUES (?, ?, ?, ?)";
+		//주는 포인트 빼기
+		String sql2 = "UPDATE tbl_member SET m_point= m_point - ? WHERE m_id = ? ";
+		//받는 포인트 더하기
+		String sql3 = "UPDATE tbl_member SET m_point= m_point + ? WHERE m_id = ? ";
+
+		pool = DBConnectionMgr.getInstance();
+		
+		try {
+			con = pool.getConnection();
+			//거래기록 입력
+			pstmt = con.prepareStatement(sql1);
+			pstmt.setInt(1, r_point);
+			pstmt.setString(2, r_content);
+			pstmt.setString(3, member_id);
+			pstmt.setString(4, admin_id);
+			pstmt.executeUpdate();
+			
+			//포인트 빼기
+			pstmt = con.prepareStatement(sql2);
+			pstmt.setInt(1, r_point);
+			pstmt.setString(2, member_id);
+			pstmt.executeUpdate();
+			
+			//포인트 더하기
+			pstmt = con.prepareStatement(sql3);
+			pstmt.setInt(1, r_point);
+			pstmt.setString(2, admin_id);
+			pstmt.executeUpdate();
+			
+		} 
+		catch (Exception e) {
+			System.out.println( "a_pointcheck.jsp : " + e);
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt);
+		}		
+		
+		return "complete";
+	}
+	
 }
