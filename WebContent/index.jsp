@@ -24,6 +24,7 @@
             position:relative;
             min-height:100%;
         }
+        
         header {
             height:60px;
             background:#ffffff;
