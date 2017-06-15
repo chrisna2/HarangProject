@@ -7,6 +7,14 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <title>사용 예약 취소 추가(관리자)</title>
+<script>
+	//스크롤 이동 JQuery
+	function fnMove(){
+		var offset = $("#confirm72").offset();
+		$('html, body').animate({scrollTop : offset.top}, 1200)
+	}
+
+</script>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
 <div class="content-wrapper">
@@ -68,7 +76,7 @@
 										<td>
 											<input type="submit" class="btn btn-primary"
 											value="선택">
-											<input type="hidden" value="${p.pgm_num}">
+											<input type="hidden" value="${p.pgm_num}" name="delete">
 										</td>
 									</tr>
 									
@@ -178,7 +186,7 @@
 
 		<!-- -------취소 시설 선택후 표기되는 정보------- -->
 		<!-- 세로 길이 수정 -->
-		<div class="row">
+		<div class="row" id="confirm72">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-12">
 				<!-- box -->
@@ -200,7 +208,7 @@
 					<!-- box-body -->
 					<div class="box-body">
 						<form role="form">
-							<div class="row">
+							<div class="row" >
 
 								<!-- text input -->
 								<div class="form-group col-md-4">

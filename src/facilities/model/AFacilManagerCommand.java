@@ -39,7 +39,9 @@ public class AFacilManagerCommand implements CommandInterface {
 
 		String keyword = request.getParameter("keyword");
 		String keyfield = request.getParameter("keyfiled");
+		String delete = request.getParameter("delete");
 		
+		System.out.println(delete);
 		
 		// 초기 접속시 출력되는 테이블 SQL QUERY
 		if (null == (keyfield)) {
