@@ -29,7 +29,12 @@
              	스펙 목록
           </h1>
          <br>
-         <button class="btn btn-sm btn-primary col-xs-9 col-md-9 col-lg-9">신규 자격증 등록</button>
+        
+
+       	<input type="button" value="신규 자격증  등록" class="btn btn-info btn btn-sm btn-primary col-xs-9 col-md-9 col-lg-9" id ="input"/>
+    
+
+      
          <br>
          <br>
          <ol class="breadcrumb">
@@ -54,7 +59,7 @@
                     <div class="input-group">
                     
                   <form action="/HarangProject/myPage?cmd=AspecList" name="search" method="post">  
-                      <input type="text" name= keyfield class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                      <input type="text" name= "keyfield" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                       <select class="form-control input-sm pull-right" style="width: 150px" name=keyword>
                      
                        
@@ -123,12 +128,7 @@
                      </c:forEach>
                    </c:otherwise>
                    </c:choose>
-                    	<tr>
-                    	
-                   
-                    	
-                    	<td></td>
-                    	</tr>
+                    
                      
                     </tbody>
                   </table>
@@ -148,9 +148,10 @@
                 </div>
               </div><!-- /.box -->
 		          
-		          
+		         
+		       
 		      <!-- 자격증 신규 등록  -->
-              <div class="box box-black">
+              <div class="box box-black" id="theRemote" style="display: none;">
                 <div class="box-header">
                   <h3 class="box-title">자격증 신규 등록</h3>
                   <div class="box-tools pull-right">
@@ -189,12 +190,14 @@
                 
                 </form>
               </div><!-- /.box -->
+                 
                   
                   
-                  
-                <c:if test="${requestScope.read !=null }">
+             
+            <c:if test="${requestScope.read !=null }">
+   
                    <!-- 도전 확인  -->
-              <div class="box box-black" id="a">
+              <div class="box box-black" >
                 <div class="box-header">
                   <h3 class="box-title">자격증 정보 수정</h3>
                   <div class="box-tools pull-right">
@@ -205,7 +208,9 @@
                 
                 <!-- form 시작 -->
                 <form role="form2" name="read" action="/HarangProject/myPage?cmd=AspecList" method="post">
-                	<input type="hidden" name="${read.c_num}" />
+               
+               	<!-- 히든을 통해 read2를 커멘더로 넘겨줌  -->
+                <input type="hidden" name="read2" value="${requestScope.read}" />
                 <div class="box-body">
                  <div class="input-group">
                  
@@ -234,7 +239,7 @@
                   <div class="box-footer" align="right">
                     <input type="button" class="btn" value="닫기">
                     <input type="button" class="btn btn-danger" value="삭제" data-widget="remove">
-                    <input type="submit" class="btn btn-primary" value="수정"  >
+                    <input type="submit" class="btn btn-primary" value="수정">
                 </div>
                 </form>
               </div><!-- /.box   -->
@@ -278,7 +283,7 @@
 	
 <form name="frmRead" method="post" action="/HarangProject/myPage?cmd=AspecList">
 		<input type="hidden" name="c_num" /> <input type="hidden"
-			name="keyfiled" value="keyfield" /> <input type="hidden"
+			name="keyfield" value="keyfield" /> <input type="hidden"
 			name="keyword" value="keyword" />
 
 	</form>	
@@ -306,10 +311,7 @@ function goPage(nowPage){
 
 /////////////////////////////끝//////////////////////////////////
 
-//function fnRead(p_num){
-//	document.getElementById("p_num").value = p_num;
-//	document.read.submit();
-//}
+
 
 
 
@@ -319,6 +321,18 @@ function fnRead(c_num) {
 	document.frmRead.submit();
 }
 
+$(document).ready(function(){
+	
+	$("#input").click(function(){
+		if($("#theRemote").css("display") == "none"){
+			$("#theRemote").slideDown();
+		}
+		else{
+			$("#theRemote").slideUp();
+		}
+	});
+	
+});
 
 
 </script>

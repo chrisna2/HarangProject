@@ -34,18 +34,28 @@ public class AspecListCommand implements CommandInterface {
 //		
 		
 	String c_num = request.getParameter("c_num");
+	String read = request.getParameter("read2");	
 	
-		
+	
 		if(!(c_num == null)){
 			read(request);
-			insert(request);
+		}
+		
+		/*insert(request);
+			update(request);
+		 */	
+		
+		// 넘어온 read가 널이 아닐시 
+		// 수정 버튼을 클릭시 수정폼을 사라지게 한다.
+		if(!(read == null)){
 			update(request);
 		}
 		
+			insert(request);
+	
 		listCommand(request);
 		
-			//if(cmd){read(request);
-		//	}
+		
 		
 		
 		
@@ -64,7 +74,7 @@ public class AspecListCommand implements CommandInterface {
 		
 		
 		String keyword = request.getParameter("keyword");
-		String keyfield = request.getParameter("keyfiled");
+		String keyfield = request.getParameter("keyfield");
 		
 		if (null==(keyfield)) {
 		
@@ -117,7 +127,7 @@ public class AspecListCommand implements CommandInterface {
 			
 			PagingBean pbean = new PagingBean();
 			// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-			PagingDto paging = pbean.Paging(list.size(),5, nowPage, nowBlock);
+			PagingDto paging = pbean.Paging(list.size(),5, nowPage,10, nowBlock);
 			
 			request.setAttribute("paging", paging);
 	
@@ -210,8 +220,8 @@ public class AspecListCommand implements CommandInterface {
 		finally {
 			pool.freeConnection(con,pstmt,rs);
 		}
-		
-		
+			
+		request.removeAttribute("read");
 	}
 	
 	}
