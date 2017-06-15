@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -39,7 +39,7 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-					<form method="post">
+					<form method="post" action="/HarangProject/facil?cmd=AFacilManager">
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -61,14 +61,14 @@
 										<td>${p.pgm_regdate}</td>
 										<td>${p.m_id}</td>
 										<td>운동장</td>
-										<td>${p.pgm_ftype}</td>
-										<td>${p.pgm_fname}</td>
+										<td>${p.pg_type}</td>
+										<td>${p.pg_name}</td>
 										<td>${p.pgm_date}</td>
 										<td>${p.pgm_timecode}</td>
 										<td>
-											<input type="button" class="btn btn-primary"
+											<input type="submit" class="btn btn-primary"
 											value="선택">
-											<input type="hidden" value="${p.pgm_regdate}">
+											<input type="hidden" value="${p.pgm_num}">
 										</td>
 									</tr>
 									
@@ -96,24 +96,71 @@
 
 						<!-- 셀렉트  -->
 
-						<form action="">
+						<form action="/HarangProject/facil?cmd=AFacilManager" name="search" method="post">
 							<div class="row">
+								
 								<div class="col-md-3" align="center">
-									<select class="form-control input-sm pull-left"
-										style="width: 150px;">
-										<option>예약번호(예약날짜)</option>
-										<option>학번[ID]</option>
-										<option>시설명</option>
-										<option>호수</option>
-										<option>예약날짜</option>
+									<select 
+										class="form-control input-sm pull-left"
+										style="width: 150px"
+										name="keyword">
+										<option value="pgm_num" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_num'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약번호</option>
+										
+										<option value="pgm_regdate" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_regdate'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약한 날짜</option>	
+										
+										<option value="m_id" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'm_id'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>학번[ID]</option>
+										
+										<!-- 이중 셀렉문 pgm_type인지 체크-->
+										<option value="p.pg_type" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'p.pg_type'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>시설명</option>
+										
+										<!-- 이중 셀렉문 pgm_name인지 체크-->
+										<option value="p.pg_name" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'p.pg_name'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>호수</option>
+										
+										<option value="pgm_date" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_date'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약날짜</option>
+										
 									</select>
 								</div>
+								
 								<div class="col-md-3" align="center">
-									<input type="text" name="table_search"
-										class="form-control input-sm  pull-left" style="width: 150px;"
-										placeholder="Search" />
+									<input type="text" 
+										   name="keyfiled"
+										   class="form-control input-sm  pull-left" 
+										   style="width: 150px;"
+										   placeholder="Search" />
 									<div class="input-group-btn  pull-left">
-										<button class="btn btn-sm btn-primary">
+										<button
+											type="submit" 
+											class="btn btn-sm btn-primary">
 											검색 <i class="fa fa-search"></i>
 										</button>
 									</div>

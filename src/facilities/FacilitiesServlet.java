@@ -18,13 +18,20 @@ import facilities.model.CommandInterface;
 public class FacilitiesServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
 		doPost(req, resp);
 		System.out.println("FacilitiesServlet doGet 접속 성공");
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
 		String cmd = req.getParameter("cmd");
 		String url = null;
+		
 		
 		CommandInterface command = CommandFactory.newInstance().createCommand(cmd);
 		url = (String)command.processCommand(req, resp);

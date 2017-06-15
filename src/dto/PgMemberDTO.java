@@ -7,9 +7,28 @@ public class PgMemberDTO {
 	String m_id;
 	String pg_num;
 	String pgm_num;
+	// 쿼리문 방식 변경으로 사용여부 체크후 삭제.
 	String pgm_ftype;
+	
+	// 쿼리문 방식 변경으로 사용여부 체크후 삭제.
 	String pgm_fname;
 	
+	String pg_type;
+	String pg_name;
+	
+	
+	public String getPg_type() {
+		return pg_type;
+	}
+	public void setPg_type(String pg_type) {
+		this.pg_type = pg_type;
+	}
+	public String getPg_name() {
+		return pg_name;
+	}
+	public void setPg_name(String pg_name) {
+		this.pg_name = pg_name;
+	}
 	public String getPgm_num() {
 		return pgm_num;
 	}
