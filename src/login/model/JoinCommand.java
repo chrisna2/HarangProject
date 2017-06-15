@@ -53,6 +53,8 @@ public class JoinCommand implements CommandInterface {
 			File file = multi.getFile(name);
 			photoName = "upload/"+multi.getFilesystemName(name);
 		}
+		
+		System.out.println(photoName+"/"+multi.getParameter("m_mail")+"/"+multi.getParameter("m_pw"));
 		/////////////////////////////////////////////////////////////////////////////
 		
 		try{
@@ -72,7 +74,7 @@ public class JoinCommand implements CommandInterface {
 		}
 		finally{
 			// DBCP 접속해제
-			pool.freeConnection(con,pstmt,rs);
+			pool.freeConnection(con,pstmt);
 		}		
 		
 		return "/index.jsp";

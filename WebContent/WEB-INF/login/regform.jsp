@@ -46,6 +46,35 @@
           margin-bottom: 50px;
         }
     </style>
+    <script type="text/javascript">
+    function checkform(){
+        if(input.terms_check.checked==""){
+            alert("약관에 동의 해주십시요");
+            return false;
+        }
+        if(input.m_pw.value!=input.m_pw2.value){
+            alert("두 비밀번호가 다릅니다. 다시한번 확인 하여 주십시요.");
+            return false;
+        }
+        var m_mail1 = input.m_mail1.value;
+        var m_mail2 = input.m_mail2.value;
+        var m_mail = m_mail1 + "@" + m_mail2;
+        input.m_mail.value = m_mail;
+
+        var m_tel1 = input.m_tel1.value;
+        var m_tel2 = input.m_tel2.value;
+        var m_tel3 = input.m_tel3.value;
+        var m_tel = m_tel1 + "-" + m_tel2 + "-" + m_tel3;
+        input.m_tel.value = m_tel;
+
+        var m_addr1 = input.m_addr1.value;
+        var m_addr2 = input.m_addr2.value;
+        var m_addr3 = input.m_addr3.value;
+        var m_addr = m_addr1 + "/" + m_addr2 + "/" + m_addr3;
+        input.m_addr.value = m_addr;
+        
+    }
+    </script>
   </head>
   <body class="login-page">
   <div class="wrapper">
@@ -65,12 +94,57 @@
                 <div class="box-header">
                   <h3 class="box-title">정식 회원 가입</h3>
                 </div>
-                <form role="form">
+                <form role="form" action="/HarangProject/login?cmd=join" name="input" onsubmit="checkform()" method="post" enctype="multipart/form-data">
                 <div class="box-body">
+<table class="table">
+    <tr>
+        <td>약관 동의</td>
+    </tr>
+    <tr>
+        <td>
+        <textarea rows="5" style="width: 100%" readonly>
+        전자금융 이용약관 
+        제 1 조 【 목적 】
+        이 『전자금융 이용 약관』(이하 약관이라 함)은 서비스의 제공자인 ○○은행(이하 당행이라 함)과 이용자인 고객간에 전자금융 이용에 관한 제반 사항을 정함을 목적으로 합니다.
+        
+        제 2 조 【 서비스와 이용업무 】
+        서비스의 종류는 텔레뱅킹, pc뱅킹 및 인터넷뱅킹으로 구분하며 제공되는 서비스는 다음과 같습니다.
+        1.텔레뱅킹 : 각종 조회, 자금이체, 예약이체, 전자금융론, 통지, 안내, 상담, 사고신고접수 등
+        2.pc 뱅킹 : 각종 조회, 자금이체, 예약이체, 예금계좌의 개설 및 해지, 통지, 안내, 상담, 사고신고 접수 등
+        3.인터넷뱅킹
+        가.예금, 신탁, 대출, 신용카드, 외국환 및 기타 업무에 관한 정보조회
+        나.원화 및 외화자금이체, 예금계좌의 개설 및 해지, 대출원금 상환 및 이자 납부, 신용카드 현금 서비스, 지로 등 공과금 납부, 수출입 업무 관련 이자 및 수수료의 납부, 신용장 개설 및 조건변경 신청, 해외 송금
+        , 외환의 매매 등
+        다.대출 신청, 사고신고, 기타 부가 서비스 등
+        제 3 조 【 서비스 이용매체 】
+        서비스별로 이용할 수 있는 매체는 다음과 같습니다.
+        1.텔레뱅킹 : 전화
+        2.pc 뱅킹 : 개인용컴퓨터(pc), 하이텔단말기, 다기능전화기(이지폰 등)
+        3.인터넷뱅킹 : 개인용컴퓨터(pc), 인터넷tv, 인터넷폰, 휴대용 정보 단말기(pda)
+        제 4 조 【 서비스의 개시 및 종료 】
+        ① 고객은 텔레뱅킹, pc뱅킹, 인터넷뱅킹 모두 또는 어느 한가지 서비스만을 선택하여 전자금융이용신청서(이하 신청서라 함)를 작성하여 제출하고 당행이 이를 승낙한 후 고객이 직접 각종 비밀번호를 입력함으로써 개시됩니
+        다.
+        ② 고객은 이용 업무에 따라 별도의 약정이 필요한 경우에는 별도의 개별 약정을 체결하셔야 합니다.
+        ③ 고객이 제①항의 서비스 이용을 중단하고자 할 경우에는 신청서에 의하여 해지 신청을 하셔야 합니다.
+        제 5 조 【 본인 확인방법 】
+        당행은 다음 각 호와 같이 서비스 종류별로 은행이 요구하는 해당 항목을 고객이 입력했을 때 동 내용이 당행에 등록된 것과 일치할 경우 본인으로 간주하여 서비스를 제공합니다.
+        
+        1.텔레뱅킹 : 텔레뱅킹이용자번호 또는 주민등록번호, 텔레뱅킹비밀번호, 계좌비밀번호, otp(one time password)카드 번호, 보안카드 비밀번호, 음성확인 등
+        
+        2.pc 뱅킹 : pc뱅킹이용자번호, pc뱅킹비밀번호, 자금이체비밀번호, 계좌비밀번호, otp (one time password)카드번호, 보안카드비밀번호 등
+        (이하 생략)
+        </textarea>
+        </td>
+    </tr>
+    <tr align="center">
+        <td><br>전체 약관에 동의 합니다.&nbsp;<input type="checkbox" name="terms_check" value=""></td>
+    </tr>
+</table>
+                
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-picture-o"></i> 개인 이미지</span>
                     <span class="input-group-addon">
-                       <input type="file" id="exampleInputFile" required="required">
+                       <input type="file" id="exampleInputFile" name="upFile" required="required">
                     </span>
                     <span class="input-group-addon bg-gray">
                         <img src="" class="img-rounded" height="120" width="90" alt="User Image"/>
@@ -84,7 +158,7 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 학번</span>
-                    <input type="text" name="m_num" class="form-control" value="${newbee.m_id}" readonly="readonly">
+                    <input type="text" name="m_id" class="form-control" value="${newbee.m_id}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
@@ -109,9 +183,9 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-envelope"></i> 이메일</span>
-                    <input type="text" name="m_email" class="form-control" required="required">
+                    <input type="text" name="m_mail1" class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> @ </span>
-                    <input type="text" name="m_email" class="form-control" required="required">
+                    <input type="text" name="m_mail2" class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> 선택 </span>
                     <select class="form-control" required="required">
                         <option></option>
@@ -121,22 +195,24 @@
                         <option>nate.om</option>
                         <option>gmail.com</option>
                     </select>
+                    <input type="hidden" name="m_mail">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-phone-square"></i> 연락처</span>
-                    <select class="form-control" required="required">
+                    <select class="form-control" name="m_tel1" required="required">
                         <option></option>
-                        <option>010</option>
-                        <option>011</option>
-                        <option>012</option>
-                        <option>016</option>
-                        <option>017</option>
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="012">012</option>
+                        <option value="016">016</option>
+                        <option value="017">017</option>
                     </select>
                     <span class="input-group-addon bg-gray"> - </span>
-                    <input type="text" name="m_tel" class="form-control" required="required">
+                    <input type="text" name="m_tel2" class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> - </span>
-                    <input type="text" name="m_tel" class="form-control" required="required">
+                    <input type="text" name="m_tel3" class="form-control" required="required">
+                    <input type="hidden" name="m_tel">
                   </div>
                   <br>
                   <div class="input-group">
@@ -149,19 +225,20 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-location-arrow"></i> 우편번호 주소</span>
-                    <input type="text" name="m_addr1" class="form-control" required="required">
+                    <input type="text" name="m_addr2" class="form-control" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-location-arrow"></i> 상세 주소</span>
-                    <input type="text" name="m_addr1" class="form-control" required="required">
+                    <input type="text" name="m_addr3" class="form-control" required="required">
                   </div>
+                  <input type="hidden" name="m_addr">
                   <br>
                 </div><!-- /.box-body -->
                  <div class="box-footer" align="right">
                     <input type="button" class="btn" value="뒤로가기">
                     <input type="reset" class="btn" value="리셋">
-                    <input type="submit" class="btn btn-primary" value="개인정보 수정">
+                    <input type="submit" class="btn btn-primary" value="회원 정보 수정">
                 </div>
                 </form>
               </div><!-- /.box -->
