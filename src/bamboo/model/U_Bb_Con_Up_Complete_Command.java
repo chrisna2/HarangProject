@@ -4,21 +4,17 @@ package bamboo.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
-public class U_Bb_Post_Complete_Command implements CommandInterface {
-	
+public class U_Bb_Con_Up_Complete_Command implements CommandInterface {
 	private Connection con;
 	private PreparedStatement pstmt;
 	private DBConnectionMgr pool;
 
-	public U_Bb_Post_Complete_Command() {
+	public U_Bb_Con_Up_Complete_Command() {
 		try {
 			pool = DBConnectionMgr.getInstance();
 		} catch (Exception err) {
@@ -29,20 +25,19 @@ public class U_Bb_Post_Complete_Command implements CommandInterface {
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 		try {
-		HttpSession session = req.getSession();
-		MemberDTO mdto = (MemberDTO)session.getAttribute("member");
-		String m_id = mdto.getM_id();
+		
 		con = pool.getConnection();
 		
-		System.out.println(m_id);
+		//System.out.println(m_id);
 		
-		String sql = "insert into tbl_bamboo (m_id, bb_notice, bb_title, bb_content, bb_count, bb_nickname) values (?,'N',?,?,0,?)";
+		String sql = "update harang.tbl_bamboo set bb_nickname = ?, bb_content = ?, bb_title= ? where bb_num=?";
 		
-		System.out.println(sql);
+		//System.out.println(sql);
 
 		String bb_title = (String)req.getParameter("bb_title");
 		String bb_nickname = (String)req.getParameter("bb_nickname");
 		String bb_content = (String)req.getParameter("bb_content");
+		String bb_num = (String)req.getParameter("bb_num");
 		
 		
 		System.out.println(bb_title);
@@ -56,10 +51,10 @@ public class U_Bb_Post_Complete_Command implements CommandInterface {
 			
 			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, m_id);
-			pstmt.setString(2, bb_title);
-			pstmt.setString(3, bb_content);
-			pstmt.setString(4, bb_nickname);
+			pstmt.setString(1, bb_nickname);
+			pstmt.setString(2, bb_content);
+			pstmt.setString(3, bb_title);
+			pstmt.setString(4, bb_num);
 			
 
 			
@@ -68,7 +63,7 @@ public class U_Bb_Post_Complete_Command implements CommandInterface {
 			
 
 		} catch (Exception err) {
-			System.out.println("U_Bb_Post_Complete에서 에러");
+			System.out.println("U_Bb_Con_Up_Complete에서 에러");
 			err.printStackTrace();
 		} finally {
 			pool.freeConnection(con, pstmt);
@@ -77,9 +72,9 @@ public class U_Bb_Post_Complete_Command implements CommandInterface {
 		
 		
 		
-	 	// 대나무숲 학생측 리스트 페이지(메인페이지) 에서 글쓰기를 눌렀을 때
+		// 대나무숲 학생측 리스트 페이지(메인페이지) 에서 글쓰기를 눌렀을 때
 		// 대나무숲 학생이용자의 글 작성 페이지로 이동.
-		Bb_List_Command goback = new Bb_List_Command();		
+		U_Bb_Content_Command goback = new U_Bb_Content_Command();		
 		String url = goback.processCommand(req, resp);
 		
 		

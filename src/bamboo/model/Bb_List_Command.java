@@ -36,6 +36,14 @@ public class Bb_List_Command implements CommandInterface
 	
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) 
 	{
+
+		req.setAttribute("bblist", bblist(req));
+		
+		return "/WEB-INF/bamboo/u_bb_list.jsp";
+	}
+	
+	
+	public ArrayList bblist(HttpServletRequest req){
 		HttpSession session = req.getSession();
 		
 		MemberDTO mdto = (MemberDTO)session.getAttribute("member");
@@ -76,15 +84,12 @@ public class Bb_List_Command implements CommandInterface
 				bbdto.setM_id(rs.getString("m_id"));
 				bbdto.setBb_notice(rs.getString("bb_notice"));
 				bbdto.setBb_title(rs.getString("bb_title"));
-				bbdto.setBb_content(rs.getString("bb_content").replace("\n", "<br>"));
+				bbdto.setBb_content(rs.getString("bb_content"));
 				bbdto.setBb_regdate(rs.getDate("bb_regdate"));
 				bbdto.setBb_count(rs.getInt("bb_count"));
 				bbdto.setBb_nickname(rs.getString("bb_nickname"));
 
 				list.add(bbdto);
-				
-				req.setAttribute("bblist", list);
-				
 				
 
 			}
@@ -96,7 +101,8 @@ public class Bb_List_Command implements CommandInterface
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-
-		return "/WEB-INF/bamboo/u_bb_list.jsp";
+		
+		return list;
 	}
+	
 }

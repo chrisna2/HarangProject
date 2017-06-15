@@ -6,7 +6,18 @@
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
-<title>학사일정</title>
+<title>대나무숲</title>
+
+
+<script>
+	
+	function fnGoback(){
+		
+		document.gobocktocontent.submit();
+	}
+	
+	
+</script>
 
 
 </head>
@@ -15,7 +26,7 @@
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
 		<h1>
-			대나무숲 <small>학생이 대숲 글 쓰는 곳</small>
+			대나무숲 <small>학생이 대숲 글 수정하는 곳</small>
 		</h1>
 		<ol class="breadcrumb">
 			<!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
@@ -24,9 +35,11 @@
 		</ol>
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-	<form action="/HarangProject/bamboo?cmd=U_BB_POST_COMPLETE"
-		name="bbpostcomplete" method="post">
-		
+	<form action="/HarangProject/bamboo" name="bbpostcomplete"
+		method="post">
+		<input type="hidden" name="cmd" value="U_BB_CONUP_COMPLETE"> <input
+			type="hidden" name="bb_num" value="${bbcon.bb_num }">
+
 		<section class="content">
 			<!-- 세로 길이 수정 -->
 			<div class="row">
@@ -35,18 +48,18 @@
 
 					<div class='box box-info'>
 						<div class='box-header'>
-							<h3 class='box-title'>대나무숲 글 등록</h3>
+							<h3 class='box-title'>대나무숲 글 수정</h3>
 							<br> <br>
 							<!-- tools box -->
 
 							<div class="form-group">
 								<label>제목</label> <input type="text" class="form-control"
-									placeholder="제목을 입력 해 주세요" name="bb_title" />
+									value="${bbcon.bb_title }" name="bb_title" />
 							</div>
 
 							<div class="form-group">
 								<label>닉네임</label> <input type="text" class="form-control"
-									placeholder="닉네임을 입력 해 주세요" name="bb_nickname" />
+									value="${bbcon.bb_nickname }" name="bb_nickname" />
 							</div>
 
 
@@ -66,20 +79,22 @@
 						<div class='box-body pad'>
 
 							<textarea id="editor1" name="bb_content" rows="10" cols="80">
-                                            본문을 입력 해 주세요.
+                                            ${bbcon.bb_content }
                     </textarea>
 						</div>
 
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-2">
-								<button type="submit" class="btn btn-block btn-primary">등록</button>
+								<button type="submit" class="btn btn-block btn-primary">수정</button>
 							</div>
 							<div class="col-md-2">
-								<a class="btn btn-block btn-danger"
-									href="/HarangProject/bamboo?cmd=BB_LIST">취소</a>
+								<a class="btn btn-block btn-danger" href="javascript:fnGoback()">취소</a>
 							</div>
 						</div>
+
+
+
 
 
 
@@ -91,6 +106,15 @@
 			<!-- /.row -->
 		</section>
 	</form>
+
+	<!--  대나무숲 글 수정하기 페이지에서 취소를 눌렀을 때 원래 페이지로 돌아가기 위한 폼 시작 -->
+	<form method="post" action="/HarangProject/bamboo"
+		name="gobocktocontent">
+		<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
+			type="hidden" name="cmd" value="U_BB_CON" />
+
+	</form>
+	<!--  대나무숲 글 수정하기 페이지에서 취소를 눌렀을 때 원래 페이지로 돌아가기 위한 폼 끝 -->
 	<!-- /. 작업 공간 끝! -->
 	<!------------------------------------------------------------------------------------------------------------------->
 </div>

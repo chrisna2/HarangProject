@@ -6,6 +6,69 @@
 <head>
 <%@ include file="../include/header.jsp"%>
 <title>대나무숲 리스트+컨텐츠 사용자페이지</title>
+
+<script>
+	function fnbrdelete(br_num){
+		document.fnbrdelete.br_num.value=br_num;
+		//document객체의 fnbrdelete form의 br_num 의 값에 br_num을 대입한다.
+		
+		document.fnbrdelete.submit();
+		
+		
+	}
+	function fnbrpost(){
+		
+		if(document.bbreply.br_nickname.value ==""||document.bbreply.br_coment.value ==""){
+			
+			alert("빠짐없이 입력 해주세요");
+			return;
+			
+		}
+		else {
+			document.bbreply.submit();
+						
+		}
+		
+	}
+	
+	function fnBbconup(){
+		
+		document.bbconupdateform.submit();
+	}
+	
+	function fnBbdel(){
+		
+		if(${brlist.size() > 0 }){
+			alert("댓글이 등록된 글은 삭제 할 수 없습니다.");
+			
+		}
+		else{
+			
+		document.bbcondel.submit();
+		}
+		
+		
+	}
+	
+	function fnBblike(){
+		document.bblike.submit()
+	}
+	function fnBbdlike(){
+		document.bbdlike.submit()
+	}
+	function fnBblikecancle(){
+		document.bblikecancle.submit()
+	}
+	function fnBbdlikecancle(){
+		document.bbdlikecancle.submit()
+	}
+	
+	
+	
+	
+</script>
+
+
 </head>
 
 <div class="content-wrapper">
@@ -29,32 +92,112 @@
 			<div class="col-md-9">
 				<div class="box" id="bamcon">
 					<div class="box-header">
-						<font size = "6">${bbcon.bb_title}</font>
-						<span class="badge bg-green pull-right"> ${bbcon.bb_regdate}<br>
-							${bbcon.bb_nickname}<br> <br> <span class="badge bg-blue"><i
-								class="fa fa-thumbs-o-up"></i> 추천수 들어갈 곳</span> <span class="badge bg-red"><i
-								class="fa fa-thumbs-o-down"></i> 비추천수 들어갈 곳</span>
-						</span> 
+						<font size="6">${bbcon.bb_title}</font> <span
+							class="badge bg-green pull-right"> ${bbcon.bb_regdate}<br>닉네임
+							: ${bbcon.bb_nickname}<br> <br> <span
+							class="badge bg-blue"><i class="fa fa-thumbs-o-up"></i>
+								${bblcnt.size()}</span> <span class="badge bg-red"><i
+								class="fa fa-thumbs-o-down"></i> ${bbdlcnt.size()}</span>
+						</span>
 
 					</div>
-						
-					<div class="box-body">${bbcon.bb_content} //${bbcon.m_id} ${sessionScope.member.m_id}</div>
+
+					<div class="box-body">${bbcon.bb_content}
+						<br>테스트용 작성자 m_id : ${bbcon.m_id}<br>테스트용 로그인한 m_id :
+						${sessionScope.member.m_id}
+						<br> 테스트용 islike : ${islike }
+						<br> 테스트용 isdlike : ${isdlike }
+					</div>
 					<!-- /.box-body -->
 					<div class="box-footer ">
-						
-						<!-- 아이디 검사 해서 본인일 경우만 출력되도록 if문 처리 -->
-						<c:if test="${bbcon.m_id eq sessionScope.member.m_id  }">
-						<div class="pull-right">
-							<button type="button" class="btn btn-success btn-xs">수정</button>
-							<button type="button" class="btn btn-success btn-xs">삭제</button>
 
-						</div>
+						<!-- 아이디 검사 해서 본인일 경우만 수정, 삭제 출력되도록 if문 처리 -->
+						<c:if test="${bbcon.m_id eq sessionScope.member.m_id  }">
+							<div class="pull-right">
+								<a type="button" class="btn btn-success btn-xs" href="javascript:fnBbconup()">수정</a> 
+								<a type="button" class="btn btn-success btn-xs" href= "javascript:fnBbdel()">삭제</a>
+
+							</div>
 						</c:if>
 
+						<!--  수정을 위한 폼 시작 -->
+						<!-- 수정 하려면.. 글번호를 가져가야함.  -->
+						<form method="post" action="/HarangProject/bamboo"
+							name="bbconupdateform">
+							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
+							 <input type="hidden" name="cmd" value="U_BB_CONUP" />
+
+						</form>
+						<!--  수정을 위한 폼 끝 -->
+
+						<!--  삭제를 위한 폼 시작 -->
+						<!-- 삭제 하려면.. 글번호를 가져가야함.  -->
+						<form method="post" action="/HarangProject/bamboo"
+							name="bbcondel">
+							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
+							 <input type="hidden" name="cmd" value="U_BB_DEL" />
+
+						</form>
+						<!--  수정을 위한 폼 끝 -->
+
+
 						<div align="center">
-							<button type="button" class="btn btn-primary">추천</button>
-							<button type="button" class="btn btn-danger">비추천</button>
+						
+						<c:if test="${islike == y}" >	
+							<a type="button" class="btn btn-primary" href="javascript:fnBblike()">추천</a>
+						</c:if>	
+						<c:if test="${islike != y}" >	
+							<a type="button" class="btn btn-primary" href="javascript:fnBblikecancle()">추천취소</a>
+						</c:if>	
+						<c:if test="${isdlike == y}" >
+							<a type="button" class="btn btn-danger" href="javascript:fnBbdlike()">비추천</a>
+						</c:if>	
+						<c:if test="${isdlike != y}" >
+							<a type="button" class="btn btn-danger" href="javascript:fnBbdlikecancle()">비추천취소</a>
+						</c:if>	
 						</div>
+						
+						<!-- 추천을 위한 폼 시작 -->
+						<form method="post" action="/HarangProject/bamboo"
+							name="bblike">
+							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
+							 <input type="hidden" name="cmd" value="U_BB_LIKE" />
+
+						</form>
+						<!--  추천을 위한 폼 끝 -->
+						
+						<!-- 비추천을 위한 폼 시작 -->
+						<form method="post" action="/HarangProject/bamboo"
+							name="bbdlike">
+							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
+							 <input type="hidden" name="cmd" value="U_BB_DLIKE" />
+
+						</form>
+						<!--  비추천을 위한 폼 끝 -->
+						
+						<!-- 추천취소를 위한 폼 시작 -->
+						<form method="post" action="/HarangProject/bamboo"
+							name="bblikecancle">
+							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
+							 <input type="hidden" name="cmd" value="U_BB_LIKE_CANCLE" />
+
+						</form>
+						<!--  추천취소를 위한 폼 끝 -->
+						
+						<!-- 비추천취소를 위한 폼 시작 -->
+						<form method="post" action="/HarangProject/bamboo"
+							name="bbdlikecancle">
+							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
+							 <input type="hidden" name="cmd" value="U_BB_DLIKE_CANCLE" />
+
+						</form>
+						<!--  비추천취소를 위한 폼 끝 -->
+						
+						
+						
+						
+						
+						
 					</div>
 					<!-- /.box-body -->
 				</div>
@@ -72,201 +215,99 @@
 				<div class="box" id="reply">
 
 					<div class="box-body">
-						<!--  댓글 1 -->
-						<div class="box-header">
-							<span class="badge bg-green">익명 asdlxdi</span>
-						</div>
+						<c:if test="${brlist.size() > 0 }">
+							<c:forEach var="i" begin="0" end="${brlist.size()-1 }">
+								<!--  댓글 들어가는 곳 -->
+								<div class="box-header">
+									<span class="badge bg-green">${brlist[i].br_nickname }</span>
+								</div>
 
-						<div class="box-body">여기에 댓글 넣고 댓글댓글를알;일 여기에 댓글 넣고 댓글댓글를알;일
-							여기에 댓글 넣고 댓글댓글를알;일 여기에 댓글 넣고 댓글댓글를알;일</div>
-						<!-- /.box-body -->
-						<div class="box-footer ">
-							<p align="right">
-								<button type="button" class="btn btn-success btn-xs">수정</button>
-								<button type="button" class="btn btn-success btn-xs">삭제</button>
+								<div class="box-body">${brlist[i].br_coment }</div>
+								<!-- /.box-body -->
+								<div class="box-footer ">
+									<p align="right">
 
-							</p>
 
-						</div>
 
-						<!-- 댓글1끝 -->
-						<!--  댓글 2 -->
+										<a type="button" class="btn btn-success btn-xs"
+											href="javascript:fnbrdelete('${brlist[i].br_num }')">삭제</a>
+									</p>
 
-						<div class="box" id="reply">
+								</div>
 
-							<div class="box-header">
-								<span class="badge bg-green">익명 zxcvdfdf</span>
-							</div>
+								<!-- 댓글 들어가는 곳 끝 -->
+							</c:forEach>
+						</c:if>
 
-							<div class="box-body">두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
-								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
-								댓글글그그르망두 번째 댓글글그그르망</div>
-							<!-- /.box-body -->
-							<div class="box-footer ">
-								<p align="right">
-									<button type="button" class="btn btn-success btn-xs">수정</button>
-									<button type="button" class="btn btn-success btn-xs">삭제</button>
 
-								</p>
 
-							</div>
-
-						</div>
-						<!-- 댓글2 끝 -->
-						<!--  댓글 3 -->
-
-						<div class="box" id="reply">
-
-							<div class="box-header">
-								<span class="badge bg-green">익명 fdf3</span>
-							</div>
-
-							<div class="box-body">세 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
-								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
-								댓글글그그르망두 번째 댓글글그그르망</div>
-							<!-- /.box-body -->
-							<div class="box-footer ">
-								<p align="right">
-									<button type="button" class="btn btn-success btn-xs">수정</button>
-									<button type="button" class="btn btn-success btn-xs">삭제</button>
-
-								</p>
-
-							</div>
-
-						</div>
-						<!-- 댓글3 끝 -->
-						<!--  댓글 4 -->
-
-						<div class="box" id="reply">
-
-							<div class="box-header">
-								<span class="badge bg-green">익명 zxdf4</span>
-							</div>
-
-							<div class="box-body">4 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
-								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
-								댓글글그그르망두 번째 댓글글그그르망</div>
-							<!-- /.box-body -->
-							<div class="box-footer ">
-								<p align="right">
-									<button type="button" class="btn btn-success btn-xs">수정</button>
-									<button type="button" class="btn btn-success btn-xs">삭제</button>
-
-								</p>
-
-							</div>
-
-						</div>
-						<!-- 댓글4 끝 -->
-						<!--  댓글 5 -->
-
-						<div class="box" id="reply">
-
-							<div class="box-header">
-								<span class="badge bg-green">익명 zdfdf5</span>
-							</div>
-
-							<div class="box-body">5 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
-								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
-								댓글글그그르망두 번째 댓글글그그르망</div>
-							<!-- /.box-body -->
-							<div class="box-footer ">
-								<p align="right">
-									<button type="button" class="btn btn-success btn-xs">수정</button>
-									<button type="button" class="btn btn-success btn-xs">삭제</button>
-
-								</p>
-
-							</div>
-
-						</div>
-						<!-- 댓글5 끝 -->
-						<!--  댓글 6 -->
-
-						<div class="box" id="reply">
-
-							<div class="box-header">
-								<span class="badge bg-green">익명vdfdf6</span>
-							</div>
-
-							<div class="box-body">6 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
-								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
-								댓글글그그르망두 번째 댓글글그그르망</div>
-							<!-- /.box-body -->
-							<div class="box-footer ">
-								<p align="right">
-									<button type="button" class="btn btn-success btn-xs">수정</button>
-									<button type="button" class="btn btn-success btn-xs">삭제</button>
-
-								</p>
-
-							</div>
-
-						</div>
-						<!-- 댓글6 끝 -->
-						<!--  댓글 7 -->
-
-						<div class="box" id="reply">
-
-							<div class="box-header">
-								<span class="badge bg-green">익명 fdf7</span>
-							</div>
-
-							<div class="box-body">7 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두
-								번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째 댓글글그그르망두 번째
-								댓글글그그르망두 번째 댓글글그그르망</div>
-							<!-- /.box-body -->
-							<div class="box-footer ">
-								<p align="right">
-									<button type="button" class="btn btn-success btn-xs">수정</button>
-									<button type="button" class="btn btn-success btn-xs">삭제</button>
-
-								</p>
-
-							</div>
-
-						</div>
-						<!-- 댓글2 끝 -->
 
 					</div>
 					<!--  여기까지가 기존 댓글 들어가는 부분 -->
 
+					<!--  댓글 삭제를 위한 폼 -->
+
+					<form method="post" action="/HarangProject/bamboo"
+						name="fnbrdelete">
+						<input type="hidden" name="br_num" /> <input type="hidden"
+							name="bb_num" value="${bbcon.bb_num}" /> <input type="hidden"
+							name="cmd" value="U_BR_DEL" />
+
+					</form>
+
+					<!--  댓글 삭제를 위한 폼 끝-->
+
+
+
+
+
 					<!-- 여기부터 새 댓글 작성창 -->
-					<div class="box-footer">
+					<form action="/HarangProject/bamboo" name="bbreply" method="post">
+						<input type="hidden" name="cmd" value="U_BB_REPLY" /> <input
+							type="hidden" name="bb_num" value="${bbcon.bb_num }" />
 
-						<div class="box" id="reply">
+						<div class="box-footer">
 
-							<div class="box-header">
-								<span class="badge bg-blue">익명 qwersdf123</span>
-							</div>
+							<div class="box" id="reply">
 
-							<div class="box-body">
+								<div class="box-header">
+									<div class="form-group">
 
-								<div class="form-group">
-									
-									<textarea class="form-control" rows="3" placeholder="댓글을 입력 해 주세요"></textarea>
+										<textarea class="form-control" rows="1"
+											placeholder="닉네임을 입력 해 주세요" name="br_nickname"></textarea>
+									</div>
+
 								</div>
 
+								<div class="box-body">
 
+									<div class="form-group">
+
+										<textarea class="form-control" rows="3"
+											placeholder="댓글을 입력 해 주세요" name="br_coment"></textarea>
+									</div>
+
+
+
+								</div>
+								<!-- /.box-body -->
+								<div class="box-footer ">
+									<p align="right">
+										<a type="button" class="btn btn-success btn-xs"
+											href="javascript:fnbrpost()">등록</a>
+
+
+									</p>
+
+								</div>
 
 							</div>
-							<!-- /.box-body -->
-							<div class="box-footer ">
-								<p align="right">
-									<button type="button" class="btn btn-success btn-xs">등록</button>
 
 
-								</p>
 
-							</div>
 
 						</div>
-
-
-
-
-					</div>
+					</form>
 					<!-- 여기까지 새 댓글 작성창 -->
 				</div>
 			</div>
@@ -283,67 +324,54 @@
 			<div class="col-md-9">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">학사 일정</h3>
+						<h3 class="box-title">대나무숲</h3>
 						<div class="box-tools">
-							<div class="input-group">
+							<form action="/HarangProject/bamboo?cmd=U_BB_POST" name="bbpost"
+								method="post">
+								<div class="input-group">
+									<button type="submit" class="btn btn-primary pull-right btn-sm">글쓰기</button>
 
-								<button type="button" class="btn btn-primary pull-right">글쓰기</button>
-							</div>
+								</div>
+							</form>
 						</div>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
+
+
 							<tr>
-								
-								<th>번호</th>
+
+
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>제목</th>
-								<th>추천수</th>
-								<th> 비추천수</th>
+								<th>조회수</th>
+
 
 							</tr>
-							<tr>
-								
-								<td>183</td>
-								<td>익명asdf</td>
-								<td>2017년 6월 8일</td>
-								<td><a href="#" class="" style="color: black">조장 나현기는 보아라</a></td>
-								<td>500</td>
-								<td>20</td>
 
-							</tr>
-							<tr>
-								
-								<td>219</td>
-								<td>익명 zsdf</td>
-								<td>2017년 4월 30일</td>
-								<td><a href="#" class="" style="color: black">익명글 23232ㅁㄴㅇㄹ</a></td>
-								<td>100</td>
-								<td>50</td>
 
-							</tr>
-							<tr>
-								
-								<td>657</td>
-								<td>익명zdfq</td>
-								<td>2017년 5월 20일</td>
-								<td><a href="#" class="" style="color: black">익명 ㄴㅇㅁㅇㄴㄻㅇ</a></td>
-								<td>10</td>
-								<td>5</td>
+							<c:if test="${bblist != null }">
+								<c:forEach var="i" begin="0" end="${bblist.size()-1 }">
 
-							</tr>
-							<tr>
-								
-								<td>175</td>
-								<td>익명 azxc</td>
-								<td>2017년 3월 8일</td>
-								<td><a href="#" class="" style="color: black">익명글글글</a></td>
-								<td>1589</td>
-								<td>1111</td>
+									<tr>
 
-							</tr>
+										<td>${bblist[i].bb_nickname}</td>
+										<td><fmt:formatDate value="${bblist[i].bb_regdate}"
+												pattern="yyyy-MM-dd" /></td>
+										<td><a
+											href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bblist[i].bb_num}"
+											style="color: black">${bblist[i].bb_title}</a></td>
+										<td>${bblist[i].bb_count}</td>
+
+									</tr>
+
+
+								</c:forEach>
+							</c:if>
+
+
 						</table>
 					</div>
 					<!-- /.box-body -->
@@ -351,7 +379,7 @@
 					<div class="box-footer clearfix">
 
 
-						
+
 
 
 
@@ -363,32 +391,38 @@
 							<li><a href="#">&raquo;</a></li>
 						</ul>
 
-						<div class="input-group">
-							<input type="text" name="table_search"
-								class="form-control input-sm pull-right" style="width: 150px;"
-								placeholder="Search" /> <select
-								class="form-control input-sm pull-right" style="width: 150px;">
-								<option></option>
-								<option>포인트 지급</option>
-								<option>학과</option>
-								<option>제목</option>
+						<form action="/HarangProject/bamboo?cmd=BB_LIST" name="search"
+							method="post">
+							<div class="input-group">
 
-							</select>
-							<div class="input-group-btn">
-								<button class="btn btn-sm btn-default">
+								<select name="sOption" class="form-control input-sm"
+									style="width: 150px;">
+
+									<option value="bb_title">제목</option>
+									<option value="bb_content">내용</option>
+
+								</select> <input type="text" name="table_search"
+									class="form-control input-sm" style="width: 150px;"
+									placeholder="Search" />
+
+								<button class="btn btn-sm btn-default pull-left">
 									<i class="fa fa-search"></i>
 								</button>
+
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
-				<!-- /.box -->
 			</div>
-
+			<!-- /.box -->
 		</div>
 
 	</section>
 </div>
+
+
+
+
 <!-- /.col -->
 
 <!-- /.content-wrapper -->

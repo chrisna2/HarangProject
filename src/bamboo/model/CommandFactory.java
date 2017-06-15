@@ -52,6 +52,46 @@ public class CommandFactory
 		{
 			return new U_Bb_Post_Complete_Command();
 		}
+		else if(cmd.equals("U_BB_REPLY"))
+		{
+			return new U_Bb_Reply_Command();
+		}
+		else if(cmd.equals("U_BR_LIST"))
+		{
+			return new U_Br_List_Command();
+		}
+		else if(cmd.equals("U_BR_DEL"))
+		{
+			return new U_Br_Delete_Command();
+		}
+		else if(cmd.equals("U_BB_CONUP"))
+		{
+			return new U_Bb_Con_Update_Command();
+		}
+		else if(cmd.equals("U_BB_CONUP_COMPLETE"))
+		{
+			return new U_Bb_Con_Up_Complete_Command();
+		}
+		else if(cmd.equals("U_BB_DEL"))
+		{
+			return new U_Bb_Delete_Command();
+		}
+		else if(cmd.equals("U_BB_LIKE"))
+		{
+			return new Bb_Like_Command();
+		}
+		else if(cmd.equals("U_BB_DLIKE"))
+		{
+			return new Bb_Dlike_Command();
+		}
+		else if(cmd.equals("U_BB_LIKE_CANCLE"))
+		{
+			return new Bb_Like_Cancle_Command();
+		}
+		else if(cmd.equals("U_BB_DLIKE_CANCLE"))
+		{
+			return new Bb_Dlike_Cancle_Command();
+		}
 		
 		else
 		{
