@@ -6,6 +6,7 @@ public class SrMemberDTO {
 	String srm_timecode;
 	String sr_num;
 	String m_id;
+	String srm_num;
 	
 	public String getSrm_regdate() {
 		return srm_regdate;

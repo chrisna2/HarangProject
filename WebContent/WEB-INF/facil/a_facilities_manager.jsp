@@ -39,10 +39,12 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
+					<form method="post">
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
 									<th>예약 번호</th>
+									<th>예약한 날짜</th>
 									<th>학번[ID]</th>
 									<th>시설 종류</th>
 									<th>시설명</th>
@@ -53,42 +55,27 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>l00001</td>
-									<td>20120501</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-								<tr>
-									<td>l00002</td>
-									<td>20120501</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-								<tr>
-									<td>l00003</td>
-									<td>20120501</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-
+							 	<c:forEach items="${requestScope.list}" var="p" varStatus="i">
+									<tr class="text-blue">
+										<td>${p.pgm_num}</td>
+										<td>${p.pgm_regdate}</td>
+										<td>${p.m_id}</td>
+										<td>운동장</td>
+										<td>${p.pgm_ftype}</td>
+										<td>${p.pgm_fname}</td>
+										<td>${p.pgm_date}</td>
+										<td>${p.pgm_timecode}</td>
+										<td>
+											<input type="button" class="btn btn-primary"
+											value="선택">
+											<input type="hidden" value="${p.pgm_regdate}">
+										</td>
+									</tr>
+									
+								</c:forEach>
 							</tbody>
 						</table>
+						</form>
 					</div>
 					<!-- /.box-body -->
 
@@ -108,33 +95,32 @@
 						</div>
 
 						<!-- 셀렉트  -->
-						
+
 						<form action="">
-						<div class="row">
-							<div class="col-md-3" align="center">
-								<select class="form-control input-sm pull-left"
-									style="width: 150px;">
-									<option>예약번호</option>
-									<option>학번[ID]</option>
-									<option>시설종류</option>
-									<option>시설명</option>
-									<option>호수</option>
-									<option>예약날짜</option>
-								</select>
-							</div>
-							<div class="col-md-3" align="center">
-								<input type="text" name="table_search"
-									class="form-control input-sm  pull-left" style="width: 150px;"
-									placeholder="Search" />
-								<div class="input-group-btn  pull-left">
-									<button class="btn btn-sm btn-primary">
-										검색 <i class="fa fa-search"></i>
-									</button>
+							<div class="row">
+								<div class="col-md-3" align="center">
+									<select class="form-control input-sm pull-left"
+										style="width: 150px;">
+										<option>예약번호(예약날짜)</option>
+										<option>학번[ID]</option>
+										<option>시설명</option>
+										<option>호수</option>
+										<option>예약날짜</option>
+									</select>
+								</div>
+								<div class="col-md-3" align="center">
+									<input type="text" name="table_search"
+										class="form-control input-sm  pull-left" style="width: 150px;"
+										placeholder="Search" />
+									<div class="input-group-btn  pull-left">
+										<button class="btn btn-sm btn-primary">
+											검색 <i class="fa fa-search"></i>
+										</button>
+									</div>
 								</div>
 							</div>
-							</div>
 						</form>
-						
+
 					</div>
 				</div>
 				<!-- /.box -->
@@ -205,28 +191,29 @@
 										placeholder="5000" disabled>
 								</div>
 							</div>
-							
+
 							<div class="row">
 								<div class="col-md-6">
 									<label>예약 취소 사유</label> <input type="text" class="form-control"
-									placeholder="취소사유를 입력하세요">
+										placeholder="취소사유를 입력하세요">
 								</div>
 							</div>
 						</form>
 						<!-- /.box-body -->
 						<!-- box-footer -->
 						<div class="box-footer">
-												<div class="row" align="center">
-							<div class="col-md-3 btn-group">
+							<div class="row" align="center">
+								<div class="col-md-3 btn-group"></div>
+								<div class="col-md-3 btn-group">
+									<input type="button" class="btn btn-block btn-primary"
+										value="예약취소">
+								</div>
+								<div class="col-md-3 btn-group">
+									<input type="button" class="btn btn-block  btn-primary"
+										value="다시 선택">
+								</div>
 							</div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary" value="예약취소">
-							</div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block  btn-primary" value="다시 선택">
-							</div>
-						</div>
-						
+
 						</div>
 						<!-- /.box-footer -->
 					</div>

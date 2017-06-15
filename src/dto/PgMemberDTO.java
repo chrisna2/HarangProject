@@ -6,6 +6,28 @@ public class PgMemberDTO {
 	String pgm_timecode;
 	String m_id;
 	String pg_num;
+	String pgm_num;
+	String pgm_ftype;
+	String pgm_fname;
+	
+	public String getPgm_num() {
+		return pgm_num;
+	}
+	public void setPgm_num(String pgm_num) {
+		this.pgm_num = pgm_num;
+	}
+	public String getPgm_ftype() {
+		return pgm_ftype;
+	}
+	public void setPgm_ftype(String pgm_ftype) {
+		this.pgm_ftype = pgm_ftype;
+	}
+	public String getPgm_fname() {
+		return pgm_fname;
+	}
+	public void setPgm_fname(String pgm_fname) {
+		this.pgm_fname = pgm_fname;
+	}
 	public String getPgm_regdate() {
 		return pgm_regdate;
 	}

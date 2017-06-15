@@ -72,26 +72,7 @@
 									<td><input type="button" class="btn btn-primary"
 										value="선택"></td>
 								</tr>
-								<tr>
-									<td>l00002</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-								<tr>
-									<td>l00003</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
+
 
 							</tbody>
 						</table>
