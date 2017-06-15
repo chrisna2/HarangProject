@@ -1,15 +1,22 @@
 package dto;
 
+import java.sql.Date;
+
 public class BbreplyDTO {
 
 	
-
+		private String m_id;
 		private String br_num;
 		private String bb_num;
 		private String br_coment;
 		private String br_nickname;
-		private String br_regdate;
-		private String m_id;
+		private Date br_regdate;
+		public String getM_id() {
+			return m_id;
+		}
+		public void setM_id(String m_id) {
+			this.m_id = m_id;
+		}
 		public String getBr_num() {
 			return br_num;
 		}
@@ -34,18 +41,15 @@ public class BbreplyDTO {
 		public void setBr_nickname(String br_nickname) {
 			this.br_nickname = br_nickname;
 		}
-		public String getBr_regdate() {
+		public Date getBr_regdate() {
 			return br_regdate;
 		}
-		public void setBr_regdate(String br_regdate) {
+		public void setBr_regdate(Date br_regdate) {
 			this.br_regdate = br_regdate;
 		}
-		public String getM_id() {
-			return m_id;
-		}
-		public void setM_id(String m_id) {
-			this.m_id = m_id;
-		}
+		
+		
+		
 		
 		
 
