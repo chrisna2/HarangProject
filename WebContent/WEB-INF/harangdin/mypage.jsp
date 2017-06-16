@@ -31,7 +31,7 @@
 			<div class="box box-danger">
                 <div class="box-header with-border">
 					<h3 class="box-title">구매 신청</h3>
-					<small>내가 중고도서 구매 신청한 내역입니다.</small>
+					<small>내가 중고도서를 구매 신청한 내역입니다.</small>
                   
 					<!-- <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>

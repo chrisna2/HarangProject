@@ -42,7 +42,7 @@
                 <div class="row">
                 	<div class="col-sm-12 form-group">
                  	 <label>도서명</label>
-                	 <input type="text" class="form-control" placeholder="2017시나공 정보처리기사 필기" readonly="readonly">
+                	 <input type="text" class="form-control" value="${i.b_name }" placeholder="2017시나공 정보처리기사 필기" readonly="readonly">
              	   </div>
                 </div>
  
@@ -53,17 +53,17 @@
                 <div class="col-sm-6 form-group">
                  
                   <label>중고도서 거래번호</label>
-                  <input type="text" class="form-control" placeholder="1234-56789" readonly="readonly">
+                  <input type="text" class="form-control" value="${i.b_num }" readonly="readonly">
                   <label>학번</label>
-                  <input type="text" class="form-control" placeholder="20140001" readonly="readonly">
+                  <input type="text" class="form-control" value="${i.m_id }" readonly="readonly">
                   <label>저자</label>
-                  <input type="text" class="form-control" placeholder="길벗알앤디" readonly="readonly">
+                  <input type="text" class="form-control" value="${i.b_writer }" readonly="readonly">
                   <label>출판사</label>
-                  <input type="text" class="form-control" placeholder="길벗" readonly="readonly">
+                  <input type="text" class="form-control" value="${i.b_pub }" readonly="readonly">
                   <label>재고수량</label>
-                  <input type="text" class="form-control" placeholder="1" readonly="readonly">
+                  <input type="text" class="form-control" value="${i.b_stock }" readonly="readonly">
                   <label>판매자 희망 포인트</label>
-                  <input type="text" class="form-control" placeholder="3000" readonly="readonly">
+                  <input type="text" class="form-control" value="${i.b_want }" readonly="readonly">
                   <label>등록날짜</label>
 	                      <div class="input-group">
 	                      <div class="input-group-addon">
@@ -79,22 +79,25 @@
                 <!-- textarea -->
                 <div class="form-group">
                   <label>도서 정보</label>
-                  <textarea class="form-control" rows="5" placeholder="정보처리기사 필기 합격하고 기쁜마음으로 책 팝니다!! 좋은기운 받아가세요 :)"
+                  <textarea class="form-control" value="${i.b_content }" rows="5" placeholder="정보처리기사 필기 합격하고 기쁜마음으로 책 팝니다!! 좋은기운 받아가세요 :)"
                   	readonly="readonly"></textarea>
                 </div>
 
-              </form>
-            </div>
             <div class="row">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-2">
-							<button class="btn btn-block btn-primary">구매희망</button>
+							<button type="submit" class="btn btn-block btn-primary">구매희망</button>
 						</div>
-						<div class="col-sm-2">	
-							<button class="btn btn-block">이전</button>
-                  		</div>
+            </div>
+              </form>
                   	</div>
             <!-- /.box-body -->
+						
+						<form action="/HarangProject/harangdin?cmd=main" method="post">
+						<div class="col-sm-2">	
+							<button type="submit" class="btn btn-block">이전</button>
+                  		</div>
+                  		</form>
             
           </div>
 
@@ -108,3 +111,4 @@
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+<!-- ---------------------------------------------------------------- -->

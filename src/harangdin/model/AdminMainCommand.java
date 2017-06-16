@@ -30,12 +30,20 @@ public class AdminMainCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String delete_check = request.getParameter("delete_check");
+		if(null!=delete_check){
+			delete(request);			
+			
+		}
 		list(request);
-
+		
 		return "/WEB-INF/harangdin/m_harangdin_main.jsp";
+		
 	}
+
 	
 	public void list(HttpServletRequest request){
+		
 		
 		String sql;
 		
@@ -44,7 +52,7 @@ public class AdminMainCommand implements CommandInterface {
 		String keyword = request.getParameter("keyword");
 		String keyfield = request.getParameter("keyfield");
 		
-		System.out.println(keyword +"." + keyfield);
+		//System.out.println(keyword +"." + keyfield);
 		
 		if(keyword == null || keyword.equals("")){
 			sql = "SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book order by b_regdate desc";			
@@ -105,5 +113,27 @@ public class AdminMainCommand implements CommandInterface {
 		request.setAttribute("paging", paging);
 		
 	}
-
+	
+	public void delete(HttpServletRequest request){
+		
+		pool = DBConnectionMgr.getInstance();
+		
+		String b_num = request.getParameter("b_num");
+				
+			try{
+				con = pool.getConnection();
+				
+				String sql="DELETE FROM tbl_book WHERE b_num=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, b_num);
+				pstmt.executeUpdate();
+				
+			}catch(Exception err){
+				System.out.println("delete() : " + err);
+				err.printStackTrace();
+			}finally{
+				pool.freeConnection(con,pstmt);
+			}
+	}
 }

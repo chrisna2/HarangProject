@@ -51,16 +51,16 @@
 								<button type="button" class="btn btn-info.btn-flat">
 									<i class="fa fa-user"></i> AdminPage</button>
 							</div>
-							<div class="col-xs-1 no-margin pull-right">
-								<button type="button" class="btn btn-block btn-default" >등록</button>
-							</div>
-							<div class="col-xs-1 no-margin pull-right">
-								<button class="btn btn-block btn-default">삭제</button>
-							</div>
+							
+							<form action="/HarangProject/harangdin?cmd=regist" method="post">
+								<div class="col-xs-1 no-margin pull-right">
+										<button type="submit" class="btn btn-block btn-default" >등록</button>
+								</div>
+							</form>
 
-							<table id="example2" class="table table-bordered table-hover dataTable">
+							<table class="table table-bordered table-hover dataTable">
 								<tr role="row">
-									<th></th>
+									<th style="width: 30px"></th>
 									<th style="width: 50px">거래번호</th>
 									<th style="width: 40%">도서명</th>
 									<th>저자</th>
@@ -73,7 +73,10 @@
 									end="${paging.beginPerPage + paging.numPerPage -1}">
 											
 									<tr>
-										<td><input type="checkbox" name="check"/></td>
+									
+										<td>
+											<button class="btn btn-block btn-default" onclick="fnDelete('${i.b_num }')">삭제</button>
+										</td>
 										<td>${i.b_num }</td>
 										<td>${i.b_name }</td>
 										<td>${i.b_writer }</td>
@@ -97,7 +100,9 @@
 											<li><a href="javascript:prevPage()">&laquo;</a></li>
 										</c:if>
 										<c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+											<c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
 											<li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+										 	</c:if>
 										 </c:forEach>
 										<c:if test="${paging.totalBlock > paging.nowBlock +1}">
 											<li><a href="javascript:nextPage()">&raquo;</a></li>
@@ -133,6 +138,13 @@
 	<input type="hidden" name="nowPage" value="" id="page"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
+
+<form name="del" method="post" action="/HarangProject/harangdin?cmd=adminMain">
+	<input type="hidden" name="b_num" value="" id="b_num"/>
+	<input type="hidden" name="delete_check" value="delete_check"/>
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
@@ -152,7 +164,11 @@
 	/////////////////////////////끝//////////////////////////////////
 	
 	function fnRead(b_num){
-		document.getElementById("b_num").value = p_num;
+		document.getElementById("b_num").value = b_num;
 		document.read.submit();
+	}
+	function fnDelete(b_num){
+		document.getElementById("b_num").value = b_num;
+		document.del.submit();
 	}
 </script>

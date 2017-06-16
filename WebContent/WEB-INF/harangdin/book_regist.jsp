@@ -34,7 +34,7 @@
 					<h3 class="box-title">중고도서 등록</h3>
 	            </div>
 	           	<!-- /.box-header -->
-					<form role="form" action="/HarangProject/harangdin?cmd=regist" method="post">
+					<form role="form" action="/HarangProject/harangdin?cmd=regist_proc" method="post">
 				<div class="box-body">
 					<input type="hidden" name="m_id" value="${member.m_id}">
 						<!-- text input -->
@@ -66,18 +66,16 @@
 	                
 						<div class="row">
 								
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-6 form-group">
 								<label>재고수량</label>
 								<input type="text" name="b_stock" class="form-control" placeholder="ex)1,2,3,...">
 							</div>
-						</div>
-	                
-						<div class="row">
 							<div class="col-sm-6 form-group">
 								<label>판매자 희망 포인트</label>
 								<input type="text" name="b_want" class="form-control" placeholder="ex)3000">
 							</div>
 						</div>
+
 	
 						<!-- textarea -->
 						<div class="form-group">
@@ -91,21 +89,19 @@
 								<p class="help-block">해당 도서의 표지 사진을 올려주세요 </p>
 						</div>
 				</div>
+				<!-- /.box-body --> 
 				
-	            <div class="row">
 					<div class="col-sm-4"></div>
 					<div class="col-sm-2">
 						<button type="submit" class="btn btn-block btn-primary">등록</button>
 					</div>
-					</form>
+				</form>
 					
 					<form action="/HarangProject/harangdin?cmd=main" method="post">
 						<div class="col-sm-2">	
 							<button type="submit" class="btn btn-block">취소</button>
 						</div>
 					</form>
-				</div>
-	            <!-- /.box-body --> 
 			</div>
 		</div><!-- /.col -->
 	</div><!-- /.row -->
