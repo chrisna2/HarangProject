@@ -174,10 +174,12 @@
 
 					<!-- Box footer -->
 					<div class="box-footer">
+						<form method="POST" action="/HarangProject/facil?cmd=AFacilAddDel"> 
 						<div class="row" align="center">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
+								<input type="hidden" name="deleteOK" value="${pgdto.pg_num}">
+								<input type="submit" class="btn btn-block btn-primary"
 									value="삭제">
 							</div>
 							<div class="col-md-3 btn-group">
@@ -185,10 +187,12 @@
 									value="다시 선택">
 							</div>
 						</div>
+						</form>
 					</div>
 
 				</div>
 			</div>
+			
 		</div>
 		<!-- 시설확인 끝 -->
 

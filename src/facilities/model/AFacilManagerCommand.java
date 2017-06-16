@@ -28,14 +28,23 @@ public class AFacilManagerCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// 예약목록중 [삭제] 선택된 예약 .
 		String delete = request.getParameter("delete");
 
+		// [삭제] 완료를 위한 변수.
+		String deleteOK = request.getParameter("deleteOK");
+
 		loadlist(request);
-		
-		if(null != delete){
+
+		if (null != delete) {
 			tossConfirm(request, delete);
 		}
-		
+
+		if (null != deleteOK) {
+			deleteOK(request, deleteOK);
+			loadlist(request);
+		}
+
 		return "/WEB-INF/facil/a_facilities_manager.jsp";
 	}
 
@@ -90,7 +99,7 @@ public class AFacilManagerCommand implements CommandInterface {
 					+ " FROM tbl_pg_member m, tbl_playground p" + " WHERE m.pg_num = p.pg_num" + " AND " + keyword
 					+ " LIKE '%" + keyfield + "%' ORDER BY m.pgm_num DESC";
 
-			//System.out.println(sql);
+			// System.out.println(sql);
 		}
 
 		try {
@@ -126,8 +135,9 @@ public class AFacilManagerCommand implements CommandInterface {
 		request.setAttribute("list", list);
 	}
 
+	// 리스트에서 '삭제'할 목록을 가져옴.
 	public void tossConfirm(HttpServletRequest request, String _delete) {
-		
+
 		String sql = null;
 		String pgm_num = _delete;
 		PgMemberDTO pgdto = null;
@@ -141,7 +151,6 @@ public class AFacilManagerCommand implements CommandInterface {
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pgm_num);
-			System.out.println(sql);
 			rs = pstmt.executeQuery();
 
 			pgdto = new PgMemberDTO();
@@ -161,8 +170,45 @@ public class AFacilManagerCommand implements CommandInterface {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-		
+
 		request.setAttribute("pgdto", pgdto);
+	}
+
+	// 삭제 메서드.
+	private void deleteOK(HttpServletRequest request, String pgm_num) {
+		String sql = null;
+		sql = "DELETE FROM tbl_pg_member WHERE pgm_num=?";
+		PgMemberDTO pgdto = null;
+
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pgm_num);
+			pstmt.executeUpdate();
+			System.out.println(sql);
+			
+/*			while (rs.next()) {
+
+				PgMemberDTO pgdto = new PgMemberDTO();
+
+				pgdto.setPgm_num(rs.getString("m.pgm_num"));
+				pgdto.setPgm_regdate(rs.getString("m.pgm_regdate"));
+				pgdto.setM_id(rs.getString("m.m_id"));
+				pgdto.setPg_type(rs.getString("p.pg_type"));
+				pgdto.setPg_name(rs.getString("p.pg_name"));
+				pgdto.setPgm_date(rs.getString("m.pgm_date"));
+				pgdto.setPgm_timecode(rs.getString("m.pgm_timecode"));
+
+				list.add(pgdto);
+			}*/
+
+		} catch (Exception e) {
+			System.out.println("a_facilities_manager.jsp : " + e);
+
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
 	}
 
 }

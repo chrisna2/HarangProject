@@ -260,10 +260,13 @@
 						<div class="box-footer">
 							<div class="row" align="center">
 								<div class="col-md-3 btn-group"></div>
-								<div class="col-md-3 btn-group">
-									<input type="button" class="btn btn-block btn-primary"
-										value="예약취소">
-								</div>
+									<form method="POST" action="/HarangProject/facil?cmd=AFacilManager">
+										<div class="col-md-3 btn-group">
+											<input type="hidden" name="deleteOK" value="${pgdto.pgm_num}">
+											<input type="submit" class="btn btn-block btn-primary"
+												value="예약취소">
+										</div>
+									</form>
 								<div class="col-md-3 btn-group">
 									<input type="reset" class="btn btn-block  btn-primary"
 										value="다시 선택">

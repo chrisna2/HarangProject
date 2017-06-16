@@ -21,16 +21,22 @@ public class AfacilAddDelCommand implements CommandInterface {
 	private PreparedStatement pstmt;
 	private DataSource ds;
 	private ResultSet rs;
+	
 	DBConnectionMgr pool;
 	
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("AfacilAddDelCommand 접속");
+		
+		// 디버깅용.
+		
+		
 		String delete = request.getParameter("delete");
 		String modified = request.getParameter("modified");
 		String addFacil = request.getParameter("addFacil");
+		String deleteOK = request.getParameter("deleteOK");
 		
+		System.out.println("AfacilAddDelCommand 접속");
 		loadlist(request);
 		
 		if(null != delete){
@@ -39,15 +45,24 @@ public class AfacilAddDelCommand implements CommandInterface {
 		
 		else if(null != modified){
 			modified(request, modified);
-		}
+			}
 		
 		else if(null != addFacil){
 			addFacil(request);
 		}
 		
+		else if(null != deleteOK){
+			deleteOK(request, deleteOK);
+			
+		}
+		
+		System.out.println("1");
+		
 		return "/WEB-INF/facil/a_facilities_adddel.jsp";
 	}
 	
+
+
 	// 기본 페이지 출력.
 	public void loadlist(HttpServletRequest request){
 		
@@ -116,17 +131,37 @@ public class AfacilAddDelCommand implements CommandInterface {
 	}
 	
 	//시설 내용 수정
-	public void modified(HttpServletRequest request, String _delete){
-		String sql = null;
-		
-		
+	public void modified(HttpServletRequest request, String _modified){
+		String sql = null;		
 	}
 	
 	//시설추가
 	private void addFacil(HttpServletRequest request){
 		String sql = null;
 	}
+	
+	//시설 최종 삭제
+	private void deleteOK(HttpServletRequest request, String deleteOK) {
+		String sql = null;
+		sql = "DELETE FROM tbl_playground WHERE pg_num=?";
 		
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, deleteOK);
+			pstmt.executeUpdate();	
+			
+		} 
+		catch (Exception e) {
+			System.out.println("a_facilities_adddel 삭제실패 : " + e);
+			
+
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+	}
+	
 }
 
 
