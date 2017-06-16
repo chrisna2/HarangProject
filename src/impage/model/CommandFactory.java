@@ -39,6 +39,10 @@ public class CommandFactory {
 			
 			return new ImadetailCommand();
 		}
+		if(cmd.equals("insert")){
+			
+			return new InsertCommand();
+		}
 		else{
 			
 			return null;
