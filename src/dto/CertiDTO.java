@@ -5,6 +5,23 @@ public class CertiDTO {
 		String c_name;
 		String c_agency;
 		int	c_point;
+		String cm_iscomplete;
+		String cm_completedate;
+		
+		
+		
+		public String getCm_iscomplete() {
+			return cm_iscomplete;
+		}
+		public void setCm_iscomplete(String cm_iscomplete) {
+			this.cm_iscomplete = cm_iscomplete;
+		}
+		public String getCm_completedate() {
+			return cm_completedate;
+		}
+		public void setCm_completedate(String cm_completedate) {
+			this.cm_completedate = cm_completedate;
+		}
 		public String getC_num() {
 			return c_num;
 		}

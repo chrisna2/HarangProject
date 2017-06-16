@@ -39,7 +39,10 @@ public class SpecUpCommand implements CommandInterface {
 	}
 
 	public void listCommand(HttpServletRequest request) {
-
+		
+		MemberDTO member = (MemberDTO)request.getSession().getAttribute("member");
+		String m_id = member.getM_id();
+		
 		pool = DBConnectionMgr.getInstance();
 
 		String sql;
@@ -49,18 +52,22 @@ public class SpecUpCommand implements CommandInterface {
 		String keyword = request.getParameter("keyword");
 		String keyfield = request.getParameter("keyfield");
 
+		
 		if (null == (keyfield)) {
-
-			sql = "SELECT * FROM tbl_certificate order by c_num";
+			sql = "select c.c_num, c.c_name, c.c_agency, c.c_point, cm.cm_iscomplete, cm.cm_completedate "
+					+ "from tbl_certificate c left outer join tbl_certi_member cm on c.c_num = cm.c_num  and cm.m_id = ?";
 
 		} else {
-			sql = "SELECT * FROM tbl_certificate where " + keyword + " like '%" + keyfield + "%' order by c_num";
+			sql = "select c.c_num, c.c_name, c.c_agency, c.c_point cm.cm_iscomplete, cm.cm_completedate "
+					+ "from tbl_certificate c left outer join tbl_certi_member cm on c.c_num = cm.c_num  and cm.m_id = ? "
+					+ "where " + keyword + " like '%" + keyfield + "%'";
 		}
 
 		try {
 
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -70,6 +77,8 @@ public class SpecUpCommand implements CommandInterface {
 				dto.setC_name(rs.getString("c_name"));
 				dto.setC_agency(rs.getString("c_agency"));
 				dto.setC_point(rs.getInt("c_point"));
+				dto.setCm_iscomplete(rs.getString("cm_iscomplete"));
+				dto.setCm_completedate(rs.getString("cm_completedate"));
 				
 				list.add(dto);
 
@@ -100,10 +109,8 @@ public class SpecUpCommand implements CommandInterface {
 		PagingDto paging = pbean.Paging(list.size(), 5, nowPage, 10, nowBlock);
 
 		request.setAttribute("paging", paging);
-
 	}
-
 	
-
+	
 
 }

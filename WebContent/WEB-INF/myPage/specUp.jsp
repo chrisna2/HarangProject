@@ -104,58 +104,25 @@
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="aspec" items="${requestScope.aspeclist}"
-											begin="${paging.beginPerPage}"
-											end="${paging.beginPerPage + paging.numPerPage -1}">
+											begin="${paging.beginPerPage}" end="${paging.beginPerPage + paging.numPerPage -1}">
 											<tr>
-
 												<td>${aspec.c_num}</td>
 												<td>${aspec.c_name }</td>
 												<td>${aspec.c_agency}</td>
 												<td>${aspec.c_point}P</td>
-												<td>
-														
-														<c:if test="${requestScope.success eq 'suc1' }">
-																<div id="suc1">
-																	<a
-													href="/HarangProject/myPage?cmd=specUp&c_num=${aspec.c_num}&m_id=${member.m_id}">
-																<input type="hidden" name="m_id" value="${member.m_id}"> 
-																
-																<span  class="label label-warning">도전 심사 중</span>
-                       				 								</a>
-                       				 							</div>
-                       										 
-														</c:if>
-														
-															<c:if test="${requestScope.success eq 'suc2' }">
-																<div id="suc2">
-																	<a
-													href="/HarangProject/myPage?cmd=specUp&c_num=${aspec.c_num}&m_id=${member.m_id}">
-														<input type="hidden" name="m_id" value="${member.m_id}"> 
-														<input type="hidden" name="cm_image" value="${read2.cm_image}"> 
-																<span class="label label-danger">도전 중</span>
-                       				 								</a>
-                       				 							</div>
-                       										 
-														</c:if>
-														
-														
-														 
-												</td>
-
-
+												  <c:if test="${aspec.cm_iscomplete eq 'none'}">
+												      <td><span class="label label-warning">심사 중</span></td>
+    					                          </c:if>
+												  <c:if test="${aspec.cm_iscomplete eq 'complete'}">
+    												  <td><span class="label label-success">도전 완료</span></td>
+    					                          </c:if>
+												  <c:if test="${aspec.cm_iscomplete eq null}">
+    												  <td><span class="label label-danger">도전 중</span></td>
+    					                          </c:if>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
-
-
-								<tr>
-
-									<td><span class="label label-danger">도전 중</span></td>
-									<td><span class="label label-success">도전 완료</span></td>
-									<td></td>
-								</tr>
-
 							</tbody>
 						</table>
 					</div>
