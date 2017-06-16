@@ -11,7 +11,6 @@ public class AFacilSRCommand implements CommandInterface {
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		return "/WEB-INF/facil/a_facilities_sr_schedule.jsp";
 	}
 

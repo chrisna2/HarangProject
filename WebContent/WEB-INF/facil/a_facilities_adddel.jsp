@@ -53,6 +53,7 @@
 									<th>시설 종류</th>
 									<th>시설명</th>
 									<th>호수</th>
+									<th>설명</th>
 									<th>수정</th>
 									<th>삭제</th>
 								</tr>
@@ -64,6 +65,7 @@
 										<td>운동장</td>
 										<td>${p.pg_type}</td>
 										<td>${p.pg_name}</td>
+										<td>${p.pg_content}</td>
 										<td>
 										<form method="post" action="/HarangProject/facil?cmd=AFacilAddDel">
 											<input type="hidden" name="delete" value="${p.pg_num}">
@@ -101,23 +103,48 @@
 
 						<!-- 셀렉트  -->
 
-						<form action="">
+						<form action="/HarangProject/facil?cmd=AFacilAddDel" name="search" method="post">
 							<div class="row">
 								<div class="col-md-3" align="center">
-									<select class="form-control input-sm pull-left"
-										style="width: 150px;">
-										<option>시설번호</option>
-										<option>시설종류</option>
-										<option>시설명</option>
-										<option>호수</option>
+									<select 
+										class="form-control input-sm pull-left"
+										style="width: 150px"
+										name="keyword">
+										<option value="pg_num" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pg_num'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>시설 번호</option>
+										
+										<option value="m_id" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'm_id'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>시설명</option>
+										
+										<!-- 이중 셀렉문 pgm_type인지 체크-->
+										<option value="pg_type" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pg_type'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>호수</option>
+										
 									</select>
 								</div>
+								
 								<div class="col-md-3" align="center">
-									<input type="text" name="table_search"
-										class="form-control input-sm  pull-left" style="width: 150px;"
-										placeholder="Search" />
+									<input type="text" 
+										   name="keyfield"
+										   class="form-control input-sm  pull-left" 
+										   style="width: 150px;"
+										   placeholder="Search" />
 									<div class="input-group-btn  pull-left">
-										<button class="btn btn-sm btn-primary">
+										<button
+											type="submit" 
+											class="btn btn-sm btn-primary">
 											검색 <i class="fa fa-search"></i>
 										</button>
 									</div>
@@ -174,10 +201,12 @@
 
 					<!-- Box footer -->
 					<div class="box-footer">
+						<form method="POST" action="/HarangProject/facil?cmd=AFacilAddDel"> 
 						<div class="row" align="center">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
+								<input type="hidden" name="deleteOK" value="${pgdto.pg_num}">
+								<input type="submit" class="btn btn-block btn-primary"
 									value="삭제">
 							</div>
 							<div class="col-md-3 btn-group">
@@ -185,10 +214,12 @@
 									value="다시 선택">
 							</div>
 						</div>
+						</form>
 					</div>
 
 				</div>
 			</div>
+			
 		</div>
 		<!-- 시설확인 끝 -->
 
