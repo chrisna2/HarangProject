@@ -165,10 +165,12 @@
 							<c:if test="${paging.nowBlock > 0}">
 								<li><a href="javascript:prevPage()">&laquo;</a></li>
 							</c:if>
-							<c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}"
-								step="1">
-								<li><a
-									href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+							<c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}"	step="1">
+								    <!-- if문 추가 : 20170615 -->
+		                            <c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
+		                            <li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+		                            </c:if>
+		                            <!-- 끝 -->
 							</c:forEach>
 							<c:if test="${paging.totalBlock > paging.nowBlock +1}">
 								<li><a href="javascript:nextPage()">&raquo;</a></li>

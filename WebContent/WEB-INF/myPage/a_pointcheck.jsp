@@ -92,7 +92,11 @@
                             <li><a href="javascript:prevPage()">&laquo;</a></li>
                           </c:if>
                         <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
-                            <li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+                            <!-- if문 추가 : 20170615 -->
+                               <c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
+                                    <li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+                               </c:if>
+                            <!-- 끝 -->
                         </c:forEach>
                           <c:if test="${paging.totalBlock > paging.nowBlock +1}">
                             <li><a href="javascript:nextPage()">&raquo;</a></li>
@@ -129,7 +133,7 @@
 	                       <tr class="text-red">
 	                        <td>${p.r_regdate}</td>
 	                        <td>${p.r_content}</td>
-	                        <td>${p.r_point}</td>
+	                        <td>- ${p.r_point}</td>
 	                        <td>${p.m_givername} | ${p.m_giver}</td>
 	                        <td>${p.m_havername} | ${p.m_haver}</td>
 	                      </tr>
@@ -138,7 +142,7 @@
                            <tr class="text-green">
                             <td>${p.r_regdate}</td>
                             <td>${p.r_content}</td>
-                            <td>${p.r_point}</td>
+                            <td>+ ${p.r_point}</td>
                             <td>${p.m_givername} | ${p.m_giver}</td>
                             <td>${p.m_havername} | ${p.m_haver}</td>
                           </tr>
