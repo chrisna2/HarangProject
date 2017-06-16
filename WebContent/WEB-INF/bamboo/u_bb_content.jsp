@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -64,6 +65,32 @@
 	}
 	
 	
+
+	function fnBbnewlist(){
+		document.bbnewlist.submit()
+	}
+	function fnBbhotlist(){
+		document.bbhotlist.submit()
+	}
+	function fnBbpost(){
+		document.bbpost.submit()
+	}
+
+
+///////////////// 페이지 관련 javascript function////////////////////
+	function prevPage(){
+	document.getElementById("prevPage").submit();
+	}
+	function nextPage(){
+	document.getElementById("nextPage").submit();
+	}
+	function goPage(nowPage){
+	document.getElementById("page").value = nowPage;
+	document.getElementById("goPage").submit();
+	}
+	/////////////////////////////끝//////////////////////////////////
+	
+	
 	
 	
 </script>
@@ -94,8 +121,8 @@
 					<div class="box-header">
 						<font size="6">${bbcon.bb_title}</font> <span
 							class="badge bg-green pull-right"> ${bbcon.bb_regdate}<br>닉네임
-							: ${bbcon.bb_nickname}<br> <br> <span
-							class="badge bg-blue"><i class="fa fa-thumbs-o-up"></i>
+							: ${bbcon.bb_nickname}<br> 조회수 : ${bbcon.bb_count }<br>
+							<span class="badge bg-blue"><i class="fa fa-thumbs-o-up"></i>
 								${bblcnt.size()}</span> <span class="badge bg-red"><i
 								class="fa fa-thumbs-o-down"></i> ${bbdlcnt.size()}</span>
 						</span>
@@ -104,9 +131,8 @@
 
 					<div class="box-body">${bbcon.bb_content}
 						<br>테스트용 작성자 m_id : ${bbcon.m_id}<br>테스트용 로그인한 m_id :
-						${sessionScope.member.m_id}
-						<br> 테스트용 islike : ${islike }
-						<br> 테스트용 isdlike : ${isdlike }
+						${sessionScope.member.m_id} <br> 테스트용 islike : ${islike } <br>
+						테스트용 isdlike : ${isdlike }
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer ">
@@ -114,8 +140,9 @@
 						<!-- 아이디 검사 해서 본인일 경우만 수정, 삭제 출력되도록 if문 처리 -->
 						<c:if test="${bbcon.m_id eq sessionScope.member.m_id  }">
 							<div class="pull-right">
-								<a type="button" class="btn btn-success btn-xs" href="javascript:fnBbconup()">수정</a> 
-								<a type="button" class="btn btn-success btn-xs" href= "javascript:fnBbdel()">삭제</a>
+								<a type="button" class="btn btn-success btn-xs"
+									href="javascript:fnBbconup()">수정</a> <a type="button"
+									class="btn btn-success btn-xs" href="javascript:fnBbdel()">삭제</a>
 
 							</div>
 						</c:if>
@@ -124,80 +151,81 @@
 						<!-- 수정 하려면.. 글번호를 가져가야함.  -->
 						<form method="post" action="/HarangProject/bamboo"
 							name="bbconupdateform">
-							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
-							 <input type="hidden" name="cmd" value="U_BB_CONUP" />
+							<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
+								type="hidden" name="cmd" value="U_BB_CONUP" />
 
 						</form>
 						<!--  수정을 위한 폼 끝 -->
 
 						<!--  삭제를 위한 폼 시작 -->
 						<!-- 삭제 하려면.. 글번호를 가져가야함.  -->
-						<form method="post" action="/HarangProject/bamboo"
-							name="bbcondel">
-							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
-							 <input type="hidden" name="cmd" value="U_BB_DEL" />
+						<form method="post" action="/HarangProject/bamboo" name="bbcondel">
+							<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
+								type="hidden" name="cmd" value="U_BB_DEL" />
 
 						</form>
 						<!--  수정을 위한 폼 끝 -->
 
 
 						<div align="center">
-						
-						<c:if test="${islike == y}" >	
-							<a type="button" class="btn btn-primary" href="javascript:fnBblike()">추천</a>
-						</c:if>	
-						<c:if test="${islike != y}" >	
-							<a type="button" class="btn btn-primary" href="javascript:fnBblikecancle()">추천취소</a>
-						</c:if>	
-						<c:if test="${isdlike == y}" >
-							<a type="button" class="btn btn-danger" href="javascript:fnBbdlike()">비추천</a>
-						</c:if>	
-						<c:if test="${isdlike != y}" >
-							<a type="button" class="btn btn-danger" href="javascript:fnBbdlikecancle()">비추천취소</a>
-						</c:if>	
+
+							<c:if test="${islike == y}">
+								<a type="button" class="btn btn-primary"
+									href="javascript:fnBblike()">추천</a>
+							</c:if>
+							<c:if test="${islike != y}">
+								<a type="button" class="btn btn-primary"
+									href="javascript:fnBblikecancle()">추천취소</a>
+							</c:if>
+							<c:if test="${isdlike == y}">
+								<a type="button" class="btn btn-danger"
+									href="javascript:fnBbdlike()">비추천</a>
+							</c:if>
+							<c:if test="${isdlike != y}">
+								<a type="button" class="btn btn-danger"
+									href="javascript:fnBbdlikecancle()">비추천취소</a>
+							</c:if>
 						</div>
-						
+
 						<!-- 추천을 위한 폼 시작 -->
-						<form method="post" action="/HarangProject/bamboo"
-							name="bblike">
-							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
-							 <input type="hidden" name="cmd" value="U_BB_LIKE" />
+						<form method="post" action="/HarangProject/bamboo" name="bblike">
+							<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
+								type="hidden" name="cmd" value="U_BB_LIKE" />
 
 						</form>
 						<!--  추천을 위한 폼 끝 -->
-						
+
 						<!-- 비추천을 위한 폼 시작 -->
-						<form method="post" action="/HarangProject/bamboo"
-							name="bbdlike">
-							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
-							 <input type="hidden" name="cmd" value="U_BB_DLIKE" />
+						<form method="post" action="/HarangProject/bamboo" name="bbdlike">
+							<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
+								type="hidden" name="cmd" value="U_BB_DLIKE" />
 
 						</form>
 						<!--  비추천을 위한 폼 끝 -->
-						
+
 						<!-- 추천취소를 위한 폼 시작 -->
 						<form method="post" action="/HarangProject/bamboo"
 							name="bblikecancle">
-							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
-							 <input type="hidden" name="cmd" value="U_BB_LIKE_CANCLE" />
+							<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
+								type="hidden" name="cmd" value="U_BB_LIKE_CANCLE" />
 
 						</form>
 						<!--  추천취소를 위한 폼 끝 -->
-						
+
 						<!-- 비추천취소를 위한 폼 시작 -->
 						<form method="post" action="/HarangProject/bamboo"
 							name="bbdlikecancle">
-							 <input type="hidden" name="bb_num" value="${bbcon.bb_num}" />
-							 <input type="hidden" name="cmd" value="U_BB_DLIKE_CANCLE" />
+							<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
+								type="hidden" name="cmd" value="U_BB_DLIKE_CANCLE" />
 
 						</form>
 						<!--  비추천취소를 위한 폼 끝 -->
-						
-						
-						
-						
-						
-						
+
+
+
+
+
+
 					</div>
 					<!-- /.box-body -->
 				</div>
@@ -324,15 +352,49 @@
 			<div class="col-md-9">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">대나무숲</h3>
+						<h1 class="box-title">대나무숲</h1>
 						<div class="box-tools">
-							<form action="/HarangProject/bamboo?cmd=U_BB_POST" name="bbpost"
-								method="post">
-								<div class="input-group">
-									<button type="submit" class="btn btn-primary pull-right btn-sm">글쓰기</button>
 
-								</div>
+							<p align="right">
+								<a type="button" class="btn btn-default btn-sm"
+									href="javascript:fnBbnewlist()">최신글 보기</a> <a type="button"
+									class="btn btn-default btn-sm" href="javascript:fnBbhotlist()">인기글
+									보기</a> <a type="button" class="btn btn-primary btn-sm"
+									href="javascript:fnBbpost()">글쓰기</a>
+							</p>
+
+
+
+							<!-- 최신글 보기를 위한 form 시작 -->
+
+							<form action="/HarangProject/bamboo" name="bbnewlist"
+								method="post">
+								<input type="hidden" name="cmd" value="BB_LIST"> <input
+									type="hidden" name="table_search" value="bbnewlist"> 
+
 							</form>
+							<!-- 최신글 보기를 위한 form 끝 -->
+
+							<!-- 인기글 보기를 위한 form 시작 -->
+							<form action="/HarangProject/bamboo" name="bbhotlist"
+								method="post">
+								<input type="hidden" name="cmd" value="BB_LIST"> <input
+									type="hidden" name="table_search" value="bbhotlist"> 
+
+							</form>
+							<!-- 인기글 보기를 위한 form 끝 -->
+
+							<!-- 글쓰기를 위한 form 시작 -->
+							<form action="/HarangProject/bamboo" name="bbpost" method="post">
+								<input type="hidden" name="cmd" value="U_BB_POST"> 
+
+							</form>
+							<!-- 인기글 보기를 위한 form 끝 -->
+
+
+							
+
+
 						</div>
 					</div>
 					<!-- /.box-header -->
@@ -341,36 +403,34 @@
 
 
 							<tr>
-
-
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>제목</th>
 								<th>조회수</th>
-
-
 							</tr>
-
-
-							<c:if test="${bblist != null }">
-								<c:forEach var="i" begin="0" end="${bblist.size()-1 }">
-
+							
+							
+							<c:choose>
+								<c:when test="${fn:length(bblist) < 1}">
+								게시물이 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${bblist}" var="bblist" 
+											   begin="${paging.beginPerPage}" 
+											   end="${paging.beginPerPage + paging.numPerPage -1}" 
+											   varStatus="status">
 									<tr>
-
-										<td>${bblist[i].bb_nickname}</td>
-										<td><fmt:formatDate value="${bblist[i].bb_regdate}"
+										<td>${bblist.bb_nickname}</td>
+										<td><fmt:formatDate value="${bblist.bb_regdate}"
 												pattern="yyyy-MM-dd" /></td>
 										<td><a
-											href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bblist[i].bb_num}"
-											style="color: black">${bblist[i].bb_title}</a></td>
-										<td>${bblist[i].bb_count}</td>
-
+											href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bblist.bb_num}"
+											style="color: black">${bblist.bb_title}</a></td>
+										<td>${bblist.bb_count}</td>
 									</tr>
-
-
 								</c:forEach>
-							</c:if>
-
+							</c:otherwise>
+							</c:choose>
 
 						</table>
 					</div>
@@ -381,15 +441,24 @@
 
 
 
-
-
+					<!-- 페이징 버튼 -->
+					<div class="box-footer clearfix">
 						<ul class="pagination pagination-sm no-margin pull-right">
-							<li><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">&raquo;</a></li>
+							<c:if test="${paging.nowBlock > 0}">
+							<li><a href="javascript:prevPage()">&laquo;</a></li>
+							</c:if>
+						  <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+						  	<!-- if문 추가 : 20170615 -->
+						  	<c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
+							<li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+						  	</c:if>
+						  	<!-- 끝 -->
+						  </c:forEach>
+						  	<c:if test="${paging.totalBlock > paging.nowBlock +1}">
+							<li><a href="javascript:nextPage()">&raquo;</a></li>
+							</c:if>
 						</ul>
+					</div><!-- 페이징 버튼 -->
 
 						<form action="/HarangProject/bamboo?cmd=BB_LIST" name="search"
 							method="post">
@@ -419,7 +488,29 @@
 
 	</section>
 </div>
-
+<!-- 페이징 관련 폼 ----------------------------------------------------------------------->
+<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="U_BB_CON" /> <input type="hidden"
+		name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}" />
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}" />
+	<input type="hidden" name="bb_num" value="${bbcon.bb_num }" />
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="U_BB_CON" /> <input type="hidden"
+		name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}" />
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}" />
+	<input type="hidden" name="bb_num" value="${bbcon.bb_num }" />
+</form>
+<!-- 페이징 : 해당 페이지로 이동하는 폼 -->
+<form id="goPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="U_BB_CON" />
+	<input type="hidden" name="bb_num" value="${bbcon.bb_num }" />
+	 <input	type="hidden" name="nowPage" value="" id="page" /> <input
+		type="hidden" name="nowBlock" value="${paging.nowBlock}" />
+</form>
+<!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
 
 
 

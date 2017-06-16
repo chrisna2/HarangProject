@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import dto.BambooDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import paging.PagingBean;
+import paging.dto.PagingDto;
 
 public class Bb_List_Command implements CommandInterface 
 {
@@ -37,7 +39,19 @@ public class Bb_List_Command implements CommandInterface
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) 
 	{
 
-		req.setAttribute("bblist", bblist(req));
+			req.setAttribute("bblist", bblist(req));
+		 
+			// 페이징 관련 블록
+			// 페이징 관련 parameter 받아오기
+			int nowPage=0, nowBlock=0;
+				if(req.getParameter("nowPage") != null){nowPage = Integer.parseInt(req.getParameter("nowPage"));}
+				if(req.getParameter("nowBlock") != null){nowBlock = Integer.parseInt(req.getParameter("nowBlock"));}
+			PagingBean pbean = new PagingBean();
+			// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
+			PagingDto paging = pbean.Paging(bblist(req).size(), 10, nowPage, 10,  nowBlock);
+			//페이징 정보 보내기
+			req.setAttribute("paging", paging);
+			
 		
 		return "/WEB-INF/bamboo/u_bb_list.jsp";
 	}
@@ -59,8 +73,11 @@ public class Bb_List_Command implements CommandInterface
 			String sOption = req.getParameter("sOption");
 			String table_search = req.getParameter("table_search");
 			
+			//System.out.println(sOption);
+			//System.out.println("테이블 서치 : " + table_search);
+			
 			if(null==table_search){
-			//(!sOption.equals("") || !sOption.equals(null)) && (!table_search.equals("") || !sOption.equals(null))	
+				
 				sql = "select * from harang.tbl_bamboo";
 				pstmt = con.prepareStatement(sql);
 				//System.out.println(sql);
@@ -68,9 +85,24 @@ public class Bb_List_Command implements CommandInterface
 								
 			else {
 						
-				
-				sql = "SELECT * FROM harang.tbl_bamboo where " +sOption+ " like '%"+table_search+"%'";
-				pstmt = con.prepareStatement(sql);
+				if(table_search.equals("bbnewlist")){
+					
+					sql = "SELECT * FROM harang.tbl_bamboo where bb_regdate > (select date_sub(now(), interval 1 day)) order by bb_regdate ";
+					pstmt = con.prepareStatement(sql);
+				}
+				else if(table_search.equals("bbhotlist")){
+					
+					sql = "select distinct bb.bb_num, bb.m_id, bb_notice, bb_title, bb_content, bb_regdate, bb_count, bb_nickname "
+							+ "from tbl_bamboo bb inner join (select bb_num, count(m_id) cnt from tbl_like group by bb_num) li on bb.bb_num = li.bb_num "
+							+ "where bb_regdate> (select date_sub(now(), interval 30 day)) order by cnt desc, bb.bb_count desc";
+					pstmt = con.prepareStatement(sql);
+					
+				}
+				else{
+					
+					sql = "SELECT * FROM harang.tbl_bamboo where " +sOption+ " like '%"+table_search+"%'";
+					pstmt = con.prepareStatement(sql);
+				}
 				//System.out.println(sql);
 				
 			}

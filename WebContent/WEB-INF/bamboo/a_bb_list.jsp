@@ -1,17 +1,48 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <%@ include file="../include/a_header.jsp"%>
-<title>대나무숲 리스트 관리자페이지</title>
+<title>대나무숲 리스트 사용자페이지</title>
+
+<script>
+	function fnBbnewlist() {
+		document.bbnewlist.submit();
+	}
+	function fnBbhotlist() {
+		document.bbhotlist.submit();
+	}
+	function fnBbpost() {
+		document.bbpost.submit();
+	}
+	
+	
+	
+	///////////////// 페이지 관련 javascript function////////////////////
+	function prevPage() {
+		document.getElementById("prevPage").submit();
+	}
+	function nextPage() {
+		document.getElementById("nextPage").submit();
+	}
+	function goPage(nowPage) {
+		document.getElementById("page").value = nowPage;
+		document.getElementById("goPage").submit();
+	}
+	/////////////////////////////끝//////////////////////////////////
+</script>
+
+
 </head>
 
 <div class="content-wrapper">
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
-		<h1>대나무숲 리스트 관리자페이지</h1>
+		<h1>대나무숲 리스트 사용자페이지</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
 			<li class="active">대나무숲</li>
@@ -24,7 +55,6 @@
 		<!-- 컨텐츠 헤더부분. 제목. 작성일. 작성자. 추천/비추천 수 표시 -->
 
 
-		
 
 		<!--  여기부터 본문 -->
 
@@ -34,67 +64,89 @@
 			<div class="col-md-9">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">학사 일정</h3>
+						<h1 class="box-title">대나무숲</h1>
 						<div class="box-tools">
-							<div class="input-group">
 
-								<button type="button" class="btn btn-primary pull-right btn-sm">글쓰기</button>
-							</div>
+							<p align="right">
+								<a type="button" class="btn btn-default btn-sm"
+									href="javascript:fnBbnewlist()">최신글 보기</a> <a type="button"
+									class="btn btn-default btn-sm" href="javascript:fnBbhotlist()">인기글
+									보기</a> <a type="button" class="btn btn-primary btn-sm"
+									href="javascript:fnBbpost()">글쓰기</a>
+							</p>
+
+
+
+							<!-- 최신글 보기를 위한 form 시작 -->
+
+							<form action="/HarangProject/bamboo" name="bbnewlist"
+								method="post">
+								<input type="hidden" name="cmd" value="A_BB_LIST"> <input
+									type="hidden" name="table_search" value="bbnewlist">
+
+							</form>
+							<!-- 최신글 보기를 위한 form 끝 -->
+
+							<!-- 인기글 보기를 위한 form 시작 -->
+							<form action="/HarangProject/bamboo" name="bbhotlist"
+								method="post">
+								<input type="hidden" name="cmd" value="A_BB_LIST"> <input
+									type="hidden" name="table_search" value="bbhotlist">
+
+							</form>
+							<!-- 인기글 보기를 위한 form 끝 -->
+
+							<!-- 글쓰기를 위한 form 시작 -->
+							<form action="/HarangProject/bamboo" name="bbpost" method="post">
+								<input type="hidden" name="cmd" value="A_BB_POST">
+
+							</form>
+							<!-- 인기글 보기를 위한 form 끝 -->
+
+							
+
+
+
+
 						</div>
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
+
+
 							<tr>
-								<th></th>
-								<th>번호</th>
+								
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>제목</th>
-								<th>추천수</th>
-								<th> 비추천수</th>
-
+								<th>조회수</th>
 							</tr>
-							<tr>
-								<td><input type="checkbox" /></td>
-								<td>183</td>
-								<td>익명asdf</td>
-								<td>2017년 6월 8일</td>
-								<td><a href="#" class="" style="color: black">조장 나현기는 보아라</a></td>
-								<td>500</td>
-								<td>20</td>
 
-							</tr>
-							<tr>
-								<td><input type="checkbox" /></td>
-								<td>219</td>
-								<td>익명 zsdf</td>
-								<td>2017년 4월 30일</td>
-								<td><a href="#" class="" style="color: black">익명글 23232ㅁㄴㅇㄹ</a></td>
-								<td>100</td>
-								<td>50</td>
 
-							</tr>
-							<tr>
-								<td><input type="checkbox" /></td>
-								<td>657</td>
-								<td>익명zdfq</td>
-								<td>2017년 5월 20일</td>
-								<td><a href="#" class="" style="color: black">익명 ㄴㅇㅁㅇㄴㄻㅇ</a></td>
-								<td>10</td>
-								<td>5</td>
+							<c:choose>
+								<c:when test="${fn:length(bblist) eq 0}">
+								게시물이 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${bblist}" var="bblist"
+										begin="${paging.beginPerPage}"
+										end="${paging.beginPerPage + paging.numPerPage -1}"
+										varStatus="status">
+										<tr>
+											
+											<td>${bblist.bb_nickname}</td>
+											<td><fmt:formatDate value="${bblist.bb_regdate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td><a
+												href="/HarangProject/bamboo?cmd=A_BB_CON&bb_num=${bblist.bb_num}"
+												style="color: black">${bblist.bb_title}</a></td>
+											<td>${bblist.bb_count}</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 
-							</tr>
-							<tr>
-								<td><input type="checkbox" /></td>
-								<td>175</td>
-								<td>익명 azxc</td>
-								<td>2017년 3월 8일</td>
-								<td><a href="#" class="" style="color: black">익명글글글</a></td>
-								<td>1589</td>
-								<td>1111</td>
-
-							</tr>
 						</table>
 					</div>
 					<!-- /.box-body -->
@@ -102,49 +154,86 @@
 					<div class="box-footer clearfix">
 
 
-					<button type="button" class="btn btn-success pull-left btn-xs">공지등록</button>
-						<button type="button" class="btn btn-danger pull-left btn-xs">삭제</button>
 
 
+						<!-- 페이징 버튼 -->
+						<div class="box-footer clearfix">
+							<ul class="pagination pagination-sm no-margin pull-right">
+								<c:if test="${paging.nowBlock > 0}">
+									<li><a href="javascript:prevPage()">&laquo;</a></li>
+								</c:if>
+								<c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}"
+									step="1">
+									<!-- if문 추가 : 20170615 -->
+									<c:if
+										test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}">
+										<li><a
+											href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+									</c:if>
+									<!-- 끝 -->
+								</c:forEach>
+								<c:if test="${paging.totalBlock > paging.nowBlock +1}">
+									<li><a href="javascript:nextPage()">&raquo;</a></li>
+								</c:if>
+							</ul>
+						</div>
+						<!-- 페이징 버튼 -->
 
-						<ul class="pagination pagination-sm no-margin pull-right">
-							<li><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
+						<form action="/HarangProject/bamboo" name="search" method="post">
 
-						<div class="input-group">
-							<input type="text" name="table_search"
-								class="form-control input-sm pull-right" style="width: 150px;"
-								placeholder="Search" /> <select
-								class="form-control input-sm pull-right" style="width: 150px;">
-								<option></option>
-								<option>포인트 지급</option>
-								<option>학과</option>
-								<option>제목</option>
+							<input type="hidden" name="cmd" value="A_BB_LIST">
+							<div class="input-group">
 
-							</select>
-							<div class="input-group-btn">
-								<button class="btn btn-sm btn-default">
+								<select name="sOption" class="form-control input-sm"
+									style="width: 150px;">
+
+									<option value="bb_title">제목</option>
+									<option value="bb_content">내용</option>
+
+								</select> <input type="text" name="table_search"
+									class="form-control input-sm" style="width: 150px;"
+									placeholder="Search" />
+
+								<button class="btn btn-sm btn-default pull-left">
 									<i class="fa fa-search"></i>
 								</button>
+
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
-				<!-- /.box -->
 			</div>
-
+			<!-- /.box -->
 		</div>
 
 	</section>
 </div>
+
+<!-- 페이징 관련 폼 ----------------------------------------------------------------------->
+<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="A_BB_LIST" /> <input type="hidden"
+		name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}" />
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}" />
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="A_BB_LIST" /> <input type="hidden"
+		name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}" />
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}" />
+</form>
+<!-- 페이징 : 해당 페이지로 이동하는 폼 -->
+<form id="goPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="A_BB_LIST" /> <input
+		type="hidden" name="nowPage" value="" id="page" /> <input
+		type="hidden" name="nowBlock" value="${paging.nowBlock}" />
+</form>
+<!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
 <!-- /.col -->
 
 <!-- /.content-wrapper -->
 <%@ include file="../include/footer.jsp"%>
+
 
 <!-- ★★★Ajax를 배우면 이해 할 수 있는 곳 : 여기에 데이터를 삽입합니다. -->
 <script type="text/javascript">

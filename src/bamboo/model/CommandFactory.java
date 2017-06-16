@@ -76,6 +76,10 @@ public class CommandFactory
 		{
 			return new U_Bb_Delete_Command();
 		}
+		else if(cmd.equals("A_BB_DEL"))
+		{
+			return new A_Bb_Delete_Command();
+		}
 		else if(cmd.equals("U_BB_LIKE"))
 		{
 			return new Bb_Like_Command();
