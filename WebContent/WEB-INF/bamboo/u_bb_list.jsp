@@ -8,7 +8,19 @@
 <%@ include file="../include/header.jsp"%>
 <title>대나무숲 리스트 사용자페이지</title>
 
+<script>
+	function fnBbnewlist() {
+		document.bbnewlist.submit()
+	}
+	function fnBbhotlist() {
+		document.bbhotlist.submit()
+	}
+	function fnBbpost() {
+		document.bbpost.submit()
+	}
 
+	
+</script>
 
 
 </head>
@@ -38,16 +50,49 @@
 			<div class="col-md-9">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">대나무숲</h3>
+						<h1 class="box-title">대나무숲</h1>
 						<div class="box-tools">
-								<form action="/HarangProject/bamboo?cmd=U_BB_POST" name="bbpost"
-							method="post">
-							<div class="input-group">
-								<button type="submit" 
-								 class="btn btn-primary pull-right btn-sm">글쓰기</button>
-								
-							</div>
+
+							<p align="right">
+								<a type="button" class="btn btn-default btn-sm"
+									href="javascript:fnBbnewlist()">최신글 보기</a> <a type="button"
+									class="btn btn-default btn-sm" href="javascript:fnBbhotlist()">인기글
+									보기</a> <a type="button" class="btn btn-primary btn-sm"
+									href="javascript:fnBbpost()">글쓰기</a>
+							</p>
+
+
+
+							<!-- 최신글 보기를 위한 form 시작 -->
+
+							<form action="/HarangProject/bamboo" name="bbnewlist"
+								method="post">
+								<input type="hidden" name="cmd" value="BB_LIST"> <input
+									type="hidden" name="table_search" value="bbnewlist"> 
+
 							</form>
+							<!-- 최신글 보기를 위한 form 끝 -->
+
+							<!-- 인기글 보기를 위한 form 시작 -->
+							<form action="/HarangProject/bamboo" name="bbhotlist"
+								method="post">
+								<input type="hidden" name="cmd" value="BB_LIST"> <input
+									type="hidden" name="table_search" value="bbhotlist"> 
+
+							</form>
+							<!-- 인기글 보기를 위한 form 끝 -->
+
+							<!-- 글쓰기를 위한 form 시작 -->
+							<form action="/HarangProject/bamboo" name="bbpost" method="post">
+								<input type="hidden" name="cmd" value="U_BB_POST"> 
+
+							</form>
+							<!-- 인기글 보기를 위한 form 끝 -->
+
+
+							
+
+
 						</div>
 					</div>
 					<!-- /.box-header -->
@@ -57,30 +102,33 @@
 
 							<tr>
 
-								
+
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>제목</th>
 								<th>조회수</th>
-								
+
 
 							</tr>
 
-							
-							<c:if test="${bblist != null }">
-							<c:forEach var="i" begin="0" end="${bblist.size()-1 }">
 
-								<tr>
-									
-									<td>${bblist[i].bb_nickname}</td>
-									<td><fmt:formatDate value="${bblist[i].bb_regdate}" pattern="yyyy-MM-dd"/></td>
-									<td><a href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bblist[i].bb_num}"  style= "color: black" >${bblist[i].bb_title}</a></td>
-									<td>${bblist[i].bb_count}</td>
-									
-								</tr>
+							<c:if test="${bblist.size()>0 }">
+								<c:forEach var="i" begin="0" end="${bblist.size()-1 }">
+
+									<tr>
+
+										<td>${bblist[i].bb_nickname}</td>
+										<td><fmt:formatDate value="${bblist[i].bb_regdate}"
+												pattern="yyyy-MM-dd" /></td>
+										<td><a
+											href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bblist[i].bb_num}"
+											style="color: black">${bblist[i].bb_title}</a></td>
+										<td>${bblist[i].bb_count}</td>
+
+									</tr>
 
 
-							</c:forEach>
+								</c:forEach>
 							</c:if>
 							<!-- 
 							<tr>
@@ -120,19 +168,18 @@
 
 								<select name="sOption" class="form-control input-sm"
 									style="width: 150px;">
-									
+
 									<option value="bb_title">제목</option>
 									<option value="bb_content">내용</option>
 
-								</select> 
-								<input type="text" name="table_search"
+								</select> <input type="text" name="table_search"
 									class="form-control input-sm" style="width: 150px;"
 									placeholder="Search" />
-								
-									<button class="btn btn-sm btn-default pull-left">
-										<i class="fa fa-search"></i>
-									</button>
-								
+
+								<button class="btn btn-sm btn-default pull-left">
+									<i class="fa fa-search"></i>
+								</button>
+
 							</div>
 						</form>
 					</div>

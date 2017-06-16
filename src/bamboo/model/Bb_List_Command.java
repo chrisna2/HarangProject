@@ -59,8 +59,11 @@ public class Bb_List_Command implements CommandInterface
 			String sOption = req.getParameter("sOption");
 			String table_search = req.getParameter("table_search");
 			
+			System.out.println(sOption);
+			System.out.println("테이블 서치 : " + table_search);
+			
 			if(null==table_search){
-			//(!sOption.equals("") || !sOption.equals(null)) && (!table_search.equals("") || !sOption.equals(null))	
+				
 				sql = "select * from harang.tbl_bamboo";
 				pstmt = con.prepareStatement(sql);
 				//System.out.println(sql);
@@ -68,9 +71,24 @@ public class Bb_List_Command implements CommandInterface
 								
 			else {
 						
-				
-				sql = "SELECT * FROM harang.tbl_bamboo where " +sOption+ " like '%"+table_search+"%'";
-				pstmt = con.prepareStatement(sql);
+				if(table_search.equals("bbnewlist")){
+					
+					sql = "SELECT * FROM harang.tbl_bamboo where bb_regdate > (select date_sub(now(), interval 1 day)) order by bb_regdate ";
+					pstmt = con.prepareStatement(sql);
+				}
+				else if(table_search.equals("bbhotlist")){
+					
+					sql = "select distinct bb.bb_num, bb.m_id, bb_notice, bb_title, bb_content, bb_regdate, bb_count, bb_nickname "
+							+ "from tbl_bamboo bb inner join (select bb_num, count(m_id) cnt from tbl_like group by bb_num) li on bb.bb_num = li.bb_num "
+							+ "where bb_regdate> (select date_sub(now(), interval 30 day)) order by cnt desc, bb.bb_count desc";
+					pstmt = con.prepareStatement(sql);
+					
+				}
+				else{
+					
+					sql = "SELECT * FROM harang.tbl_bamboo where " +sOption+ " like '%"+table_search+"%'";
+					pstmt = con.prepareStatement(sql);
+				}
 				//System.out.println(sql);
 				
 			}

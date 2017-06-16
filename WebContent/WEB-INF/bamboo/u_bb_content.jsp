@@ -64,6 +64,21 @@
 	}
 	
 	
+
+	function fnBbnewlist(){
+		document.bbnewlist.submit()
+	}
+	function fnBbhotlist(){
+		document.bbhotlist.submit()
+	}
+	function fnBbpost(){
+		document.bbpost.submit()
+	}
+
+
+	
+	
+	
 	
 	
 </script>
@@ -94,7 +109,7 @@
 					<div class="box-header">
 						<font size="6">${bbcon.bb_title}</font> <span
 							class="badge bg-green pull-right"> ${bbcon.bb_regdate}<br>닉네임
-							: ${bbcon.bb_nickname}<br> <br> <span
+							: ${bbcon.bb_nickname}<br> 조회수 : ${bbcon.bb_count }<br> <span
 							class="badge bg-blue"><i class="fa fa-thumbs-o-up"></i>
 								${bblcnt.size()}</span> <span class="badge bg-red"><i
 								class="fa fa-thumbs-o-down"></i> ${bbdlcnt.size()}</span>
@@ -324,15 +339,47 @@
 			<div class="col-md-9">
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">대나무숲</h3>
+						<h1 class="box-title">대나무숲</h1>
 						<div class="box-tools">
-							<form action="/HarangProject/bamboo?cmd=U_BB_POST" name="bbpost"
-								method="post">
-								<div class="input-group">
-									<button type="submit" class="btn btn-primary pull-right btn-sm">글쓰기</button>
 
-								</div>
+							<p align="right">
+								<a type="button" class="btn btn-default btn-sm" href="javascript:fnBbnewlist()">최신글
+									보기</a> <a type="button" class="btn btn-default btn-sm" href="javascript:fnBbhotlist()">인기글
+									보기</a> <a type="button" class="btn btn-primary btn-sm" href="javascript:fnBbpost()">글쓰기</a>
+							</p>
+
+
+
+							<!-- 최신글 보기를 위한 form 시작 -->
+
+							<form action="/HarangProject/bamboo" name="bbnewlist"
+								method="post">
+								<input type="hidden" name="cmd" value="BB_LIST">
+								<input type="hidden" name="table_search" value="bbnewlist">
+
 							</form>
+							<!-- 최신글 보기를 위한 form 끝 -->
+
+							<!-- 인기글 보기를 위한 form 시작 -->
+							<form action="/HarangProject/bamboo" name="bbhotlist"
+								method="post">
+								<input type="hidden" name="cmd" value="BB_LIST">
+								<input type="hidden" name="table_search" value="bbhotlist">
+
+							</form>
+							<!-- 인기글 보기를 위한 form 끝 -->
+
+							<!-- 글쓰기를 위한 form 시작 -->
+							<form action="/HarangProject/bamboo" name="bbpost" method="post">
+								<input type="hidden" name="cmd" value="U_BB_POST">
+
+
+							</form>
+							<!-- 인기글 보기를 위한 form 끝 -->
+
+
+
+
 						</div>
 					</div>
 					<!-- /.box-header -->
@@ -352,7 +399,7 @@
 							</tr>
 
 
-							<c:if test="${bblist != null }">
+							<c:if test="${bblist.size()>0 }">
 								<c:forEach var="i" begin="0" end="${bblist.size()-1 }">
 
 									<tr>
@@ -370,7 +417,18 @@
 
 								</c:forEach>
 							</c:if>
+							<!-- 
+							<tr>
+							
+								<td>${bbdto.bb_num}</td>
+								<td>${bbdto.bb_nickname}</td>
+								<td>${bbdto.bb_regdate}</td>
+								<td><a href="#" class="" style="color: black">${bbdto.bb_title}</a></td>
+								<td>${bbdto.bb_count}</td>
+								<td>20</td>
 
+							</tr>
+							 -->
 
 						</table>
 					</div>
