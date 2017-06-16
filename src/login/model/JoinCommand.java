@@ -18,7 +18,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import upload.UploadBean;
+import upload.RandomFileRenamePolicy;
 
 public class JoinCommand implements CommandInterface {
 	
@@ -43,15 +43,17 @@ public class JoinCommand implements CommandInterface {
 		 * 사진 올리는 작업
 		 */
 		/////////////////////////////////////////////////////////////////////////////
-		String realPath = request.getServletContext().getRealPath("upload");
+		String realPath = request.getServletContext().getRealPath("upload/member");
 		int maxSize = 1024 * 1024 * 1024; 
-		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "UTF-8", new RandomFileRenamePolicy());
+		
 		String photoName = null;
+		
 		Enumeration enumer =  multi.getFileNames();
 		while(enumer.hasMoreElements()){
 			String name = (String)enumer.nextElement();
 			File file = multi.getFile(name);
-			photoName = "upload/"+multi.getFilesystemName(name);
+			photoName = "upload/member/"+multi.getFilesystemName(name);
 		}
 		
 		System.out.println(photoName+"/"+multi.getParameter("m_mail")+"/"+multi.getParameter("m_pw"));

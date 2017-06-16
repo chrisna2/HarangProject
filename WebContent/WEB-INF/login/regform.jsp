@@ -43,19 +43,18 @@
             background:#ffffff;
         }
         .content{
-          margin-bottom: 50px;
+          margin-top: 20px;
+          margin-bottom: 100px;
         }
     </style>
     <script type="text/javascript">
     function checkform(){
-        if(input.terms_check.checked==""){
-            alert("약관에 동의 해주십시요");
-            return false;
-        }
+
         if(input.m_pw.value!=input.m_pw2.value){
             alert("두 비밀번호가 다릅니다. 다시한번 확인 하여 주십시요.");
             return false;
         }
+        
         var m_mail1 = input.m_mail1.value;
         var m_mail2 = input.m_mail2.value;
         var m_mail = m_mail1 + "@" + m_mail2;
@@ -72,7 +71,8 @@
         var m_addr3 = input.m_addr3.value;
         var m_addr = m_addr1 + "/" + m_addr2 + "/" + m_addr3;
         input.m_addr.value = m_addr;
-        
+
+        return true;
     }
     </script>
   </head>
@@ -94,10 +94,10 @@
                 <div class="box-header">
                   <h3 class="box-title">정식 회원 가입</h3>
                 </div>
-                <form role="form" action="/HarangProject/login?cmd=join" name="input" onsubmit="checkform()" method="post" enctype="multipart/form-data">
+                <form role="form" action="/HarangProject/login?cmd=join" name="input" onsubmit="return checkform()" method="post" enctype="multipart/form-data">
                 <div class="box-body">
 <table class="table">
-    <tr>
+    <tr align="center">
         <td>약관 동의</td>
     </tr>
     <tr>
@@ -137,10 +137,9 @@
         </td>
     </tr>
     <tr align="center">
-        <td><br>전체 약관에 동의 합니다.&nbsp;<input type="checkbox" name="terms_check" value=""></td>
+        <td><br>전체 약관에 동의 합니다.&nbsp;<input type="checkbox" name="terms_check" required="required"></td>
     </tr>
 </table>
-                
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-picture-o"></i> 개인 이미지</span>
                     <span class="input-group-addon">

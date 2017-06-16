@@ -21,43 +21,47 @@ public class CommandFactory{
 			
 			return new MyinfoCommand();
 		}
-		if(cmd.equals("specUp")){
+		else if(cmd.equals("update")){
+			
+			return new MyinfoUpdateCommand();
+		}
+		else if(cmd.equals("specUp")){
 			
 			return new SpecUpCommand();
 		}
-		if(cmd.equals("timeTable")){
+		else if(cmd.equals("timeTable")){
 			
 			return new TimetableCommand();
 		}
-		if(cmd.equals("pointList")){
+		else if(cmd.equals("pointList")){
 			
 			return new PointlistCommand();
 		}
-		if(cmd.equals("pointZero")){
+		else if(cmd.equals("pointZero")){
 			
 			return new PointZeroCommand();
 		}
-		if(cmd.equals("AmemList")){
+		else if(cmd.equals("AmemList")){
 			
 			return new AmemListCommand();
 		}
-		if(cmd.equals("AspecList")){
+		else if(cmd.equals("AspecList")){
 			
 			return new AspecListCommand();
 		}
-		if(cmd.equals("Achallenge")){
+		else if(cmd.equals("Achallenge")){
 			
 			return new AchallengeCommand();
 		}
-		if(cmd.equals("AspecList")){
+		else if(cmd.equals("AspecList")){
 			
 			return new AspecListCommand();
 		}
-		if(cmd.equals("Alesson")){
+		else if(cmd.equals("Alesson")){
 			
 			return new AlessonCommand();
 		}
-		if(cmd.equals("ApointCheck")){
+		else if(cmd.equals("ApointCheck")){
 			
 			return new ApointCommand();
 		}

@@ -30,26 +30,13 @@
            <!-- 너비 사이즈 수정  : col-->
            <div class="col-md-9">
         
-            <!-- 리스트 사용시  -->
-             <div class="box">
+                    <!-- 리스트 사용시  -->
+              <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">포인트 거래 내역 조회</h3>
-                   <div class="box-tools">
-                    <form action="">
-                     <div class="input-group">
-                       <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
-	                      <select class="form-control input-sm pull-right" style="width: 150px;">
-	                        <option>거래 날짜</option>
-	                        <option>거래 내용</option>
-	                        <option>포인트</option>
-	                        <option>출금 대상</option>
-	                        <option>입금 대상</option>
-	                      </select>
-	                      <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-                      </div>
-                    </div>
-                    </form>
+                  <h3 class="box-title">${member.m_name} [학번 : ${member.m_id} ] 포인트 거래 목록</h3>
+                   <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -64,58 +51,58 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="text-red">
-                        <td>2017-07-21</td>
-                        <td>식권 구매</td>
-                        <td>5000 포인트 출금</td>
-                        <td>나현기</td>
-                        <td>학교 식당 관리자</td>
-                      </tr>
-                      <tr class="text-green">
-                        <td>2017-06-15</td>
-                        <td>스펙업[정보처리기사]</td>
-                        <td>600000 포인트 입금</td>
-                        <td>학교 포인트 관리자</td>
-                        <td>나현기</td>
-                      </tr>
-                      <tr class="text-red">
-                        <td>2017-06-12</td>
-                        <td>학자금 포인트 감면</td>
-                        <td>400000 포인트 감면 </td>
-                        <td>나현기</td>
-                        <td>학교 포인트 관리자</td>
-                      </tr>
-                      <tr class="text-green">
-                        <td>2017-05-15</td>
-                        <td>교내 경시 대회 우승</td>
-                        <td>1000000 포인트 입금</td>
-                        <td>학교 포인트 관리자</td>
-                        <td>나현기</td>
-                      </tr>
+                      <c:forEach items="${requestScope.pList}" var="p" varStatus="i">
+                        <c:if test="${member.m_id eq p.m_giver}">
+                           <tr class="text-red">
+                            <td>${p.r_regdate}</td>
+                            <td>${p.r_content}</td>
+                            <td>- ${p.r_point}</td>
+                            <td>${p.m_givername} | ${p.m_giver}</td>
+                            <td>${p.m_havername} | ${p.m_haver}</td>
+                          </tr>
+                         </c:if>
+                         <c:if test="${member.m_id eq p.m_haver}">
+                           <tr class="text-green">
+                            <td>${p.r_regdate}</td>
+                            <td>${p.r_content}</td>
+                            <td>+ ${p.r_point}</td>
+                            <td>${p.m_givername} | ${p.m_giver}</td>
+                            <td>${p.m_havername} | ${p.m_haver}</td>
+                          </tr>
+                         </c:if>
+                      </c:forEach>
                     </tbody>
-                    <tfoot>
-                       <tr>
-                        <th>거래 날짜</th>
-                        <th>거래 내용</th>
-                        <th>포인트</th>
-                        <th>출금 대상</th>
-                        <th>입금 대상</th>
-                      </tr>
-                    </tfoot>
                   </table>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix">
-                  <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                  </ul>
+                       <ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                         </ul>
+                    <!-- 검색 폼 -->    
+                    <form action="">
+                      <div class="input-group">
+                          <select class="form-control input-sm pull-left" style="width: 150px;">
+                            <option>거래 날짜</option>
+                            <option>거래 내용</option>
+                            <option>포인트</option>
+                            <option>출금 대상</option>
+                            <option>입금 대상</option>
+                          </select>
+                          <input type="text" name="table_search" class="form-control input-sm  pull-left" style="width: 150px;" placeholder="Search"/>
+                         <div class="input-group-btn  pull-left">
+                            <button class="btn btn-sm btn-primary"> 검색 <i class="fa fa-search"></i></button>
+                         </div>
+                      </div>
+                    </form>
                 </div>
               </div><!-- /.box -->
+           
               </div><!-- /.col -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->

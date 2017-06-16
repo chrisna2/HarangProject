@@ -32,21 +32,17 @@ public class SpecUpCommand implements CommandInterface {
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		String c_num = request.getParameter("c_num");
 	
-		if (!(c_num == null)) {
-			read(request);
-			
-		}
-		read2(request);
 		listCommand(request);
 
 		return "/WEB-INF/myPage/specUp.jsp";
 	}
 
 	public void listCommand(HttpServletRequest request) {
-
+		
+		MemberDTO member = (MemberDTO)request.getSession().getAttribute("member");
+		String m_id = member.getM_id();
+		
 		pool = DBConnectionMgr.getInstance();
 
 		String sql;
@@ -56,18 +52,22 @@ public class SpecUpCommand implements CommandInterface {
 		String keyword = request.getParameter("keyword");
 		String keyfield = request.getParameter("keyfield");
 
+		
 		if (null == (keyfield)) {
-
-			sql = "SELECT * FROM tbl_certificate order by c_num";
+			sql = "select c.c_num, c.c_name, c.c_agency, c.c_point, cm.cm_iscomplete, cm.cm_completedate "
+					+ "from tbl_certificate c left outer join tbl_certi_member cm on c.c_num = cm.c_num  and cm.m_id = ?";
 
 		} else {
-			sql = "SELECT * FROM tbl_certificate where " + keyword + " like '%" + keyfield + "%' order by c_num";
+			sql = "select c.c_num, c.c_name, c.c_agency, c.c_point cm.cm_iscomplete, cm.cm_completedate "
+					+ "from tbl_certificate c left outer join tbl_certi_member cm on c.c_num = cm.c_num  and cm.m_id = ? "
+					+ "where " + keyword + " like '%" + keyfield + "%'";
 		}
 
 		try {
 
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -77,6 +77,8 @@ public class SpecUpCommand implements CommandInterface {
 				dto.setC_name(rs.getString("c_name"));
 				dto.setC_agency(rs.getString("c_agency"));
 				dto.setC_point(rs.getInt("c_point"));
+				dto.setCm_iscomplete(rs.getString("cm_iscomplete"));
+				dto.setCm_completedate(rs.getString("cm_completedate"));
 				
 				list.add(dto);
 
@@ -107,87 +109,8 @@ public class SpecUpCommand implements CommandInterface {
 		PagingDto paging = pbean.Paging(list.size(), 5, nowPage, 10, nowBlock);
 
 		request.setAttribute("paging", paging);
-
 	}
-
-	public void read(HttpServletRequest request) {
-		pool = DBConnectionMgr.getInstance();
-		String sql;
-		CertiDTO dto = new CertiDTO();
-
-		try {
-			sql = "select * from tbl_certificate where c_num=?";
-			con = pool.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, request.getParameter("c_num"));
-			rs = pstmt.executeQuery();
-			rs.next();
-			dto.setC_num(rs.getString("c_num"));
-			dto.setC_name(rs.getString("c_name"));
-			dto.setC_agency(rs.getString("c_agency"));
-			dto.setC_point(rs.getInt("c_point"));
-
-		} catch (Exception err) {
-			System.out.println(err);
-		} finally {
-			// DBCP 접속해제
-			pool.freeConnection(con, pstmt, rs);
-		}
-		request.setAttribute("read", dto);
-	}
-
-	public void read2(HttpServletRequest request) {
-		pool = DBConnectionMgr.getInstance();
-
-		String sql;
-
-		ArrayList list = new ArrayList();
-		
-		String list3= null;
-				HttpSession session = request.getSession();
-				MemberDTO member = (MemberDTO) session.getAttribute("member");
-				String m_id = member.getM_id();
-		
-				System.out.println(m_id);
-				System.out.println(request.getParameter("c_num"));
-				
-		
-		try {
-			list3 = "suc1";
-			sql = "select * from tbl_certi_member where c_num =? and m_id =?";
-		
-			con = pool.getConnection();
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			rs.next();
-			pstmt.setString(1, request.getParameter("c_num"));
-			pstmt.setString(2, m_id);
-			
-			while (rs.next()) {
-				CertiMemberDTO dto = new CertiMemberDTO();
-				dto.setM_id(m_id);
-				dto.setC_num(rs.getString("c_num"));
-				dto.setCm_image(rs.getString("cm_image"));
-				System.out.println(request.getParameter("cm_image"));
-				
-				list.add(dto);
-				//System.out.println(request.getParameter("cm_image"));
-			}
-		
-			//System.out.println(request.getParameter("c_num"));
-			//System.out.println(request.getParameter("m_id"));
-
-		} catch (Exception err) {
-			System.out.println(err);
-		} finally {
-			// DBCP 접속해제
-			pool.freeConnection(con, pstmt, rs);
-		}
-		
-		request.setAttribute("m_id", m_id);
-		request.setAttribute("success", list3);
-		request.setAttribute("read2", list);
-		
-	}
+	
+	
 
 }

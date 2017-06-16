@@ -7,6 +7,58 @@
 <!-- 페이지 헤드 라인 : 브라우저 제목 -->
 <head>
      <title>개인 정보 조회</title>
+     <script type="text/javascript">
+    window.onload =  function () {
+        
+        var usermail = "${member.m_mail}";
+        var mailArray = usermail.split('@');
+        input.m_mail1.value = mailArray[0];
+        input.m_mail2.value = mailArray[1];
+
+        var usertel = "${member.m_tel}";
+        var telArray = usertel.split('-');
+        input.m_tel1.value = telArray[0];
+        input.m_tel2.value = telArray[1];
+        input.m_tel3.value = telArray[2];
+        
+        var useraddr = "${member.m_addr}"
+        var mailArray = useraddr.split('/');
+        input.m_addr1.value = mailArray[0];
+        input.m_addr2.value = mailArray[1];
+        input.m_addr3.value = mailArray[2];
+    }
+    
+    function mailcheck(){ 
+         i = input.m_mail3.selectedIndex; // 선택항목의 인덱스 번호
+         var mail= input.m_mail3.options[i].value; // 선택항목 value
+         input.m_mail2.value = mail;
+    }
+
+
+    function checkform(){
+        
+        var m_mail1 = input.m_mail1.value;
+        var m_mail2 = input.m_mail2.value;
+        var m_mail = m_mail1 + "@" + m_mail2;
+        input.m_mail.value = m_mail;
+
+        var m_tel1 = input.m_tel1.value;
+        var m_tel2 = input.m_tel2.value;
+        var m_tel3 = input.m_tel3.value;
+        var m_tel = m_tel1 + "-" + m_tel2 + "-" + m_tel3;
+        input.m_tel.value = m_tel;
+
+        var m_addr1 = input.m_addr1.value;
+        var m_addr2 = input.m_addr2.value;
+        var m_addr3 = input.m_addr3.value;
+        var m_addr = m_addr1 + "/" + m_addr2 + "/" + m_addr3;
+        input.m_addr.value = m_addr;
+
+        return true;
+        
+    }
+
+     </script>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -35,90 +87,112 @@
                 <div class="box-header">
                   <h3 class="box-title">개인 정보 수정</h3>
                 </div>
-                
                 <!-- form 시작 -->
-                <form role="form">
-                
+                <form role="form" action="/HarangProject/myPage?cmd=update" name="input" onsubmit="return checkform()" method="post" enctype="multipart/form-data">
                 <div class="box-body">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-picture-o"></i> 이미지</span>
 	                <span class="input-group-addon">
-	                   <input type="file" id="exampleInputFile" required="required">
+	                   <input type="file" id="exampleInputFile" name="upFile" required="required">
 	                </span>
                     <span class="input-group-addon  bg-gray">
-	                    <img src="dist/img/TL.jpg" class="img-circle" height="90" width="90" alt="User Image"/>
+	                    <img src="${member.m_photo}" class="img-circle" height="90" width="90" alt="User Image"/>
+	                    <input type="hidden" name="m_photo" value="${member.m_photo}">
 	                </span>
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-smile-o"></i> 이름</span>
-                    <input type="text" name="m_name" class="form-control" value="나현기" readonly="readonly">
+                    <input type="text" name="m_name" class="form-control" value="${member.m_name}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-money"></i> 보유 포인트</span>
-                    <input type="text" name="m_point" class="form-control" value="999999" readonly="readonly">
+                    <input type="text" name="m_point" class="form-control" value="${member.m_point}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 학번</span>
-                    <input type="text" name="m_num" class="form-control" value="201701008" readonly="readonly">
+                    <input type="text" name="m_id" class="form-control" value="${member.m_id}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-sitemap"></i> 학과</span>
-                    <input type="text" name="m_dept" class="form-control" value="국어국문학과" readonly="readonly">
+                    <input type="text" name="m_dept" class="form-control" value="${member.m_dept}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-star"></i> 생년월일</span>
-                    <input type="text" name="m_birth" class="form-control" value="1991-03-21" readonly="readonly">
+                    <input type="text" name="m_birth" class="form-control" value="${member.m_birth}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-envelope"></i> 이메일</span>
-                    <input type="text" name="m_email" class="form-control" value="chrisna2" required="required">
+                    <input type="text" name="m_mail1" class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> @ </span>
-                    <input type="text" name="m_email" class="form-control" value="hanmail.net" required="required">
+                    <input type="text" name="m_mail2" class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> 선택 </span>
-                    <select class="form-control" required="required">
-                        <option>google.com</option>
-                        <option>hanmail.net</option>
-                        <option>naver.com</option>
-                        <option>nate.om</option>
-                        <option>gmail.com</option>
+                    <select name="m_mail3"class="form-control" onChange="mailcheck()">
+	                    <option selected="selected" value="self">선택하세요</option>
+	                    <option value='nate.com' >nate.com</option>
+	                    <option value='empas.com' >empas.com</option>
+	                    <option value='dreamwiz.com' >dreamwiz.com</option>
+	                    <option value='gmail.com' >gmail.com</option>
+	                    <option value='hanafos.com' >hanafos.com</option>
+	                    <option value='hanmail.net' >hanmail.net</option>
+	                    <option value='daum.net' >daum.net</option>
+	                    <option value='hotmail.com' >hotmail.com</option>
+	                    <option value='korea.com' >korea.com</option>
+	                    <option value='naver.com' >naver.com</option>
+	                    <option value='yahoo.com' >yahoo.com</option>
                     </select>
+                  </div>
+                  <br>
+                    <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 종합 이메일</span>
+                    <input type="text" name="m_mail" class="form-control" value="${member.m_mail}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-phone-square"></i> 연락처</span>
-                    <select class="form-control" required="required">
-                        <option>010</option>
-                        <option>011</option>
-                        <option>012</option>
-                        <option>016</option>
-                        <option>017</option>
+                    <select class="form-control" name="m_tel1" required="required">
+                        <option></option>
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="012">012</option>
+                        <option value="016">016</option>
+                        <option value="017">017</option>
                     </select>
                     <span class="input-group-addon bg-gray"> - </span>
-                    <input type="text" name="m_tel" class="form-control" value="4375" required="required">
+                    <input type="text" name="m_tel2"  class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> - </span>
-                    <input type="text" name="m_tel" class="form-control" value="2772" required="required">
+                    <input type="text" name="m_tel3"  class="form-control" required="required">
+                  </div>
+                  <br>
+                    <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 종합 연락처</span>
+                    <input type="text" name="m_tel" class="form-control" value="${member.m_tel}" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 우편번호</span>
-                    <input type="text" name="m_addr1" class="form-control" value="194-763" required="required">
+                    <input type="text" name="m_addr1" class="form-control"  required="required">
                     <span class="input-group-btn">
                       <button class="btn btn-warning btn-flat" type="button">우편 번호 검색</button>
                     </span>
                   </div>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 우편번호 주소</span>
-                    <input type="text" name="m_addr1" class="form-control" value="서울시 동작구 사당동" required="required">
+                    <input type="text" name="m_addr2" class="form-control" required="required">
                   </div>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 상세 주소</span>
-                    <input type="text" name="m_addr1" class="form-control" value="돌돌이 아파트 102동  905호" required="required">
+                    <input type="text" name="m_addr3" class="form-control" required="required">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-location-arrow"></i>종합 주소</span>
+                    <input type="text" name="m_addr" class="form-control" value="${member.m_addr}" readonly="readonly">
                   </div>
                   <br>
                 </div><!-- /.box-body -->
@@ -140,3 +214,5 @@
       </div>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+
+
