@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import dto.BambooDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import paging.PagingBean;
+import paging.dto.PagingDto;
 
 public class Bb_List_Command implements CommandInterface 
 {
@@ -37,7 +39,19 @@ public class Bb_List_Command implements CommandInterface
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) 
 	{
 
-		req.setAttribute("bblist", bblist(req));
+			req.setAttribute("bblist", bblist(req));
+		 
+			// 페이징 관련 블록
+			// 페이징 관련 parameter 받아오기
+			int nowPage=0, nowBlock=0;
+				if(req.getParameter("nowPage") != null){nowPage = Integer.parseInt(req.getParameter("nowPage"));}
+				if(req.getParameter("nowBlock") != null){nowBlock = Integer.parseInt(req.getParameter("nowBlock"));}
+			PagingBean pbean = new PagingBean();
+			// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
+			PagingDto paging = pbean.Paging(bblist(req).size(), 10, nowPage, 10,  nowBlock);
+			//페이징 정보 보내기
+			req.setAttribute("paging", paging);
+			
 		
 		return "/WEB-INF/bamboo/u_bb_list.jsp";
 	}
@@ -59,8 +73,8 @@ public class Bb_List_Command implements CommandInterface
 			String sOption = req.getParameter("sOption");
 			String table_search = req.getParameter("table_search");
 			
-			System.out.println(sOption);
-			System.out.println("테이블 서치 : " + table_search);
+			//System.out.println(sOption);
+			//System.out.println("테이블 서치 : " + table_search);
 			
 			if(null==table_search){
 				

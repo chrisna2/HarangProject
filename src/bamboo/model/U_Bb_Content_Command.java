@@ -14,6 +14,8 @@ import dto.DlikeDTO;
 import dto.LikeDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import paging.PagingBean;
+import paging.dto.PagingDto;
 
 public class U_Bb_Content_Command implements CommandInterface {
 
@@ -43,10 +45,28 @@ public class U_Bb_Content_Command implements CommandInterface {
 
 		String sql = null;
 
+		Bb_List_Command bb = new Bb_List_Command();
+		req.setAttribute("bblist", bb.bblist(req));
+		
+		// 페이징 관련 블록
+		// 페이징 관련 parameter 받아오기
+		int nowPage = 0, nowBlock = 0;
+		if (req.getParameter("nowPage") != null) {
+			nowPage = Integer.parseInt(req.getParameter("nowPage"));
+		}
+		if (req.getParameter("nowBlock") != null) {
+			nowBlock = Integer.parseInt(req.getParameter("nowBlock"));
+		}
+		PagingBean pbean = new PagingBean();
+		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
+		PagingDto paging = pbean.Paging(bb.bblist(req).size(), 10, nowPage, 10, nowBlock);
+		// 페이징 정보 보내기
+		req.setAttribute("paging", paging);
+
 		try {
-			
+
 			con = pool.getConnection();
-			
+
 			updateCnt(req, con, bb_num);
 
 			sql = "select * from tbl_bamboo where bb_num =?";
@@ -87,8 +107,7 @@ public class U_Bb_Content_Command implements CommandInterface {
 
 		req.setAttribute("bbcon", bbdto);
 
-		Bb_List_Command bb = new Bb_List_Command();
-		req.setAttribute("bblist", bb.bblist(req));
+		
 
 		U_Br_List_Command br = new U_Br_List_Command();
 		req.setAttribute("brlist", br.brlist(req));
@@ -204,26 +223,26 @@ public class U_Bb_Content_Command implements CommandInterface {
 	private void updateCnt(HttpServletRequest req, Connection con, String bb_number) {
 
 		HttpSession session = req.getSession();
-		
+
 		String bb_num = bb_number;
-		
-		//System.out.println("updateCnt에서 실험 bb_num :" + bb_num);
-		
+
+		// System.out.println("updateCnt에서 실험 bb_num :" + bb_num);
+
 		try {
-		
-			if(session.getAttribute(bb_num) != "read"){
-				
+
+			if (session.getAttribute(bb_num) != "read") {
+
 				String sql = "update tbl_bamboo set bb_count = bb_count+1 where bb_num =? ";
-				
-				//System.out.println(sql);
+
+				// System.out.println(sql);
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, bb_num);
-				
+
 				pstmt.executeUpdate();
 				session.setAttribute(bb_num, "read");
 			}
-			
-					} catch (Exception err) {
+
+		} catch (Exception err) {
 			System.out.println("updateCnt에서 에러 :  ");
 			err.printStackTrace();
 		}

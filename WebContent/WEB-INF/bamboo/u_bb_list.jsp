@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -18,8 +20,18 @@
 	function fnBbpost() {
 		document.bbpost.submit()
 	}
-
-	
+	///////////////// 페이지 관련 javascript function////////////////////
+	function prevPage() {
+		document.getElementById("prevPage").submit();
+	}
+	function nextPage() {
+		document.getElementById("nextPage").submit();
+	}
+	function goPage(nowPage) {
+		document.getElementById("page").value = nowPage;
+		document.getElementById("goPage").submit();
+	}
+	/////////////////////////////끝//////////////////////////////////
 </script>
 
 
@@ -68,7 +80,7 @@
 							<form action="/HarangProject/bamboo" name="bbnewlist"
 								method="post">
 								<input type="hidden" name="cmd" value="BB_LIST"> <input
-									type="hidden" name="table_search" value="bbnewlist"> 
+									type="hidden" name="table_search" value="bbnewlist">
 
 							</form>
 							<!-- 최신글 보기를 위한 form 끝 -->
@@ -77,20 +89,20 @@
 							<form action="/HarangProject/bamboo" name="bbhotlist"
 								method="post">
 								<input type="hidden" name="cmd" value="BB_LIST"> <input
-									type="hidden" name="table_search" value="bbhotlist"> 
+									type="hidden" name="table_search" value="bbhotlist">
 
 							</form>
 							<!-- 인기글 보기를 위한 form 끝 -->
 
 							<!-- 글쓰기를 위한 form 시작 -->
 							<form action="/HarangProject/bamboo" name="bbpost" method="post">
-								<input type="hidden" name="cmd" value="U_BB_POST"> 
+								<input type="hidden" name="cmd" value="U_BB_POST">
 
 							</form>
 							<!-- 인기글 보기를 위한 form 끝 -->
 
 
-							
+
 
 
 						</div>
@@ -101,47 +113,36 @@
 
 
 							<tr>
-
-
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>제목</th>
 								<th>조회수</th>
-
-
+								
 							</tr>
 
 
-							<c:if test="${bblist.size()>0 }">
-								<c:forEach var="i" begin="0" end="${bblist.size()-1 }">
-
-									<tr>
-
-										<td>${bblist[i].bb_nickname}</td>
-										<td><fmt:formatDate value="${bblist[i].bb_regdate}"
-												pattern="yyyy-MM-dd" /></td>
-										<td><a
-											href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bblist[i].bb_num}"
-											style="color: black">${bblist[i].bb_title}</a></td>
-										<td>${bblist[i].bb_count}</td>
-
-									</tr>
-
-
-								</c:forEach>
-							</c:if>
-							<!-- 
-							<tr>
-							
-								<td>${bbdto.bb_num}</td>
-								<td>${bbdto.bb_nickname}</td>
-								<td>${bbdto.bb_regdate}</td>
-								<td><a href="#" class="" style="color: black">${bbdto.bb_title}</a></td>
-								<td>${bbdto.bb_count}</td>
-								<td>20</td>
-
-							</tr>
-							 -->
+							<c:choose>
+								<c:when test="${fn:length(bblist) eq 0}">
+								게시물이 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${bblist}" var="bblist"
+										begin="${paging.beginPerPage}"
+										end="${paging.beginPerPage + paging.numPerPage -1}"
+										varStatus="status">
+										<tr>
+											<td>${bblist.bb_nickname}</td>
+											<td><fmt:formatDate value="${bblist.bb_regdate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td><a
+												href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bblist.bb_num}"
+												style="color: black">${bblist.bb_title}</a></td>
+											<td>${bblist.bb_count}</td>
+											
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 
 						</table>
 					</div>
@@ -152,18 +153,32 @@
 
 
 
+						<!-- 페이징 버튼 -->
+						<div class="box-footer clearfix">
+							<ul class="pagination pagination-sm no-margin pull-right">
+								<c:if test="${paging.nowBlock > 0}">
+									<li><a href="javascript:prevPage()">&laquo;</a></li>
+								</c:if>
+								<c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}"
+									step="1">
+									<!-- if문 추가 : 20170615 -->
+									<c:if
+										test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}">
+										<li><a
+											href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+									</c:if>
+									<!-- 끝 -->
+								</c:forEach>
+								<c:if test="${paging.totalBlock > paging.nowBlock +1}">
+									<li><a href="javascript:nextPage()">&raquo;</a></li>
+								</c:if>
+							</ul>
+						</div>
+						<!-- 페이징 버튼 -->
 
+						<form action="/HarangProject/bamboo" name="search" method="post">
 
-						<ul class="pagination pagination-sm no-margin pull-right">
-							<li><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
-
-						<form action="/HarangProject/bamboo?cmd=BB_LIST" name="search"
-							method="post">
+							<input type="hidden" name="cmd" value="BB_LIST">
 							<div class="input-group">
 
 								<select name="sOption" class="form-control input-sm"
@@ -191,14 +206,31 @@
 	</section>
 </div>
 
-
-
-
-
+<!-- 페이징 관련 폼 ----------------------------------------------------------------------->
+<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="BB_LIST" /> <input type="hidden"
+		name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}" />
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}" />
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="BB_LIST" /> <input type="hidden"
+		name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}" />
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}" />
+</form>
+<!-- 페이징 : 해당 페이지로 이동하는 폼 -->
+<form id="goPage" method="post" action="/HarangProject/bamboo">
+	<input type="hidden" name="cmd" value="BB_LIST" /> <input
+		type="hidden" name="nowPage" value="" id="page" /> <input
+		type="hidden" name="nowBlock" value="${paging.nowBlock}" />
+</form>
+<!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
 <!-- /.col -->
 
 <!-- /.content-wrapper -->
 <%@ include file="../include/footer.jsp"%>
+
 
 <!-- ★★★Ajax를 배우면 이해 할 수 있는 곳 : 여기에 데이터를 삽입합니다. -->
 <script type="text/javascript">
