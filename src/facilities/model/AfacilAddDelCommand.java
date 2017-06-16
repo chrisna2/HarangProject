@@ -36,7 +36,6 @@ public class AfacilAddDelCommand implements CommandInterface {
 		String addFacil = request.getParameter("addFacil");
 		String deleteOK = request.getParameter("deleteOK");
 		
-		System.out.println("AfacilAddDelCommand 접속");
 		loadlist(request);
 		
 		if(null != delete){
@@ -56,8 +55,6 @@ public class AfacilAddDelCommand implements CommandInterface {
 			
 		}
 		
-		System.out.println("1");
-		
 		return "/WEB-INF/facil/a_facilities_adddel.jsp";
 	}
 	
@@ -66,8 +63,27 @@ public class AfacilAddDelCommand implements CommandInterface {
 	// 기본 페이지 출력.
 	public void loadlist(HttpServletRequest request){
 		
-		String sql = "SELECT * FROM tbl_playground";
-		ArrayList list = new ArrayList();
+		// 검색을 위한 파라미터를 가져온다.
+		String keyfield = request.getParameter("keyfield");
+		String keyword = request.getParameter("keyword");
+		
+		// 기본 쿼리문.
+		String sql= null;
+		ArrayList<Object> list = new ArrayList<Object>();
+		
+		// 검색을 위한 if문.
+		if(null != keyfield){
+			sql = "SELECT * FROM tbl_playground "
+				+ "WHERE " 
+				+ keyword
+				+ " LIKE '%" + keyfield + "%'";
+			
+			System.out.println(2);
+			System.out.println(sql);
+		}
+		else{
+			sql = "SELECT * FROM tbl_playground";	
+		}
 		
 		try {
 			pool = DBConnectionMgr.getInstance();
@@ -76,7 +92,8 @@ public class AfacilAddDelCommand implements CommandInterface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+				
+				
 				PlaygroundDTO pgdto = new PlaygroundDTO();
 
 				pgdto.setPg_num(rs.getString("pg_num"));
@@ -86,6 +103,7 @@ public class AfacilAddDelCommand implements CommandInterface {
 				pgdto.setPg_point(rs.getInt("pg_point"));
 
 				list.add(pgdto);
+				
 			}
 
 		} catch (Exception e) {
@@ -94,7 +112,10 @@ public class AfacilAddDelCommand implements CommandInterface {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
+		
 		request.setAttribute("list", list);
+		request.setAttribute("keyfield", keyfield);
+		request.setAttribute("keyword", keyword);
 	}
 	
 	//시설 삭제

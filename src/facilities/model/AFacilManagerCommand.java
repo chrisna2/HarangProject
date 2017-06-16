@@ -54,46 +54,15 @@ public class AFacilManagerCommand implements CommandInterface {
 		ArrayList list = new ArrayList();
 
 		String keyword = request.getParameter("keyword");
-		String keyfield = request.getParameter("keyfiled");
-
-		// 테이블에서 삭제 항목을 선택하였을때 받게 되는 Parameter, input hidden으로 전달.
-
-		/*
-		 * if(null != delete){ sql =
-		 * "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
-		 * +" FROM tbl_pg_member m, tbl_playground p"
-		 * +" WHERE m.pg_num = p.pg_num" +" AND m.pgm_num='" +delete
-		 * +"' ORDER BY m.pgm_num DESC"; }
-		 */
+		String keyfield = request.getParameter("keyfield");
 
 		// 초기 접속시 출력되는 테이블 SQL QUERY
 		if (null == (keyfield)) {
-
-			/*
-			 * sql = "SELECT pgm_num, pg.pgm_regdate, pg.m_id, " +
-			 * "(SELECT pg_type FROM tbl_playground WHERE pg_num = pg.pg_num) AS pgm_ftype, "
-			 * +
-			 * "(SELECT pg_name FROM tbl_playground WHERE pg_num = pg.pg_num) AS pgm_fname, "
-			 * + "pg.pgm_date, pg.pgm_timecode " +
-			 * "FROM tbl_pg_member pg ORDER BY pg.pgm_regdate DESC";
-			 */
-
 			sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
 					+ " FROM tbl_pg_member m, tbl_playground p" + " WHERE m.pg_num = p.pg_num ORDER BY m.pgm_num DESC";
 		}
 
 		else {
-			// 이전 쿼리문
-			// 검색 셀렉트 예약번호, 학번[ID], 시설 종류, 시설명, 호수, 예약날짜
-			/*
-			 * sql = "SELECT pgm_num, pg.pgm_regdate, pg.m_id, "
-			 * +"(SELECT pg_type FROM tbl_playground WHERE pg_num = pg.pg_num) AS pgm_ftype, "
-			 * +"(SELECT pg_name FROM tbl_playground WHERE pg_num = pg.pg_num) AS pgm_fname, "
-			 * +"pg.pgm_date, pg.pgm_timecode " +"FROM tbl_pg_member pg WHERE "
-			 * +keyword +" like '%" +keyfield
-			 * +"%' ORDER BY pg.pgm_regdate DESC";
-			 */
-
 			// 검색 SQL QUERY
 			sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
 					+ " FROM tbl_pg_member m, tbl_playground p" + " WHERE m.pg_num = p.pg_num" + " AND " + keyword
@@ -185,23 +154,9 @@ public class AFacilManagerCommand implements CommandInterface {
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pgm_num);
-			pstmt.executeUpdate();
-			System.out.println(sql);
 			
-/*			while (rs.next()) {
-
-				PgMemberDTO pgdto = new PgMemberDTO();
-
-				pgdto.setPgm_num(rs.getString("m.pgm_num"));
-				pgdto.setPgm_regdate(rs.getString("m.pgm_regdate"));
-				pgdto.setM_id(rs.getString("m.m_id"));
-				pgdto.setPg_type(rs.getString("p.pg_type"));
-				pgdto.setPg_name(rs.getString("p.pg_name"));
-				pgdto.setPgm_date(rs.getString("m.pgm_date"));
-				pgdto.setPgm_timecode(rs.getString("m.pgm_timecode"));
-
-				list.add(pgdto);
-			}*/
+			// DELETE는 executeUpdate. return값은 int.
+			pstmt.executeUpdate(); 
 
 		} catch (Exception e) {
 			System.out.println("a_facilities_manager.jsp : " + e);

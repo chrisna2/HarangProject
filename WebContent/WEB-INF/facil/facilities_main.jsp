@@ -57,21 +57,27 @@
 									<th>시설명</th>
 									<th>호수</th>
 									<th>예약날짜</th>
-									<th>예약시간</th>
+									<th>예약 포인트</th>
 									<th>선택</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>l00001</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<td>15~17시</td>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
+							<c:forEach items="${requestScope.list}" var="p" varStatus="i">
+									<tr class="text-blue">
+										<td>${p.pgm_num}</td>
+										<td>운동장</td>
+										<td>${p.pg_type}</td>
+										<td>${p.pg_name}</td>
+										<td>${p.pgm_date}</td>
+										<td>${p.payoutpoint}</td>
+										<td>
+										<form method="post" action="/HarangProject/facil?cmd=FacilMain">
+											<input type="hidden" name="delete" value="${p.pgm_num}">
+											<input type="submit" class="btn btn-primary" value="선택">
+										</form>
+										</td>
+									</tr>
+								</c:forEach>
 
 
 							</tbody>

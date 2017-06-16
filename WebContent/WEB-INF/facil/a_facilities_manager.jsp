@@ -103,8 +103,7 @@
 							</ul>
 						</div>
 
-						<!-- 셀렉트  -->
-
+						<!-- 검색문 / 셀렉트  -->
 						<form action="/HarangProject/facil?cmd=AFacilManager" name="search" method="post">
 							<div class="row">
 								
@@ -162,7 +161,7 @@
 								
 								<div class="col-md-3" align="center">
 									<input type="text" 
-										   name="keyfiled"
+										   name="keyfield"
 										   class="form-control input-sm  pull-left" 
 										   style="width: 150px;"
 										   placeholder="Search" />
