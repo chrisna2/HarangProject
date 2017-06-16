@@ -55,7 +55,15 @@
 							<!-- 맨위에  taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" 추가해주세요!! -->
 							<c:choose>
 								<c:when test="${fn:length(list) eq 0}">
-								게시물이 없습니다.
+								<tr>
+									<td></td>
+									<td>게시물이 없습니다.<td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									</tr>
 								</c:when>
 								<c:otherwise>
 									<c:forEach items="${list}" var="list" 

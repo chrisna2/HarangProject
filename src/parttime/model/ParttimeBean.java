@@ -35,6 +35,20 @@ public class ParttimeBean {
 		}
 	}
 	
+	public MemberDTO getLoginInfo(HttpServletRequest req){
+		MemberDTO login = null;
+		MemberDTO member = (MemberDTO)req.getSession().getAttribute("member");
+		MemberDTO admin = (MemberDTO)req.getSession().getAttribute("admin");
+		
+		if (admin != null){ 
+			login = admin;
+		}else{ 
+			login = member;
+		}
+		
+		return login;
+	}
+	
 	/**
 	 * DB에서 알바 모집 게시판의 모든 글 정보를 검색하는 메서드
 	 */

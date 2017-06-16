@@ -1,7 +1,7 @@
 package dto;
 
 public class MessageDTO {
-	private String list_num;
+	private int list_num;
 	private String t_num;
 	private String t_title;
 	private String t_content;
@@ -11,13 +11,15 @@ public class MessageDTO {
 	private String t_read_del;
 	private String m_sender;
 	private String m_reader;
+	private String m_sender_name;
+	private String m_reader_name;
 	
 	
-	public String getList_num() {
+	public int getList_num() {
 		return list_num;
 	}
-	public void setList_num(String list_num) {
-		this.list_num = list_num;
+	public void setList_num(int i) {
+		this.list_num = i;
 	}
 	public String getT_num() {
 		return t_num;
@@ -73,6 +75,18 @@ public class MessageDTO {
 	}
 	public void setM_reader(String m_reader) {
 		this.m_reader = m_reader;
+	}
+	public String getM_sender_name() {
+		return m_sender_name;
+	}
+	public void setM_sender_name(String m_sender_name) {
+		this.m_sender_name = m_sender_name;
+	}
+	public String getM_reader_name() {
+		return m_reader_name;
+	}
+	public void setM_reader_name(String m_reader_name) {
+		this.m_reader_name = m_reader_name;
 	}
 	
 	

@@ -24,6 +24,9 @@ private CommandFactory(){}
 		else if(cmd.equals("TOME")){
 			return new ToMeCommand();
 		}
+		else if(cmd.equals("READ")){
+			return new ReadCommand();
+		}
 		else{
 			return null;
 		}

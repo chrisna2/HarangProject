@@ -117,6 +117,7 @@
                </ul>
             <h4>대나무 숲</h4>
             <ul>
+            
                  <li>user side</li>
                  <li><a href="/HarangProject/bamboo?cmd=BB_LIST">메인 페이지</a></li>
                  <li>admin side</li>
@@ -131,6 +132,8 @@
               </ul>
                  <h4>강의평가</h4>
                 <ul>
+                
+                
                  <li>user side</li>
                  <li><a href="/HarangProject/impage?cmd=main">강의평가 메인 페이지</a></li>
                  <li>admin side</li>
@@ -144,6 +147,7 @@
                  <li><a href="/HarangProject/harangdin?cmd=adminMain">하랑딘 관리자 메인</a></li>
               </ul>
               
+                   
                    
             <h4>시설관리</h4>
             <ul>

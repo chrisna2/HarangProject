@@ -34,43 +34,36 @@
                   <h3 class="box-title">새 쪽지를 작성하세요.</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
+                <form name="send" method="post" action="/HarangProject/message?cmd=SENT">
                   <div class="row">
                   	  <div class=" col-md-2 form-group">
-                  	  	<input type="checkbox"/>
+                  	  	<input id="toMe" type="checkbox" onclick ="fnToMe('${member.m_name}')"/>
                   	    <label>내게 쓰기</label>
 	                  </div>
 	                  <div class=" col-md-5 form-group">
-	                    <input class="form-control" placeholder="받는사람:"/>
+	                    <input class="form-control" id="reader" placeholder="받는사람 입력 후 오른쪽에서 학번 선택" value="" onblur="fnSearch()"/>
 	                  </div>
 	                  <div class=" col-md-5 form-group">
-	                    <select class="form-control">
+	                    <select class="form-control" name="m_reader" id="display">
 	                    	<option> 이름중복확인</option>
-	                    	<option> 학번1</option>
-	                    	<option> 학번2</option>
-	                    	<option> 학번3</option>
+	                    	
 	                    </select>
 	                  </div>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" placeholder="제목:"/>
+                    <input class="form-control" name="t_title" placeholder="제목:"/>
                   </div>
                   <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px">
+                    <textarea id="compose-textarea" name="t_content" class="form-control" style="height: 300px">
                       
                     </textarea>
                   </div>
-                  <div class="form-group">
-                    <div class="btn btn-default btn-file">
-                      <i class="fa fa-paperclip"></i> Attachment
-                      <input type="file" name="attachment"/>
-                    </div>
-                    <p class="help-block">Max. 32MB</p>
-                  </div>
+                </form>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                   <div class="pull-right">
                     <button class="btn btn-default"><i class="fa fa-times"></i> 삭제하기</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 보내기</button>
+                    <button type="submit" class="btn btn-primary" onclick="fnSend()"><i class="fa fa-envelope-o"></i> 보내기</button>
                   </div>
                 </div><!-- /.box-footer -->
                 <br><br>
@@ -79,7 +72,8 @@
               
               <!-- 오른쪽에 메시지 탭 바 구성 -->
              <div class="col-md-3">
-              <%@ include file="message_bar_post.jsp" %>
+            <a href="/HarangProject/message?cmd=POST" class="btn btn-primary btn-block margin-bottom">쪽지쓰기</a>
+	          <div class="box box-solid">
                 <div class="box-body no-padding">
                   <ul class="nav nav-pills nav-stacked">
                     <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">12</span></a></li>
@@ -90,6 +84,7 @@
                   </ul>
                 </div><!-- /.box-body -->
               </div><!-- /. box -->
+           	</div>
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
@@ -97,3 +92,66 @@
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+<script>
+var httpRequest = null;
+
+function sendRequest(method, url, param, callback){
+	httpRequest = new XMLHttpRequest();
+	
+	var httpMethod = method ? method : "GET";
+	//method가 null이면 method값으로 아니면 "Get"으로
+	if(httpMethod != "Get" && httpMethod != "POST"){
+		httpMethod="GET";
+	}//오타방지
+	
+	var httpParam = (param == null || param == "")?null : param;
+	//param이 없으면 null처리 있으면 그대로
+	if(httpMethod == "GET" && httpParam != null){
+		url = url + "?" + httpParam;
+	}
+	
+	httpRequest.open(httpMethod, url, true);
+	httpRequest.onreadystatechange = callback;
+	httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=utf-8");
+	httpRequest.send(httpMethod=="POST"?httpParam:null);
+	
+}
+
+	function fnSend(){
+		if(confirm("정말 보내시겠습니까?\n보낸 메시지는 수정이 불가능합니다.")==true){
+			document.send.submit();
+		}else{
+			return;
+		}
+	}
+	
+	function fnSearch(){
+		var m_name = document.getElementById("reader").value;
+		var param = "m_name=" + m_name;
+		
+		sendRequest("POST", "/HarangProject/m_search", param, callback );
+	}
+	
+	function callback(){
+		if(httpRequest.readyState == 4){
+			if(httpRequest.status == 200){
+				var idArray = httpRequest.responseText.split("\n");
+				$("#display option").remove();
+				for(var i=0;i<idArray.length-1;i++){
+					var option = $("<option>"+idArray[i]+"</option>");
+	                $('#display').append(option);
+				}
+			}
+			else{
+				alert(httpRequest.status);
+			}
+		}
+	}
+	function fnToMe(m_name){
+		var cbx = document.getElementById("toMe");
+		if(cbx.checked == true){
+			document.getElementById("reader").value = m_name;
+			document.getElementById("reader").onfocus();
+		}
+	}
+</script>

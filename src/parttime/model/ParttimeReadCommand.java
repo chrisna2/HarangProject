@@ -20,12 +20,8 @@ public class ParttimeReadCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 	MessageBean mbean = new MessageBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
-		// 로그인 정보
-		String m_id = "";
-		MemberDTO member = (MemberDTO)req.getSession().getAttribute("member");
-		MemberDTO admin = (MemberDTO)req.getSession().getAttribute("admin");
-		if (admin != null){ m_id = admin.getM_id();}
-		else{ m_id = member.getM_id();}
+		MemberDTO member = bean.getLoginInfo(req); // 로그인 정보
+		String m_id = member.getM_id();
 		
 		/** Read!!!!!! 글 정보 */
 		String p_num = (String) req.getParameter("p_num"); // 글번호 parameter		
@@ -123,7 +119,7 @@ public class ParttimeReadCommand implements CommandInterface {
 			
 			// 지원 확인 메시지 보내기 : 관리자 -> 글쓴이
 			String title = "\"" + dto.getP_title() + "\"글에 " + member.getM_name() 
-						+ "님이 지원하였습니다. 해당 글을 확인해주세요." ;
+						+ "님이 지원하였습니다." ;
 			String content = "\"" + dto.getP_title() + "\"글에 " + member.getM_name() 
 					+ "님이 지원하였습니다. 해당 글에서 이력서를 확인해주세요." ;
 			mbean.postMessage(title, content, "admin02", m_id);

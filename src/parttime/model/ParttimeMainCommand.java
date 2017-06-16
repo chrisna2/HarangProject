@@ -18,17 +18,13 @@ import paging.dto.PagingDto;
 public class ParttimeMainCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
-		String m_id = "";
-		MemberDTO member = (MemberDTO)req.getSession().getAttribute("member");
-		MemberDTO admin = (MemberDTO)req.getSession().getAttribute("admin");
-		if (admin != null){ m_id = admin.getM_id();}
-		else{ m_id = member.getM_id();}
+		MemberDTO member = bean.getLoginInfo(req); // 로그인 정보
 		
 		delete(req); // 글이 삭제된 경우
 		getList(req); // 게시판에 띄울 글 목록을 처리
 		
 		// 페이지 이동
-		if ("admin02".equals(m_id)) { // 관리자면 a_parttime_main.jsp
+		if ("admin02".equals(member.getM_id())) { // 관리자면 a_parttime_main.jsp
 			return "WEB-INF/parttime/a_parttime_main.jsp";
 		} else { // 회원이면 parttime_main.jsp
 			return "/WEB-INF/parttime/parttime_main.jsp";

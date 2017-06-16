@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../include/header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
@@ -40,164 +41,102 @@
                   </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body no-padding">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                    <div class="pull-right">
-                      1-50/200
-                      <div class="btn-group">
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                      </div><!-- /.btn-group -->
-                    </div><!-- /.pull-right -->
-                  </div>
+                  <%@ include file="message_paging.jsp" %>
+                  
                   <div class="table-responsive mailbox-messages">
                     <table class="table table-hover table-striped">
                       <tbody>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"></td>
-                          <td class="mailbox-date">5 mins ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">28 mins ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">11 hours ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"></td>
-                          <td class="mailbox-date">15 hours ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">Yesterday</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">2 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">2 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"></td>
-                          <td class="mailbox-date">2 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"></td>
-                          <td class="mailbox-date">2 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"></td>
-                          <td class="mailbox-date">2 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">4 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"></td>
-                          <td class="mailbox-date">12 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">12 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">14 days ago</td>
-                        </tr>
-                        <tr>
-                          <td><input type="checkbox" /></td>
-                          <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                          <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                          <td class="mailbox-date">15 days ago</td>
-                        </tr>
+	                      <tr>
+	                      	<th></th>
+	                      	<th>#</th>
+	                      	<th>받는사람</th>
+	                      	<th>제목</th>
+	                      	<th>날짜</th>
+	                      </tr>
+                      <c:choose>
+								<c:when test="${fn:length(list) eq 0}">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>보낸 쪽지가 없습니다.<td>
+									<td></td>
+								</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var="list" 
+											   begin="${paging.beginPerPage}" 
+											   end="${paging.beginPerPage + paging.numPerPage -1}" 
+											   varStatus="status">
+										<tr>
+				                          <td><input type="checkbox" /></td>
+				                          <td>${list.list_num}</td>
+				                          <td class="mailbox-name" >${list.m_reader_name}</td>
+				                          <td class="mailbox-subject" style="width: 50%"><a href="javascript:fnRead('${list.t_num}');">${list.t_title}</a></td>
+				                          <td class="mailbox-date">${list.t_send_date}</td>
+				                        </tr>
+									</c:forEach>
+							</c:otherwise>
+							</c:choose>
                       </tbody>
                     </table><!-- /.table -->
                   </div><!-- /.mail-box-messages -->
                 </div><!-- /.box-body -->
+                
                 <div class="box-footer no-padding">
-                  <div class="mailbox-controls">
-                    <!-- Check all button -->
-                    <button class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>                    
-                    <div class="btn-group">
-                      <button class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                      <button class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                    </div><!-- /.btn-group -->
-                    <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                    <div class="pull-right">
-                      1-50/200
-                      <div class="btn-group">
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                        <button class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                      </div><!-- /.btn-group -->
-                    </div><!-- /.pull-right -->
-                  </div>
+                  <%@ include file="message_paging.jsp" %>
                 </div>
               </div><!-- /. box -->
               </div><!-- /.col -->
               
               <!-- 오른쪽에 메시지 탭 바 구성 -->
-              <%@ include file="message_bar_sent.jsp" %>
-              
+              <div class="col-md-3">
+              	<a href="/HarangProject/message?cmd=POST" class="btn btn-primary btn-block margin-bottom">쪽지쓰기</a>
+	          	  <div class="box box-solid">
+	                <div class="box-body no-padding">
+	                  <ul class="nav nav-pills nav-stacked">
+	                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">12</span></a></li>
+	                    <li class="active"><a href="/HarangProject/message?cmd=SENT"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
+	                    <li><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 </a></li>
+	                  </ul>
+	                </div><!-- /.box-body -->
+                </div>
+              </div><!-- /. box -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      
+      <!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/message?cmd=SENT">
+	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/message?cmd=SENT">
+	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
+</form>
+<!-- 메시지 읽기 -->
+<form name="read" method="post" action="/HarangProject/message?cmd=READ">
+	<input type="hidden" name="t_num" value="" id="t_num"/>
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+	<input type="hidden" name="tab" value="sent"/>
+</form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+<script>
+///////////////// 페이지 관련 javascript function////////////////////
+function prevPage(){
+	document.getElementById("prevPage").submit();
+}
+function nextPage(){
+	document.getElementById("nextPage").submit();
+}
+/////////////////////////////////////////////////////////////////
+
+function fnRead(t_num){
+	document.getElementById("t_num").value = t_num;
+	document.read.submit();
+}
+</script>

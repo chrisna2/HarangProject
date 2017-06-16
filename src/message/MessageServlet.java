@@ -18,13 +18,17 @@ import message.model.CommandInterface;
 public class MessageServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
 		doPost(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+
 		String cmd = req.getParameter("cmd");
 		String url = null;
-
+		
+		
 		CommandInterface command = CommandFactory.newInstance().createCommand(cmd);
 		
 		url = (String)command.processCommand(req, resp);
