@@ -7,7 +7,7 @@ public class ImDTO {
 	String lm_regdate;
 	String lm_group;
 	String lm_year;
-	String lm_team;
+	String lm_term;
 	String lm_star;
 	String lm_hw;
 	String lm_attend;
@@ -37,11 +37,12 @@ public class ImDTO {
 	public void setLm_year(String lm_year) {
 		this.lm_year = lm_year;
 	}
-	public String getLm_team() {
-		return lm_team;
+	
+	public String getLm_term() {
+		return lm_term;
 	}
-	public void setLm_team(String lm_team) {
-		this.lm_team = lm_team;
+	public void setLm_term(String lm_term) {
+		this.lm_term = lm_term;
 	}
 	public String getLm_star() {
 		return lm_star;

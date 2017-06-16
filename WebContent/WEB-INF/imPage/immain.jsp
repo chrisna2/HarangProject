@@ -42,20 +42,26 @@
                       <th>교수이름</th>
                       <th>평가</th>
                     </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>자바</td>
-                      <td>가나다</td>
-                      <td>평가완료</td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>c#</td>
-                      <td>
-                       	라마바
-                      </td>
-                      <td>평가미완료</td>
-                    </tr>
+                   
+                   
+					
+          			
+                      <c:forEach var="im" items="${requestScope.imlist}">
+                      <tr>
+                    
+                        <td>${im.l_num}</td>
+                        <td>${im.l_name }</td>
+                        <td>${im.l_teacher}</td>
+                       
+                        <td>
+						  <a href="/HarangProject/impage?cmd=make&l_num=${im.l_num}">평가미완료</a>
+					 	</td>           
+                      </tr>
+                     </c:forEach>
+                 
+                  
+                   
+                   
                    
                   </table>
                 </div><!-- /.box-body -->
@@ -107,31 +113,25 @@
                         <th>교수명</th>
                         <th>작성자</th>
                     </tr>
-                    <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                      <td>
-               			      ☆☆☆☆☆
-                      </td>
-                      <td>2016년도</td>
+                    
+                      <c:forEach var="all" items="${requestScope.alllist}">
+                      <tr>
+                    
+                        <td>${all.lm_num}</td>
+                        <td>${all.l_name }</td>
+                        <td>${all.lm_star}</td>
+                        <td>${all.lm_year}</td>
+                        <td>${all.lm_term}</td>
+                        <td>${all.l_teacher}</td>
+                        <td>${all.m_name}</td>
+                     
+                       
+                               
+                      </tr>
+                     </c:forEach>
+                    
                   
-                      <td>1학기</td>
-                      <td>김만종</td>
-                      <td>스프링</td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-             			
-                      <td>
-                      Update software
-                      </td>
-                      <td>	        ★☆☆☆☆</td>
-                      <td>2014년도</td>
-                  
-                      <td>2학기</td>
-                      <td>김지성</td>
-                      <td>선주박</td>
-                    </tr>
+                   
                    
                     
                     
