@@ -78,7 +78,9 @@
 											
 									<tr>
 										<td>${i.b_num }</td>
-										<td>${i.b_name }</td>
+										<td>
+											<a href="javascript:fnRead('${list.b_num}')" id="read">${list.b_name}</a>
+										</td>
 										<td>${i.b_writer }</td>
 										<td>${i.b_pub }</td>
 										<td>${i.b_want }</td>
@@ -98,7 +100,9 @@
 											<li><a href="javascript:prevPage()">&laquo;</a></li>
 										</c:if>
 									  	<c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+									  		<c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
 											<li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+											</c:if>
 										</c:forEach>
 										<c:if test="${paging.totalBlock > paging.nowBlock +1}">
 											<li><a href="javascript:nextPage()">&raquo;</a></li>
@@ -134,6 +138,13 @@
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/harangdin?cmd=main">
 	<input type="hidden" name="nowPage" value="" id="page"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
+
+<!-- 글 읽기 -->
+<form name="read" method="post" action="/HarangProject/harangdin?cmd=main">
+	<input type="hidden" name="b_num" value="" id="b_num"/>
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
 

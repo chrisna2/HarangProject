@@ -16,7 +16,7 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-public class mainCommand implements CommandInterface {
+public class HarangdinMainCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
 	Connection con;
