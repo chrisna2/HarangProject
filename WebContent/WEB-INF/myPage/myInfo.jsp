@@ -93,10 +93,10 @@
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-picture-o"></i> 이미지</span>
 	                <span class="input-group-addon">
-	                   <input type="file" id="exampleInputFile" name="upFile" required="required">
+	                   <input type="file" id="imgInp" name="upFile" required="required">
 	                </span>
                     <span class="input-group-addon  bg-gray">
-	                    <img src="${member.m_photo}" class="img-circle" height="90" width="90" alt="User Image"/>
+	                    <img src="${member.m_photo}" id="local" class="img-rounded" height="120" width="90" alt="User Image"/>
 	                    <input type="hidden" name="m_photo" value="${member.m_photo}">
 	                </span>
                   </div>
@@ -178,7 +178,7 @@
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 우편번호</span>
                     <input type="text" name="m_addr1" class="form-control"  required="required">
                     <span class="input-group-btn">
-                      <button class="btn btn-warning btn-flat" type="button">우편 번호 검색</button>
+                      <button class="btn btn-warning btn-flat" type="button" id="btnPopup">우편 번호 검색</button>
                     </span>
                   </div>
                   <div class="input-group">
@@ -198,7 +198,7 @@
                 </div><!-- /.box-body -->
                 
                  <div class="box-footer" align="right">
-                    <input type="button" class="btn" value="뒤로가기">
+                    <input type="button" class="btn" onclick="location.href=history.go(-1)" value="뒤로가기">
                     <input type="reset" class="btn" value="리셋">
                     <input type="submit" class="btn btn-primary" value="개인정보 수정">
                 </div>
@@ -210,9 +210,150 @@
              </div><!-- /.col -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
+        
+                    <!-- 뒷 페이지 배경을 눌러도 꺼지지 않음 -->
+                <div class="modal fade" id="theModal" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <form name="zip" action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>우편 번호 검색</h3>
+                            </div>
+                            <div class="modal-body">
+                              <div class="input-group">
+                                <span class="input-group-addon bg-gray"><i class="fa fa-map-o"></i> 시/도 선택</span>
+                                <select name="sido" class="form-control" onchange="fngugun()" required="required">
+                                         <option>시/도를 선택해 주세요</option>
+                                     <c:forEach items="${sido}" var="s">
+                                         <option value="${s.sido}">${s.sido}</option>
+                                     </c:forEach>
+                                </select>
+                              </div>
+                              <br>
+                              <div class="input-group">
+                                <span class="input-group-addon bg-gray"><i class="fa fa-map-o"></i> 구/군 선택</span>
+                                <select name="gugun" class="form-control" required="required" disabled="disabled" id="gugun" onchange="fndong()">
+                                    <option>시/도를 선택해 주세요</option>
+                                </select>
+                              </div>
+                              <br>
+                              <div class="input-group">
+                                <span class="input-group-addon bg-gray"><i class="fa fa-map-o"></i> 동/면 입력</span>
+                                <input type="text" name="dong" id="dong" class="form-control" required="required" placeholder="구/군을 선택하세요" readonly="readonly">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info btn-flat" type="button" onclick="fnSearch()">우편 번호 검색</button>
+                                </span>
+                              </div>
+                              <br>
+                              <div style="width:100%; height:200px; overflow:auto">
+                              <table class="table table-bordered table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>우편번호</th>
+                                    <th>시/도</th>
+                                    <th>구/군</th>
+                                    <th>동/면</th>
+                                    <th>번지</th>
+                                  </tr>
+                                </thead>
+                                <tbody id="total">
+                                  <tr>
+                                     <td colspan="5">동/면을 입력 하세요.</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" data-dismiss="modal">닫기</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div><!-- 모달 끝 -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+    <script>
+      $(function () {
+        //아이디 접근 바로 하기
+        $("#btnPopup").click(
+            function(){
+                //alert("버튼 눌림");
+                $("#theModal").modal('toggle');
+            });
+      });
+
+      //로컬 업로드 사진 불러오기
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                  $('#local').attr('src', e.target.result);
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+      $("#imgInp").change(function(){
+          readURL(this);
+      });
+
+      //jquery로 json입력 방법
+         function fngugun() {
+             $("#gugun").removeAttr("disabled");
+              var valsido = zip.sido.value;
+               $.getJSON("/HarangProject/ajax?cmd=gugun",{sido:encodeURIComponent(valsido)},
+                        function(data){
+                       $("#gugun option").remove();
+                       $("#gugun").append("<option>구/군을 선택해 주세요</option>");
+                       $(data).each(function(index, glist){
+                           $("#gugun").append("<option value="+glist.gugun+">"+glist.gugun+"</option>");
+                    });
+                });
+          }
+
+      // readonly 해제
+         function fndong() {
+             $("#dong").removeAttr("readonly");
+             $("#dong").attr("placeholder", "동/면을 입력하세요");
+        }
+
+     //종합검색     
+     function fnSearch() {
+         
+          var valsido = zip.sido.value;
+          var valgugun = zip.gugun.value;
+          var valdong = zip.dong.value;
+          
+          $.getJSON("/HarangProject/ajax?cmd=dong",
+                  {sido:encodeURIComponent(valsido),gugun:encodeURIComponent(valgugun),dong:encodeURIComponent(valdong)},
+                  function(data){
+                 $("#total tr").remove();
+                 $(data).each(function(index, zlist){
+
+                    var bunji = zlist.bunji;
+                     
+                     if(zlist.bunji == undefined){
+                         bunji = " ";
+                     }
+                     $("#total").append(
+                             "<tr id='"+zlist.zipcode
+                             +"' style='cursor:pointer;'>"
+                             +"<td>"+zlist.zipcode+"</td>"
+                             +"<td>"+zlist.sido+"</td>"
+                             +"<td>"+zlist.gugun+"</td>"
+                             +"<td>"+zlist.dong+"</td>"
+                             +"<td>"+bunji+"</td>"
+                             +"</tr>");
+                     $("#"+zlist.zipcode).click(function(){
+                         input.m_addr1.value = zlist.zipcode;
+                         input.m_addr2.value = zlist.sido+" "+zlist.gugun+" "+zlist.dong+" "+bunji;
+                         $("#theModal").modal("toggle");
+                     });
+              });
+          });
+     }
+    </script>
 
 

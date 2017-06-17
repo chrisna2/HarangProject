@@ -26,6 +26,7 @@ public class MemberSearchServlet extends HttpServlet{
 		
 		MessageBean mbean = new MessageBean();
 		String[] arrID = mbean.getMember_id(m_name);
+		
 		for(int i=0; i<arrID.length;i++){
 			out.println(arrID[i]);
 		}

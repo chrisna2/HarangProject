@@ -344,7 +344,6 @@
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- iCheck -->
     <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <script src="plugins/ajax/module.js" type="text/javascript"></script>
     <script>
       $(function () {
         $('input').iCheck({

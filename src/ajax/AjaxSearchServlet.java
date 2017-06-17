@@ -16,7 +16,11 @@ import com.google.gson.Gson;
 import ajax.model.CommandFactory;
 import ajax.model.CommandInterface;
 
-
+/**
+ * Ajax 전용 : ArrayList를 JSON으로 바로 보내주는 서블릿 클래스.
+ * @author 나현기
+ *
+ */
 @WebServlet("/ajax")
 public class AjaxSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
