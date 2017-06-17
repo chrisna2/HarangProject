@@ -32,10 +32,13 @@ public class DongCommand implements CommandInterface {
 			throws ServletException, IOException{
 		
 		String sido = URLDecoder.decode(request.getParameter("sido"), "UTF-8" );
+			System.out.println(sido);
 		String gugun = URLDecoder.decode(request.getParameter("gugun"), "UTF-8" );
+			System.out.println(gugun);
 		String dong = URLDecoder.decode(request.getParameter("dong"), "UTF-8" );
+			System.out.println(dong);
 		
-		String sql = "SELECT sido, gugun, dong, bunji, zipcode FROM tbl_zip where sido = "+sido+" and gugun = "+gugun+" and dong like '%"+dong+"%' group by dong";
+		String sql = "SELECT sido, gugun, dong, bunji, zipcode FROM tbl_zip where sido = '"+sido+"' and gugun = '"+gugun+"' and dong like '%"+dong+"%' group by dong";
 		ArrayList zlist  = new ArrayList();
 		
 		try {
@@ -56,7 +59,7 @@ public class DongCommand implements CommandInterface {
 			}
 		} 
 		catch (Exception e) {
-			System.out.println( "a_pointcheck.jsp : " + e);
+			System.out.println( "a_regform.jsp : " + e);
 		}
 		finally{
 			// DBCP 접속해제
