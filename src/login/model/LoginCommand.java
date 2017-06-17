@@ -93,11 +93,11 @@ public class LoginCommand implements CommandInterface {
 			//신규 회원 일때.
 			else if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && m_mail.isEmpty() && m_tel.isEmpty() && m_addr.isEmpty()){
 				session.setAttribute("newbee", mdto);
-				url="/WEB-INF/login/regform.jsp";
+				url="/WEB-INF/login/newbee.jsp";
 			}
 			//비밀번호가 틀렸을때.
 			else if(!input_pw.equals(m_pw)){
-				url="/index.jsp";
+				url="/WEB-INF/login/badinfo.jsp";
 			}
 			
 		}catch(Exception err){

@@ -23,6 +23,18 @@ public class CommandFactory {
 			
 			return new JoinCommand();
 		}
+		else if(cmd.equals("regform")){
+			
+			return new RegformCommand();
+		}
+		else if(cmd.equals("logout")){
+			
+			return new LogoutCommand();
+		}
+		else if(cmd.equals("goback")){
+			
+			return new GoBackCommand();
+		}
 		else{
 			
 			return null;

@@ -58,6 +58,12 @@
             <ul class="nav navbar-nav">
             <!-- 포인트 확인 : 현제 보유 포인트와 상세 정보 확인 -->
             <!-- 포인트 확인 : 현제 보유 포인트와 상세 정보 확인 -->
+              <li>
+                <a href="/HarangProject/login?cmd=logout">
+                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp;
+                                        로그아웃
+                </a>
+              </li>
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-money"></i>&nbsp;&nbsp;
@@ -219,10 +225,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">내 정보 조회</a>
+                      <a href="/HarangProject/myPage?cmd=myinfo" class="btn btn-default btn-flat">내 정보 조회</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">로그아웃</a>
+                      <a href="/HarangProject/login?cmd=logout" class="btn btn-default btn-flat">로그아웃</a>
                     </div>
                   </li>
                 </ul>

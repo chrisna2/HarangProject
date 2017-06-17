@@ -74,6 +74,13 @@
 
         return true;
     }
+    
+    function mailcheck(){ 
+        i = input.m_mail3.selectedIndex; // 선택항목의 인덱스 번호
+        var mail= input.m_mail3.options[i].value; // 선택항목 value
+        input.m_mail2.value = mail;
+   }
+   
     </script>
   </head>
   <body class="login-page">
@@ -96,9 +103,9 @@
                 </div>
                 <form role="form" action="/HarangProject/login?cmd=join" name="input" onsubmit="return checkform()" method="post" enctype="multipart/form-data">
                 <div class="box-body">
-<table class="table">
+<table class="table" style="margin-bottom: 50px">
     <tr align="center">
-        <td>약관 동의</td>
+        <td class="bg-gray">약관 동의</td>
     </tr>
     <tr>
         <td>
@@ -136,8 +143,14 @@
         </textarea>
         </td>
     </tr>
+    <tr>
+        <td class="bg-gray"></td>
+    </tr>
     <tr align="center">
         <td><br>전체 약관에 동의 합니다.&nbsp;<input type="checkbox" name="terms_check" required="required"></td>
+    </tr>
+    <tr>
+        <td class="bg-gray"></td>
     </tr>
 </table>
                   <div class="input-group">
@@ -186,13 +199,19 @@
                     <span class="input-group-addon bg-gray"> @ </span>
                     <input type="text" name="m_mail2" class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> 선택 </span>
-                    <select class="form-control" required="required">
-                        <option></option>
-                        <option>google.com</option>
-                        <option>hanmail.net</option>
-                        <option>naver.com</option>
-                        <option>nate.om</option>
-                        <option>gmail.com</option>
+                    <select name="m_mail3"class="form-control" onChange="mailcheck()">
+                        <option selected="selected" value="self">선택하세요</option>
+                        <option value='nate.com' >nate.com</option>
+                        <option value='empas.com' >empas.com</option>
+                        <option value='dreamwiz.com' >dreamwiz.com</option>
+                        <option value='gmail.com' >gmail.com</option>
+                        <option value='hanafos.com' >hanafos.com</option>
+                        <option value='hanmail.net' >hanmail.net</option>
+                        <option value='daum.net' >daum.net</option>
+                        <option value='hotmail.com' >hotmail.com</option>
+                        <option value='korea.com' >korea.com</option>
+                        <option value='naver.com' >naver.com</option>
+                        <option value='yahoo.com' >yahoo.com</option>
                     </select>
                     <input type="hidden" name="m_mail">
                   </div>

@@ -69,7 +69,7 @@
             <div class="col-xs-8">    
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-unlock"></i> 로그인</button>
+              <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-sign-in"></i> 로그인</button>
             </div><!-- /.col -->
           </div>
         </form>
@@ -109,7 +109,8 @@
                <ul>
                  <li>user side</li>
                  <li><a href="/HarangProject/parttime?cmd=PMAIN">알바 모집</a></li>
-                 <li><a href="/HarangProject/parttime?cmd=DMAIN">대타 모집</a></li>
+                 <li><a href="/HarangProject/part
+                 time?cmd=DMAIN">대타 모집</a></li>
                  <li><a href="/HarangProject/parttime?cmd=MYPAGE">내가 쓴 글</a></li>
                  <li>admin side</li>
                  <li><a href="/HarangProject/parttime?cmd=PMAIN">알바 모집 관리</a></li>
@@ -146,9 +147,6 @@
                  <li>admin side</li>
                  <li><a href="/HarangProject/harangdin?cmd=adminMain">하랑딘 관리자 메인</a></li>
               </ul>
-              
-                   
-                   
             <h4>시설관리</h4>
             <ul>
                  <li>user side</li>
