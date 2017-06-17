@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -80,6 +82,7 @@
         var mail= input.m_mail3.options[i].value; // 선택항목 value
         input.m_mail2.value = mail;
    }
+
    
     </script>
   </head>
@@ -237,7 +240,7 @@
                     <span class="input-group-addon bg-gray"><i class="fa fa-location-arrow"></i> 우편번호</span>
                     <input type="text" name="m_addr1" class="form-control" required="required">
                     <span class="input-group-btn">
-                      <button class="btn btn-warning btn-flat" type="button">우편 번호 검색</button>
+                      <button class="btn btn-warning btn-flat" type="button" id="btnPopup">우편 번호 검색</button>
                     </span>
                   </div>
                   <br>
@@ -263,7 +266,62 @@
              </div><!-- /.col -->
            </div><!-- /.row -->  
        </section>
-        
+       
+                    <!-- 뒷 페이지 배경을 눌러도 꺼지지 않음 -->
+                <div class="modal fade" id="theModal" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <form name="zip" action="">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>우편 번호 검색</h3>
+                            </div>
+                            <div class="modal-body">
+                              <div class="input-group">
+			                    <span class="input-group-addon bg-gray"><i class="fa fa-map-o"></i> 시/도 선택</span>
+			                    <select name="sido" class="form-control" onchange="fngugun()" required="required">
+			                         <c:forEach items="${sido}" var="s">
+			                             <option value="${s.sido}">${s.sido}</option>
+			                         </c:forEach>
+			                    </select>
+			                  </div>
+                              <br>
+                              <div class="input-group">
+			                    <span class="input-group-addon bg-gray"><i class="fa fa-map-o"></i> 구/군 선택</span>
+			                    <select name="gugun" class="form-control" required="required" id="gugun" onchange="fndong()">
+			                        <option>시/도를 선택해 주세요</option>
+			                    </select>
+			                  </div>
+                              <br>
+                              <div class="input-group">
+			                    <span class="input-group-addon bg-gray"><i class="fa fa-map-o"></i> 동/면 입력</span>
+			                    <input type="text" name="dong" id="dong" class="form-control" required="required" placeholder="구/군을 선택하세요" readonly="readonly" onblur="fnSearch()">
+			                  </div>
+                              <br>
+                              <table class="table table-bordered table-striped">
+			                    <thead>
+			                      <tr>
+			                        <th>주소 번호</th>
+			                        <th>시/도</th>
+			                        <th>구/군</th>
+			                        <th>동/면</th>
+			                        <th>번지</th>
+			                      </tr>
+			                    </thead>
+			                    <tbody id="total">
+			                      <tr>
+			                         <td colspan="5">동/면을 입력 하세요.</td>
+			                      </tr>
+			                    </tbody>
+			                  </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" data-dismiss="modal">닫기</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div><!-- 모달 끝 -->
+                
      <footer>
         <div class="pull-right hidden-xs">
           <b>Version</b> 2.0
@@ -280,6 +338,7 @@
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- iCheck -->
     <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
+    <script src="plugins/ajax/module.js" type="text/javascript"></script>
     <script>
       $(function () {
         $('input').iCheck({
@@ -287,7 +346,60 @@
           radioClass: 'iradio_square-blue',
           increaseArea: '20%' // optional
         });
+        //아이디 접근 바로 하기
+        $("#btnPopup").click(
+            function(){
+                //alert("버튼 눌림");
+                $("#theModal").modal();
+            });
       });
+
+      //jquery로 json입력 방법
+         function fngugun() {
+        	  var valsido = zip.sido.value;
+        	  
+        	   $.getJSON("/HarangProject/ajax?cmd=gugun",{sido:encodeURIComponent(valsido)},
+                	    function(data){
+        	    	   $("#gugun option").remove();
+        	    	   $(data).each(function(index, glist){
+            	    	   $("#gugun").append("<option value="+glist.gugun+">"+glist.gugun+"</option>");
+					});
+        	    });
+          }
+
+      // readonly 해제
+         function fndong() {
+             $("#dong").removeAttr("readonly");
+		}
+
+     //종합검색     
+     function fnSearch() {
+
+         var valsido = zip.sido.value;
+         var valgugun = zip.gugun.value;
+         var valdong = zip.dong.value;
+
+         $.getJSON("/HarangProject/ajax?cmd=dong",
+                 {sido:encodeURIComponent(valsido),gugun:encodeURIComponent(valsido),dong:encodeURIComponent(valdong)},
+                 function(data){
+                $("#total tr").remove();
+                $(data).each(function(index, zlist){
+                    $("#gugun").append(
+                            "<tr>"
+                            +"<td>"+zlist.zipcode+"</td>"
+                            +"<td>"+zlist.sido+"</td>"
+                            +"<td>"+zlist.gugun+"</td>"
+                            +"<td>"+zlist.dong+"</td>"
+                            +"<td>"+zlist.bunji+"</td>"
+                            +"</tr>"
+                            );
+             });
+         });
+
+
+     }
+
+                   
     </script>
   </body>
 </html>

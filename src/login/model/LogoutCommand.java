@@ -25,17 +25,16 @@ public class LogoutCommand implements CommandInterface {
 	//DBCP 사용
 	DBConnectionMgr pool;
 	
-
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
 		
+		session.removeAttribute("member");
+		session.removeAttribute("admin");
 		session.invalidate();
-		
+				
 		return "/index.jsp";
-		
 	}
-
 }
