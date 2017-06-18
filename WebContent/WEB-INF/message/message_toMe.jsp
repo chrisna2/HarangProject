@@ -68,9 +68,18 @@
 											   end="${paging.beginPerPage + paging.numPerPage -1}" 
 											   varStatus="status">
 										<tr>
-				                          <td><input type="checkbox" /></td>
+				                          <td><input type="checkbox" value="${list.t_num}"/></td>
 				                          <td>${list.list_num}</td>
-				                          <td class="mailbox-subject" style="width: 50%"><a href="javascript:fnRead('${list.t_num}');">${list.t_title}</a></td>
+				                          <td class="mailbox-subject" style="width: 50%">
+				                          <c:choose>
+					                          <c:when test="${list.t_read_date eq null}">
+					                          	<a href="javascript:fnRead('${list.t_num}');">${list.t_title}</a>
+					                          </c:when>
+					                          <c:otherwise>
+					                          	<a href="javascript:fnRead('${list.t_num}');" style="color:black">${list.t_title}</a>
+					                          </c:otherwise>
+				                          </c:choose>
+				                          </td>
 				                          <td class="mailbox-date">${list.t_send_date}</td>
 				                        </tr>
 									</c:forEach>
@@ -93,9 +102,9 @@
 	          	  <div class="box box-solid">
 	                <div class="box-body no-padding">
 	                  <ul class="nav nav-pills nav-stacked">
-	                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">12</span></a></li>
+	                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">${notRead}</span></a></li>
 	                    <li><a href="/HarangProject/message?cmd=SENT"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
-	                    <li class="active"><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 </a></li>
+	                    <li class="active"><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 <span class="label label-primary pull-right">${notRead_toMe}</span></a></li>
 	                  </ul>
 	                </div><!-- /.box-body -->
                 </div>
@@ -119,7 +128,7 @@
 	<input type="hidden" name="t_num" value="" id="t_num"/>
 	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
-	<input type="hidden" name="tab" value="tome"/>
+	<input type="hidden" name="tab" value="${tab}"/>
 </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
@@ -136,5 +145,36 @@ function nextPage(){
 function fnRead(t_num){
 	document.getElementById("t_num").value = t_num;
 	document.read.submit();
+}
+function fnRefresh(tab){
+	var cmd="INBOX";
+	if (tab == "sent"){
+		cmd = "SENT";
+	}else if (tab == "tome"){
+		cmd = "TOME";
+	}
+	location.href="/HarangProject/message?cmd="+cmd;
+}
+
+function fnCheck(){
+	$("checkbox").attr('checked','checked');
+}
+
+function fnDel(tab){
+	if(confirm("정말 삭제하시겠습니까?") == true){
+		var arr = $("checkbox:checked").val();
+		var cmd="INBOX";
+		if (tab == "sent"){
+			cmd = "SENT";
+		}else if (tab == "tome"){
+			cmd = "TOME";
+		}
+		document.getElementById("deleteList").value = arr;
+		document.del.action ="/HarangProject/message?cmd="+cmd;
+		document.del.submit();
+	}else{
+		return;
+	}
+	
 }
 </script>
