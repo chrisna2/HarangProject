@@ -337,6 +337,7 @@
                      if(zlist.bunji == undefined){
                          bunji = " ";
                      }
+                     
                      $("#total").append(
                              "<tr id='"+zlist.zipcode
                              +"' style='cursor:pointer;'>"

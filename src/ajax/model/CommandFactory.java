@@ -21,9 +21,17 @@ public class CommandFactory{
 			
 			return new GugunCommand();
 		}
-		if(cmd.equals("dong")){
+		else if(cmd.equals("dong")){
 			
 			return new DongCommand();
+		}
+		else if(cmd.equals("food")){
+			
+			return new FoodCommand();
+		}
+		else if(cmd.equals("foodinfo")){
+			
+			return new FoodinfoCommand();
 		}
 		else{
 			return null;

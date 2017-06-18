@@ -49,13 +49,14 @@ public class AjaxSearchServlet extends HttpServlet {
 		//요거 한줄이면 아~~주 깔끔하게 떨어진다. if문도 사라짐
 		command = CommandFactory.newInstance().createCommand(cmd);
 		
+		//dto를 포함한 목록은 여기서 불러오기
 		list = (ArrayList)command.processCommand(request, response);
 		
 		Gson gson = new Gson();
 		
-		String ziplist = gson.toJson(list);
+		String jsonlist = gson.toJson(list);
 		
-		out.write(ziplist);
+		out.write(jsonlist);
 		out.flush();
 		out.close();
 	}
