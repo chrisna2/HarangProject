@@ -248,6 +248,7 @@
     <input type="hidden" name="nowPage" value="" id="page"/>
     <input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
+
 <!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
       
       

@@ -8,7 +8,14 @@ public class CalanderDTO {
     public String end;
     public String color;
     public boolean allDay;
+    public String isuse;
     
+	public String getIsuse() {
+		return isuse;
+	}
+	public void setIsuse(String isuse) {
+		this.isuse = isuse;
+	}
 	public boolean isAllDay() {
 		return allDay;
 	}

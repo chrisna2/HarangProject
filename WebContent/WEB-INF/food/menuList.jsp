@@ -20,8 +20,20 @@
            color: #047A00;
         }   
      </style>
+     <script type="text/javascript">
+     function checkIt() {
+         var buy = confirm("식권을 구매 하시겠습니까?\n해당 식권은 1인 1매 한정이며 한번 사용하면 재사용 불가 합니다.\n환불은 판매일 2일 전 가능합니다.");
+         
+         if(buy){
+               return true;
+         }
+         else{
+               return false;
+         }
+       
+   }
+     </script>
 </head>   
- 
     <div class="content-wrapper">
   <!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
         <section class="content-header">
@@ -41,7 +53,6 @@
           <div class="row">
             <!-- 달력의 크기 조정 -->
             <div class="col-md-9">
-            
             <!-- 달력 메뉴 판 보이기 -->
               <div class="box box-primary">
                 <div class="box-body no-padding">
@@ -49,9 +60,9 @@
                   <div id="calendar"></div>
                 </div><!-- /.box-body -->
               </div><!-- /. box -->
-              
             <!-- 메뉴 판 클릭 후 메뉴 상세 정보 팝업 -->  
              <!-- 리스트 사용시  -->
+            <form role="form" name="menuinfo" method="post" action="/HarangProject/food?cmd=ticket_proc" onsubmit="return checkIt()">
               <div class="box" id="menuinfobox" hidden="hidden">
                 <div class="box-header">
                   <h3 class="box-title">식권 구매</h3>
@@ -61,7 +72,6 @@
                   </div>
                 </div><!-- /.box-header -->
                  <!-- form 시작 -->
-                <form role="form" name="menuinfo" method="post" action="#">
                 <div class="box-body">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 제목</span>
@@ -76,7 +86,6 @@
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 상세 정보</span>
                     <textarea class="form-control" name="f_content" rows="10" readonly="readonly">
-                          
                     </textarea>
                    </div>
                     <br>
@@ -88,14 +97,13 @@
                   <br>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix" align="right">
-                      <input type="hidden" name="f_num"  value="">
+                      <input type="hidden" name="member_id" value="${member.m_id}">
+                      <input type="hidden" name="f_num">
                       <input type="button" id="closeup" class="btn btn-gray" value="닫기">
                       <input type="submit" class="btn btn-success" value="구매">
                 </div>
-                </form>
               </div><!-- /.box -->
-              
-              
+            </form>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
@@ -138,37 +146,86 @@
 //달력에 글자 입력 가능
 //DB에 값을 접근합니다. ajax 서블릿 commandFactory에 경로를 따로 만들어야 합니다. 
            events : "/HarangProject/ajax?cmd=food",
-           //입력 글자 뒷 배경 색
-           eventColor: '#F9FFAB',
            //입력 글자 색
            eventTextColor: '#000000',
            eventMouseover: function(calEvent, jsEvent, view) {
-        	   $(this).css('background-color', '#CCFF66');
-        	   $(this).css('cursor','pointer');
+        	   if(calEvent.isuse == 'used'){
+                   $(this).css('background-color', '#40464f');
+                   $(this).css('cursor','pointer');
+               }
+               else if(calEvent.isuse == 'return'){
+                   $(this).css('background-color', '#f4305e');
+                   $(this).css('cursor','pointer');
+               }
+               else if(calEvent.isuse == 'unuse'){
+                   $(this).css('background-color', '#4e71fc');
+                   $(this).css('cursor','pointer');
+               }
+               else{
+                   $(this).css('background-color', '#CCFF66');
+                   $(this).css('cursor','pointer');
+               }
            },
            eventMouseout: function(calEvent, jsEvent, view) {
-               $(this).css('background-color', '#F9FFAB');
+        	   if(calEvent.isuse == 'used'){
+                   
+                   $(this).css('background-color', '#616872');
+               }
+               else if(calEvent.isuse == 'return'){
+
+                   $(this).css('background-color', '#ff7f9d');
+               }
+               else if(calEvent.isuse == 'unuse'){
+
+                   $(this).css('background-color', '#7793ff');
+               }
+               else{
+                   $(this).css('background-color', '#F9FFAB');
+               }
            },
            eventClick: function(calEvent, jsEvent, view) {
-               //날짜를 클릭 했을 때 해당 날짜에 포함된 데이터를 불러 옵니다. 위와 마찮가지..
-               $.getJSON("/HarangProject/ajax?cmd=foodinfo",
-                       {f_num:calEvent.id},
-                       function(data){
-                    	    $("#menuinfobox").slideDown();
-                    	    $(data).each(function(index, flist){
-                    	    	menuinfo.f_title.value = flist.f_title;
-                    	    	menuinfo.f_selldate.value = flist.f_selldate;
-                    	    	menuinfo.f_content.value = flist.f_content;
-                    	    	menuinfo.f_point.value = flist.f_point;
-                    	    	menuinfo.f_num.value = flist.f_num;
-                       });
-             });
+
+        	    if(calEvent.isuse == 'used'){
+
+        	        alert("이미 사용한 식권입니다.");
+            	}
+        	    else if(calEvent.isuse == 'return'){
+
+        	        alert("한번 환불 된 식권은 다시 구매 할수 없습니다.");
+
+            	}
+        	    else if(calEvent.isuse == 'unuse'){
+
+        	    	alert("이미 구매한 식권입니다.");
+            	}
+        	    else{
+                    //날짜를 클릭 했을 때 해당 날짜에 포함된 데이터를 불러 옵니다. 위와 마찮가지..
+                    $.getJSON("/HarangProject/ajax?cmd=foodinfo",
+                            {f_num:calEvent.id},
+                            function(data){
+                                 $("#menuinfobox").slideDown();
+                                 $(data).each(function(index, flist){
+                                     menuinfo.f_title.value = flist.f_title;
+                                     menuinfo.f_selldate.value = flist.f_selldate;
+                                     menuinfo.f_content.value = flist.f_content;
+                                     menuinfo.f_point.value = flist.f_point;
+                                     menuinfo.f_num.value = flist.f_num;
+                            });
+                  });
+                }
            }
         });
         
        $("#closeup").click(function(){
     	   $("#menuinfobox").slideUp();
        });
+
+       //모달 접근 바로 하기
+       $("#btnPopup").click(
+           function(){
+               //alert("버튼 눌림");
+               $("#theModal").modal('toggle');
+           });
         
       });
     </script>

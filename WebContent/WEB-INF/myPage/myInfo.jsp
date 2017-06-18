@@ -211,7 +211,7 @@
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
         
-                    <!-- 뒷 페이지 배경을 눌러도 꺼지지 않음 -->
+                <!-- 모달 : 뒷 페이지 배경을 눌러도 꺼지지 않음 -->
                 <div class="modal fade" id="theModal" data-backdrop="static">
                     <div class="modal-dialog">
                         <form name="zip" action="">
@@ -277,7 +277,7 @@
 <%@ include file="../include/footer.jsp" %>
     <script>
       $(function () {
-        //아이디 접근 바로 하기
+        //모달 접근 바로 하기
         $("#btnPopup").click(
             function(){
                 //alert("버튼 눌림");

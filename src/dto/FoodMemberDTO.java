@@ -9,7 +9,42 @@ public class FoodMemberDTO {
 	private String fm_regdate;
 	private String fm_isuse;
 	private Date fm_usedate;
+	private int f_point;
+	private String f_title;
+	private String f_content;
+	private String f_regdate;
+	private Date f_selldate;
 	
+	public int getF_point() {
+		return f_point;
+	}
+	public void setF_point(int f_point) {
+		this.f_point = f_point;
+	}
+	public String getF_title() {
+		return f_title;
+	}
+	public void setF_title(String f_title) {
+		this.f_title = f_title;
+	}
+	public String getF_content() {
+		return f_content;
+	}
+	public void setF_content(String f_content) {
+		this.f_content = f_content;
+	}
+	public String getF_regdate() {
+		return f_regdate;
+	}
+	public void setF_regdate(String f_regdate) {
+		this.f_regdate = f_regdate;
+	}
+	public Date getF_selldate() {
+		return f_selldate;
+	}
+	public void setF_selldate(Date f_selldate) {
+		this.f_selldate = f_selldate;
+	}
 	public String getM_id() {
 		return m_id;
 	}

@@ -16,7 +16,6 @@ import harang.dbcp.DBConnectionMgr;
 
 public class LoginCommand implements CommandInterface {
 	
-	
 	//DB 커넥션 3 대장
 	Connection con;
 	PreparedStatement pstmt;
@@ -24,7 +23,6 @@ public class LoginCommand implements CommandInterface {
 	ResultSet rs;
 	//DBCP 사용
 	DBConnectionMgr pool;
-	
 
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)

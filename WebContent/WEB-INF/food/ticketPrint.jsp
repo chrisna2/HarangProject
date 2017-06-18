@@ -78,15 +78,15 @@
 	                                         하랑 <img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="75" height="75"/> 식당
 	                </h2>
 	                    <!-- 여기다 코드 벨류 입력 DB 데이터 -->
-		                <input type="hidden" id="barcodeValue" value="4566464879872313" onload="generateBarcode();">
+		                <input type="hidden" id="barcodeValue" value="${thecode}" onload="generateBarcode();">
 		                <!-- 바코드 핵심 위치 -->
 		                <div id="barcodeTarget" class="barcodeTarget"></div>
 		                <canvas id="canvasTarget" width="250" height="250"></canvas> 
                     <BR>
-                    <h4><i class="fa fa-cutlery"></i> 구매 메뉴 : 초밥</h4>
-                    <h4><i class="fa fa-cutlery"></i> 구매일 : 2017-06-21 09:25:15</h4>
-                    <h4><i class="fa fa-cutlery"></i> 구매자 : 나현기 (201701008)</h4>
-                    <h4 class="text-danger"><i class="fa fa-warning"></i> 사용 가능 시간 : 2017-06-22 11시 이후 부터 3시 이전까지</h4>
+                    <h4><i class="fa fa-cutlery"></i> 구매 메뉴 : ${food.f_title}</h4>
+                    <h4><i class="fa fa-cutlery"></i> 구매일 : ${food.fm_regdate}5</h4>
+                    <h4><i class="fa fa-cutlery"></i> 구매자 : ${member.m_name} (${member.m_id})</h4>
+                    <h4 class="text-danger"><i class="fa fa-warning"></i> 사용 가능 시간 : ${food.f_selldate} 11시 이후 부터 3시 이전까지</h4>
                     <br>
                     <h4 class="text-danger"><i class="fa fa-warning"></i> 사용시 주의 사항 <i class="fa fa-warning"></i></h4>
                     <p>1. 해당식권은 사용 가능 시간이 지나면 사용할 수 없습니다.</p>

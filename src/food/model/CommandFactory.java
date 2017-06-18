@@ -27,6 +27,14 @@ public class CommandFactory {
 			
 			return new TicketCommand();
 		}
+		if(cmd.equals("ticket_print")){
+			
+			return new PrintTicketCommand();
+		}
+		if(cmd.equals("ticket_proc")){
+			
+			return new TicketprocCommand();
+		}
 		if(cmd.equals("Aticket")){
 			
 			return new AdminTicketCommand();

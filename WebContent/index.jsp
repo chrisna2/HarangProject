@@ -109,8 +109,7 @@
                <ul>
                  <li>user side</li>
                  <li><a href="/HarangProject/parttime?cmd=PMAIN">알바 모집</a></li>
-                 <li><a href="/HarangProject/part
-                 time?cmd=DMAIN">대타 모집</a></li>
+                 <li><a href="/HarangProject/parttime?cmd=DMAIN">대타 모집</a></li>
                  <li><a href="/HarangProject/parttime?cmd=MYPAGE">내가 쓴 글</a></li>
                  <li>admin side</li>
                  <li><a href="/HarangProject/parttime?cmd=PMAIN">알바 모집 관리</a></li>
@@ -118,7 +117,6 @@
                </ul>
             <h4>대나무 숲</h4>
             <ul>
-            
                  <li>user side</li>
                  <li><a href="/HarangProject/bamboo?cmd=BB_LIST">메인 페이지</a></li>
                  <li>admin side</li>
@@ -133,8 +131,6 @@
               </ul>
                  <h4>강의평가</h4>
                 <ul>
-                
-                
                  <li>user side</li>
                  <li><a href="/HarangProject/impage?cmd=main">강의평가 메인 페이지</a></li>
                  <li>admin side</li>
@@ -153,7 +149,6 @@
                  <li><a href="/HarangProject/facil?cmd=FacilMain">사용자 메인</a></li>
                  <li><a href="/HarangProject/facil?cmd=FacilPGreserv">사용자 운동장 예약</a></li>
                  <li><a href="/HarangProject/facil?cmd=FacilSRreserv">사용자 스터디룸 예약</a></li>
-                 
                  <li>admin side</li>
                  <li><a href="/HarangProject/facil?cmd=AFacilAddDel">관리자 시설 추가/삭제 </a></li>
                  <li><a href="/HarangProject/facil?cmd=AFacilPG">관리자 운동장 일정 추가 </a></li>
