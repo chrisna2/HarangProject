@@ -182,7 +182,8 @@ public class MessageBean {
 		try{
 			con = pool.getConnection();
 			
-			String sql="SELECT * FROM tbl_text WHERE m_reader=? AND NOT m_sender=? ORDER BY t_send_date DESC";
+			String sql="SELECT * FROM tbl_text WHERE m_reader=? AND NOT m_sender=? AND t_read_del = 'N' "
+							+ "ORDER BY t_send_date DESC";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_id);
@@ -225,7 +226,8 @@ public class MessageBean {
 		try{
 			con = pool.getConnection();
 			
-			String sql="SELECT * FROM tbl_text WHERE m_sender=? AND NOT m_reader=? ORDER BY t_send_date DESC";
+			String sql="SELECT * FROM tbl_text WHERE m_sender=? AND NOT m_reader=? AND t_send_del = 'N'"
+					+ "ORDER BY t_send_date DESC";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_id);
@@ -425,5 +427,63 @@ public class MessageBean {
 		}finally{
 			pool.freeConnection(con,pstmt);
 		}
+	}
+
+	/**
+	 * 아직 읽지 않은 메시지의 개수를 검색하는 메서드.
+	 * @param m_id
+	 * @return 읽지 않은 메시지의 개수
+	 */
+	public int getNotReadMessage(String m_id){
+		int notRead=0;
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT count(t_num) FROM tbl_text WHERE m_reader = ? "
+					+ "AND t_read_date = null AND NOT m_sender = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, m_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			notRead = rs.getInt(1);
+			
+		}catch(Exception err){
+			System.out.println("getNotReadMessage() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		return notRead;
+	}
+	
+	/**
+	 * 아직 읽지 않은 내게 보낸 메시지의 개수를 구하는 메서드.
+	 * @param m_id
+	 * @return 내게 보낸 메시지중 아직 읽지 않은 메시지의 개수
+	 */
+	public int getNotReadMessage_toMe(String m_id){
+		int notRead=0;
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT count(t_num) FROM tbl_text WHERE m_reader = ? "
+					+ "AND t_read_date is null AND m_sender = ?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, m_id);
+			rs = pstmt.executeQuery();
+			rs.next();
+			notRead = rs.getInt(1);
+			
+		}catch(Exception err){
+			System.out.println("getNotReadMessage_toMe() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		return notRead;
 	}
 }

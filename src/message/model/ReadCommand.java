@@ -53,12 +53,14 @@ public class ReadCommand implements message.model.CommandInterface{
 	 */
 	public void read(HttpServletRequest req){
 		String t_num = req.getParameter("t_num");
+		String tab = req.getParameter("tab");
 		MessageDTO msg = mbean.getMessage(t_num);
 		if(msg.getT_read_date() == null){
-			mbean.readMessage(t_num);
+			// 보낸 메시지는 읽음 처리 하지 않는다.
+			if("inbox".equals(tab) || "tome".equals(tab)){
+				mbean.readMessage(t_num);
+			}
 		}
 	}
-	
-	
 	
 }

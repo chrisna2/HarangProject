@@ -62,7 +62,7 @@
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                   <div class="pull-right">
-                    <button class="btn btn-default"><i class="fa fa-times"></i> 삭제하기</button>
+                    <button class="btn btn-default" onclick="fnCancel()"><i class="fa fa-times"></i> 취소하기</button>
                     <button type="submit" class="btn btn-primary" onclick="fnSend()"><i class="fa fa-envelope-o"></i> 보내기</button>
                   </div>
                 </div><!-- /.box-footer -->
@@ -76,11 +76,9 @@
 	          <div class="box box-solid">
                 <div class="box-body no-padding">
                   <ul class="nav nav-pills nav-stacked">
-                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">12</span></a></li>
+                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">${notRead}</span></a></li>
                     <li><a href="/HarangProject/message?cmd=SENT"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
-                    <li><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 </a></li>
-                    <li><a href="#"><i class="fa fa-filter"></i> 스팸 쪽지함 <span class="label label-waring pull-right">65</span></a></li>
-                    <li><a href="#"><i class="fa fa-trash-o"></i> 휴지통</a></li>
+                    <li><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 <span class="label label-primary pull-right">${notRead_toMe}</span></a></li>
                   </ul>
                 </div><!-- /.box-body -->
               </div><!-- /. box -->
@@ -151,7 +149,15 @@ function sendRequest(method, url, param, callback){
 		var cbx = document.getElementById("toMe");
 		if(cbx.checked == true){
 			document.getElementById("reader").value = m_name;
-			document.getElementById("reader").onfocus();
+			document.getElementById("reader").focus();
+		}
+	}
+	
+	function fnCancel(){
+		if(confirm("정말 취소하시겠습니까?\n작성하던 메시지는 저장되지 않습니다.")==true){
+			location.href = "/HarangProject/message?cmd=INBOX";
+		}else{
+			return;
 		}
 	}
 </script>
