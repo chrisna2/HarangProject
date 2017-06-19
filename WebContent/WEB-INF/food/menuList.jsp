@@ -53,15 +53,7 @@
           <div class="row">
             <!-- 달력의 크기 조정 -->
             <div class="col-md-9">
-            <!-- 달력 메뉴 판 보이기 -->
-              <div class="box box-primary">
-                <div class="box-body no-padding">
-                  <!-- THE CALENDAR -->
-                  <div id="calendar"></div>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            <!-- 메뉴 판 클릭 후 메뉴 상세 정보 팝업 -->  
-             <!-- 리스트 사용시  -->
+            <!-- 리스트 사용시  -->
             <form role="form" name="menuinfo" method="post" action="/HarangProject/food?cmd=ticket_proc" onsubmit="return checkIt()">
               <div class="box" id="menuinfobox" hidden="hidden">
                 <div class="box-header">
@@ -100,15 +92,26 @@
                       <input type="hidden" name="member_id" value="${member.m_id}">
                       <input type="hidden" name="f_num">
                       <input type="button" id="closeup" class="btn btn-gray" value="닫기">
-                      <input type="submit" class="btn btn-success" value="구매">
+                      <input type="submit" id="buybtn" class="btn btn-success" value="구매">
                 </div>
               </div><!-- /.box -->
             </form>
+            <!-- 달력 메뉴 판 보이기 -->
+              <div class="box box-primary">
+                <div class="box-body no-padding">
+                  <!-- THE CALENDAR -->
+                  <div id="calendar"></div>
+                </div><!-- /.box-body -->
+              </div><!-- /. box -->
+            <!-- 메뉴 판 클릭 후 메뉴 상세 정보 팝업 -->  
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
 <!-- 푸터(footer) 삽입 [지우지 마세여] --------------------------------------------------------------------------------------> 
       </div><!-- /.content-wrapper -->
+      <form id="goprint" method="post">
+        <input type="hidden" id="f_num" name="f_num" value="">
+      </form>
 <%@ include file="../include/footer.jsp" %>
 
 <!-- ★★★Ajax를 배우면 이해 할 수 있는 곳 : 여기에 데이터를 삽입합니다. -->
@@ -186,23 +189,38 @@
            eventClick: function(calEvent, jsEvent, view) {
 
         	    if(calEvent.isuse == 'used'){
-
         	        alert("이미 사용한 식권입니다.");
+        	        $("#buybtn").hide();
+        	        $(".box-title").text("메뉴 조회");
             	}
         	    else if(calEvent.isuse == 'return'){
-
         	        alert("한번 환불 된 식권은 다시 구매 할수 없습니다.");
+        	        $("#buybtn").hide();
+        	        $(".box-title").text("메뉴 조회");
 
             	}
         	    else if(calEvent.isuse == 'unuse'){
-
-        	    	alert("이미 구매한 식권입니다.");
+        	    	var choice = confirm("이미 구매한 식권입니다. 해당 식권 페이지로 가시겠습니까?");
+        	        if(choice){
+            	        $("#f_num").val(calEvent.id);
+            	        $("#goprint")
+            	        .attr("action", "/HarangProject/food?cmd=ticket_print")
+            	        .submit();
+            	    }
+        	        else{
+        	        	$("#buybtn").hide();
+                        $(".box-title").text("메뉴 조회");
+            	    }
             	}
         	    else{
+        	    	$("#buybtn").show();
+                    $(".box-title").text("식권 구매");
+                }
                     //날짜를 클릭 했을 때 해당 날짜에 포함된 데이터를 불러 옵니다. 위와 마찮가지..
                     $.getJSON("/HarangProject/ajax?cmd=foodinfo",
                             {f_num:calEvent.id},
                             function(data){
+                                 $("#menuinfobox").slideUp();
                                  $("#menuinfobox").slideDown();
                                  $(data).each(function(index, flist){
                                      menuinfo.f_title.value = flist.f_title;
@@ -212,7 +230,6 @@
                                      menuinfo.f_num.value = flist.f_num;
                             });
                   });
-                }
            }
         });
         

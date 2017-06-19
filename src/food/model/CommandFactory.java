@@ -19,25 +19,29 @@ public class CommandFactory {
 			
 			return new MenuCommand();
 		}
-		if(cmd.equals("Amenu")){
+		else if(cmd.equals("Amenu")){
 			
 			return new AdminMenuCommand();
 		}
-		if(cmd.equals("ticket")){
+		else if(cmd.equals("ticket")){
 			
 			return new TicketCommand();
 		}
-		if(cmd.equals("ticket_print")){
+		else if(cmd.equals("ticket_print")){
 			
 			return new PrintTicketCommand();
 		}
-		if(cmd.equals("ticket_proc")){
+		else if(cmd.equals("ticket_proc")){
 			
 			return new TicketprocCommand();
 		}
-		if(cmd.equals("Aticket")){
+		else if(cmd.equals("Aticket")){
 			
 			return new AdminTicketCommand();
+		}
+		else if(cmd.equals("ticketuse")){
+			
+			return new TicketUseCommand();
 		}
 		else{
 			

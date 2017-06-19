@@ -18,7 +18,7 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-public class PrintTicketCommand implements CommandInterface {
+public class TicketUseCommand implements CommandInterface {
 	
 	//DB 커넥션 4 대장
 	Connection con;
@@ -32,48 +32,45 @@ public class PrintTicketCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		MemberDTO mdto = (MemberDTO)session.getAttribute("member");
-		String m_id = mdto.getM_id();
+		String m_id = request.getParameter("m_id");
 		String f_num = request.getParameter("f_num");
+		String check = request.getParameter("check");
+		String result = null;
 		
-		String sql = "SELECT fm.fm_regdate, f.f_selldate, f.f_title, f.f_point, fm.fm_isuse, fm.fm_usedate "
-				+ "FROM tbl_food_member fm, tbl_food f "
-				+ "where f.f_num = fm.f_num and fm.m_id = ? and f.f_num =?";
+		String sql = null;
 		
-		FoodMemberDTO fmdto = new FoodMemberDTO();
+		if(("use").equals(check)){
+			
+			sql = "UPDATE tbl_food_member SET fm_isuse = 'used', fm_usedate = NOW() WHERE m_id = ? and f_num = ?";
+			result = "used";
+		}
+		else if(("return").equals(check)){
+			
+			sql = "UPDATE tbl_food_member SET fm_isuse = 'return', fm_usedate = NOW() WHERE m_id = ? and f_num = ?";
+			result = "return";
+		}
+		
 		
 		try {
+			
 			pool = DBConnectionMgr.getInstance();
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_id);
 			pstmt.setString(2, f_num);
-			rs = pstmt.executeQuery();
+			pstmt.executeUpdate();
 			
-			rs.next();
-				fmdto.setFm_regdate(rs.getString("fm_regdate"));
-				fmdto.setF_selldate(rs.getDate("f_selldate"));
-				fmdto.setF_title(rs.getString("f_title"));
-				fmdto.setF_point(rs.getInt("f_point"));
-				fmdto.setFm_isuse(rs.getString("fm_isuse"));
-				fmdto.setFm_usedate(rs.getDate("fm_usedate"));
-				fmdto.setF_num(f_num);
-				
 		} 
 		catch (Exception e) {
-			System.out.println("ticketlist.jsp : " + e);
+			System.out.println("ticketUse.jsp : " + e);
 		}
 		finally{
 			// DBCP 접속해제
-			pool.freeConnection(con, pstmt, rs);
+			pool.freeConnection(con, pstmt);
 		}
 		
-		
-		request.setAttribute("food", fmdto);
-		request.setAttribute("thecode", m_id+"@"+f_num);
-		
-		return "/WEB-INF/food/ticketPrint.jsp";
+		request.setAttribute("result", result);
+		return "/WEB-INF/food/ticketResult.jsp";
 	}
 
 }

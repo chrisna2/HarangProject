@@ -7,12 +7,6 @@
 		<head>
 		     <title>식권 구매 내역</title>
 		         <style>
-		      * {
-		          color:#7F7F7F;
-		          font-family:Arial,sans-serif;
-		          font-size:12px;
-		          font-weight:normal;
-		      }    
 		      #config{
 		          overflow: auto;
 		          margin-bottom: 10px;
@@ -84,7 +78,7 @@
 		                <canvas id="canvasTarget" width="250" height="250"></canvas> 
                     <BR>
                     <h4><i class="fa fa-cutlery"></i> 구매 메뉴 : ${food.f_title}</h4>
-                    <h4><i class="fa fa-cutlery"></i> 구매일 : ${food.fm_regdate}5</h4>
+                    <h4><i class="fa fa-cutlery"></i> 구매일 : ${food.fm_regdate}</h4>
                     <h4><i class="fa fa-cutlery"></i> 구매자 : ${member.m_name} (${member.m_id})</h4>
                     <h4 class="text-danger"><i class="fa fa-warning"></i> 사용 가능 시간 : ${food.f_selldate} 11시 이후 부터 3시 이전까지</h4>
                     <br>
@@ -98,8 +92,8 @@
 
 					<div class="box-footer clearfix" align="center">
 						<input type="button" class="btn" value="닫기"> 
-						<input type="submit" class="btn btn-success" value="사용 [결제 테스트용]"> 
-					    <input type="button" onclick="" class="btn btn-danger" value="환불 처리">
+						<input type="button" id="use" class="btn btn-success" value="사용 [결제 테스트용]"> 
+					    <input type="button" id="return" class="btn btn-danger" value="환불 처리">
 					</div>
 
 				</div><!-- /.box -->
@@ -109,7 +103,11 @@
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      
+      <form id="ticketuse" method="post" action="">
+          <input type="hidden" name="check" id="check">
+          <input type="hidden" name="f_num" value="${food.f_num}">
+          <input type="hidden" name="m_id" value="${member.m_id}">
+      </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
     <script type="text/javascript" src="plugins/barcode/jquery-barcode.js"></script>
@@ -157,5 +155,19 @@
         });
         generateBarcode();
       });
-  
+
+      //티켓 사용 : 결제
+    	    $("#use").click(function() {
+    	        $("#check").val("use");
+    	        $("#ticketuse")
+    	        .attr("action", "/HarangProject/food?cmd=ticketuse")
+    	        .submit();
+    	    });
+     //티켓 환불 	    
+    	    $("#return").click(function() {
+    	        $("#check").val("return");
+    	        $("#ticketuse")
+    	        .attr("action", "/HarangProject/food?cmd=ticketuse")
+    	        .submit();
+    	    });
 </script>

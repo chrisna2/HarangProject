@@ -54,11 +54,11 @@ public class SpecUpCommand implements CommandInterface {
 
 		
 		if (null == (keyfield)) {
-			sql = "select c.c_num, c.c_name, c.c_agency, c.c_point, cm.cm_iscomplete, cm.cm_completedate "
+			sql = "select c.c_num, c.c_name, c.c_agency, c.c_point, cm.cm_iscomplete, cm.cm_completedate, cm.cm_regdate, cm.cm_image "
 					+ "from tbl_certificate c left outer join tbl_certi_member cm on c.c_num = cm.c_num  and cm.m_id = ?";
 
 		} else {
-			sql = "select c.c_num, c.c_name, c.c_agency, c.c_point cm.cm_iscomplete, cm.cm_completedate "
+			sql = "select c.c_num, c.c_name, c.c_agency, c.c_point cm.cm_iscomplete, cm.cm_completedate, cm.cm_regdate, cm.cm_image "
 					+ "from tbl_certificate c left outer join tbl_certi_member cm on c.c_num = cm.c_num  and cm.m_id = ? "
 					+ "where " + keyword + " like '%" + keyfield + "%'";
 		}
@@ -79,6 +79,8 @@ public class SpecUpCommand implements CommandInterface {
 				dto.setC_point(rs.getInt("c_point"));
 				dto.setCm_iscomplete(rs.getString("cm_iscomplete"));
 				dto.setCm_completedate(rs.getString("cm_completedate"));
+				dto.setCm_regdate(rs.getString("cm_regdate"));
+				dto.setCm_image(rs.getString("cm_image"));
 				
 				list.add(dto);
 
@@ -106,7 +108,7 @@ public class SpecUpCommand implements CommandInterface {
 
 		PagingBean pbean = new PagingBean();
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-		PagingDto paging = pbean.Paging(list.size(), 5, nowPage, 10, nowBlock);
+		PagingDto paging = pbean.Paging(list.size(), 10, nowPage, 10, nowBlock);
 
 		request.setAttribute("paging", paging);
 	}

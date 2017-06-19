@@ -7,9 +7,22 @@ public class CertiDTO {
 		int	c_point;
 		String cm_iscomplete;
 		String cm_completedate;
+		String cm_regdate;
+		String cm_image;
 		
 		
-		
+		public String getCm_image() {
+			return cm_image;
+		}
+		public void setCm_image(String cm_image) {
+			this.cm_image = cm_image;
+		}
+		public String getCm_regdate() {
+			return cm_regdate;
+		}
+		public void setCm_regdate(String cm_regdate) {
+			this.cm_regdate = cm_regdate;
+		}
 		public String getCm_iscomplete() {
 			return cm_iscomplete;
 		}

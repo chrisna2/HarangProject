@@ -29,6 +29,10 @@ public class CommandFactory{
 			
 			return new SpecUpCommand();
 		}
+		else if(cmd.equals("specUp_proc")){
+			
+			return new SpecUpProcCommand();
+		}
 		else if(cmd.equals("timeTable")){
 			
 			return new TimetableCommand();

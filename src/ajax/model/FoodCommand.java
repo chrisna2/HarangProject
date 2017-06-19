@@ -39,7 +39,7 @@ public class FoodCommand implements CommandInterface {
 		MemberDTO mdto = (MemberDTO)session.getAttribute("member");
 		String m_id = mdto.getM_id();
 		
-		String sql = "SELECT f.f_selldate, f.f_title, f.f_num, fm.fm_isuse "
+		String sql = "SELECT f.f_selldate, f.f_content, f.f_num, fm.fm_isuse "
 				+ "FROM tbl_food f left join tbl_food_member fm "
 				+ "on f.f_num = fm.f_num and fm.m_id = ? "
 				+ "where f_selldate > sysdate()";
@@ -57,11 +57,10 @@ public class FoodCommand implements CommandInterface {
 				CalanderDTO cdto = new CalanderDTO();
 				
 				cdto.setStart(rs.getString("f_selldate"));
-				cdto.setTitle(rs.getString("f_title"));
+				cdto.setTitle(rs.getString("f_content"));
 				cdto.setId(rs.getString("f_num"));
 				cdto.setIsuse(rs.getString("fm_isuse"));
 				cdto.setAllDay(true);
-								
 				   if(("used").equals(rs.getString("fm_isuse"))){
 	                   cdto.setColor("#616872");
 	               }
@@ -74,7 +73,6 @@ public class FoodCommand implements CommandInterface {
 	               else{
 	            	   cdto.setColor("#F9FFAB");
 	               }
-				 
 				flist.add(cdto);
 			}
 		} 

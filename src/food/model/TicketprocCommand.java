@@ -30,7 +30,7 @@ public class TicketprocCommand implements CommandInterface {
 			int f_point = Integer.parseInt(request.getParameter("f_point"));
 			String f_num = request.getParameter("f_num");
 			System.out.println(f_num);
-			String r_content = "식권 구매 : "+ request.getParameter("f_title") + " 판매일 : " + request.getParameter("f_selldate");
+			String r_content = "식권 구매 : "+ request.getParameter("f_title") + " | 판매일 : " + request.getParameter("f_selldate");
 			String member_id = request.getParameter("member_id");
 			String admin_id = "admin01";
 			
