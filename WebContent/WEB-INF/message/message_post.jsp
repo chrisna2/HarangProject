@@ -41,7 +41,14 @@
                   	    <label>내게 쓰기</label>
 	                  </div>
 	                  <div class=" col-md-5 form-group">
-	                    <input class="form-control" id="reader" placeholder="받는사람 입력 후 오른쪽에서 학번 선택" value="" onblur="fnSearch()"/>
+	                  <c:choose>
+	                  	<c:when test="${not empty reader}">
+	                  		<input class="form-control" id="reader" placeholder="받는사람 입력 후 오른쪽에서 학번 선택" value="${reader}" onblur="fnSearch()"/>
+	                  	</c:when>
+	                  	<c:otherwise>
+		                    <input class="form-control" id="reader" placeholder="받는사람 입력 후 오른쪽에서 학번 선택" value="" onblur="fnSearch()"/>
+	                  	</c:otherwise>
+	                  </c:choose>
 	                  </div>
 	                  <div class=" col-md-5 form-group">
 	                    <select class="form-control" name="m_reader" id="display">
@@ -159,5 +166,9 @@ function sendRequest(method, url, param, callback){
 		}else{
 			return;
 		}
+	}
+	
+	window.onload = function(){
+		document.getElemembById("reader").focus();
 	}
 </script>

@@ -46,10 +46,10 @@
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                   <div class="pull-right">
-                    <button class="btn btn-default"><i class="fa fa-reply"></i> 답장</button>
+                    <button class="btn btn-default" onclick="fnReply()"><i class="fa fa-reply" ></i> 답장</button>
                     <button class="btn btn-default" onclick="fnList('${tab}')"><i class="fa fa-share"></i> 목록</button>
                   </div>
-                  <button class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
+                  <button class="btn btn-default" onclick="fnDel('${tab}')"><i class="fa fa-trash-o"></i> 삭제</button>
                 </div><!-- /.box-footer -->
               </div><!-- /. box -->
            </div><!-- /.col -->
@@ -59,30 +59,30 @@
               	<a href="/HarangProject/message?cmd=POST" class="btn btn-primary btn-block margin-bottom">쪽지쓰기</a>
 	             <div class="box box-solid">
 	             <c:choose>  
-	               <c:when test="${tab eq 'inbox'}"> 
+	               <c:when test="${tab eq 'INBOX'}"> 
 	                <div class="box-body no-padding">
 	                  <ul class="nav nav-pills nav-stacked">
-	                    <li class="active"><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">12</span></a></li>
+	                    <li class="active"><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">${notRead}</span></a></li>
 	                    <li><a href="/HarangProject/message?cmd=SENT"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
-	                    <li><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 </a></li>
+	                    <li><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 <span class="label label-primary pull-right">${notRead_toMe}</span></a></li>
 	                  </ul>
 	                </div><!-- /.box-body -->
 	               </c:when>
-	               <c:when test="${tab eq 'sent'}"> 
+	               <c:when test="${tab eq 'SENT'}"> 
 	                <div class="box-body no-padding">
 	                  <ul class="nav nav-pills nav-stacked">
-	                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">12</span></a></li>
+	                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">${notRead}</span></a></li>
 	                    <li class="active"><a href="/HarangProject/message?cmd=SENT"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
-	                    <li><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 </a></li>
+	                    <li><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 <span class="label label-primary pull-right">${notRead_toMe}</span></a></li>
 	                  </ul>
 	                </div><!-- /.box-body -->
 	               </c:when>
-	               <c:when test="${tab eq 'tome'}"> 
+	               <c:when test="${tab eq 'TOME'}"> 
 	                <div class="box-body no-padding">
 	                  <ul class="nav nav-pills nav-stacked">
-	                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">12</span></a></li>
+	                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">${notRead}</span></a></li>
 	                    <li><a href="/HarangProject/message?cmd=SENT"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
-	                    <li class="active"><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 </a></li>
+	                    <li class="active"><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 <span class="label label-primary pull-right">${notRead_toMe}</span></a></li>
 	                  </ul>
 	                </div><!-- /.box-body -->
 	               </c:when> 
@@ -96,17 +96,45 @@
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
       </form>
+      <form name="del" method="post" action="">
+		<input type="hidden" name="tab" value="${tab}"/>
+		<input type="hidden" name="deleteList" value="${msg.t_num}"/>
+		<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+	  </form>
+	  <form name="reply" method="post" action="/HarangProject/message?cmd=POST">
+		<input type="hidden" name="t_num" value="${msg.t_num}"/>
+	  </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <script>
 function fnList(tab){
-	if(tab == 'inbox'){
+	if(tab == 'INBOX'){
 		document.list.action = "/HarangProject/message?cmd=INBOX";
-	}else if(tab == 'sent'){
+	}else if(tab == 'SENT'){
 		document.list.action = "/HarangProject/message?cmd=SENT";
-	}else if(tab == 'tome'){
+	}else if(tab == 'TOME'){
 		document.list.action = "/HarangProject/message?cmd=TOME";
 	}
 	document.list.submit();
+}
+
+function fnDel(tab){
+	if(tab == 'INBOX'){
+		document.del.action = "/HarangProject/message?cmd=INBOX";
+	}else if(tab == 'SENT'){
+		document.del.action = "/HarangProject/message?cmd=SENT";
+	}else if(tab == 'TOME'){
+		document.del.action = "/HarangProject/message?cmd=TOME";
+	}
+	if(confirm("정말 삭제하시겠습니까?") == true){
+		document.del.submit();
+	}else{
+		return;
+	}
+}
+
+function fnReply(){
+	document.reply.submit();
 }
 </script>

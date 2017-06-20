@@ -141,35 +141,5 @@ function fnRead(t_num){
 	document.getElementById("t_num").value = t_num;
 	document.read.submit();
 }
-function fnRefresh(tab){
-	var cmd="INBOX";
-	if (tab == "sent"){
-		cmd = "SENT";
-	}else if (tab == "tome"){
-		cmd = "TOME";
-	}
-	location.href="/HarangProject/message?cmd="+cmd;
-}
 
-function fnCheck(){
-	$("checkbox").attr('checked','checked');
-}
-
-function fnDel(tab){
-	if(confirm("정말 삭제하시겠습니까?") == true){
-		var arr = $("checkbox:checked").val();
-		var cmd="INBOX";
-		if (tab == "sent"){
-			cmd = "SENT";
-		}else if (tab == "tome"){
-			cmd = "TOME";
-		}
-		document.getElementById("deleteList").value = arr;
-		document.del.action ="/HarangProject/message?cmd="+cmd;
-		document.del.submit();
-	}else{
-		return;
-	}
-	
-}
 </script>

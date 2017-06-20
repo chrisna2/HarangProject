@@ -33,6 +33,9 @@ public class CommandFactory{
 			
 			return new FoodinfoCommand();
 		}
+		else if(cmd.equals("memberid")){
+			return new MemberIdCommand();
+		}
 		else{
 			return null;
 		}

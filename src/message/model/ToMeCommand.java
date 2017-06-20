@@ -34,7 +34,7 @@ public class ToMeCommand implements message.model.CommandInterface{
 			toMeList.set(i, msg);
 		}
 		paging(toMeList.size(), req);
-		req.setAttribute("tab", "tome");
+		req.setAttribute("tab", "TOME");
 		req.setAttribute("list", toMeList);
 	}
 	
@@ -51,7 +51,7 @@ public class ToMeCommand implements message.model.CommandInterface{
 		PagingBean pbean = new PagingBean();
 
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수, 네번째는 블록당 페이지 개수!!
-		PagingDto paging = pbean.Paging(listSize, 20, nowPage, 5, nowBlock);
+		PagingDto paging = pbean.Paging(listSize, 20, nowPage, 1, nowBlock);
 
 		req.setAttribute("paging", paging);
 	}
@@ -64,22 +64,26 @@ public class ToMeCommand implements message.model.CommandInterface{
 	}
 	
 	public void deleteMessage(String m_id, HttpServletRequest req){
-		String[] deleteList = (String[])req.getParameterValues("arr");
+		String arr = req.getParameter("deleteList");
 		String tab = req.getParameter("tab");
 		
-		if(deleteList != null){
-			for(int i=0; i<deleteList.length;i++){
-				MessageDTO msg = mbean.getMessage(deleteList[i]); //메시지 정보
-				if(msg.getT_read_del() == "N" && msg.getT_send_del() == "N"){ // 둘다 삭제하지 않은 경우
-					if(tab == "inbox"){ // 받은 메시지 함이라면
-						mbean.deleteGivenMessage_first(deleteList[i]); // 받은메시지 삭제
-					}else if(tab == "sent"){ // 보낸 메시지 함이라면
-						mbean.deleteSentMessage_first(deleteList[i]); // 보낸메시지 삭제
-					}else{ // 내게 쓴 메시지함이라면
-						mbean.deleteMessage(deleteList[i]); // 메시지 삭제
+		if (arr != null){
+			String deleteList[] = arr.split(",");
+			if(deleteList != null){
+				System.out.println(deleteList.length);
+				for(int i=0; i<deleteList.length;i++){
+					MessageDTO msg = mbean.getMessage(deleteList[i]); //메시지 정보
+					if(msg.getT_read_del() == "N" && msg.getT_send_del() == "N"){ // 둘다 삭제하지 않은 경우
+						if(tab == "INBOX"){ // 받은 메시지 함이라면
+							mbean.deleteGivenMessage_first(deleteList[i]); // 받은메시지 삭제
+						}else if(tab == "SENT"){ // 보낸 메시지 함이라면
+							mbean.deleteSentMessage_first(deleteList[i]); // 보낸메시지 삭제
+						}else{ // 내게 쓴 메시지함이라면
+							mbean.deleteMessage(deleteList[i]); // 메시지 삭제
+						}
+					}else{ // 둘 중 한명이 삭제한 경우
+						mbean.deleteMessage(deleteList[i]); // 메시지 삭제 
 					}
-				}else{ // 둘 중 한명이 삭제한 경우
-					mbean.deleteMessage(deleteList[i]); // 메시지 삭제 
 				}
 			}
 		}

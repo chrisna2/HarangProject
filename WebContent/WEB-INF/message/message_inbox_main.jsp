@@ -35,7 +35,7 @@
                   <h3 class="box-title">받은 쪽지함</h3>
                   <div class="box-tools pull-right">
                     <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" placeholder="Search Mail"/>
+                      <input type="text" class="form-control input-sm" placeholder="Search Message"/>
                       <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </div><!-- /.box-tools -->
@@ -148,44 +148,5 @@ function nextPage(){
 function fnRead(t_num){
 	document.getElementById("t_num").value = t_num;
 	document.read.submit();
-}
-
-function fnRefresh(tab){
-	var cmd="INBOX";
-	if (tab == "sent"){
-		cmd = "SENT";
-	}else if (tab == "tome"){
-		cmd = "TOME";
-	}
-	location.href="/HarangProject/message?cmd="+cmd;
-}
-
-function fnCheck(){
-	$("checkbox").attr('checked','checked');
-}
-
-function fnDel(tab){
-	if(confirm("정말 삭제하시겠습니까?") == true){
-		var str = "";  
-		$("checkbox:checked")).each(function() {
-			str += $(this).val() + ",";
-		}
-		
-		var arr = str.split(",");
-		
-		var cmd="INBOX";
-		if (tab == "sent"){
-			cmd = "SENT";
-		}else if (tab == "tome"){
-			cmd = "TOME";
-		}
-		document.getElementById("deleteList").value = arr;
-		document.del.action ="/HarangProject/message?cmd="+cmd;
-		alert(cmd);
-		document.del.submit();
-	}else{
-		return;
-	}
-	
 }
 </script>

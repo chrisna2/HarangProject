@@ -440,7 +440,7 @@ public class MessageBean {
 			con = pool.getConnection();
 			
 			String sql="SELECT count(t_num) FROM tbl_text WHERE m_reader = ? "
-					+ "AND t_read_date = null AND NOT m_sender = ?";
+					+ "AND t_read_date is null AND NOT m_sender = ?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_id);

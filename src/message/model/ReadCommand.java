@@ -13,8 +13,9 @@ public class ReadCommand implements message.model.CommandInterface{
 		String m_id = member.getM_id();
 		
 		getMessage(req);
-		inbox_paging(req);
+		paging(req);
 		read(req);
+		notRead(m_id, req);
 		
 		// message_read.jsp 로 페이지 이동
 		return "/WEB-INF/message/message_read.jsp";
@@ -39,7 +40,7 @@ public class ReadCommand implements message.model.CommandInterface{
 	 * 
 	 * @param req
 	 */
-	public void inbox_paging(HttpServletRequest req) {
+	public void paging(HttpServletRequest req) {
 		int nowPage = Integer.parseInt(req.getParameter("nowPage"));
 		int nowBlock = Integer.parseInt(req.getParameter("nowBlock"));
 
@@ -57,10 +58,17 @@ public class ReadCommand implements message.model.CommandInterface{
 		MessageDTO msg = mbean.getMessage(t_num);
 		if(msg.getT_read_date() == null){
 			// 보낸 메시지는 읽음 처리 하지 않는다.
-			if("inbox".equals(tab) || "tome".equals(tab)){
+			if("INBOX".equals(tab) || "TOME".equals(tab)){
 				mbean.readMessage(t_num);
 			}
 		}
+	}
+	
+	public void notRead(String m_id, HttpServletRequest req){
+		int notRead = mbean.getNotReadMessage(m_id);
+		int notRead_toMe = mbean.getNotReadMessage_toMe(m_id);
+		req.setAttribute("notRead", notRead);
+		req.setAttribute("notRead_toMe", notRead_toMe);
 	}
 	
 }
