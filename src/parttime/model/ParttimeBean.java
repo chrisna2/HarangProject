@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.D_ApplyDTO;
+import dto.DaetaDTO;
 import dto.MemberDTO;
 import dto.P_ApplyDTO;
 import dto.ParttimeDTO;
@@ -35,6 +37,11 @@ public class ParttimeBean {
 		}
 	}
 	
+	/**
+	 * 세션에 저장된 로그인 정보를 가져오는 메서드.
+	 * @param req
+	 * @return
+	 */
 	public MemberDTO getLoginInfo(HttpServletRequest req){
 		MemberDTO login = null;
 		MemberDTO member = (MemberDTO)req.getSession().getAttribute("member");
@@ -67,8 +74,8 @@ public class ParttimeBean {
 				ParttimeDTO dto = new ParttimeDTO();
 				dto.setP_num(rs.getString("p_num"));
 				dto.setP_title(rs.getString("p_title"));
-				dto.setP_regdate(rs.getDate("p_regdate"));
-				dto.setP_deadline(rs.getDate("p_deadline"));
+				dto.setP_regdate(rs.getString("p_regdate"));
+				dto.setP_deadline(rs.getString("p_deadline"));
 				dto.setP_wage(rs.getInt("p_wage"));
 				dto.setP_term(rs.getString("p_term"));
 				dto.setP_content(rs.getString("p_content"));
@@ -93,11 +100,142 @@ public class ParttimeBean {
 	}
 	
 	/**
-	 * 해당 글에 지원한 지원자 수를 검색하는 메서드.
+	 * DB에서 알바 모집 게시판의 내가 쓴 글 정보를 검색하는 메서드
+	 */
+	public ArrayList getMyParttimeList(String m_id){
+		ArrayList list = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_parttime WHERE m_id = ? ORDER BY p_regdate DESC";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				ParttimeDTO dto = new ParttimeDTO();
+				dto.setP_num(rs.getString("p_num"));
+				dto.setP_title(rs.getString("p_title"));
+				dto.setP_regdate(rs.getString("p_regdate"));
+				dto.setP_deadline(rs.getString("p_deadline"));
+				dto.setP_wage(rs.getInt("p_wage"));
+				dto.setP_term(rs.getString("p_term"));
+				dto.setP_content(rs.getString("p_content"));
+				dto.setP_tel(rs.getString("p_tel"));
+				dto.setP_daycode(rs.getString("p_daycode"));
+				dto.setP_location(rs.getString("p_location"));
+				dto.setP_header(rs.getString("p_header"));
+				dto.setP_cnt(rs.getInt("p_cnt"));
+				dto.setM_id(rs.getString("m_id"));				
+				
+				list.add(dto);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getMyParttimeList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * DB에서 대타 모집 게시판의 모든 글 정보를 검색하는 메서드
+	 */
+	public ArrayList getDaetaList(){
+		ArrayList list = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_daeta ORDER BY d_regdate DESC";
+			
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				DaetaDTO dto = new DaetaDTO();
+				dto.setD_num(rs.getString("d_num"));
+				dto.setD_title(rs.getString("d_title"));
+				dto.setD_regdate(rs.getString("d_regdate"));
+				dto.setD_deadline(rs.getString("d_deadline"));
+				dto.setD_wage(rs.getInt("d_wage"));
+				dto.setD_date(rs.getString("d_date"));
+				dto.setD_content(rs.getString("d_content"));
+				dto.setD_tel(rs.getString("d_tel"));
+				dto.setD_deposit(rs.getInt("d_deposit"));
+				dto.setD_location(rs.getString("d_location"));
+				dto.setD_header(rs.getString("d_header"));
+				dto.setD_cnt(rs.getInt("d_cnt"));
+				dto.setM_id(rs.getString("m_id"));				
+				
+				list.add(dto);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getDaetaList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * DB에서 대타 모집 게시판의 내가 쓴 글 정보를 검색하는 메서드
+	 */
+	public ArrayList getMyDaetaList(String m_id){
+		ArrayList list = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_daeta WHERE m_id = ? ORDER BY d_regdate DESC";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				DaetaDTO dto = new DaetaDTO();
+				dto.setD_num(rs.getString("d_num"));
+				dto.setD_title(rs.getString("d_title"));
+				dto.setD_regdate(rs.getString("d_regdate"));
+				dto.setD_deadline(rs.getString("d_deadline"));
+				dto.setD_wage(rs.getInt("d_wage"));
+				dto.setD_date(rs.getString("d_date"));
+				dto.setD_content(rs.getString("d_content"));
+				dto.setD_tel(rs.getString("d_tel"));
+				dto.setD_deposit(rs.getInt("d_deposit"));
+				dto.setD_location(rs.getString("d_location"));
+				dto.setD_header(rs.getString("d_header"));
+				dto.setD_cnt(rs.getInt("d_cnt"));
+				dto.setM_id(rs.getString("m_id"));				
+				
+				list.add(dto);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getMyDaetaList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 알바 모집 게시판에서 해당 글에 지원한 지원자 수를 검색하는 메서드.
 	 * @param p_num  글번호
 	 * @return 지원자수 
 	 */
-	public int getCnt_apply(String p_num){
+	public int getParttimeCnt_apply(String p_num){
 		int cnt_apply=0;
 		
 		try{
@@ -114,7 +252,7 @@ public class ParttimeBean {
 			}
 			
 		}catch(Exception err){
-			System.out.println("getCnt_apply() : " + err);
+			System.out.println("getParttimeCnt_apply() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);
@@ -124,7 +262,38 @@ public class ParttimeBean {
 	}
 	
 	/**
-	 * 해당 글의 모든 정보를 검색하는 메서드.
+	 * 대타 모집 게시판에서 해당 글에 지원한 지원자 수를 검색하는 메서드.
+	 * @param p_num  글번호
+	 * @return 지원자수 
+	 */
+	public int getDaetaCnt_apply(String p_num){
+		int cnt_apply=0;
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT count(m_id) FROM tbl_daeta_member where d_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, p_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				cnt_apply = rs.getInt("count(m_id)");
+			}
+			
+		}catch(Exception err){
+			System.out.println("getDaetaCnt_apply() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		
+		return cnt_apply;
+	}
+	
+	/**
+	 * 해당 알바 모집 글의 모든 정보를 검색하는 메서드.
 	 * @param p_num 글번호
 	 * @return 해당 글의 모든 정보(dto)
 	 */
@@ -143,8 +312,8 @@ public class ParttimeBean {
 			if(rs.next()){
 				dto.setP_num(rs.getString("p_num"));
 				dto.setP_title(rs.getString("p_title"));
-				dto.setP_regdate(rs.getDate("p_regdate"));
-				dto.setP_deadline(rs.getDate("p_deadline"));
+				dto.setP_regdate(rs.getString("p_regdate"));
+				dto.setP_deadline(rs.getString("p_deadline"));
 				dto.setP_wage(rs.getInt("p_wage"));
 				dto.setP_term(rs.getString("p_term"));
 				dto.setP_content(rs.getString("p_content"));
@@ -164,19 +333,65 @@ public class ParttimeBean {
 		}
 		return dto;
 	}
+	
+	/**
+	 * 해당 대타 모집 글의 모든 정보를 검색하는 메서드.
+	 * @param p_num 글번호
+	 * @return 해당 글의 모든 정보(dto)
+	 */
+	public DaetaDTO getDaeta(String d_num){
+		DaetaDTO dto = new DaetaDTO();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_daeta where d_num=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				dto.setD_num(rs.getString("d_num"));
+				dto.setD_title(rs.getString("d_title"));
+				dto.setD_regdate(rs.getString("d_regdate"));
+				dto.setD_deadline(rs.getString("d_deadline"));
+				dto.setD_wage(rs.getInt("d_wage"));
+				dto.setD_date(rs.getString("d_date"));
+				dto.setD_content(rs.getString("d_content"));
+				dto.setD_tel(rs.getString("d_tel"));
+				dto.setD_deposit(rs.getInt("d_deposit"));
+				dto.setD_location(rs.getString("d_location"));
+				dto.setD_header(rs.getString("d_header"));
+				dto.setD_cnt(rs.getInt("d_cnt"));
+				dto.setM_id(rs.getString("m_id"));		
+			}
+			
+		}catch(Exception err){
+			System.out.println("getDaeta() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		return dto;
+	}
 
 	/**
 	 * 조회 수를 1 증가시키는 메서드.
 	 * @param p_num 
 	 */
-	public void counterUp(String p_num){
+	public void counterUp(String pORd, String pORd_num){
 		try{
 			con = pool.getConnection();
 			
 			String sql="UPDATE tbl_parttime SET p_cnt = p_cnt+1 WHERE p_num=?";
 			
+			if (pORd.equals("d")){ // 대타 모집 글 조회수
+				sql = "UPDATE tbl_daeta SET d_cnt = d_cnt+1 WHERE d_num=?";
+			}
+			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, p_num);
+			pstmt.setString(1, pORd_num);
 			pstmt.executeUpdate();
 		
 		}catch(Exception err){
@@ -269,7 +484,7 @@ public class ParttimeBean {
 	public void deleteParttime(String p_num){
 		try{
 			// 게시글에 지원한 지원자들을 먼저 삭제한다.
-			deleteApply(p_num);
+			deleteParttimeApply(p_num);
 			
 			// 그 다음에 게시글을 삭제할 수 있다.
 			String sql="DELETE FROM tbl_parttime WHERE p_num=?";
@@ -287,10 +502,34 @@ public class ParttimeBean {
 	}
 	
 	/**
+	 * 게시글을 삭제하는 메서드
+	 * @param p_num
+	 */
+	public void deleteDaeta(String d_num){
+		try{
+			// 게시글에 지원한 지원자들을 먼저 삭제한다.
+			deleteDaetaApply(d_num);
+			
+			// 그 다음에 게시글을 삭제할 수 있다.
+			String sql="DELETE FROM tbl_daeta WHERE d_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("deleteDaeta() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
+	
+	/**
 	 * 게시글을 지우기 이전에 게시글에 지원한 지원자들을 먼저 삭제하는 메서드.
 	 * @param p_num
 	 */
-	public void deleteApply(String p_num){
+	public void deleteParttimeApply(String p_num){
 		try{
 			con = pool.getConnection();
 			
@@ -301,17 +540,37 @@ public class ParttimeBean {
 			pstmt.executeUpdate();
 			
 		}catch(Exception err){
-			System.out.println("deleteApply() : " + err);
+			System.out.println("deleteParttimeApply() : " + err);
+			err.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 게시글을 지우기 이전에 게시글에 지원한 지원자들을 먼저 삭제하는 메서드.
+	 * @param p_num
+	 */
+	public void deleteDaetaApply(String d_num){
+		try{
+			con = pool.getConnection();
+			
+			String sql="DELETE FROM tbl_daeta_member WHERE d_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("deleteDaetaApply() : " + err);
 			err.printStackTrace();
 		}
 	}
 
 	/**
-	 * 게시글에 지원한 지원자 목록을 검색하는 메서드.
+	 * 알바 모집 게시글에 지원한 지원자 목록을 검색하는 메서드.
 	 * @param p_num
 	 * @return 지원자 목록
 	 */
-	public ArrayList getApplyList(String p_num){
+	public ArrayList getParttimeApplyList(String p_num){
 		ArrayList applyList = new ArrayList();
 		
 		try{
@@ -337,7 +596,7 @@ public class ParttimeBean {
 			}
 			
 		}catch(Exception err){
-			System.out.println("getApplyList() : " + err);
+			System.out.println("getParttimeApplyList() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);
@@ -345,7 +604,133 @@ public class ParttimeBean {
 		
 		return applyList;
 	}
-
+	
+	/**
+	 * 내가 알바 모집 게시글에 지원한 목록을 검색하는 메서드.
+	 * @param m_id
+	 * @return 글 목록
+	 */
+	public ArrayList getMyParttimeApplyList(String m_id){
+		ArrayList applyList = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_parttime_member WHERE m_id = ? ORDER BY pm_regdate DESC";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				P_ApplyDTO dto = new P_ApplyDTO();
+				
+				dto.setP_num(rs.getString("p_num"));
+				dto.setM_id(rs.getString("m_id"));
+				dto.setPm_reason(rs.getString("pm_reason"));
+				dto.setPm_career(rs.getString("pm_wanttime"));
+				dto.setPm_regdate(rs.getString("pm_regdate"));
+				dto.setPm_choice(rs.getString("pm_choice"));
+				
+				applyList.add(dto);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getMyParttimeApplyList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		
+		return applyList;
+	}
+	
+	/**
+	 * 대타 모집 게시글에 지원한 지원자 목록을 검색하는 메서드.
+	 * @param p_num
+	 * @return 지원자 목록
+	 */
+	public ArrayList getDaetaApplyList(String d_num){
+		ArrayList applyList = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_daeta_member WHERE d_num = ? ORDER BY dm_regdate ASC";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				D_ApplyDTO dto = new D_ApplyDTO();
+				
+				dto.setD_num(rs.getString("d_num"));
+				dto.setM_id(rs.getString("m_id"));
+				dto.setDm_reason(rs.getString("dm_reason"));
+				dto.setDm_iscomplete(rs.getString("dm_iscomplete"));
+				dto.setDm_regdate(rs.getString("dm_regdate"));
+				dto.setDm_choice(rs.getString("dm_choice"));
+				
+				applyList.add(dto);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getDaetaApplyList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		
+		return applyList;
+	}
+	
+	/**
+	 * 내가 대타 모집 게시글에 지원한 목록을 검색하는 메서드.
+	 * @param m_id
+	 * @return 글 목록
+	 */
+	public ArrayList getMyDaetaApplyList(String m_id){
+		ArrayList applyList = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_daeta_member WHERE m_id = ? ORDER BY dm_regdate DESC";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				D_ApplyDTO dto = new D_ApplyDTO();
+				
+				dto.setD_num(rs.getString("d_num"));
+				dto.setM_id(rs.getString("m_id"));
+				dto.setDm_reason(rs.getString("dm_reason"));
+				dto.setDm_iscomplete(rs.getString("dm_iscomplete"));
+				dto.setDm_regdate(rs.getString("dm_regdate"));
+				dto.setDm_choice(rs.getString("dm_choice"));
+				
+				applyList.add(dto);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getMyDaetaApplyList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		
+		return applyList;
+	}
+	
+	/**
+	 * 해당 게시글에 지원한 지원자의 이력서 정보를 검색하는 메서드.
+	 * @param m_id
+	 * @param p_num
+	 * @return 지원자의 이력서 폼
+	 */
 	public P_ApplyDTO getApply(String m_id, String p_num){
 		P_ApplyDTO dto = new P_ApplyDTO();
 		
@@ -421,6 +806,62 @@ public class ParttimeBean {
 			
 		}catch(Exception err){
 			System.out.println("deleteApply() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
+
+	public void insertParttime(ParttimeDTO dto){
+		try{
+			con = pool.getConnection();
+			
+			String sql="INSERT INTO tbl_parttime(p_title, p_deadline, p_wage, p_term, p_content, p_tel, p_daycode, p_location, p_header, m_id) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?) ";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getP_title());
+			pstmt.setString(2, dto.getP_deadline());
+			pstmt.setInt(3, dto.getP_wage());
+			pstmt.setString(4, dto.getP_term());
+			pstmt.setString(5, dto.getP_content());
+			pstmt.setString(6, dto.getP_tel());
+			pstmt.setString(7, dto.getP_daycode());
+			pstmt.setString(8, dto.getP_location());
+			pstmt.setString(9, dto.getP_header());
+			pstmt.setString(10, dto.getM_id());			
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("insertParttime() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
+	
+	public void insertDaeta(DaetaDTO dto){
+		try{
+			con = pool.getConnection();
+			
+			String sql="INSERT INTO tbl_daeta(d_title, d_deadline, d_wage, d_date, d_content, d_tel, d_deposite, d_location, d_header, m_id) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?) ";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getD_title());
+			pstmt.setString(2, dto.getD_deadline());
+			pstmt.setInt(3, dto.getD_wage());
+			pstmt.setString(4, dto.getD_date());
+			pstmt.setString(5, dto.getD_content());
+			pstmt.setString(6, dto.getD_tel());
+			pstmt.setInt(7, dto.getD_deposit());
+			pstmt.setString(8, dto.getD_location());
+			pstmt.setString(9, dto.getD_header());
+			pstmt.setString(10, dto.getM_id());			
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("insertDaeta() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);

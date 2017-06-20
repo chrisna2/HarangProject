@@ -47,7 +47,7 @@ public class ParttimeReadCommand implements CommandInterface {
 			} else { // 다른 사람의 글
 				String read = (String) req.getParameter("read");
 				if (read != "no") {
-					bean.counterUp(p_num); // 조회수 1 증가
+					bean.counterUp("d",p_num); // 조회수 1 증가
 				}
 				return "/WEB-INF/parttime/parttime_read.jsp";
 			}
@@ -133,7 +133,7 @@ public class ParttimeReadCommand implements CommandInterface {
 	 */
 	public void showApply(HttpServletRequest req){
 		String p_num = (String) req.getParameter("p_num"); // 글번호 parameter	
-		ArrayList list = bean.getApplyList(p_num); // 지원자 목록 데이터
+		ArrayList list = bean.getParttimeApplyList(p_num); // 지원자 목록 데이터
 		
 		for(int i=0; i<list.size();i++){
 			P_ApplyDTO dto = (P_ApplyDTO) list.get(i);

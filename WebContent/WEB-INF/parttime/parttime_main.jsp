@@ -76,7 +76,7 @@
 												<a href="javascript:fnRead('${list.p_num}')" id="read">${list.p_title}</a>
 											</td>
 											<td>${list.p_wage}원 </td>
-											<td>${list.m_id}</td>
+											<td>${list.m_name}</td>
 											<td>${list.p_regdate}</td>
 											<td>${list.p_cnt}</td>
 											<td>${list.cnt_apply}</td>

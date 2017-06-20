@@ -68,9 +68,11 @@ public class ParttimeMainCommand implements CommandInterface {
 		for (int i = 0; i < list.size(); i++) {
 			ParttimeDTO dto = list.get(i);
 			dto.setList_num(list.size() - i); // 글번호
-			dto.setCnt_apply(bean.getCnt_apply(dto.getP_num())); // 지원자수
+			dto.setCnt_apply(bean.getParttimeCnt_apply(dto.getP_num())); // 지원자수
 			if (dto.getM_id().equals("admin02")) {
-				dto.setM_id("관리자");
+				dto.setM_name("관리자");
+			}else{
+				dto.setM_name(bean.getMember(dto.getM_id()).getM_name()); //이름을 저장
 			}
 			list.set(i, dto);
 		}
@@ -89,4 +91,34 @@ public class ParttimeMainCommand implements CommandInterface {
 			bean.deleteParttime(p_num);
 		}
 	}
+	
+	public void insert(HttpServletRequest req){
+		ParttimeDTO dto = new ParttimeDTO();
+		dto.setM_id(req.getParameter("m_id"));
+		dto.setP_title(req.getParameter("p_title"));
+		dto.setP_deadline(req.getParameter("p_deadline"));
+		dto.setP_wage(Integer.parseInt(req.getParameter("p_wage")));
+		dto.setP_term(req.getParameter("p_term"));
+		dto.setP_content(req.getParameter("p_content"));
+		dto.setP_tel(req.getParameter("p_tel"));
+		dto.setP_location(req.getParameter("p_location"));
+		dto.setP_header(req.getParameter("p_header"));
+		
+		
+		
+		String daycode = ();
+		dto.setP_daycode(daycode);
+		
+		bean.insertParttime(dto);
+	}
+	
+	public void transCode(String code, HttpServletRequest req) {
+		
+		for(int i=0;i<6;i++){
+			req.getParameter("daycode["+i+"]");
+		}
+		
+		// 작성중
+	}
+
 }

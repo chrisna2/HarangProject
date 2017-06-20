@@ -33,12 +33,12 @@
                   <h3 class="box-title">채용 정보</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  <form name="post" method="post" action="/HarangProject/parttime?cmd=PMAIN">
                     <!-- text input -->
                     <div class="row">
 	                    <div class="col-md-3 form-group">
 	                      <label>머릿말</label>	                      
-		                    <select class="form-control">
+		                    <select class="form-control" name="p_header">
 		                    	<option>[모집중]</option>
 		                    	<option>[마감]</option>
 		                    	<option>[급구]</option>
@@ -47,40 +47,42 @@
                     </div>
                     <div class="form-group">
                       <label>제목</label>
-                      <input type="text" class="form-control" placeholder="ex)**과 과사무실 조교 모집합니다."/>
+                      <input type="text" class="form-control" name="p_title" placeholder="ex)**과 과사무실 조교 모집합니다."/>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>장소</label>
-	                      <input type="text" class="form-control" placeholder="ex) **과 과사무실"/>
+	                      <input type="text" class="form-control" name="p_location" placeholder="ex) **과 과사무실"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>마감일</label>
 	                      <div class="input-group">
-	                      <div class="input-group-addon">
-	                        <i class="fa fa-calendar"></i>
-	                      </div>
-	                      <input type="text" class="form-control pull-right" id="reservation"/>
-	                    </div><!-- /.input group -->
+		                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+		                      <input type="text" class="form-control pull-right" name="p_deadline" id="date"/>
+	                      </div><!-- /.input group -->
 	                    </div>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>시급</label>
-	                      <input type="text" class="form-control" placeholder="ex) 7000원"/>
+	                      <input type="text" class="form-control" name="p_wage" placeholder="ex) 7000원"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>근무기간</label>
-	                      <input type="text" class="form-control" placeholder="ex) 6개월, 1년 ..."/>
+	                      <input type="text" class="form-control" name="p_term" placeholder="ex) 6개월, 1년 ..."/>
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>요일</label>
-                      <input type="text" class="form-control" placeholder="Enter ..."/>
+                      <div>
+                      <c:forEach var="i" begin="0" end="6" step="1">
+		                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"  value = "" name="daycode[${i}]" id="checkbox"> ${day[i]}
+	                  </c:forEach>
+	                  </div>
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" placeholder="ex)010-1234-5678 or email@naver.com"/>
+                      <input type="text" class="form-control" name="p_tel" placeholder="ex)010-1234-5678 or email@naver.com"/>
                     </div>
                     
 					<div class='box'>
@@ -88,17 +90,15 @@
 		                  <h3 class='box-title'>업무 내용 <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small></h3>
 		                </div><!-- /.box-header -->
 		                <div class='box-body pad'>
-		                  <form>
-		                    <textarea id="editor1" name="editor1" rows="10" cols="80">
+		                    <textarea id="editor1" name="p_content" rows="10" cols="80">
 		                       	※ 구체적인 요일/시간을 작성해주세요.	                       	                 
 		                    </textarea>
-		                  </form>
 		                </div>
               		</div><!-- /.box -->
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-primary">등록</button>
+							<button class="btn btn-block btn-primary" onclick="fnPost()">등록</button>
 						</div>
 						<div class="col-md-2">	
 							<button class="btn btn-block btn-danger" onclick="fnCancel()">취소</button>
@@ -110,68 +110,47 @@
               <div class="row">
               	<div class="col-md-10"></div>
               	<div class="col-md-2">
-              		<button class="btn btn-block btn-warning">목록</button>
+              		<button class="btn btn-block btn-warning" onclick="fnList()">목록</button>
               	</div>
               </div>
             </div><!--/.col (right) -->
-        
         </div>
-        
-
-        </section><!-- /. 작업 공간 끝! -->
+      </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
 <form name="cancel" method="post" action="/HarangProject/parttime?cmd=PMAIN">
 	<input type="hidden" name="nowPage" value="${nowPage}"/>
     <input type="hidden" name="nowBlock" value="${nowBlock}"/>
 </form>
+<form name="list" method="post" action="/HarangProject/parttime?cmd=PMAIN">
+	<input type="hidden" name="nowPage" value="${nowPage}"/>
+    <input type="hidden" name="nowBlock" value="${nowBlock}"/>
+</form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
-<!-- jQuery 2.1.3 -->
-    <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js" type="text/javascript"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js" type="text/javascript"></script>
-    <!-- CK Editor -->
+	<!-- Editor -->	
+	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-    <!-- InputMask -->
-    <script src="plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
-    <script src="plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
-    <script src="plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-    <!-- date-range-picker -->
-    <script src="plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- bootstrap color picker -->
-    <script src="plugins/colorpicker/bootstrap-colorpicker.min.js" type="text/javascript"></script>
-    <!-- bootstrap time picker -->
-    <script src="plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
-    <!-- SlimScroll 1.3.0 -->
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- iCheck 1.0.1 -->
-    <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js" type="text/javascript"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js" type="text/javascript"></script>
-    
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(function () {
         // Replace the <textarea id="editor1"> with a CKEditor
         // instance, using default configuration.
         CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
+        // bootstrap WYSIHTML5 - text editor
         $(".textarea").wysihtml5();
       });
     </script>
+    
+    <!-- 날짜 입력  -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script>
+    $(function() {
+        $("#date").datepicker({
+        });
+    });
+    </script>
+    
     <script>
     function fnCancel(){
 		if(confirm("현재 작성한 내용이 모두 사라집니다.\n정말 취소하시겠습니까?") == true){
@@ -180,4 +159,19 @@
 			return;
 		}
 	}
+    
+    function fnList(){
+    	if(confirm("현재 작성한 내용이 모두 사라집니다.\n정말 돌아가시겠습니까?") == true){
+			document.list.submit();
+		}else{
+			return;
+		}
+    }
+    
+    function fnPost(){
+    	$(":checkbox:checked").val
+    	document.post.submit();
+    }
     </script>
+    
+    

@@ -7,6 +7,9 @@ public class ParttimePostCommand implements CommandInterface{
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp){
 		
 		paging(req);
+		
+		String[] day = {"월","화","수","목","금","토","일"};
+		req.setAttribute("day", day);
 		// parttime_post.jsp 로 페이지 이동
 		return "/WEB-INF/parttime/parttime_post.jsp";
 	}

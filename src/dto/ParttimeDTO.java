@@ -1,13 +1,11 @@
 package dto;
 
-import java.util.Date;
-
 public class ParttimeDTO {
 	private int list_num; //게시판 글번호
 	private String p_num; //DB 글번호
 	private String p_title; //글제목
-	private Date p_regdate; //등록날짜
-	private Date p_deadline; //마감일
+	private String p_regdate; //등록날짜
+	private String p_deadline; //마감일
 	private int p_wage; //시급
 	private String p_term; //기간
 	private String p_content; //본문내용
@@ -17,6 +15,7 @@ public class ParttimeDTO {
 	private String p_header; //머리말
 	private int p_cnt; //조회수
 	private String m_id; //글쓴이
+	private String m_name; //글쓴이 이름
 	private int cnt_apply; //지원자수
 	
 	
@@ -38,16 +37,16 @@ public class ParttimeDTO {
 	public void setP_title(String p_title) {
 		this.p_title = p_title;
 	}
-	public Date getP_regdate() {
+	public String getP_regdate() {
 		return p_regdate;
 	}
-	public void setP_regdate(Date p_regdate) {
+	public void setP_regdate(String p_regdate) {
 		this.p_regdate = p_regdate;
 	}
-	public Date getP_deadline() {
+	public String getP_deadline() {
 		return p_deadline;
 	}
-	public void setP_deadline(Date p_deadline) {
+	public void setP_deadline(String p_deadline) {
 		this.p_deadline = p_deadline;
 	}
 	public int getP_wage() {
@@ -103,6 +102,13 @@ public class ParttimeDTO {
 	}
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
+	}
+	
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 	public int getCnt_apply() {
 		return cnt_apply;
