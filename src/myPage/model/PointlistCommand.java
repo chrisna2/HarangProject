@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 import dto.MemberDTO;
 import dto.RecordDTO;
 import harang.dbcp.DBConnectionMgr;
+import paging.PagingBean;
+import paging.dto.PagingDto;
 
 
 
@@ -53,10 +55,26 @@ public class PointlistCommand implements CommandInterface {
 		
 		ArrayList plist  = new ArrayList();
 		
-		String sql = "select r_regdate, r_content, r_point, m_giver, m_haver, "+
-				"(select m_name from tbl_member where m_id = m_giver) as m_givername, "+
-				"(select m_name from tbl_member where m_id = m_haver) as m_havername  "+
-				"from tbl_record where m_giver = ? or  m_haver = ? order by r_regdate desc";
+		String keyword = request.getParameter("keyword");
+		String keyfield = request.getParameter("keyfield");
+		
+		String sql = null;
+				
+		if (null == (keyword)) {
+			sql  = 	"select r_regdate, r_content, r_point, m_giver, m_haver, "+
+					"(select m_name from tbl_member where m_id = m_giver) as m_givername, "+
+					"(select m_name from tbl_member where m_id = m_haver) as m_havername  "+
+					"from tbl_record where m_giver = ? or  m_haver = ? order by r_regdate desc";
+		}
+		 else {
+			 sql  = "select r_regdate, r_content, r_point, m_giver, m_haver, "+
+					"(select m_name from tbl_member where m_id = m_giver) as m_givername, "+
+					"(select m_name from tbl_member where m_id = m_haver) as m_havername  "+
+					"from tbl_record where (m_giver = ? or  m_haver = ?) and "
+					+ keyfield + " like '%" + keyword + "%'"
+					+ "order by r_regdate desc";
+		 }
+		
 		
 		try {
 			pool = DBConnectionMgr.getInstance();
@@ -89,6 +107,25 @@ public class PointlistCommand implements CommandInterface {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		request.setAttribute("pList", plist);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("keyfield", keyfield);
+		
+		// 페이징 관련 parameter 받아오기
+				int nowPage = 0, nowBlock = 0;
+				if (request.getParameter("nowPage") != null) {
+					nowPage = Integer.parseInt(request.getParameter("nowPage"));
+				}
+				if (request.getParameter("nowBlock") != null) {
+					nowBlock = Integer.parseInt(request.getParameter("nowBlock"));
+				}
+				// DB 연동 함수를 쓰기 위해 인스턴스 생성
+
+				PagingBean pbean = new PagingBean();
+				// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
+				PagingDto paging = pbean.Paging(plist.size(), 10, nowPage, 10, nowBlock);
+
+				request.setAttribute("paging", paging);
+		
 	}
 	
 	

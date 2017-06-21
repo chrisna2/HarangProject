@@ -75,7 +75,7 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 판매일</span>
-                    <input type="text" name="m_addr1" id="date1" class="form-control" required="required">
+                    <input type="text" name="m_addr1" id="date1" class="form-control" required="required" data-date-format='yyyy-mm-dd'>
                   </div>
                   <br>
                   <div class="input-group">
@@ -119,7 +119,7 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 판매일</span>
-                    <input type="text" name="m_addr2" id="date2" value="06/23/2017" class="form-control" required="required">
+                    <input type="text" name="m_addr2" id="date2" class="form-control" required="required" data-date-format='yyyy-mm-dd'>
                   </div>
                   <br>
                   <div class="input-group">
