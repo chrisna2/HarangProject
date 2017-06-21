@@ -17,8 +17,8 @@ public class ParttimeResumeCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
-		String m_id = (String) req.getParameter("m_id");
-		String p_num = (String) req.getParameter("p_num");
+		String m_id = req.getParameter("m_id");
+		String p_num = req.getParameter("p_num");
 
 		paging(req);
 

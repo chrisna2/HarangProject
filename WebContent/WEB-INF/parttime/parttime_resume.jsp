@@ -33,7 +33,7 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<form role="form">
+						
 							<!-- text input -->
 							<div class="row">
 								<div class="col-md-9">
@@ -79,11 +79,20 @@
 					
 					<div class="row">
 						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<button class="btn btn-block btn-primary">선택</button>
-						</div>
+						<c:choose>
+						<c:when test="${m_id eq resume.m_id}">
+							<div class="col-md-4">
+								<button class="btn btn-block btn-primary">선택</button>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="col-md-4">
+								<button class="btn btn-block btn-primary" onclick="fnDelete()">삭제</button>
+							</div>
+						</c:otherwise>	
+						</c:choose>
 					</div>
-			</form>
+		
 			</div>
 			</div>
 			
@@ -106,67 +115,23 @@
     <input type="hidden" name="nowBlock" value="${nowBlock}"/>
 	<input type="hidden" name="p_num" value="${p_num}"/>
 </form>
+<form name="del" method="post" action="/HarangProject/parttime?cmd=PREAD">
+	<input type="hidden" name="p_num" value="${p_num}"/>
+	<input type="hidden" name="cancel" value="OK"/>
+</form>
 <!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
 <!-- ------------------------------------------------------------------------------------------------ -->
-<!-- jQuery 2.1.3 -->
-<script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
-<!-- Bootstrap 3.3.2 JS -->
-<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- FastClick -->
-<script src='plugins/fastclick/fastclick.min.js'></script>
-<!-- AdminLTE App -->
-<script src="dist/js/app.min.js" type="text/javascript"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js" type="text/javascript"></script>
-<!-- CK Editor -->
-<script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-<!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"
-	type="text/javascript"></script>
-<script
-	src="plugins/input-mask/jquery.inputmask.date.extensions.js"
-	type="text/javascript"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"
-	type="text/javascript"></script>
-<!-- date-range-picker -->
-<script src="plugins/daterangepicker/daterangepicker.js"
-	type="text/javascript"></script>
-<!-- bootstrap color picker -->
-<script src="plugins/colorpicker/bootstrap-colorpicker.min.js"
-	type="text/javascript"></script>
-<!-- bootstrap time picker -->
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"
-	type="text/javascript"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js"
-	type="text/javascript"></script>
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-<!-- FastClick -->
-<script src='plugins/fastclick/fastclick.min.js'></script>
-<!-- AdminLTE App -->
-<script src="dist/js/app.min.js" type="text/javascript"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js" type="text/javascript"></script>
 
-<!-- Bootstrap WYSIHTML5 -->
-<script
-	src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-	type="text/javascript"></script>
-<script type="text/javascript">
-	$(function() {
-		// Replace the <textarea id="editor1"> with a CKEditor
-		// instance, using default configuration.
-		CKEDITOR.replace('editor1');
-		//bootstrap WYSIHTML5 - text editor
-		$(".textarea").wysihtml5();
-	});
-</script>
 <script>
-	function fnList(){
-		document.list.submit();
+	function fnList(){document.list.submit();}
+	function fnDelete(){
+		if(confirm("지금 이력서를 삭제하면 복구할 수 없습니다.\n정말 삭제하시겠습니까?") == true){
+			document.del.submit();
+		}else{
+			return;
+		}
 	}
 </script>

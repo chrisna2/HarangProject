@@ -66,7 +66,7 @@
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
-	                      <label>시급<small>숫자만 입력해주세요.</small></label>
+	                      <label>시급&nbsp;&nbsp;&nbsp;&nbsp;<small>숫자만 입력해주세요.</small></label>
 	                      <input type="text" class="form-control onlynum" name="p_wage" id = "p_wage" required="required" placeholder="ex) 7000원"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
@@ -87,16 +87,10 @@
                       <input type="text" class="form-control" name="p_tel" required="required" placeholder="ex)010-1234-5678 or email@naver.com"/>
                     </div>
                     
-					<div class='box'>
-		                <div class='box-header'>
-		                  <h3 class='box-title'>업무 내용 <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small></h3>
-		                </div><!-- /.box-header -->
-		                <div class='box-body pad'>
-		                    <textarea id="editor1" name="p_content" required="required" rows="10" cols="80">
-		                       	※ 구체적인 요일/시간을 작성해주세요.	                       	                 
-		                    </textarea>
-		                </div>
-              		</div><!-- /.box -->
+					<div class="form-group">
+		              <label>업무 내용 &nbsp;&nbsp;&nbsp;&nbsp;<small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small></label>
+		              <textarea class="form-control" name="p_content" required="required" rows="10">※ 구체적인 요일/시간을 작성해주세요.</textarea>
+		            </div>
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
@@ -131,18 +125,7 @@
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
-	<!-- Editor -->	
-	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-    <script type="text/javascript">
-      $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        // bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-      });
-    </script>
+	
     
     <!-- 날짜 입력  -->
     <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>

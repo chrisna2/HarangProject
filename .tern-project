@@ -4,11 +4,12 @@
     "es_modules": {
       
     },
-    "jquery-extension": {
+    "browser-extension": {
       
     }
   },
   "libs": [
+    "browser",
     "jquery"
   ]
 }
