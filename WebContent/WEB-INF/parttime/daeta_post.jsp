@@ -147,16 +147,25 @@
     <!-- 날짜 -->
     <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
     <script src="plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+	<script src="plugins/daterangepicker/daterangepicker.js"></script>
     <script>
-    $(function() {
+   
         $( "#date1" ).datepicker({
+        	format: 'yyyy-mm-dd',
+        	autoclose: true
         });
-        $( "#date2" ).datepicker({
+       
+        $("#date2").daterangepicker({
+        	timePicker: true, timePickerIncrement: 30, format: 'YYYY-MM-DD h:mm A'
         });
-    });
+    
     </script>
     
     <script>
+  	//숫자만 입력하게 하기 
+    $(".onlynum").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+    	
     	function fnPost(){
     		document.post.submit();
     	}

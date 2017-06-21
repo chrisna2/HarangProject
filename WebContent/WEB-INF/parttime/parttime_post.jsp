@@ -34,11 +34,13 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <form name="post" method="post" action="/HarangProject/parttime?cmd=PMAIN">
+                  	<input type="hidden" name="insert" value="OK"/>
+                  	<input type="hidden" name="p_daycode" value="" id = "p_daycode" required="required"/>
                     <!-- text input -->
                     <div class="row">
 	                    <div class="col-md-3 form-group">
 	                      <label>머릿말</label>	                      
-		                    <select class="form-control" name="p_header">
+		                    <select class="form-control" name="p_header" required="required">
 		                    	<option>[모집중]</option>
 		                    	<option>[마감]</option>
 		                    	<option>[급구]</option>
@@ -47,42 +49,42 @@
                     </div>
                     <div class="form-group">
                       <label>제목</label>
-                      <input type="text" class="form-control" name="p_title" placeholder="ex)**과 과사무실 조교 모집합니다."/>
+                      <input type="text" class="form-control" name="p_title" required="required" placeholder="ex)**과 과사무실 조교 모집합니다."/>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>장소</label>
-	                      <input type="text" class="form-control" name="p_location" placeholder="ex) **과 과사무실"/>
+	                      <input type="text" class="form-control" name="p_location" required="required" placeholder="ex) **과 과사무실"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>마감일</label>
 	                      <div class="input-group">
 		                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-		                      <input type="text" class="form-control pull-right" name="p_deadline" id="date"/>
+		                      <input type="text" class="form-control pull-right" name="p_deadline" required="required" id="datepicker"/>
 	                      </div><!-- /.input group -->
 	                    </div>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
-	                      <label>시급</label>
-	                      <input type="text" class="form-control" name="p_wage" placeholder="ex) 7000원"/>
+	                      <label>시급<small>숫자만 입력해주세요.</small></label>
+	                      <input type="text" class="form-control onlynum" name="p_wage" id = "p_wage" required="required" placeholder="ex) 7000원"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>근무기간</label>
-	                      <input type="text" class="form-control" name="p_term" placeholder="ex) 6개월, 1년 ..."/>
+	                      <input type="text" class="form-control" name="p_term" required="required" placeholder="ex) 6개월, 1년 ..."/>
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>요일</label>
                       <div>
                       <c:forEach var="i" begin="0" end="6" step="1">
-		                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"  value = "" name="daycode[${i}]" id="checkbox"> ${day[i]}
+		                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="${day[i]}"> ${day[i]}
 	                  </c:forEach>
 	                  </div>
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" name="p_tel" placeholder="ex)010-1234-5678 or email@naver.com"/>
+                      <input type="text" class="form-control" name="p_tel" required="required" placeholder="ex)010-1234-5678 or email@naver.com"/>
                     </div>
                     
 					<div class='box'>
@@ -90,7 +92,7 @@
 		                  <h3 class='box-title'>업무 내용 <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small></h3>
 		                </div><!-- /.box-header -->
 		                <div class='box-body pad'>
-		                    <textarea id="editor1" name="p_content" rows="10" cols="80">
+		                    <textarea id="editor1" name="p_content" required="required" rows="10" cols="80">
 		                       	※ 구체적인 요일/시간을 작성해주세요.	                       	                 
 		                    </textarea>
 		                </div>
@@ -145,13 +147,17 @@
     <!-- 날짜 입력  -->
     <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
     <script>
-    $(function() {
-        $("#date").datepicker({
+   
+        $('#datepicker').datepicker({
+        	format: 'yyyy-mm-dd',
+        	autoclose: true
         });
-    });
-    </script>
+	</script>
     
     <script>
+    //숫자만 입력하게 하기 
+    $(".onlynum").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+    
     function fnCancel(){
 		if(confirm("현재 작성한 내용이 모두 사라집니다.\n정말 취소하시겠습니까?") == true){
 			document.cancel.submit();
@@ -169,7 +175,11 @@
     }
     
     function fnPost(){
-    	$(":checkbox:checked").val
+    	var arr = [];
+    	$(":checkbox:checked").each(function(){
+    		arr.push($(this).val());
+    	});
+    	document.getElementById("p_daycode").value = arr;
     	document.post.submit();
     }
     </script>
