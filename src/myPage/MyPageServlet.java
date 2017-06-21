@@ -42,4 +42,6 @@ public class MyPageServlet extends HttpServlet {
 		view.forward(request, response);
 		
 	}
+	
+	
 }

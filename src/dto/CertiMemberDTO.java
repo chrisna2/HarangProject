@@ -1,13 +1,49 @@
 package dto;
 
 public class CertiMemberDTO {
-	String c_num;
-	String m_id;
-	String cm_regdate;
-	String cm_iscomplete;
-	String cm_completedate;
-	String cm_image;
 	
+	private String c_num;
+	private String c_name;
+	private String c_agency;
+	private int	c_point;
+	private String m_id;
+	private String cm_regdate;
+	private String cm_iscomplete;
+	private String cm_completedate;
+	private String cm_image;
+	private String m_dept;
+	private String m_name;
+	
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
+	}
+	public String getC_name() {
+		return c_name;
+	}
+	public void setC_name(String c_name) {
+		this.c_name = c_name;
+	}
+	public String getC_agency() {
+		return c_agency;
+	}
+	public void setC_agency(String c_agency) {
+		this.c_agency = c_agency;
+	}
+	public int getC_point() {
+		return c_point;
+	}
+	public void setC_point(int c_point) {
+		this.c_point = c_point;
+	}
+	public String getM_dept() {
+		return m_dept;
+	}
+	public void setM_dept(String m_dept) {
+		this.m_dept = m_dept;
+	}
 	public String getC_num() {
 		return c_num;
 	}

@@ -187,7 +187,6 @@
 
           //여기서  ajax 처리함  
           dayClick: function(date, jsEvent, view) {
-
               //스크립트로 인벤트 처리 합니다. 
         	  alert('클릭한 날짜: ' + date.format());
         	  

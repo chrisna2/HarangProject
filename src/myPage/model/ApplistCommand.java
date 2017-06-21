@@ -18,9 +18,6 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-
-
-
 public class ApplistCommand implements CommandInterface {
 
 	//DB 커넥션 4 대장
@@ -38,9 +35,7 @@ public class ApplistCommand implements CommandInterface {
 		
 		String pointcheck = request.getParameter("check");
 		
-		
 		prseonInfo(request);
-	
 	
 			if(!(pointcheck == null)){
 				
@@ -58,7 +53,6 @@ public class ApplistCommand implements CommandInterface {
 			}
 		
 		pointList(request);
-		
 		
 		return "/WEB-INF/myPage/a_pplist.jsp";
 	}
@@ -88,6 +82,7 @@ public class ApplistCommand implements CommandInterface {
 		} 
 		catch (Exception e) {
 			System.out.println( "a_pointcheck.jsp : " + e);
+			e.getStackTrace();
 		}
 		finally{
 			// DBCP 접속해제
@@ -155,11 +150,13 @@ public class ApplistCommand implements CommandInterface {
 		} 
 		catch (Exception e) {
 			System.out.println( "a_pointcheck.jsp : " + e);
-		}
+			e.getStackTrace();
+			}
 		finally{
 			// DBCP 접속해제
 			pool.freeConnection(con, pstmt, rs);
 		}
+		
 		request.setAttribute("pList", plist);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("keyfield", keyfield);

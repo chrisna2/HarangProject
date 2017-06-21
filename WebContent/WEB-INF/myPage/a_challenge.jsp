@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
@@ -62,51 +61,25 @@
                       </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${cmlist}" var="cm">
                       <tr>
-                        <td>201602001</td>
-                        <td>박중훈</td>
-                        <td>정보통신학과</td>
-                        <td>정보처리기사</td>
-                        <td>200000p</td>
-                        <td>2017-05-19</td>
-                        <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
+                        <td>${cm.m_id}</td>
+                        <td>${cm.m_name}</td>
+                        <td>${cm.m_dept}</td>
+                        <td>${cm.c_name}</td>
+                        <td>${cm.c_point}p</td>
+                        <td>${cm.cm_regdate}</td>
+                        <c:if test="${cm.cm_iscomplete eq 'none'}">
+                            <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
+                        </c:if>
+                        <c:if test="${cm.cm_iscomplete eq 'complete'}">
+                            <td><span class="label label-success">처리완료</span><br>${cm.cm_completedate}</td>
+                        </c:if>
+                        <c:if test="${cm.cm_iscomplete eq 'reject'}">
+                             <td><span class="label label-danger">지급거부</span></td>
+                        </c:if>
                       </tr>
-                      <tr>
-                        <td>201602002</td>
-                        <td>박희선</td>
-                        <td>정보통신학과</td>
-                        <td>정보처리기사</td>
-                        <td>200000p</td>
-                        <td>2017-05-19</td>
-                        <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
-                      </tr>
-                      <tr>
-                        <td>201604012</td>
-                        <td>김진환</td>
-                        <td>경영학과</td>
-                        <td>공인회계사</td>
-                        <td>200000p</td>
-                        <td>2017-05-18</td>
-                        <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
-                      </tr>
-                      <tr>
-                        <td>201602010</td>
-                        <td>송진경</td>
-                        <td>정보통신학과</td>
-                        <td>정보처리기사</td>
-                        <td>200000p</td>
-                        <td>2017-05-17</td>
-                        <td><span class="label label-success">처리완료</span></td>
-                      </tr>
-                      <tr>
-                        <td>201602010</td>
-                        <td>송진경</td>
-                        <td>정보통신학과</td>
-                        <td>정보처리기사</td>
-                        <td>200000p</td>
-                        <td>2017-05-15</td>
-                        <td><span class="label label-danger">지급거부</span></td>
-                      </tr>
+                      </c:forEach>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->

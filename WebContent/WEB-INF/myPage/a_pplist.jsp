@@ -7,20 +7,23 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
      <title>기본 값 페이지</title>
-     
 <c:if test="${result eq 'plusgo'}">
     <script type="text/javascript">
     alert("해당 대상의 포인트를 추가 하였습니다.");
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    location.href = "/HarangProject/myPage?cmd=Applist&check_id="+${pNum};
     </script>
 </c:if>   
 <c:if test="${result eq 'minusgo'}">
     <script type="text/javascript">
     alert("해당 대상의 포인트를 차감 하였습니다.");
+    location.href = "/HarangProject/myPage?cmd=Applist&check_id="+${pNum};
     </script>
 </c:if>
 <c:if test="${result eq 'overpoint'}">
     <script type="text/javascript">
     alert("입력 포인트가 보유 포인트를 초과 합니다.");
+    location.href = "/HarangProject/myPage?cmd=Applist&check_id="+${pNum};
     </script>
 </c:if>
 </head>
@@ -116,6 +119,7 @@
                         </ul>
                     <!-- 검색 폼 -->    
                     <form action="/HarangProject/myPage?cmd=Applist" name="search" method="post">
+                     <input type="hidden" name="check_id" value="${pNum}">
                       <div class="input-group">
                           <select name="keyfield" class="form-control input-sm pull-left" style="width: 150px;">
                             <option value="r_regdate" ${requestScope.keyfield eq 'r_regdate' ? 'selected' : null }>거래 날짜</option>
@@ -124,7 +128,7 @@
                             <option value="m_givername" ${requestScope.keyfield eq 'm_givername' ? 'selected' : null }>출금 대상</option>
                             <option value="m_havername" ${requestScope.keyfield eq 'm_havername' ? 'selected' : null }>입금 대상</option>
                           </select>
-                          <input type="text" name="keyword" class="form-control input-sm  pull-left" style="width: 150px;" placeholder="Search"/>
+                          <input type="text" name="keyword" class="form-control input-sm  pull-left" value="${requestScope.keyword}" style="width: 150px;" placeholder="Search"/>
                          <div class="input-group-btn  pull-left">
                             <button class="btn btn-sm btn-primary"> 검색 <i class="fa fa-search"></i></button>
                          </div>
@@ -142,6 +146,7 @@
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
+                
                  <!-- form 시작 -->
                 <form role="form" id="updatepoint" name="point" method="post">
                 <input type="hidden" name="member_id" value="${pNum}">
@@ -215,6 +220,7 @@ function goPage(nowPage) {
     document.getElementById("page").value = nowPage;
     document.getElementById("goPage").submit();
 }
+
     $("#plus").click(function() {
         $("#check").val("plus");
         $("#updatepoint")
