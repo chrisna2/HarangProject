@@ -3,13 +3,9 @@
   "plugins": {
     "es_modules": {
       
-    },
-    "browser-extension": {
-      
     }
   },
   "libs": [
-    "browser",
     "jquery"
   ]
 }

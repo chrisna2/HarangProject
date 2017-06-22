@@ -326,6 +326,12 @@
                                                         <a href="javascript:check('${aspec.c_num}')"><span class="label label-success">도전 완료</span><br><font class="text-green" id="comdate${aspec.c_num}">${aspec.cm_completedate}</font></a>
                                                      </td>
                                                   </c:if>
+                                                  <c:if test="${aspec.cm_iscomplete eq 'return'}">
+                                                     <td>
+                                                        <input type="hidden" id="image${aspec.c_num}" value="${aspec.cm_image}">
+                                                        <a href="javascript:rechallange('${aspec.c_num}')"><span class="label label-waring">지급 거부</span><br><font class="text-warning" id="comdate${aspec.c_num}">${aspec.cm_completedate}</font></a>
+                                                     </td>
+                                                  </c:if>
                                                   <c:if test="${aspec.cm_iscomplete eq null}">
                                                       <td class="text-danger"><a href="javascript:challange('${aspec.c_num}')"><span class="label label-danger">도전 중</span></a></td>
                                                   </c:if>

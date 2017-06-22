@@ -7,6 +7,19 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
      <title>스펙 업 관리</title>
+<c:if test="${result eq 'complete'}">
+    <script type="text/javascript">
+    alert("해당 회원에게 포인트가 지급 되었습니다.");
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    location.href = "/HarangProject/myPage?cmd=Achallenge";
+    </script>
+</c:if>   
+<c:if test="${result eq 'return'}">
+    <script type="text/javascript">
+    alert("해당 대상의 자격증을 등록 취소했습니다.");
+    location.href = "/HarangProject/myPage?cmd=Achallenge";
+    </script>
+</c:if>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -28,7 +41,71 @@
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
            <div class="col-md-9">
-           
+                           <!-- 도전 등록 -->
+              <div class="box box-black" id="check-box" hidden="hidden">
+                <form name="checkform" id="checkform" action="" method="post">
+                <div class="box-header">
+                  <h3 class="box-title"><font color="#4888FF" id="checkname">나현기</font> 회원 자격 증명 확인</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <!-- form 시작 -->
+                <div class="box-body">
+                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i> 이름</span>
+                    <input type="text" name="m_name" class="form-control" value="정보 처리 기사" readonly="readonly">
+                  </div>
+                  <br>
+                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-mortar-board"></i> 학번</span>
+                    <input type="text" name="m_id" class="form-control" value="정보 처리 기사" readonly="readonly">
+                  </div>
+                  <br>
+                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-bolt"></i> 학과</span>
+                    <input type="text" name="m_dept" class="form-control" value="정보 처리 기사" readonly="readonly">
+                  </div>
+                  <br>
+                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-credit-card"></i> 자격증 이름</span>
+                    <input type="text" name="c_name" class="form-control" value="" readonly="readonly">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 자격증 번호</span>
+                    <input type="text" name="c_num" class="form-control" value="" readonly="readonly">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-money"></i> 보상 포인트</span>
+                    <input type="text" name="c_point" class="form-control" value="" readonly="readonly">
+                    <span class="input-group-addon">포인트</span>
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i> 등록 날짜</span>
+                    <input type="text" name="cm_regdate" class="form-control" value="" readonly="readonly">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-file-text"></i> 자격증명서</span>
+                    <span class="input-group-addon ">
+                        <a href="#"><img src="" class="img-responsive" alt="User Image" id="cm_image"/></a>
+                    </span>
+                  </div>
+                  <br>
+                </div><!-- /.box-body -->
+                  <div class="box-footer" align="right">
+                    <input type="hidden" name="admin_id" value="${admin.m_id}">
+                    <input type="hidden" name="check" id="check">
+                    <input type="button" id="check-close" class="btn" value="닫기">
+                    <input type="button" id="complete" class="btn btn-primary" value="포인트 지급 처리">
+                    <input type="button" id="return" class="btn btn-danger" value="포인트 지급 거부 [팝업]">
+                </div>
+                </form>
+              </div><!-- /.box -->
            <!-- 리스트 사용시  -->
             <div class="box">
                 <div class="box-header">
@@ -61,6 +138,7 @@
                         <th>이름</th>
                         <th>학과</th>
                         <th>자격증</th>
+                        <th>자격증번호</th>
                         <th>보상포인트</th>
                         <th>신청등록날짜</th>
                         <th>조회버튼</th>
@@ -74,22 +152,35 @@
                     <c:forEach items="${cmlist}"
                       begin="${paging.beginPerPage}" 
                       end="${paging.beginPerPage + paging.numPerPage -1}" 
+                      varStatus="i"
                       var="cm">
                       <tr>
-                        <td>${cm.m_id}</td>
-                        <td>${cm.m_name}</td>
-                        <td>${cm.m_dept}</td>
-                        <td>${cm.c_name}</td>
-                        <td>${cm.c_point}p</td>
-                        <td>${cm.cm_regdate}</td>
+                        <td id="${i.index}m_id">${cm.m_id}</td>
+                        <td id="${i.index}m_name">${cm.m_name}</td>
+                        <td id="${i.index}m_dept">${cm.m_dept}</td>
+                        <td id="${i.index}c_name">${cm.c_name}</td>
+                        <td id="${i.index}c_num">${cm.c_num}</td>
+                        <td id="${i.index}c_point">${cm.c_point}</td>
+                        <td id="${i.index}cm_regdate">${cm.cm_regdate}</td>
                         <c:if test="${cm.cm_iscomplete eq 'none'}">
-                            <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
+                            <td>
+                                <input type="hidden" id="${i.index}cm_image" value="${cm.cm_image}">
+                                <input type="button" class="btn btn-primary" value="확인 조회" onclick="checkUp('${i.index}')">
+                            </td>
                         </c:if>
                         <c:if test="${cm.cm_iscomplete eq 'complete'}">
-                            <td><span class="label label-success">처리완료</span><br>${cm.cm_completedate}</td>
+                            <td class="text-green">
+                                <input type="hidden" value="${cm.cm_image}" id="">
+                                <span class="label label-success">처리완료</span>
+                                <br>${cm.cm_completedate}
+                            </td>
                         </c:if>
-                        <c:if test="${cm.cm_iscomplete eq 'reject'}">
-                             <td><span class="label label-danger">지급거부</span></td>
+                        <c:if test="${cm.cm_iscomplete eq 'return'}">
+                             <td class="text-red">
+                                <input type="hidden" value="${cm.cm_image}" id="">
+                                <span class="label label-danger">지급거부</span>
+                                <br>${cm.cm_completedate}
+                             </td>
                         </c:if>
                       </tr>
                       </c:forEach>
@@ -116,53 +207,6 @@
                         </ul>
                 </div>
               </div><!-- /.box -->
-              
-                <!-- 도전 등록 -->
-              <div class="box box-black">
-                <div class="box-header">
-                  <h3 class="box-title"><font color="#4888FF">나현기</font> 회원 자격 증명 확인</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div>
-                
-                <!-- form 시작 -->
-                <form role="form">
-                
-                <div class="box-body">
-                 <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-bolt"></i> 자격증 이름</span>
-                    <input type="text" name="c_name" class="form-control" value="정보 처리 기사" readonly="readonly">
-                  </div>
-                  <br>
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 자격증 번호</span>
-                    <input type="text" name="c_num" class="form-control" value="c000000005" readonly="readonly">
-                  </div>
-                  <br>
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-money"></i> 보상 포인트</span>
-                    <input type="text" name="c_point" class="form-control" value="600000" readonly="readonly">
-                    <span class="input-group-addon">포인트</span>
-                  </div>
-                  <br>
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-file-text"></i> 자격증명서</span>
-                    <span class="input-group-addon ">
-                        <a href="#"><img src="../dist/img/license.jpg" class="img-responsive" alt="User Image"/></a>
-                    </span>
-                  </div>
-                  <br>
-                </div><!-- /.box-body -->
-                  <div class="box-footer" align="right">
-                    <input type="button" class="btn" value="닫기">
-                    <input type="submit" class="btn btn-primary" value="포인트 지급 처리">
-                    <input type="button" onclick="" class="btn btn-danger" value="포인트 지급 거부 [팝업]">
-                </div>
-                </form>
-              </div><!-- /.box -->
-              
               </div><!-- /.col -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
@@ -170,22 +214,16 @@
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
 <!-- 페이징 : 이전 블록으로 이동하는 폼 -->
 <form id="prevPage" method="post" action="/HarangProject/myPage?cmd=Achallenge">
-    <input type="hidden" name="keyword" value="${requestScope.keyword}"/>
-    <input type="hidden" name="keyfield" value="${requestScope.keyfield}"/>
     <input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
     <input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
 </form>
 <!-- 페이징 : 다음 블록으로 이동하는 폼 -->
 <form id="nextPage" method="post" action="/HarangProject/myPage?cmd=Achallenge">
-    <input type="hidden" name="keyword" value="${requestScope.keyword}"/>
-    <input type="hidden" name="keyfield" value="${requestScope.keyfield}"/>
     <input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
     <input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
 </form>
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/myPage?cmd=Achallenge">
-    <input type="hidden" name="keyword" value="${requestScope.keyword}"/>
-    <input type="hidden" name="keyfield" value="${requestScope.keyfield}"/>
     <input type="hidden" name="nowPage" value="" id="page"/>
     <input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
@@ -202,4 +240,38 @@ function goPage(nowPage) {
     document.getElementById("page").value = nowPage;
     document.getElementById("goPage").submit();
 }
+function checkUp(idx){
+    $("#check-box").slideUp();
+    $("#check-box").slideDown();
+    var name = $("#"+idx+"m_name").text();
+    $("#checkname").text(name);
+    checkform.m_id.value = $("#"+idx+"m_id").text();
+    checkform.m_name.value = name;
+    checkform.m_dept.value = $("#"+idx+"m_dept").text();
+    checkform.c_num.value = $("#"+idx+"c_num").text();
+    checkform.c_name.value = $("#"+idx+"c_name").text();
+    checkform.c_point.value = $("#"+idx+"c_point").text();
+    checkform.cm_regdate.value = $("#"+idx+"cm_regdate").text();
+    var $image = $("#"+idx+"cm_image").val();
+    $("#cm_image").attr("src", $image);
+}
+$("#check-close").click(function(){
+    $("#check-box").slideUp();
+})
+
+   $("#complete").click(function(){
+        $("#check").val("complete");
+        $("#checkform")
+        .attr("action", "/HarangProject/myPage?cmd=Achallenge")
+        .submit();
+    });
+    
+    $("#return").click(function() {
+        $("#check").val("return");
+        $("#checkform")
+        .attr("action", "/HarangProject/myPage?cmd=Achallenge")
+        .submit();
+    });
+
+
 </script>
