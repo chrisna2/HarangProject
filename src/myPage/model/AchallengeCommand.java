@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import dto.CertiMemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import paging.PagingBean;
+import paging.dto.PagingDto;
 
 public class AchallengeCommand implements CommandInterface {
 	
@@ -30,10 +32,25 @@ public class AchallengeCommand implements CommandInterface {
 		
 		ArrayList cmlist  = new ArrayList();
 		
-		String sql = "SELECT m.m_id, m.m_name, m.m_dept, c.c_name, c.c_point, cm.cm_regdate, "
+		String keyword = request.getParameter("keyword");
+		String keyfield = request.getParameter("keyfield");
+		
+		String sql = null;
+		
+		if (null == (keyword)) {
+			sql = "SELECT m.m_id, m.m_name, m.m_dept, c.c_name, c.c_point, cm.cm_regdate, "
 				+ "cm.cm_image, cm.cm_iscomplete, cm.cm_completedate "
 				+ "from tbl_certificate c, tbl_certi_member cm, tbl_member m "
 				+ "where c.c_num = cm.c_num and cm.m_id = m.m_id order by cm.cm_regdate desc";
+		}
+		 else {
+			 sql = "SELECT m.m_id, m.m_name, m.m_dept, c.c_name, c.c_point, cm.cm_regdate, "
+				 + "cm.cm_image, cm.cm_iscomplete, cm.cm_completedate "
+				 + "from tbl_certificate c, tbl_certi_member cm, tbl_member m "
+				 + "where c.c_num = cm.c_num and cm.m_id = m.m_id and "
+				 + keyfield + " like '%" + keyword + "%'"
+				 + "order by cm.cm_regdate desc"; 
+		 }
 		
 		try {
 			
@@ -71,6 +88,25 @@ public class AchallengeCommand implements CommandInterface {
 		}
 		
 		request.setAttribute("cmlist", cmlist);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("keyfield", keyfield);
+		
+		
+		// 페이징 관련 parameter 받아오기
+		int nowPage = 0, nowBlock = 0;
+		if (request.getParameter("nowPage") != null) {
+			nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		}
+		if (request.getParameter("nowBlock") != null) {
+			nowBlock = Integer.parseInt(request.getParameter("nowBlock"));
+		}
+		// DB 연동 함수를 쓰기 위해 인스턴스 생성
+
+		PagingBean pbean = new PagingBean();
+		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
+		PagingDto paging = pbean.Paging(cmlist.size(), 10, nowPage, 10, nowBlock);
+
+		request.setAttribute("paging", paging);
 		
 		return "/WEB-INF/myPage/a_challenge.jsp";
 	}
