@@ -69,6 +69,10 @@ public class CommandFactory{
 			
 			return new ApointCommand();
 		}
+		else if(cmd.equals("Applist")){
+			
+			return new ApplistCommand();
+		}
 		else{
 			return null;
 		}

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
@@ -34,18 +34,23 @@
                 <div class="box-header">
                   <h3 class="box-title">스펙 업 포인트 신청 목록</h3>
                    <div class="box-tools">
+                   <form action="/HarangProject/myPage?cmd=Achallenge" name="search" method="post"> 
                     <div class="input-group">
-                      <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
+                      <input type="text" name="keyword" value="${requestScope.keyword}" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                       <select class="form-control input-sm pull-right" style="width: 150px;">
-                        <option>학번</option>
-                        <option>이름</option>
-                        <option>학과</option>
-                        <option>자격증</option>
+                        <option value="" ${requestScope.keyfield eq null ? 'selected' : null }></option>
+                        <option value="m_id" ${requestScope.keyfield eq 'm_id' ? 'selected' : null }>학번 / 관리자 번호</option>
+                        <option value="m_name" ${requestScope.keyfield eq 'm_name' ? 'selected' : null }>이름</option>
+                        <option value="m_dept" ${requestScope.keyfield eq 'm_dept' ? 'selected' : null }>학과</option>
+                        <option value="m_dept" ${requestScope.keyfield eq 'c_name' ? 'selected' : null }>자격증명</option>
+                        <option value="m_dept" ${requestScope.keyfield eq 'c_point' ? 'selected' : null }>지급포인트</option>
+                        <option value="m_dept" ${requestScope.keyfield eq 'cm_regdate' ? 'selected' : null }>등록 날짜</option>
                       </select>
                       <div class="input-group-btn">
                         <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                       </div>
                     </div>
+                    </form>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -62,62 +67,53 @@
                       </tr>
                     </thead>
                     <tbody>
+                   <c:choose>
+                      <c:when test="${fn:length(cmlist) eq 0}">
+                      </c:when>
+                    <c:otherwise>
+                    <c:forEach items="${cmlist}"
+                      begin="${paging.beginPerPage}" 
+                      end="${paging.beginPerPage + paging.numPerPage -1}" 
+                      var="cm">
                       <tr>
-                        <td>201602001</td>
-                        <td>박중훈</td>
-                        <td>정보통신학과</td>
-                        <td>정보처리기사</td>
-                        <td>200000p</td>
-                        <td>2017-05-19</td>
-                        <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
+                        <td>${cm.m_id}</td>
+                        <td>${cm.m_name}</td>
+                        <td>${cm.m_dept}</td>
+                        <td>${cm.c_name}</td>
+                        <td>${cm.c_point}p</td>
+                        <td>${cm.cm_regdate}</td>
+                        <c:if test="${cm.cm_iscomplete eq 'none'}">
+                            <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
+                        </c:if>
+                        <c:if test="${cm.cm_iscomplete eq 'complete'}">
+                            <td><span class="label label-success">처리완료</span><br>${cm.cm_completedate}</td>
+                        </c:if>
+                        <c:if test="${cm.cm_iscomplete eq 'reject'}">
+                             <td><span class="label label-danger">지급거부</span></td>
+                        </c:if>
                       </tr>
-                      <tr>
-                        <td>201602002</td>
-                        <td>박희선</td>
-                        <td>정보통신학과</td>
-                        <td>정보처리기사</td>
-                        <td>200000p</td>
-                        <td>2017-05-19</td>
-                        <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
-                      </tr>
-                      <tr>
-                        <td>201604012</td>
-                        <td>김진환</td>
-                        <td>경영학과</td>
-                        <td>공인회계사</td>
-                        <td>200000p</td>
-                        <td>2017-05-18</td>
-                        <td><input type="button" class="btn btn-primary" value="확인 조회"></td>
-                      </tr>
-                      <tr>
-                        <td>201602010</td>
-                        <td>송진경</td>
-                        <td>정보통신학과</td>
-                        <td>정보처리기사</td>
-                        <td>200000p</td>
-                        <td>2017-05-17</td>
-                        <td><span class="label label-success">처리완료</span></td>
-                      </tr>
-                      <tr>
-                        <td>201602010</td>
-                        <td>송진경</td>
-                        <td>정보통신학과</td>
-                        <td>정보처리기사</td>
-                        <td>200000p</td>
-                        <td>2017-05-15</td>
-                        <td><span class="label label-danger">지급거부</span></td>
-                      </tr>
+                      </c:forEach>
+                      </c:otherwise>
+                    </c:choose>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix">
                   <ul class="pagination pagination-sm no-margin pull-right">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">&raquo;</a></li>
-                  </ul>
+                         <c:if test="${paging.nowBlock > 0}">
+                                <li><a href="javascript:prevPage()">&laquo;</a></li>
+                            </c:if>
+                            <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+                                    <!-- if문 추가 : 20170615 -->
+                                    <c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
+                                    <li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+                                    </c:if>
+                                    <!-- 끝 -->
+                            </c:forEach>
+                            <c:if test="${paging.totalBlock > paging.nowBlock +1}">
+                                <li><a href="javascript:nextPage()">&raquo;</a></li>
+                            </c:if>
+                        </ul>
                 </div>
               </div><!-- /.box -->
               
@@ -172,6 +168,38 @@
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      
+<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/myPage?cmd=Achallenge">
+    <input type="hidden" name="keyword" value="${requestScope.keyword}"/>
+    <input type="hidden" name="keyfield" value="${requestScope.keyfield}"/>
+    <input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/myPage?cmd=Achallenge">
+    <input type="hidden" name="keyword" value="${requestScope.keyword}"/>
+    <input type="hidden" name="keyfield" value="${requestScope.keyfield}"/>
+    <input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
+</form>
+<!-- 페이징 : 해당 페이지로 이동하는 폼 -->
+<form id="goPage" method="post" action="/HarangProject/myPage?cmd=Achallenge">
+    <input type="hidden" name="keyword" value="${requestScope.keyword}"/>
+    <input type="hidden" name="keyfield" value="${requestScope.keyfield}"/>
+    <input type="hidden" name="nowPage" value="" id="page"/>
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+<script>
+function prevPage() {
+    document.getElementById("prevPage").submit();
+}
+function nextPage() {
+    document.getElementById("nextPage").submit();
+}
+function goPage(nowPage) {
+    document.getElementById("page").value = nowPage;
+    document.getElementById("goPage").submit();
+}
+</script>

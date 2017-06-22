@@ -3,12 +3,12 @@ package dto;
 public class MemberDTO {
 
 	private String m_id;
+	private String m_dept;
 	private String m_regdate;
 	private String m_pw;
 	private int m_grade;
 	private String m_name;
 	private String m_birth;
-	private String m_dept;
 	private String m_mail;
 	private String m_photo;
 	private String m_addr;

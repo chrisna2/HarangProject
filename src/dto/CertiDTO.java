@@ -1,6 +1,7 @@
 package dto;
 
 public class CertiDTO {
+	
 		String c_num;
 		String c_name;
 		String c_agency;
