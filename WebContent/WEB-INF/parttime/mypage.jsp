@@ -26,6 +26,8 @@
 	<section class="content">
 	<div class="row">
 		<div class="col-md-10">
+			
+			
 			<!-- 알바 모집 collapse -->
 			<div class="box box-info">
                 <div class="box-header with-border">
@@ -36,7 +38,7 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id = "example1" class="table table-bordered table-striped">
+                  <table class="table table-bordered table-striped">
 							<tr>
 								<th style="width: 10px">#</th>
 								<th style="width: 60%">제목</th>
@@ -46,12 +48,12 @@
 							</tr>
 							<c:choose>
 								<c:when test="${fn:length(plist) eq 0}">
-								<tr>
-									<td></td>
-									<td>게시물이 없습니다.<td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<tr>
+										<td></td>
+										<td>게시물이 없습니다.<td>
+										<td></td>
+										<td></td>
+										<td></td>
 									</tr>
 								</c:when>
 								<c:otherwise>
@@ -62,14 +64,14 @@
 										<tr>
 											<td>${list.list_num}</td>
 											<td>${list.p_header}&nbsp;&nbsp; 
-												<a href="javascript:fnRead('${list.p_num}')" id="read">${list.p_title}</a>
+												<a href="#" onclick="fnP_Read('${list.p_num}')">${list.p_title}</a>
 											</td>
 											<td>${list.p_regdate}</td>
 											<td>${list.p_cnt}</td>
 											<td>${list.cnt_apply}</td>
 										</tr>
 									</c:forEach>
-							</c:otherwise>
+								</c:otherwise>
 							</c:choose>
 						</table>
                 </div><!-- /.box-body -->
@@ -94,9 +96,7 @@
 					</div><!-- 페이징 버튼 -->
               </div><!-- /.box -->
               
-              
-              
-           <!-- 대타 모집 collapse -->
+           	<!-- 대타 모집 collapse -->
 			<div class="box box-warning">
                 <div class="box-header with-border">
                   <h3 class="box-title">대타 모집</h3>
@@ -106,7 +106,7 @@
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id = "example1" class="table table-bordered table-striped">
+                  <table class="table table-bordered table-striped">
 							<tr>
 								<th style="width: 10px">#</th>
 								<th style="width: 60%">제목</th>
@@ -140,9 +140,8 @@
 										</tr>
 									</c:forEach>
 							</c:otherwise>
-							</c:choose>
-						</table>
-						</table>
+						</c:choose>
+					</table>
                 </div><!-- /.box-body -->
                 <!-- 페이징 버튼 -->
 					<div class="box-footer clearfix">
@@ -164,7 +163,7 @@
 					</div><!-- 페이징 버튼 -->
 			</div><!-- /.box -->
                 
-                <!-- 알바 지원 collapse -->
+            <!-- 알바 지원 collapse -->
 			<div class="box box-success">
                 <div class="box-header with-border">
                   <h3 class="box-title">알바 지원</h3>
@@ -237,7 +236,6 @@
 					</div><!-- 페이징 버튼 -->
               </div><!-- /.box -->
                 
-                
             <!-- 대타 지원 collapse -->
 			<div class="box box-danger">
                 <div class="box-header with-border">
@@ -278,7 +276,7 @@
 										<tr>
 											<td>${list.list_num}</td>
 											<td>${list.p_header}&nbsp;&nbsp; 
-												<a href="javascript:fnRead('${list.p_num}')" id="read">${list.p_title}</a>
+												<a href="#">${list.p_title}</a>
 											</td>
 											<td>${list.m_name} </td>
 											<td>${list.p_regdate} </td>
@@ -314,14 +312,24 @@
               </div><!-- /.box -->  
            
             </div><!-- /.col -->
-		</div>
+		</div><!-- /.row -->
 	</section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->
 </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
+<form name="pRead" method="post" action="/HarangProject/parttime?cmd=PREAD">
+	<input type="hidden" name="p_num" value="" id="p_num"/>
+</form>
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
-
 <!-- --------------------------------------------------------------------------------------------------- -->
+<script>
+function fnP_Read(p_num){
+	document.getElementById("p_num").value = p_num;
+	pRead.submit();
+}	
+</script>
+
+
 
  
