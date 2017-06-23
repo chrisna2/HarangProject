@@ -38,16 +38,17 @@
 		<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-10">
-
+			
 				<div class="box-header"></div>
 				<div class="box-body">
-
+					<form role="form2" name="read2"
+					action="/HarangProject/impage?cmd=insert" method="post">
 					<div class="row">
 						<div class="col-md-5 form-group">
-							<label>작성자</label> <input type="text" class="form-control"
+							<label>작성자</label> <input type="text" class="form-control" value="${read2.m_name }"
 								readonly="readonly" />
 						</div>
-
+				
 					</div>
 
 
@@ -55,24 +56,24 @@
 
 						<div class="col-md-5 form-group">
 							<label>교수명</label> <input type="text" class="form-control"
-								readonly="readonly" />
+								value="${read2.l_teacher }" readonly="readonly" />
 						</div>
 						<div class="col-md-5 form-group">
 							<label>강의명</label> <input type="text"
 								class="form-control pull-right" id="reservation"
-								readonly="readonly" />
+								value="${read2.l_name }" readonly="readonly" />
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-5 form-group">
 							<label>개설년도</label> <input type="text" class="form-control"
-								readonly="readonly" />
+								value="${read2.lm_year }" readonly="readonly" />
 						</div>
 						<div class="col-md-5 form-group">
 							<label>개설학기</label> <input type="text"
-								class="form-control pull-right" id="reservation"
-								readonly="readonly" />
+								class="form-control pull-right" 
+								value="${read2.lm_term }" readonly="readonly" />
 						</div>
 
 					</div>
@@ -80,12 +81,12 @@
 					<div class="row">
 						<div class="col-md-5 form-group">
 							<label>만족도</label> <input type="text" class="form-control"
-								readonly="readonly" />
+								value="${read2.lm_star }" readonly="readonly" />
 						</div>
 						<div class="col-md-5 form-group">
 							<label>조모임</label> <input type="text"
-								class="form-control pull-right" id="reservation"
-								readonly="readonly" />
+								class="form-control pull-right" 
+								value="${read2.lm_group }" readonly="readonly" />
 						</div>
 
 					</div>
@@ -93,11 +94,11 @@
 					<div class="row">
 						<div class="col-md-5 form-group">
 							<label>과제</label> <input type="text" class="form-control"
-								readonly="readonly" />
+							value="${read2.lm_hw }"	readonly="readonly" />
 						</div>
 						<div class="col-md-5 form-group">
-							<label>시험횟수</label> <input type="text"
-								class="form-control pull-right" id="reservation"
+							<label>작성일</label> <input type="text"
+							value="${read2.lm_regdate}"	class="form-control pull-right" id="reservation"
 								readonly="readonly" />
 						</div>
 
@@ -107,7 +108,7 @@
 					<div class="row">
 						<div class="col-md-10 form-group">
 							<label><big>총평</big></label>
-							<textarea class="form-control" rows="3" readonly="readonly"></textarea>
+							<textarea class="form-control" rows="3" readonly="readonly">${read2.lm_comment}</textarea>
 
 						</div>
 
@@ -124,7 +125,7 @@
 
 					</div>
 
-
+</form>
 
 				</div>
 
