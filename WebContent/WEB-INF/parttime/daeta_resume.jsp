@@ -14,7 +14,7 @@
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
 		<h1>
-			이력서 보기 <small>당신의 알바 채용 글에 지원한 지원자의 이력서입니다. 채용 의사가 있다면 선택버튼을 눌러주세요.</small>
+			이력서 보기 <small>당신의 대타 채용 글에 지원한 지원자의 이력서입니다. 채용 의사가 있다면 선택버튼을 눌러주세요.</small>
 		</h1>
 		<ol class="breadcrumb">
 			<!-- 페이지 기록 메인에서 부터 현재 페이지 까지의 경로 나열 -->
@@ -34,68 +34,39 @@
 					<!-- /.box-header -->
 					<div class="box-body">
 						
+				
 							<!-- text input -->
-							<div class="row">
-								<div class="col-md-9">
-									<div class="form-group">
-										<label>이름</label><br> 
-										<input type="text" class="form-control" value="${applicant.m_name}" readonly="readonly" />
-									</div>
-									<div class="form-group">
-										<label>생년월일</label> 
-										<input type="text" class="form-control" value="${applicant.m_birth}" readonly="readonly" />
-									</div>
-									<div class="form-group">
-										<label>나이</label> 
-										<input type="text" class="form-control" value="${applicant.m_age}" readonly="readonly" />
-									</div>
-								</div>
-								<div class="col">
-									<img src="/HarangProject/WebContent/dist/img/photo1.png"/>
-								</div>
-							</div>
 							<div class="form-group">
-								<label>학번</label> 
-								<input type="text" class="form-control" value="${applicant.m_id}" readonly="readonly" />
-							</div>				
+								<label>이름</label><br> 
+								<input type="text" class="form-control" value="${applicant.m_name}" readonly="readonly" />
+							</div>
 							<div class="form-group">
 								<label>연락처</label> 
 								<input type="text" class="form-control" value="${applicant.m_tel}" readonly="readonly" />
 							</div>
 							<div class="form-group">
-									<label>지원 동기</label>
-									<textarea class="form-control" readonly="readonly">${resume.pm_reason}</textarea>
+								<label>지원 동기</label>
+								<textarea class="form-control" name="dm_reason" readonly="readonly">${resume.dm_reason}</textarea>
 							</div>
-							<br>
-							<div class="form-group">
-								<label>경력사항</label><br>
-								<textarea class="form-control"readonly="readonly">${resume.pm_career}</textarea>
-							</div>
-							<br>
-							<div class="form-group">
-								<label>희망 근무 시간</label><br>
-								<textarea class="form-control" readonly="readonly">${resume.pm_wanttime}</textarea>
-							</div>
+					</div>
 					
 					<div class="row">
-						<div class="col-md-4"></div>
+						<div class="col-md-5"></div>
 						<c:choose>
 						<c:when test="${m_id eq resume.m_id}">
-							<div class="col-md-4">
+							<div class="col-md-2">
 								<button class="btn btn-block btn-primary">선택</button>
 							</div>
 						</c:when>
 						<c:otherwise>
-							<div class="col-md-4">
+							<div class="col-md-2">
 								<button class="btn btn-block btn-primary" onclick="fnDelete()">삭제</button>
 							</div>
 						</c:otherwise>	
 						</c:choose>
 					</div>
-		
-			</div>
-			</div>
-			
+					<br><br>
+				</div>
 					<div class="row">
 						<div class="col-md-10"></div>
 						<div class="col-md-2">
@@ -108,16 +79,16 @@
 	<!-- /. 작업 공간 끝! -->
 	<!------------------------------------------------------------------------------------------------------------------->
 </div>
-<form name="list" method="post" action="/HarangProject/parttime?cmd=PREAD">
-	<input type="hidden" name="tab" value="${tab}"/>
+<form name="list" method="post" action="/HarangProject/parttime?cmd=DREAD">
 	<input type="hidden" name="a_nowPage" value="${a_nowPage}"/>
 	<input type="hidden" name="a_nowBlock" value="${a_nowBlock}"/>
 	<input type="hidden" name="nowPage" value="${nowPage}"/>
     <input type="hidden" name="nowBlock" value="${nowBlock}"/>
-	<input type="hidden" name="p_num" value="${p_num}"/>
+	<input type="hidden" name="d_num" value="${d_num}"/>
+	<input type="hidden" name="tab" value="${tab}"/>
 </form>
-<form name="del" method="post" action="/HarangProject/parttime?cmd=PREAD">
-	<input type="hidden" name="p_num" value="${p_num}"/>
+<form name="del" method="post" action="/HarangProject/parttime?cmd=DREAD">
+	<input type="hidden" name="d_num" value="${d_num}"/>
 	<input type="hidden" name="cancel" value="OK"/>
 	<input type="hidden" name="tab" value="${tab}"/>
 </form>

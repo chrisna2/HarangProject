@@ -3,7 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ include file="../include/header.jsp" %>
+
+<%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -32,29 +33,31 @@
            <div class="col-md-9">
         	 <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">내게 쓴 쪽지함</h3>
+                  <h3 class="box-title">받은 쪽지함</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body no-padding">
+                  
                   <%@ include file="message_paging.jsp" %>
                   
                   <div class="table-responsive mailbox-messages">
                     <table class="table table-hover table-striped">
                       <tbody>
-                      	<tr>
-	                      	<th></th>
-	                      	<th>#</th>
-	                      	<th>제목</th>
-	                      	<th>날짜</th>
-	                      </tr>
+                      <tr>
+                      	<th></th>
+                      	<th>#</th>
+                      	<th>보낸사람</th>
+                      	<th>제목</th>
+                      	<th>날짜</th>
+                      </tr>
                       <c:choose>
 								<c:when test="${fn:length(list) eq 0}">
-								<tr>
+									<tr>
 									<td></td>
 									<td></td>
 									<td></td>
-									<td>내게 쓴 쪽지가 없습니다.<td>
+									<td>받은 쪽지가 없습니다.<td>
 									<td></td>
-								</tr>
+									</tr>
 								</c:when>
 								<c:otherwise>
 									<c:forEach items="${list}" var="list" 
@@ -64,6 +67,7 @@
 										<tr>
 				                          <td><input type="checkbox" value="${list.t_num}"/></td>
 				                          <td>${list.list_num}</td>
+				                          <td class="mailbox-name" >${list.m_sender_name}</td>
 				                          <td class="mailbox-subject" style="width: 50%">
 				                          <c:choose>
 					                          <c:when test="${list.t_read_date eq null}">
@@ -96,9 +100,9 @@
 	          	  <div class="box box-solid">
 	                <div class="box-body no-padding">
 	                  <ul class="nav nav-pills nav-stacked">
-	                    <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">${notRead}</span></a></li>
+	                    <li class="active"><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-inbox"></i> 받은 쪽지함 <span class="label label-primary pull-right">${notRead}</span></a></li>
 	                    <li><a href="/HarangProject/message?cmd=SENT"><i class="fa fa-envelope-o"></i> 보낸 쪽지함</a></li>
-	                    <li class="active"><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 <span class="label label-primary pull-right">${notRead_toMe}</span></a></li>
+	                    <li><a href="/HarangProject/message?cmd=TOME"><i class="fa fa-file-text-o"></i> 내게 쓴 쪽지함 <span class="label label-primary pull-right">${notRead_toMe}</span></a></li>
 	                  </ul>
 	                </div><!-- /.box-body -->
                 </div>
@@ -108,12 +112,12 @@
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
       <!-- 페이징 : 이전 블록으로 이동하는 폼 -->
-<form id="prevPage" method="post" action="/HarangProject/message?cmd=TOME">
+<form id="prevPage" method="post" action="/HarangProject/message?cmd=INBOX">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
 </form>
 <!-- 페이징 : 다음 블록으로 이동하는 폼 -->
-<form id="nextPage" method="post" action="/HarangProject/message?cmd=TOME">
+<form id="nextPage" method="post" action="/HarangProject/message?cmd=INBOX">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
 </form>
@@ -124,9 +128,8 @@
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 	<input type="hidden" name="tab" value="${tab}"/>
 </form>
-
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/a_footer.jsp" %>
 <script>
 ///////////////// 페이지 관련 javascript function////////////////////
 function prevPage(){
@@ -142,4 +145,7 @@ function fnRead(t_num){
 	document.read.submit();
 }
 
+function fnSearch(){
+	
+}
 </script>

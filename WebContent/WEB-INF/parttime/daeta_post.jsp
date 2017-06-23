@@ -35,13 +35,14 @@
                 <div class="box-body">
                   <form name="post" method="post" action="/HarangProject/parttime?cmd=DMAIN">
                   	<input type="hidden" name="m_id" value="${m_id}"/>
+                  	<input type="hidden" name="insert" value="OK"/>
 					<input type="hidden" name="nowPage" value="${nowPage}"/>
       				<input type="hidden" name="nowBlock" value="${nowBlock}"/>
                     <!-- text input -->
                     <div class="row">
 	                    <div class="col-md-3 form-group">
 	                      <label>머릿말</label>	                      
-		                    <select class="form-control" name="d_header">
+		                    <select class="form-control" name="d_header" required="required">
 		                    	<option>[모집중]</option>
 		                    	<option>[마감]</option>
 		                    	<option>[급구]</option>
@@ -50,41 +51,41 @@
                     </div>
                     <div class="form-group">
                       <label>제목</label>
-                      <input type="text" class="form-control" name="d_title" placeholder="ex)**과 과사무실 조교 모집합니다."/>
+                      <input type="text" class="form-control" name="d_title" placeholder="ex)**과 과사무실 조교 모집합니다." required="required"/>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>장소</label>
-	                      <input type="text" class="form-control" name="d_location" placeholder="ex) **과 과사무실"/>
+	                      <input type="text" class="form-control" name="d_location" placeholder="ex) **과 과사무실" required="required"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>마감일</label>
 	                      <div class="input-group">
 	                      	<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-	                      	<input type="text" class="form-control pull-right" name="d_deadline" value="" id="date1"/>
+	                      	<input type="text" class="form-control pull-right" name="d_deadline" value="" id="date1" required="required"/>
 	                      </div><!-- /.input group -->
 	                    </div>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>시급</label>
-	                      <input type="text" class="form-control" name="d_wage" placeholder="ex) 7000원"/>
+	                      <input type="text" class="form-control onlynum" name="d_wage" placeholder="ex) 7000원" required="required"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>지급 포인트</label>&nbsp;&nbsp;&nbsp;<small>시급과 별개로 지급하는 포인트입니다.</small>
-	                      <input type="text" class="form-control" name="d_deposit" placeholder="ex)500point"/>
+	                      <input type="text" class="form-control onlynum" name="d_deposit" placeholder="ex)500point" required="required"/>
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>대타 날짜</label>&nbsp;&nbsp;&nbsp;<small>날짜와 시간을 정확하게 입력해주세요.</small>
                       <div class="input-group">
                       	  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-	                      <input type="text" class="form-control pull-right" name="d_date" value="" id="date2"/>
+	                      <input type="text" class="form-control pull-right" name="d_date" value="" id="date2" required="required"/>
 	                  </div><!-- /.input group -->
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" name="d_tel" placeholder="ex)010-1234-5678 or email@naver.com"/>
+                      <input type="text" class="form-control" name="d_tel" placeholder="ex)010-1234-5678 or email@naver.com" required="required"/>
                     </div>
                     
 					<div class='box'>
@@ -92,8 +93,8 @@
 		                  <h3 class='box-title'>업무 내용 <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small></h3>
 		                </div><!-- /.box-header -->
 		                <div class='box-body pad'>
-		                    <textarea id="editor1" name="d_content" rows="10" cols="80">
-		                       	대타로서 해야할 업무를 상세하게 작성해주세요.                     	                 
+		                    <textarea class="form-control" name="d_content" rows="10" required="required">
+대타로서 해야할 업무를 상세하게 작성해주세요.                     	                 
 		                    </textarea>
 		                </div>
               		</div><!-- /.box -->
@@ -112,38 +113,23 @@
               <div class="row">
               	<div class="col-md-10"></div>
               	<div class="col-md-2">
-              		<button class="btn btn-block btn-warning">목록</button>
+              		<button class="btn btn-block btn-warning" onclick="fnList()">목록</button>
               	</div>
               </div>
             </div><!--/.col (right) -->
-        
-        </div>
-        
-
-        </section><!-- /. 작업 공간 끝! -->
+        </div><!-- /.row -->
+     </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
      </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
 <form name="cancel" method="post" action="/HarangProject/parttime?cmd=DMAIN">
 	<input type="hidden" name="nowPage" value="${nowPage}"/>
     <input type="hidden" name="nowBlock" value="${nowBlock}"/>
-</form>      
+</form>  
+
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
-    
-    <!-- Editor -->
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-    <script type="text/javascript">
-      $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-      });
-    </script>
-    
+  
     <!-- 날짜 -->
     <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
     <script src="plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
@@ -157,6 +143,7 @@
         });
        
         $("#date2").daterangepicker({
+        	minDate : true, 
         	timePicker: true, timePickerIncrement: 30, format: 'YYYY-MM-DD h:mm A'
         });
     
@@ -166,15 +153,23 @@
   	//숫자만 입력하게 하기 
     $(".onlynum").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
     	
-    	function fnPost(){
-    		document.post.submit();
-    	}
+    function fnPost(){
+   		document.post.submit();
+   	}
     	
-    	function fnCancel(){
-    		if(confirm("현재 작성한 내용이 모두 사라집니다.\n정말 취소하시겠습니까?") == true){
-    			document.cancel.submit();
-    		}else{
-    			return;
-    		}
-    	}
+   	function fnCancel(){
+   		if(confirm("현재 작성한 내용이 모두 사라집니다.\n정말 취소하시겠습니까?") == true){
+   			document.cancel.submit();
+   		}else{
+   			return;
+   		}
+   	}
+   	
+   	function fnList(){
+   		if(confirm("현재 작성한 내용이 모두 사라집니다.\n정말 목록으로 이동하시겠습니까?") == true){
+   			document.cancel.submit();
+   		}else{
+   			return;
+   		}
+   	}
     </script>

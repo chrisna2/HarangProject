@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 <%@ include file="../include/header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
@@ -33,14 +34,6 @@
         	 <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">받은 쪽지함</h3>
-                  <div class="box-tools pull-right">
-                    <div class="input-group">
-                      <input type="text" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search Message"/>
-                      <div class="input-group-btn">
-                      	<button class="btn btn-sm btn-default" onclick="fnSearch()"><i class="fa fa-search"></i></button>
-                    </div>
-                    </div>
-                  </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body no-padding">
                   

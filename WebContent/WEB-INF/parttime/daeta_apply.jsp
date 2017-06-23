@@ -34,15 +34,15 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<form role="form">
+						<form >
 							<!-- text input -->
 							<div class="form-group">
 								<label>이름</label><br> 
-								<input type="text" class="form-control" value="김철수" readonly="readonly" />
+								<input type="text" class="form-control" value="${member.m_name}" readonly="readonly" />
 							</div>
 							<div class="form-group">
 								<label>연락처</label> 
-								<input type="text" class="form-control" value="010-1111-2222" readonly="readonly" />
+								<input type="text" class="form-control" value="${member.m_tel}" readonly="readonly" />
 							</div>
 						</form>
 					</div><!-- /.box-body -->
@@ -59,11 +59,13 @@
 							</h3>
 						</div><!-- /.box-header -->
 						<div class='box-body pad'>
-							<form>
+							<form name="apply" method="post" action="/HarangProject/parttime?cmd=DREAD">
+								<input type="hidden" name="d_num" value="${d_num}"/>
+								<input type="hidden" name="nowPage" value="${nowPage}"/>
+      							<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      							<input type="hidden" name="read" value="no"/>							
 							<label>지원 동기</label>
-								<textarea class="form-control" >
-본인을 마구마구 뽐내주세요.                       	                 
-		                    	</textarea>
+								<textarea class="form-control" name="dm_reason" >본인을 마구마구 뽐내주세요.</textarea>
 							</form>
 						</div>
 					</div>
@@ -71,17 +73,10 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-primary">지원 완료</button>
+							<button class="btn btn-block btn-primary" onclick="fnApply()">지원 완료</button>
 						</div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-danger">취소</button>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-10"></div>
-						<div class="col-md-2">
-							<button class="btn btn-block btn-warning">돌아가기</button>
+							<button class="btn btn-block btn-danger" onclick="fnCancel()">취소</button>
 						</div>
 					</div>
 			</div>
@@ -89,63 +84,30 @@
 	</section>
 	<!-- /. 작업 공간 끝! -->
 	<!------------------------------------------------------------------------------------------------------------------->
-</div>
-<!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-
+</div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
+<form name="cancel" method="post" action="/HarangProject/parttime?cmd=DREAD">
+	<input type="hidden" name="d_num" value="${d_num}"/>
+	<input type="hidden" name="nowPage" value="${nowPage}"/>
+    <input type="hidden" name="nowBlock" value="${nowBlock}"/>
+    <input type="hidden" name="read" value="no"/>
+</form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
 <!-- ------------------------------------------------------------------------------------------------ -->
-<!-- jQuery 2.1.3 -->
-<script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
-<!-- Bootstrap 3.3.2 JS -->
-<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- FastClick -->
-<script src='plugins/fastclick/fastclick.min.js'></script>
-<!-- AdminLTE App -->
-<script src="dist/js/app.min.js" type="text/javascript"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js" type="text/javascript"></script>
-<!-- CK Editor -->
-<script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-<!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"
-	type="text/javascript"></script>
-<script
-	src="plugins/input-mask/jquery.inputmask.date.extensions.js"
-	type="text/javascript"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"
-	type="text/javascript"></script>
-<!-- date-range-picker -->
-<script src="plugins/daterangepicker/daterangepicker.js"
-	type="text/javascript"></script>
-<!-- bootstrap color picker -->
-<script src="plugins/colorpicker/bootstrap-colorpicker.min.js"
-	type="text/javascript"></script>
-<!-- bootstrap time picker -->
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"
-	type="text/javascript"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js"
-	type="text/javascript"></script>
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-<!-- FastClick -->
-<script src='plugins/fastclick/fastclick.min.js'></script>
-<!-- AdminLTE App -->
-<script src="dist/js/app.min.js" type="text/javascript"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js" type="text/javascript"></script>
-
-<!-- Bootstrap WYSIHTML5 -->
-<script
-	src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-	type="text/javascript"></script>
-<script type="text/javascript">
-	$(function() {
-		// Replace the <textarea id="editor1"> with a CKEditor
-		// instance, using default configuration.
-		CKEDITOR.replace('editor1');
-		//bootstrap WYSIHTML5 - text editor
-		$(".textarea").wysihtml5();
-	});
+<script>
+	function fnCancel(){
+		if(confirm("정말 취소하시겠습니까?") == true){
+			document.cancel.submit();
+		}else{
+			return;
+		}
+	}
+	
+	function fnApply(){
+		if(confirm("지금 제출하시면 수정이 불가합니다.\n정말 제출하시겠습니까?") == true){
+			document.apply.submit();
+		}else{
+			return;
+		}
+	}
 </script>

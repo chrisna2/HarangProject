@@ -22,11 +22,12 @@ public class ParttimeResumeCommand implements CommandInterface {
 
 		paging(req);
 
-		P_ApplyDTO resume = bean.getApply(m_id, p_num);
+		P_ApplyDTO resume = bean.getParttimeApply(m_id, p_num);
 		applicantInfo(resume.getM_id(), req);
 
 		req.setAttribute("p_num", p_num);
 		req.setAttribute("resume", resume);
+		req.setAttribute("tab", req.getParameter("tab"));
 
 		// parttime_resume.jsp 로 페이지 이동
 		return "/WEB-INF/parttime/parttime_resume.jsp";

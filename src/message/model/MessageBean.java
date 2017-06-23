@@ -54,6 +54,19 @@ public class MessageBean {
 	}
 	
 	/**
+	 * 관리자인지 아닌지 체크하는 메서드.
+	 * @param m_id
+	 * @return true || false
+	 */
+	public Boolean adminCheck(String m_id){
+		if(m_id.equals("admin01") || m_id.equals("admin02") || m_id.equals("admin03") 
+				|| m_id.equals("admin04") || m_id.equals("admin05") || m_id.equals("admin06") ){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * 회원 정보를 검색하는 메서드.
 	 * @param m_id 회원id
 	 * @return 회원정보

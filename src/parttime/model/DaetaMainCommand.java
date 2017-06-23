@@ -16,10 +16,11 @@ public class DaetaMainCommand implements CommandInterface {
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 		MemberDTO member = bean.getLoginInfo(req); // 로그인 정보
 		
+		insert(member.getM_id(),req); // 글이 추가된 경우
 		delete(req);
 		getList(req);
 		
-		if ("admin02".equals(member.getM_id())) { // 관리자면 a_parttime_main.jsp
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_main.jsp
 			return "WEB-INF/parttime/a_daeta_main.jsp";
 		} else { // 회원이면 parttime_main.jsp
 			return "/WEB-INF/parttime/daeta_main.jsp";
@@ -84,6 +85,26 @@ public class DaetaMainCommand implements CommandInterface {
 		
 		if ("OK".equals(delete)){
 			bean.deleteDaeta(d_num);
+		}
+	}
+	
+	public void insert(String m_id,HttpServletRequest req) {
+		String insert = req.getParameter("insert");
+
+		if ("OK".equals(insert)) {
+			DaetaDTO dto = new DaetaDTO();
+			dto.setM_id(m_id);
+			dto.setD_title(req.getParameter("d_title"));
+			dto.setD_deadline(req.getParameter("d_deadline"));
+			dto.setD_wage(Integer.parseInt(req.getParameter("d_wage")));
+			dto.setD_date(req.getParameter("d_date"));
+			dto.setD_content(req.getParameter("d_content"));
+			dto.setD_tel(req.getParameter("d_tel"));
+			dto.setD_location(req.getParameter("d_location"));
+			dto.setD_header(req.getParameter("d_header"));
+			dto.setD_deposit(Integer.parseInt(req.getParameter("d_deposit")));
+
+			bean.insertDaeta(dto);
 		}
 	}
 }

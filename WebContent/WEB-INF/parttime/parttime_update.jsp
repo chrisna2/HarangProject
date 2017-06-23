@@ -33,75 +33,88 @@
                   <h3 class="box-title">채용 정보</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  <form name="post" method="post" action="/HarangProject/parttime?cmd=PREAD">
+                  	<input type="hidden" name="update" value="OK"/>
+                  	<input type="hidden" name="p_num" value="${info.p_num}"/>
+                  	<input type="hidden" name="p_daycode" value="" id = "p_daycode" required="required"/>
                     <!-- text input -->
                     <div class="row">
 	                    <div class="col-md-3 form-group">
-	                      <label>머릿말</label>	                      
-		                    <select class="form-control">
-		                    	<option>[모집중]</option>
-		                    	<option>[마감]</option>
-		                    	<option>[급구]</option>
+	                      <label>머릿말</label>	                       
+		                    <select class="form-control" name="p_header">
+		                    	<c:if test="${info.p_header eq '[모집중]'}">
+		                    		<option selected="selected">[모집중]</option>
+		                    		<option >[마감]</option>
+		                    		<option >[급구]</option>
+		                    	</c:if>
+		                    	<c:if test="${info.p_header eq '[마감]'}">
+		                    		<option >[모집중]</option>
+		                    		<option selected="selected">[마감]</option>
+		                    		<option >[급구]</option>
+		                    	</c:if>
+		                    	<c:if test="${info.p_header eq '[급구]'}">
+		                    		<option >[모집중]</option>
+		                    		<option >[마감]</option>
+		                    		<option selected="selected">[급구]</option>
+		                    	</c:if>
 		                    </select>		                		                  
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>제목</label>
-                      <input type="text" class="form-control" placeholder="ex)**과 과사무실 조교 모집합니다."/>
+                      <input type="text" class="form-control" name="p_title" value="${info.p_title }"/>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>장소</label>
-	                      <input type="text" class="form-control" placeholder="ex) **과 과사무실"/>
+	                      <input type="text" class="form-control" name="p_location" value="${info.p_location}"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
-	                      <label>마감일</label>
-	                      <div class="input-group">
-	                      <div class="input-group-addon">
-	                        <i class="fa fa-calendar"></i>
-	                      </div>
-	                      <input type="text" class="form-control pull-right" id="reservation"/>
-	                    </div><!-- /.input group -->
+	                      <label>마감일</label>	                      
+	                      <input type="text" class="form-control pull-right" name="p_deadline" value="${info.p_deadline}"/>                    
 	                    </div>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>시급</label>
-	                      <input type="text" class="form-control" placeholder="ex) 7000원"/>
+	                      <input type="text" class="form-control" name="p_wage" value="${info.p_wage}"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>근무기간</label>
-	                      <input type="text" class="form-control" placeholder="ex) 6개월, 1년 ..."/>
+	                      <input type="text" class="form-control" name="p_term" value="${info.p_term}"/>
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>요일</label>
-                      <input type="text" class="form-control" placeholder="Enter ..."/>
+                      <c:forEach var="i" begin="0" end="6" step="1">
+                      	  	<c:choose>
+	                      	  	<c:when test="${daycode[i] == 1}">
+		                      		<input type="checkbox" checked="checked" value="${day[i]}" > ${day[i]}
+		                      		&nbsp;&nbsp;&nbsp;
+		                      	</c:when>
+		                      	<c:otherwise>
+		                      		<input type="checkbox" value="${day[i]}"> ${day[i]}
+		                      		&nbsp;&nbsp;&nbsp;
+		                      	</c:otherwise>
+	                      	</c:choose>
+	                      </c:forEach>
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" placeholder="ex)010-1234-5678 or email@naver.com"/>
+                      <input type="text" class="form-control" name="p_tel" value="${info.p_tel}"/>
                     </div>
                     
-					<div class='box'>
-		                <div class='box-header'>
-		                  <h3 class='box-title'>업무 내용 <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small></h3>
-		                </div><!-- /.box-header -->
-		                <div class='box-body pad'>
-		                  <form>
-		                    <textarea id="editor1" name="editor1" rows="10" cols="80">
-		                       	※ 구체적인 요일/시간을 작성해주세요.	                       	                 
-		                    </textarea>
-		                  </form>
-		                </div>
-              		</div><!-- /.box -->
+					<div class="form-group">
+		                <label>업무 내용</label>&nbsp;&nbsp;&nbsp; <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small>
+		                <textarea class="form-control" name="p_content" rows="10">${info.p_content}</textarea>
+		            </div>
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-primary">수정</button>
+							<button class="btn btn-block btn-primary" onclick="fnUpdate()">수정</button>
 						</div>
 						<div class="col-md-2">	
-							<button class="btn btn-block btn-danger">취소</button>
+							<button class="btn btn-block btn-danger" onclick="fnCancel()">취소</button>
                   		</div>
                   	</div>
                   </form>
@@ -121,29 +134,41 @@
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      
+      <form name="cancel" method="post" action="/HarangProject/parttime?cmd=PREAD">
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
-	<!-- Editor -->	
-	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-    <script type="text/javascript">
-      $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-      });
-    </script>
     
     <!-- 날짜 입력  -->
     <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-    <script>
-   
+    $(function(){
         $('#datepicker').datepicker({
         	format: 'yyyy-mm-dd',
         	autoclose: true
         });
+	});
+	
+	<script>
+	function fnUpdate(){
+		var arr = [];
+    	$(":checkbox:checked").each(function(){
+    		arr.push($(this).val());
+    	});
+    	alert(arr);
+    	document.getElementById("p_daycode").value = arr;
+    	document.post.submit();
+	}
+	
+	function fnCancel(){
+		if(confirm("정말 취소하시겠습니까?") == true){
+			document.cancel.submit();
+		}else{
+			return;
+		}
+	}
 	</script>
+	
