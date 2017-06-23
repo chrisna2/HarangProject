@@ -14,6 +14,9 @@ public class BambooDTO {
 		private Date bb_regdate;
 		private int bb_count;
 		private String bb_nickname;
+		private int like_cnt;
+		private int dlike_cnt;
+		private int reply_cnt;
 		public String getBb_num() {
 			return bb_num;
 		}
@@ -62,6 +65,26 @@ public class BambooDTO {
 		public void setBb_nickname(String bb_nickname) {
 			this.bb_nickname = bb_nickname;
 		}
+		public int getLike_cnt() {
+			return like_cnt;
+		}
+		public void setLike_cnt(int like_cnt) {
+			this.like_cnt = like_cnt;
+		}
+		public int getDlike_cnt() {
+			return dlike_cnt;
+		}
+		public void setDlike_cnt(int dlike_cnt) {
+			this.dlike_cnt = dlike_cnt;
+		}
+		public int getReply_cnt() {
+			return reply_cnt;
+		}
+		public void setReply_cnt(int reply_cnt) {
+			this.reply_cnt = reply_cnt;
+		}
+		
+		
 		
 		
 		

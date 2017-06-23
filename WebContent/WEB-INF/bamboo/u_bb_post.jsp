@@ -8,6 +8,53 @@
 <head>
 <title>학사일정</title>
 
+<script>
+
+function fnbbp(){
+	
+	if(document.bbpostcomplete.bb_nickname.value ==""||
+			document.bbpostcomplete.bb_content.value ==""||
+			document.bbpostcomplete.bb_title.value ==""){
+		
+		alert("빠짐없이 입력 해주세요");
+		return;
+		
+	}
+	else if(document.bbpostcomplete.bb_nickname.value.length>50){
+		
+		
+		alert("닉네임을 너무 길게 입력하셨습니다. 영문 50글자. 한글 25글자 이하로 입력 해 주세요.(공백 포함)");
+		return;
+	}
+	else if(document.getElementById('bb_title').value.length>2000){
+		
+		
+		alert("제목을 너무 길게 입력하셨습니다. 영문 200글자. 한글 100글자 이하로 입력 해 주세요.(공백 포함)");
+		return;
+	}
+	else if(document.bbpostcomplete.bb_content.value.length>2000){
+		
+		
+		alert("본문을 너무 길게 입력하셨습니다. 영문 4000글자. 한글 2000글자 이하로 입력 해 주세요.(공백 포함)");
+		return;
+	}
+	
+	
+	else {
+		document.bbpostcomplete.submit();
+					
+	}
+	
+}
+
+
+
+
+
+
+
+
+</script>
 
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
@@ -24,8 +71,8 @@
 		</ol>
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-	<form action="/HarangProject/bamboo?cmd=U_BB_POST_COMPLETE"
-		name="bbpostcomplete" method="post">
+	<form action="/HarangProject/bamboo" name="bbpostcomplete" method="post">
+		<input type = "hidden" name="cmd" value="U_BB_POST_COMPLETE">
 		
 		<section class="content">
 			<!-- 세로 길이 수정 -->
@@ -41,7 +88,7 @@
 
 							<div class="form-group">
 								<label>제목</label> <input type="text" class="form-control"
-									placeholder="제목을 입력 해 주세요" name="bb_title" />
+									placeholder="제목을 입력 해 주세요" name="bb_title" id="bb_title" />
 							</div>
 
 							<div class="form-group">
@@ -73,7 +120,8 @@
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-2">
-								<button type="submit" class="btn btn-block btn-primary">등록</button>
+								<a type="button" class="btn btn-block btn-primary"
+								href="javascript:fnbbp()">등록</a>
 							</div>
 							<div class="col-md-2">
 								<a class="btn btn-block btn-danger"
@@ -125,5 +173,14 @@
 		//bootstrap WYSIHTML5 - text editor
 		$(".textarea").wysihtml5();
 	});
+	
+	
+	
+	
+	
+	
+	
 </script>
+
+
 

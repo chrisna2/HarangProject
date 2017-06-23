@@ -90,12 +90,7 @@ public class U_Bb_Content_Command implements CommandInterface {
 
 			}
 
-			sql = "select * from tbl_bbreply where bb_num = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, bb_num);
-			rs = pstmt.executeQuery();
-
-			ArrayList bbrlist = new ArrayList();
+			
 
 		} catch (Exception err) {
 			System.out.println("U_Bb_Content 에서 에러 ");

@@ -62,7 +62,7 @@ public class U_Br_List_Command implements CommandInterface {
 				brdto.setM_id(rs.getString("m_id"));
 				brdto.setBr_num(rs.getString("br_num"));
 				brdto.setBb_num(rs.getString("bb_num"));
-				brdto.setBr_coment(rs.getString("br_coment").replace("\n", "<br>"));
+				brdto.setBr_coment(rs.getString("br_coment"));
 				brdto.setBr_nickname(rs.getString("br_nickname"));
 				brdto.setBr_regdate(rs.getDate("br_regdate"));
 

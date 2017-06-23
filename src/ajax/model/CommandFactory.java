@@ -36,6 +36,12 @@ public class CommandFactory{
 		else if(cmd.equals("memberid")){
 			return new MemberIdCommand();
 		}
+		else if(cmd.equals("sche")){
+			return new ScheduleCommand();
+		}
+		else if(cmd.equals("schecon")){
+			return new ScheduleContentCommand();
+		}
 		else{
 			return null;
 		}

@@ -78,7 +78,7 @@ public class Bb_List_Command implements CommandInterface
 			
 			if(null==table_search){
 				
-				sql = "select * from harang.tbl_bamboo";
+				sql = "select distinct bb.bb_num, bb.m_id, bb_notice, bb_title, bb_content, bb_regdate, bb_count, bb_nickname, ifnull(like_cnt,0), (select count(br_num) from tbl_bbreply where bb_num = bb.bb_num) as bb_replycnt from tbl_bamboo bb left outer join (select bb_num, count(tbl_like.m_id) like_cnt from tbl_like group by bb_num) li on bb.bb_num = li.bb_num order by bb_regdate desc";
 				pstmt = con.prepareStatement(sql);
 				//System.out.println(sql);
 				}
@@ -87,20 +87,18 @@ public class Bb_List_Command implements CommandInterface
 						
 				if(table_search.equals("bbnewlist")){
 					
-					sql = "SELECT * FROM harang.tbl_bamboo where bb_regdate > (select date_sub(now(), interval 1 day)) order by bb_regdate ";
+					sql = "select distinct bb.bb_num, bb.m_id, bb_notice, bb_title, bb_content, bb_regdate, bb_count, bb_nickname, ifnull(like_cnt,0), (select count(br_num) from tbl_bbreply where bb_num = bb.bb_num) as bb_replycnt from tbl_bamboo bb left outer join (select bb_num, count(tbl_like.m_id) like_cnt from tbl_like group by bb_num) li on bb.bb_num = li.bb_num  where bb_regdate > (select date_sub(now(), interval 3 day)) order by bb_regdate";
 					pstmt = con.prepareStatement(sql);
 				}
 				else if(table_search.equals("bbhotlist")){
 					
-					sql = "select distinct bb.bb_num, bb.m_id, bb_notice, bb_title, bb_content, bb_regdate, bb_count, bb_nickname "
-							+ "from tbl_bamboo bb inner join (select bb_num, count(m_id) cnt from tbl_like group by bb_num) li on bb.bb_num = li.bb_num "
-							+ "where bb_regdate> (select date_sub(now(), interval 30 day)) order by cnt desc, bb.bb_count desc";
+					sql = "select distinct bb.bb_num, bb.m_id, bb_notice, bb_title, bb_content, bb_regdate, bb_count, bb_nickname, ifnull(like_cnt,0), (select count(br_num) from tbl_bbreply where bb_num = bb.bb_num) as bb_replycnt from tbl_bamboo bb left outer join (select bb_num, count(tbl_like.m_id) like_cnt from tbl_like group by bb_num) li on bb.bb_num = li.bb_num  where bb_regdate> (select date_sub(now(), interval 30 day)) order by like_cnt desc, bb.bb_count desc";
 					pstmt = con.prepareStatement(sql);
 					
 				}
 				else{
 					
-					sql = "SELECT * FROM harang.tbl_bamboo where " +sOption+ " like '%"+table_search+"%'";
+					sql = "select distinct bb.bb_num, bb.m_id, bb_notice, bb_title, bb_content, bb_regdate, bb_count, bb_nickname, ifnull(like_cnt,0), (select count(br_num) from tbl_bbreply where bb_num = bb.bb_num) as bb_replycnt from tbl_bamboo bb left outer join (select bb_num, count(tbl_like.m_id) like_cnt from tbl_like group by bb_num) li on bb.bb_num = li.bb_num  where bb." +sOption+ " like '%"+table_search+"%'";
 					pstmt = con.prepareStatement(sql);
 				}
 				//System.out.println(sql);
@@ -120,7 +118,9 @@ public class Bb_List_Command implements CommandInterface
 				bbdto.setBb_regdate(rs.getDate("bb_regdate"));
 				bbdto.setBb_count(rs.getInt("bb_count"));
 				bbdto.setBb_nickname(rs.getString("bb_nickname"));
-
+				bbdto.setLike_cnt(rs.getInt("ifnull(like_cnt,0)"));
+				bbdto.setReply_cnt(rs.getInt("bb_replycnt"));
+				
 				list.add(bbdto);
 				
 
