@@ -55,39 +55,20 @@
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-9">
 
-
-				<!-- Default box -->
-				<div align="center">
-
-					<button class="btn btn-primary" data-toggle="collapse"
-						data-widget="collapse" title="Collapse" data-target="#schcon">
-						본문 보기/닫기
-					</button>
-				</div>
-				<br>
-				<br>
-
-				<div class="box" id="schcon">
+				<div class="box" id="schcon" hidden="hidden">
 					<div class="box-header with-border">
-						<h1 class="box-title">국문인의 밤</h1>
+						<h1 class="box-title" id= "s_title"></h1>
 
 					</div>
 					<div class="box-body">
 
-						참가신청 기간 : xx월 xx일 ~ yy월 yy일<br> 행사 기간 : zz월 zz일 ~ zz월 ZZ일 <br>
-						지급 포인트 : 1000 <br>
+						<div id="s_rgigan">참가신청 기간 :<span id="s_rstart"></span> ~ <span id="s_rend"></span></div>
+						<div id ="s_dgigan">행사 기간 : <span id="s_dstart"></span> ~ <span id="s_dend"></span> </div>
+						<div id ="s_isgrade">참가가능 학년 : <span id="s_grade"></span><span id="s_dend"></span> </div>
+						<div id = "s_pointdetail">지급 포인트 : <span id = "s_point"></span> </div>
+						<div id = "s_islocation">행사 장소 : <span id = "s_location"></span> </div>
 						<hr />
-						하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진
-						것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 하는 온갖 과실이
-						어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고
-						작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 하는 온갖 과실이 어디 있으랴? 이상!
-						우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이
-						있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을 하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장
-						많이 품고 있는 이상! 이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게
-						살 수 있는 것이다 석가는 무엇을 하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상!
-						이것이야말로 무한한 가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다
-						석가는 무엇을 하는 온갖 과실이 어디 있으랴? 이상! 우리의 청춘이 가장 많이 품고 있는 이상! 이것이야말로 무한한
-						가치를 가진 것이다 사람은 크고 작고 간에 이상이 있음으로써 용감하고 굳세게 살 수 있는 것이다 석가는 무엇을
+						<div id="s_content"></div>
 
 					</div>
 					<!-- /.box-body -->
@@ -194,16 +175,6 @@
 						<!-- /.box -->
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-
-
 			</div>
 			<!-- /.col -->
 		</div>
@@ -247,7 +218,70 @@
           monthNamesShort:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
           dayNames:["일요일","월요일","화요일","수요일","목요일","금요일","<font color='blue'>토요일</font>"],
           dayNamesShort:["일","월","화","수","목","금","토"],
-          editable: true
+          editable: false,
+          events : "/HarangProject/ajax?cmd=sche",
+        //입력 글자 색
+          eventTextColor: '#000000',
+          eventMouseover: function(calEvent, jsEvent, view) {
+               $(this).css('background-color', '#40464f');
+               $(this).css('cursor','pointer');
+          },
+          eventMouseout: function(calEvent, jsEvent, view) {
+                  $(this).css('background-color', '#E4FFB7');
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+        	  $("#schcon").slideUp();
+        	  $("#schcon").slideDown();
+        	    //날짜를 클릭 했을 때 해당 날짜에 포함된 데이터를 불러 옵니다. 위와 마찮가지..
+              $.getJSON("/HarangProject/ajax?cmd=schecon",
+                      {s_num:calEvent.id},
+                      function(data){
+                           $("#menuinfobox").slideUp();
+                           $("#menuinfobox").slideDown();
+                           $(data).each(function(index, schconlist){
+                        	  $("#s_content").text(schconlist.s_content);        
+                        	  $("#s_num").text(schconlist.s_num);        
+                        	  $("#s_grade").text(schconlist.s_grade);        
+                        	  $("#s_title").text(schconlist.s_title);  
+                        	  $("#s_dstart").text(schconlist.s_dstart);        
+                        	  $("#s_dend").text(schconlist.s_dend);        
+                        	  $("#s_dept").text(schconlist.s_dept);        
+                        	  $("#s_location").text(schconlist.s_location);        
+                              $("#s_point").text(schconlist.s_point);    
+                        	  if(null != schconlist.s_rend && null != schconlist.s_rstart){
+                            	  $("#s_rend").text(schconlist.s_rend);        
+                        	      $("#s_rstart").text(schconlist.s_rstart);        
+                        	  }
+                        	  else{
+                        		  $("#s_rgigan").remove();
+                        	  }
+                        	  if(null != schconlist.s_point){
+                        	      $("#s_point").text(schconlist.s_point);        
+                        	  }
+                        	  else{
+                        		  $("#s_pointdetail").remove();
+                        	  }
+                        	  if(null != schconlist.s_location){
+                        	      $("#s_location").text(schconlist.s_location);        
+                        	  }
+                        	  else{
+                        		  $("#s_islocation").remove();
+                        	  }
+                        	  if(null == schconlist.s_grade){
+                        	      $("#s_grade").text('제한없음');        
+                        	  }
+                        	  else{
+                        		  var grade =  schconlist.s_grade;
+                        		  var grade2 = new Array(grade.split(""));
+                        		  var grade3 = "";
+                        		  for(var i = 0; i<grade2.length; i++){
+                        			  grade3 += grade2[i];
+                        		  }                        		  
+                        		  $("#s_grade").text(grade3);
+                        	  }
+                      });
+            });
+          }
         });
       });
     </script>

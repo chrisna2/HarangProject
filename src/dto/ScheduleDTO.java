@@ -5,7 +5,7 @@ public class ScheduleDTO {
 	
 
 	private String s_num, s_grade, s_ispoint, s_title, s_content, s_dstart, s_dend, s_dept,
-		s_location, s_rstart, s_rend;
+		s_location, s_rstart, s_rend, s_point;
 
 	public String getS_num() {
 		return s_num;
@@ -93,7 +93,17 @@ public class ScheduleDTO {
 
 	public void setS_rend(String s_rend) {
 		this.s_rend = s_rend;
-	}	
+	}
+
+	public String getS_point() {
+		return s_point;
+	}
+
+	public void setS_point(String s_point) {
+		this.s_point = s_point;
+	}
+
+	
 	
 
 }
