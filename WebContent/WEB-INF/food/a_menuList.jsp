@@ -6,6 +6,25 @@
 <!-- 페이지 헤드 라인 : 제목 -->
  <head>
      <title>학식 메뉴 조회</title>
+<c:if test="${result eq 'update'}">
+    <script type="text/javascript">
+    alert("해당 메뉴를 수정햇습니다.");
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    location.href = "/HarangProject/food?cmd=Amenu";
+    </script>
+</c:if>   
+<c:if test="${result eq 'delete'}">
+    <script type="text/javascript">
+    alert("해당 메뉴를 삭제 했습니다.");
+    location.href = "/HarangProject/food?cmd=Amenu";
+    </script>
+</c:if>
+<c:if test="${result eq 'insert'}">
+    <script type="text/javascript">
+    alert("해당 날짜에 해당 메뉴를 등록했습니다.");
+    location.href = "/HarangProject/food?cmd=Amenu";
+    </script>
+</c:if>
      <style type="text/css">
 	    .fc-sat{
 	       background-color: #D5E5FF;
@@ -29,7 +48,7 @@
                          학식 메뉴 등록 수정
           </h1>
           <br>
-          <button class="btn btn-sm btn-primary col-md-9">신규 메뉴 등록</button>
+          <button id="newMenu" class="btn btn-sm btn-primary col-md-9">신규 메뉴 등록</button>
           <br>
           <br>
           <ol class="breadcrumb">
@@ -45,17 +64,8 @@
             <!-- 달력의 크기 조정 -->
             <div class="col-md-9">
             
-            <!-- 달력 메뉴 판 보이기 -->
-              <div class="box box-primary">
-                <div class="box-body no-padding">
-                  <!-- THE CALENDAR -->
-                  <div id="calendar"></div>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-              
-            <!-- 메뉴 판 클릭 후 메뉴 상세 정보 팝업 -->  
              <!-- 리스트 사용시  -->
-              <div class="box">
+              <div class="box" id="inputMenu" hidden="hidden">
                 <div class="box-header">
                   <h3 class="box-title">신규 메뉴 등록</h3>
                    <div class="box-tools pull-right">
@@ -64,42 +74,44 @@
                   </div>
                 </div><!-- /.box-header -->
                  <!-- form 시작 -->
-                <form role="form">
+                <form role="form" action="/HarangProject/food
+                ?cmd=Amenu" method="post">
                 
                 <div class="box-body">
                 
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 제목</span>
-                    <input type="text" name="m_addr1" class="form-control" required="required">
+                    <input type="text" name="f_title" class="form-control" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 판매일</span>
-                    <input type="text" name="m_addr1" id="date1" class="form-control" required="required" data-date-format='yyyy-mm-dd'>
+                    <input type="text" name="f_selldate" id="date1" class="form-control" required="required" data-date-format='yyyy-mm-dd'>
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 상세 정보</span>
-                    <textarea class="form-control" rows="10" required="required">
+                    <textarea class="form-control" rows="10" required="required" name="f_content">
                     </textarea>
                    </div>
                     <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 식권  판매 포인트</span>
-                    <input type="text" name="m_addr1" class="form-control" required="required">
+                    <input type="text" name="f_point" class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> 포인트</span>
                   </div>
                   <br>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix" align="right">
-                      <input type="submit" class="btn btn-gray" value="닫기">
+                      <input type="hidden" name="check" value="insert">
+                      <input type="button" id="closebtn" class="btn btn-gray" value="닫기">
                       <input type="submit" class="btn btn-success" value="메뉴 등록">
                 </div>
                 </form>
               </div><!-- /.box -->
-              
-               <!-- 리스트 사용시  -->
-              <div class="box">
+            
+             <!-- 리스트 사용시  -->
+              <div class="box" id="updateMenu" hidden="hidden">
                 <div class="box-header">
                   <h3 class="box-title">메뉴 수정</h3>
                    <div class="box-tools pull-right">
@@ -108,51 +120,47 @@
                   </div>
                 </div><!-- /.box-header -->
                  <!-- form 시작 -->
-                <form role="form">
-                
+                <form role="form" action="" name="menuUpdate" id="udpateProc" method="post">
                 <div class="box-body">
-                
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 제목</span>
-                    <input type="text" name="m_addr1" class="form-control" value="초밥" required="required">
+                    <input type="text" name="f_title" class="form-control" required="required">
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 판매일</span>
-                    <input type="text" name="m_addr2" id="date2" class="form-control" required="required" data-date-format='yyyy-mm-dd'>
+                    <input type="text" name="f_selldate" id="date2" class="form-control" readonly="readonly" data-date-format='yyyy-mm-dd'>
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 메뉴 상세 정보</span>
-                    <textarea class="form-control" rows="10" required="required">
-  [3일간의 일식 파티! : 한정 메뉴] 
-    새우 초밥
-    광어 초밥
-    연어 초밥
-    참치 초밥
-    군함 말이
-    오징어 초밥
-    한치 초밥
-    등등.... 30가지 초밥을 골라 먹을 수 있음
-                       
-    원산지 : 모두 국내산                            
+                    <textarea class="form-control" name="f_content" rows="10" required="required">
                     </textarea>
                    </div>
                     <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 식권  판매 포인트</span>
-                    <input type="text" name="m_addr1" class="form-control" value="6000" required="required">
+                    <input type="text" name="f_point" class="form-control" required="required">
                     <span class="input-group-addon bg-gray"> 포인트</span>
                   </div>
                   <br>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix" align="right">
-                      <input type="submit" class="btn btn-gray" value="닫기">
-                      <input type="submit" class="btn btn-warning" value="메뉴 수정">
-                      <input type="submit" class="btn btn-danger" value="메뉴 삭제">
+                      <input type="hidden" name="f_num">
+                      <input type="hidden" name="check" id="check">
+                      <input type="button" id="closebtn" class="btn btn-gray" value="닫기">
+                      <input type="button" id="update" class="btn btn-warning" value="메뉴 수정">
+                      <input type="button" id="delete" class="btn btn-danger" value="메뉴 삭제">
                 </div>
                 </form>
               </div><!-- /.box -->
+            <!-- 달력 메뉴 판 보이기 -->
+              <div class="box box-primary">
+                <div class="box-body no-padding">
+                  <!-- THE CALENDAR -->
+                  <div id="calendar"></div>
+                </div><!-- /.box-body -->
+              </div><!-- /. box -->
               
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -165,16 +173,14 @@
     <script>
     $(function() {
         $( "#date1" ).datepicker({
-        });
-        $( "#date2" ).datepicker({
+        	format: 'yyyy-mm-dd',
+            autoclose: true
         });
     });
     </script>
-
 <!-- ★★★Ajax를 배우면 이해 할 수 있는 곳 : 여기에 데이터를 삽입합니다. -->
     <script type="text/javascript">
       $(function () {
-
         /* initialize the calendar
          -----------------------------------------------------------------*/
          //현재 년 월 일 불러 오기
@@ -184,13 +190,7 @@
             y = date.getFullYear();
         
         $('#calendar').fullCalendar({
-
           //여기서  ajax 처리함  
-          dayClick: function(date, jsEvent, view) {
-              //스크립트로 인벤트 처리 합니다. 
-        	  alert('클릭한 날짜: ' + date.format());
-        	  
-          },
           locale: 'kr',
           header: {
             left: 'prev,next',
@@ -214,117 +214,64 @@
           editable: false,
 //달력에 글자 입력 가능
 //DB에 값을 접근합니다.
-          events : [
-              {
-              title : '순대국',
-              start : '2017-06-02',
-              allDay : true
-              },
-              {
-              title : '립아이스테이크',
-              start : '2017-06-05',
-              allDay : true
-              },
-              {
-              title : '유린기',
-              start : '2017-06-06',
-              allDay : true
-              },
-              {
-              title : '청라면',
-              start : '2017-06-07',
-              allDay : true
-              },
-              {
-              title : '김치찌개',
-              start : '2017-06-08',
-              allDay : true
-              },
-              {
-              title : '철판 볶음',
-              start : '2017-06-09',
-              allDay : true
-              },
-              {
-              title : '삼계탕',
-              start : '2017-06-12',
-              allDay : true
-              },
-              {
-              title : '알비오올리오',
-              start : '2017-06-13',
-              allDay : true
-              },
-              {
-              title : '순대볶음',
-              start : '2017-06-14',
-              allDay : true
-              },
-              {
-              title : '수제 햄버거',
-              start : '2017-06-15',
-              allDay : true
-              },
-              {
-              title : '감자탕',
-              start : '2017-06-16',
-              allDay : true
-              },
-              {
-              title : '갈비탕',
-              start : '2017-06-19',
-              allDay : true
-              },
-              {
-              title : '스키야키',
-              start : '2017-06-20',
-              allDay : true
-              },
-              {
-              title : '오야코동',
-              start : '2017-06-21',
-              allDay : true
-              },
-              {
-              title : '스시',
-              start : '2017-06-22',
-              allDay : true
-              },
-              {
-              title : '굴라시',
-              start : '2017-06-23',
-              allDay : true
-              },
-              {
-              title : '퐁듀',
-              start : '2017-06-26',
-              allDay : true
-              },
-              {
-              title : '닭도리탕',
-              start : '2017-06-27',
-              allDay : true
-              },
-              {
-              title : '안동찜닭',
-              start : '2017-06-28',
-              allDay : true
-              },
-              {
-              title : '탕수육',
-              start : '2017-06-29',
-              allDay : true
-              },
-              {
-              title : '유린기',
-              start : '2017-06-30',
-              allDay : true
-              }
-           ],
+          events : "/HarangProject/ajax?cmd=food&check=amenu",
            //입력 글자 뒷 배경 색
            eventColor: '#F9FFAB',
            //입력 글자 색
-           eventTextColor: '#000000'
+           eventTextColor: '#000000',
+           eventMouseover: function(calEvent, jsEvent, view) {
+        	   $(this).css('background-color', '#CCFF66');
+               $(this).css('cursor','pointer');
+           },
+           eventMouseout: function(calEvent, jsEvent, view) {
+        	   $(this).css('background-color', '#F9FFAB');
+           },
+           eventClick: function(calEvent, jsEvent, view) {
+        	   $("#updateMenu").slideUp();
+        	   $("#inputMenu").slideUp();
+        	   $("#updateMenu").slideDown();
+        	 //날짜를 클릭 했을 때 해당 날짜에 포함된 데이터를 불러 옵니다. 위와 마찬가지..
+               $.getJSON("/HarangProject/ajax?cmd=foodinfo",
+                       {f_num:calEvent.id},
+                       function(data){
+                            $("#menuinfobox").slideUp();
+                            $("#menuinfobox").slideDown();
+                            $(data).each(function(index, flist){
+                            	menuUpdate.f_title.value = flist.f_title;
+                            	menuUpdate.f_selldate.value = flist.f_selldate;
+                            	menuUpdate.f_content.value = flist.f_content;
+                            	menuUpdate.f_point.value = flist.f_point;
+                            	menuUpdate.f_num.value = flist.f_num;
+                       });
+             });
+           }
         });
+        $('#newMenu').click(function() {
+            $("#updateMenu").slideUp();
+            $("#inputMenu").slideUp();
+            $("#inputMenu").slideDown();
+        });
+        $("#closebtn1").click(function(){
+        	$("#inputMenu").slideUp();
+        });
+        $("#closebtn2").click(function(){
+        	$("#updateMenu").slideUp();s
+        });
+
+        
+        $("#update").click(function() {
+            $("#check").val("update");
+            $("#udpateProc")
+            .attr("action", "/HarangProject/food?cmd=Amenu")
+            .submit();
+        });
+        
+        $("#delete").click(function() {
+            $("#check").val("delete");
+            $("#udpateProc")
+            .attr("action", "/HarangProject/food?cmd=Amenu")
+            .submit();
+        });
+        
       });
     </script>

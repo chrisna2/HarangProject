@@ -22,6 +22,15 @@
      </style>
      <script type="text/javascript">
      function checkIt() {
+
+    	 var f_point = menuinfo.f_point.value;
+    	 var m_point = menuinfo.m_point.value;
+    	   
+    	 if(m_point < f_point){
+    		 alert("현재 보유 포인트가 부족합니다. 포인트를 더 벌어 오세요!")
+    		      return false;
+             }
+         
          var buy = confirm("식권을 구매 하시겠습니까?\n해당 식권은 1인 1매 한정이며 한번 사용하면 재사용 불가 합니다.\n환불은 판매일 2일 전 가능합니다.");
          
          if(buy){
@@ -90,6 +99,7 @@
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix" align="right">
                       <input type="hidden" name="member_id" value="${member.m_id}">
+                      <input type="hidden" name="m_point" value="${member.m_point}">
                       <input type="hidden" name="f_num">
                       <input type="button" id="closeup" class="btn btn-gray" value="닫기">
                       <input type="submit" id="buybtn" class="btn btn-success" value="구매">
@@ -148,7 +158,7 @@
           editable: false,
 //달력에 글자 입력 가능
 //DB에 값을 접근합니다. ajax 서블릿 commandFactory에 경로를 따로 만들어야 합니다. 
-           events : "/HarangProject/ajax?cmd=food",
+           events : "/HarangProject/ajax?cmd=food&check=umenu",
            //입력 글자 색
            eventTextColor: '#000000',
            eventMouseover: function(calEvent, jsEvent, view) {
@@ -230,19 +240,11 @@
                                      menuinfo.f_num.value = flist.f_num;
                             });
                   });
-           }
+              }
         });
-        
        $("#closeup").click(function(){
     	   $("#menuinfobox").slideUp();
        });
 
-       //모달 접근 바로 하기
-       $("#btnPopup").click(
-           function(){
-               //alert("버튼 눌림");
-               $("#theModal").modal('toggle');
-           });
-        
       });
     </script>

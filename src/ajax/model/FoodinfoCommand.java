@@ -52,7 +52,7 @@ public class FoodinfoCommand implements CommandInterface {
 				
 				fdto.setF_num(rs.getString("f_num"));
 				fdto.setF_point(rs.getInt("f_point"));
-				fdto.setF_selldate(rs.getDate("f_selldate"));
+				fdto.setF_selldate(rs.getString("f_selldate"));
 				fdto.setF_content(rs.getString("f_content"));
 				fdto.setF_title(rs.getString("f_title"));
 				

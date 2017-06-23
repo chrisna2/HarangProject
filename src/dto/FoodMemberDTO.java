@@ -14,7 +14,14 @@ public class FoodMemberDTO {
 	private String f_content;
 	private String f_regdate;
 	private Date f_selldate;
+	private int fm_sellcount;
 	
+	public int getFm_sellcount() {
+		return fm_sellcount;
+	}
+	public void setFm_sellcount(int fm_sellcount) {
+		this.fm_sellcount = fm_sellcount;
+	}
 	public int getF_point() {
 		return f_point;
 	}

@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +33,18 @@ public class FoodCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
 		
-		return menulist(request);
+		String check = request.getParameter("check");
+		ArrayList mlist = new ArrayList();		
+		
+		if("umenu".equals(check)){
+			
+			mlist = menulist(request);
+		}
+		else if("amenu".equals(check)){
+			
+			mlist = Amenulist(request);
+		}
+		return mlist;
 	}
 	
 	public ArrayList menulist(HttpServletRequest request){
@@ -78,6 +92,43 @@ public class FoodCommand implements CommandInterface {
 		} 
 		catch (Exception e) {
 			System.out.println( "menuList.jsp : " + e);
+			e.printStackTrace();
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return flist;
+	}
+	
+	public ArrayList Amenulist(HttpServletRequest request){
+		
+		Date now = new Date();		
+		
+		String sql = "SELECT f_selldate, f_content, f_num FROM tbl_food where f_selldate > sysdate()";
+		
+		ArrayList flist  = new ArrayList();
+		
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				CalanderDTO cdto = new CalanderDTO();
+				
+				cdto.setStart(rs.getString("f_selldate"));
+				cdto.setTitle(rs.getString("f_content"));
+				cdto.setId(rs.getString("f_num"));
+				cdto.setAllDay(true);
+				   
+				flist.add(cdto);
+			}
+		} 
+		catch (Exception e) {
+			System.out.println( "AmenuList.jsp : " + e);
 			e.printStackTrace();
 		}
 		finally{

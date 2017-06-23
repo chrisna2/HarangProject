@@ -9,7 +9,7 @@ public class FoodDTO {
 	private String f_title;
 	private String f_content;
 	private String f_regdate;
-	private Date f_selldate;
+	private String f_selldate;
 	
 	public String getF_num() {
 		return f_num;
@@ -41,12 +41,11 @@ public class FoodDTO {
 	public void setF_regdate(String f_regdate) {
 		this.f_regdate = f_regdate;
 	}
-	public Date getF_selldate() {
+	public String getF_selldate() {
 		return f_selldate;
 	}
-	public void setF_selldate(Date f_selldate) {
+	public void setF_selldate(String f_selldate) {
 		this.f_selldate = f_selldate;
 	}
-	
 	
 }

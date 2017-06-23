@@ -220,14 +220,12 @@ function goPage(nowPage) {
     document.getElementById("page").value = nowPage;
     document.getElementById("goPage").submit();
 }
-
     $("#plus").click(function() {
         $("#check").val("plus");
         $("#updatepoint")
         .attr("action", "/HarangProject/myPage?cmd=Applist")
         .submit();
     });
-    
     $("#minus").click(function() {
         $("#check").val("minus");
         $("#updatepoint")
