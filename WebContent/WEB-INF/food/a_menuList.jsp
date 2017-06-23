@@ -265,7 +265,6 @@
             .attr("action", "/HarangProject/food?cmd=Amenu")
             .submit();
         });
-        
         $("#delete").click(function() {
             $("#check").val("delete");
             $("#udpateProc")
