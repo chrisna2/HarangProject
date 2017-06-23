@@ -27,7 +27,7 @@ public class ParttimeMainCommand implements CommandInterface {
 		getList(req); // 게시판에 띄울 글 목록을 처리
 
 		// 페이지 이동
-		if ("admin02".equals(member.getM_id())) { // 관리자면 a_parttime_main.jsp
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_main.jsp
 			return "WEB-INF/parttime/a_parttime_main.jsp";
 		} else { // 회원이면 parttime_main.jsp
 			return "/WEB-INF/parttime/parttime_main.jsp";

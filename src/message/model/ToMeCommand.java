@@ -21,7 +21,8 @@ public class ToMeCommand implements message.model.CommandInterface{
 		notRead(m_id, req); // 안읽은 메시지 개수
 		
 		// message_toMe.jsp 로 페이지 이동
-		return "/WEB-INF/message/message_toMe.jsp";
+		if(mbean.adminCheck(m_id)){return "WEB-INF/message/a_message_toMe.jsp";}
+		else{ return "/WEB-INF/message/message_toMe.jsp";}
 	}
 	
 	public void getList(String m_id, HttpServletRequest req){

@@ -3,17 +3,28 @@ package parttime.model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.MemberDTO;
+
 public class DaetaApplyCommand implements CommandInterface{
+	ParttimeBean bean = new ParttimeBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp){
-		String m_id = (String) req.getSession().getAttribute("m_id");
+		MemberDTO member = bean.getLoginInfo(req);
 		
-		// DB에서 m_id정보를 통해 m_name, m_tel을 검색
-		
-		// 검색한 파라미터를 req에 담아 넘긴다.
-		//req.setAttribute("m_name", m_name);
-		//req.setAttribute("m_tel", m_tel);
+		paging(req);
+		req.setAttribute("d_num", req.getParameter("d_num"));
+		req.setAttribute("tab", req.getParameter("tab"));
+		req.setAttribute("member", member);
 		
 		// daeta_apply.jsp 로 페이지 이동
 		return "/WEB-INF/parttime/daeta_apply.jsp";
+	}
+	
+	public void paging(HttpServletRequest req) {
+		// 페이지 정보 parameter
+		int nowPage = Integer.parseInt(req.getParameter("nowPage"));
+		int nowBlock = Integer.parseInt(req.getParameter("nowBlock"));
+
+		req.setAttribute("nowPage", nowPage);
+		req.setAttribute("nowBlock", nowBlock);
 	}
 }

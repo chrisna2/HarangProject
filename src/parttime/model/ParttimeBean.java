@@ -57,6 +57,19 @@ public class ParttimeBean {
 	}
 	
 	/**
+	 * 관리자인지 아닌지 체크하는 메서드.
+	 * @param m_id
+	 * @return true || false
+	 */
+	public Boolean adminCheck(String m_id){
+		if(m_id.equals("admin01") || m_id.equals("admin02") || m_id.equals("admin03") 
+				|| m_id.equals("admin04") || m_id.equals("admin05") || m_id.equals("admin06") ){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * DB에서 알바 모집 게시판의 모든 글 정보를 검색하는 메서드
 	 */
 	public ArrayList getParttimeList(){
@@ -445,14 +458,14 @@ public class ParttimeBean {
 	}
 	
 	/**
-	 * 이력서를 DB에 삽입하는 메서드.
+	 * 알바 지원 이력서를 DB에 삽입하는 메서드.
 	 * @param p_num 
 	 * @param m_id 
 	 * @param pm_reason 
 	 * @param pm_career
 	 * @param pm_wanttime
 	 */
-	public void createResume(String p_num, String m_id, 
+	public void createParttimeResume(String p_num, String m_id, 
 			String pm_reason, String pm_career, String pm_wanttime){
 		try{
 			con = pool.getConnection();
@@ -470,7 +483,36 @@ public class ParttimeBean {
 			pstmt.executeUpdate();
 			
 		}catch(Exception err){
-			System.out.println("createResume() : " + err);
+			System.out.println("createParttimeResume() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
+	
+	/**
+	 * 대타 지원 이력서를 DB에 삽입하는 메서드.
+	 * @param p_num 
+	 * @param m_id 
+	 * @param pm_reason 
+	 * @param pm_career
+	 * @param pm_wanttime
+	 */
+	public void createDaetaResume(String d_num, String m_id, String dm_reason){
+		try{
+			con = pool.getConnection();
+			
+			String sql="INSERT INTO tbl_daeta_member(d_num, m_id, dm_reason, "
+					+ " dm_choice) VALUES(?,?,?,'N')";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			pstmt.setString(2, m_id);
+			pstmt.setString(3, dm_reason);
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("createDaetaResume() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);
@@ -731,7 +773,7 @@ public class ParttimeBean {
 	 * @param p_num
 	 * @return 지원자의 이력서 폼
 	 */
-	public P_ApplyDTO getApply(String m_id, String p_num){
+	public P_ApplyDTO getParttimeApply(String m_id, String p_num){
 		P_ApplyDTO dto = new P_ApplyDTO();
 		
 		try{
@@ -754,7 +796,45 @@ public class ParttimeBean {
 			}
 			
 		}catch(Exception err){
-			System.out.println("getApply() : " + err);
+			System.out.println("getParttimeApply() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		
+		return dto;
+	}
+	
+	/**
+	 * 해당 게시글에 지원한 지원자의 이력서 정보를 검색하는 메서드.
+	 * @param m_id
+	 * @param d_num
+	 * @return 지원자의 이력서 폼
+	 */
+	public D_ApplyDTO getDaetaApply(String m_id, String d_num){
+		D_ApplyDTO dto = new D_ApplyDTO();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT * FROM tbl_daeta_member WHERE d_num = ? AND m_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			pstmt.setString(2, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				dto.setD_num(rs.getString("d_num"));
+				dto.setM_id(rs.getString("m_id"));
+				dto.setDm_reason(rs.getString("dm_reason"));
+				dto.setDm_regdate(rs.getString("dm_regdate"));
+				dto.setDm_choice(rs.getString("dm_choice"));
+				dto.setDm_iscomplete(rs.getString("dm_iscomplete"));
+			}
+			
+		}catch(Exception err){
+			System.out.println("getDaetaApply() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);
@@ -768,7 +848,7 @@ public class ParttimeBean {
 	 * @param m_id
 	 * @param p_num
 	 */
-	public void updateChoice(String m_id, String p_num){
+	public void updateParttimeChoice(String m_id, String p_num){
 		
 		try{
 			con = pool.getConnection();
@@ -781,7 +861,32 @@ public class ParttimeBean {
 			pstmt.executeUpdate();
 			
 		}catch(Exception err){
-			System.out.println("updateChoice() : " + err);
+			System.out.println("updateParttimeChoice() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
+	
+	/**
+	 * 채용 버튼을 누를 시 DB에 채용여부를 저장하는 메서드.
+	 * @param m_id
+	 * @param p_num
+	 */
+	public void updateDaetaChoice(String m_id, String d_num){
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="UPDATE tbl_daeta_member SET dm_choice = 'Y' WHERE d_num = ? AND m_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			pstmt.setString(2, m_id);
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("updateDaetaChoice() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);
@@ -793,7 +898,7 @@ public class ParttimeBean {
 	 * @param m_id
 	 * @param p_num
 	 */
-	public void deleteApply(String m_id, String p_num){
+	public void deleteParttimeApply(String m_id, String p_num){
 		try{
 			con = pool.getConnection();
 			
@@ -811,7 +916,35 @@ public class ParttimeBean {
 			pool.freeConnection(con,pstmt);
 		}
 	}
+	
+	/**
+	 * 지원 취소한 경우 DB에서 지원 내역 삭제하는 메서드.
+	 * @param m_id
+	 * @param d_num
+	 */
+	public void deleteDaetaApply(String m_id, String d_num){
+		try{
+			con = pool.getConnection();
+			
+			String sql="DELETE FROM tbl_daeta_member WHERE d_num = ? AND m_id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			pstmt.setString(2, m_id);
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("deleteDaetaApply() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
 
+	/**
+	 * 알바 모집 게시판에 글을 추가하는 메서드.
+	 * @param dto
+	 */
 	public void insertParttime(ParttimeDTO dto){
 		try{
 			con = pool.getConnection();
@@ -840,11 +973,15 @@ public class ParttimeBean {
 		}
 	}
 	
+	/**
+	 * 대타 모집 게시판에 글을 추가하는 메서드.
+	 * @param dto
+	 */
 	public void insertDaeta(DaetaDTO dto){
 		try{
 			con = pool.getConnection();
 			
-			String sql="INSERT INTO tbl_daeta(d_title, d_deadline, d_wage, d_date, d_content, d_tel, d_deposite, d_location, d_header, m_id) "
+			String sql="INSERT INTO tbl_daeta(d_title, d_deadline, d_wage, d_date, d_content, d_tel, d_deposit, d_location, d_header, m_id) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?) ";
 			
 			pstmt = con.prepareStatement(sql);
@@ -862,6 +999,68 @@ public class ParttimeBean {
 			
 		}catch(Exception err){
 			System.out.println("insertDaeta() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
+	
+	/**
+	 * 알바 모집 글을 수정하는 메서드.
+	 * @param dto
+	 */
+	public void updateParttime(ParttimeDTO dto){
+		try{
+			con = pool.getConnection();
+			
+			String sql="UPDATE tbl_parttime SET p_title = ?, p_deadline =? , p_wage =? , "
+					+ "p_term=?, p_content=?, p_tel=?, p_daycode=?, p_location=?, p_header=? "
+					+ "WHERE p_num = ? ";
+					
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getP_title());
+			pstmt.setString(2, dto.getP_deadline());
+			pstmt.setInt(3, dto.getP_wage());
+			pstmt.setString(4, dto.getP_term());
+			pstmt.setString(5, dto.getP_content());
+			pstmt.setString(6, dto.getP_tel());
+			pstmt.setString(7, dto.getP_daycode());
+			pstmt.setString(8, dto.getP_location());
+			pstmt.setString(9, dto.getP_header());
+			pstmt.setString(10, dto.getP_num());
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("updateParttime() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
+	
+	public void updateDaeta(DaetaDTO dto){
+		try{
+			con = pool.getConnection();
+			
+			String sql="UPDATE tbl_daeta SET d_title=?, d_deadline=?, d_wage=?, d_date=?, d_content=?, "
+					+ "d_tel=?, d_deposit=?, d_location=?, d_header=? WHERE p_num = ? ";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getD_title());
+			pstmt.setString(2, dto.getD_deadline());
+			pstmt.setInt(3, dto.getD_wage());
+			pstmt.setString(4, dto.getD_date());
+			pstmt.setString(5, dto.getD_content());
+			pstmt.setString(6, dto.getD_tel());
+			pstmt.setInt(7, dto.getD_deposit());
+			pstmt.setString(8, dto.getD_location());
+			pstmt.setString(9, dto.getD_header());
+			pstmt.setString(10, dto.getD_num());			
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("updateDaeta() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);

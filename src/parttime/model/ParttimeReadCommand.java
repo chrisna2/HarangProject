@@ -27,29 +27,33 @@ public class ParttimeReadCommand implements CommandInterface {
 		String m_id = member.getM_id();
 
 		cancelApply(member, req); // 지원을 취소하는 경우
+		update(member, req); // 글을 수정하는 경우
 		
 		/** Read!!!!!! 글 정보 */
 		String p_num = req.getParameter("p_num"); // 글번호 parameter
 		ParttimeDTO dto = bean.getParttime(p_num); // 글 번호를 매개변수로 하여 글 정보를 받아온다.
-		transCode(dto.getP_daycode(), req); // Daycode 변환해서 parameter 넘기기
+		splitCode(dto.getP_daycode(), req); // Daycode 변환해서 parameter 넘기기
 		req.setAttribute("info", dto);
 		req.setAttribute("p_num", p_num);
 		req.setAttribute("m_id", m_id);
+		req.setAttribute("tab", req.getParameter("tab"));
 		/** 끝 : Read */
-
+		
+		/** Apply!! 지원자 정보*/
 		apply(req); // 지원완료 후
 		paging(req); // paging 관련 변수 받아서 넘기기
 		choice(m_id, req); // 채용버튼 눌렀을 때 처리
 		isApply(m_id, req); // 지원했는지 안했는지
 		showApply(req); // 지원자목록
+		/** 끝 : Apply */
 		
 		/** 페이지 이동 */
-		if ("admin02".equals(m_id)) { // 관리자면 a_parttime_read.jsp로 페이지 이동
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_read.jsp로 페이지 이동
 			return "WEB-INF/parttime/a_parttime_read.jsp";
 		} else { // 회원이면 parttime_read.jsp 로 페이지 이동
 			String read = (String) req.getParameter("read");
 			if (read != "no" || m_id != dto.getM_id()) { 
-				bean.counterUp("d", p_num); // 조회수 1 증가
+				bean.counterUp("p", p_num); // 조회수 1 증가
 			}
 			return "/WEB-INF/parttime/parttime_read.jsp";
 		}
@@ -61,7 +65,7 @@ public class ParttimeReadCommand implements CommandInterface {
 	 * @param code
 	 * @param req
 	 */
-	public void transCode(String code, HttpServletRequest req) {
+	public void splitCode(String code, HttpServletRequest req) {
 		char[] day = { '월', '화', '수', '목', '금', '토', '일' };
 
 		// String을 한글자씩 쪼개서 저장
@@ -85,12 +89,8 @@ public class ParttimeReadCommand implements CommandInterface {
 	 */
 	public void paging(HttpServletRequest req) {
 		int nowPage = 0, nowBlock = 0;
-		if (req.getParameter("nowPage") != null) {
-			nowPage = Integer.parseInt(req.getParameter("nowPage"));
-		}
-		if (req.getParameter("nowBlock") != null) {
-			nowBlock = Integer.parseInt(req.getParameter("nowBlock"));
-		}
+		if (req.getParameter("nowPage") != null) {nowPage = Integer.parseInt(req.getParameter("nowPage"));}
+		if (req.getParameter("nowBlock") != null) {nowBlock = Integer.parseInt(req.getParameter("nowBlock"));}
 
 		req.setAttribute("nowPage", nowPage);
 		req.setAttribute("nowBlock", nowBlock);
@@ -119,7 +119,7 @@ public class ParttimeReadCommand implements CommandInterface {
 
 		// 지원완료 후 이 페이지로 넘어올 경우
 		if (m_id != null && pm_reason != null && pm_career != null && pm_wanttime != null) {
-			bean.createResume(p_num, m_id, pm_reason, pm_career, pm_wanttime);
+			bean.createParttimeResume(p_num, m_id, pm_reason, pm_career, pm_wanttime);
 
 			// 지원 확인 메시지 보내기 : 관리자 -> 글쓴이
 			String title = "\"" + dto.getP_title() + "\"글에 " + member.getM_name() + "님이 지원하였습니다.";
@@ -184,7 +184,7 @@ public class ParttimeReadCommand implements CommandInterface {
 			String m_id = req.getParameter("choice_id"); // 지원자
 			String p_num = req.getParameter("p_num");
 
-			bean.updateChoice(m_id, p_num); // 채용 정보를 DB에 저장
+			bean.updateParttimeChoice(m_id, p_num); // 채용 정보를 DB에 저장
 			ParttimeDTO dto = bean.getParttime(p_num); // 해당 글 정보
 			MemberDTO member = bean.getMember(dto.getM_id()); // 글쓴이의 회원정보
 			MemberDTO applicant = bean.getMember(m_id);
@@ -215,7 +215,7 @@ public class ParttimeReadCommand implements CommandInterface {
 		String p_num = req.getParameter("p_num");
 
 		P_ApplyDTO applydto = new P_ApplyDTO();
-		applydto = bean.getApply(m_id, p_num);
+		applydto = bean.getParttimeApply(m_id, p_num);
 
 		if (applydto.getM_id() != null) {
 			req.setAttribute("applied", "Y");
@@ -234,7 +234,7 @@ public class ParttimeReadCommand implements CommandInterface {
 		if ("OK".equals(req.getParameter("cancel"))) {
 			String p_num = req.getParameter("p_num");
 
-			bean.deleteApply(member.getM_id(), p_num); // 지원 정보를 DB에서 삭제
+			bean.deleteParttimeApply(member.getM_id(), p_num); // 지원 정보를 DB에서 삭제
 			ParttimeDTO dto = bean.getParttime(p_num); // 해당 글 정보
 			MemberDTO writer = bean.getMember(dto.getM_id()); // 글쓴이의 회원정보
 
@@ -245,5 +245,60 @@ public class ParttimeReadCommand implements CommandInterface {
 			mbean.postMessage(title, content, "admin02", member.getM_id());
 
 		}
+	}
+
+	public void update(MemberDTO member, HttpServletRequest req){
+		String update = req.getParameter("update");
+
+		if ("OK".equals(update)) {
+			ParttimeDTO dto = new ParttimeDTO();
+			dto.setM_id(member.getM_id());
+			dto.setP_title(req.getParameter("p_title"));
+			dto.setP_deadline(req.getParameter("p_deadline"));
+			dto.setP_wage(Integer.parseInt(req.getParameter("p_wage")));
+			dto.setP_term(req.getParameter("p_term"));
+			dto.setP_content(req.getParameter("p_content"));
+			dto.setP_tel(req.getParameter("p_tel"));
+			dto.setP_location(req.getParameter("p_location"));
+			dto.setP_header(req.getParameter("p_header"));
+			dto.setP_num(req.getParameter("p_num"));
+			dto.setP_daycode(transCode(req));
+
+			bean.updateParttime(dto);
+			
+			// 해당 글의 지원자들에게 글의 내용이 수정되었음을 알리는 메시지를 보낸다.
+			ArrayList list = bean.getParttimeApplyList(req.getParameter("p_num")); // 지원자 목록 데이터
+			for (int i = 0; i < list.size(); i++) {
+				P_ApplyDTO dto1 = (P_ApplyDTO) list.get(i);
+				MemberDTO applicant = bean.getMember(dto1.getM_id()); // 지원자의 회원정보
+				
+				String title = applicant.getM_name()+"님이 지원한 글의 내용이 수정되었습니다.";
+				String content =applicant.getM_name()+"님이 지원한 알바 모집 글의 작성자 " + member.getM_name() + "님이 \"" + dto.getP_title() + "\"글의 내용을 수정하였습니다."
+						+ "\n해당 글을 반드시 확인해주세요.";
+				
+				mbean.postMessage(title, content, "admin02", dto1.getM_id());
+			}
+		}
+	}
+	
+	public String transCode(HttpServletRequest req) {
+		String daycode = "";
+		String[] day = { "월", "화", "수", "목", "금", "토", "일" };
+		String[] arr2 = {"0","0","0","0","0","0","0"};
+		String param = req.getParameter("p_daycode"); 
+		
+		if(param != null){
+			String arr[] = param.split(",");
+			for (int i = 0; i < 7; i++) {
+				for(int j=0; j<arr.length;j++){
+					// 해당 요일이 있으면 1로 변경
+					if(arr[j].equals(day[i])){
+						arr2[i] = "1";
+					}
+				}
+				daycode += arr2[i];
+			}
+		}
+		return daycode;
 	}
 }

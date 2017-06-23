@@ -26,6 +26,7 @@ public class MyPageCommand implements CommandInterface {
 		getDaetaList(m_id, req);
 		getParttimeApplyList(m_id, req);
 		getDaetaApplyList(m_id, req);
+		req.setAttribute("m_id", m_id);
 		
 		// mypage.jsp 로 페이지 이동
 		return "/WEB-INF/parttime/mypage.jsp";
@@ -125,27 +126,27 @@ public class MyPageCommand implements CommandInterface {
 		switch(i){
 		case 1:
 			int nowPage1 = 0, nowBlock1 = 0;
-			if (req.getParameter("nowPage") != null) {nowPage1 = Integer.parseInt(req.getParameter("nowPage"));}
-			if (req.getParameter("nowBlock") != null) {nowBlock1 = Integer.parseInt(req.getParameter("nowBlock"));}
+			if (req.getParameter("nowPage1") != null) {nowPage1 = Integer.parseInt(req.getParameter("nowPage1"));}
+			if (req.getParameter("nowBlock1") != null) {nowBlock1 = Integer.parseInt(req.getParameter("nowBlock1"));}
 			PagingDto paging1 = pbean.Paging(listSize, 5, nowPage1, 3, nowBlock1);
 			req.setAttribute("paging1", paging1);
 		case 2:
 			int nowPage2 = 0, nowBlock2 = 0;
-			if (req.getParameter("nowPage") != null) {nowPage2 = Integer.parseInt(req.getParameter("nowPage"));}
-			if (req.getParameter("nowBlock") != null) {nowBlock2 = Integer.parseInt(req.getParameter("nowBlock"));}
+			if (req.getParameter("nowPage2") != null) {nowPage2 = Integer.parseInt(req.getParameter("nowPage"));}
+			if (req.getParameter("nowBlock2") != null) {nowBlock2 = Integer.parseInt(req.getParameter("nowBlock"));}
 			PagingDto paging2 = pbean.Paging(listSize, 5, nowPage2, 3, nowBlock2);
 			req.setAttribute("paging2", paging2);
 		case 3:
 			int nowPage3 = 0, nowBlock3 = 0;
-			if (req.getParameter("nowPage") != null) {nowPage3 = Integer.parseInt(req.getParameter("nowPage"));}
-			if (req.getParameter("nowBlock") != null) {nowBlock3 = Integer.parseInt(req.getParameter("nowBlock"));}
+			if (req.getParameter("nowPage3") != null) {nowPage3 = Integer.parseInt(req.getParameter("nowPage"));}
+			if (req.getParameter("nowBlock3") != null) {nowBlock3 = Integer.parseInt(req.getParameter("nowBlock"));}
 			PagingDto paging3 = pbean.Paging(listSize, 5, nowPage3, 3, nowBlock3);
 			req.setAttribute("paging3", paging3);
 		
 		case 4:
 			int nowPage4 = 0, nowBlock4 = 0;
-			if (req.getParameter("nowPage") != null) {nowPage4 = Integer.parseInt(req.getParameter("nowPage"));}
-			if (req.getParameter("nowBlock") != null) {nowBlock4 = Integer.parseInt(req.getParameter("nowBlock"));}	
+			if (req.getParameter("nowPage4") != null) {nowPage4 = Integer.parseInt(req.getParameter("nowPage"));}
+			if (req.getParameter("nowBlock4") != null) {nowBlock4 = Integer.parseInt(req.getParameter("nowBlock"));}	
 			PagingDto paging4 = pbean.Paging(listSize, 5, nowPage4, 3, nowBlock4);
 			req.setAttribute("paging4", paging4);
 		}

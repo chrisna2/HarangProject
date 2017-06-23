@@ -16,7 +16,8 @@ public class PostCommand implements CommandInterface{
 		req.setAttribute("member", member);
 		
 		// message_post.jsp 로 페이지 이동
-		return "/WEB-INF/message/message_post.jsp";
+		if(mbean.adminCheck(member.getM_id())){return "WEB-INF/message/a_message_post.jsp";}
+		else{ return "/WEB-INF/message/message_post.jsp";}
 	}
 	
 	public void notRead(String m_id, HttpServletRequest req){

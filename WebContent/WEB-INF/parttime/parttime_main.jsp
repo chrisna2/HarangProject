@@ -161,6 +161,7 @@
 <!-- 글 읽기 -->
 <form name="read" method="post" action="/HarangProject/parttime?cmd=PREAD">
 	<input type="hidden" name="p_num" value="" id="p_num"/>
+	<input type="hidden" name="tab" value="PMAIN"/>
 	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>

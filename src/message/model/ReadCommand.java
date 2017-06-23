@@ -18,7 +18,8 @@ public class ReadCommand implements message.model.CommandInterface{
 		notRead(m_id, req);
 		
 		// message_read.jsp 로 페이지 이동
-		return "/WEB-INF/message/message_read.jsp";
+		if(mbean.adminCheck(m_id)){return "WEB-INF/message/a_message_read.jsp";}
+		else{ return "/WEB-INF/message/message_read.jsp";}
 	}
 	
 	/**

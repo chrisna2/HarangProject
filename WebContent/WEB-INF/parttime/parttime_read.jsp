@@ -99,8 +99,9 @@
 		                    <textarea class="form-control" rows="10" cols="120" readonly="readonly">${info.p_content}</textarea>
 		                </div>
               		</div><!-- /.box -->
+              		
+              		<!-- 버튼 -->
 					<div class="row">
-						
 						<c:choose>
 							<c:when test="${m_id eq info.m_id}"><!-- 내가 쓴 글일 때 -->
 								<div class="col-md-4"></div>
@@ -139,7 +140,7 @@
               <div class="row">
               	<div class="col-md-10"></div>
               	<div class="col-md-2">
-              		<button class="btn btn-block btn-warning" onclick="javascript:fnList()">목록</button>
+              		<button class="btn btn-block btn-warning" onclick="javascript:fnList('${tab}')">목록</button>
               	</div>
               </div>
               <br>
@@ -238,26 +239,29 @@
                   </div><!-- /input-group -->
                 </div>
               </div><!-- /.box -->
-		
             </div><!--/.col -->
         </div><!-- /.row -->
        </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      <form name="list" method="post" action="/HarangProject/parttime?cmd=PMAIN">
+      <form name="list" method="post" action="/HarangProject/parttime">
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      	<input type="hidden" name="cmd" value="" id="tab"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
       </form>
       <form name="apply" method="post" action="/HarangProject/parttime?cmd=PAPPLY">
       	<input type="hidden" name="p_num" value="${info.p_num}"/>
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
       </form>
       <form name="cancel" method="post" action="/HarangProject/parttime?cmd=PREAD">
       	<input type="hidden" name="p_num" value="${info.p_num}"/>
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
       	<input type="hidden" name="cancel" value="OK"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
       </form>
       <form name="resume" method="post" action="/HarangProject/parttime?cmd=PRESUME">
       	<input type="hidden" name="p_num" value="${info.p_num}"/>
@@ -266,6 +270,7 @@
     	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
     	<input type="hidden" name="a_nowPage" value="${a_paging.nowPage}"/>
 		<input type="hidden" name="a_nowBlock" value="${a_paging.nowBlock}"/>
+		<input type="hidden" name="tab" value="${tab}"/>
       </form>
       <form name="pick" method="post" action="/HarangProject/parttime?cmd=PREAD">
       	<input type="hidden" name="a_nowPage" value="${a_paging.nowPage}"/>
@@ -275,29 +280,38 @@
 		<input type="hidden" name="p_num" value="${p_num}"/>
 		<input type="hidden" name="choice" value="Y"/> 
 		<input type="hidden" name="choice_id" value="" id="choice_id"/>
+		<input type="hidden" name="tab" value="${tab}"/>
       </form>
       <form name="del" method="post" action="/HarangProject/parttime?cmd=PMAIN">
       	<input type="hidden" name="delete" value="OK"/>
       	<input type="hidden" name="p_num" value="${info.p_num}"/>
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
       </form>
       <form name="update" method="post" action="/HarangProject/parttime">
-      	<input type="hidden" name="info" value="${info}"/>
       	<input type="hidden" name="cmd" value="PUPDATE"/>
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
+      	<input type="hidden" name="daycode" value="${daycode}"/>
+      	<input type="hidden" name="day" value="${day}"/>
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
       </form>
       <form name="myresume" method="post" action="/HarangProject/parttime">
       	<input type="hidden" name="cmd" value="PRESUME"/>
       	<input type="hidden" name="p_num" value="${info.p_num}"/>
       	<input type="hidden" name="m_id" value="${m_id}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
       </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
 <script>
-function fnList(){list.submit();}
+function fnList(tab){
+	document.getElementById("tab").value = tab;
+	list.submit();
+}
 function fnApply(){apply.submit();}
 function fnMyResume(){myresume.submit();}
 function fnUpdate(){update.submit();}

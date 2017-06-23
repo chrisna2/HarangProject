@@ -65,8 +65,6 @@
 									<input type="text" class="form-control" id = "contact" value="${member.m_tel}" readonly="readonly" />
 								</div>				
 								
-							
-							
 						</form>
 					</div><!-- /.box-body -->
 				</div><!-- /.box -->
@@ -90,6 +88,7 @@
 								<input type="hidden" name="p_num" value="${p_num}"/>
 								<input type="hidden" name="nowPage" value="${nowPage}"/>
       							<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      							<input type="hidden" name="tab" value="${tab}"/>
       							<input type="hidden" name="read" value="no"/>
 							<label>지원 동기</label>
 								<textarea class="form-control" name="pm_reason" row="10" >
@@ -132,6 +131,7 @@
 <!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
 <form name="cancel" method="post" action="/HarangProject/parttime?cmd=PREAD">
 	<input type="hidden" name="p_num" value="${p_num}"/>
+	<input type="hidden" name="tab" value="${tab}"/>
 	<input type="hidden" name="nowPage" value="${nowPage}"/>
     <input type="hidden" name="nowBlock" value="${nowBlock}"/>
     <input type="hidden" name="read" value="no"/>
@@ -140,60 +140,6 @@
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
 <!-- ------------------------------------------------------------------------------------------------ -->
-<!-- jQuery 2.1.3 -->
-<script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
-<!-- Bootstrap 3.3.2 JS -->
-<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<!-- FastClick -->
-<script src='plugins/fastclick/fastclick.min.js'></script>
-<!-- AdminLTE App -->
-<script src="dist/js/app.min.js" type="text/javascript"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js" type="text/javascript"></script>
-<!-- CK Editor -->
-<script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-<!-- InputMask -->
-<script src="plugins/input-mask/jquery.inputmask.js"
-	type="text/javascript"></script>
-<script
-	src="plugins/input-mask/jquery.inputmask.date.extensions.js"
-	type="text/javascript"></script>
-<script src="plugins/input-mask/jquery.inputmask.extensions.js"
-	type="text/javascript"></script>
-<!-- date-range-picker -->
-<script src="plugins/daterangepicker/daterangepicker.js"
-	type="text/javascript"></script>
-<!-- bootstrap color picker -->
-<script src="plugins/colorpicker/bootstrap-colorpicker.min.js"
-	type="text/javascript"></script>
-<!-- bootstrap time picker -->
-<script src="plugins/timepicker/bootstrap-timepicker.min.js"
-	type="text/javascript"></script>
-<!-- SlimScroll 1.3.0 -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js"
-	type="text/javascript"></script>
-<!-- iCheck 1.0.1 -->
-<script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-<!-- FastClick -->
-<script src='plugins/fastclick/fastclick.min.js'></script>
-<!-- AdminLTE App -->
-<script src="dist/js/app.min.js" type="text/javascript"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js" type="text/javascript"></script>
-
-<!-- Bootstrap WYSIHTML5 -->
-<script
-	src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
-	type="text/javascript"></script>
-<script type="text/javascript">
-	$(function() {
-		// Replace the <textarea id="editor1"> with a CKEditor
-		// instance, using default configuration.
-		CKEDITOR.replace('editor1');
-		//bootstrap WYSIHTML5 - text editor
-		$(".textarea").wysihtml5();
-	});
-</script>
 <script>
 	
 	function fnCancel(){

@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -137,7 +137,7 @@
 	<input type="hidden" name="tab" value="${tab}"/>
 </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/a_footer.jsp" %>
 <script>
 ///////////////// 페이지 관련 javascript function////////////////////
 function prevPage(){

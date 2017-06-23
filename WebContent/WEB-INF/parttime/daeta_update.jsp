@@ -85,19 +85,13 @@
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" placeholder="ex)010-1234-5678 or email@naver.com"/>
+                      <input type="text" class="form-control" value="${info.d_tel}"/>
                     </div>
                     
-					<div class='box'>
-		                <div class='box-header'>
-		                  <h3 class='box-title'>업무 내용 <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small></h3>
-		                </div><!-- /.box-header -->
-		                <div class='box-body pad'>
-		                    <textarea id="editor1" name="editor1" rows="10" cols="80">
-		                       	대타로서 해야할 업무를 상세하게 작성해주세요.                     	                 
-		                    </textarea>
-		                </div>
-              		</div><!-- /.box -->
+					<div class="form-group">
+		                <label>업무 내용</label>&nbsp;&nbsp;&nbsp; <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small>
+		                <textarea class="form-control" rows="10">${info.d_content}</textarea>
+		            </div>
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">

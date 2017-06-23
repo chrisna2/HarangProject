@@ -21,7 +21,8 @@ public class InboxCommand implements message.model.CommandInterface{
 		notRead(m_id, req); // 읽지않은 메시지 개수
 		
 		// message_inbox_main.jsp 로 페이지 이동
-		return "/WEB-INF/message/message_inbox_main.jsp";
+		if(mbean.adminCheck(m_id)){return "WEB-INF/message/a_message_inbox_main.jsp";}
+		else{ return "/WEB-INF/message/message_inbox_main.jsp";}
 	}
 	
 	public void getList(String m_id, HttpServletRequest req){

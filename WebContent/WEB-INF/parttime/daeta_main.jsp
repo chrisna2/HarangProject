@@ -41,11 +41,11 @@
 							<tr>
 								<th style="width: 10px">#</th>
 								<th style="width: 40%">제목</th>
-								<th>대타 날짜</th>
-								<th>글쓴이</th>
+								<th style="width: 18%">대타 날짜</th>
+								<th style="width: 8%">글쓴이</th>
 								<th>작성일</th>
-								<th>조회수</th>
-								<th>지원자 수</th>
+								<th style="width: 8%">조회수</th>
+								<th style="width: 10%">지원자 수</th>
 							</tr>
 							<c:choose>
 								<c:when test="${fn:length(list) eq 0}">
@@ -71,8 +71,8 @@
 											</td>
 											<td>${list.d_date} </td>
 											<td>${list.m_name}</td>
-											<td>${list.p_regdate}</td>
-											<td>${list.p_cnt}</td>
+											<td>${list.d_regdate}</td>
+											<td>${list.d_cnt}</td>
 											<td>${list.cnt_apply}</td>
 										</tr>
 									</c:forEach>
@@ -147,6 +147,7 @@
 <!-- 글 읽기 -->
 <form name="read" method="post" action="/HarangProject/parttime?cmd=DREAD">
 	<input type="hidden" name="d_num" value="" id="d_num"/>
+	<input type="hidden" name="tab" value="DMAIN"/>
 	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
