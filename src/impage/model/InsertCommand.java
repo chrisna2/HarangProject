@@ -18,6 +18,7 @@ public class InsertCommand implements CommandInterface {
 	// DB 커넥션 3 대장
 			Connection con;
 			PreparedStatement pstmt;
+			PreparedStatement pstmt2;
 			DataSource ds;
 			ResultSet rs;
 			// DBCP 사용
@@ -25,10 +26,11 @@ public class InsertCommand implements CommandInterface {
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String a= request.getParameter("l_num");
-		System.out.println(a);
+	//	String a= request.getParameter("l_num");
+				
 		insert(request);
-		return "/WEB-INF/imPage/immain.jsp";
+		
+		return "/WEB-INF/imPage/imcomplete.jsp";
 	}
 	
 	
@@ -44,11 +46,16 @@ public class InsertCommand implements CommandInterface {
 				sql = "INSERT INTO tbl_member_lesson "
 						+ "(m_id, l_num, lm_group, lm_year, lm_term, lm_star, lm_hw, lm_attend, lm_comment) "
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql2= "UPDATE tbl_timetable SET tt_iscomplete='Y' WHERE m_id=? and l_num=?";
 			try {
 			
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt2.setString(1, m_id);
 			
+			pstmt2.setString(2, request.getParameter("l_num"));
+				
 				pstmt.setString(1, m_id);
 				
 				pstmt.setString(2, request.getParameter("l_num"));
@@ -61,6 +68,7 @@ public class InsertCommand implements CommandInterface {
 				pstmt.setString(9, request.getParameter("lm_comment"));
 				
 				pstmt.executeUpdate();
+				pstmt2.executeUpdate();
 			
 		}catch(Exception err){
 			System.out.println(err);
@@ -69,8 +77,7 @@ public class InsertCommand implements CommandInterface {
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt);
 		}			
-	
-				
+			
 	}
 
 }

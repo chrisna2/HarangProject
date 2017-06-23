@@ -1,5 +1,9 @@
 package dto;
-
+/**
+ * 강의평가를 위한 DTO
+ * @author 박주선 
+ *
+ */
 public class Im2DTO {
 	String lm_num;
 	String lm_regdate;
@@ -9,8 +13,10 @@ public class Im2DTO {
 	String lm_star;
 	String lm_hw;
 	String lm_attend;
-	String comment;
+	
+	String lm_comment;
 	String l_num;
+	String tt_iscomplete;
 	String l_time;
 	String l_day;
 	String l_name;
@@ -32,9 +38,18 @@ public class Im2DTO {
 	private String m_photo;
 	private String m_addr;
 	private String m_tel;
+	
 	private int m_fee;
 	private long m_point;
 	private int m_age;
+	
+	public String getTt_iscomplete() {
+		return tt_iscomplete;
+	}
+	public void setTt_iscomplete(String tt_iscomplete) {
+		this.tt_iscomplete = tt_iscomplete;
+	}
+	
 	public String getLm_num() {
 		return lm_num;
 	}
@@ -83,11 +98,12 @@ public class Im2DTO {
 	public void setLm_attend(String lm_attend) {
 		this.lm_attend = lm_attend;
 	}
-	public String getComment() {
-		return comment;
+	
+	public String getLm_comment() {
+		return lm_comment;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setLm_comment(String lm_comment) {
+		this.lm_comment = lm_comment;
 	}
 	public String getL_num() {
 		return l_num;

@@ -32,10 +32,15 @@
          <div class="box-header">
                  
                 </div>
+                <form role="form2" name="read"
+					action="/HarangProject/impage?cmd=insert" method="post">
+				
+
+					
                 <div class="box-body" >
                   <div class="input-group">
                     <span class="input-group-addon">강의명</span>
-                    <input type="text" class="form-control" placeholder="강의명">
+                    <input type="text" value="" class="form-control" placeholder="강의명">
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">교수명</span>

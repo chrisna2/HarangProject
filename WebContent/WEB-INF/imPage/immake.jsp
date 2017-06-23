@@ -31,12 +31,11 @@
 				<div class="box-header"></div>
 
 				<!-- form 시작 -->
-				<form role="form2" name="read"
-					action="/HarangProject/impage?cmd=main" method="post">
+				<form role="form2" name="read5"
+					action="/HarangProject/impage?cmd=insert" method="post">
+				<input type="hidden" name="check" value="check" >
 
-					<!-- 히든을 통해 read2를 커멘더로 넘겨줌  -->
-					<input type="hidden" name="read" value="${requestScope.read}" /> <input
-						type="text" name="l_num" value="${read.l_num}">
+					
 
 					<div class="box-body">
 						<div class="input-group">

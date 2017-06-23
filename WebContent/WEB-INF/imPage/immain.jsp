@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../include/header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
@@ -52,10 +52,17 @@
                         <td>${im.l_num}</td>
                         <td>${im.l_name }</td>
                         <td>${im.l_teacher}</td>
-                       
+                       <c:if test="${im.tt_iscomplete eq 'Y'}">
+                        <td>
+						 <a href="/HarangProject/impage?cmd=modify&l_num=${im.l_num}">평가완료</a>
+					 	</td>     
+					 	 </c:if>   
+					 	 
+					 	  <c:if test="${im.tt_iscomplete eq 'N'}">
                         <td>
 						  <a href="/HarangProject/impage?cmd=make&l_num=${im.l_num}">평가미완료</a>
-					 	</td>           
+					 	</td>     
+					 	 </c:if>      
                       </tr>
                      </c:forEach>
                  
@@ -80,18 +87,33 @@
                   
                     <div class="input-group">
                     	
+                     <form action="/HarangProject/impage?cmd=main" name="search" method="post">  
+ 
+                    <input type="text" name="keyfield" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                    
-                      <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="검색"/>
-                       <select class="form-control input-sm pull-right" style="width: 80px; heigh:30px;">
-                        <option>제목</option>
-                        <option>교수명</option>
-                        <option>작성자</option>
+                       <select class="form-control input-sm pull-right" name="keyword" style="width: 80px; heigh:30px;">
+                        <option value="l_name"
+                        <c:choose>
+                        <c:when test="${requestScope.keyword eq 'l_name' }">
+                        selected="selected"
+                         </c:when>
+                         </c:choose>>강의명</option>
+                        <option value="l_teacher"   <c:choose>
+                        <c:when test="${requestScope.keyword eq 'l_teacher' }">
+                        selected="selected"
+                         </c:when>
+                         </c:choose>>교수명</option>
+                        <option value="m_name"   <c:choose>
+                        <c:when test="${requestScope.keyword eq 'm_name' }">
+                        selected="selected"
+                         </c:when>
+                         </c:choose>>작성자</option>
                        
                       </select>
                       <div class="input-group-btn">
-                      	
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                       </div>
+                     </form>     
                     </div>
                     
                      
@@ -113,11 +135,16 @@
                         <th>교수명</th>
                         <th>작성자</th>
                     </tr>
-                    
-                      <c:forEach var="all" items="${requestScope.alllist}">
+                     <tbody>
+                     <c:choose>
+						<c:when test="${fn:length(alllist) eq 0}">
+						</c:when>
+          				<c:otherwise>
+                      <c:forEach var="all" items="${requestScope.alllist}"
+                       begin="${paging.beginPerPage}"  end="${paging.beginPerPage + paging.numPerPage -1}">
                       <tr>
                     
-                        <td>${all.lm_num}</td>
+                     <td>  <a href="/HarangProject/impage?cmd=detail&lm_num=${all.lm_num}">  ${all.lm_num}</a></td>
                         <td>${all.l_name }</td>
                         <td>${all.lm_star}</td>
                         <td>${all.lm_year}</td>
@@ -129,7 +156,9 @@
                                
                       </tr>
                      </c:forEach>
-                    
+                        </c:otherwise>
+                   </c:choose>
+                    </tbody>
                   
                    
                    
@@ -137,13 +166,22 @@
                     
                    
                   </table>
-                  <ul class="pagination pagination-sm no-margin pull-right">
-                      <li><a href="#">&laquo;</a></li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">&raquo;</a></li>
-                    </ul>
+                   <div class="box-footer clearfix">
+                   <ul class="pagination pagination-sm no-margin pull-right">
+							<c:if test="${paging.nowBlock > 0}">
+							<li><a href="javascript:prevPage()">&laquo;</a></li>
+							</c:if>
+						  <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+                            <!-- if문 추가 : 20170615 -->
+                               <c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
+                                    <li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+                               </c:if>
+                            <!-- 끝 -->
+						  </c:forEach>
+						  	<c:if test="${paging.totalBlock > paging.nowBlock +1}">
+							<li><a href="javascript:nextPage()">&raquo;</a></li>
+							</c:if>
+						</ul>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
         </div>
@@ -151,7 +189,7 @@
                 
               </div><!-- /.box -->
 
-
+</div>
 
 
 
@@ -159,5 +197,53 @@
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
       
+
+<!-- 페이징 관련 폼 ----------------------------------------------------------------------->
+<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/impage?cmd=main">
+	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/impage?cmd=main">
+	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
+</form>
+<!-- 페이징 : 해당 페이지로 이동하는 폼 -->
+<form id="goPage" method="post" action="/HarangProject/impage?cmd=main">
+	<input type="hidden" name="nowPage" value="" id="page"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>   
+      
+      
+      
+      
+      
+      
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+
+
+<script>
+///////////////// 페이지 관련 javascript function////////////////////
+function prevPage(){
+	document.getElementById("prevPage").submit();
+}
+function nextPage(){
+	document.getElementById("nextPage").submit();
+}
+function goPage(nowPage){
+	document.getElementById("page").value = nowPage;
+	document.getElementById("goPage").submit();
+}
+
+
+
+
+
+
+
+</script>
+
+
+
