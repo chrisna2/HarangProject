@@ -312,9 +312,6 @@
 		                        <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade == grade}">
                                    <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-warning" value="재수강 취소"></td>
                                 </c:when>
-		                        <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade < grade}">
-		                          <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-info" value="재수강"></td>
-		                        </c:when>
 		                        <c:when test="${null eq l.m_id}">
 	                               <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-primary" value="시간표 등록"></td>
 	                            </c:when>

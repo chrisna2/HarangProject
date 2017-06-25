@@ -230,7 +230,7 @@ public class TimetableCommand implements CommandInterface {
 						+"from tbl_lesson l left outer join tbl_timetable t "
 						+"on l.l_num = t.l_num "
 						+"and t.m_id = ? " 
-						+"and t.tt_grade >= ? "
+						+"and t.tt_grade = ? "
 						+"where l.l_grade <= ? "
 						+"and l.l_term = ?";
 		}
@@ -240,7 +240,7 @@ public class TimetableCommand implements CommandInterface {
 						+"from tbl_lesson l left outer join tbl_timetable t "
 						+"on l.l_num = t.l_num "
 						+"and t.m_id = ? " 
-						+"and t.tt_grade >= ? "
+						+"and t.tt_grade = ? "
 						+"where l.l_grade <= ? "
 						+"and l.l_term = ? "
 						+"and "+ keyfield + " like '%" + keyword + "%'";
