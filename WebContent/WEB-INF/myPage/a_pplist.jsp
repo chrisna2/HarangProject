@@ -178,13 +178,12 @@
                 </div>
                 </form>
               </div><!-- /.box -->
-              
               </div><!-- /.col -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      <!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
 <form id="prevPage" method="post" action="/HarangProject/myPage?cmd=Applist">
    <input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}" /> 
    <input type="hidden" name="nowBlock" value="${paging.nowBlock-1}" />
@@ -205,7 +204,6 @@
         type="hidden" name="nowBlock" value="${paging.nowBlock}" />
         <input type="hidden" name="check_id" value="${pNum}">
 </form>
-
 <!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>

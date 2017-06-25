@@ -14,7 +14,14 @@ public class LessonDTO {
 	String l_term;
 	int l_credit;
 	String l_room;
+	String m_id;
 	
+	public String getM_id() {
+		return m_id;
+	}
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 	public String getL_num() {
 		return l_num;
 	}

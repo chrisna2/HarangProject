@@ -1,12 +1,24 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <%@ include file="../include/header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
      <title>학비 포인트 제로!</title>
+<c:if test="${result eq 'complete'}">
+    <script type="text/javascript">
+    alert("해당 포인트로 다음학기의 학비를 감면 했습니다.");
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    location.href = "/HarangProject/myPage?cmd=pointZero";
+    </script>
+</c:if>   
+<c:if test="${result eq 'overpoint'}">
+    <script type="text/javascript">
+    alert("현재 보유한 포인트 보다 더 큰 포인트를 입력 했습니다. 다시 입력 해 주십시요 ");
+    location.href = "/HarangProject/myPage?cmd=pointZero";
+    </script>
+</c:if>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -34,12 +46,12 @@
                 <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">당신의 다음 학기 학비</span>
-                  <span class="info-box-number">2,000,000 만원</span>
+                  <span class="info-box-number">${member.m_fee}원</span>
                   <div class="progress">
-                    <div class="progress-bar" style="width: 66%"></div>
+                    <div class="progress-bar" style="width: ${member.m_fee/3000000*100}%"></div>
                   </div>
                   <span class="progress-description">
-                                        학비 제로 까지 66% 남았습니다!
+                                        학비 제로 까지 ${member.m_fee/3000000*100}% 남았습니다!
                   </span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
@@ -50,24 +62,24 @@
                 </div>
                 
                 <!-- form 시작 -->
-                <form role="form">
+                <form role="form" action="/HarangProject/myPage?cmd=pointZero" method="post">
                 
                 <div class="box-body">
                   <div class="input-group">
                     <span class="input-group-addon bg-black-gradient"><i class="fa fa-money"></i> 보유 포인트</span>
-                    <input type="text" name="c_point" class="form-control" value="999999" readonly="readonly">
+                    <input type="text" name="mem_point" class="form-control" value="${member.m_point}" readonly="readonly">
                     <span class="input-group-addon bg-black-gradient">포인트</span>
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-black-gradient"><i class="fa fa-money"></i> 등록금 감면</span>
-                    <input type="text" name="c_point" class="form-control" placeholder="당신의 포인트를 입력 하세요" required="required">
+                    <input type="text" name="r_point" class="form-control" placeholder="당신의 포인트를 입력 하세요" required="required">
                     <span class="input-group-addon bg-black-gradient">포인트</span>
                   </div>
                   <br>
                  </div><!-- /.box-body -->
-                
                   <div class="box-footer bg-black-gradient" align="center">
+                    <input type="hidden" name="check" value="pointzero">
                     <input type="submit" class="btn btn-default" value="★ ☆ ★ ☆ ★ 학비 포인트 감면 ★ ☆ ★ ☆ ★">
                 </div>
                 </form>

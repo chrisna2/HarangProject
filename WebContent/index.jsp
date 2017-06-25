@@ -78,6 +78,7 @@
     </div><!-- /.login-box -->
     <!-- 완성시 최종 삭제 -->
     <div class="login-box">
+    
       <div class="login-box-body">
            <h3>인덱스</h3>
            <h4>내 정보</h4>

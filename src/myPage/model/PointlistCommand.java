@@ -18,9 +18,11 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-
-
-
+/**
+ * pointList.jsp 관련 페이지 기능
+ * @author 나현기
+ *
+ */
 public class PointlistCommand implements CommandInterface {
 
 	//DB 커넥션 4 대장

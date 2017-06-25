@@ -28,7 +28,6 @@ public class ApplistCommand implements CommandInterface {
 	//DBCP 사용
 	DBConnectionMgr pool;
 
-	
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

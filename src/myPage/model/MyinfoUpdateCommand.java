@@ -18,6 +18,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import login.LoginBean;
 import upload.RandomFileRenamePolicy;
 import upload.TimestampFileRenamePolicy;
 
@@ -45,11 +46,6 @@ public class MyinfoUpdateCommand implements CommandInterface {
 		HttpSession session = request.getSession();
 		
 		String sql1 = "UPDATE tbl_member SET m_mail = ?, m_addr = ?, m_tel = ?, m_photo = ? WHERE m_id = ?";
-		
-		String sql2 = "select m_name, m_dept, m_mail, m_tel, m_addr, m_point, m_photo, m_fee, m_grade, m_birth, m_regdate "
-				+ "from tbl_member where m_id = ?";
-				
-		
 				
 		pool = DBConnectionMgr.getInstance();
 		
@@ -85,43 +81,6 @@ public class MyinfoUpdateCommand implements CommandInterface {
 			pstmt.setString(5, multi.getParameter("m_id"));
 			pstmt.executeUpdate();
 			
-			
-			//회원정보 동기화
-			pstmt = con.prepareStatement(sql2);
-			pstmt.setString(1, multi.getParameter("m_id"));
-			rs = pstmt.executeQuery();
-			
-			rs.next();
-			
-			String m_name = rs.getString("m_name");
-			String m_dept = rs.getString("m_dept");
-			String m_mail = rs.getString("m_mail");
-			String m_tel = rs.getString("m_tel");
-			String m_addr = rs.getString("m_addr");
-			long m_point = rs.getLong("m_point");
-			String m_photo = rs.getString("m_photo");
-			int m_fee = rs.getInt("m_fee");
-			int m_grade = rs.getInt("m_grade");
-			String m_birth = rs.getString("m_birth");
-			String m_regdate = rs.getString("m_regdate");
-			
-			MemberDTO mdto = new MemberDTO();
-			
-			mdto.setM_id(multi.getParameter("m_id"));
-			mdto.setM_name(m_name);
-			mdto.setM_dept(m_dept);
-			mdto.setM_mail(m_mail);
-			mdto.setM_tel(m_tel);
-			mdto.setM_addr(m_addr);
-			mdto.setM_point(m_point);
-			mdto.setM_photo(m_photo);
-			mdto.setM_fee(m_fee);
-			mdto.setM_grade(m_grade);
-			mdto.setM_birth(m_birth);
-			mdto.setM_regdate(m_regdate);
-			
-			session.setAttribute("member", mdto);
-			
 		}catch(Exception err){
 			
 			System.out.println( "regform.jsp : " + err);
@@ -129,7 +88,11 @@ public class MyinfoUpdateCommand implements CommandInterface {
 		finally{
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt);
-		}		
+		}
+		
+		//회원정보 세션 최신화
+		LoginBean update = new LoginBean();
+		update.refreshSession(request);
 		
 		return "/WEB-INF/login/main.jsp";
 	}
