@@ -15,7 +15,21 @@ public class LessonDTO {
 	int l_credit;
 	String l_room;
 	String m_id;
+	String tt_grade;
+	String tt_term;
 	
+	public String getTt_grade() {
+		return tt_grade;
+	}
+	public void setTt_grade(String tt_grade) {
+		this.tt_grade = tt_grade;
+	}
+	public String getTt_term() {
+		return tt_term;
+	}
+	public void setTt_term(String tt_term) {
+		this.tt_term = tt_term;
+	}
 	public String getM_id() {
 		return m_id;
 	}

@@ -16,6 +16,38 @@
             text-align:center;
         }
      </style>
+<c:if test="${msg eq 'enroll'}">
+    <script type="text/javascript">
+    window.onload = function() {
+    alert("해당 수업이 시간표에 등록되었습니다.");
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    reset.submit();}
+    </script>
+</c:if>   
+<c:if test="${msg eq 'duplicate'}">
+    <script type="text/javascript">
+    window.onload = function() {
+    alert("해당 수업은 시간이 중복 됩니다.");
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    reset.submit();}
+    </script>
+</c:if>
+<c:if test="${msg eq 'evaluated'}">
+    <script type="text/javascript">
+    window.onload = function() {
+    alert("해당 수업은 이미 평가가 완료된 수업입니다.");
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    reset.submit();}
+    </script>
+</c:if>
+<c:if test="${msg eq 'delete'}">
+    <script type="text/javascript">
+    window.onload = function() {
+    alert("해당 수업을 시간표에서 삭제 했습니다.");
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    reset.submit();}
+    </script>
+</c:if>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -85,77 +117,77 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr id="t1">
                       <td class="bg-gray"><br><b>1교시</b><br>[9시 ~ 10시]</td>
-                      <td id="T11"></td>
-                      <td id="T21"></td>
-                      <td id="T31"></td>
-                      <td id="T41"></td>
-                      <td id="T51"></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t2">
                      <td class="bg-gray"><br><b>2교시</b><br>[10시 ~ 11시]</td>
-                      <td id="T12"></td>
-                      <td id="T22"></td>
-                      <td id="T32"></td>
-                      <td id="T42"></td>
-                      <td id="T52"></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t3">
                        <td class="bg-gray"><br><b>3교시</b><br>[11시 ~ 12시]</td>
-                      <td id="T13"></td>
-                      <td id="T23"></td>
-                      <td id="T33"></td>
-                      <td id="T43"></td>
-                      <td id="T53"></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t4">
                        <td class="bg-gray"><br><b>4교시</b><br>[12시 ~ 13시]</td>
-                      <td id="T14"></td>
-                      <td id="T24"></td>
-                      <td id="T34"></td>
-                      <td id="T44"></td>
-                      <td id="T54"></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t5">
                        <td class="bg-gray"><br><b>5교시</b><br>[13시 ~ 14시]</td>
-                      <td id="T15"></td>
-                      <td id="T25"></td>
-                      <td id="T35"></td>
-                      <td id="T45"></td>
-                      <td id="T55"></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
-                       <td class="bg-gray"><br><b>6교시</b><br>[14시 ~ 15시]</td>
-                      <td id="T16"></td>
-                      <td id="T26"></td>
-                      <td id="T36"></td>
-                      <td id="T46"></td>
-                      <td id="T56"></td>
+                    <tr id="t6">
+                      <td class="bg-gray"><br><b>6교시</b><br>[14시 ~ 15시]</td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
-                       <td class="bg-gray"><br><b>7교시</b><br>[15시 ~ 16시]</td>
-                      <td id="T17"></td>
-                      <td id="T27"></td>
-                      <td id="T37"></td>
-                      <td id="T47"></td>
-                      <td id="T57"></td>
+                    <tr id="t7">
+                      <td class="bg-gray"><br><b>7교시</b><br>[15시 ~ 16시]</td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t8">
                        <td class="bg-gray"><br><b>8교시</b><br>[16시 ~ 17시]</td>
-                      <td id="T18"></td>
-                      <td id="T28"></td>
-                      <td id="T38"></td>
-                      <td id="T48"></td>
-                      <td id="T58"></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t9">
                        <td class="bg-gray"><br><b>9교시</b><br>[17시 ~ 18시]</td>
-                      <td id="T19"></td>
-                      <td id="T29"></td>
-                      <td id="T39"></td>
-                      <td id="T49"></td>
-                      <td id="T59"></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
                    </tbody>
                   </table>
@@ -200,14 +232,20 @@
                             <td>${tt.l_name}</td>
                             <td>${tt.l_grade}</td>
                             <td>${tt.l_term}</td>
-                            <td>${tt.l_day}</td>
-                            <td>${tt.l_time}</td>
+                            <td id="day${tt.l_num}">${tt.l_day}</td>
+                            <td id="time${tt.l_num}">${tt.l_time}</td>
                             <td>${tt.l_teacher}</td>
                             <td>${tt.l_room}</td>
                             <td>${tt.l_credit}</td>
                             <c:choose>
-                                <c:when test="${tt.m_id eq member.m_id}">
-                                   <td><input type="button" class="btn btn-danger" value="등록 취소"></td>
+                                <c:when test="${tt.m_id eq member.m_id and tt.l_grade == grade and tt.tt_grade == tt.l_grade}">
+                                   <td><input type="button" onclick="deletelesson('${tt.l_num}')"  class="btn btn-danger" value="수강 취소"></td>
+                                </c:when>
+                                <c:when test="${tt.m_id eq member.m_id and tt.l_grade < grade and tt.tt_grade == grade}">
+                                   <td><input type="button" onclick="deletelesson('${tt.l_num}')"  class="btn btn-warning" value="재수강 취소"></td>
+                                </c:when>
+                                <c:when test="${tt.m_id eq member.m_id and tt.l_grade < grade and tt.tt_grade < grade}">
+                                  <td><input type="button" onclick="enroll('${tt.l_num}')"  class="btn btn-info" value="재수강"></td>
                                 </c:when>
                             </c:choose>
                           </tr>
@@ -216,8 +254,8 @@
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
-
-
+              
+	<!-- 시험용. -->
             <!-- 리스트 사용시  -->
              <div class="box">
                 <div class="box-header">
@@ -262,18 +300,24 @@
 	                        <td>${l.l_name}</td>
 	                        <td>${l.l_grade}</td>
 	                        <td>${l.l_term}</td>
-	                        <td>${l.l_day}</td>
-	                        <td>${l.l_time}</td>
+	                        <td id="day${l.l_num}">${l.l_day}</td>
+	                        <td id="time${l.l_num}">${l.l_time}</td>
 	                        <td>${l.l_teacher}</td>
 	                        <td>${l.l_room}</td>
 	                        <td>${l.l_credit}</td>
 	                        <c:choose>
-		                        <c:when test="${l.m_id eq member.m_id}">
-		                           <td><input type="button" class="btn btn-danger" value="등록 취소"></td>
+	                            <c:when test="${l.m_id eq member.m_id and l.l_grade == grade and l.tt_grade == l.l_grade}">
+                                   <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-danger" value="수강 취소"></td>
+                                </c:when>
+		                        <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade == grade}">
+                                   <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-warning" value="재수강 취소"></td>
+                                </c:when>
+		                        <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade < grade}">
+		                          <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-info" value="재수강"></td>
 		                        </c:when>
-		                        <c:otherwise>
-	                               <td><input type="button" class="btn btn-primary" value="시간표 등록"></td>
-	                            </c:otherwise>
+		                        <c:when test="${null eq l.m_id}">
+	                               <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-primary" value="시간표 등록"></td>
+	                            </c:when>
 	                        </c:choose>
 	                      </tr>
                             </c:forEach>
@@ -284,18 +328,18 @@
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix">
                     <ul class="pagination pagination-sm no-margin pull-right">
-                         <c:if test="${paging.nowBlock > 0}">
-                                <li><a href="javascript:prevPage()">&laquo;</a></li>
+                            <c:if test="${paging.nowBlock > 0}">
+                            <li><a href="javascript:prevPage()">&laquo;</a></li>
                             </c:if>
-                            <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
-                                    <!-- if문 추가 : 20170615 -->
-                                    <c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
+                          <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+                            <!-- if문 추가 : 20170615 -->
+                               <c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
                                     <li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
-                                    </c:if>
-                                    <!-- 끝 -->
-                            </c:forEach>
+                               </c:if>
+                            <!-- 끝 -->
+                          </c:forEach>
                             <c:if test="${paging.totalBlock > paging.nowBlock +1}">
-                                <li><a href="javascript:nextPage()">&raquo;</a></li>
+                            <li><a href="javascript:nextPage()">&raquo;</a></li>
                             </c:if>
                         </ul>
                     <!-- 검색 폼 -->    
@@ -316,7 +360,6 @@
                     </form>
                 </div>
               </div><!-- /.box -->
-
               </div><!-- /.col -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
@@ -330,6 +373,7 @@
     <input type="hidden" name="term" value="${term}"/>
     <input type="hidden" name="keyword" value="${keyword}"/>
     <input type="hidden" name="keyfield" value="${keyfield}"/>
+    <input type="hidden" name='check' value="findtt">
 </form>
 <!-- 페이징 : 다음 블록으로 이동하는 폼 -->
 <form id="nextPage" method="post" action="/HarangProject/myPage?cmd=timeTable">
@@ -339,6 +383,7 @@
     <input type="hidden" name="term" value="${term}"/>
     <input type="hidden" name="keyword" value="${keyword}"/>
     <input type="hidden" name="keyfield" value="${keyfield}"/>
+    <input type="hidden" name='check' value="findtt">
 </form>
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/myPage?cmd=timeTable">
@@ -348,10 +393,48 @@
     <input type="hidden" name="term" value="${term}"/>
     <input type="hidden" name="keyword" value="${keyword}"/>
     <input type="hidden" name="keyfield" value="${keyfield}"/>
+    <input type="hidden" name='check' value="findtt">
+</form>
+<!-- 등록 form -->
+<form name="goEnroll" method="post" action="/HarangProject/myPage?cmd=timeTable">
+    <input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+    <input type="hidden" name='check' value="enroll">
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+    <input type="hidden" name="grade" value="${grade}"/>
+    <input type="hidden" name="term" value="${term}"/>
+    <input type="hidden" name="keyword" value="${keyword}"/>
+    <input type="hidden" name="keyfield" value="${keyfield}"/>
+    <input type="hidden" name="l_num" value=""/>
+    <input type="hidden" name="l_day" value=""/>
+    <input type="hidden" name="l_time" value=""/>
+</form>
+<!-- 삭제 form -->
+<form name="goDelete" method="post" action="/HarangProject/myPage?cmd=timeTable">
+    <input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+    <input type="hidden" name='check' value="delete">
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+    <input type="hidden" name="grade" value="${grade}"/>
+    <input type="hidden" name="term" value="${term}"/>
+    <input type="hidden" name="keyword" value="${keyword}"/>
+    <input type="hidden" name="keyfield" value="${keyfield}"/>
+    <input type="hidden" name="l_num" value=""/>
+    <input type="hidden" name="l_day" value=""/>
+    <input type="hidden" name="l_time" value=""/>
+</form>
+<!-- 초기화 form -->
+<form name="reset" method="post" action="/HarangProject/myPage?cmd=timeTable">
+    <input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+    <input type="hidden" name='check' value="findtt">
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+    <input type="hidden" name="grade" value="${grade}"/>
+    <input type="hidden" name="term" value="${term}"/>
+    <input type="hidden" name="keyword" value="${keyword}"/>
+    <input type="hidden" name="keyfield" value="${keyfield}"/>
 </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <script>
+//페이징
 function prevPage() {
     document.getElementById("prevPage").submit();
 }
@@ -362,4 +445,90 @@ function goPage(nowPage) {
     document.getElementById("page").value = nowPage;
     document.getElementById("goPage").submit();
 }
+//등록
+function enroll(l_num) {
+	goEnroll.l_num.value = l_num;
+	goEnroll.l_day.value = $("#day"+l_num).text();
+	goEnroll.l_time.value = $("#time"+l_num).text();
+	goEnroll.submit();
+}
+//삭제
+function deletelesson(l_num) {
+	goDelete.l_num.value = l_num;
+	goDelete.l_day.value = $("#day"+l_num).text();
+	goDelete.l_time.value = $("#time"+l_num).text();
+	goDelete.submit();
+	
+}
 </script>
+    <!-- 시간표를 출력 할 수 있는 쿼리 -->
+     <c:forEach items="${ttlist}" varStatus="i" var="tj">
+       <script>
+       // 요일  -> 날짜 숫자로 변환
+       var day = "${tj.l_day}";
+        var daynum = 0;
+        if(day=="월"){
+        	daynum = 1;
+            }
+        else if(day=="화"){
+        	daynum = 2;
+            }
+        else if(day=="수"){
+        	daynum = 3;
+            }
+        else if(day=="목"){
+        	daynum = 4;
+            }
+        else if(day=="금"){
+        	daynum = 5;
+            }
+        //alert(daynum);
+        
+        // 시간
+        var time = "${tj.l_time}";
+        // 1-3 ,4-6, 7-9 
+        var sptime = time.split("-");
+        var start = sptime[0];
+        //alert(start);
+        var end = sptime[1];
+        //alert(end);
+        
+        // 수업 이름
+        var name = "${tj.l_name}";
+        
+        // 강의실
+        var room = "${tj.l_room}";
+
+        // 교수00
+        var teacher = "${tj.l_teacher}";
+
+        // 학과별 색상 변경
+        var dept =  "${tj.l_dept}";
+        var color = "";
+        if(dept=="경영학과"){
+        	color = "#EECECE";
+            }
+        else if(dept=="교양학과"){
+        	color = "#EFF7BE";
+            }
+        else if(dept=="국어국문학과"){
+        	color = "#BEDDF7";
+            }
+        else if(dept=="수학과"){
+        	color = "#BEF7EA";
+            }
+        else if(dept=="산업디자인학과"){
+        	color = "#F4DBAF";
+            }
+        else if(dept=="컴퓨터공학과"){
+        	color = "#E0A8FF";
+            }
+
+        // 시간표에 해당 내용을 올리는 For문
+        for(i=start;i<=end;i++){
+        	$("#t"+i+" > #d"+daynum)
+        	.css("background",color)
+        	.html(name+"<br>"+room+"<br>"+teacher);
+        }
+       </script>
+</c:forEach>

@@ -37,6 +37,7 @@ public class TimetableCommand implements CommandInterface {
 			throws ServletException, IOException {
 
 		String check = request.getParameter("check");
+		
 		//처음 시간표(기본값)
 		if(null == check){
 			defaultTimeTable(request);
@@ -44,6 +45,25 @@ public class TimetableCommand implements CommandInterface {
 		//시간표선택시
 		else if("findtt".equals(check)){
 			timeTableChoice(request);
+		}
+		//수업 시간표 등록
+		else if("enroll".equals(check)){
+			String msg = enrollCheck(request);
+			//중복 체크가 완료되면
+				if(msg.equals("enroll")){
+					enrollLesson(request);
+				}
+			timeTableChoice(request);
+			request.setAttribute("msg", msg);
+		}
+		//수업 시간표 등록 해제
+		else if("delete".equals(check)){
+			String msg = deleteCheck(request);
+				if(msg.equals("delete")){
+					deleteLesson(request);
+				}
+			timeTableChoice(request);
+			request.setAttribute("msg", msg);
 		}
 		
 		return "/WEB-INF/myPage/timeTable.jsp";
@@ -58,35 +78,34 @@ public class TimetableCommand implements CommandInterface {
 				ArrayList ttlist  = new ArrayList();
 				
 				//초기 시간표 설정값
-				int l_grade = member.getM_grade();
-				int l_term = 0;
+				int tt_grade = member.getM_grade();
+				int tt_term = 0;
 			
 				//현재 학기 구하기
 				Calendar cal = Calendar.getInstance();
 				int nowMonth = cal.get(Calendar.MONTH) + 1; 
 				if(nowMonth>=3&&nowMonth<9){
-					l_term = 1;
+					tt_term = 1;
 				}
 				else if((nowMonth>=1&&nowMonth<3)||(nowMonth>=9&&nowMonth<=12)){
-					l_term = 2;
+					tt_term = 2;
 				}
 						
-				String sql = "SELECT l.l_num,l.l_time,l.l_day,l_name,l.l_teacher,l.l_grade,l.l_term,l.l_credit,l.l_room,l.l_ismust,l.l_dept,t.m_id "
+				String sql = "SELECT l.l_num,l.l_time,l.l_day,l_name,l.l_teacher,l.l_grade,l.l_term,"
+							+"l.l_credit,l.l_room,l.l_ismust,l.l_dept,t.m_id,t.tt_grade "
 							+"from tbl_lesson l inner join tbl_timetable t "
 							+"on l.l_num = t.l_num "
-							+"and t.tt_grade = l.l_grade "
-							+"and t.tt_term = l.l_term "
 							+"and t.m_id = ? "
-							+"and l.l_grade = ? "
-							+"and l.l_term = ? ";	
+							+"and t.tt_grade = ? "
+							+"and t.tt_term = ? ";	
 				try {
 					
 					pool = DBConnectionMgr.getInstance();
 					con = pool.getConnection();
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, member.getM_id());
-					pstmt.setInt(2, l_grade);
-					pstmt.setInt(3, l_term);
+					pstmt.setInt(2, tt_grade);
+					pstmt.setInt(3, tt_term);
 					rs = pstmt.executeQuery();
 					
 					while(rs.next()){
@@ -105,6 +124,7 @@ public class TimetableCommand implements CommandInterface {
 						ldto.setL_ismust(rs.getString("l_ismust"));
 						ldto.setL_dept(rs.getString("l_dept"));
 						ldto.setM_id(rs.getString("m_id"));
+						ldto.setTt_grade(rs.getString("tt_grade"));
 						
 						ttlist.add(ldto);
 						
@@ -118,12 +138,12 @@ public class TimetableCommand implements CommandInterface {
 					// DBCP 접속해제
 					pool.freeConnection(con, pstmt, rs);
 				}
-				request.setAttribute("grade", l_grade);
-				request.setAttribute("term", l_term);
+				request.setAttribute("grade", tt_grade);
+				request.setAttribute("term", tt_term);
 				request.setAttribute("ttlist", ttlist);
-				request.setAttribute("ttname", l_grade+"학년 "+l_term+"학기");
+				request.setAttribute("ttname", tt_grade+"학년 "+tt_term+"학기");
 				//등록 가능한 수업 목록 출력
-				userLessonList(request, l_grade, l_term, member.getM_id());
+				userLessonList(request, tt_grade, tt_term, member.getM_id());
 	}
 	
 	public void timeTableChoice(HttpServletRequest request){
@@ -134,25 +154,24 @@ public class TimetableCommand implements CommandInterface {
 		
 		ArrayList ttlist  = new ArrayList();
 		
-		int l_grade = Integer.parseInt(request.getParameter("grade"));
-		int l_term = Integer.parseInt(request.getParameter("term"));
+		int tt_grade = Integer.parseInt(request.getParameter("grade"));
+		int tt_term = Integer.parseInt(request.getParameter("term"));
 				
-		String sql = "SELECT l.l_num,l.l_time,l.l_day,l_name,l.l_teacher,l.l_grade,l.l_term,l.l_credit,l.l_room,l.l_ismust,l.l_dept,t.m_id "
+		String sql = "SELECT l.l_num,l.l_time,l.l_day,l_name,l.l_teacher,l.l_grade,l.l_term,"
+					+"l.l_credit,l.l_room,l.l_ismust,l.l_dept,t.m_id,t.tt_grade "
 					+"from tbl_lesson l inner join tbl_timetable t "
 					+"on l.l_num = t.l_num "
-					+"and t.tt_grade = l.l_grade "
-					+"and t.tt_term = l.l_term "
 					+"and t.m_id = ? "
-					+"and l.l_grade = ? "
-					+"and l.l_term = ? ";	
+					+"and t.tt_grade = ? "
+					+"and t.tt_term = ? ";	
 		try {
 			
 			pool = DBConnectionMgr.getInstance();
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member.getM_id());
-			pstmt.setInt(2, l_grade);
-			pstmt.setInt(3, l_term);
+			pstmt.setInt(2, tt_grade);
+			pstmt.setInt(3, tt_term);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -171,6 +190,7 @@ public class TimetableCommand implements CommandInterface {
 				ldto.setL_ismust(rs.getString("l_ismust"));
 				ldto.setL_dept(rs.getString("l_dept"));
 				ldto.setM_id(rs.getString("m_id"));
+				ldto.setTt_grade(rs.getString("tt_grade"));
 				
 				ttlist.add(ldto);
 				
@@ -184,18 +204,17 @@ public class TimetableCommand implements CommandInterface {
 			// DBCP 접속해제
 			pool.freeConnection(con, pstmt, rs);
 		}
-		request.setAttribute("grade", l_grade);
-		request.setAttribute("term", l_term);
+		request.setAttribute("grade", tt_grade);
+		request.setAttribute("term", tt_term);
 		request.setAttribute("ttlist", ttlist);
-		request.setAttribute("ttname", l_grade+"학년 "+l_term+"학기");
+		request.setAttribute("ttname", tt_grade+"학년 "+tt_term+"학기");
 		
 		//등록 가능한 수업 목록 출력
-		userLessonList(request, l_grade, l_term, member.getM_id());
+		userLessonList(request, tt_grade, tt_term, member.getM_id());
 		
 	}
 	
-	
-	public void userLessonList(HttpServletRequest request, int l_grade, int l_term, String m_id){
+	public void userLessonList(HttpServletRequest request, int tt_grade, int tt_term, String m_id){
 		
 		
 		ArrayList llist  = new ArrayList();
@@ -206,22 +225,22 @@ public class TimetableCommand implements CommandInterface {
 		String sql = null;
 				
 		if (null == (keyword) || "".equals(keyword)) {
-			sql  = 	"SELECT l.l_num,l.l_time,l.l_day,l_name,l.l_teacher,l.l_grade,l.l_term,l.l_credit,l.l_room,l.l_ismust,l.l_dept,t.m_id "
+			sql  = 	"SELECT l.l_num,l.l_time,l.l_day,l_name,l.l_teacher,l.l_grade,l.l_term,"
+					 	+"l.l_credit,l.l_room,l.l_ismust,l.l_dept,t.m_id,t.tt_grade,t.tt_term "
 						+"from tbl_lesson l left outer join tbl_timetable t "
 						+"on l.l_num = t.l_num "
-						+"and t.tt_grade = l.l_grade "
-						+"and t.tt_term = l.l_term "
 						+"and t.m_id = ? " 
+						+"and t.tt_grade >= ? "
 						+"where l.l_grade <= ? "
 						+"and l.l_term = ?";
 		}
 		 else {
-			 sql  ="SELECT l.l_num,l.l_time,l.l_day,l_name,l.l_teacher,l.l_grade,l.l_term,l.l_credit,l.l_room,l.l_ismust,l.l_dept,t.m_id "
+			 sql  ="SELECT l.l_num,l.l_time,l.l_day,l_name,l.l_teacher,l.l_grade,l.l_term,"
+						+"l.l_credit,l.l_room,l.l_ismust,l.l_dept,t.m_id,t.tt_grade "
 						+"from tbl_lesson l left outer join tbl_timetable t "
 						+"on l.l_num = t.l_num "
-						+"and t.tt_grade = l.l_grade "
-						+"and t.tt_term = l.l_term "
 						+"and t.m_id = ? " 
+						+"and t.tt_grade >= ? "
 						+"where l.l_grade <= ? "
 						+"and l.l_term = ? "
 						+"and "+ keyfield + " like '%" + keyword + "%'";
@@ -234,8 +253,9 @@ public class TimetableCommand implements CommandInterface {
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_id);
-			pstmt.setInt(2, l_grade);
-			pstmt.setInt(3, l_term);
+			pstmt.setInt(2, tt_grade);
+			pstmt.setInt(3, tt_grade);
+			pstmt.setInt(4, tt_term);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -254,6 +274,7 @@ public class TimetableCommand implements CommandInterface {
 				ldto.setL_ismust(rs.getString("l_ismust"));
 				ldto.setL_dept(rs.getString("l_dept"));
 				ldto.setM_id(rs.getString("m_id"));
+				ldto.setTt_grade(rs.getString("tt_grade"));
 				
 				llist.add(ldto);
 				
@@ -289,5 +310,161 @@ public class TimetableCommand implements CommandInterface {
 		
 		
 	}
-
+	
+	public String enrollCheck(HttpServletRequest request){
+		
+		//로그인 된 세션의 모든 값 불러 오기
+		LoginBean login = new LoginBean();
+		MemberDTO member = login.getLoginInfo(request);
+		//입력할 값
+		int tt_grade = Integer.parseInt(request.getParameter("grade"));
+		int tt_term = Integer.parseInt(request.getParameter("term"));
+		//비교 대상의 값
+		String cl_time = request.getParameter("l_time");
+		String cl_day = request.getParameter("l_day");
+		
+		String sql ="SELECT l.l_day, l.l_time "
+				+ "FROM tbl_lesson l, tbl_timetable tt "
+				+ "where tt.m_id = ? and tt.tt_grade = ? and tt.tt_term = ? and tt.l_num = l.l_num;";
+		
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getM_id());
+			pstmt.setInt(2, tt_grade);
+			pstmt.setInt(3, tt_term);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				if(cl_day.equals(rs.getString("l_day"))&&cl_time.equals(rs.getString("l_time"))){
+					
+					return "duplicate";
+					
+				}
+			}
+		} 
+		catch (Exception e) {
+			System.out.println( "timetable.jsp : " + e);
+			e.printStackTrace();
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt, rs);
+		}
+		
+		return "enroll";
+	}
+	
+	
+	
+	public void enrollLesson(HttpServletRequest request){
+		
+		String sql = "INSERT INTO tbl_timetable (tt_grade, tt_term, m_id, l_num, tt_iscomplete) VALUES (?, ?, ?, ?, 'N');";
+		
+		//로그인 된 세션의 모든 값 불러 오기
+			LoginBean login = new LoginBean();
+			MemberDTO member = login.getLoginInfo(request);
+			//입력할 값
+			int tt_grade = Integer.parseInt(request.getParameter("grade"));
+			int tt_term = Integer.parseInt(request.getParameter("term"));
+			String l_num = request.getParameter("l_num");
+			
+			try {
+				pool = DBConnectionMgr.getInstance();
+				con = pool.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, tt_grade);
+				pstmt.setInt(2, tt_term);
+				pstmt.setString(3, member.getM_id());
+				pstmt.setString(4, l_num);
+				pstmt.executeUpdate();
+			} 
+			catch (Exception e) {
+				System.out.println( "timetable.jsp : " + e);
+				e.printStackTrace();
+			}
+			finally{
+				// DBCP 접속해제
+				pool.freeConnection(con, pstmt);
+			}
+	}
+	
+	
+	
+	public String deleteCheck(HttpServletRequest request){
+		
+		//로그인 된 세션의 모든 값 불러 오기
+		LoginBean login = new LoginBean();
+		MemberDTO member = login.getLoginInfo(request);
+		//입력할 값
+		String l_num = request.getParameter("l_num");
+		int tt_grade = Integer.parseInt(request.getParameter("grade"));
+		
+		String sql = "select tt_iscomplete from tbl_timetable where m_id = ? and l_num = ? and tt_grade = ?";
+				
+		
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getM_id());
+			pstmt.setString(2, l_num);
+			pstmt.setInt(3, tt_grade);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				if("Y".equals(rs.getString("tt_iscomplete"))){
+					return "evaluated";
+				}
+				
+				
+			}
+			
+		} 
+		catch (Exception e) {
+			System.out.println( "timetable.jsp : " + e);
+			e.printStackTrace();
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt, rs);
+		}
+		
+		return "delete";
+	}
+	
+	
+	public void deleteLesson(HttpServletRequest request){
+		
+		String sql = "DELETE FROM tbl_timetable WHERE l_num = ? and m_id = ? and tt_grade = ?";
+		
+		//로그인 된 세션의 모든 값 불러 오기
+		LoginBean login = new LoginBean();
+		MemberDTO member = login.getLoginInfo(request);
+		//입력할 값
+		String l_num = request.getParameter("l_num");
+		int tt_grade = Integer.parseInt(request.getParameter("grade"));
+		
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, l_num);
+			pstmt.setString(2, member.getM_id());
+			pstmt.setInt(3, tt_grade);
+			pstmt.executeUpdate();
+		} 
+		catch (Exception e) {
+			System.out.println( "timetable.jsp : " + e);
+			e.printStackTrace();
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt);
+		}
+		
+	}
 }
