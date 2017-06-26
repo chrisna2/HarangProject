@@ -6,14 +6,16 @@
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
-<title>학사일정</title>
+<title>대나무숲</title>
 
 <script>
 
 function fnbbp(){
 	
+	//alert(CKEDITOR.instances.editor1.getData().length);
+	
 	if(document.bbpostcomplete.bb_nickname.value ==""||
-			document.bbpostcomplete.bb_content.value ==""||
+			CKEDITOR.instances.editor1.getData() ==""||
 			document.bbpostcomplete.bb_title.value ==""){
 		
 		alert("빠짐없이 입력 해주세요");
@@ -23,19 +25,20 @@ function fnbbp(){
 	else if(document.bbpostcomplete.bb_nickname.value.length>50){
 		
 		
-		alert("닉네임을 너무 길게 입력하셨습니다. 영문 50글자. 한글 25글자 이하로 입력 해 주세요.(공백 포함)");
+		alert("닉네임을 너무 길게 입력하셨습니다. 50글자 이하로 입력 해 주세요.(공백 포함)");
 		return;
 	}
-	else if(document.getElementById('bb_title').value.length>2000){
+	else if(document.bbpostcomplete.bb_title.value.length>200){
 		
 		
-		alert("제목을 너무 길게 입력하셨습니다. 영문 200글자. 한글 100글자 이하로 입력 해 주세요.(공백 포함)");
+		alert("제목을 너무 길게 입력하셨습니다. 200글자 이하로 입력 해 주세요.(공백 포함)");
 		return;
 	}
-	else if(document.bbpostcomplete.bb_content.value.length>2000){
+	
+	else if(CKEDITOR.instances.editor1.getData().length>4000){
 		
 		
-		alert("본문을 너무 길게 입력하셨습니다. 영문 4000글자. 한글 2000글자 이하로 입력 해 주세요.(공백 포함)");
+		alert("본문을 너무 길게 입력하셨습니다. 4000글자 이하로 입력 해 주세요.(공백 포함)");
 		return;
 	}
 	
@@ -112,8 +115,8 @@ function fnbbp(){
 
 						<div class='box-body pad'>
 
-							<textarea id="editor1" name="bb_content" rows="10" cols="80">
-                                            본문을 입력 해 주세요.
+							<textarea id="editor1" name="bb_content" rows="10" cols="80"  placeholder="Enter the text...">
+                                         
                     </textarea>
 						</div>
 

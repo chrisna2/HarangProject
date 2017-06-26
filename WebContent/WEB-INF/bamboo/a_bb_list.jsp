@@ -8,20 +8,28 @@
 <head>
 <%@ include file="../include/a_header.jsp"%>
 <title>대나무숲 리스트 사용자페이지</title>
+<style>
+table {
+	table-layout: fixed;
+}
+
+td {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+</style>
+
 
 <script>
 	function fnBbnewlist() {
-		document.bbnewlist.submit();
+		document.bbnewlist.submit()
 	}
 	function fnBbhotlist() {
-		document.bbhotlist.submit();
+		document.bbhotlist.submit()
 	}
 	function fnBbpost() {
-		document.bbpost.submit();
+		document.bbpost.submit()
 	}
-	
-	
-	
 	///////////////// 페이지 관련 javascript function////////////////////
 	function prevPage() {
 		document.getElementById("prevPage").submit();
@@ -42,7 +50,10 @@
 <div class="content-wrapper">
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
-		<h1>대나무숲 리스트 사용자페이지</h1>
+		<h1>
+			<a href="/HarangProject/bamboo?cmd=A_BB_LIST" style="color: black">대나무숲
+				리스트 관리자페이지</a>
+		</h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
 			<li class="active">대나무숲</li>
@@ -64,15 +75,21 @@
 			<div class="col-md-9">
 				<div class="box">
 					<div class="box-header">
-						<h1 class="box-title">대나무숲</h1>
+						<h1 class="box-title">
+							<a href="/HarangProject/bamboo?cmd=A_BB_LIST"
+								style="color: black">대나무숲</a>
+						</h1>
 						<div class="box-tools">
 
 							<p align="right">
 								<a type="button" class="btn btn-default btn-sm"
-									href="javascript:fnBbnewlist()">최신글 보기</a> <a type="button"
-									class="btn btn-default btn-sm" href="javascript:fnBbhotlist()">인기글
-									보기</a> <a type="button" class="btn btn-primary btn-sm"
-									href="javascript:fnBbpost()">글쓰기</a>
+									href="javascript:fnBbnewlist()"
+									title="최신글 보기 : 최근 3일 이내의 게시글을 게시일 순서로 검색합니다. "
+									data-placement="top">최신글 보기</a> <a type="button"
+									class="btn btn-default btn-sm" href="javascript:fnBbhotlist()"
+									title="인기글 보기 : 최근 30일 이내의 게시글을 추천수가 많은 순서로 검색합니다. "
+									data-placement="top">인기글 보기</a> <a type="button"
+									class="btn btn-primary btn-sm" href="javascript:fnBbpost()">글쓰기</a>
 							</p>
 
 
@@ -103,7 +120,6 @@
 							</form>
 							<!-- 인기글 보기를 위한 form 끝 -->
 
-							
 
 
 
@@ -116,13 +132,40 @@
 
 
 							<tr>
-								
-								<th>작성자</th>
-								<th>작성일</th>
+								<th width="100">작성일</th>
+								<th width="100">닉네임</th>
 								<th>제목</th>
-								<th>조회수</th>
+								<th width="70">조회수</th>
+								<th width="70">추천수</th>
+
 							</tr>
 
+
+
+							<c:choose>
+								<c:when test="${fn:length(bbnlist) eq 0}">
+								공지사항이 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${bbnlist}" var="bbnlist"
+										begin="${paging.beginPerPage}"
+										end="${paging.beginPerPage + paging.numPerPage -1}"
+										varStatus="status">
+										<tr bgcolor="pink">
+											<td><fmt:formatDate value="${bbnlist.bb_regdate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td>${bbnlist.bb_nickname}</td>
+											<td><a
+												href="/HarangProject/bamboo?cmd=A_BB_CON&bb_num=${bbnlist.bb_num}"
+												style="color: black">[공지] ${bbnlist.bb_title}
+													[${bbnlist.reply_cnt}]</a></td>
+											<td>${bbnlist.bb_count}</td>
+											<td>${bbnlist.like_cnt}</td>
+
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 
 							<c:choose>
 								<c:when test="${fn:length(bblist) eq 0}">
@@ -134,14 +177,16 @@
 										end="${paging.beginPerPage + paging.numPerPage -1}"
 										varStatus="status">
 										<tr>
-											
-											<td>${bblist.bb_nickname}</td>
 											<td><fmt:formatDate value="${bblist.bb_regdate}"
 													pattern="yyyy-MM-dd" /></td>
+											<td>${bblist.bb_nickname}</td>
 											<td><a
 												href="/HarangProject/bamboo?cmd=A_BB_CON&bb_num=${bblist.bb_num}"
-												style="color: black">${bblist.bb_title}</a></td>
+												style="color: black">${bblist.bb_title}
+													[${bblist.reply_cnt}]</a></td>
 											<td>${bblist.bb_count}</td>
+											<td>${bblist.like_cnt}</td>
+
 										</tr>
 									</c:forEach>
 								</c:otherwise>
@@ -212,15 +257,17 @@
 <!-- 페이징 관련 폼 ----------------------------------------------------------------------->
 <!-- 페이징 : 이전 블록으로 이동하는 폼 -->
 <form id="prevPage" method="post" action="/HarangProject/bamboo">
-	<input type="hidden" name="cmd" value="A_BB_LIST" /> <input type="hidden"
-		name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}" />
-	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}" />
+	<input type="hidden" name="cmd" value="A_BB_LIST" /> <input
+		type="hidden" name="nowPage"
+		value="${paging.pagePerBlock * (paging.nowBlock-1)}" /> <input
+		type="hidden" name="nowBlock" value="${paging.nowBlock-1}" />
 </form>
 <!-- 페이징 : 다음 블록으로 이동하는 폼 -->
 <form id="nextPage" method="post" action="/HarangProject/bamboo">
-	<input type="hidden" name="cmd" value="A_BB_LIST" /> <input type="hidden"
-		name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}" />
-	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}" />
+	<input type="hidden" name="cmd" value="A_BB_LIST" /> <input
+		type="hidden" name="nowPage"
+		value="${paging.pagePerBlock * (paging.nowBlock+1)}" /> <input
+		type="hidden" name="nowBlock" value="${paging.nowBlock+1}" />
 </form>
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/bamboo">

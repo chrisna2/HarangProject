@@ -9,19 +9,41 @@
 <title>대나무숲 리스트+컨텐츠 사용자페이지</title>
 
 <style>
-
-div#brcoment
-{
-word-wrap: break-word; /* Internet Explorer 5.5+ */
-white-space: pre-wrap; /* css-3 */
-white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-white-space: -pre-wrap; /* Opera 4-6 */
-white-space: -o-pre-wrap; /* Opera 7 */
-word-break:break-all;
+div#brcoment {
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-break: break-all;
 }
 
+div#bbcontent {
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-break: break-all;
+}
 
+span#bbtt {
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-break: break-all;
+}
 
+table {
+	table-layout: fixed;
+}
+
+td {
+	word-break: break-all;
+	word-wrap: break-word;
+}
 </style>
 
 <script>
@@ -45,16 +67,22 @@ word-break:break-all;
 			return;
 			
 		}
+		else if(document.bbreply.br_nickname.value=="관리자"){
+			
+			
+			alert("'관리자' 라는 닉네임은 사용할 수 없습니다.");
+			return;
+		}
 		else if(document.bbreply.br_nickname.value.length>50){
 			
 			
-			alert("닉네임을 너무 길게 입력하셨습니다. 영문 50글자. 한글 25글자 이하로 입력 해 주세요.(공백 포함)");
+			alert("닉네임을 너무 길게 입력하셨습니다. 50글자 이하로 입력 해 주세요.(공백 포함)");
 			return;
 		}
 		else if(document.bbreply.br_coment.value.length>2000){
 			
 			
-			alert("댓글을 너무 길게 입력하셨습니다. 영문 2000글자. 한글 1000글자 이하로 입력 해 주세요.(공백 포함)");
+			alert("댓글을 너무 길게 입력하셨습니다. 2000글자 이하로 입력 해 주세요.(공백 포함)");
 			return;
 		}
 		
@@ -162,8 +190,8 @@ word-break:break-all;
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-9">
 				<div class="box" id="bamcon">
-					<div class="box-header">
-						<font size="6">${bbcon.bb_title}</font> <span
+					<div class="box-header" style= "background-color: #c9ddfc">
+						<span id="bbtt"><font size="5">${bbcon.bb_title}</font></span> <span
 							class="badge bg-green pull-right"> ${bbcon.bb_regdate}<br>닉네임
 							: ${bbcon.bb_nickname}<br> 조회수 : ${bbcon.bb_count }<br>
 							<span class="badge bg-blue"><i class="fa fa-thumbs-o-up"></i>
@@ -173,10 +201,12 @@ word-break:break-all;
 
 					</div>
 
-					<div class="box-body">${bbcon.bb_content}
-						<br>테스트용 작성자 m_id : ${bbcon.m_id}<br>테스트용 로그인한 m_id :
-						${sessionScope.member.m_id} <br> 테스트용 islike : ${islike } <br>
-						테스트용 isdlike : ${isdlike }
+					<div class="box-body" id="bbcontent">${bbcon.bb_content}
+						<br>테스트용 작성자 m_id : ${bbcon.m_id} <br>테스트용 로그인한 m_id :
+						${sessionScope.member.m_id} <br>테스트용 islike : ${islike } <br>테스트용
+						isdlike : ${isdlike } <br>테스트용 관리자 :
+						${sessionScope.admin.m_dept } <br>테스트용 공지여부 :
+						${bbcon.bb_notice }
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer ">
@@ -291,19 +321,26 @@ word-break:break-all;
 							<c:forEach var="i" begin="0" end="${brlist.size()-1 }">
 								<!--  댓글 들어가는 곳 -->
 								<div class="box-header">
-									<span class="badge bg-green">${brlist[i].br_nickname }</span>
+
+									<c:if test="${brlist[i].br_nickname eq '관리자' }">
+										<span class="badge bg-red">${brlist[i].br_nickname }</span>
+									</c:if>
+									<c:if test="${brlist[i].br_nickname != '관리자' }">
+										<span class="badge bg-green">${brlist[i].br_nickname }</span>
+									</c:if>
+
 								</div>
 
-								<div class="box-body" id = "brcoment"> ${brlist[i].br_coment }</div>
+								<div class="box-body" id="brcoment">${brlist[i].br_coment }</div>
 								<!-- /.box-body -->
-								<div class="box-footer ">
-									
-									<c:if test="${brlist[i].m_id eq sessionScope.member.m_id }">
-									<p align="right">
+								<div class="box-footer " style= "background-color: #c9ddfc">
 
-										<a type="button" class="btn btn-success btn-xs"
-											href="javascript:fnbrdelete('${brlist[i].br_num }')">삭제</a>
-									</p>
+									<c:if test="${brlist[i].m_id eq sessionScope.member.m_id }">
+										<p align="right">
+
+											<a type="button" class="btn btn-success btn-xs"
+												href="javascript:fnbrdelete('${brlist[i].br_num }')">삭제</a>
+										</p>
 									</c:if>
 
 
@@ -454,15 +491,38 @@ word-break:break-all;
 
 
 							<tr>
-								<th>작성일</th>
-								<th>닉네임</th>
+								<th width="100">작성일</th>
+								<th width="100">닉네임</th>
 								<th>제목</th>
-								<th>조회수</th>
-								<th>추천수</th>
+								<th width="70">조회수</th>
+								<th width="70">추천수</th>
 
 							</tr>
 
+							<c:choose>
+								<c:when test="${fn:length(bbnlist) eq 0}">
+								공지사항이 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${bbnlist}" var="bbnlist"
+										begin="${paging.beginPerPage}"
+										end="${paging.beginPerPage + paging.numPerPage -1}"
+										varStatus="status">
+										<tr bgcolor="pink">
+											<td><fmt:formatDate value="${bbnlist.bb_regdate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td>${bbnlist.bb_nickname}</td>
+											<td><a
+												href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bbnlist.bb_num}"
+												style="color: black">[공지] ${bbnlist.bb_title}
+													[${bbnlist.reply_cnt}]</a></td>
+											<td>${bbnlist.bb_count}</td>
+											<td>${bbnlist.like_cnt}</td>
 
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 							<c:choose>
 								<c:when test="${fn:length(bblist) eq 0}">
 								게시물이 없습니다.

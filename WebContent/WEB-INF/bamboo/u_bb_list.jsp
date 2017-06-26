@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
@@ -9,7 +8,16 @@
 <head>
 <%@ include file="../include/header.jsp"%>
 <title>대나무숲 리스트 사용자페이지</title>
+<style>
+table {
+	table-layout: fixed;
+}
 
+td {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+</style>
 
 
 <script>
@@ -123,13 +131,50 @@
 
 
 							<tr>
-								<th>작성일</th>
-								<th>닉네임</th>
+								<th width="100">작성일</th>
+								<th width="100">닉네임</th>
 								<th>제목</th>
-								<th>조회수</th>
-								<th>추천수</th>
+								<th width="70">조회수</th>
+								<th width="70">추천수</th>
 
 							</tr>
+
+							<c:choose>
+								<c:when test="${fn:length(bbnlist) eq 0}">
+								공지사항이 없습니다.
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${bbnlist}" var="bbnlist"
+										begin="${paging.beginPerPage}"
+										end="${paging.beginPerPage + paging.numPerPage -1}"
+										varStatus="status">
+										<tr bgcolor="pink">
+											<td><fmt:formatDate value="${bbnlist.bb_regdate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td>${bbnlist.bb_nickname}</td>
+											<td><a href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bbnlist.bb_num}"
+												style="color: black">[공지] ${bbnlist.bb_title}
+													[${bbnlist.reply_cnt}]</a></td>
+											<td>${bbnlist.bb_count}</td>
+											<td>${bbnlist.like_cnt}</td>
+
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 							<c:choose>

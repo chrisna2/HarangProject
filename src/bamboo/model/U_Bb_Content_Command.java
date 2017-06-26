@@ -46,7 +46,6 @@ public class U_Bb_Content_Command implements CommandInterface {
 		String sql = null;
 
 		Bb_List_Command bb = new Bb_List_Command();
-		req.setAttribute("bblist", bb.bblist(req));
 		
 		// 페이징 관련 블록
 		// 페이징 관련 parameter 받아오기
@@ -59,7 +58,7 @@ public class U_Bb_Content_Command implements CommandInterface {
 		}
 		PagingBean pbean = new PagingBean();
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-		PagingDto paging = pbean.Paging(bb.bblist(req).size(), 10, nowPage, 10, nowBlock);
+		PagingDto paging = pbean.Paging(bb.bblist(req).size(), 20, nowPage, 10, nowBlock);
 		// 페이징 정보 보내기
 		req.setAttribute("paging", paging);
 
@@ -68,6 +67,8 @@ public class U_Bb_Content_Command implements CommandInterface {
 			con = pool.getConnection();
 
 			updateCnt(req, con, bb_num);
+			req.setAttribute("bblist", bb.bblist(req));
+			req.setAttribute("bbnlist", bb.bbnlist(req));
 
 			sql = "select * from tbl_bamboo where bb_num =?";
 			pstmt = con.prepareStatement(sql);

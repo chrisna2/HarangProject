@@ -35,7 +35,7 @@ public class ScheduleContentCommand implements CommandInterface {
 		
 		String s_num = request.getParameter("s_num");
 		
-		String sql = "select * from tbl_schedule where s_num = ?";
+		String sql = "select *, (select count(m_id) from tbl_schedule_member where s_num = ?) as 'isjoin' from tbl_schedule where s_num = ?;";
 		ArrayList schconlist  = new ArrayList();
 		
 		try {
@@ -43,6 +43,7 @@ public class ScheduleContentCommand implements CommandInterface {
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, s_num);
+			pstmt.setString(2, s_num);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
@@ -61,6 +62,7 @@ public class ScheduleContentCommand implements CommandInterface {
 				sdto.setS_rstart(rs.getString("s_rstart"));
 				sdto.setS_rend(rs.getString("s_rend"));
 				sdto.setS_point(rs.getString("s_point"));
+				sdto.setIsjoin(rs.getString("isjoin"));
 				
 				System.out.println(rs.getString("s_rstart"));
 				

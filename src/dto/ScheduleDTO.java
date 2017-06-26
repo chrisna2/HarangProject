@@ -5,7 +5,7 @@ public class ScheduleDTO {
 	
 
 	private String s_num, s_grade, s_ispoint, s_title, s_content, s_dstart, s_dend, s_dept,
-		s_location, s_rstart, s_rend, s_point;
+		s_location, s_rstart, s_rend, s_point, isjoin;
 
 	public String getS_num() {
 		return s_num;
@@ -102,6 +102,16 @@ public class ScheduleDTO {
 	public void setS_point(String s_point) {
 		this.s_point = s_point;
 	}
+
+	public String getIsjoin() {
+		return isjoin;
+	}
+
+	public void setIsjoin(String isjoin) {
+		this.isjoin = isjoin;
+	}
+
+	
 
 	
 	

@@ -13,9 +13,48 @@
 	
 	function fnGoback(){
 		
-		document.gobocktocontent.submit();
+		document.gobacktocontent.submit();
 	}
 	
+function fnbbp(){
+		
+		//alert(CKEDITOR.instances.editor1.getData().length);
+		
+		if(document.bbpostcomplete.bb_nickname.value ==""||
+				CKEDITOR.instances.editor1.getData() ==""||
+				document.bbpostcomplete.bb_title.value ==""){
+			
+			alert("빠짐없이 입력 해주세요");
+			return;
+			
+		}
+		else if(document.bbpostcomplete.bb_nickname.value.length>50){
+			
+			
+			alert("닉네임을 너무 길게 입력하셨습니다. 50글자 이하로 입력 해 주세요.(공백 포함)");
+			return;
+		}
+		else if(document.bbpostcomplete.bb_title.value.length>200){
+			
+			
+			alert("제목을 너무 길게 입력하셨습니다. 200글자 이하로 입력 해 주세요.(공백 포함)");
+			return;
+		}
+		
+		else if(CKEDITOR.instances.editor1.getData().length>4000){
+			
+			
+			alert("본문을 너무 길게 입력하셨습니다. 4000글자 이하로 입력 해 주세요.(공백 포함)");
+			return;
+		}
+		
+		
+		else {
+			document.bbpostcomplete.submit();
+						
+		}
+		
+	}
 	
 </script>
 
@@ -86,7 +125,8 @@
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-2">
-								<button type="submit" class="btn btn-block btn-primary">수정</button>
+								<a type="button" class="btn btn-block btn-primary"
+								href="javascript:fnbbp()">수정</a>
 							</div>
 							<div class="col-md-2">
 								<a class="btn btn-block btn-danger" href="javascript:fnGoback()">취소</a>
@@ -109,7 +149,7 @@
 
 	<!--  대나무숲 글 수정하기 페이지에서 취소를 눌렀을 때 원래 페이지로 돌아가기 위한 폼 시작 -->
 	<form method="post" action="/HarangProject/bamboo"
-		name="gobocktocontent">
+		name="gobacktocontent">
 		<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
 			type="hidden" name="cmd" value="U_BB_CON" />
 
