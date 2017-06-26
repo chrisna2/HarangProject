@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import dto.BookDTO;
+import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-public class HarangdinMainCommand implements CommandInterface {
+public class BuyingCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
 	Connection con;
@@ -32,11 +34,14 @@ public class HarangdinMainCommand implements CommandInterface {
 		
 		list(request);
 		
-		return "/WEB-INF/harangdin/harangdin_main.jsp";
+		return "/WEB-INF/harangdin/list_buying.jsp";
 		
 	}
 	
 	public void list(HttpServletRequest request){
+		
+		LoginBean login = new LoginBean();
+		MemberDTO member = login.getLoginInfo(request);
 		
 		String sql;
 		
@@ -49,11 +54,11 @@ public class HarangdinMainCommand implements CommandInterface {
 		
 		
 		if(keyword == null || keyword.equals("")){
-			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book where b_choice='판매' order by b_regdate desc";
+			sql ="select b.b_num, b.b_name, h.m_id, h.bh_regdate, h.bh_want from tbl_book b, tbl_b_hunter h  where h.b_num = b.b_num and h.m_id=?";
 		}
 		else{
-			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book where b_choice='판매' and "
-					+ keyfield + " like '%" + keyword + "%' order by b_regdate desc";
+			sql ="select b.b_num, b.b_name, h.m_id, h.bh_regdate, h.bh_want from tbl_book b, tbl_b_hunter h  where h.b_num = b.b_num and h.m_id=? and "
+					+ keyfield + " like '%" + keyword + "%' order by bh_regdate desc";
 		}
 		
 		pool = DBConnectionMgr.getInstance();
@@ -63,6 +68,7 @@ public class HarangdinMainCommand implements CommandInterface {
 			
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getM_id());
 			rs = pstmt.executeQuery();
 			
 			
@@ -73,9 +79,9 @@ public class HarangdinMainCommand implements CommandInterface {
 				
 				dto.setB_num(rs.getString("b_num"));
 				dto.setB_name(rs.getString("b_name"));
-				dto.setB_writer(rs.getString("b_writer"));
-				dto.setB_pub(rs.getString("b_pub"));
-				dto.setB_want(rs.getInt("b_want"));
+				dto.setM_id(rs.getString("m_id"));
+				dto.setB_regdate(rs.getString("bh_regdate"));
+				dto.setB_want(rs.getInt("bh_want"));
 				
 				list.add(dto);
 				

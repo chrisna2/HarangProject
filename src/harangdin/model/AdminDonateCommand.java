@@ -16,7 +16,7 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-public class HarangdinMainCommand implements CommandInterface {
+public class AdminDonateCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
 	Connection con;
@@ -29,14 +29,21 @@ public class HarangdinMainCommand implements CommandInterface {
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
+		String delete_check = request.getParameter("delete_check");
+		if(null!=delete_check){
+			delete(request);			
+			
+		}
 		list(request);
 		
-		return "/WEB-INF/harangdin/harangdin_main.jsp";
+		return "/WEB-INF/harangdin/a_harangdin_donate.jsp";
 		
 	}
+
 	
 	public void list(HttpServletRequest request){
+		
 		
 		String sql;
 		
@@ -45,15 +52,15 @@ public class HarangdinMainCommand implements CommandInterface {
 		String keyword = request.getParameter("keyword");
 		String keyfield = request.getParameter("keyfield");
 		
-		System.out.println(keyword +"." + keyfield);
-		
+		//System.out.println(keyword +"." + keyfield);
 		
 		if(keyword == null || keyword.equals("")){
-			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book where b_choice='판매' order by b_regdate desc";
+			sql = "SELECT b.b_num, b.b_name, b.b_writer, b.b_pub, m.m_id, m.m_name from tbl_book b, tbl_member m "
+					+ "where m.m_id=b.m_id and b.b_choice='기부' order by b.b_regdate desc";			
 		}
 		else{
-			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book where b_choice='판매' and "
-					+ keyfield + " like '%" + keyword + "%' order by b_regdate desc";
+			sql ="SELECT b.b_num, b.b_name, b.b_writer, b.b_pub, m.m_id, m.m_name, from tbl_book b, tbl_member m"
+					+ " where m.m_id=b.m_id and b.b_choice='기부' and " + keyfield + " like '%" + keyword + "%' order by b.b_regdate desc";
 		}
 		
 		pool = DBConnectionMgr.getInstance();
@@ -67,31 +74,32 @@ public class HarangdinMainCommand implements CommandInterface {
 			
 			
 			while (rs.next()) {
-
 				
 				BookDTO dto = new BookDTO();
+				
 				
 				dto.setB_num(rs.getString("b_num"));
 				dto.setB_name(rs.getString("b_name"));
 				dto.setB_writer(rs.getString("b_writer"));
 				dto.setB_pub(rs.getString("b_pub"));
-				dto.setB_want(rs.getInt("b_want"));
+				dto.setM_id(rs.getString("m_id"));
+				dto.setM_name(rs.getString("m_name"));
 				
 				list.add(dto);
-				
 			}
-			
 			
 		}catch(Exception err){
 			System.out.println(err);
 		}
+		
 		finally{
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt,rs);
 		}
+
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("keyfield", keyfield);
-		request.setAttribute("harangdinmain", list);
+		request.setAttribute("dlist", list);
 		
 		//페이징 관련 parameter 받아오기
 		int nowPage=0, nowBlock=0;
@@ -102,10 +110,33 @@ public class HarangdinMainCommand implements CommandInterface {
 		PagingBean pbean = new PagingBean();
 				
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-		PagingDto paging = pbean.Paging(list.size(),5, nowPage,10, nowBlock);
+		PagingDto paging = pbean.Paging(list.size(),5, nowPage, 3, nowBlock);
 						
 		// parameter 보내기
 		request.setAttribute("paging", paging);
+		
 	}
-
+	
+	public void delete(HttpServletRequest request){
+		
+		pool = DBConnectionMgr.getInstance();
+		
+		String b_num = request.getParameter("b_num");
+				
+			try{
+				con = pool.getConnection();
+				
+				String sql="DELETE FROM tbl_book WHERE b_num=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, b_num);
+				pstmt.executeUpdate();
+				
+			}catch(Exception err){
+				System.out.println("delete() : " + err);
+				err.printStackTrace();
+			}finally{
+				pool.freeConnection(con,pstmt);
+			}
+	}
 }

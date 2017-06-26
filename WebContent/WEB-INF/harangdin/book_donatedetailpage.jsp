@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -14,13 +14,13 @@
         <section class="content-header">
           <h1>
              	중고도서 상세페이지
-            <small>거래중인 중고도서의 상세정보를 알 수 있습니다.</small>
+            <small>기부중인 중고도서의 상세정보를 알 수 있습니다.</small>
           </h1>
           <ol class="breadcrumb">
           <!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
             <li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
             <li class="active">하랑딘24</li>
-            <li class="active">중고도서 상세페이지</li>
+            <li class="active">중고도서 기부상세페이지</li>
           </ol>
         </section>
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
@@ -32,7 +32,7 @@
         
         <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">중고도서 상세페이지</h3>
+              <h3 class="box-title">중고도서 기부상세페이지</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -42,7 +42,7 @@
                 <div class="row">
                 	<div class="col-sm-12 form-group">
                  	 <label>도서명</label>
-                	 <input type="text" class="form-control" value="${i.b_name }" readonly="readonly">
+                	 <input type="text" class="form-control" value="${i.b_name }" placeholder="2017시나공 정보처리기사 필기" readonly="readonly">
              	   </div>
                 </div>
  
@@ -86,18 +86,18 @@
             <div class="row">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-2">
-							<button type="button" id="btnPopup" class="btn btn-block btn-primary">구매희망</button>
+							<button type="submit" class="btn btn-block btn-primary">구매희망</button>
 						</div>
+            </div>
               </form>
+                  	</div>
+            <!-- /.box-body -->
+						
 						<form action="/HarangProject/harangdin?cmd=main" method="post">
 						<div class="col-sm-2">	
 							<button type="submit" class="btn btn-block">이전</button>
                   		</div>
                   		</form>
-                  	</div>
-            </div>
-            <!-- /.box-body -->
-						
             
           </div>
 
@@ -106,59 +106,9 @@
               </div><!-- /.col -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
-        
-         <!-- 모달 : 뒷 페이지 배경을 눌러도 꺼지지 않음 -->
-                <div class="modal fade" id="theModal" data-backdrop="static">
-                    <div class="modal-dialog">
-                        <form name="apply" action="/HarangProject/harangdin?cmd=b_hunter" method="post">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3>구매희망</h3>
-                            </div>
-                            <div class="modal-body">
-                              <div class="form-group">
-                              	 <label>중고도서 거래번호</label>
-                  				<input type="text" class="form-control" name="b_num" value="${i.b_num }" readonly="readonly">
-                              	<label>도서명</label>
-                				<input type="text" class="form-control" value="${i.b_name }" readonly="readonly">
-                				<label>저자</label>
-				                <input type="text" class="form-control" value="${i.b_writer }" readonly="readonly">
-				                <label>출판사</label>
-				                <input type="text" class="form-control" value="${i.b_pub }" readonly="readonly">
-				                <label>판매자 희망 포인트</label>
-                  				<input type="text" class="form-control" value="${i.b_want }" readonly="readonly">
-				                
-                              </div>
-                              <br>
-                              <div style="width:100%; height:100px; overflow:auto">
-                                <span class="input-group-addon bg-gray">입찰 포인트</span>
-                                	<input type="text" class="form-control" name="bh_want" required="required">
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-default" type="submit">입찰</button>
-                                <button class="btn btn-primary" data-dismiss="modal">닫기</button>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
-                </div><!-- 모달 끝 -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ---------------------------------------------------------------- -->
-<script>
-$(function(){
-//모달 접근 바로 하기
-	$("#btnPopup").click(
-	    function(){
-	        //alert("버튼 눌림");
-	        $("#theModal").modal('toggle');
-	    
-	});
-});
-
-
-</script>

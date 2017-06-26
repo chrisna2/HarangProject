@@ -17,10 +17,12 @@
 	<h1>
     	중고도서 거래 게시판
     </h1>
+    
     <ol class="breadcrumb">
     <!-- 페이지 기록 메인에서 부터 현재 페이지 까지의 경로 나열 -->
     	<li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
         <li class="active">하랑딘 24</li>
+        
     </ol>
 </section>
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
@@ -55,6 +57,12 @@
 							<form action="/HarangProject/harangdin?cmd=regist" method="post">
 								<div class="col-xs-1 no-margin pull-right">
 										<button type="submit" class="btn btn-block btn-default" >등록</button>
+								</div>
+							</form>
+							
+							<form id="adminDonate" name="adminDonate" method="post" action="/HarangProject/harangdin?cmd=adminDonate">
+								<div class="col-xs-1 no-margin pull-right">
+								<button class="btn btn-primary" type="submit">기부확인</button>
 								</div>
 							</form>
 

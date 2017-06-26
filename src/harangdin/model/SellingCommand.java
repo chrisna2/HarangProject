@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import dto.BookDTO;
+import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-public class HarangdinMainCommand implements CommandInterface {
+public class SellingCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
 	Connection con;
@@ -32,11 +34,14 @@ public class HarangdinMainCommand implements CommandInterface {
 		
 		list(request);
 		
-		return "/WEB-INF/harangdin/harangdin_main.jsp";
+		return "/WEB-INF/harangdin/list_selling.jsp";
 		
 	}
 	
 	public void list(HttpServletRequest request){
+		
+		LoginBean login = new LoginBean();
+		MemberDTO member = login.getLoginInfo(request);
 		
 		String sql;
 		
@@ -49,10 +54,10 @@ public class HarangdinMainCommand implements CommandInterface {
 		
 		
 		if(keyword == null || keyword.equals("")){
-			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book where b_choice='판매' order by b_regdate desc";
+			sql ="select b.b_num,b.b_name,h.m_id,h.bh_regdate,h.bh_want from tbl_b_hunter h, tbl_book b where h.b_num = b.b_num and b.m_id =?";
 		}
 		else{
-			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book where b_choice='판매' and "
+			sql ="select b.b_num,b.b_name,h.m_id,h.bh_regdate,h.bh_want from tbl_b_hunter h, tbl_book b where h.b_num = b.b_num and b.m_id =? and "
 					+ keyfield + " like '%" + keyword + "%' order by b_regdate desc";
 		}
 		
@@ -63,6 +68,7 @@ public class HarangdinMainCommand implements CommandInterface {
 			
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getM_id());
 			rs = pstmt.executeQuery();
 			
 			
@@ -73,9 +79,9 @@ public class HarangdinMainCommand implements CommandInterface {
 				
 				dto.setB_num(rs.getString("b_num"));
 				dto.setB_name(rs.getString("b_name"));
-				dto.setB_writer(rs.getString("b_writer"));
-				dto.setB_pub(rs.getString("b_pub"));
-				dto.setB_want(rs.getInt("b_want"));
+				dto.setM_id(rs.getString("m_id"));
+				dto.setBh_regdate(rs.getString("bh_regdate"));
+				dto.setBh_want(rs.getInt("bh_want"));
 				
 				list.add(dto);
 				
@@ -100,10 +106,10 @@ public class HarangdinMainCommand implements CommandInterface {
 
 		// DB 연동 함수를 쓰기 위해 인스턴스 생성
 		PagingBean pbean = new PagingBean();
-				
+						
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
 		PagingDto paging = pbean.Paging(list.size(),5, nowPage,10, nowBlock);
-						
+								
 		// parameter 보내기
 		request.setAttribute("paging", paging);
 	}

@@ -37,7 +37,7 @@ public class AdminMainCommand implements CommandInterface {
 		}
 		list(request);
 		
-		return "/WEB-INF/harangdin/m_harangdin_main.jsp";
+		return "/WEB-INF/harangdin/a_harangdin_main.jsp";
 		
 	}
 

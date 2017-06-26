@@ -27,6 +27,28 @@ public class CommandFactory {
 		else if(cmd.equals("mypage")){
 			return new MyPageCommand();
 		}
+		else if(cmd.equals("adminDonate")){
+			return new AdminDonateCommand();
+		}
+		else if(cmd.equals("bdetail")){
+			return new BookDetailCommand();
+		}
+		else if(cmd.equals("bd_detail")){
+			return new BookDonateDetailCommand();
+		}
+		else if(cmd.equals("b_hunter")){
+			return new BookHunterCommand();
+		}
+		else if(cmd.equals("buying")){
+			return new BuyingCommand();
+		}
+		else if(cmd.equals("selling")){
+			return new SellingCommand();
+		}
+		else if(cmd.equals("donation")){
+			return new DonationCommand();
+		}
+		
 		else{
 			return null;
 		}
