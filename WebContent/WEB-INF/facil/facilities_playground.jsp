@@ -53,7 +53,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- Box -->
-				<div class="box box-primary">
+				<div class="box box-primary" id="reser01" hidden="hidden">
 					<!-- Box header -->
 					<div class="box-header">
 						<h3 class="box-title">예약 시설 선택</h3>
@@ -63,58 +63,64 @@
 							</button>
 						</div>
 					</div>
-					
+
 					<!-- Box body -->
+					<form name="select09">
 					<div class="box-body">
 					
 						<!-- 사용자 편의를 위한.. 운동장 표시 -->
 						<div class="row">
 							<div class="col-md-4">
-								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="운동장" disabled>
+								<label>예약할 날짜</label> <input id="Reser" type="text"
+									class="form-control" placeholder="예약한 날짜가 여기로 들어와야 한다."
+									disabled>
 							</div>
-						
-						 <!-- 시설명(첫번째 카테고리) 선택 -->
-						 <div class="form-group col-md-4">
-	                  		<label>시설명</label>
-	                  		<select class="form-control" name="pg_type" id="pg_type" onchange="selectfacil()">
-							
-		                    	<option>시설을 선택하세요.</option>
-		                    	
-		                    	 <c:forEach items="${list}" var="s">
-                                         <option value="${s.pg_type}">${s.pg_type}</option>
-                                 </c:forEach>
-	                    	</select>
-	                	</div>
-	                	
-	                	<!-- 호수(두번째 카테고리) 선택 -->
-	                	<div class="form-group col-md-4">
-	                  		<label>호수</label>
-	                  		<select class="form-control">
-		                    	<option>중앙회관옆</option>
-		                    	<option>대운동장</option>
-		                    	<option>소운동장</option>
-		                    	<option>공과대학옆</option>
-	                    	</select>
-	                	</div>
-	                	</div>
-					</div>
-					
-					<!-- Box footer -->
-					<div class="box-footer">
-						<div class="row" align="center">
-							<div class="col-md-3 btn-group"></div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
-									value="확인">
+
+							<!-- 시설명(첫번째 카테고리) 선택 -->
+							<div class="form-group col-md-4">
+								<label>시설명</label> <select class="form-control" name="pg_type"
+									id="pg_type" onchange="selectfacil()">
+
+									<option>시설을 선택하세요.</option>
+
+									<c:forEach items="${list}" var="s">
+										<option value="${s.pg_type}">${s.pg_type}</option>
+									</c:forEach>
+								</select>
 							</div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
-									value="다시 선택">
+
+							<!-- 호수(두번째 카테고리) 선택 -->
+							<div class="form-group col-md-4">
+								<label>호수</label> <select class="form-control" id="pg_name"
+									name="pg_name" onchange="select02()">
+									<option>호수를 선택하세요.</option>
+								</select>
+							</div>
+						</div>
+
+						<!-- 시설 정보 두번째줄 -->
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group" id="pg_content" name="pg_content">
+									<label>시설정보</label>
+									<textarea class="form-control" rows="3" placeholder="운동장"
+										disabled style="width: 250px">
+                  						</textarea>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label>대여 포인트</label> <input id="pg_point" type="text" class="form-control"
+									readonly="readonly" style="width: 150px">
 							</div>
 						</div>
 					</div>
-										
+					</form>
+
+					<!-- Box footer -->
+					<div class="box-footer">
+						<div class="row" align="center"></div>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -123,7 +129,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- faclities.select.box-->
-				<div class="box box-primary">
+				<div class="box box-primary collapsed-box" id="reser02">
 					<!-- faclities.select.box header -->
 					<div class="box-header">
 						<h3 class="box-title">예약 시간 선택</h3>
@@ -144,12 +150,12 @@
 								<label>시설종류</label> <input type="text" class="form-control"
 									placeholder="운동장 " style="width: 150px" disabled>
 							</div>
-							
+
 							<div class="col-md-4">
 								<label>시설명</label> <input type="text" class="form-control"
 									placeholder="족구장" style="width: 150px" disabled>
 							</div>
-							
+
 							<div class="col-md-4">
 								<label>호수</label> <input type="text" class="form-control"
 									placeholder="대운동장" style="width: 150px" disabled>
@@ -157,22 +163,6 @@
 
 						</div>
 						<br>
-						
-						<!-- 시설 정보 두번째줄 -->
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label>시설정보</label>
-									<textarea class="form-control" rows="3" placeholder="운동장"
-										disabled style="width: 250px">
-                  						</textarea>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<label>대여 포인트</label> <input type="text" class="form-control"
-									placeholder="100포인트" style="width: 150px" disabled>
-							</div>
-						</div>
 
 						<!-- 날짜 선택줄 -->
 						<div class="row">
@@ -236,7 +226,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- 최종결제 box -->
-				<div class="box box-primary">
+				<div class="box box-primary collapsed-box" id="reser03">
 					<!-- 최종결제 box-header -->
 					<div class="box-header">
 						<h3 class="box-title">결제</h3>
@@ -248,7 +238,7 @@
 					</div>
 
 					<!-- 최종결제 box-body -->
-					<div class="box-body">
+					<div class="box-body ">
 						<div class="row ">
 							<!-- 사용 시간 -->
 							<div class="col-md-3">
@@ -335,27 +325,17 @@
           allDayDefault:false,
           editable: false,
 		  dayClick: function(date, jsEvent, view) {
-
-			  	//alert(date.format());
-        	    	 
-
-        	    	        
-                    //날짜를 클릭 했을 때 해당 날짜에 포함된 데이터를 불러 옵니다. 위와 마찮가지..
-                    /* $.getJSON("/HarangProject/ajax?cmd=foodinfo",
-                            {f_num:calEvent.id},
-                            function(data){
-                                 $("#menuinfobox").slideUp();
-                                 $("#menuinfobox").slideDown();
-                                 $(data).each(function(index, flist){
-                                     menuinfo.f_title.value = flist.f_title;
-                                     menuinfo.f_selldate.value = flist.f_selldate;
-                                     menuinfo.f_content.value = flist.f_content;
-                                     menuinfo.f_point.value = flist.f_point;
-                                     menuinfo.f_num.value = flist.f_num;
-                            });
-                  }); */ 
+				// 이날짜를 바탕으로 쿼리문을 날려서 예약결제로 넘어가도록 한다.
+        	    document.getElementById('Reser').setAttribute( 'placeholder',date.format());
+      			
+				$("#reser01").slideUp();
+				$("#reser01").slideDown();
+				
               }
         });
+        
+        
+        
        $("#closeup").click(function(){
     	   $("#menuinfobox").slideUp();
        });
@@ -365,23 +345,41 @@
       
       function selectfacil(){
 			
-    	   	var pg_type_1 = document.getElementById('pg_type').value;
-			/* var pg_type = $("pg_type"); */
-			
-			alert(pg_type_1);
-			 /* $.getJSON("/HarangProject/ajax?cmd=selectPg",
-                   {f_num:},
+    	   	var wpg_type = document.getElementById('pg_type').value;
+			 $.getJSON("/HarangProject/ajax?cmd=selectPg",
+                   {pg_type:encodeURIComponent(wpg_type)},
                    function(data){
-                        $("#menuinfobox").slideUp();
-                        $("#menuinfobox").slideDown();
-                        $(data).each(function(index, flist){
-                            menuinfo.f_title.value = flist.f_title;
-                            menuinfo.f_selldate.value = flist.f_selldate;
-                            menuinfo.f_content.value = flist.f_content;
-                            menuinfo.f_point.value = flist.f_point;
-                            menuinfo.f_num.value = flist.f_num;
-                   });
-         }); */
-			
+                       $("#pg_name option").remove();
+                       $("#pg_name").append("<option>호수를 입력하세요.</option>");
+                       $(data).each(function(index, pglist){
+                           $("#pg_name").append("<option value='"+pglist.pg_name+"'>"+pglist.pg_name+"</option>");
+                         
+                    });
+                });
 		}
+      
+       function select02(){
+			 var varpg_type = document.getElementById('pg_type').value;    	  
+    	  	 var varpg_name = select09.pg_name.value;
+    	  	
+    	  	 $.getJSON("/HarangProject/ajax?cmd=selectPg",
+                 {pg_type:encodeURIComponent(varpg_type),pg_name:encodeURIComponent(varpg_name),check:1},
+                 function(data){
+                 $("#pg_content textarea").remove();
+                 $(data).each(function(index, pglist){
+                 	$("#pg_content").append("<textarea readonly='readonly' class='form-control' rows='3' style='width: 250px'>"
+              	 	+ pglist.pg_content
+              	 	+"</textarea>");
+                 	$("#pg_point").attr("value", pglist.pg_point);
+                 });
+              });
+		}      
+      
+      	function insertDate(){
+      		return date.format();
+      	}
+      	
+      	
+
+
     </script>
