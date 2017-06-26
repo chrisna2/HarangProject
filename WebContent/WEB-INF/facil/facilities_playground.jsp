@@ -71,17 +71,19 @@
 						<div class="row">
 							<div class="col-md-4">
 								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="넌 운동장을 골랐어." disabled>
+									placeholder="운동장" disabled>
 							</div>
 						
 						 <!-- 시설명(첫번째 카테고리) 선택 -->
 						 <div class="form-group col-md-4">
 	                  		<label>시설명</label>
-	                  		<select class="form-control">
-		                    	<option>족구장</option>
-		                    	<option>축구장</option>
-		                    	<option>농구장</option>
-		                    	<option>테니스장</option>
+	                  		<select class="form-control" name="pg_type" id="pg_type" onchange="selectfacil()">
+							
+		                    	<option>시설을 선택하세요.</option>
+		                    	
+		                    	 <c:forEach items="${list}" var="s">
+                                         <option value="${s.pg_type}">${s.pg_type}</option>
+                                 </c:forEach>
 	                    	</select>
 	                	</div>
 	                	
@@ -301,38 +303,85 @@
 <%@ include file="../include/footer.jsp"%>
 
 <script type="text/javascript">
-	$(function() {
 
-		/* initialize the calendar
-		 -----------------------------------------------------------------*/
-		//현재 년 월 일 불러 오기
-		var date = new Date();
-		var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
+      $(function () {
+        /* initialize the calendar
+         -----------------------------------------------------------------*/
+         //현재 년 월 일 불러 오기
+        var date = new Date();
+        var d = date.getDate(),
+            m = date.getMonth(),
+            y = date.getFullYear();
+        $('#calendar').fullCalendar({
+          locale: 'kr',
+          header: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'today'
+          },
+          buttonText: {
+            today: '오늘날짜',
+            month: '월별',
+            week: '주별',
+            day: '일별'
+          },
+          titleFormat: {
+            month: 'YYYY년 MMMM'
+          },
+          monthNames:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+          monthNamesShort:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
+          dayNames:["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
+          dayNamesShort:["일","월","화","수","목","금","토"],
+          allDayDefault:false,
+          editable: false,
+		  dayClick: function(date, jsEvent, view) {
 
-		$('#calendar').fullCalendar(
-				{
-					header : {
-						left : 'prev,next',
-						center : 'title',
-						right : 'today'
-					},
-					buttonText : {
-						today : '오늘날짜',
-						month : '월별',
-						week : '주별',
-						day : '일별'
-					},
-					titleFormat : {
-						month : 'YYYY년 MMMM'
-					},
-					monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
-							"8월", "9월", "10월", "11월", "12월" ],
-					monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월",
-							"7월", "8월", "9월", "10월", "11월", "12월" ],
-					dayNames : [ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일",
-							"<font color='blue'>토요일</font>" ],
-					dayNamesShort : [ "일", "월", "화", "수", "목", "금", "토" ],
-					editable : true
-				});
-	});
-</script>
+			  	//alert(date.format());
+        	    	 
+
+        	    	        
+                    //날짜를 클릭 했을 때 해당 날짜에 포함된 데이터를 불러 옵니다. 위와 마찮가지..
+                    /* $.getJSON("/HarangProject/ajax?cmd=foodinfo",
+                            {f_num:calEvent.id},
+                            function(data){
+                                 $("#menuinfobox").slideUp();
+                                 $("#menuinfobox").slideDown();
+                                 $(data).each(function(index, flist){
+                                     menuinfo.f_title.value = flist.f_title;
+                                     menuinfo.f_selldate.value = flist.f_selldate;
+                                     menuinfo.f_content.value = flist.f_content;
+                                     menuinfo.f_point.value = flist.f_point;
+                                     menuinfo.f_num.value = flist.f_num;
+                            });
+                  }); */ 
+              }
+        });
+       $("#closeup").click(function(){
+    	   $("#menuinfobox").slideUp();
+       });
+
+      });
+      
+      
+      function selectfacil(){
+			
+    	   	var pg_type_1 = document.getElementById('pg_type').value;
+			/* var pg_type = $("pg_type"); */
+			
+			alert(pg_type_1);
+			 /* $.getJSON("/HarangProject/ajax?cmd=selectPg",
+                   {f_num:},
+                   function(data){
+                        $("#menuinfobox").slideUp();
+                        $("#menuinfobox").slideDown();
+                        $(data).each(function(index, flist){
+                            menuinfo.f_title.value = flist.f_title;
+                            menuinfo.f_selldate.value = flist.f_selldate;
+                            menuinfo.f_content.value = flist.f_content;
+                            menuinfo.f_point.value = flist.f_point;
+                            menuinfo.f_num.value = flist.f_num;
+                   });
+         }); */
+			
+		}
+    </script>
