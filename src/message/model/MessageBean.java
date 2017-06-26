@@ -115,6 +115,7 @@ public class MessageBean {
 	 */
 	public String[] getMember_id(String m_name){
 		String[] arrID = null;
+		
 		try{
 			con = pool.getConnection();
 			int i=0;
@@ -145,6 +146,7 @@ public class MessageBean {
 				rs.next(); 
 				arrID[j] = rs.getString("m_id");
 			}
+			
 		}catch(Exception err){
 			System.out.println("getMember_id() : " + err);
 			err.printStackTrace();

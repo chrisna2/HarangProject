@@ -72,8 +72,7 @@
 						<div class="row">
 							<div class="col-md-4">
 								<label>예약할 날짜</label> <input id="Reser" type="text"
-									class="form-control" placeholder="예약한 날짜가 여기로 들어와야 한다."
-									disabled>
+									class="form-control" readonly="readonly">
 							</div>
 
 							<!-- 시설명(첫번째 카테고리) 선택 -->
@@ -112,13 +111,29 @@
 								<label>대여 포인트</label> <input id="pg_point" type="text" class="form-control"
 									readonly="readonly" style="width: 150px">
 							</div>
+							
+							<div class="col-md-4">
+								<label>시설번호</label> <input id="pg_num" type="text" class="form-control"
+									readonly="readonly" style="width: 150px">
+							</div>
+							
 						</div>
 					</div>
 					</form>
 
 					<!-- Box footer -->
 					<div class="box-footer">
-						<div class="row" align="center"></div>
+						<div class="row" align="center">
+							<div class="col-md-3 btn-group"></div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary"
+									onclick="goSelectTime()" value="예약 시간 선택">
+							</div>
+							<div class="col-md-3 btn-group">
+								<input type="button" class="btn btn-block btn-primary"
+									value="날짜 다시 선택">
+							</div>
+						</div>
 					</div>
 
 				</div>
@@ -144,31 +159,10 @@
 					<div class="box-body">
 						<!-- 시설 정보 [위에 선택 정보 받아옴]  -->
 						<!-- 시설 정보 첫줄 -->
-						<div class="row">
-
-							<div class="col-md-4">
-								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="운동장 " style="width: 150px" disabled>
-							</div>
-
-							<div class="col-md-4">
-								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="족구장" style="width: 150px" disabled>
-							</div>
-
-							<div class="col-md-4">
-								<label>호수</label> <input type="text" class="form-control"
-									placeholder="대운동장" style="width: 150px" disabled>
-							</div>
-
-						</div>
 						<br>
 
 						<!-- 날짜 선택줄 -->
 						<div class="row">
-							<div class="col-md-12" align="center">
-								<label>시간 선택</label>
-							</div>
 							<div class="col-md-12" align="center">
 
 								<div class="btn-group" data-toggle="buttons">
@@ -293,8 +287,10 @@
 <%@ include file="../include/footer.jsp"%>
 
 <script type="text/javascript">
-
-      $(function () {
+	 // 일단 전역 변수로 만들었는데...이거참...
+	  var vardate;
+      
+	  $(function () {
         /* initialize the calendar
          -----------------------------------------------------------------*/
          //현재 년 월 일 불러 오기
@@ -326,8 +322,8 @@
           editable: false,
 		  dayClick: function(date, jsEvent, view) {
 				// 이날짜를 바탕으로 쿼리문을 날려서 예약결제로 넘어가도록 한다.
-        	    document.getElementById('Reser').setAttribute( 'placeholder',date.format());
-      			
+        	    document.getElementById('Reser').setAttribute( 'value',date.format());
+        	    vardate = date.format();
 				$("#reser01").slideUp();
 				$("#reser01").slideDown();
 				
@@ -371,9 +367,28 @@
               	 	+ pglist.pg_content
               	 	+"</textarea>");
                  	$("#pg_point").attr("value", pglist.pg_point);
+                 	$("#pg_num").attr("value", pglist.pg_num);
                  });
               });
-		}      
+		}
+       function goSelectTime(){
+    	   	var vardate2 = this.vardate;
+    	   	var varpg_num = document.getElementById('pg_num').value;
+    	    var varpg_type = document.getElementById('pg_type').value;
+    		
+    		alert(vardate2 + "," + varpg_type +"," + varpg_num);
+    		
+    		$.getJSON("/HarangProject/ajax?cmd=selectPg",
+                    {pg_type:encodeURIComponent(varpg_type),pg_num:encodeURIComponent(varpg_num),pgm_date:vardate2,check:2},
+                    function(data){
+                    	$(data).each(function(index, pglist){
+
+                         });
+                    
+                 });
+    		
+    		
+       }
       
       	function insertDate(){
       		return date.format();
