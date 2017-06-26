@@ -100,6 +100,12 @@
 										<button class="btn btn-block btn-primary" onclick="fnApply()">지원하기</button>
 									</div>		
 									</c:when>
+									<c:when test="${info.d_header eq '[마감]'}">
+									<div class="col-md-4"></div>
+									<div class="col-md-4">
+										<button class="btn btn-block btn-default" disabled="disabled">마감</button>
+									</div>	
+									</c:when>
 									<c:otherwise>
 									<div class="col-md-4"></div>
 									<div class="col-md-2">
@@ -142,7 +148,7 @@
 								<th>지원자 정보</th>
 								<th>지원날짜</th>
 								<th>pick</th>
-								<th>지급확인</th>
+								<th>포인트</th>
 							</tr>
 							<c:choose>
 								<c:when test="${fn:length(resume) eq 0}">
@@ -162,7 +168,7 @@
 											<td>${resume.list_num}</td>
 											<td>${resume.m_name}</td>
 											<td><button class="btn btn-danger btn-sm" onclick="fnResume(${resume.m_id})">이력서 보기</button></td>
-											<td>${resume.ㅇm_regdate}</td>
+											<td>${resume.m_regdate}</td>
 											<td>
 											<c:choose>
 												<c:when test="${resume.pm_choice eq 'Y'}">
@@ -173,7 +179,14 @@
 												</c:otherwise>
 											</c:choose>
 											</td>
-											<td></td>
+											<td>
+											<c:choose>
+												<c:when test="${info.d_header eq '[마감]' && resume.pm_choice eq 'Y'}">
+													<button class="btn btn-sm btn-danger" onclick="fnConfirm()">지급</button>
+													<button class="btn btn-sm btn-danger">거절</button>
+												</c:when>
+											</c:choose>
+											</td>
 										</tr>
 									</c:forEach>
 							</c:otherwise>
@@ -281,6 +294,12 @@
       	<input type="hidden" name="d_num" value="${info.d_num}"/>
       	<input type="hidden" name="m_id" value="${m_id}"/>
       	<input type="hidden" name="tab" value="${tab}"/>
+      </form>
+      <form name="confirm" method="post" action="/HarangProject/parttime/DREAD">
+      	<input type="hidden" name="d_num" value="${info.d_num}"/>
+      	<input type="hidden" name="m_id" value="${m_id}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
+      	<input type="hidden" name="isComplete" value="OK"/>
       </form>      
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
@@ -290,6 +309,7 @@ function fnList(tab){list.submit();}
 function fnApply(){apply.submit();}
 function fnMyResume(){myresume.submit();}
 function fnUpdate(){update.submit();}
+function fnConfirm(){confirm.submit();}
 function fnCancel(){
 	if(confirm("작성한 이력서가 삭제됩니다.\n정말 지원을 취소하시겠습니까?") == true){
 		document.cancel.submit();

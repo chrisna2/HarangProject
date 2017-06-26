@@ -1,6 +1,8 @@
 package parttime.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +34,7 @@ public class DaetaReadCommand implements CommandInterface {
 		
 		/** Apply!! 지원자 정보*/
 		apply(req); // 지원완료 후
+		isComplete(m_id, req); // 대타 수행 확인
 		paging(req); // paging 관련 변수 받아서 넘기기
 		choice(m_id, req); // 채용버튼 눌렀을 때 처리
 		isApply(m_id, req); // 지원했는지 안했는지
@@ -215,6 +218,43 @@ public class DaetaReadCommand implements CommandInterface {
 					+ "\n해당 글을 확인해주세요.";
 			mbean.postMessage(title, content, "admin02", member.getM_id());
 
+		}
+	}
+	
+	/**
+	 * 마감일이 지났는지 여부를 확인하는 메서드.
+	 * @param d_num
+	 * @return true 지남|| false 안 지남
+	 */
+	public boolean checkDeadline(String d_num){
+		DaetaDTO dto = bean.getDaeta(d_num);
+		String d_deadline = dto.getD_deadline();
+		
+		// d_deadline을 Date로 형변환
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		Date deadline = null;
+		
+		try{
+			deadline = date.parse(d_deadline);
+		}catch(Exception e){}
+		
+		// 오늘날짜와 비교해서 지났으면 true 안지났으면 false를 반환
+		return deadline.before(new Date());
+	}
+	
+	/**
+	 * 대타를 확인 후 포인트를 지급하는 메서드.
+	 * @param req
+	 */
+	public void isComplete(String m_id, HttpServletRequest req){
+		String d_num = req.getParameter("d_num");
+		String isComplete = req.getParameter("isComplete");
+		if(isComplete != null){
+			D_ApplyDTO dto = bean.getDaetaApply(m_id, d_num);
+			dto.setDm_iscomplete("Y");
+			bean.updateDaetaMember(dto);
+			
+			/** 포인트 지급!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 		}
 	}
 

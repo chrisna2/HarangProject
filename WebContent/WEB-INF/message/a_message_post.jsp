@@ -157,6 +157,8 @@ function sendRequest(method, url, param, callback){
 		if(cbx.checked == true){
 			document.getElementById("reader").value = m_name;
 			document.getElementById("reader").focus();
+		}else{
+			document.getElementById("reader").value = "";
 		}
 	}
 	

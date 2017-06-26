@@ -9,6 +9,7 @@ public class D_ApplyDTO {
 	private String dm_iscomplete;
 	private String dm_choice;
 	private String dm_regdate;
+	private String dm_report;
 	
 	public int getList_num() {
 		return list_num;
@@ -58,4 +59,10 @@ public class D_ApplyDTO {
 	public void setDm_regdate(String dm_regdate) {
 		this.dm_regdate = dm_regdate;
 	}
+	public String getDm_report() {
+		return dm_report;
+	}
+	public void setDm_report(String dm_report) {
+		this.dm_report = dm_report;
+	}	
 }

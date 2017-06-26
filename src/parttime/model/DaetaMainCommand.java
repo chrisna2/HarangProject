@@ -7,18 +7,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.DaetaDTO;
 import dto.MemberDTO;
-import dto.ParttimeDTO;
 import paging.PagingBean;
 import paging.dto.PagingDto;
+import util.DateBean;
 
+/**
+ * 대타 모집 게시판에 필요한 정보를 DB에서 꺼내오고 게시판 페이지로 이동하는 함수
+ * @author 양혜민
+ *
+ */
 public class DaetaMainCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 		MemberDTO member = bean.getLoginInfo(req); // 로그인 정보
 		
 		insert(member.getM_id(),req); // 글이 추가된 경우
-		delete(req);
-		getList(req);
+		delete(req); //글이 삭제된 경우
+		getList(req); //글목록
 		
 		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_main.jsp
 			return "WEB-INF/parttime/a_daeta_main.jsp";
@@ -36,11 +41,20 @@ public class DaetaMainCommand implements CommandInterface {
 		// 게시판에 띄울 글 정보를 모두 불러와 ArrayList에 저장
 		ArrayList list = bean.getDaetaList();
 		
+		// 마감일이 지나면 [마감]으로 말머리 변경
+		for(int i=0; i<list.size(); i++){
+			afterDeadline(((DaetaDTO)list.get(i)).getD_num()); 
+		}
+		
 		// 추가정보 저장=> 1.글번호 2.해당 글에 지원한 지원자
 		for (int i = 0; i < list.size(); i++) {
 			DaetaDTO dto = (DaetaDTO) list.get(i);
 			dto.setList_num(list.size() - i); // 글번호
 			dto.setCnt_apply(bean.getParttimeCnt_apply(dto.getD_num())); // 지원자수
+			dto.setD_pick(bean.getPicked(dto.getD_num())); // 채용된 사람 회원번호
+			
+			/** 거래중인지 확인 : 마감일은 지나고 대타날짜+3는 안지난 경우*/
+			
 			if (dto.getM_id().equals("admin02")) {
 				dto.setM_name("관리자");
 			}else{
@@ -79,6 +93,10 @@ public class DaetaMainCommand implements CommandInterface {
 		req.setAttribute("paging", paging);
 	}
 	
+	/**
+	 * 대타 모집 게시판에서 글을 삭제하는 메서드.
+	 * @param req
+	 */
 	public void delete(HttpServletRequest req){
 		String delete = (String)req.getParameter("delete");
 		String d_num = (String)req.getParameter("d_num");
@@ -88,6 +106,11 @@ public class DaetaMainCommand implements CommandInterface {
 		}
 	}
 	
+	/**
+	 * 대타 모집 게시판에서 글을 추가하는 메서드.
+	 * @param m_id
+	 * @param req
+	 */
 	public void insert(String m_id,HttpServletRequest req) {
 		String insert = req.getParameter("insert");
 
@@ -105,6 +128,20 @@ public class DaetaMainCommand implements CommandInterface {
 			dto.setD_deposit(Integer.parseInt(req.getParameter("d_deposit")));
 
 			bean.insertDaeta(dto);
+			
+			/** 포인트!!!!!!!!!!!!!!!!!!!!!*/
+		}
+	}
+
+	/**
+	 * 마감일이 지나면 자동으로 말머리가 [마감]으로 변경되는 메서드.
+	 * @param d_num
+	 */
+	public void afterDeadline(String d_num){
+		DaetaDTO dto = bean.getDaeta(d_num);
+		if(new DateBean().checkDeadline(dto.getD_deadline()) && !dto.getD_header().equals("[마감]")){
+			dto.setD_header("[마감]");
+			bean.updateDaeta(dto);
 		}
 	}
 }

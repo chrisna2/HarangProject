@@ -1039,12 +1039,16 @@ public class ParttimeBean {
 		}
 	}
 	
+	/**
+	 * 대타 모집 글을 수정하는 메서드.
+	 * @param dto
+	 */
 	public void updateDaeta(DaetaDTO dto){
 		try{
 			con = pool.getConnection();
 			
 			String sql="UPDATE tbl_daeta SET d_title=?, d_deadline=?, d_wage=?, d_date=?, d_content=?, "
-					+ "d_tel=?, d_deposit=?, d_location=?, d_header=? WHERE p_num = ? ";
+					+ "d_tel=?, d_deposit=?, d_location=?, d_header=? WHERE d_num = ? ";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getD_title());
@@ -1061,6 +1065,56 @@ public class ParttimeBean {
 			
 		}catch(Exception err){
 			System.out.println("updateDaeta() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
+
+	/**
+	 * 해당글의 대타로 선택된 사람을 검색하는 메서드.
+	 * @param d_num
+	 * @return
+	 */
+	public String getPicked(String d_num){
+		String m_id = null;
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT m_id FROM tbl_daeta_member WHERE d_num=? AND dm_choice='Y' ";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, d_num);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				m_id = rs.getString("m_id");
+			}
+			
+		}catch(Exception err){
+			System.out.println("getPicked() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		return m_id;
+	}
+
+	public void updateDaetaMember(D_ApplyDTO dto){
+		try{
+			con = pool.getConnection();
+			
+			String sql="UPDATE tbl_parttime_member SET dm_iscomplete=? WHERE m_id=? AND d_num=?";
+					
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getDm_iscomplete());
+			pstmt.setString(2, dto.getM_id());
+			pstmt.setString(3, dto.getD_num());
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("updateDaetaMember() : " + err);
 			err.printStackTrace();
 		}finally{
 			pool.freeConnection(con,pstmt);
