@@ -74,7 +74,7 @@ td {
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-9">
 				<div class="box">
-					<div class="box-header">
+					<div class="box-header" style="background-color: #dceff4">
 						<h1 class="box-title">
 							<a href="/HarangProject/bamboo?cmd=BB_LIST" style="color: black">대나무숲</a>
 						</h1>
@@ -206,13 +206,12 @@ td {
 					</div>
 					<!-- /.box-body -->
 
-					<div class="box-footer clearfix">
 
 
 
 
 						<!-- 페이징 버튼 -->
-						<div class="box-footer clearfix">
+						<div class="box-footer clearfix" style="background-color: #dceff4">
 							<ul class="pagination pagination-sm no-margin pull-right">
 								<c:if test="${paging.nowBlock > 0}">
 									<li><a href="javascript:prevPage()">&laquo;</a></li>
@@ -231,9 +230,6 @@ td {
 									<li><a href="javascript:nextPage()">&raquo;</a></li>
 								</c:if>
 							</ul>
-						</div>
-						<!-- 페이징 버튼 -->
-
 						<form action="/HarangProject/bamboo" name="search" method="post">
 
 							<input type="hidden" name="cmd" value="BB_LIST">
@@ -255,7 +251,9 @@ td {
 
 							</div>
 						</form>
-					</div>
+						</div>
+						<!-- 페이징 버튼 -->
+
 				</div>
 			</div>
 			<!-- /.box -->

@@ -7,7 +7,51 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <title>학사일정</title>
+<script>
 
+function fnschp(){
+	
+	//alert(CKEDITOR.instances.editor1.getData().length);
+	
+	if(CKEDITOR.instances.editor1.getData() ==""||
+		document.schpostcomplete.s_title.value ==""||
+		document.schpostcomplete.s_dstart.value ==""||
+		document.schpostcomplete.s_dend.value ==""){
+		
+		alert("제목, 행사 시작일, 행사 종료일, 일정 상세정보는 필수로 입력하셔야 합니다.");
+		return;
+		
+	}
+	else if(document.schpostcomplete.s_title.value.length>200){
+		
+		
+		alert("제목을 너무 길게 입력하셨습니다. 200글자 이하로 입력 해 주세요.(공백 포함)");
+		return;
+	}
+	
+	else if(CKEDITOR.instances.editor1.getData().length>4000){
+		
+		
+		alert("본문을 너무 길게 입력하셨습니다. 4000글자 이하로 입력 해 주세요.(공백 포함)");
+		return;
+	}
+	
+	
+	else {
+		document.schpostcomplete.submit();
+					
+	}
+	
+}
+
+
+
+
+
+
+
+
+</script>
 
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
@@ -15,7 +59,7 @@
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
 		<h1>
-			일정등록 <small>관리자가 일정등록하는 곳</small>
+			학사일정 등록 <small>관리자가 일정등록하는 곳</small>
 		</h1>
 		<ol class="breadcrumb">
 			<!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
@@ -24,7 +68,8 @@
 		</ol>
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-	<form>
+	<form action="/HarangProject/schedule" name="schpostcomplete" method="post">
+		<input type = "hidden" name="cmd" value="A_SCH_POST_COMPLETE">
 		<section class="content">
 			<!-- 세로 길이 수정 -->
 			<div class="row">
@@ -39,18 +84,18 @@
 
 							<div class="form-group">
 								<label>제목</label> <input type="text" class="form-control"
-									placeholder="ex)중간고사 일정 안내" />
+									placeholder="제목을 입력 하세요." name = "s_title" />
 							</div>
 
 							<div class="row">
 								<div class="col-md-3 form-group">
-									<label>학과</label> <select class="form-control">
-										<option>[전체학과]</option>
-										<option>[국문과]</option>
-										<option>[수학과]</option>
-										<option>[경영학과]</option>
-										<option>[시각디자인과]</option>
-										<option>[컴퓨터공학과]</option>
+									<label>학과</label> <select class="form-control" name = "s_dept">
+										<option value = "전체">전체</option>
+										<option value = "국문학과">국문학과</option>
+										<option value = "수학과">수학과</option>
+										<option value = "경영학과">경영학과</option>
+										<option value = "시각디자인과">시각디자인과</option>
+										<option value = "컴퓨터공학과">컴퓨터공학과</option>
 									</select>
 								</div>
 
@@ -64,7 +109,7 @@
 											<i class="fa fa-calendar"></i>
 										</div>
 										<input type="text" class="form-control pull-right"
-											id="reservation" />
+											id="reservation" name = "s_dstart" />
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -75,7 +120,7 @@
 											<i class="fa fa-calendar"></i>
 										</div>
 										<input type="text" class="form-control pull-right"
-											id="reservation" />
+											id="reservation" name = "s_dend" />
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -88,7 +133,7 @@
 											<i class="fa fa-calendar"></i>
 										</div>
 										<input type="text" class="form-control pull-right"
-											id="reservation" />
+											id="reservation" name = "s_rstart" />
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -99,7 +144,7 @@
 											<i class="fa fa-calendar"></i>
 										</div>
 										<input type="text" class="form-control pull-right"
-											id="reservation" />
+											id="reservation" name = "s_rend"/>
 									</div>
 									<!-- /.input group -->
 								</div>
@@ -107,7 +152,7 @@
 							<div class="row">
 								<div class="col-md-2 form-group">
 									<div class="checkbox">
-										<label> <input type="checkbox">포인트 지급
+										<label> <input type="checkbox" name = "point">포인트 지급
 										</label>
 									</div>
 
@@ -117,7 +162,7 @@
 								<div class="col-md-6 form-group">
 
 									<input class="form-control" type="text"
-										placeholder="지급할 포인트를 입력하세요">
+										placeholder="지급할 포인트를 입력하세요" name = "s_point">
 
 								</div>
 							</div>
@@ -131,18 +176,18 @@
 
 						<div class='box-body pad'>
 
-							<textarea id="editor1" name="editor1" rows="10" cols="80">
-                                            본문을 입력 해 주세요.
-                    </textarea>
+							<textarea id="editor1" name="editor1" rows="10" cols="80" name = "s_content"></textarea>
 						</div>
 
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-2">
-								<button class="btn btn-block btn-primary">등록</button>
+								<a type="button" class="btn btn-block btn-primary"
+								href="javascript:fnschp()">등록</a>
 							</div>
 							<div class="col-md-2">
-								<button class="btn btn-block btn-danger">취소</button>
+								<a class="btn btn-block btn-danger"
+									href="/HarangProject/schedule?cmd=A_SCH_LIST">취소</a>
 							</div>
 						</div>
 

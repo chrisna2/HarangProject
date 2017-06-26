@@ -36,6 +36,10 @@ public class CommandFactory
 		{
 			return new U_Sch_Join_Command();
 		}
+		else if(cmd.equals("U_SCH_JOIN_CANCLE"))
+		{
+			return new U_Sch_Join_Cancle_Command();
+		}
 		
 		
 		else

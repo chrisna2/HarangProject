@@ -42,6 +42,12 @@ public class CommandFactory{
 		else if(cmd.equals("schecon")){
 			return new ScheduleContentCommand();
 		}
+		else if(cmd.equals("asche")){
+			return new A_ScheduleCommand();
+		}
+		else if(cmd.equals("aschecon")){
+			return new A_ScheduleContentCommand();
+		}
 		else{
 			return null;
 		}

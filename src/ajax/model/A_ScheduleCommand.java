@@ -20,7 +20,7 @@ import dto.RecordDTO;
 import dto.ZipDTO;
 import harang.dbcp.DBConnectionMgr;
 
-public class ScheduleCommand implements CommandInterface {
+public class A_ScheduleCommand implements CommandInterface {
 
 	// DB 커넥션 4 대장
 	Connection con;
@@ -39,18 +39,13 @@ public class ScheduleCommand implements CommandInterface {
 		// System.out.println(sido);
 
 		ArrayList slist = new ArrayList();
-		HttpSession session = request.getSession();
-		MemberDTO mdto = (MemberDTO) session.getAttribute("member");
-		String s_dept = mdto.getM_dept();
-		String m_grade = mdto.getM_grade() + "";
 
-		String sql = "select s_num, s_title, s_dstart, s_dend from tbl_schedule where (s_grade like '%"+m_grade+"%' or s_grade = '1234') and (s_dept = '전체' or s_dept = ?) and s_ispoint = 'N'";
+		String sql = "select s_num, s_title, s_dstart, s_dend from tbl_schedule ";
 
 		try {
 			pool = DBConnectionMgr.getInstance();
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, s_dept);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -67,24 +62,7 @@ public class ScheduleCommand implements CommandInterface {
 				slist.add(cdto);
 			}
 			
-			sql = "select s_num, s_title, s_dstart, s_dend from tbl_schedule where (select count(m_id) from tbl_schedule_member where s_num = tbl_schedule.s_num) >0 ";
 			
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			while (rs.next()) {
-				
-				CalanderDTO cdto = new CalanderDTO();
-				
-				cdto.setId(rs.getString("s_num"));
-				cdto.setStart(rs.getString("s_dstart"));
-				cdto.setTitle(rs.getString("s_title"));
-				cdto.setEnd(rs.getString("s_dend"));
-				cdto.setColor("#df98e0");
-				cdto.setAllDay(true);
-				
-				slist.add(cdto);
-			}
 
 		} catch (Exception e) {
 			System.out.println("a_pointcheck.jsp : " + e);

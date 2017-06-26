@@ -190,7 +190,7 @@ td {
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-9">
 				<div class="box" id="bamcon">
-					<div class="box-header" style= "background-color: #c9ddfc">
+					<div class="box-header" style= "background-color: #dceff4">
 						<span id="bbtt"><font size="5">${bbcon.bb_title}</font></span> <span
 							class="badge bg-green pull-right"> ${bbcon.bb_regdate}<br>닉네임
 							: ${bbcon.bb_nickname}<br> 조회수 : ${bbcon.bb_count }<br>
@@ -202,14 +202,15 @@ td {
 					</div>
 
 					<div class="box-body" id="bbcontent">${bbcon.bb_content}
-						<br>테스트용 작성자 m_id : ${bbcon.m_id} <br>테스트용 로그인한 m_id :
-						${sessionScope.member.m_id} <br>테스트용 islike : ${islike } <br>테스트용
-						isdlike : ${isdlike } <br>테스트용 관리자 :
-						${sessionScope.admin.m_dept } <br>테스트용 공지여부 :
-						${bbcon.bb_notice }
+						<br>테스트용 작성자 m_id : ${bbcon.m_id} 
+						<br>테스트용 로그인한 m_id : ${sessionScope.member.m_id} 
+						<br>테스트용 islike : ${islike } 
+						<br>테스트용 isdlike : ${isdlike } 
+						<br>테스트용 관리자 : ${sessionScope.admin.m_dept } 
+						<br>테스트용 공지여부 : ${bbcon.bb_notice }
 					</div>
 					<!-- /.box-body -->
-					<div class="box-footer ">
+					<div class="box-footer" style= "background-color: #dceff4">
 
 						<!-- 아이디 검사 해서 본인일 경우만 수정, 삭제 출력되도록 if문 처리 -->
 						<c:if test="${bbcon.m_id eq sessionScope.member.m_id  }">
@@ -320,7 +321,7 @@ td {
 						<c:if test="${brlist.size() > 0 }">
 							<c:forEach var="i" begin="0" end="${brlist.size()-1 }">
 								<!--  댓글 들어가는 곳 -->
-								<div class="box-header">
+								<div class="box-header" >
 
 									<c:if test="${brlist[i].br_nickname eq '관리자' }">
 										<span class="badge bg-red">${brlist[i].br_nickname }</span>
@@ -333,12 +334,12 @@ td {
 
 								<div class="box-body" id="brcoment">${brlist[i].br_coment }</div>
 								<!-- /.box-body -->
-								<div class="box-footer " style= "background-color: #c9ddfc">
+								<div class="box-footer " style= "background-color: #dceff4">
 
 									<c:if test="${brlist[i].m_id eq sessionScope.member.m_id }">
-										<p align="right">
+										<p align="center">
 
-											<a type="button" class="btn btn-success btn-xs"
+											<a type="button" class="btn btn-danger btn-xs"
 												href="javascript:fnbrdelete('${brlist[i].br_num }')">삭제</a>
 										</p>
 									</c:if>
@@ -434,7 +435,7 @@ td {
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-9">
 				<div class="box">
-					<div class="box-header">
+					<div class="box-header" style="background-color: #dceff4">
 						<h1 class="box-title">
 							<a href="/HarangProject/bamboo?cmd=BB_LIST" style="color: black">대나무숲</a>
 						</h1>
@@ -512,8 +513,7 @@ td {
 											<td><fmt:formatDate value="${bbnlist.bb_regdate}"
 													pattern="yyyy-MM-dd" /></td>
 											<td>${bbnlist.bb_nickname}</td>
-											<td><a
-												href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bbnlist.bb_num}"
+											<td><a href="/HarangProject/bamboo?cmd=U_BB_CON&bb_num=${bbnlist.bb_num}"
 												style="color: black">[공지] ${bbnlist.bb_title}
 													[${bbnlist.reply_cnt}]</a></td>
 											<td>${bbnlist.bb_count}</td>
@@ -523,6 +523,21 @@ td {
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 							<c:choose>
 								<c:when test="${fn:length(bblist) eq 0}">
 								게시물이 없습니다.
@@ -552,13 +567,12 @@ td {
 					</div>
 					<!-- /.box-body -->
 
-					<div class="box-footer clearfix">
 
 
 
 
 						<!-- 페이징 버튼 -->
-						<div class="box-footer clearfix">
+						<div class="box-footer clearfix" style="background-color: #dceff4">
 							<ul class="pagination pagination-sm no-margin pull-right">
 								<c:if test="${paging.nowBlock > 0}">
 									<li><a href="javascript:prevPage()">&laquo;</a></li>
@@ -577,9 +591,6 @@ td {
 									<li><a href="javascript:nextPage()">&raquo;</a></li>
 								</c:if>
 							</ul>
-						</div>
-						<!-- 페이징 버튼 -->
-
 						<form action="/HarangProject/bamboo" name="search" method="post">
 
 							<input type="hidden" name="cmd" value="BB_LIST">
@@ -601,7 +612,9 @@ td {
 
 							</div>
 						</form>
-					</div>
+						</div>
+						<!-- 페이징 버튼 -->
+
 				</div>
 			</div>
 			<!-- /.box -->
