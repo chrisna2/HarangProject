@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import dto.LessonDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
@@ -42,7 +43,10 @@ public class InsertCommand implements CommandInterface {
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("member");
 		String m_id = member.getM_id();
-			
+		
+		
+	
+	
 				sql = "INSERT INTO tbl_member_lesson "
 						+ "(m_id, l_num, lm_group, lm_year, lm_term, lm_star, lm_hw, lm_attend, lm_comment) "
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -53,7 +57,7 @@ public class InsertCommand implements CommandInterface {
 			pstmt = con.prepareStatement(sql);
 			pstmt2 = con.prepareStatement(sql2);
 			pstmt2.setString(1, m_id);
-			
+			System.out.println(request.getParameter("l_num"));
 			pstmt2.setString(2, request.getParameter("l_num"));
 				
 				pstmt.setString(1, m_id);
@@ -69,7 +73,7 @@ public class InsertCommand implements CommandInterface {
 				
 				pstmt.executeUpdate();
 				pstmt2.executeUpdate();
-			
+				System.out.println(request.getParameter("l_num"));
 		}catch(Exception err){
 			System.out.println(err);
 		}

@@ -43,14 +43,15 @@
 
 
 			<div class="box box-black">
-                <div class="box-header">
-                  <h3 class="box-title">개인 정보 수정</h3>
-                </div>
+                
 				<div class="box-body">
+				<form role="form2" name="read3"
+					action="/HarangProject/impage?cmd=delete" method="post">
+					<input type="hidden" name="lm_num" value="${read3.lm_num }" >
 					<div class="row">
 						<div class="col-md-5 form-group">
 							<label>작성자</label> <input type="text" class="form-control"
-								readonly="readonly" />
+								readonly="readonly" value="${read3.m_name }" />
 						</div>
 
 					</div>
@@ -60,23 +61,23 @@
 
 						<div class="col-md-5 form-group">
 							<label>교수명</label> <input type="text" class="form-control"
-								readonly="readonly" />
+								readonly="readonly" value="${read3.l_teacher }"/>
 						</div>
 						<div class="col-md-5 form-group">
 							<label>강의명</label> <input type="text"
-								class="form-control pull-right" id="reservation"
+								class="form-control pull-right" value="${read3.l_name }" id="reservation"
 								readonly="readonly" />
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-5 form-group">
-							<label>개설년도</label> <input type="text" class="form-control"
+							<label>개설년도</label> <input type="text" class="form-control" value="${read3.lm_year }"
 								readonly="readonly" />
 						</div>
 						<div class="col-md-5 form-group">
 							<label>개설학기</label> <input type="text"
-								class="form-control pull-right" id="reservation"
+								class="form-control pull-right" id="reservation" value="${read3.lm_term }"
 								readonly="readonly" />
 						</div>
 
@@ -84,12 +85,12 @@
 
 					<div class="row">
 						<div class="col-md-5 form-group">
-							<label>만족도</label> <input type="text" class="form-control"
+							<label>만족도</label> <input type="text" class="form-control" value="${read3.lm_star }"
 								readonly="readonly" />
 						</div>
 						<div class="col-md-5 form-group">
 							<label>조모임</label> <input type="text"
-								class="form-control pull-right" id="reservation"
+								class="form-control pull-right" id="reservation" value="${read3.lm_group }"
 								readonly="readonly" />
 						</div>
 
@@ -97,14 +98,10 @@
 
 					<div class="row">
 						<div class="col-md-5 form-group">
-							<label>과제</label> <input type="text" class="form-control"
+							<label>과제</label> <input type="text" class="form-control" value="${read3.lm_hw }"
 								readonly="readonly" />
 						</div>
-						<div class="col-md-5 form-group">
-							<label>시험횟수</label> <input type="text"
-								class="form-control pull-right" id="reservation"
-								readonly="readonly" />
-						</div>
+						
 
 					</div>
 
@@ -112,7 +109,7 @@
 					<div class="row">
 						<div class="col-md-10 form-group">
 							<label><big>총평</big></label>
-							<textarea class="form-control" rows="3" readonly="readonly"></textarea>
+							<textarea class="form-control" rows="3" readonly="readonly"> ${read3.lm_comment }</textarea>
 
 						</div>
 
@@ -123,12 +120,13 @@
 					<div class="row">
 						<div class="col-md-2"></div>
 						<div class="col-md-3">
-							<button class="btn btn-block btn-primary">글 삭제</button>
+							<input type="submit" class="btn btn-block btn-primary" value="글 삭제">
 						</div>
 						<div class="col-md-3">
 							<button class="btn btn-block btn-primary">뒤로가기</button>
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 				
@@ -144,34 +142,31 @@
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
-                
+                <form role="form3" name="read4"
+					action="/HarangProject/impage?cmd=insert" method="post">
                 <div class="box-body no-padding">
                   <table class="table">
                     <tr>
                       <th>신고번호</th>
                       <th>작성자</th>
+                      <th>등록 날짜</th>
                       <th>신고내용</th>
                     </tr>
+                    
+                     <c:forEach var="read4" items="${requestScope.read4}">
                     <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                      <td>
-               			      ☆☆☆☆☆
-                      </td>
                    
+                      <td>${read4.w_num}</td>
+                      <td>${read4.m_id }</td>
+                      <td>${read4.w_regdate }  </td>
+                      <td>${read4.w_comment }  </td>
+                    
                     </tr>
-                    <tr>
-                      <td>2.</td>
-             			
-                      <td>
-                      Update software
-                      </td>
-                      <td>	        ★☆☆☆☆</td>
-
-                    </tr>
+                 </c:forEach>
                    
                   </table>
                 </div><!-- /.box-body -->
+                </form>
               </div><!-- /.box -->
               
               

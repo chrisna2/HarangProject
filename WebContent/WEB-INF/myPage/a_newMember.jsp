@@ -9,6 +9,22 @@
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 브라우저 제목 -->
 <head>
+<script type="text/javascript">
+
+function checkform(){
+    
+    var num1 = input.num1.value;
+    var num2 = input.num2.value;
+    var num3 = input.num3.value;
+    var m_id = num1+""+num2+""+num3;
+    input.m_id.value = m_id;
+
+   
+
+    return true;
+    
+}
+</script>
      <title>신입생 편입생 등록</title>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
@@ -40,7 +56,7 @@
                 </div>
                 
                 <!-- form 시작 -->
-                <form role="form">
+                <form role="form" name="input" action="/HarangProject/myPage?cmd=Anewmem" method="post" onsubmit="return checkform()">
                 
                 <div class="box-body">
                   <div class="input-group">
@@ -50,21 +66,23 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 학번</span>
-                    <select class="form-control" required="required">
-                        <option>2017 [신입생]</option>
-                        <option>2016 [2학년 편입]</option>
-                        <option>2015 [3학년 편입]</option>
+                    <select class="form-control" required="required" onChange="idcheck()" name="num1">
+                        <option value="2017">2017 [신입생]</option>
+                        <option value="2016">2016 [2학년 편입]</option>
+                        <option value="2015">2015 [3학년 편입]</option>
                     </select>
                     <span class="input-group-addon"> - </span>
-                    <select class="form-control" required="required">
-                        <option>01:국문학과</option>
-                        <option>02:수학과</option>
-                        <option>03:컴퓨터 공학과</option>
-                        <option>04:경영학과</option>
-                        <option>05:정보통신학과</option>
+                    <select class="form-control" required="required" name="num2" onChange="id2check()">
+                        <option value="01">01:국문학과</option>
+                        <option value="02">02:수학과</option>
+                        <option value="03">03:컴퓨터 공학과</option>
+                        <option value="04">04:경영학과</option>
+                        <option value="05">05:정보통신학과</option>
                     </select>
                     <span class="input-group-addon"> - </span>
-                    <input type="text" name="m_num" class="form-control" value="055 [최종 번호로 자동 입력] [수동입력 가능]" required="required">
+                    <input type="text" name="num3" class="form-control" value="055 [최종 번호로 자동 입력] [수동입력 가능]" required="required">
+                    <input type="hidden" name="m_id" value="">
+                   
                     <span class="input-group-btn">
                       <button class="btn btn-warning btn-flat" type="button">중복 학번 확인</button>
                     </span>
@@ -75,10 +93,12 @@
                     <input type="text" name="m_dept" class="form-control" value="국어국문학과 [학번 입력시 자동 추가] [불필요하면 삭제 가능]" required="required">
                   </div>
                   <br>
+                  <!--
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i> 생년월일1</span>
                     <input type="text" class="form-control pull-right" id="date" required="required"/>
                   </div>
+                  -->
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i> 생년월일2</span>
@@ -105,8 +125,28 @@
 <%@ include file="../include/footer.jsp" %>
     <script src="../plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
     <script>
-    $(function() {
-        $( "#date" ).datepicker({
-        });
-    });
+   
+    
+    
+    function idcheck(){ 
+        i = input.num1.selectedIndex; // 선택항목의 인덱스 번호
+        var num1= input.num1.options[i].value; // 선택항목 value
+        input.num1.value = num1;
+   }
+    function idcheck2(){ 
+        i = input.num2.selectedIndex; // 선택항목의 인덱스 번호
+        var num2= input.num2.options[i].value; // 선택항목 value
+        input.num2.value = num2;
+   }
+    
+    function mailcheck(){ 
+        i = input.m_mail3.selectedIndex; // 선택항목의 인덱스 번호
+        var mail= input.m_mail3.options[i].value; // 선택항목 value
+        input.m_mail2.value = mail;
+   }
+    
+    
+    
+   
+    
     </script>

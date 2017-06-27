@@ -8,9 +8,11 @@ import java.sql.ResultSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import dto.Im2DTO;
+import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
 public class ImdetailCommand implements CommandInterface {
@@ -38,6 +40,12 @@ public class ImdetailCommand implements CommandInterface {
 			pool = DBConnectionMgr.getInstance();
 			String sql;
 			Im2DTO dto = new Im2DTO();
+			
+			// id 세션값 받아오기
+			HttpSession session = request.getSession();
+			MemberDTO member = (MemberDTO) session.getAttribute("member");
+			String m_name = member.getM_name();
+			
 			try {
 				
 				sql = "select * from tbl_member_lesson ,tbl_lesson,tbl_member where lm_num=?";
@@ -61,6 +69,7 @@ public class ImdetailCommand implements CommandInterface {
 				dto.setLm_term(rs.getString("lm_term"));
 				dto.setLm_year(rs.getString("lm_year"));
 				dto.setLm_comment(rs.getString("lm_comment"));
+				dto.setM_id(m_name);
 				
 			} catch (Exception err) {
 				System.out.println(err);
