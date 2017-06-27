@@ -17,10 +17,12 @@
 	<h1>
     	중고도서 거래 게시판
     </h1>
+    
     <ol class="breadcrumb">
     <!-- 페이지 기록 메인에서 부터 현재 페이지 까지의 경로 나열 -->
     	<li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
         <li class="active">하랑딘 24</li>
+        
     </ol>
 </section>
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
@@ -57,6 +59,12 @@
 										<button type="submit" class="btn btn-block btn-default" >등록</button>
 								</div>
 							</form>
+							
+							<form id="adminDonate" name="adminDonate" method="post" action="/HarangProject/harangdin?cmd=adminDonate">
+								<div class="col-xs-1 no-margin pull-right">
+								<button class="btn btn-primary" type="submit">기부확인</button>
+								</div>
+							</form>
 
 							<table class="table table-bordered table-hover dataTable">
 								<tr role="row">
@@ -78,7 +86,9 @@
 											<button class="btn btn-block btn-default" onclick="fnDelete('${i.b_num }')">삭제</button>
 										</td>
 										<td>${i.b_num }</td>
-										<td>${i.b_name }</td>
+										<td>
+											<a style="cursor:pointer;" onclick="fnRead('${i.b_num}')">${i.b_name}</a>
+										</td>
 										<td>${i.b_writer }</td>
 										<td>${i.b_pub }</td>
 										<td>${i.b_want }</td>
@@ -140,8 +150,15 @@
 </form>
 
 <form name="del" method="post" action="/HarangProject/harangdin?cmd=adminMain">
-	<input type="hidden" name="b_num" value="" id="b_num"/>
+	<input type="hidden" name="b_num" value="" id="b_num1"/>
 	<input type="hidden" name="delete_check" value="delete_check"/>
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
+
+<!-- 글 읽기 -->
+<form name="read" method="post" action="/HarangProject/harangdin?cmd=adminBdetail">
+	<input type="hidden" name="b_num" value="" id="b_num2"/>
 	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
@@ -164,11 +181,12 @@
 	/////////////////////////////끝//////////////////////////////////
 	
 	function fnRead(b_num){
-		document.getElementById("b_num").value = b_num;
-		document.read.submit();
+		document.getElementById("b_num2").value=b_num;
+		read.submit();
+		//alert(b_num);
 	}
 	function fnDelete(b_num){
-		document.getElementById("b_num").value = b_num;
+		document.getElementById("b_num1").value = b_num;
 		document.del.submit();
 	}
 </script>

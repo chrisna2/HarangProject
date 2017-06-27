@@ -37,7 +37,7 @@ public class AdminMainCommand implements CommandInterface {
 		}
 		list(request);
 		
-		return "/WEB-INF/harangdin/m_harangdin_main.jsp";
+		return "/WEB-INF/harangdin/a_harangdin_main.jsp";
 		
 	}
 
@@ -55,11 +55,11 @@ public class AdminMainCommand implements CommandInterface {
 		//System.out.println(keyword +"." + keyfield);
 		
 		if(keyword == null || keyword.equals("")){
-			sql = "SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book order by b_regdate desc";			
+			sql = "SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book where b_choice='판매' order by b_regdate desc";			
 		}
 		else{
-			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book"
-					+ " where " + keyfield + " like '%" + keyword + "%' order by b_regdate desc";
+			sql ="SELECT b_num, b_name, b_writer, b_pub, b_want from tbl_book where b_choice='판매' and "
+					+ keyfield + " like '%" + keyword + "%' order by b_regdate desc";
 		}
 		
 		pool = DBConnectionMgr.getInstance();

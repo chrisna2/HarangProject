@@ -12,6 +12,13 @@ public class BookDTO {
 	String b_pub;
 	String b_content;
 	String b_iscomplete;
+	String m_name;
+	String bh_regdate;
+	int bh_want;
+	String bh_choice;
+	String bh_iscomplete;
+	String b_photo;
+	
 	
 	public String getB_num() {
 		return b_num;
@@ -79,6 +86,42 @@ public class BookDTO {
 	public void setB_iscomplete(String b_iscomplete) {
 		this.b_iscomplete = b_iscomplete;
 	}
+	public String getM_name() {
+		return m_name;
+	}
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
+	}
+	public String getBh_regdate() {
+		return bh_regdate;
+	}
+	public void setBh_regdate(String bh_regdate) {
+		this.bh_regdate = bh_regdate;
+	}
+	public int getBh_want() {
+		return bh_want;
+	}
+	public void setBh_want(int bh_want) {
+		this.bh_want = bh_want;
+	}
+	public String getBh_choice() {
+		return bh_choice;
+	}
+	public void setBh_choice(String bh_choice) {
+		this.bh_choice = bh_choice;
+	}
+	public String getBh_iscomplete() {
+		return bh_iscomplete;
+	}
+	public void setBh_iscomplete(String bh_iscomplete) {
+		this.bh_iscomplete = bh_iscomplete;
+	}
+	public String getB_photo() {
+		return b_photo;
+	}
+	public void setB_photo(String b_photo) {
+		this.b_photo = b_photo;
+	}
 	
-	
+
 }

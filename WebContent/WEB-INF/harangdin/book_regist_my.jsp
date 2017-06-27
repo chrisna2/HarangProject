@@ -26,90 +26,93 @@
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
 <section class="content">
 	<!-- 세로 길이 수정 -->
-	<div class="row">
-		<!-- 너비 사이즈 수정  : col-->
-		<div class="col-md-10">
-        
+    <div class="row">
+    	<!-- 너비 사이즈 수정  : col-->
+	    <div class="col-md-10">
 			<div class="box box-warning">
 				<div class="box-header with-border">
 					<h3 class="box-title">중고도서 등록</h3>
 	            </div>
 	           	<!-- /.box-header -->
-					<form role="form" action="/HarangProject/harangdin?cmd=regist" method="post">
-				<div class="box-body">
-					<input type="hidden" name="m_id" value="${member.m_id}">
-						<!-- text input -->
-	               		<!-- select -->
-						<div class="row">
-							<div class="col-sm-2 form-group">
-								<label>머릿말</label>
-								<select name="b_choice" class="form-control">
-									<option value="판매">판매</option>
-									<option value="기부">기부</option>
-								</select>
+					<form role="form" action="/HarangProject/harangdin?cmd=registMy" method="post"  enctype="multipart/form-data">
+					<div class="box-body">
+						<input type="hidden" name="m_id" value="${member.m_id}">
+							<!-- text input -->
+		               		<!-- select -->
+							<div class="row">
+								<div class="col-sm-2 form-group">
+									<label>머릿말</label>
+									<select name="b_choice" class="form-control">
+										<option value="판매">판매</option>
+										<option value="기부">기부</option>
+									</select>
+								</div>
 							</div>
-						</div>
+		 
+							<div class="form-group">
+								<label>도서명</label>
+	                	 <input type="text" class="form-control" value="${i.b_name }" readonly="readonly">
+	             	   </div>
+	                </div>
 	 
-						<div class="form-group">
-							<label>도서명</label>
-							<input type="text" name="b_name" class="form-control" placeholder="도서명">
-						</div>
-						<div class="row">
-							<div class="col-sm-6 form-group">
-								<label>저자</label>
-								<input type="text" name="b_writer" class="form-control" placeholder="저자">
+	                <div class="row">
+	                <div class="col-sm-6 form-group">
+	                  <label>도서 대표사진</label>
+	                  <img src="${i.b_photo}" class="img-rounded" height="450" width="350">
+	                </div>
+	                <div class="col-sm-6 form-group">
+	                 
+						<label>중고도서 거래번호</label>
+		                <input type="text" class="form-control" value="${i.b_num }" required="required">
+		                <label>학번</label>
+		                <input type="text" class="form-control" value="${i.m_id }">
+		                <label>저자</label>
+		                <input type="text" class="form-control" value="${i.b_writer }">
+		                <label>출판사</label>
+		                <input type="text" class="form-control" value="${i.b_pub }">
+		                <label>재고수량</label>
+		                <input type="text" class="form-control" value="${i.b_stock }">
+		                <label>판매자 희망 포인트</label>
+		                <input type="text" class="form-control" value="${i.b_want }">
+		                <label>등록날짜</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
 							</div>
-							<div class="col-sm-6 form-group">
-								<label>출판사</label>
-								<input type="text" name="b_pub" class="form-control" placeholder="출판사">
-							</div>
+							<input type="text" value="${i.b_regdate }"  class="form-control pull-right" id="reservation" readonly="readonly"/>
 						</div>
-	                
-						<div class="row">
-								
-							<div class="col-sm-6 form-group">
-								<label>재고수량</label>
-								<input type="text" name="b_stock" class="form-control" placeholder="ex)1,2,3,...">
-							</div>
-							<div class="col-sm-6 form-group">
-								<label>판매자 희망 포인트</label>
-								<input type="text" name="b_want" class="form-control" placeholder="ex)3000">
-							</div>
-						</div>
-
-	
-						<!-- textarea -->
-						<div class="form-group">
-							<label>판매 도서 정보</label>
-							<textarea name="b_content" class="form-control" rows="5" 
-								placeholder="도서에 관한 간단한 소개 혹은 도서의 상태에 관한 정보 등을 작성해 주세요."></textarea>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputFile">판매 도서 사진</label>
-							<input type="file" id="exampleInputFile">
-								<p class="help-block">해당 도서의 표지 사진을 올려주세요 </p>
-						</div>
-				</div>
-            	<div class="row">
-					<div class="col-sm-3"></div>
-					<div class="col-sm-2">
-						<button type="submit" class="btn btn-block btn-primary">수정</button>
+						<label>현시각 최고 포인트</label>
+						<input type="text" class="form-control" value="${max_point}" readonly="readonly">
 					</div>
-					</form>
-					
-						<div class="col-sm-2">
-							<button class="btn btn-block btn-danger"
-								onclick="fnDelete">삭제</button>
-						</div>
-					<form action="/HarangProject/harangdin?cmd=main" method="post">
-						<div class="col-sm-2">	
-							<button type="submit" class="btn btn-block">취소</button>
-                  		</div>
-                  	</form>
-                  </div>					
+				</div> 
+
+                <!-- textarea -->
+                <div class="form-group">
+					<label>도서 정보</label>
+					<textarea class="form-control" rows="5">${i.b_content }</textarea>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputFile">판매 도서 사진</label>
+					<input type="file" id="imgInp" name="upFile" required="required">
+						<p class="help-block">해당 도서의 표지 사진을 올려주세요 </p>
+						<img src="" id="local" class="img-rounded" height="120" width="90" alt="User Image"/>
+				</div>
+            <div class="row">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-2">
+					<button type="submit" class="btn btn-block btn-primary">수정</button>
+				</div>
+			</form>
+				<div class="col-sm-2">
+					<button class="btn btn-block btn-danger" onclick="fnDelete">삭제</button>
+				</div>
+				<form action="/HarangProject/harangdin?cmd=main" method="post">
+					<div class="col-sm-2">	
+						<button type="submit" class="btn btn-block">취소</button>
+					</div>
+				</form>
+			</div>					
             <!-- /.box-body -->
-            
-          </div>
   		</div><!-- /.col -->
 	</div><!-- /.row -->
 </section><!-- /. 작업 공간 끝! -->
@@ -118,3 +121,18 @@
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+<script>
+//로컬 업로드 사진 불러오기
+function readURL(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $('#local').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+$("#imgInp").change(function(){
+  readURL(this);
+});
+</script>

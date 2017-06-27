@@ -34,7 +34,7 @@
 					<h3 class="box-title">중고도서 등록</h3>
 	            </div>
 	           	<!-- /.box-header -->
-					<form role="form" action="/HarangProject/harangdin?cmd=regist_proc" method="post">
+					<form role="form" action="/HarangProject/harangdin?cmd=regist_proc" method="post"  enctype="multipart/form-data">
 				<div class="box-body">
 					<input type="hidden" name="m_id" value="${member.m_id}">
 						<!-- text input -->
@@ -85,8 +85,9 @@
 						</div>
 						<div class="form-group">
 							<label for="exampleInputFile">판매 도서 사진</label>
-							<input type="file" id="exampleInputFile">
+							<input type="file" id="imgInp" name="upFile" required="required">
 								<p class="help-block">해당 도서의 표지 사진을 올려주세요 </p>
+								<img src="" id="local" class="img-rounded" height="120" width="90" alt="User Image"/>
 						</div>
 				</div>
 				<!-- /.box-body --> 
@@ -111,3 +112,19 @@
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+//로컬 업로드 사진 불러오기
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#local').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#imgInp").change(function(){
+    readURL(this);
+});
+</script>
