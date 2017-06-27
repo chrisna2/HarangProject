@@ -17,6 +17,8 @@ public class ParttimeDTO {
 	private String m_id; //글쓴이
 	private String m_name; //글쓴이 이름
 	private int cnt_apply; //지원자수
+	private String pm_choice; // 채용여부
+	private boolean checkDeadline; // 마감일 지났는지
 	
 	
 	public int getList_num() {
@@ -115,6 +117,18 @@ public class ParttimeDTO {
 	}
 	public void setCnt_apply(int cnt_apply) {
 		this.cnt_apply = cnt_apply;
+	}
+	public String getPm_choice() {
+		return pm_choice;
+	}
+	public void setPm_choice(String pm_choice) {
+		this.pm_choice = pm_choice;
+	}
+	public boolean isCheckDeadline() {
+		return checkDeadline;
+	}
+	public void setCheckDeadline(boolean checkDeadline) {
+		this.checkDeadline = checkDeadline;
 	}
 	
 }

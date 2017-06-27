@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.DaetaDTO;
 import dto.MemberDTO;
 import dto.ParttimeDTO;
 import paging.PagingBean;
 import paging.dto.PagingDto;
+import util.DateBean;
 
 /**
  * 알바 모집 게시판에 필요한 정보를 DB에서 꺼내오고 게시판 페이지로 이동하는 함수
@@ -64,9 +66,21 @@ public class ParttimeMainCommand implements CommandInterface {
 	 * @param req
 	 */
 	public void getList(HttpServletRequest req) {
-
+		String keyword = req.getParameter("keyword");
+		String keyField = req.getParameter("keyField");
+		ArrayList<ParttimeDTO> list = null;
+		
 		// 게시판에 띄울 글 정보를 모두 불러와 ArrayList에 저장
-		ArrayList<ParttimeDTO> list = bean.getParttimeList();
+		if(keyword == null){
+			list = bean.getParttimeList();
+		}else{
+			list = bean.getParttimeList(keyField, keyword);
+		}
+		
+		// 마감일이 지나면 [마감]으로 말머리 변경
+		for(int i=0; i<list.size(); i++){
+			afterDeadline(((ParttimeDTO)list.get(i)).getP_num()); 
+		}
 
 		// 추가정보 저장=> 1.글번호 2.해당 글에 지원한 지원자
 		for (int i = 0; i < list.size(); i++) {
@@ -76,8 +90,7 @@ public class ParttimeMainCommand implements CommandInterface {
 			if (dto.getM_id().equals("admin02")) {
 				dto.setM_name("관리자");
 			} else {
-				dto.setM_name(bean.getMember(dto.getM_id()).getM_name()); // 이름을
-																			// 저장
+				dto.setM_name(bean.getMember(dto.getM_id()).getM_name()); // 이름을  저장
 			}
 			list.set(i, dto);
 		}
@@ -88,6 +101,10 @@ public class ParttimeMainCommand implements CommandInterface {
 		req.setAttribute("list", list);
 	}
 
+	/**
+	 * 알바 모집 게시판에서 글을 삭제하는 메서드.
+	 * @param req
+	 */
 	public void delete(HttpServletRequest req) {
 		String delete = (String) req.getParameter("delete");
 		String p_num = (String) req.getParameter("p_num");
@@ -97,6 +114,9 @@ public class ParttimeMainCommand implements CommandInterface {
 		}
 	}
 
+	/**
+	 * 알바 모집 게시판에 글을 추가하는 메서드.
+	 */
 	public void insert(String m_id,HttpServletRequest req) {
 		String insert = req.getParameter("insert");
 
@@ -116,7 +136,10 @@ public class ParttimeMainCommand implements CommandInterface {
 			bean.insertParttime(dto);
 		}
 	}
-
+	
+	/**
+	 * 체크된 요일을 매개변수로 받아서 daycode로 변환하는 메서드.
+	 */
 	public String transCode(HttpServletRequest req) {
 		String daycode = "";
 		String[] day = { "월", "화", "수", "목", "금", "토", "일" };
@@ -137,5 +160,16 @@ public class ParttimeMainCommand implements CommandInterface {
 		}
 		return daycode;
 	}
-
+	
+	/**
+	 * 마감일이 지나면 자동으로 말머리가 [마감]으로 변경되는 메서드.
+	 * @param d_num
+	 */
+	public void afterDeadline(String p_num){
+		ParttimeDTO dto = bean.getParttime(p_num);
+		if(new DateBean().checkDeadline(dto.getP_deadline()) && !dto.getP_header().equals("[마감]")){
+			dto.setP_header("[마감]");
+			bean.updateParttime(dto);
+		}
+	}
 }

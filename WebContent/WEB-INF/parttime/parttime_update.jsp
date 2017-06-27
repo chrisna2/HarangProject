@@ -37,11 +37,12 @@
                   	<input type="hidden" name="update" value="OK"/>
                   	<input type="hidden" name="p_num" value="${info.p_num}"/>
                   	<input type="hidden" name="p_daycode" value="" id = "p_daycode" required="required"/>
+                    <input type="hidden" name="read" value="no"/>
                     <!-- text input -->
                     <div class="row">
 	                    <div class="col-md-3 form-group">
 	                      <label>머릿말</label>	                       
-		                    <select class="form-control" name="p_header">
+		                    <select class="form-control" name="p_header" required="required">
 		                    	<c:if test="${info.p_header eq '[모집중]'}">
 		                    		<option selected="selected">[모집중]</option>
 		                    		<option >[마감]</option>
@@ -62,26 +63,29 @@
                     </div>
                     <div class="form-group">
                       <label>제목</label>
-                      <input type="text" class="form-control" name="p_title" value="${info.p_title }"/>
+                      <input type="text" class="form-control" name="p_title" value="${info.p_title }" required="required"/>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>장소</label>
-	                      <input type="text" class="form-control" name="p_location" value="${info.p_location}"/>
+	                      <input type="text" class="form-control" name="p_location" value="${info.p_location}" required="required"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>마감일</label>	                      
-	                      <input type="text" class="form-control pull-right" name="p_deadline" value="${info.p_deadline}"/>                    
+						  <div class="input-group">
+		                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+		                      <input type="text" class="form-control pull-right" name="p_deadline" value="${info.p_deadline}" required="required" id="datepicker"/>
+	                      </div><!-- /.input group -->	                    
 	                    </div>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>시급</label>
-	                      <input type="text" class="form-control" name="p_wage" value="${info.p_wage}"/>
+	                      <input type="text" class="form-control" name="p_wage" value="${info.p_wage}" required="required"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>근무기간</label>
-	                      <input type="text" class="form-control" name="p_term" value="${info.p_term}"/>
+	                      <input type="text" class="form-control" name="p_term" value="${info.p_term}" required="required"/>
 	                    </div>
                     </div>
                     <div class="form-group">
@@ -101,12 +105,12 @@
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" name="p_tel" value="${info.p_tel}"/>
+                      <input type="text" class="form-control" name="p_tel" value="${info.p_tel}" required="required"/>
                     </div>
                     
 					<div class="form-group">
 		                <label>업무 내용</label>&nbsp;&nbsp;&nbsp; <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small>
-		                <textarea class="form-control" name="p_content" rows="10">${info.p_content}</textarea>
+		                <textarea class="form-control" name="p_content" rows="10" required="required">${info.p_content}</textarea>
 		            </div>
 					<div class="row">
 						<div class="col-md-4"></div>
@@ -153,6 +157,9 @@
 	});
 	
 	<script>
+	//숫자만 입력하게 하기 
+    $(".onlynum").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+	
 	function fnUpdate(){
 		var arr = [];
     	$(":checkbox:checked").each(function(){

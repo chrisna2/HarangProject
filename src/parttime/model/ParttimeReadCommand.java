@@ -246,7 +246,12 @@ public class ParttimeReadCommand implements CommandInterface {
 
 		}
 	}
-
+	
+	/**
+	 * 알바 게시글을 수정하는 메서드.
+	 * @param member
+	 * @param req
+	 */
 	public void update(MemberDTO member, HttpServletRequest req){
 		String update = req.getParameter("update");
 

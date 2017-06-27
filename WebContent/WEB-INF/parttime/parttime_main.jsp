@@ -110,22 +110,23 @@
 						</ul>
 					</div><!-- 페이징 버튼 -->
 					
-					
+					<form name="search" method="post" action="/HarangProject/parttime?cmd=PMAIN">
 					<div class="row">
 						<div class="col-md-2"></div>
 						<div class="col-md-2 form-group">
-							<select class="form-control">
+							<select class="form-control" name="keyField">
 	                        <option>제목</option>
 	                        <option>시급</option>
 	                      </select>
 						</div>
 						<div class="col-md-6 input-group input-group-sm">
-	                    <input type="text" class="form-control">
+	                    <input type="text" name="keyword" class="form-control">
 	                    <span class="input-group-btn">
-	                      <button class="btn btn-info btn-flat" type="button">Go!</button>
+	                      <button class="btn btn-info btn-flat" type="submit">Go!</button>
 	                    </span>
 	                  </div><!-- /input-group -->
                   </div>
+                  </form>
 				</div>
 			</div>
 		</div><!-- row -->

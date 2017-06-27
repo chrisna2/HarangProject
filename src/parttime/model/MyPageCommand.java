@@ -12,6 +12,7 @@ import dto.P_ApplyDTO;
 import dto.ParttimeDTO;
 import paging.PagingBean;
 import paging.dto.PagingDto;
+import util.DateBean;
 
 public class MyPageCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
@@ -92,6 +93,8 @@ public class MyPageCommand implements CommandInterface {
 			dto.setList_num(i+1); // 글번호 설정
 			dto.setCnt_apply(bean.getParttimeCnt_apply(dto.getP_num())); // 지원자수
 			dto.setM_name(bean.getMember(dto.getM_id()).getM_name());// 작성자의 회원번호로 검색하여 지원자 이름을 받아온다.
+			dto.setPm_choice(bean.getParttimeApply(m_id, dto.getP_num()).getPm_choice()); //채용선택여부
+			dto.setCheckDeadline(new DateBean().checkDeadline(dto.getP_deadline())); //마감일이 지났는지
 			p_alist.add(dto);
 		} 
 		paging(3,p_alist.size(), req); // 지원자 목록 페이징
@@ -107,6 +110,8 @@ public class MyPageCommand implements CommandInterface {
 			dto.setList_num(i+1); // 글번호 설정
 			dto.setCnt_apply(bean.getDaetaCnt_apply(dto.getD_num())); // 지원자수
 			dto.setM_name(bean.getMember(dto.getM_id()).getM_name());// 작성자의 회원번호로 검색하여 지원자 이름을 받아온다.
+			dto.setDm_choice(bean.getDaetaApply(m_id, dto.getD_num()).getDm_choice()); //채용선택여부
+			dto.setCheckDeadline(new DateBean().checkDeadline(dto.getD_deadline())); //마감일이 지났는지
 			d_alist.add(dto);
 		} 
 		paging(4 ,d_alist.size(), req); // 지원자 목록 페이징
@@ -132,21 +137,21 @@ public class MyPageCommand implements CommandInterface {
 			req.setAttribute("paging1", paging1);
 		case 2:
 			int nowPage2 = 0, nowBlock2 = 0;
-			if (req.getParameter("nowPage2") != null) {nowPage2 = Integer.parseInt(req.getParameter("nowPage"));}
-			if (req.getParameter("nowBlock2") != null) {nowBlock2 = Integer.parseInt(req.getParameter("nowBlock"));}
+			if (req.getParameter("nowPage2") != null) {nowPage2 = Integer.parseInt(req.getParameter("nowPage2"));}
+			if (req.getParameter("nowBlock2") != null) {nowBlock2 = Integer.parseInt(req.getParameter("nowBlock2"));}
 			PagingDto paging2 = pbean.Paging(listSize, 5, nowPage2, 3, nowBlock2);
 			req.setAttribute("paging2", paging2);
 		case 3:
 			int nowPage3 = 0, nowBlock3 = 0;
-			if (req.getParameter("nowPage3") != null) {nowPage3 = Integer.parseInt(req.getParameter("nowPage"));}
-			if (req.getParameter("nowBlock3") != null) {nowBlock3 = Integer.parseInt(req.getParameter("nowBlock"));}
+			if (req.getParameter("nowPage3") != null) {nowPage3 = Integer.parseInt(req.getParameter("nowPage3"));}
+			if (req.getParameter("nowBlock3") != null) {nowBlock3 = Integer.parseInt(req.getParameter("nowBlock3"));}
 			PagingDto paging3 = pbean.Paging(listSize, 5, nowPage3, 3, nowBlock3);
 			req.setAttribute("paging3", paging3);
 		
 		case 4:
 			int nowPage4 = 0, nowBlock4 = 0;
-			if (req.getParameter("nowPage4") != null) {nowPage4 = Integer.parseInt(req.getParameter("nowPage"));}
-			if (req.getParameter("nowBlock4") != null) {nowBlock4 = Integer.parseInt(req.getParameter("nowBlock"));}	
+			if (req.getParameter("nowPage4") != null) {nowPage4 = Integer.parseInt(req.getParameter("nowPage4"));}
+			if (req.getParameter("nowBlock4") != null) {nowBlock4 = Integer.parseInt(req.getParameter("nowBlock4"));}	
 			PagingDto paging4 = pbean.Paging(listSize, 5, nowPage4, 3, nowBlock4);
 			req.setAttribute("paging4", paging4);
 		}

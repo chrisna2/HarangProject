@@ -1,6 +1,8 @@
 package parttime.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,18 +10,25 @@ import javax.servlet.http.HttpServletResponse;
 import dto.D_ApplyDTO;
 import dto.DaetaDTO;
 import dto.MemberDTO;
+import dto.P_ApplyDTO;
+import dto.ParttimeDTO;
 import message.model.MessageBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
+import point.PointBean;
+import util.DateBean;
 
 public class DaetaReadCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 	MessageBean mbean = new MessageBean();
+	PointBean pbean = new PointBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 		MemberDTO member = bean.getLoginInfo(req);
 		String m_id = member.getM_id();
 		
 		cancelApply(member, req); // 지원을 취소하는 경우
+		update(member, req); //글을 수정하는 경우
+		
 		
 		/** Read!!!!!! 글 정보 */
 		String d_num = req.getParameter("d_num"); // 글번호 parameter
@@ -32,9 +41,11 @@ public class DaetaReadCommand implements CommandInterface {
 		
 		/** Apply!! 지원자 정보*/
 		apply(req); // 지원완료 후
+		isComplete(req); // 대타 수행 확인
 		paging(req); // paging 관련 변수 받아서 넘기기
 		choice(m_id, req); // 채용버튼 눌렀을 때 처리
 		isApply(m_id, req); // 지원했는지 안했는지
+		isPicked(m_id, req); // 채용이 되었는지
 		showApply(req); // 지원자목록
 		/** 끝 : Apply */
 		
@@ -90,7 +101,6 @@ public class DaetaReadCommand implements CommandInterface {
 		
 		// 지원완료 후 이 페이지로 넘어올 경우
 		if (m_id != null && dm_reason != null ) {
-			System.out.println("지원완료");
 			bean.createDaetaResume(d_num, m_id, dm_reason);
 
 			// 지원 확인 메시지 보내기 : 관리자 -> 글쓴이
@@ -217,5 +227,135 @@ public class DaetaReadCommand implements CommandInterface {
 
 		}
 	}
+	
+	/**
+	 * 마감일이 지났는지 여부를 확인하는 메서드.
+	 * @param d_num
+	 * @return true 지남|| false 안 지남
+	 */
+	public boolean checkDeadline(String d_num){
+		DaetaDTO dto = bean.getDaeta(d_num);
+		String d_deadline = dto.getD_deadline();
+		
+		// d_deadline을 Date로 형변환
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		Date deadline = null;
+		
+		try{
+			deadline = date.parse(d_deadline);
+		}catch(Exception e){}
+		
+		// 오늘날짜와 비교해서 지났으면 true 안지났으면 false를 반환
+		return deadline.before(new Date());
+	}
+	
+	/**
+	 * 대타를 확인 후 포인트를 지급하는 메서드.
+	 * @param req
+	 */
+	public void isComplete(HttpServletRequest req){
+		String d_num = req.getParameter("d_num");
+		String givePoint = req.getParameter("givePoint");
+		String m_id = req.getParameter("m_id");
+		System.out.println("givePoint : " + givePoint);
+		
+		DaetaDTO dto = bean.getDaeta(d_num); // 대타 글 정보
+		MemberDTO mem = bean.getMember(dto.getM_id()); // 작성자 정보
+		MemberDTO admin = bean.getMember("admin02"); // 관리자 정보
+		
+		/** 대타 확인 및 포인트 지급*/
+		if("OK".equals(givePoint)){
+			/** 지원자 정보에 iscomplete에 'Y'를 저장 */
+			D_ApplyDTO apply = bean.getDaetaApply(m_id, d_num);
+			apply.setDm_iscomplete("Y");
+			bean.updateDaetaMember(apply);
+			
+			/** 관리자 -> 대타  포인트 지급!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+			pbean.tradePoint("대타 완료 확인", admin.getM_point(), 
+							dto.getD_deposit(), admin.getM_id(), apply.getM_id());
+		}
+		
+		/** 대타 불만족 및 포인트 회수*/
+		if("NO".equals(givePoint)){
+			/** 지원자 정보에 iscomplete에 'N'를 저장 */
+			D_ApplyDTO apply = bean.getDaetaApply(m_id, d_num);
+			apply.setDm_iscomplete("N");
+			bean.updateDaetaMember(apply);
+			
+			/** 관리자 -> 작성자  포인트 지급!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+			pbean.tradePoint("대타 불만족으로 인한 포인트 반환", admin.getM_point(), 
+							dto.getD_deposit(), admin.getM_id(), mem.getM_id());
+		}
+	}
 
+	/**
+	 * 대타 날짜가 지난 후 신고버튼이 나타나게 하는 메서드. 
+	 * @param m_id 회원번호
+	 * @param req 
+	 */
+	public void getReportButton(String m_id, HttpServletRequest req){
+		String d_num = req.getParameter("d_num");
+		DaetaDTO dto = bean.getDaeta(d_num);
+		D_ApplyDTO apply = bean.getDaetaApply(m_id, d_num);
+		String dm_report = null;
+		
+		/** 대타 날짜가 지났고, 채용된 회원일 경우 처리*/
+		if(new DateBean().checkDeadline(dto.getD_date()) && apply.getDm_choice().equals("Y")){
+			dm_report = "OK";
+		}
+		req.setAttribute("dm_report", dm_report);
+		
+	}
+	
+	/**
+	 * 대타 게시글을 수정하는 메서드.
+	 * @param member
+	 * @param req
+	 */
+	public void update(MemberDTO member, HttpServletRequest req){
+		String update = req.getParameter("update");
+
+		if ("OK".equals(update)) {
+			DaetaDTO dto = new DaetaDTO();
+			dto.setM_id(member.getM_id());
+			dto.setD_title(req.getParameter("d_title"));
+			dto.setD_deadline(req.getParameter("d_deadline"));
+			dto.setD_wage(Integer.parseInt(req.getParameter("d_wage")));
+			dto.setD_date(req.getParameter("d_date"));
+			dto.setD_content(req.getParameter("d_content"));
+			dto.setD_tel(req.getParameter("d_tel"));
+			dto.setD_location(req.getParameter("d_location"));
+			dto.setD_header(req.getParameter("d_header"));
+			dto.setD_num(req.getParameter("d_num"));
+			dto.setD_deposit(Integer.parseInt(req.getParameter("d_deposit")));
+
+			bean.updateDaeta(dto);
+			
+			// 해당 글의 지원자들에게 글의 내용이 수정되었음을 알리는 메시지를 보낸다.
+			ArrayList list = bean.getDaetaApplyList(req.getParameter("d_num")); // 지원자 목록 데이터
+			for (int i = 0; i < list.size(); i++) {
+				D_ApplyDTO dto1 = (D_ApplyDTO) list.get(i);
+				MemberDTO applicant = bean.getMember(dto1.getM_id()); // 지원자의 회원정보
+				
+				String title = applicant.getM_name()+"님이 지원한 글의 내용이 수정되었습니다.";
+				String content =applicant.getM_name()+"님이 지원한 알바 모집 글의 작성자 " + member.getM_name() + "님이 \"" + dto.getD_title() + "\"글의 내용을 수정하였습니다."
+						+ "\n해당 글을 반드시 확인해주세요.";
+				
+				mbean.postMessage(title, content, "admin02", dto1.getM_id());
+			}
+		}
+	}
+	
+	/**
+	 * 채용 선택이 되었는지 확인하는 메서드.
+	 * @param m_id
+	 * @param req
+	 */
+	public void isPicked(String m_id, HttpServletRequest req){
+		String d_num = req.getParameter("d_num");
+		D_ApplyDTO apply = bean.getDaetaApply(m_id, d_num);
+		if("Y".equals(apply.getDm_choice())){
+			req.setAttribute("pick", "OK");
+		}
+	}
 }

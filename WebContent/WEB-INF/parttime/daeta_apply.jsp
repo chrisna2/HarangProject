@@ -63,6 +63,7 @@
 								<input type="hidden" name="d_num" value="${d_num}"/>
 								<input type="hidden" name="nowPage" value="${nowPage}"/>
       							<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      							<input type="hidden" name="tab" value="${tab}"/>
       							<input type="hidden" name="read" value="no"/>							
 							<label>지원 동기</label>
 								<textarea class="form-control" name="dm_reason" >본인을 마구마구 뽐내주세요.</textarea>
@@ -90,6 +91,7 @@
 	<input type="hidden" name="nowPage" value="${nowPage}"/>
     <input type="hidden" name="nowBlock" value="${nowBlock}"/>
     <input type="hidden" name="read" value="no"/>
+    <input type="hidden" name="tab" value="${tab}"/>
 </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>

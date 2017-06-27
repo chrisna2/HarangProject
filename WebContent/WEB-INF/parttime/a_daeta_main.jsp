@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/a_header.jsp"%>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -32,83 +32,122 @@
 					</div>
 					<!-- /.box-header -->
 					<div class="box-body">
-						<table id = "example1" class="table table-bordered table-striped">
+						<div class="row">
+						<div class="col-md-2">
+							<button class="btn btn-xs btn-block btn-info" onclick="fnPost()">글쓰기</button>
+						</div>					
+                  	</div>
+						<table class="table table-bordered table-striped">
 							<tr>
 								<th></th>
 								<th style="width: 10px">#</th>
-								<th style="width: 40%">제목</th>
-								<th>대타 날짜</th>
-								<th>글쓴이</th>
+								<th style="width: 32%">제목</th>
+								<th style="width: 13%">대타 날짜</th>
+								<th style="width: 8%">글쓴이</th>
 								<th>작성일</th>
-								<th>조회수</th>
-								<th>지원자 수</th>
+								<th>채용</th>
+								<th>거래</th>
+								<th>신고</th>
 							</tr>
-							<tr>
-								<td><input type="checkbox" name="check"/></td>
-								<td>1</td>
-								<td>[모집중] 컴퓨터공학과 과사무실 알바 모집<br>시급 : 7000원 업무 : 사무/청소
-								</td>
-								<td>2017-05-29</td>
-								<td>컴공조교</td>
-								<td>2017-05-29</td>
-								<td>100</td>
-								<td>20</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="check"/></td>
-								<td>2</td>
-								<td>[모집중] 학관 카페 파트타임 모집<br>시급 : 6500원 업무 : 바리스타/서비스
-								</td>
-								<td>2017-05-25</td>
-								<td>카페</td>
-								<td>2017-05-25</td>
-								<td>45</td>
-								<td>5</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="check"/></td>
-								<td>3</td>
-								<td>[마감] 하랑대학교 안전지킴이 알바<br>시급 : 6500원 업무 : 서비스
-								</td>
-								<td>2017-05-15</td>
-								<td>관리자</td>
-								<td>2017-05-15</td>
-								<td>64</td>
-								<td>20</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" name="check"/></td>
-								<td>4</td>
-								<td>[마감] 학관 식당 설거지 알바<br>시급 : 6500원 업무 : 설거지
-								</td>
-								<td>2017-05-29</td>
-								<td>학생식당</td>
-								<td>2017-05-29</td>
-								<td>15</td>
-								<td>3</td>
-							</tr>
+							<c:choose>
+								<c:when test="${fn:length(list) eq 0}">
+								<tr>
+									<td></td>
+									<td></td>
+									<td>게시물이 없습니다.<td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var="list" 
+											   begin="${paging.beginPerPage}" 
+											   end="${paging.beginPerPage + paging.numPerPage -1}" 
+											   varStatus="status">
+										<tr>
+											<td><input type="checkbox"/></td>
+											<td>${list.list_num}</td>
+											<td>${list.d_header}&nbsp;&nbsp; 
+												<a href="javascript:fnRead('${list.d_num}')" id="read">${list.d_title}</a>
+											</td>
+											<td>${list.d_date} </td>
+											<td>${list.m_name}</td>
+											<td>${list.d_regdate}</td>
+											<c:choose>
+												<c:when test="${(list.d_pick eq null) and (list.d_header ne '[마감]')}">
+													<td><span class="btn btn-info btn-xs">채용중</span></td>
+												</c:when>
+												<c:when test="${(list.d_pick ne null) and (list.d_header eq '[마감]')}">
+													<td><span class="btn btn-default btn-xs">완료</span></td>
+												</c:when>
+												<c:when test="${(list.d_pick eq null) and (list.d_header eq '[마감]')}">
+													<td><span class="btn btn-default btn-xs">실패</span></td>
+												</c:when>
+												<c:otherwise>
+													<td>${list.d_pick}</td>
+												</c:otherwise>
+											</c:choose>
+											<c:choose>
+												<c:when test="${(list.d_pick eq null) and (list.d_header eq '[마감]')}">
+												<td></td>
+												</c:when>
+												<c:otherwise>
+												<td>
+													<c:if test="${state eq 'prepare'}"><span class="btn btn-default btn-xs">준비중</span></c:if>
+													<c:if test="${state eq 'progress'}"><span class="btn btn-info btn-xs">진행중</span></c:if>
+													<c:if test="${state eq 'waiting'}"><span class="btn btn-info btn-xs">대기중</span></c:if>
+													<c:if test="${state eq 'warning'}"><span class="btn btn-warning btn-xs">경고</span></c:if>
+													<c:if test="${state eq 'success'}"><span class="btn btn-success btn-xs">성공</span></c:if>
+													<c:if test="${state eq 'denied'}"><span class="btn btn-danger btn-xs">거절</span></c:if>
+												</td>
+												</c:otherwise>
+											</c:choose>
+											<c:choose>
+												<c:when test="${dm_report eq 'OK'}">
+													<td><span class="btn btn-danger btn-xs">신고</span></td>
+												</c:when>
+												<c:otherwise>
+													<td></td>
+												</c:otherwise>
+											</c:choose>
+										</tr>
+									</c:forEach>
+							</c:otherwise>
+							</c:choose>
 						</table>
 					</div>
-					<div class="col-md-2">
-						<button class="btn btn-block btn-danger">삭제</button>
-					</div>
 					<!-- /.box-body -->
+					<div class="col-md-2">
+							<button class="btn btn-xs btn-block btn-danger" onclick="fnDelete()">삭제</button>
+					</div>
+					<!-- 페이징 버튼 -->
 					<div class="box-footer clearfix">
 						<ul class="pagination pagination-sm no-margin pull-right">
-							<li><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">&raquo;</a></li>
+							<c:if test="${paging.nowBlock > 0}">
+							<li><a href="javascript:prevPage()">&laquo;</a></li>
+							</c:if>
+						  <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+						  	<!-- if문 추가 : 20170615 -->
+						  	<c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
+							<li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+						  	</c:if>
+						  	<!-- 끝 -->
+						  </c:forEach>
+						  	<c:if test="${paging.totalBlock > paging.nowBlock +1}">
+							<li><a href="javascript:nextPage()">&raquo;</a></li>
+							</c:if>
 						</ul>
-					</div><!-- /.box -->
+					</div><!-- 페이징 버튼 -->
 					<div class="row">
 						<div class="col-md-2"></div>
 						<div class="col-md-2 form-group">
 							<select class="form-control">
 	                        <option>제목</option>
 	                        <option>시급</option>
-	                        <option>직종</option>
 	                      </select>
 						</div>
 						<div class="col-md-6 input-group input-group-sm">
@@ -126,10 +165,65 @@
 	</section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->
 </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
+<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/parttime?cmd=DMAIN">
+	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/parttime?cmd=DMAIN">
+	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
+</form>
+<!-- 페이징 : 해당 페이지로 이동하는 폼 -->
+<form id="goPage" method="post" action="/HarangProject/parttime?cmd=DMAIN">
+	<input type="hidden" name="nowPage" value="" id="page"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
+<!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
+<!-- 글 쓰기 -->
+<form name="post" method="post" action="/HarangProject/parttime?cmd=DPOST">
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
+
+<!-- 글 읽기 -->
+<form name="read" method="post" action="/HarangProject/parttime?cmd=DREAD">
+	<input type="hidden" name="d_num" value="" id="d_num"/>
+	<input type="hidden" name="tab" value="DMAIN"/>
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="../include/a_footer.jsp"%>
 
 <!-- --------------------------------------------------------------------------------------------------- -->
+<script>
+///////////////// 페이지 관련 javascript function////////////////////
+function prevPage(){
+	document.getElementById("prevPage").submit();
+}
+function nextPage(){
+	document.getElementById("nextPage").submit();
+}
+function goPage(nowPage){
+	document.getElementById("page").value = nowPage;
+	document.getElementById("goPage").submit();
+}
+/////////////////////////////끝//////////////////////////////////
+
+function fnRead(d_num){
+	document.getElementById("d_num").value = d_num;
+	document.read.submit();
+}
+
+function fnPost(){
+	document.post.submit();
+}
+
+</script>
+ 
+ 
 
  

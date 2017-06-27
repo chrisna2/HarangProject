@@ -16,13 +16,21 @@ public class CommandFactory
 	public CommandInterface createCommand(String cmd)
 	{
 		
-		if(cmd.equals("A_SCH_UPDATE"))
+		if(cmd.equals("A_SCH_CON_UPDATE"))
 		{
-			return new A_Sch_Update_Command();
+			return new A_Sch_Con_Update_Command();
+		}
+		if(cmd.equals("A_SCH_CON_UP_COMPLETE"))
+		{
+			return new A_Sch_Con_Up_Complete_Command();
 		}
 		else if(cmd.equals("A_SCH_POST"))
 		{
 			return new A_Sch_Post_Command();
+		}
+		else if(cmd.equals("A_SCH_POST_COMPLETE"))
+		{
+			return new A_Sch_Post_Complete_Command();
 		}
 		else if(cmd.equals("A_SCH_LIST"))
 		{
@@ -31,6 +39,18 @@ public class CommandFactory
 		else if(cmd.equals("U_SCH_LIST"))
 		{
 			return new U_Sch_List_Command();
+		}
+		else if(cmd.equals("U_SCH_JOIN"))
+		{
+			return new U_Sch_Join_Command();
+		}
+		else if(cmd.equals("U_SCH_JOIN_CANCLE"))
+		{
+			return new U_Sch_Join_Cancle_Command();
+		}
+		else if(cmd.equals("A_SCH_DELETE"))
+		{
+			return new A_Sch_Delete_Command();
 		}
 		
 		

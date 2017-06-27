@@ -40,11 +40,11 @@ public class U_Bb_Con_Up_Complete_Command implements CommandInterface {
 		String bb_num = (String)req.getParameter("bb_num");
 		
 		
-		System.out.println(bb_title);
+		/*System.out.println(bb_title);
 		System.out.println();
 		System.out.println(bb_content);
 		System.out.println();
-		System.out.println(bb_nickname);
+		System.out.println(bb_nickname);*/
 		
 		
 			

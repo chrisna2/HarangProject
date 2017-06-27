@@ -115,6 +115,12 @@
 							
 							<c:otherwise><!-- 남이 쓴 글일 때 -->
 								<c:choose>
+									<c:when test="${info.p_header eq '[마감]'}">
+									<div class="col-md-4"></div>
+									<div class="col-md-4">
+										<button class="btn btn-block btn-defalut" disabled="disabled">마감</button>
+									</div>
+									</c:when>
 									<c:when test="${applied eq 'N' || empty applied}">
 									<div class="col-md-4"></div>
 									<div class="col-md-4">

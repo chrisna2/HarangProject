@@ -6,8 +6,57 @@
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
-<title>학사일정</title>
+<title>대나무숲</title>
 
+<script>
+	
+	function fnGoback(){
+		
+		document.gobocktocontent.submit();
+	}
+	
+	function fnbbp(){
+		
+		//alert(CKEDITOR.instances.editor1.getData().length);
+		
+		if(document.bbpostcomplete.bb_nickname.value ==""||
+				CKEDITOR.instances.editor1.getData() ==""||
+				document.bbpostcomplete.bb_title.value ==""){
+			
+			alert("빠짐없이 입력 해주세요");
+			return;
+			
+		}
+		else if(document.bbpostcomplete.bb_nickname.value.length>50){
+			
+			
+			alert("닉네임을 너무 길게 입력하셨습니다. 50글자 이하로 입력 해 주세요.(공백 포함)");
+			return;
+		}
+		else if(document.bbpostcomplete.bb_title.value.length>200){
+			
+			
+			alert("제목을 너무 길게 입력하셨습니다. 200글자 이하로 입력 해 주세요.(공백 포함)");
+			return;
+		}
+		
+		else if(CKEDITOR.instances.editor1.getData().length>4000){
+			
+			
+			alert("본문을 너무 길게 입력하셨습니다. 4000글자 이하로 입력 해 주세요.(공백 포함)");
+			return;
+		}
+		
+		
+		else {
+			document.bbpostcomplete.submit();
+						
+		}
+		
+	}
+	
+	
+</script>
 
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
@@ -15,7 +64,7 @@
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
 		<h1>
-			대나무숲 <small>관리자가 대숲 글 쓰는 곳 관리자의 경우 공지사항 등록 활성화</small>
+			대나무숲 <small>관리자가 대숲 글 수정하는곳</small>
 		</h1>
 		<ol class="breadcrumb">
 			<!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
@@ -24,7 +73,10 @@
 		</ol>
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-	<form>
+	<form action="/HarangProject/bamboo" name="bbpostcomplete"
+		method="post">
+		<input type="hidden" name="cmd" value="A_BB_CONUP_COMPLETE"> <input
+			type="hidden" name="bb_num" value="${bbcon.bb_num }">
 		<section class="content">
 			<!-- 세로 길이 수정 -->
 			<div class="row">
@@ -33,22 +85,25 @@
 
 					<div class='box box-info'>
 						<div class='box-header'>
-							<h3 class='box-title'>대나무숲 글 등록</h3>
+							<h3 class='box-title'>대나무숲 글 수정</h3>
 							<br> <br>
 							<!-- tools box -->
 
 							<div class="form-group">
 								<label>제목</label> <input type="text" class="form-control"
-									placeholder="제목을 입력 해 주세요" />
+									value="${bbcon.bb_title }" name="bb_title" />
 							</div>
 
-							
+							<div class="form-group">
+								<label>닉네임</label> <input type="text" class="form-control"
+									value="${bbcon.bb_nickname }" name="bb_nickname" />
+							</div>
 							
 							
 							<div class="row">
 								<div class="col-md-2 form-group">
 									<div class="checkbox">
-										<label> <input type="checkbox">공지사항 등록
+										<label> <input type="checkbox" name = "gongji">공지사항 등록
 										</label>
 									</div>
 
@@ -67,18 +122,19 @@
 
 						<div class='box-body pad'>
 
-							<textarea id="editor1" name="editor1" rows="10" cols="80">
-                                            본문을 입력 해 주세요.
+							<textarea id="editor1" name="bb_content" rows="10" cols="80">
+                                            ${bbcon.bb_content }
                     </textarea>
 						</div>
 
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-2">
-								<button class="btn btn-block btn-primary">등록</button>
+								<a type="button" class="btn btn-block btn-primary"
+								href="javascript:fnbbp()">수정</a>
 							</div>
 							<div class="col-md-2">
-								<button class="btn btn-block btn-danger">취소</button>
+								<a class="btn btn-block btn-danger" href="javascript:fnGoback()">취소</a>
 							</div>
 						</div>
 
@@ -92,6 +148,18 @@
 			<!-- /.row -->
 		</section>
 	</form>
+	
+	
+	<!--  대나무숲 글 수정하기 페이지에서 취소를 눌렀을 때 원래 페이지로 돌아가기 위한 폼 시작 -->
+	<form method="post" action="/HarangProject/bamboo"
+		name="gobacktocontent">
+		<input type="hidden" name="bb_num" value="${bbcon.bb_num}" /> <input
+			type="hidden" name="cmd" value="U_BB_CON" />
+
+	</form>
+	<!--  대나무숲 글 수정하기 페이지에서 취소를 눌렀을 때 원래 페이지로 돌아가기 위한 폼 끝 -->
+	
+	
 	<!-- /. 작업 공간 끝! -->
 	<!------------------------------------------------------------------------------------------------------------------->
 </div>
