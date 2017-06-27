@@ -31,20 +31,20 @@
            <div class="col-md-9">
            
              <div class="box">
-                <form action="">
+                <form name="lesson">
                 <div class="box-header">
                     <h3 class="box-title">수업 개설</h3>
                 </div>
                 <div class="box-body">
                      <div class="input-group">
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 개설 학기</span>
-                          <select class="form-control input-sm" required="required">
+                          <select name="l_term" class="form-control input-sm" required="required">
                             <option></option>
                             <option value="1">1학기</option>
                             <option value="2">2학기</option>
                           </select>
                              <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 개설 학년</span>
-                          <select class="form-control input-sm" required="required">
+                          <select name="l_grade" class="form-control input-sm" required="required">
                             <option></option>
                             <option value="0">모든학년</option>
                             <option value="1">1학년</option>
@@ -56,23 +56,20 @@
                      <br>
                      <div class="input-group">
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 개설 학과</span>
-                          <select class="form-control input-sm" required="required">
+                          <select class="form-control input-sm" name="l_dept" required="required">
                             <option></option>
-                            <option value="교양">교양</option>
-                            <option value="국문학과">국문학과</option>
-	                        <option value="수학과">수학과</option>
-	                        <option value="컴퓨터공학과">컴퓨터공학과</option>
-	                        <option value="경영학과">경영학과</option>
-	                        <option value="정보통신학과">정보통신학과</option>
+                           <c:forEach items="${dlist}" var="t">
+                                    <option value="${t.l_dept}">${t.l_dept}</option> 
+                                </c:forEach>
                           </select>
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 선택 필수</span>
-                          <select class="form-control input-sm" required="required">
+                          <select name="l_credit" class="form-control input-sm" required="required">
                             <option></option>
                             <option value="선택">선택</option>
                             <option value="필수">필수</option>
                           </select>
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 이수 학점</span>
-                          <select class="form-control input-sm" required="required">
+                          <select name="l_grade" class="form-control input-sm" required="required">
                             <option></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -83,7 +80,7 @@
                     <br>
                      <div class="input-group">
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 수업 요일</span>
-                          <select class="form-control input-sm" required="required">
+                          <select name="l_day" class="form-control input-sm" required="required">
                             <option></option>
                             <option value="월">월</option>
                             <option value="회">화</option>
@@ -92,7 +89,7 @@
 	                        <option value="금">금</option>
                           </select>
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 수업 시간</span>
-                          <select class="form-control input-sm" required="required">
+                          <select name="l_time" class="form-control input-sm" required="required">
                             <option></option>
                             <option value="1-3">1-3교시</option>
                             <option value="4-5">4-5교시</option>
@@ -102,25 +99,35 @@
                     <br>
                      <div class="input-group">
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 교수님</span>
-                          <input type="text" name="m_tel" class="form-control" required="required"/>
+                            <select class="form-control input-sm" name="l_teacher" required="required">                        
+                                 <option></option>   
+                                <c:forEach items="${tlist}" var="t">
+                                    <option value="${t.l_teacher}">${t.l_teacher}</option> 
+                                </c:forEach>
+                            </select>
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 강의실</span>
-                          <input type="text" name="m_tel" class="form-control" required="required"/>
+                          <select class="form-control input-sm" name="l_room" required="required">                        
+                                 <option></option>   
+                                <c:forEach items="${rlist}" var="t">
+                                    <option value="${t.l_room}">${t.l_room}</option> 
+                                </c:forEach>
+                            </select>
                     </div>
                 </div>
                 <div class="box-footer clearfix" align="right">
+                    <button type="button" class="btn btn-info" onclick="tfindtt()">선생님 시간표 검색</button>
+                    <button type="button" class="btn btn-info" onclick="rfindtt()">수강실 시간표 검색</button>
                     <button type="button" class="btn btn-gray"> 취소  </button>
                     <button type="submit" class="btn btn-success"> 신규 등록  </button>
                 </div>
            </form>
             </div>
             
-              <!-- 수업 시간표 -->
+            <!-- 수업 시간표 -->
              <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">시간표 조회</h3>
+                  <h3 class="box-title">시간표 현황</h3>
                    <div class="box-tools">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -144,83 +151,82 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr id="t1">
                       <td class="bg-gray"><br><b>1교시</b><br>[9시 ~ 10시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
-                       <td class="bg-gray"><br><b>2교시</b><br>[10시 ~ 11시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                    <tr id="t2">
+                     <td class="bg-gray"><br><b>2교시</b><br>[10시 ~ 11시]</td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t3">
                        <td class="bg-gray"><br><b>3교시</b><br>[11시 ~ 12시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t4">
                        <td class="bg-gray"><br><b>4교시</b><br>[12시 ~ 13시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t5">
                        <td class="bg-gray"><br><b>5교시</b><br>[13시 ~ 14시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
-                       <td class="bg-gray"><br><b>6교시</b><br>[14시 ~ 15시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                    <tr id="t6">
+                      <td class="bg-gray"><br><b>6교시</b><br>[14시 ~ 15시]</td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
-                       <td class="bg-gray"><br><b>7교시</b><br>[15시 ~ 16시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                    <tr id="t7">
+                      <td class="bg-gray"><br><b>7교시</b><br>[15시 ~ 16시]</td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t8">
                        <td class="bg-gray"><br><b>8교시</b><br>[16시 ~ 17시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
-                    <tr>
+                    <tr id="t9">
                        <td class="bg-gray"><br><b>9교시</b><br>[17시 ~ 18시]</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td id="d1"></td>
+                      <td id="d2"></td>
+                      <td id="d3"></td>
+                      <td id="d4"></td>
+                      <td id="d5"></td>
                     </tr>
                    </tbody>
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
-		          
               </div><!-- /.col -->
            </div><!-- /.row -->
         </section><!-- /. 작업 공간 끝! -->
@@ -229,3 +235,190 @@
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+function tfindtt() {
+
+    var l_check = "teacher";
+    var al_term = lesson.l_term.value;
+    var al_teacher = lesson.l_teacher.value;
+	
+    if(null == al_term||"" == al_term){
+        alert("수업 학기를 선택 해 주세요");
+        return;
+        }
+    if(null == al_teacher||"" == al_teacher){
+        alert("수업 교수를 선택 해 주세요");
+        return;
+        }
+	
+	
+    $.getJSON(
+    		"/HarangProject/ajax?cmd=findtt", 
+    		{check:l_check,l_term:al_term,l_teacher:encodeURIComponent(al_teacher)}, 
+    	    function(data) {
+    			$(data).each(function(index, ttlist){
+    			      // 요일  -> 날짜 숫자로 변환
+    			       var day = ttlist.l_day;
+    			        var daynum = 0;
+    			        if(day=="월"){
+    			            daynum = 1;
+    			            }
+    			        else if(day=="화"){
+    			            daynum = 2;
+    			            }
+    			        else if(day=="수"){
+    			            daynum = 3;
+    			            }
+    			        else if(day=="목"){
+    			            daynum = 4;
+    			            }
+    			        else if(day=="금"){
+    			            daynum = 5;
+    			            }
+    			        //alert(daynum);
+    			        
+    			        // 시간
+    			        var time = ttlist.l_time;
+    			        // 1-3 ,4-6, 7-9 
+    			        var sptime = time.split("-");
+    			        var start = sptime[0];
+    			        //alert(start);
+    			        var end = sptime[1];
+    			        //alert(end);
+    			        
+    			        // 수업 이름
+    			        var name = ttlist.l_name;
+    			        
+    			        // 강의실
+    			        var room = ttlist.l_room;
+
+    			        // 교수00
+    			        var teacher = ttlist.l_teacher;
+
+    			        // 학과별 색상 변경
+    			        var dept =  ttlist.l_dept;
+    			        var color = "";
+    			        if(dept=="경영학과"){
+    			            color = "#EECECE";
+    			            }
+    			        else if(dept=="교양학과"){
+    			            color = "#EFF7BE";
+    			            }
+    			        else if(dept=="국어국문학과"){
+    			            color = "#BEDDF7";
+    			            }
+    			        else if(dept=="수학과"){
+    			            color = "#BEF7EA";
+    			            }
+    			        else if(dept=="산업디자인학과"){
+    			            color = "#F4DBAF";
+    			            }
+    			        else if(dept=="컴퓨터공학과"){
+    			            color = "#E0A8FF";
+    			            }
+    			        // 시간표에 해당 내용을 올리는 For문
+    			        for(i=start;i<=end;i++){
+    			            $("#t"+i+" > #d"+daynum)
+    			            .css("background",color)
+    			            .html(name+"<br>"+room+"<br>"+teacher);
+    			        }
+    			});
+    });
+}
+function rfindtt() {
+
+    var l_check = "room";
+    var al_term = lesson.l_term.value;
+    alert(al_term);
+    var al_room = lesson.l_room.value;
+    alert(al_room);
+    
+    if(null == al_term||"" == al_term){
+        alert("수업 학기를 선택 해 주세요");
+        return;
+        }
+    if(null == al_room||"" == al_room){
+        alert("수업 교실를 선택 해 주세요");
+        return;
+        }
+    
+    
+    $.getJSON(
+            "/HarangProject/ajax?cmd=findtt", 
+            {check:l_check,l_term:al_term,l_room:encodeURIComponent(al_room)}, 
+            function(data) {
+                $(data).each(function(index, ttlist){
+                      // 요일  -> 날짜 숫자로 변환
+                       var day = ttlist.l_day;
+                        var daynum = 0;
+                        if(day=="월"){
+                            daynum = 1;
+                            }
+                        else if(day=="화"){
+                            daynum = 2;
+                            }
+                        else if(day=="수"){
+                            daynum = 3;
+                            }
+                        else if(day=="목"){
+                            daynum = 4;
+                            }
+                        else if(day=="금"){
+                            daynum = 5;
+                            }
+                        //alert(daynum);
+                        
+                        // 시간
+                        var time = ttlist.l_time;
+                        // 1-3 ,4-6, 7-9 
+                        var sptime = time.split("-");
+                        var start = sptime[0];
+                        //alert(start);
+                        var end = sptime[1];
+                        //alert(end);
+                        
+                        // 수업 이름
+                        var name = ttlist.l_name;
+                        
+                        // 강의실
+                        var room = ttlist.l_room;
+
+                        // 교수00
+                        var teacher = ttlist.l_teacher;
+
+                        // 학과별 색상 변경
+                        var dept =  ttlist.l_dept;
+                        var color = "";
+                        if(dept=="경영학과"){
+                            color = "#EECECE";
+                            }
+                        else if(dept=="교양학과"){
+                            color = "#EFF7BE";
+                            }
+                        else if(dept=="국어국문학과"){
+                            color = "#BEDDF7";
+                            }
+                        else if(dept=="수학과"){
+                            color = "#BEF7EA";
+                            }
+                        else if(dept=="산업디자인학과"){
+                            color = "#F4DBAF";
+                            }
+                        else if(dept=="컴퓨터공학과"){
+                            color = "#E0A8FF";
+                            }
+                        // 시간표에 해당 내용을 올리는 For문
+                        for(i=start;i<=end;i++){
+                            $("#t"+i+" > #d"+daynum)
+                            .css("background",color)
+                            .html(name+"<br>"+room+"<br>"+teacher);
+                        }
+                });
+    });
+
+    
+}
+
+
+</script>

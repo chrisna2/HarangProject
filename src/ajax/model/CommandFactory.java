@@ -47,9 +47,11 @@ public class CommandFactory{
 		else if(cmd.equals("aschecon")){
 			return new A_ScheduleContentCommand();
 		}
-		
 		else if(cmd.equals("selectPg")){
 			return new FacilSelectPgCommand();
+		}
+		else if(cmd.equals("findtt")){
+			return new FindttCommand();
 		}
 		
 		else{
