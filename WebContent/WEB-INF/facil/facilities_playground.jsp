@@ -121,6 +121,7 @@
 								<div class="col-md-4">
 									<label>시설번호</label> <input id="pg_num" type="text"
 										class="form-control" readonly="readonly" style="width: 150px">
+										
 								</div>
 
 							</div>
@@ -242,7 +243,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- 최종결제 box -->
-				<div class="box box-primary" id="reser03">
+				<div class="box box-primary" id="reser03" hidden="hidden">
 					<!-- 최종결제 box-header -->
 					<div class="box-header">
 						<h3 class="box-title">결제</h3>
@@ -254,40 +255,51 @@
 					</div>
 
 					<!-- 최종결제 box-body -->
-					<div class="box-body ">
-						<div class="row ">
-							<!-- 사용 시간 -->
-							<div class="col-md-3">
-								<label>사용시간</label> <input type="text" class="form-control"
-									placeholder="17시간" style="width: 150px" disabled>
-							</div>
-							<!-- 보유 포인트 -->
-							<div class="col-md-3">
-								<label>보유 포인트</label> <input type="text" class="form-control"
-									placeholder="30000" style="width: 150px" disabled>
-							</div>
-							<!-- 차감 포인트 -->
-							<div class="col-md-3">
-								<label>차감 포인트</label> <input type="text" class="form-control"
-									placeholder="15000" style="width: 150px" disabled>
-							</div>
-
-							<!-- 결제 후 포인트-->
-							<div class="col-md-3">
-								<label>결제후 잔여 포인트</label> <input type="text"
-									class="form-control" placeholder="15000" style="width: 150px"
-									disabled>
+					<!-- <form method="post" action="/HarangProject/facil?cmd=FacilPGreserv"> -->
+					
+					<form method="post" action="/HarangProject/facil?cmd=FacilPGreserv">
+						<div class="box-body ">
+							<div class="row ">
+								<!-- 사용 시간 -->
+								<div class="col-md-3">
+									<label>사용시간</label> <input type="text" class="form-control"
+										readonly="readonly" style="width: 150px" id="count">
+										
+										<input type="hidden" id="spgm_date" name="spgm_date" />
+										<input type="hidden" id="spg_num" name="spg_num" />
+										<input type="hidden" id="spgm_timecode" name="spgm_timecode" />
+										<input type="hidden" id="minuspoint" name="minuspoint">
+										<input type="hidden" name="checkout" value="yes"/>
+								</div>
+								<!-- 보유 포인트 -->
+								<div class="col-md-3">
+									<label>보유 포인트</label> <input type="text" class="form-control"
+										readonly="readonly" style="width: 150px" id="mypoint">
+								</div>
+								<!-- 차감 포인트 -->
+								<div class="col-md-3">
+									<label>차감 포인트</label> <input type="text" class="form-control"
+										readonly="readonly" style="width: 150px" id="checkpoint">
+								</div>
+	
+								<!-- 결제 후 포인트-->
+								<div class="col-md-3">
+									<label>결제후 잔여 포인트</label> <input type="text"
+										class="form-control" readonly="readonly" 
+										style="width: 150px" id="beforepoint"
+										>
+								</div>
 							</div>
 						</div>
-					</div>
+					
 
 					<!-- 최종결제 box-footer -->
 					<div class="box-footer">
 						<div class="row" align="center">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
-									value="결제">
+								<input type="submit" class="btn btn-block btn-primary"
+									value="결제" onclick="artest()">
 							</div>
 							<div class="col-md-3 btn-group">
 								<input type="button" class="btn btn-block  btn-primary"
@@ -295,7 +307,8 @@
 							</div>
 						</div>
 					</div>
-
+					</form>
+					
 				</div>
 			</div>
 		</div>
@@ -360,12 +373,13 @@
 		$("#closeup").click(function() {
 			$("#menuinfobox").slideUp();
 		});
-
 	});
 
+	//시설 선택을 셀렉트 생성. pg_type을 바탕으로 pg_name의 list를 출력한다.
 	function selectfacil() {
 
 		var wpg_type = document.getElementById('pg_type').value;
+		
 		$.getJSON("/HarangProject/ajax?cmd=selectPg", {
 			pg_type : encodeURIComponent(wpg_type)
 		}, function(data) {
@@ -381,13 +395,13 @@
 		});
 	}
 
+	// selectfacil()을 바탕으로 pg_content와 포인트, 시설번호를 불러온다.
 	function select02() {
 		var varpg_type = document.getElementById('pg_type').value;
 		var varpg_name = select09.pg_name.value;
 
 		$
-				.getJSON(
-						"/HarangProject/ajax?cmd=selectPg",
+				.getJSON("/HarangProject/ajax?cmd=selectPg",
 						{
 							pg_type : encodeURIComponent(varpg_type),
 							pg_name : encodeURIComponent(varpg_name),
@@ -410,19 +424,30 @@
 											});
 						});
 	}
+	
+	/* 예약할 시설의 '날짜' 시설타입(pg_type), 시설호수(pg_name)을 바탕으로 Ajax JSON을 활용하여 데이터를 가지고 와서
+	   timecode를 바탕으로 예약시간 선택 창을 생성한다.
+	*/
 	function goSelectTime() {
 		var vardate2 = this.vardate;
 		var varpg_num = document.getElementById('pg_num').value;
 		var varpg_type = document.getElementById('pg_type').value;
+		
+		// 선택 날짜와 시설번호.
+		$("#spgm_date").attr("value",vardate2);
+		$("#spg_num").attr("value",varpg_num);
 
-		alert(vardate2 + "," + varpg_type + "," + varpg_num);
+		// 디버깅용.	
+		//alert(vardate2 + "," + varpg_type + "," + varpg_num);
 
 		$.getJSON("/HarangProject/ajax?cmd=selectPg", {
 			pg_type : encodeURIComponent(varpg_type),
 			pg_num : encodeURIComponent(varpg_num),
 			pgm_date : vardate2,
 			check : 2
-		}, function(data) {
+			},
+			
+			function(data) {
 			$(data).each(
 					function(index, pglist) {
 						var timecode = pglist.pgm_timecode;
@@ -454,11 +479,13 @@
 		return date.format();
 	}
 
+	// 시간 예약 선택시 active값을 바탕으로 timecode를 만든다.
 	function countTime() {
 		
 		$("#reser03").slideDown();
 		var timecode = "A";
 		var count = 0;
+		var pg_point = $("#pg_point").val();
 		
 		for (var i = 0; i < 13; i++) {
 			
@@ -471,6 +498,34 @@
 			}
 			
 		}
-		// 사용시간 보내기, 포인트와 합산해서 보내기. 태그로.		
+		
+		var checkpoint = count * pg_point;
+		var mypoint = "${member.m_point}";
+		var beforepoint = mypoint - checkpoint;
+		
+		// 일단 초기화.
+		$("#count").attr("value"," ");
+		$("#mypoint").attr("value"," ");
+		$("#checkpoint").attr("value"," ");
+		$("#beforepoint").attr("value"," ");
+		
+		// 폼태그속 hidden을 통해 전송할 타임코드
+		$("#spgm_timecode").attr("value",timecode);
+		$("#minuspoint").attr("value",checkpoint);
+		
+		// 사용시간 보내기, 포인트와 합산해서 보내기. 태그로.
+		// 포인트 출력 내용.
+		$("#count").attr("value",count);
+		$("#mypoint").attr("value",mypoint);
+		$("#checkpoint").attr("value",checkpoint);
+		$("#beforepoint").attr("value",beforepoint);
 	}
+	
+	/*	
+	디버깅용 함수.
+ 	function artest(){
+		alert($("#spgm_date").val());
+		alert($("#spg_num").val());
+		alert($("#spgm_timecode").val());
+	}  */
 </script>
