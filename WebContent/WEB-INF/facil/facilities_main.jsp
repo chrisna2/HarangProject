@@ -62,7 +62,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach items="${requestScope.list}" var="p" varStatus="i">
+							<c:forEach items="${requestScope.pgmlist}" var="p" varStatus="i">
 									<tr class="text-blue">
 										<td>${p.pgm_num}</td>
 										<td>운동장</td>

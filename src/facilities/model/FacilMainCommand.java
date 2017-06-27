@@ -11,9 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.MemberDTO;
 import dto.PgMemberDTO;
 import dto.PlaygroundDTO;
+import dto.SrMemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import login.LoginBean;
 
 public class FacilMainCommand implements CommandInterface {
 
@@ -44,20 +47,24 @@ public class FacilMainCommand implements CommandInterface {
 	
 	public void loadlist(HttpServletRequest request){
 		
-		// 임시 디버깅용 ID
-		String id = "201301001";
+		LoginBean login = new LoginBean();
+		MemberDTO member = login.getLoginInfo(request);
+		String m_id = member.getM_id();
 		
-		String sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date, p.pg_point "
+		String pgsql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date, p.pg_point "
 					+ "FROM tbl_pg_member m, tbl_playground p WHERE m.pg_num = p.pg_num "
 					+ "AND m.m_id=? ORDER BY m.pgm_num DESC";
 		
-		ArrayList list = new ArrayList();
+		String srsql = null;
+		
+		ArrayList pgmlist = new ArrayList();
+		ArrayList srmlist = new ArrayList();
 		
 		try {
 			pool = DBConnectionMgr.getInstance();
 			con = pool.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
+			pstmt = con.prepareStatement(pgsql);
+			pstmt.setString(1, m_id);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -92,8 +99,46 @@ public class FacilMainCommand implements CommandInterface {
 				// 타임코드와 리퀘스트를 같이 보내줌.
 				new FacilMainCommand().transCode(timecode,request);
 				
-				list.add(pgmdto);
+				pgmlist.add(pgmdto);
 			}
+			
+			/*pstmt = con.prepareStatement(srsql);
+			pstmt.setString(1, m_id);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				SrMemberDTO srmdto = new SrMemberDTO();
+
+				srmdto.setPgm_num(rs.getString("m.pgm_num"));
+				srmdto.setPg_type(rs.getString("p.pg_type"));
+				srmdto.setPg_name(rs.getString("p.pg_name"));
+				srmdto.setPg_point(rs.getInt("p.pg_point"));
+				
+
+				// 시간 코드를 해석해서 지불한 포인트를 확인.
+				int count = 0;
+				String timecode = srmdto.getSrm_timecode(); 
+				
+				for(int i = 0 ; i < timecode.length() ;i++){
+					if( timecode.charAt(i) == '1'){
+					count++;
+					};
+				}
+				
+				// 지불할 금액
+				int payoutpoint = count*srmdto.getPg_point();
+				
+				srmdto.setPayoutpoint(payoutpoint);
+				
+				// 디------버깅
+				System.out.println(payoutpoint);
+				
+				// 타임코드와 리퀘스트를 같이 보내줌.
+				new FacilMainCommand().transCode(timecode,request);
+				
+				pgmlist.add(pgmdto);
+			}*/
 
 		} catch (Exception e) {
 			System.out.println("facilities_main.jsp : " + e);
@@ -101,7 +146,7 @@ public class FacilMainCommand implements CommandInterface {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-		request.setAttribute("list", list);
+		request.setAttribute("pgmlist", pgmlist);
 	}
 	
 	
