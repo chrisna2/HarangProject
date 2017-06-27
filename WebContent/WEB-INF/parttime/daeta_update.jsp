@@ -33,72 +33,84 @@
                   <h3 class="box-title">알바 정보</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  <form name="post" method="post" action="/HarangProject/parttime?cmd=DREAD">
+                  	<input type="hidden" name="update" value="OK"/>
+                  	<input type="hidden" name="d_num" value="${info.d_num}"/>
+                  	<input type="hidden" name="tab" value="${tab}"/>
+                  	<input type="hidden" name="read" value="no"/>
                     <!-- text input -->
                     <div class="row">
 	                    <div class="col-md-3 form-group">
 	                      <label>머릿말</label>	                      
-		                    <select class="form-control">
-		                    	<option>[모집중]</option>
-		                    	<option>[마감]</option>
-		                    	<option>[급구]</option>
-		                    </select>		                		                  
+		                    <select class="form-control" name="d_header">
+		                    	<c:if test="${info.d_header eq '[모집중]'}">
+		                    		<option selected="selected">[모집중]</option>
+		                    		<option >[마감]</option>
+		                    		<option >[급구]</option>
+		                    	</c:if>
+		                    	<c:if test="${info.d_header eq '[마감]'}">
+		                    		<option >[모집중]</option>
+		                    		<option selected="selected">[마감]</option>
+		                    		<option >[급구]</option>
+		                    	</c:if>
+		                    	<c:if test="${info.d_header eq '[급구]'}">
+		                    		<option >[모집중]</option>
+		                    		<option >[마감]</option>
+		                    		<option selected="selected">[급구]</option>
+		                    	</c:if>
+		                    </select>		      		                		                  
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>제목</label>
-                      <input type="text" class="form-control" placeholder="ex)**과 과사무실 조교 모집합니다."/>
+                      <input type="text" class="form-control" name="d_title" value="${info.d_title}" required="required"/>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>장소</label>
-	                      <input type="text" class="form-control" placeholder="ex) **과 과사무실"/>
+	                      <input type="text" class="form-control" name="d_location" value="${info.d_location}" required="required"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
-	                      <label>마감일</label>
-	                      <div class="input-group">
-	                      <div class="input-group-addon">
-	                        <i class="fa fa-calendar"></i>
-	                      </div>
-	                      <input type="text" class="form-control pull-right" id="reservation"/>
-	                    </div><!-- /.input group -->
+	                      <label>마감일</label>	                      
+	                       <div class="input-group">
+		                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+		                      <input type="text" class="form-control pull-right" name="d_deadline" value="${info.d_deadline}" required="required" id="date1"/>
+	                       </div><!-- /.input group -->	 
 	                    </div>
                     </div>
                     <div class="row">
 	                    <div class="col-md-6 form-group">
 	                      <label>시급</label>
-	                      <input type="text" class="form-control" placeholder="ex) 7000원"/>
+	                      <input type="text" class="form-control onlynum" name="d_wage" value="${info.d_wage}" required="required"/>
 	                    </div>
 	                    <div class="col-md-6 form-group">
 	                      <label>지급 포인트</label>&nbsp;&nbsp;&nbsp;<small>시급과 별개로 지급하는 포인트입니다.</small>
-	                      <input type="text" class="form-control" placeholder="ex)500point"/>
+	                      <input type="text" class="form-control onlynum" name="d_deposit" value="${info.d_deposit}" required="required"/>
 	                    </div>
                     </div>
                     <div class="form-group">
                       <label>대타 날짜</label>&nbsp;&nbsp;&nbsp;<small>날짜와 시간을 정확하게 입력해주세요.</small>
-                      <div class="input-group">
-	                      <div class="input-group-addon">
-	                        <i class="fa fa-calendar"></i>
-	                      </div>
-	                      <input type="text" class="form-control pull-right" id="reservation"/>
-	                    </div><!-- /.input group -->
+                    	<div class="input-group">
+		                      <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+		                      <input type="text" class="form-control pull-right" name="d_date" value="${info.d_date}" required="required" id="date2"/>
+	                    </div><!-- /.input group -->	 
                     </div>
                     <div class="form-group">
                       <label>문의</label>
-                      <input type="text" class="form-control" value="${info.d_tel}"/>
+                      <input type="text" class="form-control" name="d_tel" value="${info.d_tel}" required="required"/>
                     </div>
                     
 					<div class="form-group">
 		                <label>업무 내용</label>&nbsp;&nbsp;&nbsp; <small>해야 할 업무에 대한 자세한 내용을 자유롭게 작성해주세요.</small>
-		                <textarea class="form-control" rows="10">${info.d_content}</textarea>
+		                <textarea class="form-control" name="d_content" rows="10">${info.d_content}</textarea>
 		            </div>
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-primary">수정</button>
+							<button type="submit" class="btn btn-block btn-primary">수정</button>
 						</div>
 						<div class="col-md-2">	
-							<button class="btn btn-block btn-danger">취소</button>
+							<button class="btn btn-block btn-danger" onclick="fnCancel()">취소</button>
                   		</div>
                   	</div>
                   </form>
@@ -118,51 +130,37 @@
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      
+      <form name="cancel" method="post" action="/HarangProject/parttime?cmd=DREAD">
+      	<input type="hidden" name="d_num" value="${info.d_num}"/>
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
-<!-- jQuery 2.1.3 -->
-    <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js" type="text/javascript"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js" type="text/javascript"></script>
-    <!-- CK Editor -->
-    <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-    <!-- InputMask -->
-    <script src="plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
-    <script src="plugins/input-mask/jquery.inputmask.date.extensions.js" type="text/javascript"></script>
-    <script src="plugins/input-mask/jquery.inputmask.extensions.js" type="text/javascript"></script>
-    <!-- date-range-picker -->
-    <script src="plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
-    <!-- bootstrap color picker -->
-    <script src="plugins/colorpicker/bootstrap-colorpicker.min.js" type="text/javascript"></script>
-    <!-- bootstrap time picker -->
-    <script src="plugins/timepicker/bootstrap-timepicker.min.js" type="text/javascript"></script>
-    <!-- SlimScroll 1.3.0 -->
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- iCheck 1.0.1 -->
-    <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
-    <script src='plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js" type="text/javascript"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js" type="text/javascript"></script>
-    
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-      });
+<!-- 날짜 입력  -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script>
+        $('#date1').datepicker({
+        	format: 'yyyy-mm-dd',
+        	autoclose: true
+        });
+        $('#date2').datepicker({
+        	format: 'yyyy-mm-dd',
+        	autoclose: true
+        });
     </script>
+	
+	<script>
+	//숫자만 입력하게 하기 
+    $(".onlynum").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
+	
+	function fnCancel(){
+		if(confirm("정말 취소하시겠습니까?") == true){
+			document.cancel.submit();
+		}else{
+			return;
+		}
+	}
+	</script>
+	

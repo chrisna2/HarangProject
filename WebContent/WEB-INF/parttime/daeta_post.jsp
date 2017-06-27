@@ -77,7 +77,7 @@
 	                    </div>
                     </div>
                     <div class="form-group">
-                      <label>대타 날짜</label>&nbsp;&nbsp;&nbsp;<small>날짜와 시간을 정확하게 입력해주세요.</small>
+                      <label>대타 날짜</label>&nbsp;&nbsp;&nbsp;
                       <div class="input-group">
                       	  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 	                      <input type="text" class="form-control pull-right" name="d_date" value="" id="date2" required="required"/>
@@ -94,7 +94,7 @@
 		                </div><!-- /.box-header -->
 		                <div class='box-body pad'>
 		                    <textarea class="form-control" name="d_content" rows="10" required="required">
-대타로서 해야할 업무를 상세하게 작성해주세요.                     	                 
+대타로서 해야할 업무와 업무시간을 상세하게 작성해주세요.                     	                 
 		                    </textarea>
 		                </div>
               		</div><!-- /.box -->
@@ -142,9 +142,9 @@
         	autoclose: true
         });
        
-        $("#date2").daterangepicker({
-        	minDate : true, 
-        	timePicker: true, timePickerIncrement: 30, format: 'YYYY-MM-DD h:mm A'
+        $("#date2").datepicker({
+        	format: 'yyyy-mm-dd',
+        	autoclose: true
         });
     
     </script>
@@ -154,7 +154,12 @@
     $(".onlynum").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
     	
     function fnPost(){
-   		document.post.submit();
+    	if(confirm("제출과 동시에 포인트가 빠져나갑니다.\n정말 제출하시겠습니까?") == true){
+    		document.post.submit();
+   		}else{
+   			return;
+   		}
+   		
    	}
     	
    	function fnCancel(){

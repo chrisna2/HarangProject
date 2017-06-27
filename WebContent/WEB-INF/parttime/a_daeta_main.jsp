@@ -25,7 +25,7 @@
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
 	<section class="content">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-10">
 				<div class="box">
 					<div class="box-header">
 						<h3 class="box-title"></h3>
@@ -34,18 +34,17 @@
 					<div class="box-body">
 						<div class="row">
 						<div class="col-md-2">
-							<button class="btn btn-sm btn-block btn-info" onclick="fnPost()">글쓰기</button>
+							<button class="btn btn-xs btn-block btn-info" onclick="fnPost()">글쓰기</button>
 						</div>					
                   	</div>
 						<table class="table table-bordered table-striped">
 							<tr>
 								<th></th>
 								<th style="width: 10px">#</th>
-								<th style="width: 35%">제목</th>
-								<th style="width: 18%">대타 날짜</th>
-								<th style="width: 7%">글쓴이</th>
+								<th style="width: 32%">제목</th>
+								<th style="width: 13%">대타 날짜</th>
+								<th style="width: 8%">글쓴이</th>
 								<th>작성일</th>
-								<th style="width: 7%">조회수</th>
 								<th>채용</th>
 								<th>거래</th>
 								<th>신고</th>
@@ -56,7 +55,6 @@
 									<td></td>
 									<td></td>
 									<td>게시물이 없습니다.<td>
-									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -79,22 +77,38 @@
 											<td>${list.d_date} </td>
 											<td>${list.m_name}</td>
 											<td>${list.d_regdate}</td>
-											<td>${list.d_cnt}</td>
 											<c:choose>
 												<c:when test="${(list.d_pick eq null) and (list.d_header ne '[마감]')}">
-													<td><span class="btn btn-info btn-sm">채용중</span></td>
+													<td><span class="btn btn-info btn-xs">채용중</span></td>
+												</c:when>
+												<c:when test="${(list.d_pick ne null) and (list.d_header eq '[마감]')}">
+													<td><span class="btn btn-default btn-xs">완료</span></td>
 												</c:when>
 												<c:when test="${(list.d_pick eq null) and (list.d_header eq '[마감]')}">
-													<td><span class="btn btn-default btn-sm">완료</span></td>
+													<td><span class="btn btn-default btn-xs">실패</span></td>
 												</c:when>
 												<c:otherwise>
 													<td>${list.d_pick}</td>
 												</c:otherwise>
 											</c:choose>
-											<td></td>
 											<c:choose>
-												<c:when test="${list.d_report eq 'Y'}">
-													<td><span class="btn btn-danger btn-sm">신고</span></td>
+												<c:when test="${(list.d_pick eq null) and (list.d_header eq '[마감]')}">
+												<td></td>
+												</c:when>
+												<c:otherwise>
+												<td>
+													<c:if test="${state eq 'prepare'}"><span class="btn btn-default btn-xs">준비중</span></c:if>
+													<c:if test="${state eq 'progress'}"><span class="btn btn-info btn-xs">진행중</span></c:if>
+													<c:if test="${state eq 'waiting'}"><span class="btn btn-info btn-xs">대기중</span></c:if>
+													<c:if test="${state eq 'warning'}"><span class="btn btn-warning btn-xs">경고</span></c:if>
+													<c:if test="${state eq 'success'}"><span class="btn btn-success btn-xs">성공</span></c:if>
+													<c:if test="${state eq 'denied'}"><span class="btn btn-danger btn-xs">거절</span></c:if>
+												</td>
+												</c:otherwise>
+											</c:choose>
+											<c:choose>
+												<c:when test="${dm_report eq 'OK'}">
+													<td><span class="btn btn-danger btn-xs">신고</span></td>
 												</c:when>
 												<c:otherwise>
 													<td></td>
@@ -180,6 +194,7 @@
 	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
+
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/a_footer.jsp"%>
 

@@ -207,9 +207,13 @@
 											</td>
 											<td>${list.m_name} </td>
 											<td>${list.p_regdate} </td>
-											<td><button class="btn btn-block btn-success" onclick="fnP_Resume('${list.p_num}')">이력서</button></td>
+											<td><button class="btn btn-xs btn-success" onclick="fnP_Resume('${list.p_num}')">이력서</button></td>
 											<td>${list.cnt_apply}</td>
-											<td></td>
+											<td>
+												<c:if test="${list.pm_choice eq 'Y'}"><span class="btn btn-success btn-xs">채용성공</span></c:if>
+												<c:if test="${list.pm_choice eq 'N' and list.checkDeadline eq true}"><span class="btn btn-default btn-xs">채용실패</span></c:if>
+												<c:if test="${list.pm_choice eq 'N' and list.checkDeadline eq false}"><span class="btn btn-default btn-xs">채용중</span></c:if>
+											</td>
 										</tr>
 									</c:forEach>
 							</c:otherwise>
@@ -225,7 +229,7 @@
 						  <c:forEach var="i" begin="0" end="${paging3.pagePerBlock-1}" step="1">
 						  	<!-- if문 추가 : 20170615 -->
 						  	<c:if test="${paging3.nowBlock*paging3.pagePerBlock+i < paging3.totalPage}" >
-							<li><a href="javascript:goPage3('${paging3.nowBlock*paging3.pagePerBlock+i}')">${paging2.nowBlock*paging2.pagePerBlock+(i+1)}</a></li>
+							<li><a href="javascript:goPage3('${paging3.nowBlock*paging3.pagePerBlock+i}')">${paging3.nowBlock*paging3.pagePerBlock+(i+1)}</a></li>
 						  	</c:if>
 						  	<!-- 끝 -->
 						  </c:forEach>
@@ -280,9 +284,13 @@
 											</td>
 											<td>${list.m_name} </td>
 											<td>${list.d_regdate} </td>
-											<td><button class="btn btn-block btn-danger" onclick="fnD_Resume('${list.d_num}')">이력서</button></td>
+											<td><button class="btn btn-xs btn-danger" onclick="fnD_Resume('${list.d_num}')">이력서</button></td>
 											<td>${list.cnt_apply}</td>
-											<td></td>
+											<td>
+												<c:if test="${list.dm_choice eq 'Y'}"><span class="btn btn-danger btn-xs">채용성공</span></c:if>
+												<c:if test="${list.dm_choice eq 'N' and list.checkDeadline eq true}"><span class="btn btn-default btn-xs">채용실패</span></c:if>
+												<c:if test="${list.dm_choice eq 'N' and list.checkDeadline eq false}"><span class="btn btn-default btn-xs">채용중</span></c:if>
+											</td>
 										</tr>
 									</c:forEach>
 							</c:otherwise>
@@ -298,7 +306,7 @@
 						  <c:forEach var="i" begin="0" end="${paging4.pagePerBlock-1}" step="1">
 						  	<!-- if문 추가 : 20170615 -->
 						  	<c:if test="${paging4.nowBlock*paging4.pagePerBlock+i < paging4.totalPage}" >
-							<li><a href="javascript:goPage4('${paging4.nowBlock*paging4.pagePerBlock+i}')">${paging2.nowBlock*paging2.pagePerBlock+(i+1)}</a></li>
+							<li><a href="javascript:goPage4('${paging4.nowBlock*paging4.pagePerBlock+i}')">${paging4.nowBlock*paging4.pagePerBlock+(i+1)}</a></li>
 						  	</c:if>
 						  	<!-- 끝 -->
 						  </c:forEach>

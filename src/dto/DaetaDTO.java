@@ -19,6 +19,8 @@ public class DaetaDTO {
 	private String m_name; //글쓴이 이름
 	private int cnt_apply; //지원자수
 	private String d_pick;// 채용된 사람 회원번호
+	private String dm_choice; // 채용여부
+	private Boolean checkDeadline; // 마감일이 지났는지
 	
 	public int getList_num() {
 		return list_num;
@@ -123,9 +125,18 @@ public class DaetaDTO {
 	public void setD_pick(String d_pick) {
 		this.d_pick = d_pick;
 	}
-	
-	
-	
+	public String getDm_choice() {
+		return dm_choice;
+	}
+	public void setDm_choice(String dm_choice) {
+		this.dm_choice = dm_choice;
+	}
+	public Boolean getCheckDeadline() {
+		return checkDeadline;
+	}
+	public void setCheckDeadline(Boolean checkDeadline) {
+		this.checkDeadline = checkDeadline;
+	}
 	
 	
 }

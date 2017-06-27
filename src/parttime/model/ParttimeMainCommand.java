@@ -66,9 +66,16 @@ public class ParttimeMainCommand implements CommandInterface {
 	 * @param req
 	 */
 	public void getList(HttpServletRequest req) {
-
+		String keyword = req.getParameter("keyword");
+		String keyField = req.getParameter("keyField");
+		ArrayList<ParttimeDTO> list = null;
+		
 		// 게시판에 띄울 글 정보를 모두 불러와 ArrayList에 저장
-		ArrayList<ParttimeDTO> list = bean.getParttimeList();
+		if(keyword == null){
+			list = bean.getParttimeList();
+		}else{
+			list = bean.getParttimeList(keyField, keyword);
+		}
 		
 		// 마감일이 지나면 [마감]으로 말머리 변경
 		for(int i=0; i<list.size(); i++){
@@ -83,8 +90,7 @@ public class ParttimeMainCommand implements CommandInterface {
 			if (dto.getM_id().equals("admin02")) {
 				dto.setM_name("관리자");
 			} else {
-				dto.setM_name(bean.getMember(dto.getM_id()).getM_name()); // 이름을
-																			// 저장
+				dto.setM_name(bean.getMember(dto.getM_id()).getM_name()); // 이름을  저장
 			}
 			list.set(i, dto);
 		}

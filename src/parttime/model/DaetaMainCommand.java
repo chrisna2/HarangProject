@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.D_ApplyDTO;
 import dto.DaetaDTO;
 import dto.MemberDTO;
 import paging.PagingBean;
 import paging.dto.PagingDto;
+import point.PointBean;
 import util.DateBean;
 
 /**
@@ -23,7 +25,7 @@ public class DaetaMainCommand implements CommandInterface {
 		
 		insert(member.getM_id(),req); // 글이 추가된 경우
 		delete(req); //글이 삭제된 경우
-		getList(req); //글목록
+		getList(member.getM_id(), req); //글목록
 		
 		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_main.jsp
 			return "WEB-INF/parttime/a_daeta_main.jsp";
@@ -34,9 +36,10 @@ public class DaetaMainCommand implements CommandInterface {
 	
 	/**
 	 * DB에서 게시판에 띄울 글 정보를 받아와서 request에 보내는 함수.
+	 * @param m_id
 	 * @param req
 	 */
-	public void getList(HttpServletRequest req) {
+	public void getList(String m_id, HttpServletRequest req) {
 		
 		// 게시판에 띄울 글 정보를 모두 불러와 ArrayList에 저장
 		ArrayList list = bean.getDaetaList();
@@ -50,10 +53,18 @@ public class DaetaMainCommand implements CommandInterface {
 		for (int i = 0; i < list.size(); i++) {
 			DaetaDTO dto = (DaetaDTO) list.get(i);
 			dto.setList_num(list.size() - i); // 글번호
-			dto.setCnt_apply(bean.getParttimeCnt_apply(dto.getD_num())); // 지원자수
+			dto.setCnt_apply(bean.getDaetaCnt_apply(dto.getD_num())); // 지원자수
 			dto.setD_pick(bean.getPicked(dto.getD_num())); // 채용된 사람 회원번호
 			
-			/** 거래중인지 확인 : 마감일은 지나고 대타날짜+3는 안지난 경우*/
+			/** 채용된 사람이 신고 버튼을 누른 상태이면*/
+			D_ApplyDTO apply = bean.getDaetaApply(dto.getD_pick(), dto.getD_num());
+			if(apply.getDm_report() == "Y"){
+				req.setAttribute("dm_report", "OK");
+			}
+			
+			// 거래 상태를 파라미터로 보낸다.
+			req.setAttribute("state", state(dto.getD_pick(), dto.getD_num()));
+			
 			
 			if (dto.getM_id().equals("admin02")) {
 				dto.setM_name("관리자");
@@ -111,7 +122,7 @@ public class DaetaMainCommand implements CommandInterface {
 	 * @param m_id
 	 * @param req
 	 */
-	public void insert(String m_id,HttpServletRequest req) {
+	public void insert(String m_id, HttpServletRequest req) {
 		String insert = req.getParameter("insert");
 
 		if ("OK".equals(insert)) {
@@ -129,7 +140,10 @@ public class DaetaMainCommand implements CommandInterface {
 
 			bean.insertDaeta(dto);
 			
-			/** 포인트!!!!!!!!!!!!!!!!!!!!!*/
+			/** 글을 게시하면 포인트가 관리자에게로 넘어간다!!!!!!!!!!!!!!!!!!!!!*/
+			PointBean pbean = new PointBean();
+			pbean.tradePoint("대타 모집 글 게시", bean.getMember(m_id).getM_point(), 
+										       dto.getD_deposit(), m_id, "admin02");
 		}
 	}
 
@@ -143,5 +157,51 @@ public class DaetaMainCommand implements CommandInterface {
 			dto.setD_header("[마감]");
 			bean.updateDaeta(dto);
 		}
+	}
+	
+	/**
+	 * 대타 모집 게시글에 채용된 사람의 거래 상태를 확인하는 메서드.
+	 * @param m_id 채용된 사람 회원번호
+	 * @param d_num 글번호
+	 * @return 포인트거래 진행상태
+	 */
+	public String state(String m_id, String d_num){
+		D_ApplyDTO apply = bean.getDaetaApply(m_id, d_num); // 채용된 사람의 이력서정보
+		DaetaDTO dto = bean.getDaeta(d_num); // 글정보
+		DateBean date = new DateBean();
+		
+		/** 글이 등록됨과 동시에 준비상태가 된다.*/
+		String state = "prepare";
+		
+		/*
+		if(date.checkDeadline(dto.getD_deadline()) 
+				&& (date.checkDeadline(dto.getD_date()) == false) && (apply.getDm_iscomplete() == null)){
+			/** 마감일이 지나고 대타날짜가 지나지 않았을 때는 진행중인 상태
+			state = "progress";
+		}
+		*/
+		
+		if(date.checkDeadline(dto.getD_date()) && (apply.getDm_iscomplete() == null)
+														&& (date.checkDate(dto.getD_date(), 3)==false)){
+			/** 대타 날짜가 지나고 (대타 날짜 후 3일 미만) 버튼이 아직 눌리지 않았을 때는 대기상태*/
+			state="waiting";
+		}
+		
+		if(date.checkDate(dto.getD_date(), 3)){
+			/** 대타 날짜가 3일이상 지났지만 버튼이 눌리지 않았을때는 경고상태*/
+			state="warning";
+		}
+		
+		if("Y".equals(apply.getDm_iscomplete())){
+			/** 글 작성자가 확인버튼을 눌러 거래가 완료된 상태*/
+			state="success";
+		}
+		
+		if("N".equals(apply.getDm_iscomplete())){
+			/** 포인트 거래가 거절된 상태 */
+			state="denied";
+		}
+		
+		return state;
 	}
 }

@@ -66,7 +66,7 @@
 	                    </div>
                     </div>
                     <div class="form-group">
-                      <label>대타 시간</label>&nbsp;&nbsp;&nbsp;<small>날짜와 시간을 정확하게 입력해주세요.</small>
+                      <label>대타 시간</label>
                       <input type="text" class="form-control" value="${info.d_date}" readonly="readonly"/>
                     </div>
                     <div class="form-group">
@@ -100,7 +100,14 @@
 										<button class="btn btn-block btn-primary" onclick="fnApply()">지원하기</button>
 									</div>		
 									</c:when>
-									<c:when test="${info.d_header eq '[마감]'}">
+									<c:when test="${info.d_header eq '[마감]'&& pick eq 'OK'}">
+									<div class="col-md-6"></div>
+									<div class="col-md-6 pull-right">
+										대타를 완료해도 포인트가 지급되지 않아요:( &nbsp;&nbsp;
+										<button class="btn btn-sm btn-danger" onclick="fnReport()">신고</button>
+									</div>	
+									</c:when>
+									<c:when test="${info.d_header eq '[마감]'&& pick ne 'OK'}">
 									<div class="col-md-4"></div>
 									<div class="col-md-4">
 										<button class="btn btn-block btn-default" disabled="disabled">마감</button>
@@ -111,9 +118,19 @@
 									<div class="col-md-2">
 										<button class="btn btn-block btn-primary" onclick="fnMyResume()">이력서</button>
 									</div>
-									<div class="col-md-2">
-										<button class="btn btn-block btn-primary" onclick="fnCancel()">지원 취소</button>
-									</div>
+									<c:choose>
+										<c:when test="${pick eq 'OK'}">
+										<div class="col-md-2">
+											<button class="btn btn-block btn-primary" disabled="disabled">채용 성공</button>
+										</div>
+										</c:when>
+										<c:otherwise>
+										<div class="col-md-2">
+											<button class="btn btn-block btn-primary" onclick="fnCancel()">지원 취소</button>
+										</div>
+										</c:otherwise>
+										
+									</c:choose>
 									</c:otherwise>
 								</c:choose>	
 							</c:otherwise>
@@ -168,10 +185,10 @@
 											<td>${resume.list_num}</td>
 											<td>${resume.m_name}</td>
 											<td><button class="btn btn-danger btn-sm" onclick="fnResume(${resume.m_id})">이력서 보기</button></td>
-											<td>${resume.m_regdate}</td>
+											<td>${resume.dm_regdate}</td>
 											<td>
 											<c:choose>
-												<c:when test="${resume.pm_choice eq 'Y'}">
+												<c:when test="${resume.dm_choice eq 'Y'}">
 													채용 확정
 												</c:when>
 												<c:otherwise>
@@ -181,10 +198,14 @@
 											</td>
 											<td>
 											<c:choose>
-												<c:when test="${info.d_header eq '[마감]' && resume.pm_choice eq 'Y'}">
-													<button class="btn btn-sm btn-danger" onclick="fnConfirm()">지급</button>
-													<button class="btn btn-sm btn-danger">거절</button>
+												<c:when test="${resume.dm_iscomplete eq null && info.d_header eq '[마감]' && resume.dm_choice eq 'Y'}">
+													<button class="btn btn-sm btn-danger" onclick="fnConfirm('${resume.m_id}')">지급</button>
+													<button class="btn btn-sm btn-danger" onclick="fnDeny('${resume.m_id}')">거절</button>
 												</c:when>
+												<c:when test="${resume.dm_iscomplete eq 'Y' 
+														&& info.d_header eq '[마감]' && resume.dm_choice eq 'Y'}">지급 완료</c:when>
+												<c:when test="${resume.dm_iscomplete eq 'N' 
+														&& info.d_header eq '[마감]' && resume.dm_choice eq 'Y'}">지급 거절</c:when>
 											</c:choose>
 											</td>
 										</tr>
@@ -284,7 +305,7 @@
       </form>
       <form name="update" method="post" action="/HarangProject/parttime">
         <input type="hidden" name="tab" value="${tab}"/>
-      	<input type="hidden" name="info" value="${info}"/>
+        <input type="hidden" name="d_num" value="${info.d_num}"/>
       	<input type="hidden" name="cmd" value="DUPDATE"/>
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
@@ -295,12 +316,18 @@
       	<input type="hidden" name="m_id" value="${m_id}"/>
       	<input type="hidden" name="tab" value="${tab}"/>
       </form>
-      <form name="confirm" method="post" action="/HarangProject/parttime/DREAD">
+      <form name="success" method="post" action="/HarangProject/parttime?cmd=DREAD">
       	<input type="hidden" name="d_num" value="${info.d_num}"/>
-      	<input type="hidden" name="m_id" value="${m_id}"/>
+      	<input type="hidden" name="m_id" value="" id="success_id"/>
       	<input type="hidden" name="tab" value="${tab}"/>
-      	<input type="hidden" name="isComplete" value="OK"/>
-      </form>      
+      	<input type="hidden" name="givePoint" value="OK"/>
+      </form> 
+      <form name="deny" method="post" action="/HarangProject/parttime?cmd=DREAD">
+      	<input type="hidden" name="d_num" value="${info.d_num}"/>
+      	<input type="hidden" name="m_id" value="" id="deny_id"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
+      	<input type="hidden" name="givePoint" value="NO"/>
+      </form>     
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
@@ -309,7 +336,22 @@ function fnList(tab){list.submit();}
 function fnApply(){apply.submit();}
 function fnMyResume(){myresume.submit();}
 function fnUpdate(){update.submit();}
-function fnConfirm(){confirm.submit();}
+function fnConfirm(m_id){
+	if(confirm("대타가 성공적으로 일을 마쳤습니까?\n확인 버튼을 누르면 포인트가 지급됩니다.") == true){
+		document.getElementById("success_id").value = m_id; 
+		success.submit();
+	}else{
+		return;
+	}
+}
+function fnDeny(m_id){
+	if(confirm("대타가 만족스럽지 않으십니까?\n확인 버튼을 누르면 당신의 포인트가 다시 돌아옵니다.") == true){
+		document.getElementById("deny_id").value = m_id; 
+		document.deny.submit();
+	}else{
+		return;
+	}
+}
 function fnCancel(){
 	if(confirm("작성한 이력서가 삭제됩니다.\n정말 지원을 취소하시겠습니까?") == true){
 		document.cancel.submit();
