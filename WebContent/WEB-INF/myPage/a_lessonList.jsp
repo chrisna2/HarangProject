@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
@@ -91,125 +91,89 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table class="table table-bordered table-striped">
-                    <thead class="bg-gray">
+                    <thead>
                       <tr>
                         <th>수업 번호</th>
-                        <th>개설 학과</th>
-                        <th>개설 학기</th>
+                        <th>주요 학과</th>
                         <th>필수 여부</th>
                         <th>수업 명</th>
                         <th>대상 학년</th>
+                        <th>학기</th>
                         <th>수업 요일</th>
                         <th>수업 시간</th>
                         <th>교수님</th>
                         <th>강의실</th>
                         <th>이수 학점</th>
-                        <th>수정</th>
+                        <th>시간표 수정</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>l000000001</td>
-                        <td>교양</td>
-                        <td>1학기</td>
-                        <td>필수</td>
-                        <td>교양 영어 1</td>
-                        <td>1학년</td>
-                        <td>수요일</td>
-                        <td>1~3</td>
-                        <td>Daniel Harny</td>
-                        <td>멀티관 306호</td>
-                        <td>3</td>
-                        <td><input type="button" class="btn btn-primary" value="수업 수정"></td>
-                      </tr>
-                      <tr>
-                        <td>l000000002</td>
-                        <td>교양</td>
-                        <td>1학기</td>
-                        <td>필수</td>
-                        <td>교양 영어 1</td>
-                        <td>1학년</td>
-                        <td>수요일</td>
-                        <td>1~3</td>
-                        <td>Daniel Harny</td>
-                        <td>멀티관 306호</td>
-                        <td>3</td>
-                        <td><input type="button" class="btn btn-primary" value="수업 수정"></td>
-                      </tr>
-                      <tr>
-                        <td>l000000003</td>
-                        <td>교양</td>
-                        <td>1학기</td>                        
-                        <td>필수</td>
-                        <td>교양 영어 1</td>
-                        <td>1학년</td>
-                        <td>수요일</td>
-                        <td>1~3</td>
-                        <td>Daniel Harny</td>
-                        <td>멀티관 306호</td>
-                        <td>3</td>
-                        <td><input type="button" class="btn btn-primary" value="수업 수정"></td>
-                      </tr>
-                      <tr>
-                        <td>l000000005</td>
-                        <td>교양</td>
-                        <td>1학기</td> 
-                        <td>필수</td>
-                        <td>교양 영어 1</td>
-                        <td>1학년</td>
-                        <td>수요일</td>
-                        <td>1~3</td>
-                        <td>Daniel Harny</td>
-                        <td>멀티관 306호</td>
-                        <td>3</td>
-                        <td><input type="button" class="btn btn-primary" value="수업 수정"></td>
-                      </tr>
-                      <tr>
-                        <td>l000000006</td>
-                        <td>교양</td>
-                        <td>1학기</td> 
-                        <td>필수</td>
-                        <td>교양 영어 1</td>
-                        <td>1학년</td>
-                        <td>수요일</td>
-                        <td>1~3</td>
-                        <td>Daniel Harny</td>
-                        <td>멀티관 306호</td>
-                        <td>3</td>
-                        <td><input type="button" class="btn btn-primary" value="수업 수정"></td>
-                      </tr>
+                      <c:choose>
+                        <c:when test="${fn:length(llist) eq 0}">
+                        </c:when>
+                        <c:otherwise>
+                        <c:forEach items="${llist}"
+                          begin="${paging.beginPerPage}" 
+                          end="${paging.beginPerPage + paging.numPerPage -1}" 
+                          varStatus="i"
+                          var="l">
+                          <tr>
+                            <td>${l.l_num}</td>
+                            <td>${l.l_dept}</td>
+                            <td>${l.l_ismust}</td>
+                            <td>${l.l_name}</td>
+                            <td>${l.l_grade}</td>
+                            <td>${l.l_term}</td>
+                            <td>${l.l_day}</td>
+                            <td>${l.l_time}</td>
+                            <td>${l.l_teacher}</td>
+                            <td>${l.l_room}</td>
+                            <td>${l.l_credit}</td>
+                            <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-primary" value="수업 수정"></td>
+                          </tr>
+                            </c:forEach>
+                        </c:otherwise>
+                        </c:choose>
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
                  <div class="box-footer clearfix">
-                       <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                         </ul>
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                            <c:if test="${paging.nowBlock > 0}">
+                            <li><a href="javascript:prevPage()">&laquo;</a></li>
+                            </c:if>
+                          <c:forEach var="i" begin="0" end="${paging.pagePerBlock-1}" step="1">
+                            <!-- if문 추가 : 20170615 -->
+                               <c:if test="${paging.nowBlock*paging.pagePerBlock+i < paging.totalPage}" >
+                                    <li><a href="javascript:goPage('${paging.nowBlock*paging.pagePerBlock+i}')">${paging.nowBlock*paging.pagePerBlock+(i+1)}</a></li>
+                               </c:if>
+                            <!-- 끝 -->
+                          </c:forEach>
+                            <c:if test="${paging.totalBlock > paging.nowBlock +1}">
+                            <li><a href="javascript:nextPage()">&raquo;</a></li>
+                            </c:if>
+                        </ul>
                     <!-- 검색 폼 -->    
-                    <form action="">
+                    <form name="search" method="post" action="/HarangProject/myPage?cmd=Alesson">
                       <div class="input-group">
-                          <select class="form-control input-sm pull-left" style="width: 150px;">
-	                        <option>수업 명</option>
-                            <option>수업 번호</option>
-	                        <option>개설 학과</option>
-	                        <option>개설 학기</option>
-	                        <option>필수 여부</option>
-	                        <option>대상 학년</option>
-	                        <option>수업 요일</option>
-	                        <option>수업 시간</option>
-	                        <option>교수님</option>
-	                        <option>강의실</option>
-	                        <option>이수 학점</option>
+                          <input type="hidden" name="grade" value="${grade}"/>
+                          <input type="hidden" name="term" value="${term}"/>
+                          <input type="hidden" name='check' value="search">
+                          <select name="keyfield" class="form-control input-sm pull-left" style="width: 150px;">
+                            <option value="l_num" ${keyfield eq 'l_num' ? 'selected' : null }>수업 번호</option>
+                            <option value="l_dept" ${keyfield eq 'l_dept' ? 'selected' : null }>주요 학과</option>
+                            <option value="l_ismust" ${keyfield eq 'l_ismust' ? 'selected' : null }>필수 여부</option>
+                            <option value="l_name" ${keyfield eq 'l_name' ? 'selected' : null }>수업명</option>
+                            <option value="l_grade" ${keyfield eq 'l_grade' ? 'selected' : null }>대상 학년</option>
+                            <option value="l_day" ${keyfield eq 'l_day' ? 'selected' : null }>수업 요일</option>
+                            <option value="l_time" ${keyfield eq 'l_time' ? 'selected' : null }>수업 시간</option>
+                            <option value="l_techer" ${keyfield eq 'l_teacher' ? 'selected' : null }>교수님</option>
+                            <option value="l_room" ${keyfield eq 'l_room' ? 'selected' : null }>강의실</option>
+                            <option value="l_credit" ${keyfield eq 'l_credit' ? 'selected' : null }>이수 학점</option>
                           </select>
-                          <input type="text" name="table_search" class="form-control input-sm  pull-left" style="width: 150px;" placeholder="Search"/>
+                          <input type="text" name="keyword" class="form-control input-sm  pull-left" style="width: 150px;" value="${keyword}"/>
                          <div class="input-group-btn  pull-left">
-                            <button class="btn btn-sm btn-primary"> 검색 <i class="fa fa-search"></i></button>
+                            <button type="submit" class="btn btn-sm btn-primary"> 검색 <i class="fa fa-search"></i></button>
                          </div>
                       </div>
                     </form>
@@ -221,6 +185,40 @@
         </section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
+      <!-- 페이징 : 이전 블록으로 이동하는 폼 -->
+<form id="prevPage" method="post" action="/HarangProject/myPage?cmd=Alesson">
+    <input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
+    <input type="hidden" name="keyword" value="${keyword}"/>
+    <input type="hidden" name="keyfield" value="${keyfield}"/>
+</form>
+<!-- 페이징 : 다음 블록으로 이동하는 폼 -->
+<form id="nextPage" method="post" action="/HarangProject/myPage?cmd=Alesson">
+    <input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
+    <input type="hidden" name="keyword" value="${keyword}"/>
+    <input type="hidden" name="keyfield" value="${keyfield}"/>
+</form>
+<!-- 페이징 : 해당 페이지로 이동하는 폼 -->
+<form id="goPage" method="post" action="/HarangProject/myPage?cmd=Alesson">
+    <input type="hidden" name="nowPage" value="" id="page"/>
+    <input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+    <input type="hidden" name="keyword" value="${keyword}"/>
+    <input type="hidden" name="keyfield" value="${keyfield}"/>
+</form>
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+<script>
+//페이징
+function prevPage() {
+    document.getElementById("prevPage").submit();
+}
+function nextPage() {
+    document.getElementById("nextPage").submit();
+}
+function goPage(nowPage) {
+    document.getElementById("page").value = nowPage;
+    document.getElementById("goPage").submit();
+}
+</script>

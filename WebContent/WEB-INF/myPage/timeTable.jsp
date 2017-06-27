@@ -300,22 +300,12 @@
 	                        <td>${l.l_name}</td>
 	                        <td>${l.l_grade}</td>
 	                        <td>${l.l_term}</td>
-	                        <td id="day${l.l_num}">${l.l_day}</td>
-	                        <td id="time${l.l_num}">${l.l_time}</td>
+	                        <td>${l.l_day}</td>
+	                        <td>${l.l_time}</td>
 	                        <td>${l.l_teacher}</td>
 	                        <td>${l.l_room}</td>
 	                        <td>${l.l_credit}</td>
-	                        <c:choose>
-	                            <c:when test="${l.m_id eq member.m_id and l.l_grade == grade and l.tt_grade == l.l_grade}">
                                    <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-danger" value="수강 취소"></td>
-                                </c:when>
-		                        <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade == grade}">
-                                   <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-warning" value="재수강 취소"></td>
-                                </c:when>
-		                        <c:when test="${null eq l.m_id}">
-	                               <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-primary" value="시간표 등록"></td>
-	                            </c:when>
-	                        </c:choose>
 	                      </tr>
                             </c:forEach>
                         </c:otherwise>
@@ -340,18 +330,26 @@
                             </c:if>
                         </ul>
                     <!-- 검색 폼 -->    
-                    <form action="">
+                    <form name="search" method="post" action="/HarangProject/myPage?cmd=timeTable">
                       <div class="input-group">
+                          <input type="hidden" name="grade" value="${grade}"/>
+                          <input type="hidden" name="term" value="${term}"/>
+                          <input type="hidden" name='check' value="search">
                           <select name="keyfield" class="form-control input-sm pull-left" style="width: 150px;">
-                            <option ${requestScope.keyfield eq 'r_regdate' ? 'selected' : null }>거래 날짜</option>
-                            <option>거래 내용</option>
-                            <option>포인트</option>
-                            <option>출금 대상</option>
-                            <option>입금 대상</option>
+                            <option value="l_num" ${keyfield eq 'l_num' ? 'selected' : null }>수업 번호</option>
+                            <option value="l_dept" ${keyfield eq 'l_dept' ? 'selected' : null }>주요 학과</option>
+                            <option value="l_ismust" ${keyfield eq 'l_ismust' ? 'selected' : null }>필수 여부</option>
+                            <option value="l_name" ${keyfield eq 'l_name' ? 'selected' : null }>수업명</option>
+                            <option value="l_grade" ${keyfield eq 'l_grade' ? 'selected' : null }>대상 학년</option>
+                            <option value="l_day" ${keyfield eq 'l_day' ? 'selected' : null }>수업 요일</option>
+                            <option value="l_time" ${keyfield eq 'l_time' ? 'selected' : null }>수업 시간</option>
+                            <option value="l_techer" ${keyfield eq 'l_teacher' ? 'selected' : null }>교수님</option>
+                            <option value="l_room" ${keyfield eq 'l_room' ? 'selected' : null }>강의실</option>
+                            <option value="l_credit" ${keyfield eq 'l_credit' ? 'selected' : null }>이수 학점</option>
                           </select>
-                          <input type="text" name="keyword" class="form-control input-sm  pull-left" style="width: 150px;" placeholder="Search"/>
+                          <input type="text" name="keyword" class="form-control input-sm  pull-left" style="width: 150px;" value="${keyword}"/>
                          <div class="input-group-btn  pull-left">
-                            <button class="btn btn-sm btn-primary"> 검색 <i class="fa fa-search"></i></button>
+                            <button type="submit" class="btn btn-sm btn-primary"> 검색 <i class="fa fa-search"></i></button>
                          </div>
                       </div>
                     </form>
@@ -520,7 +518,6 @@ function deletelesson(l_num) {
         else if(dept=="컴퓨터공학과"){
         	color = "#E0A8FF";
             }
-
         // 시간표에 해당 내용을 올리는 For문
         for(i=start;i<=end;i++){
         	$("#t"+i+" > #d"+daynum)

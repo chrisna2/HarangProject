@@ -46,6 +46,10 @@ public class TimetableCommand implements CommandInterface {
 		else if("findtt".equals(check)){
 			timeTableChoice(request);
 		}
+		//수업 검색시
+		else if("search".equals(check)){
+			timeTableChoice(request);
+		}
 		//수업 시간표 등록
 		else if("enroll".equals(check)){
 			String msg = enrollCheck(request);
