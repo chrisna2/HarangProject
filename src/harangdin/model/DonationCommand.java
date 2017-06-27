@@ -54,10 +54,10 @@ public class DonationCommand implements CommandInterface {
 		
 		
 		if(keyword == null || keyword.equals("")){
-			sql ="select b.b_num, b.b_name, b.b_writer, b.b_pub, h.bh_regdate, h.bh_iscomplete from tbl_book b, tbl_b_hunter h where h.b_num = b.b_num and b_choice='기부' and b.m_id=?";
+			sql ="select b_num, b_name, b_writer, b_pub,  b_iscomplete, b_choice from tbl_book where  m_id=? and b_choice='기부'";
 		}
 		else{
-			sql ="select b.b_num, b.b_name, b.b_writer, b.b_pub, h.bh_regdate, h.bh_iscomplete from tbl_book b, tbl_b_hunter h where h.b_num = b.b_num and b_choice='기부' and b.m_id=? and "
+			sql ="select b_num, b_name, b_writer, b_pub,  b_iscomplete, b_choice from tbl_book where  m_id=? and b_choice='기부' and "
 					+ " where " + keyfield + " like '%" + keyword + "%' order by b_regdate desc";
 		}
 		
@@ -81,8 +81,9 @@ public class DonationCommand implements CommandInterface {
 				dto.setB_name(rs.getString("b_name"));
 				dto.setB_writer(rs.getString("b_writer"));
 				dto.setB_pub(rs.getString("b_pub"));
-				dto.setB_regdate(rs.getString("bh_regdate"));
-				dto.setB_iscomplete(rs.getString("bh_iscomplete"));
+				dto.setB_iscomplete(rs.getString("b_iscomplete"));
+				dto.setB_choice(rs.getString("b_choice"));
+				
 				
 				list.add(dto);
 				

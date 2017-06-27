@@ -21,6 +21,9 @@ public class CommandFactory {
 		else if(cmd.equals("regist")){
 			return new RegistCommand();
 		}
+		else if(cmd.equals("registMy")){
+			return new RegistMyCommand();
+		}
 		else if(cmd.equals("regist_proc")){
 			return new RegistProcCommand();
 		}
@@ -32,6 +35,9 @@ public class CommandFactory {
 		}
 		else if(cmd.equals("bdetail")){
 			return new BookDetailCommand();
+		}
+		else if(cmd.equals("adminBdetail")){
+			return new AdminBookDetailCommand();
 		}
 		else if(cmd.equals("bd_detail")){
 			return new BookDonateDetailCommand();

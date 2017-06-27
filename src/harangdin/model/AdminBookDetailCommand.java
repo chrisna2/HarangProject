@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +14,8 @@ import dto.BookDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
 
-public class BookDonateDetailCommand implements CommandInterface {
+public class AdminBookDetailCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
 		Connection con;
@@ -31,13 +28,20 @@ public class BookDonateDetailCommand implements CommandInterface {
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-				
+			
+		
+		String delete_check = request.getParameter("delete_check");
+		
 		detailpac(request);
 				
 		point(request);
 		
+		if(null!=delete_check){
+			delete(request);
+			request.setAttribute("delete", "delete");
+		}
 		
-		return "/WEB-INF/harangdin/a_book_donatedetailpage.jsp";
+		return "/WEB-INF/harangdin/a_book_detailpage.jsp";
 		
 	}
 	
@@ -124,4 +128,26 @@ public class BookDonateDetailCommand implements CommandInterface {
 		request.setAttribute("max_point", max_point);
 	}
 	
+	public void delete(HttpServletRequest request){
+		
+		pool = DBConnectionMgr.getInstance();
+		
+		String b_num = request.getParameter("b_num");
+				
+			try{
+				con = pool.getConnection();
+				
+				String sql="DELETE FROM tbl_book WHERE b_num=?";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, b_num);
+				pstmt.executeUpdate();
+				
+			}catch(Exception err){
+				System.out.println("delete() : " + err);
+				err.printStackTrace();
+			}finally{
+				pool.freeConnection(con,pstmt);
+			}
+	}
 }

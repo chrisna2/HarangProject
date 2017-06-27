@@ -49,6 +49,7 @@
                 <div class="row">
                 <div class="col-sm-6 form-group">
                   <label>도서 대표사진</label>
+                  <img src="${i.b_photo}" class="img-rounded" height="450" width="350">
                 </div>
                 <div class="col-sm-6 form-group">
                  
@@ -72,15 +73,14 @@
 	                      <input type="text" class="form-control pull-right" id="reservation" readonly="readonly"/>
 	                    </div>
                   <label>현시각 최고 포인트</label>
-                  <input type="text" class="form-control" placeholder="2500" readonly="readonly">
+                  <input type="text" class="form-control" value="${max_point}" readonly="readonly">
                 </div>
                 </div> 
 
                 <!-- textarea -->
                 <div class="form-group">
                   <label>도서 정보</label>
-                  <textarea class="form-control" value="${i.b_content }" rows="5" placeholder="정보처리기사 필기 합격하고 기쁜마음으로 책 팝니다!! 좋은기운 받아가세요 :)"
-                  	readonly="readonly"></textarea>
+                  <textarea class="form-control" rows="5" readonly="readonly">${i.b_content }</textarea>
                 </div>
 
             <div class="row">

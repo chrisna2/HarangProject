@@ -17,6 +17,7 @@ public class BookDTO {
 	int bh_want;
 	String bh_choice;
 	String bh_iscomplete;
+	String b_photo;
 	
 	
 	public String getB_num() {
@@ -115,5 +116,12 @@ public class BookDTO {
 	public void setBh_iscomplete(String bh_iscomplete) {
 		this.bh_iscomplete = bh_iscomplete;
 	}
+	public String getB_photo() {
+		return b_photo;
+	}
+	public void setB_photo(String b_photo) {
+		this.b_photo = b_photo;
+	}
+	
 
 }

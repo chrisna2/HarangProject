@@ -118,6 +118,13 @@
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
 
+<!-- 글 읽기 -->
+<form name="read" method="post" action="/HarangProject/harangdin?cmd=bdetail">
+	<input type="hidden" name="b_num" value="" id="b_num"/>
+	<input type="hidden" name="m_id" value="" id="m_id"/>
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
 <!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>

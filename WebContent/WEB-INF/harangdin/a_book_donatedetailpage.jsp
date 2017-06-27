@@ -24,7 +24,7 @@
           </ol>
         </section>
 <!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
-        <section class="content">
+<section class="content">
           <!-- 세로 길이 수정 -->
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
@@ -32,7 +32,7 @@
         
         <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">중고도서 기부상세페이지</h3>
+              <h3 class="box-title">중고도서 상세페이지</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -42,13 +42,14 @@
                 <div class="row">
                 	<div class="col-sm-12 form-group">
                  	 <label>도서명</label>
-                	 <input type="text" class="form-control" value="${i.b_name }" placeholder="2017시나공 정보처리기사 필기" readonly="readonly">
+                	 <input type="text" class="form-control" value="${i.b_name }" readonly="readonly">
              	   </div>
                 </div>
  
                 <div class="row">
                 <div class="col-sm-6 form-group">
                   <label>도서 대표사진</label>
+                  <img src="${i.b_photo}" class="img-rounded" height="450" width="350">
                 </div>
                 <div class="col-sm-6 form-group">
                  
@@ -72,40 +73,33 @@
 	                      <input type="text" class="form-control pull-right" id="reservation" readonly="readonly"/>
 	                    </div>
                   <label>현시각 최고 포인트</label>
-                  <input type="text" class="form-control" placeholder="2500" readonly="readonly">
+                  <input type="text" class="form-control" value="${max_point}" readonly="readonly">
                 </div>
                 </div> 
 
                 <!-- textarea -->
                 <div class="form-group">
                   <label>도서 정보</label>
-                  <textarea class="form-control" value="${i.b_content }" rows="5" placeholder="정보처리기사 필기 합격하고 기쁜마음으로 책 팝니다!! 좋은기운 받아가세요 :)"
-                  	readonly="readonly"></textarea>
+                  <textarea class="form-control" rows="5" readonly="readonly">${i.b_content }</textarea>
                 </div>
-
-            <div class="row">
-						<div class="col-sm-4"></div>
-						<div class="col-sm-2">
-							<button type="submit" class="btn btn-block btn-primary">구매희망</button>
-						</div>
-            </div>
-              </form>
-                  	</div>
-            <!-- /.box-body -->
-						
-						<form action="/HarangProject/harangdin?cmd=main" method="post">
+						<div class="row">
+							<div class="col-sm-4"></div>
+							<div class="col-sm-2">
+								<button type="submit" class="btn btn-block btn-primary">구매희망</button>
+							</div>
+					</form>
+					<form action="/HarangProject/harangdin?cmd=adminDonate" method="post">
 						<div class="col-sm-2">	
 							<button type="submit" class="btn btn-block">이전</button>
-                  		</div>
-                  		</form>
-            
-          </div>
+	                  	</div>
+					</form>
 
-
-
-              </div><!-- /.col -->
-           </div><!-- /.row -->
-        </section><!-- /. 작업 공간 끝! -->
+				</div>
+			</div>
+            <!-- /.box-body -->
+		</div><!-- /.col -->
+	</div><!-- /.row -->
+</section><!-- /. 작업 공간 끝! -->
 <!------------------------------------------------------------------------------------------------------------------->        
       </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
       

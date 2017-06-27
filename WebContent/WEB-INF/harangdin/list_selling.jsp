@@ -67,7 +67,6 @@
                    		 </c:choose>
 							</table>
 						</div>
-					</div>	
 						<!-- 페이징 버튼 -->
 						<div class="box-footer clearfix">
 							<ul class="pagination pagination-sm no-margin pull-right">
@@ -87,6 +86,7 @@
 						</ul>
 						</div><!-- 페이징 버튼 -->
 					</div><!-- /.box -->  
+					</div>	
 				</div><!-- /.col -->
 			</div>
 		</div>
@@ -112,6 +112,13 @@
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/harangdin?cmd=selling">
 	<input type="hidden" name="nowPage" value="" id="page"/>
+	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+</form>
+
+<!-- 글 읽기 -->
+<form name="read" method="post" action="/HarangProject/harangdin?cmd=registMy">
+	<input type="hidden" name="b_num" value="" id="b_num"/>
+	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
 
