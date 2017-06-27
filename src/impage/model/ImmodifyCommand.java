@@ -39,7 +39,7 @@ public class ImmodifyCommand implements CommandInterface {
 		
 		try {
 			//sql = "SELECT * FROM tbl_member_lesson where lm_num=?;";
-			sql="select tl.l_name,tl.l_teacher from tbl_lesson tl where  tl.l_num=?";
+			sql="select tl.l_name,tl.l_teacher,lm.lm_year,lm.lm_term,lm.lm_star,lm.lm_hw,lm.lm_attend,lm.lm_group,lm.lm_comment from tbl_lesson tl,tbl_member_lesson lm where  tl.l_num=? and tl.l_num=lm.l_num";
 			
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -51,12 +51,13 @@ public class ImmodifyCommand implements CommandInterface {
 			dto.setL_num(request.getParameter("l_num"));
 			dto.setL_name(rs.getString("l_name"));
 			dto.setL_teacher(rs.getString("l_teacher"));
-			dto.setLm_year(rs.getString("l_teacher"));
-			dto.setLm_term(rs.getString("l_teacher"));
-			dto.setLm_star(rs.getString("l_teacher"));
-			dto.setLm_hw(rs.getString("l_teacher"));
-			dto.setLm_attend(rs.getString("l_teacher"));
-			dto.setLm_group(rs.getString("l_teacher"));
+			dto.setLm_year(rs.getString("lm_year"));
+			dto.setLm_term(rs.getString("lm_term"));
+			dto.setLm_star(rs.getString("lm_star"));
+			dto.setLm_hw(rs.getString("lm_hw"));
+			dto.setLm_attend(rs.getString("lm_attend"));
+			dto.setLm_group(rs.getString("lm_group"));
+			dto.setLm_comment(rs.getString("lm_comment"));
 			
 			
 		} catch (Exception err) {

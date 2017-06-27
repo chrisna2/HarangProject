@@ -13,7 +13,15 @@ public class Im2DTO {
 	String lm_star;
 	String lm_hw;
 	String lm_attend;
+	String w_count;
 	
+	
+	public String getW_count() {
+		return w_count;
+	}
+	public void setW_count(String w_count) {
+		this.w_count = w_count;
+	}
 	String lm_comment;
 	String l_num;
 	String tt_iscomplete;
@@ -27,6 +35,27 @@ public class Im2DTO {
 	String l_term;
 	int l_credit;
 	String l_room;
+	String w_num;
+	String w_regdate;
+	String w_comment;
+	public String getW_num() {
+		return w_num;
+	}
+	public void setW_num(String w_num) {
+		this.w_num = w_num;
+	}
+	public String getW_regdate() {
+		return w_regdate;
+	}
+	public void setW_regdate(String w_regdate) {
+		this.w_regdate = w_regdate;
+	}
+	public String getW_comment() {
+		return w_comment;
+	}
+	public void setW_comment(String w_comment) {
+		this.w_comment = w_comment;
+	}
 	private String m_id;
 	private String m_regdate;
 	private String m_pw;
@@ -42,6 +71,7 @@ public class Im2DTO {
 	private int m_fee;
 	private long m_point;
 	private int m_age;
+	
 	
 	public String getTt_iscomplete() {
 		return tt_iscomplete;

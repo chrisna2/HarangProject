@@ -1,81 +1,70 @@
 package myPage.model;
 
-public class CommandFactory{
+public class CommandFactory {
 
-	
-	private CommandFactory(){}
-	
-	
+	private CommandFactory() {
+	}
+
 	private static CommandFactory instance = new CommandFactory();
-		
-	
-	public static CommandFactory newInstance(){
+
+	public static CommandFactory newInstance() {
 		return instance;
 	}
-	
-	public CommandInterface createCommand(String cmd){
-		
+
+	public CommandInterface createCommand(String cmd) {
+
 		System.out.println(cmd);
-		
-		if(cmd.equals("myinfo")){
-			
+
+		if (cmd.equals("myinfo")) {
+
 			return new MyinfoCommand();
-		}
-		else if(cmd.equals("update")){
-			
+		} else if (cmd.equals("update")) {
+
 			return new MyinfoUpdateCommand();
-		}
-		else if(cmd.equals("specUp")){
-			
+		} else if (cmd.equals("specUp")) {
+
 			return new SpecUpCommand();
-		}
-		else if(cmd.equals("specUp_proc")){
-			
+		} else if (cmd.equals("specUp_proc")) {
+
 			return new SpecUpProcCommand();
-		}
-		else if(cmd.equals("timeTable")){
-			
+		} else if (cmd.equals("timeTable")) {
+
 			return new TimetableCommand();
-		}
-		else if(cmd.equals("pointList")){
-			
+		} else if (cmd.equals("pointList")) {
+
 			return new PointlistCommand();
-		}
-		else if(cmd.equals("pointZero")){
-			
+		} else if (cmd.equals("pointZero")) {
+
 			return new PointZeroCommand();
-		}
-		else if(cmd.equals("AmemList")){
-			
-			return new AmemListCommand();
-		}
-		else if(cmd.equals("AspecList")){
-			
+		} else if (cmd.equals("AmemList")) {
+
+			return new AinformationCommand();
+		} else if (cmd.equals("AspecList")) {
+
 			return new AspecListCommand();
-		}
-		else if(cmd.equals("Achallenge")){
-			
+		} else if (cmd.equals("Achallenge")) {
+
 			return new AchallengeCommand();
-		}
-		else if(cmd.equals("AspecList")){
-			
+		} else if (cmd.equals("AspecList")) {
+
 			return new AspecListCommand();
-		}
-		else if(cmd.equals("Alesson")){
-			
+		} else if (cmd.equals("Alesson")) {
+
 			return new AlessonCommand();
-		}
-		else if(cmd.equals("ApointCheck")){
-			
+		} else if (cmd.equals("ApointCheck")) {
+
 			return new ApointCommand();
-		}
-		else if(cmd.equals("Applist")){
-			
+		} else if (cmd.equals("Applist")) {
+
 			return new ApplistCommand();
+		} else if (cmd.equals("Anewmem")) {
+
+			return new AnewmemCommand();
 		}
-		else{
+
+		else {
 			return null;
 		}
-		
+
 	}
 }

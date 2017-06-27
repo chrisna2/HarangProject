@@ -33,8 +33,9 @@
 				<!-- form 시작 -->
 				<form role="form2" name="read5"
 					action="/HarangProject/impage?cmd=insert" method="post">
-				<input type="hidden" name="check" value="check" >
 
+				<input type="hidden" name="l_num" value="${read.l_num }"/>
+			
 					
 
 					<div class="box-body">
@@ -84,8 +85,8 @@
 						<div class="input-group">
 							<span class="input-group-addon">출결</span> <select
 								class="form-control input-sm pull-right" name="lm_attend">
-								<option>전자출결</option>
-								<option>직접호명</option>
+								<option value="전자출결">전자출결</option>
+								<option value="직접호명">직접호명</option>
 							</select>
 						</div>
 						<div class="input-group">

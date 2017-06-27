@@ -32,39 +32,42 @@
          <div class="box-header">
                  
                 </div>
-                <form role="form2" name="read"
-					action="/HarangProject/impage?cmd=insert" method="post">
-				
+            
 
 					
+				<!-- form 시작 -->
+				<form role="form2"
+					action="/HarangProject/impage?cmd=update" method="post">
+						<input type="hidden" name="l_num" value="${read.l_num }"/>
+						<input type="hidden" name="lm_num" value="${read.lm_num }"/>
                 <div class="box-body" >
                   <div class="input-group">
                     <span class="input-group-addon">강의명</span>
-                    <input type="text" value="" class="form-control" placeholder="강의명">
+                    <input type="text" name="l_name" value="${read.l_name }" class="form-control" >
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">교수명</span>
-                    <input type="text" class="form-control" placeholder="교수명">
+                    <input type="text" name="l_teacher" class="form-control" value="${read.l_teacher }" >
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">강의평가년도</span>
-                    <input type="text" class="form-control" placeholder="강의평가년도">
+                    <input type="text" name="lm_year" class="form-control" value="${read.lm_year }" >
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">강의평가학기</span>
-                    <input type="text" class="form-control" placeholder="강의평가학기">
+                    <input type="text" class="form-control" name="lm_term" value="${read.lm_term }">
                   </div>
                     <div class="input-group">
                     <span class="input-group-addon">만족도</span>
                     	
                     	
-                    	  <select class="form-control input-sm pull-right" >
-                        <option>☆☆☆☆☆</option>
-                        <option>★☆☆☆☆</option>
-                        <option>★★☆☆☆</option>
-                        <option>★★★☆☆</option>
-                        <option>★★★★☆ </option>
-                        <option>★★★★★</option>
+                    	  <select class="form-control input-sm pull-right" name="lm_star">
+                        <option value="☆☆☆☆☆">☆☆☆☆☆</option>
+                        <option value="★☆☆☆☆">★☆☆☆☆</option>
+                        <option value="★★☆☆☆">★★☆☆☆</option>
+                        <option value="★★★☆☆">★★★☆☆</option>
+                        <option value="★★★★☆">★★★★☆ </option>
+                        <option value="★★★★★">★★★★★</option>
                        
                       </select>
                     	
@@ -73,42 +76,34 @@
                  	 </div>
                    <div class="input-group">
                     <span class="input-group-addon">과제</span>
-                 	  <select class="form-control input-sm pull-right" >
-                        <option>없음</option>
-                        <option>적음</option>
-                        <option>보통</option>
-                        <option>많음</option>  
+                 	  <select class="form-control input-sm pull-right" name="lm_hw">
+                      <option value="없음">없음</option>
+								<option value="적음">적음</option>
+								<option value="보통">보통</option>
+								<option value="많음">많음</option>
                       </select>
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">출결</span>
-                       <select class="form-control input-sm pull-right" >
-                        <option>전자출결</option>
-                        <option>직접호명</option>   
+                       <select class="form-control input-sm pull-right" name="lm_attend" >
+                      <option value="전자출결">전자출결</option>
+								<option value="직접호명">직접호명</option>
                       </select>
                   </div>
                    <div class="input-group">
                     <span class="input-group-addon">조모임</span>
-                      <select class="form-control input-sm pull-right" >
-                        <option>없음</option>
-                        <option>적음</option>
-                        <option>보통</option>
-                        <option>많음</option>  
+                      <select class="form-control input-sm pull-right" name="lm_group">
+                     	<option value="없음">없음</option>
+								<option value="적음">적음</option>
+								<option value="보통">보통</option>
+								<option value="많음">많음</option>  
                        
                       </select>
-                  </div> <div class="input-group">
-                    <span class="input-group-addon">시험횟수</span>
-                      <select class="form-control input-sm pull-right" >
-                         <option>0회</option>
-                        <option>1회</option>
-                        <option>2회</option>
-                        <option>3회</option>  
-                       
-                      </select>
-                  </div>
+                  </div> 
+            
                    <div class="input-group">
                     <span class="input-group-addon">총평</span>
-                    <input type="text" class="form-control" placeholder="총평">
+                    <input type="text" class="form-control" value="${read.lm_comment }" name="lm_comment">
                   </div>
                   
                  
@@ -119,13 +114,13 @@
 			 <div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-2">
-							<button class="btn btn-block btn-primary">수정</button>
+							<input type="submit" class="btn btn-block btn-primary" value="수정" />
 						</div>
 						<div class="col-md-2">	
 							<button class="btn btn-block btn-danger">취소</button>
                   		</div>
                   	</div>
-
+</form>
 
 
               </div><!-- /.col -->

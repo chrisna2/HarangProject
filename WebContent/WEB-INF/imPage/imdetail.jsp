@@ -18,7 +18,7 @@
 			<div class="col-md-7">
 				<h1>강의평가 상세 페이지</h1>
 				<div class="col-md-2">
-					<button class="btn btn-block btn-primary">신고</button>
+					<button class="btn btn-block btn-primary" id ="input">신고</button>
 				</div>
 			</div>
 		</div>
@@ -128,13 +128,58 @@
 </form>
 
 				</div>
+				
+				
+				
 
 
 
 
 			</div>
+			
+			
+			
 		</div>
+		
+		
+		
 		<!-- /.col -->
+		
+		
+		 <!-- 신고  등록  -->
+              <div class="box box-black" id="theRemote" style="display: none;">
+                <div class="box-header">
+                  <h3 class="box-title">글 신고하기</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                
+                <!-- form 시작 -->
+                
+                <form role="form" action="/HarangProject/impage?cmd=warning" method="post">
+              	<input type="hidden" name="lm_num" value="${read2.lm_num }"/>
+                <div class="box-body">
+                 <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-bolt"></i> 신고자 이름</span>
+                    <input type="text" name="m_id" class="form-control" value="${read2.m_id }" required="required">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 신고내용</span>
+                    <input type="text" name="w_comment" class="form-control" required="required">
+                  </div>
+                
+                </div><!-- /.box-body -->
+                
+                  <div class="box-footer" align="right">
+                    <input type="button" class="btn" value="닫기">
+                    <input type="submit" id="btn1" class="btn btn-primary" value="신고">
+                </div>
+                
+                </form>
+              </div><!-- /.box -->
 </div>
 <!-- /.row -->
 </section>
@@ -145,3 +190,33 @@
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
+
+<script>
+$(document).ready(function(){
+	
+	$("#input").click(function(){
+		if($("#theRemote").css("display") == "none"){
+			$("#theRemote").slideDown();
+		}
+		else{
+			$("#theRemote").slideUp();
+		}
+	});
+	
+});
+$(
+		function () {
+		
+			$("#btn1").click(
+					function(){	
+						alert("신고 완료!");
+						
+					}
+			);
+		}	
+	);
+
+
+
+</script>
+
