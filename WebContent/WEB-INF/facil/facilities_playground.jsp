@@ -7,6 +7,12 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <title>운동장 예약(사용자)</title>
+<style>
+.fc-day:hover {
+	background: lightblue;
+	cursor: pointer;
+}
+</style>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
 <div class="content-wrapper">
@@ -66,59 +72,59 @@
 
 					<!-- Box body -->
 					<form name="select09">
-					<div class="box-body">
-					
-						<!-- 사용자 편의를 위한.. 운동장 표시 -->
-						<div class="row">
-							<div class="col-md-4">
-								<label>예약할 날짜</label> <input id="Reser" type="text"
-									class="form-control" readonly="readonly">
-							</div>
+						<div class="box-body">
 
-							<!-- 시설명(첫번째 카테고리) 선택 -->
-							<div class="form-group col-md-4">
-								<label>시설명</label> <select class="form-control" name="pg_type"
-									id="pg_type" onchange="selectfacil()">
+							<!-- 사용자 편의를 위한.. 운동장 표시 -->
+							<div class="row">
+								<div class="col-md-4">
+									<label>예약할 날짜</label> <input id="Reser" type="text"
+										class="form-control" readonly="readonly">
+								</div>
 
-									<option>시설을 선택하세요.</option>
+								<!-- 시설명(첫번째 카테고리) 선택 -->
+								<div class="form-group col-md-4">
+									<label>시설명</label> <select class="form-control" name="pg_type"
+										id="pg_type" onchange="selectfacil()">
 
-									<c:forEach items="${list}" var="s">
-										<option value="${s.pg_type}">${s.pg_type}</option>
-									</c:forEach>
-								</select>
-							</div>
+										<option>시설을 선택하세요.</option>
 
-							<!-- 호수(두번째 카테고리) 선택 -->
-							<div class="form-group col-md-4">
-								<label>호수</label> <select class="form-control" id="pg_name"
-									name="pg_name" onchange="select02()">
-									<option>호수를 선택하세요.</option>
-								</select>
-							</div>
-						</div>
+										<c:forEach items="${list}" var="s">
+											<option value="${s.pg_type}">${s.pg_type}</option>
+										</c:forEach>
+									</select>
+								</div>
 
-						<!-- 시설 정보 두번째줄 -->
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group" id="pg_content" name="pg_content">
-									<label>시설정보</label>
-									<textarea class="form-control" rows="3" placeholder="운동장"
-										disabled style="width: 250px">
-                  						</textarea>
+								<!-- 호수(두번째 카테고리) 선택 -->
+								<div class="form-group col-md-4">
+									<label>호수</label> <select class="form-control" id="pg_name"
+										name="pg_name" onchange="select02()">
+										<option>호수를 선택하세요.</option>
+									</select>
 								</div>
 							</div>
-							<div class="col-md-4">
-								<label>대여 포인트</label> <input id="pg_point" type="text" class="form-control"
-									readonly="readonly" style="width: 150px">
+
+							<!-- 시설 정보 두번째줄 -->
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group" id="pg_content" name="pg_content">
+										<label>시설정보</label>
+										<textarea class="form-control" rows="3" placeholder="운동장"
+											disabled style="width: 250px">
+                  						</textarea>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<label>대여 포인트</label> <input id="pg_point" type="text"
+										class="form-control" readonly="readonly" style="width: 150px">
+								</div>
+
+								<div class="col-md-4">
+									<label>시설번호</label> <input id="pg_num" type="text"
+										class="form-control" readonly="readonly" style="width: 150px">
+								</div>
+
 							</div>
-							
-							<div class="col-md-4">
-								<label>시설번호</label> <input id="pg_num" type="text" class="form-control"
-									readonly="readonly" style="width: 150px">
-							</div>
-							
 						</div>
-					</div>
 					</form>
 
 					<!-- Box footer -->
@@ -144,7 +150,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- faclities.select.box-->
-				<div class="box box-primary collapsed-box" id="reser02">
+				<div class="box box-primary" id="reser02" hidden="hidden">
 					<!-- faclities.select.box header -->
 					<div class="box-header">
 						<h3 class="box-title">예약 시간 선택</h3>
@@ -166,33 +172,49 @@
 							<div class="col-md-12" align="center">
 
 								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-warning active"> <input
-										type="checkbox" autocomplete="off"> 8시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 9시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 10시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 11시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 12시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 13시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 14시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 15시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 16시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 17시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 18시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 19시
-									</label> <label class="btn btn-primary"> <input type="checkbox"
-										autocomplete="off"> 20시
+
+									<label class="btn btn-primary" id="l0"> <input
+										type="checkbox" id="b0" value="8">
+										8시
+									</label> <label class="btn btn-primary" id="l1"> <input
+										type="checkbox"  id="b1" value="9">
+										9시
+									</label> <label class="btn btn-primary" id="l2"> <input
+										type="checkbox"  id="b2" value="10">
+										10시
+									</label> <label class="btn btn-primary" id="l3"> <input
+										type="checkbox"  id="b3" value="11">
+										11시
+									</label> <label class="btn btn-primary" id="l4"> <input
+										type="checkbox"  id="b4" value="12">
+										12시
+									</label> <label class="btn btn-primary" id="l5"> <input
+										type="checkbox"  id="b5" value="13">
+										13시
+									</label> <label class="btn btn-primary" id="l6"> <input
+										type="checkbox"  id="b6" value="14">
+										14시
+									</label> <label class="btn btn-primary" id="l7"> <input
+										type="checkbox"  id="b7" value="15">
+										15시
+									</label> <label class="btn btn-primary" id="l8"> <input
+										type="checkbox"  id="b8" value="16">
+										16시
+									</label> <label class="btn btn-primary" id="l9"> <input
+										type="checkbox"  id="b9" value="17">
+										17시
+									</label> <label class="btn btn-primary" id="l10"> <input
+										type="checkbox"  id="b10" value="18">
+										18시
+									</label> <label class="btn btn-primary" id="l11"> <input
+										type="checkbox"  id="b11" value="19">
+										19시
+									</label> <label class="btn btn-primary" id="l12"> <input
+										type="checkbox"  id="b12" value="20">
+										20시
 									</label>
+
+
 
 								</div>
 							</div>
@@ -204,7 +226,7 @@
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
 								<input type="button" class="btn btn-block btn-primary"
-									value="확인">
+									value="확인" onclick="countTime()">
 							</div>
 							<div class="col-md-3 btn-group">
 								<input type="button" class="btn btn-block btn-primary"
@@ -220,7 +242,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<!-- 최종결제 box -->
-				<div class="box box-primary collapsed-box" id="reser03">
+				<div class="box box-primary" id="reser03">
 					<!-- 최종결제 box-header -->
 					<div class="box-header">
 						<h3 class="box-title">결제</h3>
@@ -287,114 +309,168 @@
 <%@ include file="../include/footer.jsp"%>
 
 <script type="text/javascript">
-	 // 일단 전역 변수로 만들었는데...이거참...
-	  var vardate;
-      
-	  $(function () {
-        /* initialize the calendar
-         -----------------------------------------------------------------*/
-         //현재 년 월 일 불러 오기
-        var date = new Date();
-        var d = date.getDate(),
-            m = date.getMonth(),
-            y = date.getFullYear();
-        $('#calendar').fullCalendar({
-          locale: 'kr',
-          header: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'today'
-          },
-          buttonText: {
-            today: '오늘날짜',
-            month: '월별',
-            week: '주별',
-            day: '일별'
-          },
-          titleFormat: {
-            month: 'YYYY년 MMMM'
-          },
-          monthNames:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-          monthNamesShort:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-          dayNames:["일요일","월요일","화요일","수요일","목요일","금요일","토요일"],
-          dayNamesShort:["일","월","화","수","목","금","토"],
-          allDayDefault:false,
-          editable: false,
-		  dayClick: function(date, jsEvent, view) {
-				// 이날짜를 바탕으로 쿼리문을 날려서 예약결제로 넘어가도록 한다.
-        	    document.getElementById('Reser').setAttribute( 'value',date.format());
-        	    vardate = date.format();
-				$("#reser01").slideUp();
-				$("#reser01").slideDown();
-				
-              }
-        });
-        
-        
-        
-       $("#closeup").click(function(){
-    	   $("#menuinfobox").slideUp();
-       });
+	// 일단 전역 변수로 만들었는데...이거참...
+	var vardate;
 
-      });
-      
-      
-      function selectfacil(){
+	$(function() {
+		/* initialize the calendar
+		 -----------------------------------------------------------------*/
+		//현재 년 월 일 불러 오기
+		var date = new Date();
+		var d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
+		$('#calendar').fullCalendar(
+				{
+					locale : 'kr',
+					header : {
+						left : 'prev,next',
+						center : 'title',
+						right : 'today'
+					},
+					buttonText : {
+						today : '오늘날짜',
+						month : '월별',
+						week : '주별',
+						day : '일별'
+					},
+					titleFormat : {
+						month : 'YYYY년 MMMM'
+					},
+					monthNames : [ "1월", "2월", "3월", "4월", "5월", "6월", "7월",
+							"8월", "9월", "10월", "11월", "12월" ],
+					monthNamesShort : [ "1월", "2월", "3월", "4월", "5월", "6월",
+							"7월", "8월", "9월", "10월", "11월", "12월" ],
+					dayNames : [ "일요일", "월요일", "화요일", "수요일", "목요일", "금요일",
+							"토요일" ],
+					dayNamesShort : [ "일", "월", "화", "수", "목", "금", "토" ],
+					allDayDefault : false,
+					editable : false,
+					dayClick : function(date, jsEvent, view) {
+						// 이날짜를 바탕으로 쿼리문을 날려서 예약결제로 넘어가도록 한다.
+						document.getElementById('Reser').setAttribute('value',
+								date.format());
+						vardate = date.format();
+						$("#reser01").slideUp();
+						$("#reser02").slideUp();
+						$("#reser03").slideUp();
+						$("#reser01").slideDown();
+
+					}
+				});
+
+		$("#closeup").click(function() {
+			$("#menuinfobox").slideUp();
+		});
+
+	});
+
+	function selectfacil() {
+
+		var wpg_type = document.getElementById('pg_type').value;
+		$.getJSON("/HarangProject/ajax?cmd=selectPg", {
+			pg_type : encodeURIComponent(wpg_type)
+		}, function(data) {
+			$("#pg_name option").remove();
+			$("#pg_name").append("<option>호수를 입력하세요.</option>");
+			$(data).each(
+					function(index, pglist) {
+						$("#pg_name").append(
+								"<option value='"+pglist.pg_name+"'>"
+										+ pglist.pg_name + "</option>");
+
+					});
+		});
+	}
+
+	function select02() {
+		var varpg_type = document.getElementById('pg_type').value;
+		var varpg_name = select09.pg_name.value;
+
+		$
+				.getJSON(
+						"/HarangProject/ajax?cmd=selectPg",
+						{
+							pg_type : encodeURIComponent(varpg_type),
+							pg_name : encodeURIComponent(varpg_name),
+							check : 1
+						},
+						function(data) {
+							$("#pg_content textarea").remove();
+							$(data)
+									.each(
+											function(index, pglist) {
+												$("#pg_content")
+														.append(
+																"<textarea readonly='readonly' class='form-control' rows='3' style='width: 250px'>"
+																		+ pglist.pg_content
+																		+ "</textarea>");
+												$("#pg_point").attr("value",
+														pglist.pg_point);
+												$("#pg_num").attr("value",
+														pglist.pg_num);
+											});
+						});
+	}
+	function goSelectTime() {
+		var vardate2 = this.vardate;
+		var varpg_num = document.getElementById('pg_num').value;
+		var varpg_type = document.getElementById('pg_type').value;
+
+		alert(vardate2 + "," + varpg_type + "," + varpg_num);
+
+		$.getJSON("/HarangProject/ajax?cmd=selectPg", {
+			pg_type : encodeURIComponent(varpg_type),
+			pg_num : encodeURIComponent(varpg_num),
+			pgm_date : vardate2,
+			check : 2
+		}, function(data) {
+			$(data).each(
+					function(index, pglist) {
+						var timecode = pglist.pgm_timecode;
+						$("#reser02").slideUp();
+						$("#reser02").slideDown();
+
+						//타임코드 버튼 초기화.
+						for (i = 0; i < 13; i++) {
+							$("#l" + i).attr("class", "btn btn-primary");
+
+						}
+
+						var arraytimecode = timecode.split("");
+						for (i = 0; i < 13; i++) {
+							if (arraytimecode[i] == 1) {
+								$("#l" + i).attr("class", "btn btn-danger")
+										.attr("disabled", "disabled");
+
+							}
+						}
+
+					});
+
+		});
+
+	}
+
+	function insertDate() {
+		return date.format();
+	}
+
+	function countTime() {
+		
+		$("#reser03").slideDown();
+		var timecode = "A";
+		var count = 0;
+		
+		for (var i = 0; i < 13; i++) {
 			
-    	   	var wpg_type = document.getElementById('pg_type').value;
-			 $.getJSON("/HarangProject/ajax?cmd=selectPg",
-                   {pg_type:encodeURIComponent(wpg_type)},
-                   function(data){
-                       $("#pg_name option").remove();
-                       $("#pg_name").append("<option>호수를 입력하세요.</option>");
-                       $(data).each(function(index, pglist){
-                           $("#pg_name").append("<option value='"+pglist.pg_name+"'>"+pglist.pg_name+"</option>");
-                         
-                    });
-                });
+			 if ($("#l" + i).attr("class") == "btn btn-primary active") {
+				timecode += "1";
+				count++;
+			} 
+			else{
+				timecode += "0";
+			}
+			
 		}
-      
-       function select02(){
-			 var varpg_type = document.getElementById('pg_type').value;    	  
-    	  	 var varpg_name = select09.pg_name.value;
-    	  	
-    	  	 $.getJSON("/HarangProject/ajax?cmd=selectPg",
-                 {pg_type:encodeURIComponent(varpg_type),pg_name:encodeURIComponent(varpg_name),check:1},
-                 function(data){
-                 $("#pg_content textarea").remove();
-                 $(data).each(function(index, pglist){
-                 	$("#pg_content").append("<textarea readonly='readonly' class='form-control' rows='3' style='width: 250px'>"
-              	 	+ pglist.pg_content
-              	 	+"</textarea>");
-                 	$("#pg_point").attr("value", pglist.pg_point);
-                 	$("#pg_num").attr("value", pglist.pg_num);
-                 });
-              });
-		}
-       function goSelectTime(){
-    	   	var vardate2 = this.vardate;
-    	   	var varpg_num = document.getElementById('pg_num').value;
-    	    var varpg_type = document.getElementById('pg_type').value;
-    		
-    		alert(vardate2 + "," + varpg_type +"," + varpg_num);
-    		
-    		$.getJSON("/HarangProject/ajax?cmd=selectPg",
-                    {pg_type:encodeURIComponent(varpg_type),pg_num:encodeURIComponent(varpg_num),pgm_date:vardate2,check:2},
-                    function(data){
-                    	$(data).each(function(index, pglist){
-
-                         });
-                    
-                 });
-    		
-    		
-       }
-      
-      	function insertDate(){
-      		return date.format();
-      	}
-      	
-      	
-
-
-    </script>
+		// 사용시간 보내기, 포인트와 합산해서 보내기. 태그로.		
+	}
+</script>

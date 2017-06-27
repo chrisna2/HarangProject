@@ -144,7 +144,7 @@ public class FacilSelectPgCommand implements CommandInterface {
 			
 			 
 			while (rs.next()) {
-				PgMemberDTO dto = new PgMemberDTO();
+				
 					list.add(rs.getString("pgm_timecode"));
 				}
 		} catch (Exception e) {
@@ -155,8 +155,9 @@ public class FacilSelectPgCommand implements CommandInterface {
 		}
 		
 		String timecode = transCode(list);
-		
-		codetrans.add(timecode);
+		PgMemberDTO dto = new PgMemberDTO();
+		dto.setPgm_timecode(timecode);
+		codetrans.add(dto);
 		
 		return codetrans;
 	}
