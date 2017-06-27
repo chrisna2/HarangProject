@@ -349,7 +349,7 @@ div#s_content {
 								$.getJSON("/HarangProject/ajax?cmd=schecon",{s_num : calEvent.id},function(data) {
 													
 													$(data).each(function(index, schconlist) {
-														$("#s_content").text(schconlist.s_content);
+														$("#s_content").html(schconlist.s_content);
 														var ss_num = schconlist.s_num;
 														$("#s_num").text(ss_num);
 														$("#s_title").text(schconlist.s_title);
@@ -453,7 +453,7 @@ function schRead(s_num) {
 		$("#schcon").slideDown();
 		$.getJSON("/HarangProject/ajax?cmd=schecon",{s_num : s_num},function(data) {
 			$(data).each(function(index, schconlist) {
-				$("#s_content").text(schconlist.s_content);
+				$("#s_content").html(schconlist.s_content);
 				var ss_num = schconlist.s_num;
 				$("#s_num").text(ss_num);
 				schjoin.s_num.value = ss_num;

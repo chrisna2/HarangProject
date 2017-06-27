@@ -240,7 +240,7 @@ td {
 								type="hidden" name="cmd" value="A_BB_DEL" />
 
 						</form>
-						<!--  수정을 위한 폼 끝 -->
+						<!--  삭제를 위한 폼 끝 -->
 
 
 						<div align="center">

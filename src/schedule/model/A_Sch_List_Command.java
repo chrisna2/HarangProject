@@ -77,7 +77,7 @@ public class A_Sch_List_Command implements CommandInterface {
 
 			if (null == table_search) {
 
-				sql = "select s_num, s_grade, s_ispoint, s_title, s_content, s_dstart, s_dend, s_dept, s_location, s_rstart, s_rend from tbl_schedule order by s_dstart ";
+				sql = "select s_num, s_grade, s_ispoint, s_title, s_content, s_dstart, s_dend, s_dept, s_location, s_rstart, s_rend from tbl_schedule order by s_num ";
 				
 				
 				pstmt = con.prepareStatement(sql);
@@ -87,7 +87,7 @@ public class A_Sch_List_Command implements CommandInterface {
 
 			else {
 
-				sql = "select s_num, s_grade, s_ispoint, s_title, s_content, s_dstart, s_dend, s_dept, s_location, s_rstart, s_rend from tbl_schedule where " +  sOption + " like '%" + table_search + "%' order by s_dstart ";
+				sql = "select s_num, s_grade, s_ispoint, s_title, s_content, s_dstart, s_dend, s_dept, s_location, s_rstart, s_rend from tbl_schedule where " +  sOption + " like '%" + table_search + "%' order by s_num ";
 				
 				System.out.println(sql);
 				

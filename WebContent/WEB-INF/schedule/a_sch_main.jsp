@@ -101,7 +101,8 @@ div#s_content {
 					<div class="box-footer" id = "is_join" style="background-color: #dceff4 ">
 
 						<p align = "center">
-						<a type="button"  href = "javascript:scupdate(${schconlist.s_num})" class="btn btn-primary" > 수정</a>
+						<a type="button"  href = "javascript:scupdate()" class="btn btn-primary" > 수정</a>
+						<a type="button"  href = "javascript:scdelete()" class="btn btn-danger" > 삭제</a>
 						
 						</p>
 					
@@ -232,14 +233,23 @@ div#s_content {
 	
 	
 	
-	<!--  참가취소를 위한 폼 시작 -->
-	<!-- 참가취소 하려면.. 글번호를 가져가야함.  -->
+	<!--  학사일정 수정을 위한 폼 시작 -->
+	<!-- 학사일정 수정을  하려면.. 글번호를 가져가야함.  -->
 	<form method="post" action="/HarangProject/schedule"
 		name="scupdateform">
 		<input type="hidden" name="s_num" value="" /> 
-		<input type="hidden" name="cmd" value="A_SCH_UPDATE" />
+		<input type="hidden" name="cmd" value="A_SCH_CON_UPDATE" />
 	</form>
-	<!--  참가신청을 위한 폼 끝 -->
+	<!--  학사일정 수정을  위한 폼 끝 -->
+	
+	<!--  학사일정 삭제를 위한 폼 시작 -->
+	<!-- 학사일정 삭제를  하려면.. 글번호를 가져가야함.  -->
+	<form method="post" action="/HarangProject/schedule"
+		name="scdeleteform">
+		<input type="hidden" name="s_num" value="" /> 
+		<input type="hidden" name="cmd" value="A_SCH_DELETE" />
+	</form>
+	<!--  학사일정 삭제를  위한 폼 끝 -->
 	
 	<!-- 페이징 관련 폼 ----------------------------------------------------------------------->
 	<!-- 페이징 : 이전 블록으로 이동하는 폼 -->
@@ -285,10 +295,11 @@ function schRead(s_num) {
 		$("#schcon").slideDown();
 		$.getJSON("/HarangProject/ajax?cmd=aschecon",{s_num : s_num},function(data) {
 			$(data).each(function(index, schconlist) {
-				$("#s_content").text(schconlist.s_content);
+				$("#s_content").html(schconlist.s_content);
 				var ss_num = schconlist.s_num;
 				$("#s_num").text(ss_num);
 				scupdateform.s_num.value = ss_num;
+				scdeleteform.s_num.value = ss_num;
 				$("#s_title").text(schconlist.s_title);
 				$("#s_dstart").text(schconlist.s_dstart);
 				$("#s_dend").text(schconlist.s_dend);
@@ -336,8 +347,15 @@ function schRead(s_num) {
 	
 
 
-function scupdate(s_num){
+function scupdate(){
 	document.scupdateform.submit();
+}
+function scdelete(){
+	
+	if(confirm("정말 삭제하시겠습니까?")){
+		
+	document.scdeleteform.submit();
+	}
 }
 
 ///////////////// 페이지 관련 javascript function////////////////////
