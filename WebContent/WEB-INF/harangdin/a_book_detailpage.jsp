@@ -61,7 +61,7 @@
                 <div class="col-sm-6 form-group">
                  
                   <label>중고도서 거래번호</label>
-                  <input type="text" class="form-control" value="${i.b_num }" readonly="readonly">
+                  <input type="text" class="form-control"  value="${i.b_num }" readonly="readonly">
                   <label>학번</label>
                   <input type="text" class="form-control" value="${i.m_id }" readonly="readonly">
                   <label>저자</label>
@@ -77,7 +77,7 @@
 	                      <div class="input-group-addon">
 	                        <i class="fa fa-calendar"></i>
 	                      </div>
-	                      <input type="text" class="form-control pull-right" id="reservation" readonly="readonly"/>
+	                      <input type="text" class="form-control pull-right" value="${i.b_regdate }" readonly="readonly"/>
 	                    </div>
                   <label>현시각 최고 포인트</label>
                   <input type="text" class="form-control" value="${max_point}" readonly="readonly">
@@ -92,7 +92,7 @@
             <div class="row">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-2">
-							<button class="btn btn-block btn-danger" onclick="fnDelete()">삭제</button>
+							<button class="btn btn-block btn-danger" onclick="fnDelete('${i.b_num}')">삭제</button>
 						</div>
 				
 						<form action="/HarangProject/harangdin?cmd=adminMain" method="post">
@@ -125,8 +125,10 @@
 <%@ include file="../include/footer.jsp" %>
 
 <script>
-function fnDelete(){
-	document.getElementById("b_num").value = b_num;
+function fnDelete(b_num){
+	del.b_num.value=b_num;
+	//alert(del.b_num.value);
+	
 	document.del.submit();
 }
 </script>

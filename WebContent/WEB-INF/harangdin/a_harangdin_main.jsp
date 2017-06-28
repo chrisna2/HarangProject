@@ -49,20 +49,9 @@
 								</div>
 							</form>
 								
-							<div class="col-sm-2.5 no-margin pull-right">
-								<button type="button" class="btn btn-info.btn-flat">
-									<i class="fa fa-user"></i> AdminPage</button>
-							</div>
-							
-							<form action="/HarangProject/harangdin?cmd=regist" method="post">
-								<div class="col-xs-1 no-margin pull-right">
-										<button type="submit" class="btn btn-block btn-default" >등록</button>
-								</div>
-							</form>
-							
 							<form id="adminDonate" name="adminDonate" method="post" action="/HarangProject/harangdin?cmd=adminDonate">
-								<div class="col-xs-1 no-margin pull-right">
-								<button class="btn btn-primary" type="submit">기부확인</button>
+								<div class="col-xs-2.5 no-margin pull-right">
+								<button class="btn btn-info.btn-flat" type="submit"><i class="fa fa-user"></i>기부확인</button>
 								</div>
 							</form>
 

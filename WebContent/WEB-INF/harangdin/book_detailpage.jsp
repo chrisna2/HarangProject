@@ -7,6 +7,17 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
      <title>기본 값 페이지</title>
+     <script>
+     	function formcheck(){
+     		var max_point = apply.max_point.value;
+     		var inputpoint = apply.bh_want.value;
+     		if(max_point > inputpoint){
+     			alert("최고포인트보다 입력포인트가 작습니다");
+     			return false;
+     		}
+     		return true;
+     	}
+     </script>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -70,11 +81,10 @@
 	                      <div class="input-group-addon">
 	                        <i class="fa fa-calendar"></i>
 	                      </div>
-	                      <input type="text" class="form-control pull-right" id="reservation" readonly="readonly"/>
+	                      <input type="text" class="form-control pull-right" value="${i.b_regdate }" readonly="readonly"/>
 	                    </div>
                   <label>현시각 최고 포인트</label>
-                  <input type="text" class="form-control" value="${max_point}" readonly="readonly">
-                </div>
+                 	 <input type="text" class="form-control" value="${max_point}" readonly="readonly">
                 </div> 
 
                 <!-- textarea -->
@@ -110,7 +120,7 @@
          <!-- 모달 : 뒷 페이지 배경을 눌러도 꺼지지 않음 -->
                 <div class="modal fade" id="theModal" data-backdrop="static">
                     <div class="modal-dialog">
-                        <form name="apply" action="/HarangProject/harangdin?cmd=b_hunter" method="post">
+                        <form name="apply" action="/HarangProject/harangdin?cmd=b_hunter" method="post" onsubmit="return formcheck()">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h3>구매희망</h3>
@@ -127,6 +137,8 @@
 				                <input type="text" class="form-control" value="${i.b_pub }" readonly="readonly">
 				                <label>판매자 희망 포인트</label>
                   				<input type="text" class="form-control" value="${i.b_want }" readonly="readonly">
+				                <label>현시각 최고 포인트</label>
+                  				<input type="text" name="max_point" class="form-control" value="${max_point }" readonly="readonly">
 				                
                               </div>
                               <br>

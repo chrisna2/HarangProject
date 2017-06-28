@@ -49,10 +49,11 @@
 								</div>
 							</form>
 								
-							<div class="col-sm-2.5 no-margin pull-right">
-								<button type="button" class="btn btn-info.btn-flat">
-									<i class="fa fa-user"></i> AdminPage</button>
-							</div>
+							<form id="adminMain" name="adminMain" method="post" action="/HarangProject/harangdin?cmd=adminMain">
+								<div class="col-xs-2.5 no-margin pull-right">
+								<button class="btn btn-info.btn-flat" type="submit"><i class="fa fa-user"></i>관리자메인</button>
+								</div>
+							</form>
 							
 							<form action="/HarangProject/harangdin?cmd=regist" method="post">
 								<div class="col-xs-1 no-margin pull-right">

@@ -31,12 +31,13 @@ public class AdminBookDetailCommand implements CommandInterface {
 			
 		
 		String delete_check = request.getParameter("delete_check");
+		System.out.println(delete_check);
 		
 		detailpac(request);
 				
 		point(request);
 		
-		if(null!=delete_check){
+		if("delete".equals(delete_check)){
 			delete(request);
 			request.setAttribute("delete", "delete");
 		}
