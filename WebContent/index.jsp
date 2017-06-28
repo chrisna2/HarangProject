@@ -37,6 +37,10 @@
             height:70px;   
             background:#ffffff;
         }
+        .login-box{
+            margin-top: 200px;
+            margin-bottom: 300px;
+        }
     </style>
   </head>
   <body class="login-page">
@@ -77,9 +81,8 @@
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
     <!-- 완성시 최종 삭제 -->
-    <div class="login-box">
-    
-      <div class="login-box-body" hidden="hidden">
+    <div class="login-box" hidden="hidden">
+      <div class="login-box-body">
            <h3>인덱스</h3>
            <h4>내 정보</h4>
                <ul>
