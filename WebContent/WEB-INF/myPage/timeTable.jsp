@@ -300,8 +300,8 @@
 	                        <td>${l.l_name}</td>
 	                        <td>${l.l_grade}</td>
 	                        <td>${l.l_term}</td>
-	                        <td>${l.l_day}</td>
-	                        <td>${l.l_time}</td>
+                            <td id="day${l.l_num}">${l.l_day}</td>
+                            <td id="time${l.l_num}">${l.l_time}</td>
 	                        <td>${l.l_teacher}</td>
 	                        <td>${l.l_room}</td>
 	                        <td>${l.l_credit}</td>
