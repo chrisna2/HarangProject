@@ -247,6 +247,50 @@ public class ParttimeBean {
 		return list;
 	}
 	
+	public ArrayList<DaetaDTO> getDaetaList(String keyField, String keyword) {
+		ArrayList list = new ArrayList();
+		String sql=null;
+		
+		if(keyField.equals("제목")){
+			sql = "SELECT * FROM tbl_daeta WHERE d_title like '%"+keyword+"%' ORDER BY d_regdate DESC";
+		}else if(keyField.equals("시급")){
+			sql = "SELECT * FROM tbl_daeta WHERE d_wage > "+keyword+" ORDER BY d_regdate DESC";
+		}
+		
+		try{
+			con = pool.getConnection();
+			
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				DaetaDTO dto = new DaetaDTO();
+				dto.setD_num(rs.getString("d_num"));
+				dto.setD_title(rs.getString("d_title"));
+				dto.setD_regdate(rs.getString("d_regdate"));
+				dto.setD_deadline(rs.getString("d_deadline"));
+				dto.setD_wage(rs.getInt("d_wage"));
+				dto.setD_date(rs.getString("d_date"));
+				dto.setD_content(rs.getString("d_content"));
+				dto.setD_tel(rs.getString("d_tel"));
+				dto.setD_deposit(rs.getInt("d_deposit"));
+				dto.setD_location(rs.getString("d_location"));
+				dto.setD_header(rs.getString("d_header"));
+				dto.setD_cnt(rs.getInt("d_cnt"));
+				dto.setM_id(rs.getString("m_id"));				
+				
+				list.add(dto);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getDaetaList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		return list;
+	}
+	
 	/**
 	 * DB에서 대타 모집 게시판의 내가 쓴 글 정보를 검색하는 메서드
 	 */
@@ -1171,4 +1215,6 @@ public class ParttimeBean {
 			pool.freeConnection(con,pstmt);
 		}
 	}
+
+	
 }

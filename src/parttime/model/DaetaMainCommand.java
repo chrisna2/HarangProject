@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import dto.D_ApplyDTO;
 import dto.DaetaDTO;
 import dto.MemberDTO;
+import dto.ParttimeDTO;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 import point.PointBean;
@@ -40,9 +41,16 @@ public class DaetaMainCommand implements CommandInterface {
 	 * @param req
 	 */
 	public void getList(String m_id, HttpServletRequest req) {
+		String keyword = req.getParameter("keyword");
+		String keyField = req.getParameter("keyField");
+		ArrayList<DaetaDTO> list = null;
 		
 		// 게시판에 띄울 글 정보를 모두 불러와 ArrayList에 저장
-		ArrayList list = bean.getDaetaList();
+		if(keyword == null){
+			list = bean.getDaetaList();
+		}else{
+			list = bean.getDaetaList(keyField, keyword);
+		}
 		
 		// 마감일이 지나면 [마감]으로 말머리 변경
 		for(int i=0; i<list.size(); i++){
