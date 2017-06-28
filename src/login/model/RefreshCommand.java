@@ -23,18 +23,19 @@ import parttime.model.ParttimeBean;
  */
 public class RefreshCommand implements CommandInterface {
 	
+	LoginBean bean = new LoginBean();
+	
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		LoginBean bean = new LoginBean();
 		MemberDTO login = bean.getLoginInfo(request);
 		String m_id = login.getM_id();
 		String url = "";
 		
 		//timetable(request); //현재 학기 시간표정보
 		recentData(request); //최신정보
-		point(request);//최근 포인트 정보
+		point(request,m_id);//최근 포인트 정보
 		
 		//일반 회원 일때
 		if(bean.adminCheck(m_id)==false){
@@ -77,9 +78,17 @@ public class RefreshCommand implements CommandInterface {
 	 * 포인트 정보를 불러오는 메서드.
 	 * @param req
 	 */
-	public void point(HttpServletRequest req){
+	public void point(HttpServletRequest req, String m_id){
 		PointlistCommand plc = new PointlistCommand();
-		plc.pointList(req);
+		
+		//일반 회원 일때
+		if(bean.adminCheck(m_id)==false){
+			plc.pointList(req);
+		}
+		//관리자 일때.
+		else if(bean.adminCheck(m_id)){
+			
+		}
 	}
 
 }

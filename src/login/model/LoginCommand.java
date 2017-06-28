@@ -109,7 +109,7 @@ public class LoginCommand implements CommandInterface {
 		RefreshCommand refresh = new RefreshCommand();
 		refresh.timetable(request);
 		refresh.recentData(request);
-		refresh.point(request);
+		refresh.point(request,input_id);
 		
 		return url;
 		
