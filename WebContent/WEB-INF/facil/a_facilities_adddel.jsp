@@ -39,9 +39,6 @@
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
 							</button>
-							<button class="btn btn-box-tool" data-widget="remove">
-								<i class="fa fa-times"></i>
-							</button>
 						</div>
 					</div>
 					<!-- /.box-header -->
@@ -67,12 +64,12 @@
 										<td>${p.pg_name}</td>
 										<td>${p.pg_content}</td>
 										<td>
-										<form method="post" onclick="confirmData('pg','${p.pg_num}','${p.pg_name}','${p.pg_type}')">
+										<form method="post" onclick="confirmData('pg','${p.pg_num}','${p.pg_type}','${p.pg_name}')">
 											<input type="button" class="btn btn-primary" value="삭제">
 										</form>
 										</td>
 										<td>
-										<form method="post" action="/HarangProject/facil?cmd=AFacilAddDel">
+										<form method="post" onclick="modifityDate('pg','${p.pg_num}','${p.pg_type}','${p.pg_name}')">
 											<input type="button" class="btn btn-primary" value="수정">
 										</form>
 										</td>
@@ -170,9 +167,6 @@
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
 							</button>
-							<button class="btn btn-box-tool" data-widget="remove">
-								<i class="fa fa-times"></i>
-							</button>
 						</div>
 					</div>
 					<!-- /.box-header -->
@@ -198,12 +192,12 @@
 										<td>${p.sr_name}</td>
 										<td>${p.sr_content}</td>
 										<td>
-										<form method="post" onclick="confirmData('sr','${p.sr_num}','${p.sr_name}','${p.sr_type}')">
+										<form method="post" onclick="confirmData('sr','${p.sr_num}','${p.sr_type}','${p.sr_name}')">
 											<input type="button" class="btn btn-primary" value="삭제">
 										</form>
 										</td>
 										<td>
-										<form method="post" action="/HarangProject/facil?cmd=AFacilAddDel">
+										<form method="post" onclick="modifityDate('sr','${p.sr_num}','${p.sr_type}','${p.sr_name}')">
 											<input type="button" class="btn btn-primary" value="수정">
 										</form>
 										</td>
@@ -355,10 +349,11 @@
 		<!-- 시설확인 끝 -->
 
 		<!-- 시설추가 시작 -->
+		<form method="POST" action="/HarangProject/facil?cmd=AFacilAddDel">
 		<div class="row">
 			<div class="col-md-12">
 				<!-- Box -->
-				<div class="box box-primary">
+				<div class="box box-primary" id="faciladdbox">
 					<!-- Box header -->
 					<div class="box-header">
 						<h3 class="box-title">시설 추가</h3>
@@ -370,39 +365,49 @@
 					</div>
 
 					<!-- Box body -->
+					
 					<div class="box-body">
 
 						<!-- 운동장/스터디룸 선택 -->
 
 						<div class="row">
 							<div class="form-group col-md-4">
-								<label>시설종류</label> <select class="form-control">
-									<option>운동장</option>
-									<option>스터디룸</option>
+								<label>시설종류</label> <select class="form-control" name="selectfacil">
+									<option value="운동장">운동장</option>
+									<option value="스터디룸">스터디룸</option>
 								</select>
 							</div>
 
 							<!-- 시설명 입력 -->
 							<div class="col-md-4">
 								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="시설명을 입력하세요">
+									placeholder="시설명을 입력하세요" name="facil_type">
 							</div>
 
 							<!-- 호수 입력 -->
 							<div class="col-md-4">
-								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="시설명을 입력하세요">
+								<label>호수</label> <input type="text" class="form-control"
+									placeholder="시설명을 입력하세요" name="facil_name">
+							</div>
+						</div>
+						<div class="row">
+							<!-- 시설 설명 -->
+							<div class="col-md-12">
+								<label>시설 설명</label> <input type="text" class="form-control"
+									placeholder="시설명을 입력하세요" name="facil_content">
 							</div>
 						</div>
 					</div>
 
 					<!-- Box footer -->
+					
 					<div class="box-footer">
 						<div class="row" align="center">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
-									value="추가">
+								<input type="hidden" name="addfacil" value="1">
+								<input type="submit" class="btn btn-block btn-primary"
+									value="추가" >
 							</div>
 							<div class="col-md-3 btn-group">
 								<input type="button" class="btn btn-block btn-primary"
@@ -410,17 +415,21 @@
 							</div>
 						</div>
 					</div>
-
+					
 				</div>
+				
 			</div>
 		</div>
+		</form>
 		<!-- 시설추가 끝-->
 
 		<!-- 시설수정 시작-->
+		
 		<div class="row">
 			<div class="col-md-12">
 				<!-- Box -->
-				<div class="box box-primary">
+				<form method="POST" action="/HarangProject/facil?cmd=AFacilAddDel">
+				<div class="box box-primary" id="reser03" hidden="hidden">
 					<!-- Box header -->
 					<div class="box-header">
 						<h3 class="box-title">시설 수정</h3>
@@ -432,29 +441,30 @@
 					</div>
 
 					<!-- Box body -->
+					
 					<div class="box-body">
 
 						<!-- 운동장/스터디룸 선택 -->
 						<div class="row">
 							<div class="col-md-2">
 								<label>번호</label> <input type="text" class="form-control"
-									placeholder="F0001" disabled>
+									readonly="readonly" id="modi_num" name="modi_num">
 							</div>
 							<div class="col-md-2">
 								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="운동장" disabled>
+									readonly="readonly" id="modi_facil" name="modi_facil">
 							</div>
 
 							<!-- 시설명(첫번째 카테고리) 선택 -->
 							<div class="col-md-4">
 								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="족구장" disabled>
+									readonly="readonly" id="modi_type">
 							</div>
 
 							<!-- 호수(두번째 카테고리) 선택 -->
 							<div class="col-md-4">
 								<label>호수</label> <input type="text" class="form-control"
-									placeholder="예술조형대학 옆" disabled>
+									readonly="readonly" id="modi_name">
 							</div>
 							<br>
 							<div class="col-md-12">
@@ -465,23 +475,23 @@
 						
 
 						<div class="row">
-							<div class="form-group col-md-4">
-								<label>시설종류</label> <select class="form-control">
-									<option>운동장</option>
-									<option>스터디룸</option>
-								</select>
-							</div>
 
 							<!-- 시설명 입력 -->
 							<div class="col-md-4">
 								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="수정할 내용을 입력하세요">
+									placeholder="수정할 내용을 입력하세요" id="endmodi_name" name="endmodi_name">
 							</div>
 
 							<!-- 호수 입력 -->
 							<div class="col-md-4">
 								<label>호수</label> <input type="text" class="form-control"
-									placeholder="수정할 내용을 입력하세요">
+									placeholder="수정할 내용을 입력하세요" id="endmodi_type" name="endmodi_type">
+							</div>
+							
+							<!-- 시설 설명 입력  -->
+							<div class="form-group col-md-4">
+								<label>설명</label> <input type="text" class="form-control"
+									placeholder="수정할 내용을 입력하세요" id="endmodi_content" name="endmodi_content">
 							</div>
 						</div>
 
@@ -493,7 +503,8 @@
 						<div class="row" align="center">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
+								<input type="hidden" name="modified" value="1">
+								<input type="submit" class="btn btn-block btn-primary"
 									value="수정">
 							</div>
 							<div class="col-md-3 btn-group">
@@ -504,8 +515,10 @@
 					</div>
 
 				</div>
+				</form>
 			</div>
 		</div>
+		
 		<!-- 시설수정 끝-->
 
 	</section>
@@ -519,10 +532,6 @@
 
 <script type="text/javascript">
 function confirmData(check, num, type, name){
-		// UI적인 측면 고려. 화면 조정.
-		$("#boxstudy").attr("class", "box box-primary collapsed-box");
-		$("#boxplayground").attr("class", "box box-primary collapsed-box");
-	
 		// 삭제 확인창 보여지게.
 		$("#confirmcheck").slideUp();
 		$("#confirmcheck").slideDown();
@@ -542,6 +551,34 @@ function confirmData(check, num, type, name){
 		}
 		
 		$("#sendnumber").attr("value", num)
+		
+		// UI적인 측면 고려. 화면 조정.
+		$("#boxstudy").attr("class", "box box-primary collapsed-box");
+		$("#boxplayground").attr("class", "box box-primary collapsed-box");
+		$("#faciladdbox").attr("class", "box box-primary collapsed-box");
+}
+
+function modifityDate(check, num, type, name){
+		$("#reser03").slideUp();
+		$("#reser03").slideDown();	
+		
+		if("pg" == check){
+			$("#modi_facil").attr("value","운동장");
+		}
+		
+		else if("sr" == check){
+			$("#modi_facil").attr("value","스터디룸");
+		}
+		
+		$("#modi_num").attr("value",num);
+		$("#modi_type").attr("value",type);
+		$("#modi_name").attr("value",name);
+	
+		// UI적인 측면 고려. 화면 조정.
+		$("#boxstudy").attr("class", "box box-primary collapsed-box");
+		$("#boxplayground").attr("class", "box box-primary collapsed-box");
+		$("#faciladdbox").attr("class", "box box-primary collapsed-box");
+		
 }
 </script>
 

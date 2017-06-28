@@ -31,21 +31,28 @@ public class AfacilAddDelCommand implements CommandInterface {
 
 		String delete = request.getParameter("delete");
 		String modified = request.getParameter("modified");
-		String addFacil = request.getParameter("addFacil");
-		String deleteOK = request.getParameter("deleteOK");
-
+		String addfacil = request.getParameter("addfacil");
+		
 		loadlist(request);
-
+		System.out.println(addfacil);
+		
+		// 설비 삭제.
 		if ("1".equals(delete)) {
 			delete(request, delete);
+			loadlist(request);
 		}
 
-		else if (null != modified) {
+		// 수정.
+		else if ("1".equals(modified)) {
 			modified(request, modified);
+			loadlist(request);
 		}
-
-		else if (null != addFacil) {
+		
+		// 설비추가.
+		else if ("1".equals(addfacil)){
+			System.out.println("설비추가 접근");
 			addFacil(request);
+			loadlist(request);
 		}
 
 		return "/WEB-INF/facil/a_facilities_adddel.jsp";
@@ -143,21 +150,12 @@ public class AfacilAddDelCommand implements CommandInterface {
 		if ("pg".equals(delcheck)) {
 			try {
 
-				String sql = "DELETE FROM harang.tbl_pg_playground WHERE pg_num =?";
+				String sql = "DELETE FROM tbl_playground WHERE pg_num =?";
 				pool = DBConnectionMgr.getInstance();
 				con = pool.getConnection();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, num);
-				rs = pstmt.executeQuery();
-
-				pgdto = new PlaygroundDTO();
-
-				rs.next();
-				pgdto.setPg_num(rs.getString("pg_num"));
-				pgdto.setPg_type(rs.getString("pg_type"));
-				pgdto.setPg_name(rs.getString("pg_name"));
-				pgdto.setPg_content(rs.getString("pg_content"));
-				pgdto.setPg_point(rs.getInt("pg_point"));
+				pstmt.executeUpdate();
 
 			} catch (Exception e) {
 				System.out.println("a_facilities_adddel : " + e);
@@ -165,28 +163,18 @@ public class AfacilAddDelCommand implements CommandInterface {
 			} finally {
 				pool.freeConnection(con, pstmt, rs);
 			}
-			request.setAttribute("pgdto", pgdto);
 		}
 		
 		// 스터디룸일때..
 		else if ("sr".equals(delcheck)) {
 			try {
 
-				String sql = "DELETE FROM harang.tbl_pg_studyroom WHERE pg_num =?";
+				String sql = "DELETE FROM tbl_studyroom WHERE sr_num =?";
 				pool = DBConnectionMgr.getInstance();
 				con = pool.getConnection();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, num);
-				rs = pstmt.executeQuery();
-
-				srdto = new StudyroomDTO();
-
-				rs.next();
-				srdto.setSr_num(rs.getString("sr_num"));
-				srdto.setSr_type(rs.getString("sr_type"));
-				srdto.setSr_name(rs.getString("sr_name"));
-				srdto.setSr_content(rs.getString("sr_content"));
-				srdto.setSr_point(rs.getInt("sr_point"));
+				pstmt.executeUpdate();
 
 			} catch (Exception e) {
 				System.out.println("a_facilities_adddel : " + e);
@@ -194,20 +182,127 @@ public class AfacilAddDelCommand implements CommandInterface {
 			} finally {
 				pool.freeConnection(con, pstmt, rs);
 			}
-			request.setAttribute("srdto", srdto);
+			
 		}
 	}
 
 	// 시설 내용 수정
 	public void modified(HttpServletRequest request, String _modified) {
 		String sql = null;
+		
+		// 운동장, 스터디룸 확인
+		String check = request.getParameter("modi_facil");
+		String num = request.getParameter("modi_num");
+		String type = request.getParameter("modi_type");
+		String name = request.getParameter("modi_name");
+		String content = request.getParameter("modi_content");
+		
+		if("운동장".equals(check)){
+			try {
+
+				sql = "UPDATE tbl_playground "
+					+ "SET pg_type='?', pg_name='?', pg_content='?' "
+					+ "WHERE pg_num=?";
+				
+				pool = DBConnectionMgr.getInstance();
+				con = pool.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, type);
+				pstmt.setString(2, name);
+				pstmt.setString(3, content);
+				pstmt.setString(4, num);
+				pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				System.out.println("a_facilities_adddel : " + e);
+
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+		}
+		
+		else if("스터디룸".equals(check)){
+			try {
+
+				sql = "UPDATE tbl_studyroom "
+					+ "SET sr_type='?', sr_name='?', sr_content='?' "
+					+ "WHERE sr_num=?";
+				
+				pool = DBConnectionMgr.getInstance();
+				con = pool.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, type);
+				pstmt.setString(2, name);
+				pstmt.setString(3, content);
+				pstmt.setString(4, num);
+				pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				System.out.println("a_facilities_adddel : " + e);
+
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+			
+		}
 	}
 
 	// 시설추가
 	private void addFacil(HttpServletRequest request) {
-		String sql = null;
+		
+		String sorp = request.getParameter("selectfacil");
+		System.out.println(sorp);
+		
+		// 운동장 추가.
+		if("운동장".equals(sorp)){
+			String pg_type = request.getParameter("facil_type");
+			String pg_name = request.getParameter("facil_name");
+			String pg_content = request.getParameter("facil_content");
+			
+			String sql = 
+			"INSERT INTO tbl_playground (pg_type, pg_name, pg_content) VALUES (?,?,?)";
+			
+			try {
+				pool = DBConnectionMgr.getInstance();
+				con = pool.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, pg_type);
+				pstmt.setString(2, pg_name);
+				pstmt.setString(3, pg_content);
+				pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				System.out.println(" : " + e);
+
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+		}
+		
+		// 스터디룸 추가.
+		else if("스터디룸".equals(sorp)){
+			String sr_type = request.getParameter("facil_type");
+			String sr_name = request.getParameter("facil_name");
+			String sr_content = request.getParameter("facil_content");
+			
+			String sql = 
+				"INSERT INTO tbl_studyroom (sr_type, sr_name, sr_content) VALUES (?,?,?)";
+			try {
+				pool = DBConnectionMgr.getInstance();
+				con = pool.getConnection();
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, sr_type);
+				pstmt.setString(2, sr_name);
+				pstmt.setString(3, sr_content);
+				pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				System.out.println(" : " + e);
+
+			} finally {
+				pool.freeConnection(con, pstmt, rs);
+			}
+		}
+		
 	}
-
-
-
 }
