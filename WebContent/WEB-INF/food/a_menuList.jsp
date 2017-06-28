@@ -74,8 +74,7 @@
                   </div>
                 </div><!-- /.box-header -->
                  <!-- form 시작 -->
-                <form role="form" action="/HarangProject/food
-                ?cmd=Amenu" method="post">
+                <form role="form" action="/HarangProject/food?cmd=Amenu" method="post">
                 
                 <div class="box-body">
                 

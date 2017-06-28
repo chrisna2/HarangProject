@@ -305,7 +305,20 @@
 	                        <td>${l.l_teacher}</td>
 	                        <td>${l.l_room}</td>
 	                        <td>${l.l_credit}</td>
+                              <c:choose>
+                                <c:when test="${l.m_id eq member.m_id and l.l_grade == grade and l.tt_grade == tt.l_grade}">
                                    <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-danger" value="수강 취소"></td>
+                                </c:when>
+                                <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade == grade}">
+                                   <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-warning" value="재수강 취소"></td>
+                                </c:when>
+                                <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade < grade}">
+                                  <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-info" value="재수강"></td>
+                                </c:when>
+                                <c:otherwise>
+                                   <td><input type="button" onclick="enroll('${l.l_num}')" class="btn btn-primary" value="수업 등록"></td>
+                                </c:otherwise>
+                            </c:choose>
 	                      </tr>
                             </c:forEach>
                         </c:otherwise>
@@ -343,7 +356,7 @@
                             <option value="l_grade" ${keyfield eq 'l_grade' ? 'selected' : null }>대상 학년</option>
                             <option value="l_day" ${keyfield eq 'l_day' ? 'selected' : null }>수업 요일</option>
                             <option value="l_time" ${keyfield eq 'l_time' ? 'selected' : null }>수업 시간</option>
-                            <option value="l_techer" ${keyfield eq 'l_teacher' ? 'selected' : null }>교수님</option>
+                            <option value="l_teacher" ${keyfield eq 'l_teacher' ? 'selected' : null }>교수님</option>
                             <option value="l_room" ${keyfield eq 'l_room' ? 'selected' : null }>강의실</option>
                             <option value="l_credit" ${keyfield eq 'l_credit' ? 'selected' : null }>이수 학점</option>
                           </select>

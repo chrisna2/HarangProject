@@ -33,23 +33,23 @@
              <div class="box">
                 <form name="lesson" action="/HarangProject/myPage?cmd=AnewlessonUpdate" method="post">
                 <div class="box-header">
-                    <h3 class="box-title">수업 개설</h3>
+                    <h3 class="box-title">${dinfo.l_name} [${dinfo.l_num}] 수업 수정</h3>
                 </div>
                 <div class="box-body">
                      <div class="input-group">
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 개설 학기</span>
                           <select name="l_term" class="form-control input-sm" required="required">
                             <option></option>
-                            <option value="1">1학기</option>
-                            <option value="2">2학기</option>
+                            <option value="1" ${dinfo.l_term eq '1' ? 'selected' : null }>1학기</option>
+                            <option value="2" ${dinfo.l_term eq '2' ? 'selected' : null }>2학기</option>
                           </select>
                              <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 개설 학년</span>
                           <select name="l_grade" class="form-control input-sm" required="required">
                             <option></option>
-                            <option value="1">1학년</option>
-                            <option value="2">2학년</option>
-                            <option value="3">3학년</option>
-                            <option value="4">4학년</option>
+                            <option value="1" ${dinfo.l_grade eq '1' ? 'selected' : null }>1학년</option>
+                            <option value="2" ${dinfo.l_grade eq '2' ? 'selected' : null }>2학년</option>
+                            <option value="3" ${dinfo.l_grade eq '3' ? 'selected' : null }>3학년</option>
+                            <option value="4" ${dinfo.l_grade eq '4' ? 'selected' : null }>4학년</option>
                           </select>
                     </div>
                      <br>
@@ -58,22 +58,22 @@
                           <select class="form-control input-sm" name="l_dept" required="required">
                             <option></option>
                            <c:forEach items="${dlist}" var="t">
-                                    <option value="${t.l_dept}">${t.l_dept}</option> 
+                                    <option value="${t.l_dept}" ${dinfo.l_dept eq t.l_dept ? 'selected' : null }>${t.l_dept}</option> 
                                 </c:forEach>
                           </select>
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 선택 필수</span>
                           <select name="l_ismust" class="form-control input-sm" required="required">
                             <option></option>
-                            <option value="선택">선택</option>
-                            <option value="필수">필수</option>
+                            <option value="선택" ${dinfo.l_ismust eq '선택' ? 'selected' : null }>선택</option>
+                            <option value="필수" ${dinfo.l_ismust eq '필수' ? 'selected' : null }>필수</option>
                           </select>
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 이수 학점</span>
                           <select name="l_credit" class="form-control input-sm" required="required">
                             <option></option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            <option value="1" ${dinfo.l_credit eq '1' ? 'selected' : null }>1</option>
+                            <option value="2" ${dinfo.l_credit eq '2' ? 'selected' : null }>2</option>
+                            <option value="3" ${dinfo.l_credit eq '3' ? 'selected' : null }>3</option>
+                            <option value="4" ${dinfo.l_credit eq '4' ? 'selected' : null }>4</option>
                           </select>
                     </div>
                     <br>
@@ -81,18 +81,18 @@
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 수업 요일</span>
                           <select name="l_day" class="form-control input-sm" required="required">
                             <option></option>
-                            <option value="월">월</option>
-                            <option value="회">화</option>
-	                        <option value="수">수</option>
-	                        <option value="목">목</option>
-	                        <option value="금">금</option>
+                            <option value="월" ${dinfo.l_day eq '월' ? 'selected' : null }>월</option>
+                            <option value="회" ${dinfo.l_day eq '화' ? 'selected' : null }>화</option>
+	                        <option value="수" ${dinfo.l_day eq '수' ? 'selected' : null }>수</option>
+	                        <option value="목" ${dinfo.l_day eq '목' ? 'selected' : null }>목</option>
+	                        <option value="금" ${dinfo.l_day eq '금' ? 'selected' : null }>금</option>
                           </select>
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 수업 시간</span>
                           <select name="l_time" class="form-control input-sm" required="required">
                             <option></option>
-                            <option value="1-3">1-3교시</option>
-                            <option value="4-6">4-6교시</option>
-                            <option value="7-9">7-9교시</option>
+                            <option value="1-3" ${dinfo.l_time eq '1-3' ? 'selected' : null }>1-3교시</option>
+                            <option value="4-6" ${dinfo.l_time eq '4-6' ? 'selected' : null }>4-6교시</option>
+                            <option value="7-9" ${dinfo.l_time eq '7-9' ? 'selected' : null }>7-9교시</option>
                           </select>
                     </div>
                     <br>
@@ -101,29 +101,30 @@
                             <select class="form-control input-sm" name="l_teacher" required="required">                        
                                  <option></option>   
                                 <c:forEach items="${tlist}" var="t">
-                                    <option value="${t.l_teacher}">${t.l_teacher}</option> 
+                                    <option value="${t.l_teacher}" ${t.l_teacher eq dinfo.l_teacher ? 'selected' : null }>${t.l_teacher}</option> 
                                 </c:forEach>
                             </select>
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 강의실</span>
                           <select class="form-control input-sm" name="l_room" required="required">                        
                                  <option></option>   
                                 <c:forEach items="${rlist}" var="t">
-                                    <option value="${t.l_room}">${t.l_room}</option> 
+                                    <option value="${t.l_room}" ${t.l_room eq dinfo.l_room ? 'selected' : null }>${t.l_room}</option> 
                                 </c:forEach>
                             </select>
                     </div>
                     <br>
                      <div class="input-group">
                           <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 수업명</span>
-                            <input type="text" class="form-control input-sm" name="l_name" required="required">                        
+                            <input type="text" class="form-control input-sm" name="l_name" value="${dinfo.l_name}" required="required">                        
                       </div>
                 </div>
                 <div class="box-footer clearfix" align="right">
-                    <input type="hidden" name="check" value="insert">
+                    <input type="hidden" name="l_num" value="${dinfo.l_num}">
+                    <input type="hidden" name="check" value="update">
                     <button type="button" class="btn btn-info" onclick="tfindtt()">선생님 시간표 검색</button>
                     <button type="button" class="btn btn-info" onclick="rfindtt()">수강실 시간표 검색</button>
                     <button type="button" class="btn btn-gray"> 취소  </button>
-                    <button type="submit" class="btn btn-success"> 신규 등록  </button>
+                    <button type="submit" class="btn btn-success"> 수업 수정 </button>
                 </div>
            </form>
             </div>
