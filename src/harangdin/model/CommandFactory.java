@@ -54,6 +54,9 @@ public class CommandFactory {
 		else if(cmd.equals("donation")){
 			return new DonationCommand();
 		}
+		else if(cmd.equals("trade")){
+			return new TradeBookCommand();
+		}
 		
 		else{
 			return null;
