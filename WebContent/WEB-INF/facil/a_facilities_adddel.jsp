@@ -27,14 +27,14 @@
 	</section>
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
 	<section class="content">
-		<!-- 시설목록 테이블 시작 -->
+		<!-- 시설목록 운동장 테이블 시작 -->
 		<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-12">
 				<!-- 리스트 사용시  -->
-				<div class="box box-primary">
+				<div class="box box-primary" id="boxplayground">
 					<div class="box-header box-frimary">
-						<h3 class="box-title">시설물</h3>
+						<h3 class="box-title">시설물 운동장 목록</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
@@ -54,12 +54,12 @@
 									<th>시설명</th>
 									<th>호수</th>
 									<th>설명</th>
-									<th>수정</th>
 									<th>삭제</th>
+									<th>수정</th>
 								</tr>
 							</thead>
 							<tbody>
-							 	<c:forEach items="${requestScope.list}" var="p" varStatus="i">
+							 	<c:forEach items="${requestScope.pglist}" var="p" varStatus="i">
 									<tr class="text-blue">
 										<td>${p.pg_num}</td>
 										<td>운동장</td>
@@ -67,15 +67,13 @@
 										<td>${p.pg_name}</td>
 										<td>${p.pg_content}</td>
 										<td>
-										<form method="post" action="/HarangProject/facil?cmd=AFacilAddDel">
-											<input type="hidden" name="delete" value="${p.pg_num}">
-											<input type="submit" class="btn btn-primary" value="삭제">
+										<form method="post" onclick="confirmData('pg','${p.pg_num}','${p.pg_name}','${p.pg_type}')">
+											<input type="button" class="btn btn-primary" value="삭제">
 										</form>
 										</td>
 										<td>
 										<form method="post" action="/HarangProject/facil?cmd=AFacilAddDel">
-											<input type="hidden" name="Modified" value="${p.pg_num}">
-											<input type="submit" class="btn btn-primary" value="수정">
+											<input type="button" class="btn btn-primary" value="수정">
 										</form>
 										</td>
 									</tr>
@@ -158,13 +156,144 @@
 			</div>
 			<!-- /.col -->
 		</div>
-		<!-- 시설 목록 테이블 끝 -->
+		<!-- 시설 운동장 목록 테이블 끝 -->
+		
+		<!-- 시설 스터디룸 목록 테이블 시작 -->
+		<div class="row">
+			<!-- 너비 사이즈 수정  : col-->
+			<div class="col-md-12">
+				<!-- 리스트 사용시  -->
+				<div class="box box-primary" id="boxstudy">
+					<div class="box-header box-frimary">
+						<h3 class="box-title">시설물 스터디룸 목록</h3>
+						<div class="box-tools pull-right">
+							<button class="btn btn-box-tool" data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button class="btn btn-box-tool" data-widget="remove">
+								<i class="fa fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>시설 번호</th>
+									<th>시설 종류</th>
+									<th>시설명</th>
+									<th>호수</th>
+									<th>설명</th>
+									<th>삭제</th>
+									<th>수정</th>
+								</tr>
+							</thead>
+							<tbody>
+							 	<c:forEach items="${requestScope.srlist}" var="p" varStatus="i">
+									<tr class="text-blue">
+										<td>${p.sr_num}</td>
+										<td>스터디룸</td>
+										<td>${p.sr_type}</td>
+										<td>${p.sr_name}</td>
+										<td>${p.sr_content}</td>
+										<td>
+										<form method="post" onclick="confirmData('sr','${p.sr_num}','${p.sr_name}','${p.sr_type}')">
+											<input type="button" class="btn btn-primary" value="삭제">
+										</form>
+										</td>
+										<td>
+										<form method="post" action="/HarangProject/facil?cmd=AFacilAddDel">
+											<input type="button" class="btn btn-primary" value="수정">
+										</form>
+										</td>
+									</tr>
+									
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.box-body -->
+
+
+					<div class="box-footer">
+						<!-- 페이징 -->
+						<div class="row" align="center">
+							<ul class="pagination pagination-sm no-margin">
+								<li><a href="#">&laquo;</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">&raquo;</a></li>
+							</ul>
+						</div>
+
+						<!-- 셀렉트  -->
+
+						<form action="/HarangProject/facil?cmd=AFacilAddDel" name="search" method="post">
+							<div class="row">
+								<div class="col-md-3" align="center">
+									<select 
+										class="form-control input-sm pull-left"
+										style="width: 150px"
+										name="keyword">
+										<option value="pg_num" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pg_num'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>시설 번호</option>
+										
+										<option value="m_id" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'm_id'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>시설명</option>
+										
+										<!-- 이중 셀렉문 pgm_type인지 체크-->
+										<option value="pg_type" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pg_type'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>호수</option>
+										
+									</select>
+								</div>
+								
+								<div class="col-md-3" align="center">
+									<input type="text" 
+										   name="keyfield"
+										   class="form-control input-sm  pull-left" 
+										   style="width: 150px;"
+										   placeholder="Search" />
+									<div class="input-group-btn  pull-left">
+										<button
+											type="submit" 
+											class="btn btn-sm btn-primary">
+											검색 <i class="fa fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- 시설 스터디룸 목록 테이블 끝 -->
 
 		<!-- 시설확인 시작 -->
 		<div class="row">
 			<div class="col-md-12">
 				<!-- Box -->
-				<div class="box box-primary">
+				<div class="box box-primary" id="confirmcheck" hidden="hidden">
 					<!-- Box header -->
 					<div class="box-header">
 						<h3 class="box-title">삭제 확인</h3>
@@ -182,19 +311,19 @@
 						<div class="row">
 							<div class="col-md-4">
 								<label>시설 번호</label> <input type="text" class="form-control"
-									placeholder="${pgdto.pg_num}" disabled>
+									readonly="readonly" id="del_num" name="del_num">
 							</div>
 
 							<!-- 시설명(첫번째 카테고리) 선택 -->
 							<div class="col-md-4">
 								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="${pgdto.pg_type}" disabled>
+									readonly="readonly" id="del_type" name="del_type">
 							</div>
 
 							<!-- 호수(두번째 카테고리) 선택 -->
 							<div class="col-md-4">
 								<label>호수</label> <input type="text" class="form-control"
-									placeholder="${pgdto.pg_name}" disabled>
+									readonly="readonly" id="del_name" name="del_name">
 							</div>
 						</div>
 					</div>
@@ -205,7 +334,9 @@
 						<div class="row" align="center">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="hidden" name="deleteOK" value="${pgdto.pg_num}">
+								<input type="hidden" id="delete" name="delete" value="1">
+								<input type="hidden" id="checkfacil" name="checkfacil">
+								<input type="hidden" id="sendnumber" name="sendnumber">
 								<input type="submit" class="btn btn-block btn-primary"
 									value="삭제">
 							</div>
@@ -385,3 +516,32 @@
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
+
+<script type="text/javascript">
+function confirmData(check, num, type, name){
+		// UI적인 측면 고려. 화면 조정.
+		$("#boxstudy").attr("class", "box box-primary collapsed-box");
+		$("#boxplayground").attr("class", "box box-primary collapsed-box");
+	
+		// 삭제 확인창 보여지게.
+		$("#confirmcheck").slideUp();
+		$("#confirmcheck").slideDown();
+		
+		// 확인창에 데이터 입력.
+		$("#del_num").attr("value",num);
+		$("#del_type").attr("value",type);
+		$("#del_name").attr("value",name);
+		
+		// 최종 삭제 쿼리문에 포함시켜줄 분기. check값을 리퀘스트 값으로 확인해서 SQL문을 작성하게 된다.
+		if("pg" == check){
+			$("#checkfacil").attr("value",check);
+		}
+		
+		else if("sr" == check){
+			$("#checkfacil").attr("value",check);
+		}
+		
+		$("#sendnumber").attr("value", num)
+}
+</script>
+

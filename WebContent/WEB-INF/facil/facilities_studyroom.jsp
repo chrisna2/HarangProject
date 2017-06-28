@@ -121,7 +121,7 @@
 								<div class="col-md-4">
 									<label>시설번호</label> <input id="sr_num" type="text"
 										class="form-control" readonly="readonly" style="width: 150px">
-										
+
 								</div>
 
 							</div>
@@ -175,44 +175,31 @@
 								<div class="btn-group" data-toggle="buttons">
 
 									<label class="btn btn-primary" id="l0"> <input
-										type="checkbox" id="b0" value="8">
-										8시
+										type="checkbox" id="b0" value="8"> 8시
 									</label> <label class="btn btn-primary" id="l1"> <input
-										type="checkbox"  id="b1" value="9">
-										9시
+										type="checkbox" id="b1" value="9"> 9시
 									</label> <label class="btn btn-primary" id="l2"> <input
-										type="checkbox"  id="b2" value="10">
-										10시
+										type="checkbox" id="b2" value="10"> 10시
 									</label> <label class="btn btn-primary" id="l3"> <input
-										type="checkbox"  id="b3" value="11">
-										11시
+										type="checkbox" id="b3" value="11"> 11시
 									</label> <label class="btn btn-primary" id="l4"> <input
-										type="checkbox"  id="b4" value="12">
-										12시
+										type="checkbox" id="b4" value="12"> 12시
 									</label> <label class="btn btn-primary" id="l5"> <input
-										type="checkbox"  id="b5" value="13">
-										13시
+										type="checkbox" id="b5" value="13"> 13시
 									</label> <label class="btn btn-primary" id="l6"> <input
-										type="checkbox"  id="b6" value="14">
-										14시
+										type="checkbox" id="b6" value="14"> 14시
 									</label> <label class="btn btn-primary" id="l7"> <input
-										type="checkbox"  id="b7" value="15">
-										15시
+										type="checkbox" id="b7" value="15"> 15시
 									</label> <label class="btn btn-primary" id="l8"> <input
-										type="checkbox"  id="b8" value="16">
-										16시
+										type="checkbox" id="b8" value="16"> 16시
 									</label> <label class="btn btn-primary" id="l9"> <input
-										type="checkbox"  id="b9" value="17">
-										17시
+										type="checkbox" id="b9" value="17"> 17시
 									</label> <label class="btn btn-primary" id="l10"> <input
-										type="checkbox"  id="b10" value="18">
-										18시
+										type="checkbox" id="b10" value="18"> 18시
 									</label> <label class="btn btn-primary" id="l11"> <input
-										type="checkbox"  id="b11" value="19">
-										19시
+										type="checkbox" id="b11" value="19"> 19시
 									</label> <label class="btn btn-primary" id="l12"> <input
-										type="checkbox"  id="b12" value="20">
-										20시
+										type="checkbox" id="b12" value="20"> 20시
 									</label>
 
 
@@ -256,20 +243,19 @@
 
 					<!-- 최종결제 box-body -->
 					<!-- <form method="post" action="/HarangProject/facil?cmd=FacilSRreserv"> -->
-					
+
 					<form method="post" action="/HarangProject/facil?cmd=FacilSRreserv">
 						<div class="box-body ">
 							<div class="row ">
 								<!-- 사용 시간 -->
 								<div class="col-md-3">
 									<label>사용시간</label> <input type="text" class="form-control"
-										readonly="readonly" style="width: 150px" id="count">
-										
-										<input type="hidden" id="ssrm_date" name="ssrm_date" />
-										<input type="hidden" id="ssr_num" name="ssr_num" />
-										<input type="hidden" id="ssrm_timecode" name="ssrm_timecode" />
-										<input type="hidden" id="minuspoint" name="minuspoint">
-										<input type="hidden" name="checkout" value="yes"/>
+										readonly="readonly" style="width: 150px" id="count"> <input
+										type="hidden" id="ssrm_date" name="ssrm_date" /> <input
+										type="hidden" id="ssr_num" name="ssr_num" /> <input
+										type="hidden" id="ssrm_timecode" name="ssrm_timecode" /> <input
+										type="hidden" id="minuspoint" name="minuspoint"> <input
+										type="hidden" name="checkout" value="yes" />
 								</div>
 								<!-- 보유 포인트 -->
 								<div class="col-md-3">
@@ -281,34 +267,33 @@
 									<label>차감 포인트</label> <input type="text" class="form-control"
 										readonly="readonly" style="width: 150px" id="checkpoint">
 								</div>
-	
+
 								<!-- 결제 후 포인트-->
 								<div class="col-md-3">
 									<label>결제후 잔여 포인트</label> <input type="text"
-										class="form-control" readonly="readonly" 
-										style="width: 150px" id="beforepoint"
-										>
+										class="form-control" readonly="readonly" style="width: 150px"
+										id="beforepoint">
 								</div>
 							</div>
 						</div>
-					
 
-					<!-- 최종결제 box-footer -->
-					<div class="box-footer">
-						<div class="row" align="center">
-							<div class="col-md-3 btn-group"></div>
-							<div class="col-md-3 btn-group">
-								<input type="submit" class="btn btn-block btn-primary"
-									value="결제" onclick="artest()">
-							</div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block  btn-primary"
-									value="다시 선택">
+
+						<!-- 최종결제 box-footer -->
+						<div class="box-footer">
+							<div class="row" align="center">
+								<div class="col-md-3 btn-group"></div>
+								<div class="col-md-3 btn-group">
+									<input type="submit" class="btn btn-block btn-primary"
+										value="결제" onclick="artest()">
+								</div>
+								<div class="col-md-3 btn-group btn">
+									<input type="button" class="btn btn-block  btn-primary"
+										value="다시 선택">
+								</div>
 							</div>
 						</div>
-					</div>
 					</form>
-					
+
 				</div>
 			</div>
 		</div>
@@ -379,7 +364,7 @@
 	function selectfacil() {
 
 		var wsr_type = document.getElementById('sr_type').value;
-		
+
 		$.getJSON("/HarangProject/ajax?cmd=selectSr", {
 			sr_type : encodeURIComponent(wsr_type)
 		}, function(data) {
@@ -401,7 +386,8 @@
 		var varsr_name = select09.sr_name.value;
 
 		$
-				.getJSON("/HarangProject/ajax?cmd=selectSr",
+				.getJSON(
+						"/HarangProject/ajax?cmd=selectSr",
 						{
 							sr_type : encodeURIComponent(varsr_type),
 							sr_name : encodeURIComponent(varsr_name),
@@ -424,18 +410,18 @@
 											});
 						});
 	}
-	
+
 	/* 예약할 시설의 '날짜' 시설타입(sr_type), 시설호수(sr_name)을 바탕으로 Ajax JSON을 활용하여 데이터를 가지고 와서
 	   timecode를 바탕으로 예약시간 선택 창을 생성한다.
-	*/
+	 */
 	function goSelectTime() {
 		var vardate2 = this.vardate;
 		var varsr_num = document.getElementById('sr_num').value;
 		var varsr_type = document.getElementById('sr_type').value;
-		
+
 		// 선택 날짜와 시설번호.
-		$("#ssrm_date").attr("value",vardate2);
-		$("#ssr_num").attr("value",varsr_num);
+		$("#ssrm_date").attr("value", vardate2);
+		$("#ssr_num").attr("value", varsr_num);
 
 		// 디버깅용.	
 		//alert(vardate2 + "," + varsr_type + "," + varsr_num);
@@ -445,9 +431,9 @@
 			sr_num : encodeURIComponent(varsr_num),
 			srm_date : vardate2,
 			check : 2
-			},
-			
-			function(data) {
+		},
+
+		function(data) {
 			$(data).each(
 					function(index, srlist) {
 						var timecode = srlist.srm_timecode;
@@ -481,49 +467,47 @@
 
 	// 시간 예약 선택시 active값을 바탕으로 timecode를 만든다.
 	function countTime() {
-		
+
 		$("#reser03").slideDown();
 		var timecode = "A";
 		var count = 0;
 		var sr_point = $("#sr_point").val();
-		
+
 		for (var i = 0; i < 13; i++) {
-			
-			 if ($("#l" + i).attr("class") == "btn btn-primary active") {
+
+			if ($("#l" + i).attr("class") == "btn btn-primary active") {
 				timecode += "1";
 				count++;
-			} 
-			else{
+			} else {
 				timecode += "0";
 			}
-			
+
 		}
-		
+
 		var checkpoint = count * sr_point;
 		var mypoint = "${member.m_point}";
 		var beforepoint = mypoint - checkpoint;
-		
+
 		// 일단 초기화.
-		$("#count").attr("value"," ");
-		$("#mypoint").attr("value"," ");
-		$("#checkpoint").attr("value"," ");
-		$("#beforepoint").attr("value"," ");
-		
+		$("#count").attr("value", " ");
+		$("#mypoint").attr("value", " ");
+		$("#checkpoint").attr("value", " ");
+		$("#beforepoint").attr("value", " ");
+
 		// 폼태그속 hidden을 통해 전송할 타임코드
-		$("#ssrm_timecode").attr("value",timecode);
-		$("#minuspoint").attr("value",checkpoint);
-		
+		$("#ssrm_timecode").attr("value", timecode);
+		$("#minuspoint").attr("value", checkpoint);
+
 		// 사용시간 보내기, 포인트와 합산해서 보내기. 태그로.
 		// 포인트 출력 내용.
-		$("#count").attr("value",count);
-		$("#mypoint").attr("value",mypoint);
-		$("#checkpoint").attr("value",checkpoint);
-		$("#beforepoint").attr("value",beforepoint);
+		$("#count").attr("value", count);
+		$("#mypoint").attr("value", mypoint);
+		$("#checkpoint").attr("value", checkpoint);
+		$("#beforepoint").attr("value", beforepoint);
 	}
-	
 	/*	
 	디버깅용 함수.
- 	function artest(){
+	function artest(){
 		alert($("#ssrm_date").val());
 		alert($("#ssr_num").val());
 		alert($("#ssrm_timecode").val());
