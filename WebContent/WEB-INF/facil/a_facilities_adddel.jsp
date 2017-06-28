@@ -479,13 +479,13 @@
 							<!-- 시설명 입력 -->
 							<div class="col-md-4">
 								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="수정할 내용을 입력하세요" id="endmodi_name" name="endmodi_name">
+									placeholder="수정할 내용을 입력하세요" id="endmodi_type" name="endmodi_type">
 							</div>
 
 							<!-- 호수 입력 -->
 							<div class="col-md-4">
 								<label>호수</label> <input type="text" class="form-control"
-									placeholder="수정할 내용을 입력하세요" id="endmodi_type" name="endmodi_type">
+									placeholder="수정할 내용을 입력하세요" id="endmodi_name" name="endmodi_name">
 							</div>
 							
 							<!-- 시설 설명 입력  -->

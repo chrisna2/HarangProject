@@ -158,10 +158,10 @@ public class AfacilAddDelCommand implements CommandInterface {
 				pstmt.executeUpdate();
 
 			} catch (Exception e) {
-				System.out.println("a_facilities_adddel : " + e);
+				System.out.println("운동장 삭제 에러 : " + e);
 
 			} finally {
-				pool.freeConnection(con, pstmt, rs);
+				pool.freeConnection(con, pstmt);
 			}
 		}
 		
@@ -177,10 +177,10 @@ public class AfacilAddDelCommand implements CommandInterface {
 				pstmt.executeUpdate();
 
 			} catch (Exception e) {
-				System.out.println("a_facilities_adddel : " + e);
+				System.out.println("스터디 삭제 에러 : " + e);
 
 			} finally {
-				pool.freeConnection(con, pstmt, rs);
+				pool.freeConnection(con, pstmt);
 			}
 			
 		}
@@ -193,15 +193,17 @@ public class AfacilAddDelCommand implements CommandInterface {
 		// 운동장, 스터디룸 확인
 		String check = request.getParameter("modi_facil");
 		String num = request.getParameter("modi_num");
-		String type = request.getParameter("modi_type");
-		String name = request.getParameter("modi_name");
-		String content = request.getParameter("modi_content");
+		String type = request.getParameter("endmodi_type");
+		String name = request.getParameter("endmodi_name");
+		String content = request.getParameter("endmodi_content");
+		
+		System.out.println(check + num + type + name + content);
 		
 		if("운동장".equals(check)){
 			try {
 
 				sql = "UPDATE tbl_playground "
-					+ "SET pg_type='?', pg_name='?', pg_content='?' "
+					+ "SET pg_type=?, pg_name=?, pg_content=? "
 					+ "WHERE pg_num=?";
 				
 				pool = DBConnectionMgr.getInstance();
@@ -214,10 +216,10 @@ public class AfacilAddDelCommand implements CommandInterface {
 				pstmt.executeUpdate();
 
 			} catch (Exception e) {
-				System.out.println("a_facilities_adddel : " + e);
+				System.out.println("운동장 수정 에러 : " + e);
 
 			} finally {
-				pool.freeConnection(con, pstmt, rs);
+				pool.freeConnection(con, pstmt);
 			}
 		}
 		
@@ -225,7 +227,7 @@ public class AfacilAddDelCommand implements CommandInterface {
 			try {
 
 				sql = "UPDATE tbl_studyroom "
-					+ "SET sr_type='?', sr_name='?', sr_content='?' "
+					+ "SET sr_type=?, sr_name=?, sr_content=? "
 					+ "WHERE sr_num=?";
 				
 				pool = DBConnectionMgr.getInstance();
@@ -238,10 +240,10 @@ public class AfacilAddDelCommand implements CommandInterface {
 				pstmt.executeUpdate();
 
 			} catch (Exception e) {
-				System.out.println("a_facilities_adddel : " + e);
+				System.out.println("스터디룸 수정 에러 : " + e);
 
 			} finally {
-				pool.freeConnection(con, pstmt, rs);
+				pool.freeConnection(con, pstmt);
 			}
 			
 		}
