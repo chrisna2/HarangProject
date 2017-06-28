@@ -306,7 +306,7 @@
 	                        <td>${l.l_room}</td>
 	                        <td>${l.l_credit}</td>
                               <c:choose>
-                                <c:when test="${l.m_id eq member.m_id and l.l_grade == grade and l.tt_grade == tt.l_grade}">
+                                <c:when test="${l.m_id eq member.m_id and l.l_grade == grade and l.tt_grade == l.l_grade}">
                                    <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-danger" value="수강 취소"></td>
                                 </c:when>
                                 <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade == grade}">

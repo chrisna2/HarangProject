@@ -26,10 +26,10 @@
     	 var f_point = menuinfo.f_point.value;
     	 var m_point = menuinfo.m_point.value;
     	   
-    	 if(m_point < f_point){
+    	  if(0<f_point-m_point){
     		 alert("현재 보유 포인트가 부족합니다. 포인트를 더 벌어 오세요!")
     		      return false;
-             }
+             } 
          
          var buy = confirm("식권을 구매 하시겠습니까?\n해당 식권은 1인 1매 한정이며 한번 사용하면 재사용 불가 합니다.\n환불은 판매일 2일 전 가능합니다.");
          
@@ -92,7 +92,7 @@
                     <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 식권  구매 포인트</span>
-                    <input type="text" name="f_point" class="form-control" value="" readonly="readonly">
+                    <input type="text" name="f_point" class="form-control" readonly="readonly">
                     <span class="input-group-addon bg-gray"> 포인트</span>
                   </div>
                   <br>
