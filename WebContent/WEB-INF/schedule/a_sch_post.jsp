@@ -69,8 +69,8 @@ function fnschp(){
 		return false;
 	}
 	
-	
-	if (document.schpostcomplete.s_point.value == "" && document.schpostcomplete.point.value == "Y"){
+	var ispointchkd = document.schpostcomplete.point.checked;
+	if (document.schpostcomplete.s_point.value == "" && ispointchkd ){
 		alert("포인트 지급에 체크를 하시면, 지급할 포인트를 입력 하셔야 합니다. ")
 		return false;
 	}
@@ -206,7 +206,7 @@ function showKeyCode(event) {
 								<div class="col-md-2 form-group">
 									<div class="checkbox">
 										<label> 
-											<input type="checkbox" name="point" id="point" value ="Y" checked="checked" onchange="showmenow()">포인트 지급
+											<input type="checkbox" name="point" id="point" value ="Y" onchange="showmenow()">포인트 지급
 										</label>
 									</div>
 
