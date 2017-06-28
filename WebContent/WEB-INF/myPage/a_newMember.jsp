@@ -16,14 +16,52 @@ function checkform(){
     var num1 = input.num1.value;
     var num2 = input.num2.value;
     var num3 = input.num3.value;
+    
+    var num4 = num1+""+num2;
+    
     var m_id = num1+""+num2+""+num3;
+    
     input.m_id.value = m_id;
+    input.num4.value = num4;
 
    
 
     return true;
     
 }
+
+
+function deptcheck(){ 
+	  i = input.num2.selectedIndex; // 선택항목의 인덱스 번호
+	
+	
+	  
+      var dept= input.num2.options[i].value; // 선택항목 value
+    	
+      if(dept=="01"){
+    		dept="국문학과";
+    		
+    	} else if(dept=="02"){
+    		dept="수학과";
+    		
+    	} else if(dept=="03"){
+    		dept="컴퓨터 공학과";
+    		
+    	} else if(dept=="04"){
+    		dept="경영학과";
+    		
+    	} else if(dept=="05"){
+    		dept="정보통신학과";
+    		
+    	} 
+      
+    
+    	 input.m_dept.value = dept;
+  
+}
+
+
+
 </script>
      <title>신입생 편입생 등록</title>
 </head>
@@ -61,36 +99,39 @@ function checkform(){
                 <div class="box-body">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-smile-o"></i> 이름</span>
-                    <input type="text" name="m_name" class="form-control" value="나현기" required="required">
+                    <input type="text" name="m_name" class="form-control"   placeholder="이름">
+                    
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 학번</span>
-                    <select class="form-control" required="required" onChange="idcheck()" name="num1">
-                        <option value="2017">2017 [신입생]</option>
+                    <select class="form-control"   name="num1">
+                        <option value="2017" selected="selected">2017 [신입생]</option>
                         <option value="2016">2016 [2학년 편입]</option>
                         <option value="2015">2015 [3학년 편입]</option>
                     </select>
                     <span class="input-group-addon"> - </span>
-                    <select class="form-control" required="required" name="num2" onChange="id2check()">
-                        <option value="01">01:국문학과</option>
-                        <option value="02">02:수학과</option>
-                        <option value="03">03:컴퓨터 공학과</option>
-                        <option value="04">04:경영학과</option>
-                        <option value="05">05:정보통신학과</option>
+                    <select class="form-control"  name="num2" onchange="deptcheck()">
+                        <option value="01" >01:국문학과</option>
+                        <option value="02" selected="selected">02:수학과</option>
+                        <option value="03" >03:컴퓨터 공학과</option>
+                        <option value="04" >04:경영학과</option>
+                        <option value="05" >05:정보통신학과</option>
                     </select>
                     <span class="input-group-addon"> - </span>
-                    <input type="text" name="num3" class="form-control" value="055 [최종 번호로 자동 입력] [수동입력 가능]" required="required">
+                    <input type="text" name="num3" class="form-control"   >
                     <input type="hidden" name="m_id" value="">
-                   
+                    <input type="hidden" name="num4" value="">
+      
                     <span class="input-group-btn">
-                      <button class="btn btn-warning btn-flat" type="button">중복 학번 확인</button>
+                      <input type="button" class="btn btn-warning btn-flat" onclick="numclick()"  value="최신번호 입력">
                     </span>
+                   
                   </div>
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-sitemap"></i> 학과</span>
-                    <input type="text" name="m_dept" class="form-control" value="국어국문학과 [학번 입력시 자동 추가] [불필요하면 삭제 가능]" required="required">
+                    <input type="text" name="m_dept" class="form-control" >
                   </div>
                   <br>
                   <!--
@@ -101,8 +142,8 @@ function checkform(){
                   -->
                   <br>
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i> 생년월일2</span>
-                    <input type="text" class="form-control pull-right" required="required" value="그냥 주민등록 번호 앞자리만 입력하면 자동으로 초기 비밀번호와 생년월일이 입력되는 구조로 가도 좋을 것 같다."/>
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i> 생년월일</span>
+                    <input type="text" class="form-control pull-right" name="m_birth"  placeholder="생년월일6자리" />
                   </div>
                   <br>
                 </div><!-- /.box-body -->
@@ -113,6 +154,7 @@ function checkform(){
                     <input type="submit" class="btn btn-primary" value="등록">
                 </div>
                 </form>
+                
               </div><!-- /.box -->
               <!-- 페이지 단위 -->
              </div><!-- /.col -->
@@ -123,7 +165,7 @@ function checkform(){
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
  <!-- date-range-picker -->
 <%@ include file="../include/footer.jsp" %>
-    <script src="../plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    
     <script>
    
     
@@ -145,7 +187,23 @@ function checkform(){
         input.m_mail2.value = mail;
    }
     
-    
+    function numclick() {
+   	 var num1 = input.num1.value;
+   	    var num2 = input.num2.value;
+   	  
+   	    var num4_1 = num1+""+num2;
+   	  $.getJSON("/HarangProject/ajax?cmd=membernum",
+   			  {num4:num4_1},
+              function(data){  
+              $(data).each(function(index, list){
+               input.num3.value = list.m_maxnum;
+              
+           });
+       });
+   	    
+   	  
+   	
+   }
     
    
     

@@ -60,8 +60,10 @@ public class CommandFactory {
 		} else if (cmd.equals("Anewmem")) {
 
 			return new AnewmemCommand();
-		}
+		} else if (cmd.equals("Acomplete")) {
 
+			return new AcompleteCommand();
+		}
 		else {
 			return null;
 		}

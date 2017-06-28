@@ -1,15 +1,15 @@
 package ajax.model;
 
-public class CommandFactory{
+public class CommandFactory3{
 
 	
-	private CommandFactory(){}
+	private CommandFactory3(){}
 	
 	
-	private static CommandFactory instance = new CommandFactory();
+	private static CommandFactory3 instance = new CommandFactory3();
 		
 	
-	public static CommandFactory newInstance(){
+	public static CommandFactory3 newInstance(){
 		return instance;
 	}
 	
