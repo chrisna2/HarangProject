@@ -31,8 +31,6 @@ public class FacilPGreservCommand implements CommandInterface {
 			throws ServletException, IOException {
 		// 작동할 메서드 선택을 위한 변수
 		
-		
-		
 		String check = request.getParameter("checkout");
 		
 		
@@ -55,7 +53,6 @@ public class FacilPGreservCommand implements CommandInterface {
 			// 차감해야될 포인트 
 			int r_point = Integer.parseInt(request.getParameter("minuspoint"));
 			
-			System.out.println("차감될 포인트는?" + r_point);
 			PointBean point = new PointBean();
 			String checkOut
 			= point.tradePoint(r_content, giver_point, r_point,  member.getM_id(), "admin03");
@@ -138,8 +135,6 @@ public class FacilPGreservCommand implements CommandInterface {
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-		
-		
 		
 		//content 거래내용, giver 예약하고자하는 사람의 보유포인트, r 거래하는 포인트양, 
 		// giver_id 내아이디, haver_id  admin03;

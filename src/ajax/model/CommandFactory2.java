@@ -1,15 +1,15 @@
 package ajax.model;
 
-public class CommandFactory{
+public class CommandFactory2{
 
 	
-	private CommandFactory(){}
+	private CommandFactory2(){}
 	
 	
-	private static CommandFactory instance = new CommandFactory();
+	private static CommandFactory2 instance = new CommandFactory2();
 		
 	
-	public static CommandFactory newInstance(){
+	public static CommandFactory2 newInstance(){
 		return instance;
 	}
 	
@@ -50,10 +50,6 @@ public class CommandFactory{
 		
 		else if(cmd.equals("selectPg")){
 			return new FacilSelectPgCommand();
-		}
-		
-		else if(cmd.equals("selectSr")){
-			return new FacilSelectSrCommand();
 		}
 		
 		else{

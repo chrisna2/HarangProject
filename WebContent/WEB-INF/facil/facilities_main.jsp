@@ -30,6 +30,8 @@
 	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
 
 	<section class="content">
+		
+		<!-- 운동장 테이블 위치 -->
 		<!-- 세로 길이 수정 -->
 		<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
@@ -71,11 +73,10 @@
 										<td>${p.pgm_date}</td>
 										<td>${p.payoutpoint}</td>
 										<td>
-										<form method="post" action="/HarangProject/facil?cmd=FacilMain">
-											<input type="hidden" name="delete" value="${p.pgm_num}">
-											<input type="submit" class="btn btn-primary" value="선택">
-										</form>
+										<input type="button" class="btn btn-primary" value="선택" 
+										onclick="pgSelectDelete('${p.pgm_num}','${p.pg_type}','${p.pg_name}','${p.pgm_date}','${p.payoutpoint}')" />
 										</td>
+										
 									</tr>
 								</c:forEach>
 
@@ -134,13 +135,116 @@
 		</div>
 		<!-- /.row -->
 
+		<!-- 스터디룸 테이블 위치. -->
+		<!-- 세로 길이 수정 -->
+		<div class="row">
+			<!-- 너비 사이즈 수정  : col-->
+			<div class="col-md-12">
+				<!-- 리스트 사용시  -->
+				<div class="box">
+					<div class="box-header">
+						<h3 class="box-title">예약내역</h3>
+						<div class="box-tools pull-right">
+							<button class="btn btn-box-tool" data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button class="btn btn-box-tool" data-widget="remove">
+								<i class="fa fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>예약 번호</th>
+									<th>시설 종류</th>
+									<th>시설명</th>
+									<th>호수</th>
+									<th>예약날짜</th>
+									<th>예약 포인트</th>
+									<th>선택</th>
+								</tr>
+							</thead>
+							<tbody>
+							<c:forEach items="${requestScope.srmlist}" var="s" varStatus="i">
+									<tr class="text-blue">
+										<td>${s.srm_num}</td>
+										<td>스터디룸</td>
+										<td>${s.sr_type}</td>
+										<td>${s.sr_name}</td>
+										<td>${s.srm_date}</td>
+										<td>${s.payoutpoint}</td>
+										<td>
+										
+										<input type="button" class="btn btn-primary" value="선택" 
+										onclick="srSelectDelete('${s.srm_num}','${s.sr_type}','${s.sr_name}','${s.srm_date}','${s.payoutpoint}')" />
+										</td>
+									</tr>
+								</c:forEach>
+
+
+							</tbody>
+						</table>
+					</div>
+					<!-- /.box-body -->
+
+
+					<div class="box-footer">
+						<!-- 페이징 -->
+						<div class="row" align="center">
+							<ul class="pagination pagination-sm no-margin">
+								<li><a href="#">&laquo;</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">&raquo;</a></li>
+							</ul>
+						</div>
+
+						<!-- 셀렉트  -->
+						
+						<form action="">
+						<div class="row">
+							<div class="col-md-3" align="center">
+								<select class="form-control input-sm pull-left"
+									style="width: 150px;">
+									<option>시설종류</option>
+									<option>시설명</option>
+									<option>호수</option>
+									<option>예약시간</option>
+								</select>
+							</div>
+							<div class="col-md-3" align="center">
+								<input type="text" name="table_search"
+									class="form-control input-sm  pull-left" style="width: 150px;"
+									placeholder="Search" />
+								<div class="input-group-btn  pull-left">
+									<button class="btn btn-sm btn-primary">
+										검색 <i class="fa fa-search"></i>
+									</button>
+								</div>
+							</div>
+							</div>
+						</form>
+						
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+
 		<!-- -------취소 시설 선택후 표기되는 정보------- -->
 		<!-- 세로 길이 수정 -->
 		<div class="row">
 			<!-- 너비 사이즈 수정  : col-->
 			<div class="col-md-12">
 				<!-- box -->
-				<div class="box box-warning">
+				<div class="box box-warning" id="cancel" hidden="hidden">
 					<!--  box-header -->
 					<div class="box-header">
 						<h3 class="box-title">취소 사항</h3>
@@ -156,43 +260,45 @@
 					<!-- /.box-header -->
 
 					<!-- box-body -->
+					<form role="form" method="post" action="/HarangProject/facil?cmd=FacilMain">
+					<input type="hidden" id="deleteOk" name="deleteOk" value="1">
 					<div class="box-body">
-						<form role="form">
+						
 							<div class="row">
 
 								<!-- text input -->
 								<div class="form-group col-md-4">
 									<label>예약번호</label> <input type="text" class="form-control"
-										placeholder="Enter ..." disabled>
+										id="resernum" name="resernum" readonly="readonly">
 								</div>
 
 							</div>
 							<div class="row">
 								<div class="form-group col-md-4">
-									<label>시설종류</label> <input type="text" class="form-control"
-										placeholder="Enter ..." style="width: 200px" disabled>
+									<label>시설종류</label> 
+									<input type="text" id="mfaciltype" name="mfaciltype" class="form-control" readonly="readonly" style="width: 200px">
 								</div>
 								<div class="form-group col-md-4">
-									<label>시설명</label> <input type="text" class="form-control"
-										placeholder="Enter ..." style="width: 200px" disabled>
+									<label>시설명</label> 
+									<input type="text" id="faciltype" name="faciltype" class="form-control" readonly="readonly" style="width: 200px">
 								</div>
 								<div class="form-group col-md-4">
-									<label>호수</label> <input type="text" class="form-control"
-										placeholder="Enter ..." style="width: 100px" disabled>
+									<label>호수</label> 
+									<input type="text" id="facilname" name="facilname" class="form-control" readonly="readonly" style="width: 100px">
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="form-group col-md-4">
-									<label>예약시간</label> <input type="text" class="form-control"
-										placeholder="Enter ..." disabled>
+									<label>예약시간</label> 
+									<input type="text" id="resertime" name="resertime" class="form-control" readonly="readonly">
 								</div>
 								<div class="form-group col-md-4">
-									<label>환불포인트</label> <input type="text" class="form-control"
-										placeholder="5000" disabled>
+									<label>환불포인트</label> 
+									<input type="text" id="backpoint" name="backpoint" class="form-control" readonly="readonly" >
 								</div>
 							</div>
-						</form>
+						
 						<!-- /.box-body -->
 						<!-- box-footer -->
 						<div class="box-footer">
@@ -200,16 +306,17 @@
 							<div class="col-md-3 btn-group">
 							</div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary" value="예약취소">
+								<input type="submit" class="btn btn-block btn-primary" value="예약취소">
 							</div>
 							<div class="col-md-3 btn-group">
 								<input type="button" class="btn btn-block  btn-primary" value="다시 선택">
 							</div>
 						</div>
-						
 						</div>
+						
 						<!-- /.box-footer -->
 					</div>
+					</form>
 					<!-- /.box -->
 				</div>
 			</div>
@@ -226,3 +333,30 @@
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
+<script type="text/javascript">
+	function srSelectDelete(srm_num, sr_type, sr_name, srm_date, payoutpoint){
+		alert(srm_num + sr_type + sr_name + srm_date + payoutpoint);
+		$("#cancel").slideUp();
+		$("#cancel").slideDown();
+		
+		$("#mfaciltype").attr("value","스터디룸");
+		$("#resernum").attr("value",srm_num);
+		$("#faciltype").attr("value",sr_type);
+		$("#facilname").attr("value",sr_name);
+		$("#resertime").attr("value",srm_date);
+		$("#backpoint").attr("value",payoutpoint);
+	}
+	
+	function pgSelectDelete(pgm_num, pg_type, pg_name, pgm_date, payoutpoint){
+		$("#cancel").slideUp();
+		$("#cancel").slideDown();
+		
+		$("#mfaciltype").attr("value","운동장");
+		$("#resernum").attr("value",pgm_num);
+		$("#faciltype").attr("value",pg_type);
+		$("#facilname").attr("value",pg_name);
+		$("#resertime").attr("value",pgm_date);
+		$("#backpoint").attr("value",payoutpoint);
+	}
+</script>
+
