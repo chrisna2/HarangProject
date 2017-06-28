@@ -15,7 +15,7 @@ import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.model.RegformCommand;
 
-public class AnewlessonCommand implements CommandInterface {
+public class AupdatelessonCommand implements CommandInterface {
 	
 
 	// DB 커넥션 3 대장
@@ -35,8 +35,9 @@ public class AnewlessonCommand implements CommandInterface {
 		roomList(request);
 		teacherList(request);
 		deptList(request);
+		lessonInfo(request);
 				
-		return "/WEB-INF/myPage/a_lessonplus.jsp";
+		return "/WEB-INF/myPage/a_lessonupdate.jsp";
 	}
 
 	
@@ -124,6 +125,48 @@ public class AnewlessonCommand implements CommandInterface {
 			pool.freeConnection(con, pstmt, rs);
 		}
 		request.setAttribute("dlist", deptlist);
+	}
+	
+	public void lessonInfo(HttpServletRequest request){
+		
+		String l_num = request.getParameter("l_num");		
+		
+		String sql = "SELECT l_time,l_day,l_name,l_teacher,l_grade,l_term,"
+			 	+"l_credit,l_room,l_ismust,l_dept "
+				+"from tbl_lesson where l_num = ?";
+		
+		LessonDTO ldto =new LessonDTO();
+		
+		try {
+
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, l_num);
+			rs = pstmt.executeQuery();
+			rs.next();
+			
+			ldto.setL_time(rs.getString("l_time"));
+			ldto.setL_day(rs.getString("l_day"));
+			ldto.setL_name(rs.getString("l_name"));
+			ldto.setL_teacher(rs.getString("l_teacher"));
+			ldto.setL_grade(rs.getString("l_grade"));
+			ldto.setL_term(rs.getString("l_term"));
+			ldto.setL_credit(rs.getInt("l_credit"));
+			ldto.setL_room(rs.getString("l_room"));
+			ldto.setL_ismust(rs.getString("l_ismust"));
+			ldto.setL_dept(rs.getString("l_dept"));
+			ldto.setL_num(l_num);
+			
+		
+			
+		} catch (Exception err) {
+			System.out.println(err);
+		} finally {
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt, rs);
+		}
+		request.setAttribute("dinfo", ldto);
+		
 	}
 	
 	

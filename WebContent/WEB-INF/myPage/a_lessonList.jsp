@@ -7,6 +7,26 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
      <title>수업 등록 수정</title>
+<c:if test="${result eq 'insert_complete'}">
+    <script type="text/javascript">
+    alert("신규 수업이 등록 되었습니다.");
+    </script>
+</c:if>   
+<c:if test="${result eq 'insert_fail'}">
+    <script type="text/javascript">
+    alert("신규 수업이 등록 실패 했습니다.");
+    </script>
+</c:if>
+<c:if test="${result eq 'update_complete'}">
+    <script type="text/javascript">
+    alert("해당 수업이 수정 되었습니다.");
+    </script>
+</c:if>
+<c:if test="${result eq 'update_fail'}">
+    <script type="text/javascript">
+    alert("해당 수업이 수정 실패 했습니다.");
+    </script>
+</c:if>   
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -131,7 +151,7 @@
                             <td>${l.l_teacher}</td>
                             <td>${l.l_room}</td>
                             <td>${l.l_credit}</td>
-                            <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-primary" value="수업 수정"></td>
+                            <td><input type="button" onclick="updatelesson('${l.l_num}')"  class="btn btn-primary" value="수업 수정" /></td>
                           </tr>
                             </c:forEach>
                         </c:otherwise>
@@ -169,7 +189,7 @@
                             <option value="l_grade" ${keyfield eq 'l_grade' ? 'selected' : null }>대상 학년</option>
                             <option value="l_day" ${keyfield eq 'l_day' ? 'selected' : null }>수업 요일</option>
                             <option value="l_time" ${keyfield eq 'l_time' ? 'selected' : null }>수업 시간</option>
-                            <option value="l_techer" ${keyfield eq 'l_teacher' ? 'selected' : null }>교수님</option>
+                            <option value="l_teacher" ${keyfield eq 'l_teacher' ? 'selected' : null }>교수님</option>
                             <option value="l_room" ${keyfield eq 'l_room' ? 'selected' : null }>강의실</option>
                             <option value="l_credit" ${keyfield eq 'l_credit' ? 'selected' : null }>이수 학점</option>
                           </select>
@@ -208,6 +228,10 @@
     <input type="hidden" name="keyword" value="${keyword}"/>
     <input type="hidden" name="keyfield" value="${keyfield}"/>
 </form>
+<!-- 수업 수정 : 수업 시간 수정 -->
+<form id="update" name="update" method="post" action="/HarangProject/myPage?cmd=Aupdatelesson">
+    <input type="hidden" name="l_num" value=""> 
+</form>
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
@@ -223,4 +247,12 @@ function goPage(nowPage) {
     document.getElementById("page").value = nowPage;
     document.getElementById("goPage").submit();
 }
+function updatelesson(l_num) {
+
+	update.l_num.value = l_num;
+    //alert(update.l_num.value);
+    update.submit();
+	
+}
+
 </script>

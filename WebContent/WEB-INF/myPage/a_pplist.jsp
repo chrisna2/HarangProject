@@ -25,7 +25,7 @@
     alert("입력 포인트가 보유 포인트를 초과 합니다.");
     location.href = "/HarangProject/myPage?cmd=Applist&check_id="+${pNum};
     </script>
-</c:if>
+</c:if>    
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">

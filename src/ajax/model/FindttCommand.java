@@ -48,8 +48,6 @@ public class FindttCommand implements CommandInterface {
 		else if("room".equals(check)){
 			ttlist = findRoomTt(request);
 		}
-		
-		
 	
 		return ttlist;
 	}

@@ -60,11 +60,19 @@ public class CommandFactory {
 		} else if (cmd.equals("Anewmem")) {
 
 			return new AnewmemCommand();
-		} else if (cmd.equals("Anewlesson")) {
+		} 
+		else if (cmd.equals("Anewlesson")) {
 		
-		return new AnewlessonCommand();
+			return new AnewlessonCommand();
+		} 
+		else if (cmd.equals("Aupdatelesson")) {
+			
+			return new AupdatelessonCommand();
+		} 
+		else if (cmd.equals("AnewlessonUpdate")) {
+			
+			return new AnewLessonUpdateCommand();
 		}
-
 		else {
 			return null;
 		}

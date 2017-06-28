@@ -8,7 +8,6 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
 <script type="text/javascript">
-
 window.onload =  function () {
     
     var usermail = "${read3.m_mail}";
@@ -28,7 +27,6 @@ window.onload =  function () {
     input.m_addr2.value = mailArray[1];
     input.m_addr3.value = mailArray[2];
 }
-
 function mailcheck(){ 
      i = input.m_mail3.selectedIndex; // 선택항목의 인덱스 번호
      var mail= input.m_mail3.options[i].value; // 선택항목 value
