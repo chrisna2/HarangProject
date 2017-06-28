@@ -35,10 +35,10 @@ function fnbbp(){
 		return;
 	}
 	
-	else if(CKEDITOR.instances.editor1.getData().length>4000){
+	else if(CKEDITOR.instances.editor1.getData().length>20000){
 		
 		
-		alert("본문을 너무 길게 입력하셨습니다. 4000글자 이하로 입력 해 주세요.(공백 포함)");
+		alert("본문을 너무 길게 입력하셨습니다. 20000글자 이하로 입력 해 주세요.(공백 포함)");
 		return;
 	}
 	
