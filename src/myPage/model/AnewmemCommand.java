@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
 public class AnewmemCommand implements CommandInterface {
@@ -27,20 +28,35 @@ public class AnewmemCommand implements CommandInterface {
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			insert(request);
-		return "/WEB-INF/myPage/a_newMember.jsp";
+		String mid=request.getParameter("m_id");
+		String m_birth=request.getParameter("m_birth");
+		String num4=request.getParameter("num4");
+		System.out.println(num4);
+		System.out.println(mid);
+	
+		
+			
+			if(null!=m_birth){
+				insert(request);
+		return "/WEB-INF/myPage/a_newmemComplete.jsp";
+		} 
+			else
+			{
+			
+				return "/WEB-INF/myPage/a_newMember.jsp";
+			}
 	}
 	
 	public void insert(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
 		String sql = null;
-
-			String mid=request.getParameter("m_id");
+		String mid=request.getParameter("m_id");
+			
 			String mname=request.getParameter("m_name");
 			System.out.println(mid);
 			System.out.println(mname);
 			if(mid !=null){
-				sql = "insert into tbl_member(m_name,m_id) values(?,?)";
+				sql = "insert into tbl_member(m_name,m_id,m_dept,m_birth,m_pw) values(?,?,?,?,?)";
 			} else {
 				System.out.println("mid 없어");
 			}
@@ -51,6 +67,9 @@ public class AnewmemCommand implements CommandInterface {
 				
 			pstmt.setString(1, mname);
 			pstmt.setString(2, mid);
+			pstmt.setString(3, request.getParameter("m_dept"));
+			pstmt.setString(4, request.getParameter("m_birth"));
+			pstmt.setString(5, request.getParameter("m_birth"));
 				
 			pstmt.executeUpdate();
 				
@@ -64,6 +83,40 @@ public class AnewmemCommand implements CommandInterface {
 		}			
 	
 				}	
-
+	
+	
+	public void num(HttpServletRequest request){
+		pool = DBConnectionMgr.getInstance();
+		String sql = null;
+	
+		MemberDTO dto = new MemberDTO();
+			
+			String num3 =null;
+			try {
+			
+				
+			sql="select max(m_id) as num3 from tbl_member where m_id like '%"
+					+ request.getParameter("num4")
+					+ "%'";
+				
+				
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			num3 = rs.getString("num3");
+			
+				
+		}catch(Exception err){
+			System.out.println(err);
+		
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con,pstmt,rs);
+	}	
+			System.out.println(num3);
+			request.setAttribute("num3", num3);
+	}
 
 }

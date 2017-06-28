@@ -29,7 +29,6 @@ public class CommandFactory{
 			return new FoodCommand();
 		}
 		else if(cmd.equals("foodinfo")){
-			
 			return new FoodinfoCommand();
 		}
 		else if(cmd.equals("memberid")){
@@ -53,11 +52,12 @@ public class CommandFactory{
 		else if(cmd.equals("findtt")){
 			return new FindttCommand();
 		}
-		
 		else if(cmd.equals("selectSr")){
 			return new FacilSelectSrCommand();
 		}
-		
+		else if(cmd.equals("membernum")){
+			return new MembernumCommand();
+		}
 		else{
 			return null;
 		}

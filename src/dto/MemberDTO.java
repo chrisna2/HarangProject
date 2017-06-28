@@ -16,7 +16,14 @@ public class MemberDTO {
 	private int m_fee;
 	private long m_point;
 	private int m_age;
+	private String m_maxnum;
 	
+	public String getM_maxnum() {
+		return m_maxnum;
+	}
+	public void setM_maxnum(String m_maxnum) {
+		this.m_maxnum = m_maxnum;
+	}
 	public String getM_id() {
 		return m_id;
 	}
