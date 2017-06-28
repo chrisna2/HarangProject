@@ -40,9 +40,15 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+      <c:if test="${admin==null}">
+        <script type="text/javascript">
+        alert("관리자 전용 페이지 입니다. 관리자로 접속해 주십시요.");
+        location.href="/HarangProject/login?cmd=logout";
+        </script>
+    </c:if>
   </head>
   <!-- 스킨 색상 변경 가능 : white, yellow, red, purple -->
-   <body class="skin-yellow">
+   <body class="skin-blue">
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
