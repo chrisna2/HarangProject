@@ -91,6 +91,7 @@
 							</div>
 							<!-- /.box-body -->
 							<div class="box-footer" align="right">
+							    <input type="hidden" name="check">
 								<input type="button" id="challenge-close" class="btn" value="닫기"> 
 								<input type="submit" class="btn btn-primary" value="스펙 등록">
 							</div>
@@ -443,10 +444,22 @@
 		$("#wait-box").slideUp();
 		$("#challenge-box").slideDown();
 		challenge.c_num.value = num;
+		challenge.check.value = "insert";
 	    challenge.c_name.value = $("#name"+num).text();
 	    challenge.c_point.value = $("#point"+num).text();
 	    challenge.c_agency.value = $("#agency"+num).text();
 	}
+    function rechallange(num) {
+        $("#challenge-box").slideUp();
+        $("#check-box").slideUp();
+        $("#wait-box").slideUp();
+        $("#challenge-box").slideDown();
+        challenge.c_num.value = num;
+        challenge.check.value = "update";
+        challenge.c_name.value = $("#name"+num).text();
+        challenge.c_point.value = $("#point"+num).text();
+        challenge.c_agency.value = $("#agency"+num).text();
+    }
 	$("#challenge-close").click(function(){
 		$("#challenge-box").slideUp();		
 	})

@@ -38,8 +38,6 @@ public class SpecUpProcCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		pool = DBConnectionMgr.getInstance();
-		
 		//////////////////////////////사진 올리는 작업////////////////////////////////
 		//저장할 파일 경로 ex] WebContent/upload/member 실제 폴더 생성 해야 함
 		String realPath = request.getServletContext().getRealPath("upload/spec");
@@ -54,7 +52,26 @@ public class SpecUpProcCommand implements CommandInterface {
 		}			//위에 지정한 realPath와 똑같이 지정..
 		//////////////////request는 사용 할수 없고  multi로 파라미터 받아올수 있음//////////////
 		
+		String check = multi.getParameter("check");
+		String msg = null;
+		
+		if("insert".equals(check)){
+			msg = challenge(multi,photoName);
+		}else if("update".equals(check)){
+			msg = rechallenge(multi, photoName);
+		}
+		
+		request.setAttribute("msg", msg);
+
+		return "/WEB-INF/myPage/specUpComplete.jsp";
+	}
+	
+	
+	public String challenge(MultipartRequest multi, String photoName) {
+		
+		String msg = "";
 		String sql = "INSERT INTO  tbl_certi_member (c_num, m_id, cm_iscomplete, cm_image) VALUES (?, ?, ?, ?)";
+		pool = DBConnectionMgr.getInstance();
 		
 		try {
 			
@@ -64,7 +81,14 @@ public class SpecUpProcCommand implements CommandInterface {
 			pstmt.setString(2, multi.getParameter("m_id"));
 			pstmt.setString(3, "none");
 			pstmt.setString(4, photoName);
-			pstmt.executeUpdate();
+			int i = pstmt.executeUpdate();
+			
+			if(i==0){
+				msg = "challenge_fail";
+			}
+			else{
+				msg = "challenge_success";
+			}
 					
 		} catch (Exception e) {
 			System.out.println("specup_proc.jsp : "+e);
@@ -73,7 +97,41 @@ public class SpecUpProcCommand implements CommandInterface {
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt);
 		}
-
-		return "/WEB-INF/myPage/specUpComplete.jsp";
+		return msg;
 	}
+	
+	public String rechallenge(MultipartRequest multi, String photoName) {
+		
+		String msg = "";
+		String sql = "UPDATE tbl_certi_member SET cm_iscomplete='none', cm_completedate=NULL, cm_image=? WHERE c_num=? and m_id=?";		
+		
+		pool = DBConnectionMgr.getInstance();
+		
+		try {
+			
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, photoName);
+			pstmt.setString(2, multi.getParameter("c_num"));
+			pstmt.setString(3, multi.getParameter("m_id"));
+			int i = pstmt.executeUpdate();
+			
+			if(i==0){
+				msg = "rechallenge_fail";
+			}
+			else{
+				msg = "rechallenge_success";
+			}
+			
+		} catch (Exception e) {
+			System.out.println("specup_proc.jsp : "+e);
+			e.printStackTrace();
+		}finally {
+			// DBCP 접속해제
+			pool.freeConnection(con,pstmt);
+		}
+		return msg;
+	}
+	
+	
 }
