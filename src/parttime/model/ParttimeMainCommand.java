@@ -14,13 +14,17 @@ import paging.dto.PagingDto;
 import util.DateBean;
 
 /**
- * 알바 모집 게시판에 필요한 정보를 DB에서 꺼내오고 게시판 페이지로 이동하는 함수
+ * 알바 모집 게시판에 필요한 정보를 DB에서 꺼내오고 게시판 페이지로 이동하는 클래스
  * 
  * @author 양혜민
  */
 public class ParttimeMainCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
-
+	/**
+	 * 알바 모집 게시판에 필요한 정보를 DB에서 꺼내오고 게시판 페이지로 이동하는 메서드.
+	 * @param req
+	 * @param resp
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
 		MemberDTO member = bean.getLoginInfo(req); // 로그인 정보
 
@@ -37,7 +41,7 @@ public class ParttimeMainCommand implements CommandInterface {
 	}
 
 	/**
-	 * 페이징 관련 parameter를 받아서 처리 후 request에 보내는 함수
+	 * 페이징 관련 parameter를 받아서 처리 후 request에 보내는 메서드
 	 * 
 	 * @param listSize
 	 * @param req
@@ -61,7 +65,7 @@ public class ParttimeMainCommand implements CommandInterface {
 	}
 
 	/**
-	 * DB에서 게시판에 띄울 글 정보를 받아와서 request에 보내는 함수.
+	 * DB에서 게시판에 띄울 글 정보를 받아와서 request에 보내는 메서드.
 	 * 
 	 * @param req
 	 */
@@ -99,6 +103,8 @@ public class ParttimeMainCommand implements CommandInterface {
 
 		// parameter 보내기
 		req.setAttribute("list", list);
+		req.setAttribute("keyField", keyField);
+		req.setAttribute("keyword", keyword);
 	}
 
 	/**
@@ -172,4 +178,5 @@ public class ParttimeMainCommand implements CommandInterface {
 			bean.updateParttime(dto);
 		}
 	}
+	
 }

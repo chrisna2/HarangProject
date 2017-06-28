@@ -46,7 +46,7 @@
     <div class="wrapper">
       <header class="main-header">
         <!-- Logo -->
-        <a href="#" class="logo"><img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="40" height="40"/>&nbsp;하랑 대학교</a>
+        <a href="/HarangProject/login?cmd=refresh" class="logo"><img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="40" height="40"/>&nbsp;하랑 대학교</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->

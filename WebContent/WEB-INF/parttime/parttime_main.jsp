@@ -32,15 +32,17 @@
 					<div class="box-header">
 						<h3 class="box-title"></h3>
 					</div>
-					<!-- /.box-header -->
-					
 					<div class="box-body">
 						<div class="row">
 						<div class="col-md-2">
 							<button class="btn btn-sm btn-block btn-info" onclick="fnPost()">글쓰기</button>
+						</div>
+						<div class="col-md-9"></div>
+						<div class="col-md-1">
+							<button class="btn btn-default btn-sm pull-right" onclick="fnRefresh()"><i class="fa fa-refresh"></i></button>
 						</div>					
                   	</div>
-						<table id = "example1" class="table table-bordered table-striped">
+						<table class="table table-bordered table-striped">
 							<tr>
 								<th style="width: 10px">#</th>
 								<th style="width: 40%">제목</th>
@@ -112,15 +114,23 @@
 					
 					<form name="search" method="post" action="/HarangProject/parttime?cmd=PMAIN">
 					<div class="row">
-						<div class="col-md-2"></div>
+						<div class="col-md-3"></div>
 						<div class="col-md-2 form-group">
 							<select class="form-control" name="keyField">
-	                        <option>제목</option>
-	                        <option>시급</option>
+	                        <c:choose>
+	                        <c:when test="${keyField eq '제목' or keyField eq null}">
+		                        <option selected="selected">제목</option>
+		                        <option>시급</option>
+	                        </c:when>
+	                        <c:when test="${keyField eq '시급'}">
+		                        <option>제목</option>
+		                        <option selected="selected">시급</option>
+	                        </c:when>
+	                        </c:choose>
 	                      </select>
 						</div>
-						<div class="col-md-6 input-group input-group-sm">
-	                    <input type="text" name="keyword" class="form-control">
+						<div class="col-md-4 input-group input-group-sm">
+	                    <input type="text" name="keyword" value="${keyword}" class="form-control">
 	                    <span class="input-group-btn">
 	                      <button class="btn btn-info btn-flat" type="submit">Go!</button>
 	                    </span>
@@ -141,16 +151,22 @@
 <form id="prevPage" method="post" action="/HarangProject/parttime?cmd=PMAIN">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
+	<input type="hidden" name="keyword" value="${keyword}"/>
+	<input type="hidden" name="keyField" value="${keyField}"/>
 </form>
 <!-- 페이징 : 다음 블록으로 이동하는 폼 -->
 <form id="nextPage" method="post" action="/HarangProject/parttime?cmd=PMAIN">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
+	<input type="hidden" name="keyword" value="${keyword}"/>
+	<input type="hidden" name="keyField" value="${keyField}"/>
 </form>
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/parttime?cmd=PMAIN">
 	<input type="hidden" name="nowPage" value="" id="page"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+	<input type="hidden" name="keyword" value="${keyword}"/>
+	<input type="hidden" name="keyField" value="${keyField}"/>
 </form>
 <!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
 <!-- 글 쓰기 -->
@@ -192,6 +208,8 @@ function fnRead(p_num){
 function fnPost(){
 	document.post.submit();
 }
-
+function fnRefresh(){
+	location.href="/HarangProject/parttime?cmd=PMAIN";
+}
 </script>
  

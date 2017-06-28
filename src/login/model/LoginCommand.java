@@ -106,6 +106,11 @@ public class LoginCommand implements CommandInterface {
 			pool.freeConnection(con,pstmt,rs);
 		}		
 		
+		RefreshCommand refresh = new RefreshCommand();
+		refresh.timetable(request);
+		refresh.recentData(request);
+		refresh.point(request);
+		
 		return url;
 		
 	}

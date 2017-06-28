@@ -32,6 +32,10 @@ public class CommandFactory {
 			
 			return new GoBackCommand();
 		}
+		else if(cmd.equals("refresh")){
+			
+			return new RefreshCommand();
+		}
 		else{
 			
 			return null;
