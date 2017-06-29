@@ -13,8 +13,15 @@ public class MessageDTO {
 	private String m_reader;
 	private String m_sender_name;
 	private String m_reader_name;
+	private String s_photo;
 	
 	
+	public String getS_photo() {
+		return s_photo;
+	}
+	public void setS_photo(String s_photo) {
+		this.s_photo = s_photo;
+	}
 	public int getList_num() {
 		return list_num;
 	}

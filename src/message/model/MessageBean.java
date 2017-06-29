@@ -501,4 +501,52 @@ public class MessageBean {
 		}
 		return notRead;
 	}
+	
+
+	/**
+	 * 받은 메시지를 모두 검색하는 메서드.
+	 * @param m_id
+	 * @return 받은 메시지 리스트
+	 */
+	public ArrayList getGivenMessageListMini(String m_id){
+		ArrayList inboxlist = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT t_num, t_title, t_send_date, m_sender, "
+					+ "(select m_name from tbl_member where m_id = m_sender) as m_sender_name,"
+					+ "(select m_photo from tbl_member where m_id = m_sender) as s_photo "
+					+ " FROM tbl_text WHERE m_reader=? AND NOT m_sender=? AND t_read_del = 'N' "
+					+ "ORDER BY t_send_date DESC limit 5";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MessageDTO msg = new MessageDTO();
+				msg.setT_num(rs.getString("t_num"));
+				msg.setT_title(rs.getString("t_title"));
+				msg.setT_send_date(rs.getString("t_send_date"));
+				msg.setM_sender(rs.getString("m_sender"));
+				msg.setS_photo(rs.getString("s_photo"));
+				msg.setM_sender_name(rs.getString("m_sender_name"));
+				
+				inboxlist.add(msg);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getGivenMessageList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	
+		return inboxlist;
+	}
+	
+	
+	
 }
