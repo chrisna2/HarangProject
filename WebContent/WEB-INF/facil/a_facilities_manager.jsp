@@ -38,7 +38,7 @@
 				<!-- 리스트 사용시  -->
 				<div class="box box-primary">
 					<div class="box-header">
-						<h3 class="box-title">예약내역</h3>
+						<h3 class="box-title">운동장 예약내역</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
@@ -63,7 +63,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							 	<c:forEach items="${requestScope.list}" var="p" varStatus="i">
+							 	<c:forEach items="${requestScope.pglist}" var="p" varStatus="i">
 									<tr class="text-blue">
 										<td>${p.pgm_num}</td>
 										<td>${p.pgm_regdate}</td>
@@ -81,6 +81,157 @@
 										</td>
 									</tr>
 									
+								</c:forEach>
+							</tbody>
+						</table>
+						
+					</div>
+					<!-- /.box-body -->
+
+
+					<div class="box-footer">
+						<!-- 페이징 -->
+						<div class="row" align="center">
+							<ul class="pagination pagination-sm no-margin">
+								<li><a href="#">&laquo;</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">&raquo;</a></li>
+							</ul>
+						</div>
+
+						<!-- 검색문 / 셀렉트  -->
+						<form action="/HarangProject/facil?cmd=AFacilManager" name="search" method="post">
+							<div class="row">
+								
+								<div class="col-md-3" align="center">
+									<select 
+										class="form-control input-sm pull-left"
+										style="width: 150px"
+										name="keyword">
+										<option value="pgm_num" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_num'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약번호</option>
+										
+										<option value="pgm_regdate" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_regdate'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약한 날짜</option>	
+										
+										<option value="m_id" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'm_id'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>학번[ID]</option>
+										
+										<!-- 이중 셀렉문 pgm_type인지 체크-->
+										<option value="p.pg_type" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'p.pg_type'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>시설명</option>
+										
+										<!-- 이중 셀렉문 pgm_name인지 체크-->
+										<option value="p.pg_name" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'p.pg_name'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>호수</option>
+										
+										<option value="pgm_date" 
+										<c:choose>
+											<c:when test="${requestScope.keyword eq 'pgm_date'}">
+											selected="selected"
+											</c:when>
+										</c:choose>>예약날짜</option>
+										
+									</select>
+								</div>
+								
+								<div class="col-md-3" align="center">
+									<input type="text" 
+										   name="keyfield"
+										   class="form-control input-sm  pull-left" 
+										   style="width: 150px;"
+										   placeholder="Search" />
+									<div class="input-group-btn  pull-left">
+										<button
+											type="submit" 
+											class="btn btn-sm btn-primary">
+											검색 <i class="fa fa-search"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+		
+		<div class="row">
+			<!-- 너비 사이즈 수정  : col-->
+			<div class="col-md-12">
+				<!-- 리스트 사용시  -->
+				<div class="box box-primary">
+					<div class="box-header">
+						<h3 class="box-title">스터디룸 예약내역</h3>
+						<div class="box-tools pull-right">
+							<button class="btn btn-box-tool" data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+					
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr>
+									<th>예약 번호</th>
+									<th>예약한 날짜</th>
+									<th>학번[ID]</th>
+									<th>시설 종류</th>
+									<th>시설명</th>
+									<th>호수</th>
+									<th>예약날짜</th>
+									<th>예약시간</th>
+									<th>선택</th>
+								</tr>
+							</thead>
+							<tbody>
+							 	<c:forEach items="${requestScope.srlist}" var="p" varStatus="i">
+									<tr class="text-blue">
+										<td>${p.srm_num}</td>
+										<td>${p.srm_regdate}</td>
+										<td>${p.m_id}</td>
+										<td>스터디룸</td>
+										<td>${p.sr_type}</td>
+										<td>${p.sr_name}</td>
+										<td>${p.srm_date}</td>
+										<td>${p.srm_timecode}</td>
+										<td>
+										<!-- /HarangProject/facil?cmd=AFacilManager -->
+										<input type="button" class="btn btn-primary" value="선택"
+										onclick="selectDel('sr','${p.srm_num}','${p.m_id}','${p.sr_type}','${p.sr_name}','${p.srm_date}','${p.srm_timecode}','${p.sr_point}')" />
+										
+										</td>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -206,8 +357,9 @@
 					<!-- /.box-header -->
 
 					<!-- box-body -->
+					<form method="POST" action="/HarangProject/facil?cmd=AFacilManager">
 					<div class="box-body">
-						 <form role="form2" >
+					
 							<div class="row" >
 
 								<!-- text input -->
@@ -257,19 +409,19 @@
 										placeholder="취소사유를 입력하세요" id="cancelMsg" name="cancelMsg">
 								</div>
 							</div>
-						</form>
+						
 						<!-- /.box-body -->
 						<!-- box-footer -->
 						<div class="box-footer">
 							<div class="row" align="center">
 								<div class="col-md-3 btn-group"></div>
-									<form method="POST" action="/HarangProject/facil?cmd=AFacilManager">
+									
 										<div class="col-md-3 btn-group">
-											<input type="hidden" id="deleteOK" name="deleteOK">
+											<input type="hidden" id="deleteOk" name="deleteOk">
 											<input type="submit" class="btn btn-block btn-primary"
 												value="예약취소">
 										</div>
-									</form>
+									
 								<div class="col-md-3 btn-group">
 									<input type="reset" class="btn btn-block  btn-primary"
 										value="다시 선택">
@@ -280,6 +432,8 @@
 						<!-- /.box-footer -->
 					</div>
 					<!-- /.box -->
+					</form>
+					
 				</div>
 			</div>
 		</div>
@@ -313,6 +467,8 @@ function selectDel(pors, facil_num, m_id, facil_type, facil_name, facilm_date, f
 	point = facil_point*c;	
 	
 		$("#facil_num").attr("value", facil_num);
+		$("#deleteOk").attr("value", facil_num);
+					   
 		$("#m_id").attr("value", m_id);
 		
 		$("#facil_type").attr("value", facil_type);
