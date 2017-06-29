@@ -11,7 +11,7 @@
      	function formcheck(){
      		var max_point = apply.max_point.value;
      		var inputpoint = apply.bh_want.value;
-     		if(max_point > inputpoint){
+     		if(0 > inputpoint - max_point){
      			alert("최고포인트보다 입력포인트가 작습니다");
      			return false;
      		}
@@ -96,7 +96,15 @@
             <div class="row">
 						<div class="col-sm-4"></div>
 						<div class="col-sm-2">
+						<c:if test="${i.b_iscomplete eq '거래'}">						
 							<button type="button" id="btnPopup" class="btn btn-block btn-primary">구매희망</button>
+						</c:if>
+						<c:if test="${i.b_iscomplete eq '거래중' }">
+							<button type="button" class="btn btn-block btn-warning" disabled="disabled">거래중</button>
+						</c:if>
+						<c:if test="${i.b_iscomplete eq '완료' }">
+							<button type="button" class="btn btn-block btn-danger" disabled="disabled">거래 완료</button>
+						</c:if>
 						</div>
               </form>
 						<form action="/HarangProject/harangdin?cmd=main" method="post">

@@ -48,8 +48,8 @@ public class BookDetailCommand implements CommandInterface {
 				MemberDTO member = bean.getLoginInfo(request);
 				
 				
-				String sql= "SELECT b.b_name, b.b_num, m.m_id, b.b_writer, b.b_pub, b.b_stock, b.b_want, b.b_regdate, b.b_content, b.b_photo "
-						+ " FROM tbl_book b, tbl_member m WHERE b.b_num = ? and m.m_id = ?";
+				String sql= "SELECT b.b_name, b.b_num, m.m_id, b.b_writer, b.b_pub, b.b_stock, b.b_want, b.b_regdate, b.b_content, b.b_photo, b.b_iscomplete"
+						+ " FROM tbl_book b, tbl_member m WHERE b.b_num = ? and m.m_id = b.m_id ";
 				
 				String b_num=request.getParameter("b_num");
 				
@@ -61,7 +61,6 @@ public class BookDetailCommand implements CommandInterface {
 					con = pool.getConnection();
 					pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, b_num);
-					pstmt.setString(2, member.getM_id());			
 					rs = pstmt.executeQuery();
 					
 					
@@ -79,6 +78,7 @@ public class BookDetailCommand implements CommandInterface {
 						dto.setB_regdate(rs.getString("b_regdate"));
 						dto.setB_content(rs.getString("b_content"));
 						dto.setB_photo(rs.getString("b_photo"));
+						dto.setB_iscomplete(rs.getString("b_iscomplete"));
 					
 					
 				}catch(Exception err){

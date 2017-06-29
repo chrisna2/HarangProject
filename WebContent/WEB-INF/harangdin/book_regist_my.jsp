@@ -42,12 +42,13 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
+	            	<form name="sell" action="/HarangProject/harangdin?cmd=trade" method="post">
 	                <!-- text input -->
 	                <!-- select -->
 	                <div class="row">
 	                	<div class="col-sm-12 form-group">
 							<label>도서명</label>
-							<input type="text" class="form-control" value="${i.b_name }" readonly="readonly">
+							<input type="text" class="form-control" name="b_name" value="${i.b_name }" readonly="readonly">
 						</div>
 	                </div>
                 	<div class="row">
@@ -57,9 +58,9 @@
 		                </div>
 		                <div class="col-sm-6 form-group">
 							<label>중고도서 거래번호</label>
-							<input type="text" class="form-control" value="${i.b_num }" readonly="readonly">
+							<input type="text" class="form-control" name="b_num" value="${i.b_num }" readonly="readonly">
 							<label>학번</label>
-							<input type="text" class="form-control" value="${i.m_id }" readonly="readonly">
+							<input type="text" class="form-control" name="m_id" value="${i.m_id }" readonly="readonly">
 							<label>저자</label>
 							<input type="text" class="form-control" value="${i.b_writer }" readonly="readonly">
 							<label>출판사</label>
@@ -77,11 +78,22 @@
 							</div>
 							<label>현시각 최고 포인트</label><br>
 							 <div class="input-group">
-                  				<input type="text" class="form-control" value="${max_point}" style="width: 330px;" readonly="readonly">
-                 				 <div class="col-sm-1.5 no-margin pull-right">
-									<button type="button" class="btn btn-block btn-primary">거래</button>									
+                  				<input type="text" class="form-control" value="${max_point}" style="width: 330px;" name="max_point" readonly="readonly">
+                 				    <span class="input-group-btn">
+                 					<c:if test="${i.b_iscomplete eq '거래'}">						
+										<button type="submit" class="btn btn-block btn-primary">거래</button>	
+									</c:if>
+									<c:if test="${i.b_iscomplete eq '거래중' }">
+										<button type="button" class="btn btn-block btn-warning" disabled="disabled">거래중</button>
+									</c:if>
+									<c:if test="${i.b_iscomplete eq '완료' }">
+										<button type="button" class="btn btn-block btn-danger" disabled="disabled">완료</button>
+									</c:if>
+								</span>
 								</div>
                 			</div>
+							</form>
+					
 							
 						</div>
 					</div> 

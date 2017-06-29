@@ -43,6 +43,8 @@
 									<th>지원자 학번</th>
 									<th>신청일</th>
 									<th>지원 포인트</th>
+									<th>선택</th>
+									<th>완료여부</th>
 								</tr>
 
 								<c:choose>
@@ -61,6 +63,8 @@
 										<td>${i.m_id }</td>
 										<td>${i.bh_regdate }</td>
 										<td>${i.bh_want }</td>
+										<td>${i.bh_choice }</td>
+										<td>${i.bh_iscomplete }</td>
 									</tr>		
 								</c:forEach>
 							 </c:otherwise>

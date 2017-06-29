@@ -49,25 +49,6 @@
 								</div>
 							</form>
 							
-							<form action="/HarangProject/harangdin?cmd=buying" method="post">
-								<div class="col-sm-1.5 no-margin pull-right">
-									<button type="submit" class="btn btn-info.btn-flat">
-										<i class="fa fa-user"></i>구매신청</button>									
-								</div>
-							</form>
-							<form action="/HarangProject/harangdin?cmd=selling" method="post">
-								<div class="col-sm-1.5 no-margin pull-right">
-									<button type="submit" class="btn btn-info.btn-flat">
-										<i class="fa fa-user"></i>나의도서구매신청</button>									
-								</div>
-							</form>
-							<form action="/HarangProject/harangdin?cmd=donation" method="post">
-								<div class="col-sm-1.5 no-margin pull-right">
-									<button type="submit" class="btn btn-info.btn-flat">
-										<i class="fa fa-user"></i>기부내역</button>									
-								</div>
-							</form>
-							
 							<form action="/HarangProject/harangdin?cmd=regist" method="post">
 								<div class="col-xs-1 no-margin pull-right">
 										<button type="submit" class="btn btn-block btn-default" >등록</button>
