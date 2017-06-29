@@ -74,10 +74,10 @@
 										<td>${p.pgm_date}</td>
 										<td>${p.pgm_timecode}</td>
 										<td>
-										<form method="post" action="/HarangProject/facil?cmd=AFacilManager">
-											<input type="hidden" name="delete" value="${p.pgm_num}">
-											<input type="submit" class="btn btn-primary" value="선택">
-										</form>
+										<!-- /HarangProject/facil?cmd=AFacilManager -->
+										<input type="button" class="btn btn-primary" value="선택"
+										onclick="selectDel('pg','${p.pgm_num}','${p.m_id}','${p.pg_type}','${p.pg_name}','${p.pgm_date}','${p.pgm_timecode}','${p.pg_point}')" />
+										
 										</td>
 									</tr>
 									
@@ -213,44 +213,48 @@
 								<!-- text input -->
 								<div class="form-group col-md-4">
 									<label>예약번호</label> <input type="text" class="form-control"
-										placeholder="${pgdto.pgm_num} 맞게 들어감?" disabled>
+									readonly="readonly" id="facil_num" name="facil_num">
 								</div>
 								<div class="form-group col-md-4">
 									<label>학번[ID]</label> <input type="text" class="form-control"
-										placeholder="${pgdto.m_id}" disabled>
+									readonly="readonly" id="m_id" name="m_id">
+								</div>
+								<div class="form-group col-md-4">
+									<label>예약 날짜</label> <input type="text" class="form-control"
+									readonly="readonly" id="facilm_date" name="facilm_date">
 								</div>
 
 							</div>
 							<div class="row">
 								<div class="form-group col-md-4">
 									<label>시설종류</label> <input type="text" class="form-control"
-										placeholder="운동장" style="width: 200px" disabled>
+										style="width: 200px" readonly="readonly" id="pors" name="pors">
 								</div>
 								<div class="form-group col-md-4">
 									<label>시설명</label> <input type="text" class="form-control"
-										placeholder="${pgdto.pg_type}" style="width: 200px" disabled>
+										style="width: 200px" readonly="readonly" id="facil_type" name="facil_type">
 								</div>
 								<div class="form-group col-md-4">
 									<label>호수</label> <input type="text" class="form-control"
-										placeholder="${pgdto.pg_name}" style="width: 100px" disabled>
+										style="width: 100px" readonly="readonly" id="facil_name" name="facil_name">
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="form-group col-md-4">
 									<label>예약시간</label> <input type="text" class="form-control"
-										placeholder="${pgdto.pgm_date}" disabled>
+										readonly="readonly" id="resertime" name="resertime">
 								</div>
 								<div class="form-group col-md-4">
 									<label>환불포인트</label> <input type="text" class="form-control"
-										placeholder="5000" disabled>
+										readonly="readonly" id="backpoint" name="backpoint">
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-md-6">
 									<label>예약 취소 사유</label> <input type="text" class="form-control"
-										placeholder="취소사유를 입력하세요">
+										placeholder="취소사유를 입력하세요" id="cancelMsg" name="cancelMsg">
 								</div>
 							</div>
 						</form>
@@ -261,7 +265,7 @@
 								<div class="col-md-3 btn-group"></div>
 									<form method="POST" action="/HarangProject/facil?cmd=AFacilManager">
 										<div class="col-md-3 btn-group">
-											<input type="hidden" name="deleteOK" value="${pgdto.pgm_num}">
+											<input type="hidden" id="deleteOK" name="deleteOK">
 											<input type="submit" class="btn btn-block btn-primary"
 												value="예약취소">
 										</div>
@@ -290,3 +294,47 @@
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
+
+<script type="text/javascript">
+function selectDel(pors, facil_num, m_id, facil_type, facil_name, facilm_date, facilm_timecode, facil_point){
+	if("pg" == pors){
+		$("#pors").attr("value", "운동장");
+	}
+
+	else if("sr" == pors){
+		$("#pors").attr("value", "스터디룸");
+	}
+
+	// 타임코드를 통해서 예약한 '시간' 계산
+	var c = transcode(facilm_timecode);
+	
+	// 타임코드를 통해서 예약한 '시간'* 포인트. = 사용시간.
+	alert(facil_point);
+	point = facil_point*c;	
+	
+		$("#facil_num").attr("value", facil_num);
+		$("#m_id").attr("value", m_id);
+		
+		$("#facil_type").attr("value", facil_type);
+		$("#facil_name").attr("value", facil_name);
+		$("#facilm_date").attr("value", facilm_date);
+		$("#deleteOK").attr("value", facil_num);
+		$("#backpoint").attr("value", point);
+		$("#resertime").attr("value", c + "시간동안 사용");
+		
+		
+		
+	}
+		
+function transcode(timecode){
+	 cnt = 0;
+	 list = timecode.split('');
+	 for(i=0;i < list.length;i++){
+		 if(list[i] == "1"){
+		 cnt++;
+		 }
+	}
+	return cnt;
+}	
+
+</script>

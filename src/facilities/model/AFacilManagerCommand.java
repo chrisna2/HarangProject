@@ -58,13 +58,13 @@ public class AFacilManagerCommand implements CommandInterface {
 
 		// 초기 접속시 출력되는 테이블 SQL QUERY
 		if (null == (keyfield)) {
-			sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
+			sql = "SELECT p.pg_point, m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
 					+ " FROM tbl_pg_member m, tbl_playground p" + " WHERE m.pg_num = p.pg_num ORDER BY m.pgm_num DESC";
 		}
 
 		else {
 			// 검색 SQL QUERY
-			sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
+			sql = "SELECT p.pg_point, m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
 					+ " FROM tbl_pg_member m, tbl_playground p" + " WHERE m.pg_num = p.pg_num" + " AND " + keyword
 					+ " LIKE '%" + keyfield + "%' ORDER BY m.pgm_num DESC";
 
@@ -88,6 +88,7 @@ public class AFacilManagerCommand implements CommandInterface {
 				pgdto.setPg_name(rs.getString("p.pg_name"));
 				pgdto.setPgm_date(rs.getString("m.pgm_date"));
 				pgdto.setPgm_timecode(rs.getString("m.pgm_timecode"));
+				pgdto.setPg_point(rs.getInt("p.pg_point"));
 
 				list.add(pgdto);
 			}
@@ -111,7 +112,7 @@ public class AFacilManagerCommand implements CommandInterface {
 		String pgm_num = _delete;
 		PgMemberDTO pgdto = null;
 		// System.out.println(r);
-		sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date "
+		sql = "SELECT p.pg_point, m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date "
 				+ "FROM tbl_pg_member m, tbl_playground p WHERE m.pg_num = p.pg_num "
 				+ "AND m.pgm_num = ? ORDER BY m.pgm_num DESC";
 
@@ -132,6 +133,7 @@ public class AFacilManagerCommand implements CommandInterface {
 			pgdto.setPg_name(rs.getString("p.pg_name"));
 			pgdto.setPgm_date(rs.getString("m.pgm_date"));
 			pgdto.setPgm_timecode(rs.getString("m.pgm_timecode"));
+			pgdto.setPg_point(rs.getInt("p.pg_point"));
 
 		} catch (Exception e) {
 			System.out.println("a_facilities_manager.jsp : " + e);
@@ -147,8 +149,6 @@ public class AFacilManagerCommand implements CommandInterface {
 	private void deleteOK(HttpServletRequest request, String pgm_num) {
 		String sql = null;
 		sql = "DELETE FROM tbl_pg_member WHERE pgm_num=?";
-		PgMemberDTO pgdto = null;
-
 		try {
 			pool = DBConnectionMgr.getInstance();
 			con = pool.getConnection();
