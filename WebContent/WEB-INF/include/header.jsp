@@ -148,7 +148,7 @@
                 </ul>
               </li>
              
-              <!--회원 개인정보 요약 형태 -->
+              <!--개 인 정 보 요약 형태 -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="${member.m_photo}" class="user-image" alt="User Image"/>
