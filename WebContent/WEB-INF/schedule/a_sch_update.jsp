@@ -72,13 +72,13 @@ function fnschup(){
 		return false;
 	}
 	
-	
-	if (document.schupdatecomplete.s_point.value == "" && document.schupdatecomplete.point.value == "Y"){
+	var ispointchkd = document.schupdatecomplete.point.checked;
+	if (document.schupdatecomplete.s_point.value =="" && ispointchkd){
 		alert("포인트 지급에 체크를 하시면, 지급할 포인트를 입력 하셔야 합니다. ")
 		return false;
 	}
 	
-	if (document.schupdatecomplete.s_point.length >0 && document.schupdatecomplete.point.value != "Y"){
+	if (document.schupdatecomplete.s_point.value >0 && !ispointchkd){
 		alert("지급할 포인트를 입력 하시면, 포인트 지급에 체크를 하셔야 합니다. ")
 		return false;
 	}
@@ -209,30 +209,12 @@ function showKeyCode(event) {
 							
 							
 							
-							<c:if test="${schcon.s_point eq ''}">
+							
 							<div class="row">
 								<div class="col-md-2 form-group">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" name="point" id="point" value ="Y" onchange="showmenow()">포인트 지급
-										</label>
-									</div>
-								</div>
-								<div class="col-md-6 form-group" hidden="hidden" id="s_point">
-									<input class="form-control" 
-									    type="text"
-										placeholder="지급할 포인트를 입력하세요. (숫자만 입력 가능)" 
-										name="s_point" onkeydown="return showKeyCode(event)"
-										value = "${schcon.s_point }">
-								</div>
-							</div>
-							</c:if>
-							<c:if test="${schcon.s_point != ''}">
-							<div class="row">
-								<div class="col-md-2 form-group">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox" name="point" id="point" value ="Y" checked="checked" onchange="showmenow()">포인트 지급
+											<input type="checkbox" name="point" id="point" value ="Y" checked="checked" >포인트 지급
 										</label>
 									</div>
 								</div>
@@ -244,13 +226,13 @@ function showKeyCode(event) {
 										value = "${schcon.s_point }">
 								</div>
 							</div>
-							</c:if>
+							
 							
 							
 							<div class="row">
 								<div class="col-md-9 form-group">
 									
-									<span>참가학년을 선택 해 주세요</span>
+									<span>참가학년을 선택 해 주세요. (선택하지 않으면 전체 학년 적용)</span>
 									<div class="checkbox">
 										<label> <input type="checkbox" name = "gr1" value = "1">1학년	</label>
 										<label> <input type="checkbox" name = "gr2" value = "2">2학년	</label>
@@ -346,17 +328,7 @@ function showKeyCode(event) {
 
 
  });
-    
-function showmenow() {
-	
-	if ($('#point').is(':checked')){
-		$('#s_point').slideDown();			
-	}
-	else {
-		$('#s_point').slideUp();	
-	}
-	
-}
+
     			 
 
 
