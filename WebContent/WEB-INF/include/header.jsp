@@ -274,7 +274,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/HarangProject/facil?cmd=FacilMain"><i class="fa fa-circle-o"></i> 사용자 매인</a></li>
+                <li><a href="/HarangProject/facil?cmd=FacilMain"><i class="fa fa-circle-o"></i> 사용자 메인</a></li>
                 <li><a href="/HarangProject/facil?cmd=FacilPGreserv"><i class="fa fa-circle-o"></i> 운동장 예약</a></li>
                 <li><a href="/HarangProject/facil?cmd=FacilSRreserv"><i class="fa fa-circle-o"></i> 스터디룸 예약</a></li>
               </ul>
@@ -302,6 +302,18 @@
               </ul>
             </li>
             <li>
+              <a href="#">
+                <i class="fa fa-book"></i> <span>하랑딘 24</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="/HarangProject/harangdin?cmd=main"><i class="fa fa-circle-o"></i> 하랑딘 메인</a></li>
+                <li><a href="/HarangProject/harangdin?cmd=buying"><i class="fa fa-circle-o"></i> 도서 판매 내역</a></li>
+                <li><a href="/HarangProject/harangdin?cmd=selling"><i class="fa fa-circle-o"></i> 도서 구매 내역</a></li>
+                <li><a href="/HarangProject/harangdin?cmd=donation"><i class="fa fa-circle-o"></i> 도서 기부 내역</a></li>
+              </ul>
+            </li>
+            <li>
               <a href="/HarangProject/impage?cmd=main">
                 <i class="fa fa-check-square-o"></i><span>강의 평가</span>
               </a>
@@ -314,11 +326,6 @@
             <li>
               <a href="/HarangProject/bamboo?cmd=BB_LIST">
                 <i class="fa fa-group"></i><span>하랑 대나무 숲</span>
-              </a>
-            </li>
-            <li>
-              <a href="/HarangProject/harangdin?cmd=main">
-                <i class="fa fa-book"></i> <span>하랑딘 24</span>
               </a>
             </li>
           </ul>

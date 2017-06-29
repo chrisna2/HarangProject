@@ -48,7 +48,7 @@ public class BookDetailCommand implements CommandInterface {
 				MemberDTO member = bean.getLoginInfo(request);
 				
 				
-				String sql= "SELECT b.b_name, b.b_num, m.m_id, b.b_writer, b.b_pub, b.b_stock, b.b_want, b.b_regdate, b.b_content, b.b_photo"
+				String sql= "SELECT b.b_name, b.b_num, m.m_id, b.b_writer, b.b_pub, b.b_stock, b.b_want, b.b_regdate, b.b_content, b.b_photo "
 						+ " FROM tbl_book b, tbl_member m WHERE b.b_num = ? and m.m_id = ?";
 				
 				String b_num=request.getParameter("b_num");

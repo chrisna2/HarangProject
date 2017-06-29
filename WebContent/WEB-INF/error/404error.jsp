@@ -34,7 +34,7 @@ response.setStatus(HttpServletResponse.SC_OK);
         }
         
         footer {
-            position:relative;
+            position:absolute;
             bottom:0;
             width:100%;
             height:70px;   
@@ -56,8 +56,6 @@ response.setStatus(HttpServletResponse.SC_OK);
         &nbsp;<b>하랑</b> 대학교</a>
         <!-- Header Navbar: style can be found in header.less -->
    </header>
-   
-
     <!-- Main content -->
     <section class="content">
 
