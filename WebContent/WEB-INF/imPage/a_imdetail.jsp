@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@ include file="../include/header.jsp"%>
+<%@ include file="../include/a_header.jsp"%>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -123,8 +123,7 @@
 							<input type="submit" class="btn btn-block btn-primary" value="글 삭제">
 						</div>
 						<div class="col-md-3">
-							<button class="btn btn-block btn-primary">뒤로가기</button>
-						</div>
+							<input type="button" id="btn1" class="btn btn-block btn-primary" value="뒤로가기" />						</div>
 					</div>
 					</form>
 				</div>
@@ -195,3 +194,20 @@
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
+
+
+<script>
+$(
+function () {
+	
+	$("#btn1").click(
+			function(){	
+				self.location = "/HarangProject/impage?cmd=amain";
+				
+			}
+	);
+}	
+);
+
+
+</script>

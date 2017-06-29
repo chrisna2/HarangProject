@@ -82,7 +82,8 @@
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">전체 강의평가 게시글</h3>
-                    <!-- select -->
+                  
+                     <!-- select -->
                    <div class="box-tools">
                   
                     <div class="input-group">

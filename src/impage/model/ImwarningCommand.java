@@ -42,11 +42,11 @@ public class ImwarningCommand implements CommandInterface {
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO) session.getAttribute("member");
 		String m_id = member.getM_id();
-
+		
 		sql = "INSERT INTO tbl_warning (lm_num, m_id,w_regdate, w_comment) " + "VALUES(?,?,sysdate(),?)";
 
 		try {
-
+			
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, request.getParameter("lm_num"));

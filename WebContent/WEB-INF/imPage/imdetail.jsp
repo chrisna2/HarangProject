@@ -119,7 +119,7 @@
 					<div class="row">
 						<div class="col-md-4"></div>
 						<div class="col-md-3">
-							<button class="btn btn-block btn-primary">뒤로가기</button>
+							<input type="button" value="뒤로가기"  id="btn2" class="btn btn-block btn-primary"/>
 						</div>
 
 
@@ -204,6 +204,7 @@ $(document).ready(function(){
 	});
 	
 });
+
 $(
 		function () {
 		
@@ -215,6 +216,22 @@ $(
 			);
 		}	
 	);
+
+
+$(
+function () {
+	
+	$("#btn2").click(
+			function(){	
+				self.location = "/HarangProject/impage?cmd=main";
+				
+			}
+	);
+}	
+);
+
+
+
 
 
 

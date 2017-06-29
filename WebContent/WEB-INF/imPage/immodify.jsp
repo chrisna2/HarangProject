@@ -117,7 +117,7 @@
 							<input type="submit" class="btn btn-block btn-primary" value="수정" />
 						</div>
 						<div class="col-md-2">	
-							<button class="btn btn-block btn-danger">취소</button>
+							<input type="button" id="btn1" class="btn btn-block btn-danger" value="취소"/>
                   		</div>
                   	</div>
 </form>
@@ -131,3 +131,22 @@
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+
+
+
+<script>
+$(
+function () {
+	
+	$("#btn1").click(
+			function(){	
+				self.location = "/HarangProject/impage?cmd=main";
+				
+			}
+	);
+}	
+);
+
+
+</script>
+
