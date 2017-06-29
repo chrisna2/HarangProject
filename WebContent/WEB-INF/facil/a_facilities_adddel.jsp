@@ -533,6 +533,7 @@
 <script type="text/javascript">
 function confirmData(check, num, type, name){
 		// 삭제 확인창 보여지게.
+		
 		$("#confirmcheck").slideUp();
 		$("#confirmcheck").slideDown();
 		
@@ -553,7 +554,7 @@ function confirmData(check, num, type, name){
 		$("#sendnumber").attr("value", num)
 		
 		// UI적인 측면 고려. 화면 조정.
-		$("#boxstudy").attr("class", "box box-primary collapsed-box");
+ 		$("#boxstudy").attr("class", "box box-primary collapsed-box");
 		$("#boxplayground").attr("class", "box box-primary collapsed-box");
 		$("#faciladdbox").attr("class", "box box-primary collapsed-box");
 }
