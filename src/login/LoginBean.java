@@ -3,16 +3,20 @@ package login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import dto.MemberDTO;
+import dto.MessageDTO;
+import dto.RecordDTO;
 import harang.dbcp.DBConnectionMgr;
+import oracle.net.aso.p;
 /**
  * 로그인 정보를 가져오는 클래스.
- * @author 양헤민
+ * @author 양헤민 , 나현기
  *
  */
 public class LoginBean {
@@ -113,10 +117,12 @@ public class LoginBean {
 			//관리자 일때.
 			if(m_dept.equals("관리자")){
 				session.setAttribute("admin", mdto);
+				pointRefreshAdmin(m_id, session);
 			}
 			//일반 회원 일때
 			else{
 				session.setAttribute("member", mdto);
+				pointRefreshUser(m_id, session);
 			}
 			
 		}catch(Exception err){
@@ -126,10 +132,151 @@ public class LoginBean {
 		finally{
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt,rs);
-		}		
+		}
+		messageRefresh(m_id, session);
 	}
 	
+	/**
+	 * 받은 메시지를 새로고침 하는 메서드. into refreshSession
+	 * @param m_id
+	 * @return 받은 메시지 리스트
+	 */
+	public void messageRefresh(String m_id,HttpSession session){
+		
+		ArrayList inboxlist = new ArrayList();
+		
+		try{
+			con = pool.getConnection();
+			
+			String sql="SELECT t_num, t_title, t_send_date, m_sender, "
+					+ "(select m_name from tbl_member where m_id = m_sender) as m_sender_name,"
+					+ "(select m_photo from tbl_member where m_id = m_sender) as s_photo "
+					+ " FROM tbl_text WHERE m_reader=? AND NOT m_sender=? AND t_read_del = 'N' "
+					+ "ORDER BY t_send_date DESC limit 5";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				MessageDTO msg = new MessageDTO();
+				msg.setT_num(rs.getString("t_num"));
+				msg.setT_title(rs.getString("t_title"));
+				msg.setT_send_date(rs.getString("t_send_date"));
+				msg.setM_sender(rs.getString("m_sender"));
+				msg.setS_photo(rs.getString("s_photo"));
+				msg.setM_sender_name(rs.getString("m_sender_name"));
+				
+				inboxlist.add(msg);
+			}
+			
+		}catch(Exception err){
+			System.out.println("getGivenMessageList() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+		session.setAttribute("head_msg",inboxlist);
+	}
 	
+	/**
+	 * 회원의 포인트를 새로고침 하는 메소드 into refreshSession
+	 * @param m_id
+	 * @param session
+	 */
+	public void pointRefreshUser(String m_id,HttpSession session){
+		
+		ArrayList plist  = new ArrayList();
+		
+		String sql  = "select r_regdate, r_content, r_point, m_giver, m_haver, "+
+				"(select m_name from tbl_member where m_id = m_giver) as m_givername, "+
+				"(select m_name from tbl_member where m_id = m_haver) as m_havername  "+
+				"from tbl_record where m_giver = ? or  m_haver = ? order by r_regdate desc limit 5";
+		
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				RecordDTO rdto = new RecordDTO();
+				
+				rdto.setR_regdate(rs.getString("r_regdate"));
+				rdto.setR_content(rs.getString("r_content"));
+				rdto.setR_point(rs.getLong("r_point"));
+				rdto.setM_giver(rs.getString("m_giver"));
+				rdto.setM_haver(rs.getString("m_haver"));
+				rdto.setM_givername(rs.getString("m_givername"));
+				rdto.setM_havername(rs.getString("m_havername"));
+				
+				plist.add(rdto);
+			}
+		} 
+		catch (Exception e) {
+			System.out.println( "header.jsp : " + e);
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt, rs);
+		}
+		session.setAttribute("PLM", plist);
+	}
+
+	
+	/**
+	 * 관리자의 포인트 새로 고침 하는 메소드 into refreshSession
+	 * @param m_id
+	 * @param session
+	 */
+	public void pointRefreshAdmin(String m_id,HttpSession session){
+		
+		
+		ArrayList plist  = new ArrayList();
+		
+		String sql  = "select r_regdate, r_content, r_point, m_giver, m_haver, "+
+				"(select m_name from tbl_member where m_id = m_giver) as m_givername, "+
+				"(select m_name from tbl_member where m_id = m_haver) as m_havername  "+
+				"from tbl_record where m_giver = ? or  m_haver = ? order by r_regdate desc limit 5";
+		
+		
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m_id);
+			pstmt.setString(2, m_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				
+				RecordDTO rdto = new RecordDTO();
+				
+				rdto.setR_regdate(rs.getString("r_regdate"));
+				rdto.setR_content(rs.getString("r_content"));
+				rdto.setR_point(rs.getLong("r_point"));
+				rdto.setM_giver(rs.getString("m_giver"));
+				rdto.setM_haver(rs.getString("m_haver"));
+				rdto.setM_givername(rs.getString("m_givername"));
+				rdto.setM_havername(rs.getString("m_havername"));
+				
+				plist.add(rdto);
+			}
+		} 
+		catch (Exception e) {
+			System.out.println( "header.jsp : " + e);
+		}
+		finally{
+			// DBCP 접속해제
+			pool.freeConnection(con, pstmt, rs);
+		}
+		
+		session.setAttribute("PLA", plist);
+	}
 	
 	
 }

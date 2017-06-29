@@ -79,8 +79,8 @@
                   <li>
                     <!-- 내부 메뉴 : 실제 메세지 데이터가 포함 -->
                     <ul class="menu">
-                       <c:forEach items="${miniPlistUser}" var="ap">
-                           <c:if test="${admin.m_id eq ap.m_giver}">
+                       <c:forEach items="${PLM}" var="ap">
+                           <c:if test="${member.m_id eq ap.m_giver}">
                              <li>
                                 <a href="#">
                                   <div class="pull-left">
@@ -94,7 +94,7 @@
                                 </a>
                               </li>
                            </c:if>
-                           <c:if test="${admin.m_id eq ap.m_haver}">
+                           <c:if test="${member.m_id eq ap.m_haver}">
                               <li>
                                 <a href="#">
                                   <div class="pull-left">

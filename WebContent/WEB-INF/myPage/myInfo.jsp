@@ -93,7 +93,7 @@
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-picture-o"></i> 이미지</span>
 	                <span class="input-group-addon">
-	                   <input type="file" id="imgInp" name="upFile" required="required">
+	                   <input type="file" id="imgInp" name="upFile">
 	                </span>
                     <span class="input-group-addon  bg-gray">
 	                    <img src="${member.m_photo}" id="local" class="img-rounded" height="120" width="90" alt="User Image"/>

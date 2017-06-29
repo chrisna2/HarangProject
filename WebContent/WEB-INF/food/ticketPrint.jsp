@@ -80,6 +80,7 @@
                     <h4><i class="fa fa-cutlery"></i> 구매 메뉴 : ${food.f_title}</h4>
                     <h4><i class="fa fa-cutlery"></i> 구매일 : ${food.fm_regdate}</h4>
                     <h4><i class="fa fa-cutlery"></i> 구매자 : ${member.m_name} (${member.m_id})</h4>
+                    <h4><i class="fa fa-cutlery"></i> 구매포인트 : ${food.f_point}</h4>
                     <h4 class="text-danger"><i class="fa fa-warning"></i> 사용 가능 시간 : ${food.f_selldate} 11시 이후 부터 3시 이전까지</h4>
                     <br>
                     <h4 class="text-danger"><i class="fa fa-warning"></i> 사용시 주의 사항 <i class="fa fa-warning"></i></h4>
@@ -106,6 +107,8 @@
       <form id="ticketuse" method="post" action="">
           <input type="hidden" name="check" id="check">
           <input type="hidden" name="f_num" value="${food.f_num}">
+          <input type="hidden" name="f_title" value="${food.f_title}">
+          <input type="hidden" name="f_point" value="${food.f_point}">
           <input type="hidden" name="m_id" value="${member.m_id}">
       </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
