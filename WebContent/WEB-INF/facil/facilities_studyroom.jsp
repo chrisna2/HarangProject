@@ -88,7 +88,7 @@
 
 										<option>시설을 선택하세요.</option>
 
-										<c:forEach items="${list}" var="s">
+										<c:forEach items="${srlist}" var="s">
 											<option value="${s.sr_type}">${s.sr_type}</option>
 										</c:forEach>
 									</select>

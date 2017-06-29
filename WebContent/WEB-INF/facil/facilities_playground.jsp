@@ -88,7 +88,7 @@
 
 										<option>시설을 선택하세요.</option>
 
-										<c:forEach items="${list}" var="s">
+										<c:forEach items="${pglist}" var="s">
 											<option value="${s.pg_type}">${s.pg_type}</option>
 										</c:forEach>
 									</select>
