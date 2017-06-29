@@ -74,7 +74,7 @@ function fnschp(){
 		alert("포인트 지급에 체크를 하시면, 지급할 포인트를 입력 하셔야 합니다. ")
 		return false;
 	}
-	if (document.getElementById("point").value != "Y"){
+	if (document.schpostcomplete.s_point.value > 0 && !ispointchkd ){
 		alert("지급할 포인트를 입력 하시면, 포인트 지급에 체크를 하셔야 합니다. ")
 		return false;
 	}
@@ -206,7 +206,7 @@ function showKeyCode(event) {
 								<div class="col-md-2 form-group">
 									<div class="checkbox">
 										<label> 
-											<input type="checkbox" name="point" id="point" value ="Y" onchange="showmenow()">포인트 지급
+											<input type="checkbox" name="point" id="point" value ="Y" >포인트 지급
 										</label>
 									</div>
 
@@ -223,7 +223,7 @@ function showKeyCode(event) {
 							<div class="row">
 								<div class="col-md-9 form-group">
 									
-									<span>참가학년을 선택 해 주세요</span>
+									<span>참가학년을 선택 해 주세요. (선택하지 않으면 전체 학년 적용)</span>
 									<div class="checkbox">
 										<label> <input type="checkbox" name = "gr1" value = "1">1학년	</label>
 										<label> <input type="checkbox" name = "gr2" value = "2">2학년	</label>
@@ -236,6 +236,65 @@ function showKeyCode(event) {
 
 								</div>
 							</div>
+							
+							<div class="row">
+								
+									
+									<span>행사 장소를 선택 해 주세요</span>
+								
+								
+									<div class="form-group col-md-3">
+									<label>시설명</label> <select class="form-control" name="fc_type"
+										id="fc_type" >
+
+										<option>장소</option>
+
+										
+											<option value="운동장">운동장</option>
+											<option value="스터디룸">스터디룸</option>
+										
+									</select>
+								</div>
+								
+								
+								
+								
+								
+								
+								
+									<div class="form-group col-md-3">
+									<label>시설명</label> <select class="form-control" name="pg_type"
+										id="pg_type" onchange="selectfacil()">
+
+										<option>시설을 선택하세요.</option>
+
+										
+										
+
+										<c:forEach items="${list}" var="s">
+											<option value="${s.pg_type}">${s.pg_type}</option>
+										</c:forEach>
+										
+										
+										
+										
+									</select>
+								</div>
+
+								<!-- 호수(두번째 카테고리) 선택 -->
+								<div class="form-group col-md-3">
+									<label>호수</label> <select class="form-control" id="pg_name"
+										name="pg_name" onchange="select02()">
+										<option>호수를 선택하세요.</option>
+									</select>
+								</div>
+									
+
+
+
+								
+							</div>
+							
 
 						</div>
 						<!-- /.box-header -->
@@ -317,16 +376,7 @@ function showKeyCode(event) {
         });
     });
     
-    function showmenow() {
-    	
-    	if ($('#point').is(':checked')){
-    		$('#s_point').slideDown();			
-    	}
-    	else {
-    		$('#s_point').slideUp();	
-    	}
-    	
-    }
+   
    
     </script>
 <script type="text/javascript">
@@ -337,5 +387,68 @@ function showKeyCode(event) {
 		//bootstrap WYSIHTML5 - text editor
 		$(".textarea").wysihtml5();
 	});
+	
+	
+	
+	//시설 선택을 셀렉트 생성. pg_type을 바탕으로 pg_name의 list를 출력한다.
+	function selectfacil() {
+
+		var wpg_type = document.getElementById('pg_type').value;
+		
+		$.getJSON("/HarangProject/ajax?cmd=selectPg", {
+			pg_type : encodeURIComponent(wpg_type)
+		}, function(data) {
+			$("#pg_name option").remove();
+			$("#pg_name").append("<option>호수를 입력하세요.</option>");
+			$(data).each(
+					function(index, pglist) {
+						$("#pg_name").append(
+								"<option value='"+pglist.pg_name+"'>"
+										+ pglist.pg_name + "</option>");
+
+					});
+		});
+	}
+	
+	// selectfacil()을 바탕으로 pg_content와 포인트, 시설번호를 불러온다.
+	function select02() {
+		var varpg_type = document.getElementById('pg_type').value;
+		var varpg_name = select09.pg_name.value;
+
+		$
+				.getJSON("/HarangProject/ajax?cmd=selectPg",
+						{
+							pg_type : encodeURIComponent(varpg_type),
+							pg_name : encodeURIComponent(varpg_name),
+							check : 1
+						},
+						function(data) {
+							$("#pg_content textarea").remove();
+							$(data)
+									.each(
+											function(index, pglist) {
+												$("#pg_content")
+														.append(
+																"<textarea readonly='readonly' class='form-control' rows='3' style='width: 250px'>"
+																		+ pglist.pg_content
+																		+ "</textarea>");
+												$("#pg_point").attr("value",
+														pglist.pg_point);
+												$("#pg_num").attr("value",
+														pglist.pg_num);
+											});
+						});
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </script>
 
