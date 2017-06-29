@@ -35,7 +35,7 @@
 					<div class="box-body">
 						<div class="row">
 						<div class="col-md-2">
-							<button class="btn btn-sm btn-block btn-info" onclick="fnPost()">글쓰기</button>
+							<button class="btn btn-sm btn-info" onclick="fnPost()">글쓰기</button>
 						</div>
 						<div class="col-md-9"></div>
 						<div class="col-md-1">

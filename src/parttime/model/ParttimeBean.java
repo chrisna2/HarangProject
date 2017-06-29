@@ -722,7 +722,8 @@ public class ParttimeBean {
 				dto.setP_num(rs.getString("p_num"));
 				dto.setM_id(rs.getString("m_id"));
 				dto.setPm_reason(rs.getString("pm_reason"));
-				dto.setPm_career(rs.getString("pm_wanttime"));
+				dto.setPm_career(rs.getString("pm_career"));
+				dto.setPm_wanttime(rs.getString("pm_wanttime"));
 				dto.setPm_regdate(rs.getString("pm_regdate"));
 				dto.setPm_choice(rs.getString("pm_choice"));
 				
@@ -762,7 +763,8 @@ public class ParttimeBean {
 				dto.setP_num(rs.getString("p_num"));
 				dto.setM_id(rs.getString("m_id"));
 				dto.setPm_reason(rs.getString("pm_reason"));
-				dto.setPm_career(rs.getString("pm_wanttime"));
+				dto.setPm_career(rs.getString("pm_career"));
+				dto.setPm_wanttime(rs.getString("pm_wanttime"));
 				dto.setPm_regdate(rs.getString("pm_regdate"));
 				dto.setPm_choice(rs.getString("pm_choice"));
 				
@@ -884,7 +886,8 @@ public class ParttimeBean {
 				dto.setP_num(rs.getString("p_num"));
 				dto.setM_id(rs.getString("m_id"));
 				dto.setPm_reason(rs.getString("pm_reason"));
-				dto.setPm_career(rs.getString("pm_wanttime"));
+				dto.setPm_career(rs.getString("pm_career"));
+				dto.setPm_wanttime(rs.getString("pm_wanttime"));
 				dto.setPm_regdate(rs.getString("pm_regdate"));
 				dto.setPm_choice(rs.getString("pm_choice"));
 			}
@@ -1194,7 +1197,11 @@ public class ParttimeBean {
 		}
 		return m_id;
 	}
-
+	
+	/**
+	 * 대타가 작업을 완료했을 때 처리하는 메서드.
+	 * @param dto
+	 */
 	public void updateDaetaMember(D_ApplyDTO dto){
 		try{
 			con = pool.getConnection();
@@ -1215,6 +1222,30 @@ public class ParttimeBean {
 			pool.freeConnection(con,pstmt);
 		}
 	}
-
 	
+	/**
+	 * 대타 신청자가 업무완료 후 신고한 경우 처리하는 메서드.
+	 * @param m_id
+	 * @param d_num
+	 * @param dm_report
+	 */
+	public void report(String m_id, String d_num, String dm_report){
+		try{
+			con = pool.getConnection();
+			
+			String sql="UPDATE tbl_daeta_member SET dm_report=? WHERE m_id=? AND d_num=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dm_report);
+			pstmt.setString(2, m_id);
+			pstmt.setString(3, d_num);
+			pstmt.executeUpdate();
+			
+		}catch(Exception err){
+			System.out.println("report() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}
+	}
 }

@@ -7,6 +7,9 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
      <title>하랑대학교|학생 메인</title>
+     <style>
+      #timetable{height:100px}
+     </style>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -66,7 +69,7 @@
 				<!-- 포인트 거래 내역 -->
 				<div class="box box-solid">
 					<div class="box-header with-border">
-		              <h3 class="box-title"><small><b>최근 포인트 내역</b></small></h3>
+		              <font size='3px'><b>최근 포인트 내역</b></font>
 		            </div>
             		<div class="box-body">
             			<table class="table table-bordered table-striped">
@@ -80,6 +83,11 @@
 		                    <tbody>
 		                    <c:choose>
 		                      <c:when test="${fn:length(pList) eq 0}">
+		                      	<tr>
+		                            <td></td>
+		                            <td>최근 거래가 없습니다.</td>
+		                            <td></td>
+		                          </tr>
 		                      </c:when>
 		                      <c:otherwise>
 		                      <c:forEach items="${requestScope.pList}" 
@@ -112,8 +120,7 @@
         		
         		<!-- 시간표 -->
         		<div class="col-md-6">
-        		<b>${tt_grade}학년 ${tt_term}학기</b>
-        		<table class="table table-bordered table-striped" style="border-color: #9E9E9E">
+        		<table id="timetable" class="table table-bordered table-striped" style="border-color: #9E9E9E">
                   <colgroup>
                     <col class="col-md-1 col-xs-1">
                     <col class="col-md-2 col-xs-2"> 
@@ -217,7 +224,7 @@
 	<input type="hidden" name="p_num" value="" id="p_num"/>
 	<input type="hidden" name="tab" value="PMAIN"/>
 </form> 
-<form name="readD" method="post" action="/HarangProject/parttime?cmd=PREAD">
+<form name="readD" method="post" action="/HarangProject/parttime?cmd=DREAD">
 	<input type="hidden" name="d_num" value="" id="d_num"/>
 	<input type="hidden" name="tab" value="PMAIN"/>
 </form>
@@ -290,12 +297,6 @@ function fnReadB(bb_num){
         // 수업 이름
         var name = "${tj.l_name}";
         
-        // 강의실
-        var room = "${tj.l_room}";
-
-        // 교수00
-        var teacher = "${tj.l_teacher}";
-
         // 학과별 색상 변경
         var dept =  "${tj.l_dept}";
         var color = "";
@@ -321,7 +322,7 @@ function fnReadB(bb_num){
         for(i=start;i<=end;i++){
         	$("#t"+i+" > #d"+daynum)
         	.css("background",color)
-        	.html(name+"<br>"+room+"<br>"+teacher);
+        	.html("<font size='1px'>"+name+"</font>");
         }
        </script>
 </c:forEach>

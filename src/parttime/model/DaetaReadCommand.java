@@ -42,6 +42,7 @@ public class DaetaReadCommand implements CommandInterface {
 		/** Apply!! 지원자 정보*/
 		apply(req); // 지원완료 후
 		isComplete(req); // 대타 수행 확인
+		report(m_id,req); //신고했을 때
 		paging(req); // paging 관련 변수 받아서 넘기기
 		choice(m_id, req); // 채용버튼 눌렀을 때 처리
 		isApply(m_id, req); // 지원했는지 안했는지
@@ -50,7 +51,8 @@ public class DaetaReadCommand implements CommandInterface {
 		/** 끝 : Apply */
 		
 		/** 페이지 이동 */
-		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_read.jsp로 페이지 이동
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_read.jsp로 페이지 이동]
+			req.setAttribute("admin", member);
 			return "WEB-INF/parttime/a_daeta_read.jsp";
 		} else { // 회원이면 parttime_read.jsp 로 페이지 이동
 			String read = (String) req.getParameter("read");
@@ -257,7 +259,6 @@ public class DaetaReadCommand implements CommandInterface {
 		String d_num = req.getParameter("d_num");
 		String givePoint = req.getParameter("givePoint");
 		String m_id = req.getParameter("m_id");
-		System.out.println("givePoint : " + givePoint);
 		
 		DaetaDTO dto = bean.getDaeta(d_num); // 대타 글 정보
 		MemberDTO mem = bean.getMember(dto.getM_id()); // 작성자 정보
@@ -356,6 +357,28 @@ public class DaetaReadCommand implements CommandInterface {
 		D_ApplyDTO apply = bean.getDaetaApply(m_id, d_num);
 		if("Y".equals(apply.getDm_choice())){
 			req.setAttribute("pick", "OK");
+		}
+		
+		//이미 신고했다면 파라미터보내기
+		if(apply.getDm_report() != null){
+			if((apply.getDm_report().equals("N") == false) && apply.getDm_report() != "Solved"){
+				req.setAttribute("alreadyReport", "OK");
+			}
+		}
+	}
+	
+	/**
+	 * 신고했을 때 처리하는 메서드.
+	 * @param m_id
+	 * @param req
+	 */
+	public void report(String m_id, HttpServletRequest req){
+		String warning = req.getParameter("warning");
+		String d_num = req.getParameter("d_num");
+		String dm_report = req.getParameter("dm_report");
+		
+		if("OK".equals(warning)){
+			bean.report( m_id, d_num, dm_report);
 		}
 	}
 }

@@ -34,7 +34,7 @@
 					<div class="box-body">
 						<div class="row">
 						<div class="col-md-2">
-							<button class="btn btn-xs btn-block btn-info" onclick="fnPost()">글쓰기</button>
+							<button class="btn btn-xs btn-info" onclick="fnPost()">글쓰기</button>
 						</div>
 						<div class="col-md-9"></div>
 						<div class="col-md-1">
@@ -83,7 +83,7 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="col-md-2">
-							<button class="btn btn-xs btn-block btn-danger" onclick="fnDelete()">삭제</button>
+							<button class="btn btn-xs btn-danger" onclick="fnDelete()">삭제</button>
 					</div>
 					<div class="box-footer clearfix">
 						<ul class="pagination pagination-sm no-margin pull-right">

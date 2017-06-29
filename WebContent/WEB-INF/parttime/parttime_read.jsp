@@ -69,7 +69,6 @@
                       <label>요일</label><br>
                       <div>
                       
-                      <!-- 성지 : 보고배워라 -->
                       	  <c:forEach var="i" begin="0" end="6" step="1">
                       	  	<c:choose>
 	                      	  	<c:when test="${daycode[i] == 1}">
@@ -82,7 +81,6 @@
 		                      	</c:otherwise>
 	                      	</c:choose>
 	                      </c:forEach>
-	                 <!-- 끝 -->
 	                      
                       </div>
                     </div>
@@ -237,12 +235,28 @@
                   </div><!-- /. tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
+                	<!-- 댓글쓰기 -->
                 	<div class="input-group input-group-sm">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                      <button class="btn btn-success btn-flat" type="button">Go!</button>
-                    </span>
-                  </div><!-- /input-group -->
+                	  <form method="post" action="/HarangProject/parttime?cmd=PREAD">
+                	  	<input type="hidden" name="p_num" value="${info.p_num}"/>
+                	  	<input type="hidden" name="comment" value="insert"/>
+	                    <input type="text" name="pr_comment" class="form-control">
+	                    <span class="input-group-btn">
+	                    	<button class="btn btn-success btn-flat" type="submit">Go!</button>
+	                    </span>
+	                   </form>
+	                </div><!-- 댓글쓰기 끝! -->
+                  
+                  	<!-- 댓글 목록 -->
+                	<c:forEach items="clist" var="c">
+                		<span class="btn btn-success btn-xs">${c.m_name}</span> 
+                			${c.pr_comment} <small>${c.pr_regdate}</small>
+                			<button class="btn btn-default btn-xs">수정</button>
+                			<button class="btn btn-default btn-xs">삭제</button>
+                		<hr/>
+                	</c:forEach>
+                    <!-- 댓글 목록 끝!! -->	
+                	
                 </div>
               </div><!-- /.box -->
             </div><!--/.col -->

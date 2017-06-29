@@ -34,7 +34,7 @@
 					<div class="box-body">
 						<div class="row">
 						<div class="col-md-2">
-							<button class="btn btn-xs btn-block btn-success" onclick="fnPost()">글쓰기</button>
+							<button class="btn btn-xs btn-success" onclick="fnPost()">글쓰기</button>
 						</div>
 						<div class="col-md-9"></div>
 						<div class="col-md-1">
@@ -101,22 +101,26 @@
 												</c:when>
 												<c:otherwise>
 												<td>
-													<c:if test="${state eq 'prepare'}"><span class="btn btn-default btn-xs">준비중</span></c:if>
-													<c:if test="${state eq 'progress'}"><span class="btn btn-info btn-xs">진행중</span></c:if>
-													<c:if test="${state eq 'waiting'}"><span class="btn btn-info btn-xs">대기중</span></c:if>
-													<c:if test="${state eq 'warning'}"><span class="btn btn-warning btn-xs">경고</span></c:if>
-													<c:if test="${state eq 'success'}"><span class="btn btn-success btn-xs">성공</span></c:if>
-													<c:if test="${state eq 'denied'}"><span class="btn btn-danger btn-xs">거절</span></c:if>
+													<c:if test="${list.state eq 'prepare'}"><span class="btn btn-default btn-xs">준비중</span></c:if>
+													<c:if test="${list.state eq 'progress'}"><span class="btn btn-info btn-xs">진행중</span></c:if>
+													<c:if test="${list.state eq 'waiting'}"><span class="btn btn-parimary btn-xs">대기중</span></c:if>
+													<c:if test="${list.state eq 'warning'}"><span class="btn btn-warning btn-xs">경고</span></c:if>
+													<c:if test="${list.state eq 'success'}"><span class="btn btn-success btn-xs">성공</span></c:if>
+													<c:if test="${list.state eq 'denied'}"><span class="btn btn-danger btn-xs">거절</span></c:if>
 												</td>
 												</c:otherwise>
 											</c:choose>
 											<c:choose>
-												<c:when test="${dm_report eq 'OK'}">
-													<td><span class="btn btn-danger btn-xs">신고</span></td>
-												</c:when>
-												<c:otherwise>
+												<c:when test="${list.dm_report eq 'N' || list.dm_report eq null}">
 													<td></td>
-												</c:otherwise>
+												</c:when>
+												<c:when test="${list.dm_report eq 'Solved'}">
+													<td><span class="btn btn-default btn-xs" >해결</span></td>
+												</c:when>
+												<c:when test="${list.dm_report ne 'N' and list.dm_report ne 'Solved' and list.dm_report ne null}">
+													<td><span class="btn btn-danger btn-xs" onclick="fnReport('${list.d_num}','${list.d_pick}','${list.dm_report}')">신고</span></td>
+												</c:when>
+												
 											</c:choose>
 										</tr>
 									</c:forEach>
@@ -126,7 +130,7 @@
 					</div>
 					<!-- /.box-body -->
 					<div class="col-md-2">
-							<button class="btn btn-xs btn-block btn-danger" onclick="fnDelete()">삭제</button>
+							<button class="btn btn-xs btn-danger" onclick="fnDelete()">삭제</button>
 					</div>
 					<!-- 페이징 버튼 -->
 					<div class="box-footer clearfix">
@@ -145,7 +149,27 @@
 							<li><a href="javascript:nextPage()">&raquo;</a></li>
 							</c:if>
 						</ul>
+						
+						<br><br>
+						<div>  
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<b>거래 상태 표시</b><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                <span class="btn btn-default btn-xs">준비중</span><small> 모집 마감일이 지나지 않은 상태</small><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="btn btn-info btn-xs">진행중</span><small> 마감일이 지나고 대타날짜가 지나지 않은 상태</small><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="btn btn-primary btn-xs">대기중</span><small> 대타 날짜가 지나고 (대타 날짜 후 3일 미만) 확인 버튼이 아직 눌리지 않은 상태</small><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="btn btn-warning btn-xs">경고</span><small> 대타 날짜가 3일이상 지났지만 확인 버튼이 눌리지 않은 상태</small><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="btn btn-success btn-xs">성공</span><small> 거래가 성공적으로 완료된 상태</small><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="btn btn-danger btn-xs">거절</span><small> 거래가 거절된 상태</small><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</div>
 					</div><!-- 페이징 버튼 -->
+					
 					
 					<form name="search" method="post" action="/HarangProject/parttime?cmd=DMAIN">
 					<div class="row">
@@ -173,6 +197,39 @@
                   </div>
                   </form>
 				</div>
+				
+				<!-- 신고 -->
+				<form method="post" action="/HarangProject/parttime?cmd=DMAIN">
+					<input type="hidden" name="d_num" value="" id="report_num"/>
+	                <input type="hidden" name="solved" value="OK"/>
+              <div class="box box-danger" id="theRemote" style="display: none;">
+	                <div class="box-header">
+	                  <h3 class="box-title">신고 내용</h3>
+	                  <div class="box-tools pull-right">
+	                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	                  </div>
+	                </div>
+                
+                <!-- form 시작 -->
+                	
+	                <div class="box-body">
+	                  
+	                  <div class="input-group">
+	                    <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 회원번호</span>
+	                    <input type="text" name="d_picked" id="report_id" value="" class="form-control" readonly="readonly">
+	                  </div> 
+	                  <div class="input-group">
+	                    <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 신고내용</span>
+	                    <input type="text" id="report_content" value="" class="form-control" readonly="readonly">
+	                  </div>
+	                </div><!-- /.box-body -->
+	                
+	                 <div class="box-footer" align="right">
+	                    <button type="submit" class="btn btn-danger" onclick="fnSolve()">해결</button>
+	                </div>
+	              </div><!-- /.box -->
+	              </form>
 			</div>
 		</div><!-- row -->
 
@@ -233,6 +290,18 @@ function goPage(nowPage){
 	document.getElementById("goPage").submit();
 }
 /////////////////////////////끝//////////////////////////////////
+
+function fnReport(d_num,d_picked, report){
+	if($("#theRemote").css("display") == "none"){
+		$("#theRemote").slideDown();
+		$("#report_num").val(d_num);
+		$("#report_id").val(d_picked);
+		$("#report_content").val(report);
+	}
+	else{
+		$("#theRemote").slideUp();
+	}
+}
 
 function fnRead(d_num){
 	document.getElementById("d_num").value = d_num;

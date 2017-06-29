@@ -20,7 +20,10 @@ public class DaetaDTO {
 	private int cnt_apply; //지원자수
 	private String d_pick;// 채용된 사람 회원번호
 	private String dm_choice; // 채용여부
+	private String dm_report; // 신고내용
+	private String dm_iscomplete; // 완료여부
 	private Boolean checkDeadline; // 마감일이 지났는지
+	private String state; //거래 진행 상태
 	
 	public int getList_num() {
 		return list_num;
@@ -136,6 +139,24 @@ public class DaetaDTO {
 	}
 	public void setCheckDeadline(Boolean checkDeadline) {
 		this.checkDeadline = checkDeadline;
+	}
+	public String getDm_report() {
+		return dm_report;
+	}
+	public void setDm_report(String dm_report) {
+		this.dm_report = dm_report;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getDm_iscomplete() {
+		return dm_iscomplete;
+	}
+	public void setDm_iscomplete(String dm_iscomplete) {
+		this.dm_iscomplete = dm_iscomplete;
 	}
 	
 	

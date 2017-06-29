@@ -94,6 +94,12 @@
 							
 							<c:otherwise><!-- 남이 쓴 글일 때 -->
 								<c:choose>
+									<c:when test="${info.d_header eq '[마감]'&& pick ne 'OK'}">
+									<div class="col-md-4"></div>
+									<div class="col-md-4">
+										<button class="btn btn-block btn-default" disabled="disabled">마감</button>
+									</div>	
+									</c:when>
 									<c:when test="${applied eq 'N' || empty applied}">
 									<div class="col-md-4"></div>
 									<div class="col-md-4">
@@ -103,14 +109,14 @@
 									<c:when test="${info.d_header eq '[마감]'&& pick eq 'OK'}">
 									<div class="col-md-6"></div>
 									<div class="col-md-6 pull-right">
-										대타를 완료해도 포인트가 지급되지 않아요:( &nbsp;&nbsp;
-										<button class="btn btn-sm btn-danger" onclick="fnReport()">신고</button>
-									</div>	
-									</c:when>
-									<c:when test="${info.d_header eq '[마감]'&& pick ne 'OK'}">
-									<div class="col-md-4"></div>
-									<div class="col-md-4">
-										<button class="btn btn-block btn-default" disabled="disabled">마감</button>
+										<c:if test="${alreadyReport ne 'OK'}">
+											대타를 완료해도 포인트가 지급되지 않아요:( &nbsp;&nbsp;
+											<button class="btn btn-sm btn-danger" id="report">신고</button>
+										</c:if>
+										<c:if test="${alreadyReport eq 'OK'}">
+											이미 신고했어요!
+											<button class="btn btn-sm btn-default" disabled="disabled">신고</button>
+										</c:if>
 									</div>	
 									</c:when>
 									<c:otherwise>
@@ -138,6 +144,35 @@
                   	</div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+              
+              <!-- 신고 -->
+              <div class="box box-danger" id="theRemote" style="display: none;">
+	                <div class="box-header">
+	                  <h3 class="box-title">신고하기</h3>
+	                  <div class="box-tools pull-right">
+	                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	                  </div>
+	                </div>
+                
+                <!-- form 시작 -->
+                <form role="form" action="/HarangProject/parttime?cmd=DREAD" method="post">
+	              	<input type="hidden" name="d_num" value="${info.d_num}"/>
+	              	<input type="hidden" name="warning" value="OK"/>
+	                <div class="box-body">
+	                  <div class="input-group">
+	                    <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i> 신고내용</span>
+	                    <input type="text" name="dm_report" class="form-control" required="required">
+	                  </div>
+	                </div><!-- /.box-body -->
+	                
+	                 <div class="box-footer" align="right">
+	                    <button type="submit" id="btn1" class="btn btn-danger">신고</button>
+	                </div>
+	                </form>
+	              </div><!-- /.box -->
+              
+              <!-- 목록버튼 -->
               <div class="row">
               	<div class="col-md-10"></div>
               	<div class="col-md-2">
@@ -146,7 +181,8 @@
               </div>
               <br>
               
-              <!-- ★★★ 내가 쓴 글일 때만 보이기 : 지원자 목록 collapse -->       
+              
+          <!-- ★★★ 내가 쓴 글일 때만 보이기 : 지원자 목록 collapse -->       
            <c:if test="${m_id eq info.m_id}">
             <div class='box box-danger'>
                 <div class='box-header'>
@@ -332,6 +368,22 @@
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
 <script>
+$(document).ready(function(){
+	
+	$("#report").click(function(){
+		if($("#theRemote").css("display") == "none"){
+			$("#theRemote").slideDown();
+		}
+		else{
+			$("#theRemote").slideUp();
+		}
+	});	
+});
+$(function(){
+		$("#btn1").click(function(){	
+			alert("신고 완료!");
+		});
+});
 function fnList(tab){list.submit();}
 function fnApply(){apply.submit();}
 function fnMyResume(){myresume.submit();}
