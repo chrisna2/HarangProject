@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
 import dto.PgMemberDTO;
+import dto.SrMemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
 public class AFacilManagerCommand implements CommandInterface {
@@ -32,13 +33,17 @@ public class AFacilManagerCommand implements CommandInterface {
 		String delete = request.getParameter("delete");
 
 		// [삭제] 완료를 위한 변수.
-		String deleteOK = request.getParameter("deleteOK");
-
+		String deleteOK = request.getParameter("deleteOk");
 		loadlist(request);
+		System.out.println(deleteOK);
+		
 
-		if (null != delete) {
+/*
+ * 			자바스크립트가 대신 일을 함. 		
+ * 			if (null != delete) {
 			tossConfirm(request, delete);
-		}
+			}
+*/
 
 		if (null != deleteOK) {
 			deleteOK(request, deleteOK);
@@ -49,22 +54,27 @@ public class AFacilManagerCommand implements CommandInterface {
 	}
 
 	public void loadlist(HttpServletRequest request) {
-		String sql = null;
+		String sql_pg = null;
+		String sql_sr = null;
 
-		ArrayList list = new ArrayList();
+		ArrayList pglist = new ArrayList();
+		ArrayList srlist = new ArrayList();
 
 		String keyword = request.getParameter("keyword");
 		String keyfield = request.getParameter("keyfield");
 
 		// 초기 접속시 출력되는 테이블 SQL QUERY
 		if (null == (keyfield)) {
-			sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
+			sql_pg = "SELECT p.pg_point, m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
 					+ " FROM tbl_pg_member m, tbl_playground p" + " WHERE m.pg_num = p.pg_num ORDER BY m.pgm_num DESC";
+			
+			sql_sr = "SELECT s.sr_point, m.srm_num, m.sr_num, m.m_id, m.srm_regdate, m.srm_timecode, s.sr_type, s.sr_name, m.srm_date"
+					+ " FROM tbl_sr_member m, tbl_studyroom s" + " WHERE m.sr_num = s.sr_num ORDER BY m.srm_num DESC";
 		}
 
 		else {
 			// 검색 SQL QUERY
-			sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
+			sql_pg = "SELECT p.pg_point, m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date"
 					+ " FROM tbl_pg_member m, tbl_playground p" + " WHERE m.pg_num = p.pg_num" + " AND " + keyword
 					+ " LIKE '%" + keyfield + "%' ORDER BY m.pgm_num DESC";
 
@@ -74,7 +84,8 @@ public class AFacilManagerCommand implements CommandInterface {
 		try {
 			pool = DBConnectionMgr.getInstance();
 			con = pool.getConnection();
-			pstmt = con.prepareStatement(sql);
+			
+			pstmt = con.prepareStatement(sql_pg);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -88,8 +99,28 @@ public class AFacilManagerCommand implements CommandInterface {
 				pgdto.setPg_name(rs.getString("p.pg_name"));
 				pgdto.setPgm_date(rs.getString("m.pgm_date"));
 				pgdto.setPgm_timecode(rs.getString("m.pgm_timecode"));
+				pgdto.setPg_point(rs.getInt("p.pg_point"));
 
-				list.add(pgdto);
+				pglist.add(pgdto);
+			}
+			
+			pstmt = con.prepareStatement(sql_sr);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+
+				SrMemberDTO srdto = new SrMemberDTO();
+
+				srdto.setSrm_num(rs.getString("m.srm_num"));
+				srdto.setSrm_regdate(rs.getString("m.srm_regdate"));
+				srdto.setM_id(rs.getString("m.m_id"));
+				srdto.setSr_type(rs.getString("s.sr_type"));
+				srdto.setSr_name(rs.getString("s.sr_name"));
+				srdto.setSrm_date(rs.getString("m.srm_date"));
+				srdto.setSrm_timecode(rs.getString("m.srm_timecode"));
+				srdto.setSr_point(rs.getInt("s.sr_point"));
+
+				srlist.add(srdto);
 			}
 
 		} catch (Exception e) {
@@ -101,17 +132,20 @@ public class AFacilManagerCommand implements CommandInterface {
 
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("keyfield", keyfield);
-		request.setAttribute("list", list);
+		request.setAttribute("pglist", pglist);
+		request.setAttribute("srlist", srlist);
 	}
 
-	// 리스트에서 '삭제'할 목록을 가져옴.
+/*	
+ * 	자바스크립트가 대신함.
+ * 	 리스트에서 '삭제'할 목록을 가져옴.
 	public void tossConfirm(HttpServletRequest request, String _delete) {
 
 		String sql = null;
 		String pgm_num = _delete;
 		PgMemberDTO pgdto = null;
 		// System.out.println(r);
-		sql = "SELECT m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date "
+		sql = "SELECT p.pg_point, m.pgm_num, m.pg_num, m.m_id, m.pgm_regdate, m.pgm_timecode, p.pg_type, p.pg_name, m.pgm_date "
 				+ "FROM tbl_pg_member m, tbl_playground p WHERE m.pg_num = p.pg_num "
 				+ "AND m.pgm_num = ? ORDER BY m.pgm_num DESC";
 
@@ -132,6 +166,7 @@ public class AFacilManagerCommand implements CommandInterface {
 			pgdto.setPg_name(rs.getString("p.pg_name"));
 			pgdto.setPgm_date(rs.getString("m.pgm_date"));
 			pgdto.setPgm_timecode(rs.getString("m.pgm_timecode"));
+			pgdto.setPg_point(rs.getInt("p.pg_point"));
 
 		} catch (Exception e) {
 			System.out.println("a_facilities_manager.jsp : " + e);
@@ -141,14 +176,25 @@ public class AFacilManagerCommand implements CommandInterface {
 		}
 
 		request.setAttribute("pgdto", pgdto);
-	}
+	}*/
 
 	// 삭제 메서드.
 	private void deleteOK(HttpServletRequest request, String pgm_num) {
 		String sql = null;
-		sql = "DELETE FROM tbl_pg_member WHERE pgm_num=?";
-		PgMemberDTO pgdto = null;
-
+		String pors = request.getParameter("pors");
+		System.out.println(pors);
+		
+		if("운동장".equals(pors)){
+			sql = "DELETE FROM tbl_pg_member WHERE pgm_num=?";
+			System.out.println("운동장삭제 deleteOk도착");
+		}
+		
+		else if("스터디룸".equals(pors)){
+			sql = "DELETE FROM tbl_sr_member WHERE srm_num=?";
+			System.out.println("스터디삭제 deleteOk도착");
+		}
+		
+		
 		try {
 			pool = DBConnectionMgr.getInstance();
 			con = pool.getConnection();

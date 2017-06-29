@@ -88,7 +88,7 @@
 
 										<option>시설을 선택하세요.</option>
 
-										<c:forEach items="${list}" var="s">
+										<c:forEach items="${pglist}" var="s">
 											<option value="${s.pg_type}">${s.pg_type}</option>
 										</c:forEach>
 									</select>
@@ -417,6 +417,7 @@
 																"<textarea readonly='readonly' class='form-control' rows='3' style='width: 250px'>"
 																		+ pglist.pg_content
 																		+ "</textarea>");
+												alert("1");
 												$("#pg_point").attr("value",
 														pglist.pg_point);
 												$("#pg_num").attr("value",

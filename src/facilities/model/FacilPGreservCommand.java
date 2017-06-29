@@ -102,7 +102,7 @@ public class FacilPGreservCommand implements CommandInterface {
 			pool.freeConnection(con, pstmt, rs);
 		}
 
-		request.setAttribute("list", list);
+		request.setAttribute("pglist", list);
 	}
 	
 	private void reserPg(HttpServletRequest request, String m_id) {
