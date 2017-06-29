@@ -128,7 +128,7 @@ function showKeyCode(event) {
 
 					<div class='box box-info'>
 						<div class='box-header'>
-							<h3 class='box-title'>학사일정 등록</h3>
+							<h3 class='box-title'>학사일정 등록 </h3>
 							<br> <br>
 							<!-- tools box -->
 
@@ -244,10 +244,10 @@ function showKeyCode(event) {
 								
 								
 									<div class="form-group col-md-3">
-									<label>시설명</label> <select class="form-control" name="fc_type"
-										id="fc_type" >
-
-										<option>장소</option>
+									<label>시설명</label> <select class="form-control" name="fselect"
+										id="fselect" onchange = "fselect()" >
+										
+									<option>시설</option>
 
 										
 											<option value="운동장">운동장</option>
@@ -270,10 +270,6 @@ function showKeyCode(event) {
 
 										
 										
-
-										<c:forEach items="${list}" var="s">
-											<option value="${s.pg_type}">${s.pg_type}</option>
-										</c:forEach>
 										
 										
 										
@@ -377,9 +373,7 @@ function showKeyCode(event) {
     });
     
    
-   
-    </script>
-<script type="text/javascript">
+    
 	$(function() {
 		// Replace the <textarea id="editor1"> with a CKEditor
 		// instance, using default configuration.
@@ -388,65 +382,27 @@ function showKeyCode(event) {
 		$(".textarea").wysihtml5();
 	});
 	
-	
-	
-	//시설 선택을 셀렉트 생성. pg_type을 바탕으로 pg_name의 list를 출력한다.
-	function selectfacil() {
-
-		var wpg_type = document.getElementById('pg_type').value;
+	function fselect(){
 		
-		$.getJSON("/HarangProject/ajax?cmd=selectPg", {
-			pg_type : encodeURIComponent(wpg_type)
-		}, function(data) {
-			$("#pg_name option").remove();
-			$("#pg_name").append("<option>호수를 입력하세요.</option>");
-			$(data).each(
-					function(index, pglist) {
-						$("#pg_name").append(
-								"<option value='"+pglist.pg_name+"'>"
-										+ pglist.pg_name + "</option>");
-
-					});
-		});
+		var fvalue = documetn.getElementById("fselect");
+		
+		if(fvalue == "운동장"){
+			
+			for(int i = 0; i < ${pglist}.size; i++){
+				
+			$(.pg_type).append(<option value = "${pglist}.[i].pg_type">${pglist}.[i].pg_type</option> );
+			}
+			
+		}
+		
+		else if(fvalue == "스터디룸"){
+			
+		}
+		
+		else{
+			alert("시설 선택을 해 주세요");
+		}
 	}
-	
-	// selectfacil()을 바탕으로 pg_content와 포인트, 시설번호를 불러온다.
-	function select02() {
-		var varpg_type = document.getElementById('pg_type').value;
-		var varpg_name = select09.pg_name.value;
-
-		$
-				.getJSON("/HarangProject/ajax?cmd=selectPg",
-						{
-							pg_type : encodeURIComponent(varpg_type),
-							pg_name : encodeURIComponent(varpg_name),
-							check : 1
-						},
-						function(data) {
-							$("#pg_content textarea").remove();
-							$(data)
-									.each(
-											function(index, pglist) {
-												$("#pg_content")
-														.append(
-																"<textarea readonly='readonly' class='form-control' rows='3' style='width: 250px'>"
-																		+ pglist.pg_content
-																		+ "</textarea>");
-												$("#pg_point").attr("value",
-														pglist.pg_point);
-												$("#pg_num").attr("value",
-														pglist.pg_num);
-											});
-						});
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
