@@ -54,10 +54,10 @@ public class SellingCommand implements CommandInterface {
 		
 		
 		if(keyword == null || keyword.equals("")){
-			sql ="select b.b_num,b.b_name,h.m_id,h.bh_regdate,h.bh_want from tbl_b_hunter h, tbl_book b where h.b_num = b.b_num and b.m_id =?";
+			sql ="select b.b_num,b.b_name,h.m_id,h.bh_regdate,h.bh_want, h.bh_choice, h.bh_iscomplete from tbl_b_hunter h, tbl_book b where h.b_num = b.b_num and b.m_id =?";
 		}
 		else{
-			sql ="select b.b_num,b.b_name,h.m_id,h.bh_regdate,h.bh_want from tbl_b_hunter h, tbl_book b where h.b_num = b.b_num and b.m_id =? and "
+			sql ="select b.b_num,b.b_name,h.m_id,h.bh_regdate,h.bh_want, h.bh_choice, h.bh_iscomplete from tbl_b_hunter h, tbl_book b where h.b_num = b.b_num and b.m_id =? and "
 					+ keyfield + " like '%" + keyword + "%' order by b_regdate desc";
 		}
 		
@@ -82,6 +82,8 @@ public class SellingCommand implements CommandInterface {
 				dto.setM_id(rs.getString("m_id"));
 				dto.setBh_regdate(rs.getString("bh_regdate"));
 				dto.setBh_want(rs.getInt("bh_want"));
+				dto.setBh_choice(rs.getString("bh_choice"));
+				dto.setBh_iscomplete(rs.getString("bh_iscomplete"));
 				
 				list.add(dto);
 				

@@ -57,6 +57,9 @@ public class CommandFactory {
 		else if(cmd.equals("trade")){
 			return new TradeBookCommand();
 		}
+		else if(cmd.equals("okay")){
+			return new OkayCommand();
+		}
 		
 		else{
 			return null;

@@ -46,9 +46,11 @@
 								<tr role="row">
 									<th style="width: 50px">거래번호</th>
 									<th style="width: 40%">도서명</th>
-									<th>작성자</th>
+									<th>판매자</th>
 									<th>작성일</th>
 									<th>포인트 내역</th>
+									<th>선택</th>
+									<th>완료여부</th>
 								</tr>
 								<!-- 2번페이징 -->
 								<c:choose>
@@ -61,13 +63,25 @@
 											  end="${paging.beginPerPage + paging.numPerPage -1}">
 											
 									<tr>
-										<td>${i.b_num }</td>
+										<td id="num${k.index}">${i.b_num }</td>
 										<td>
-											<a style="cursor:pointer;" onclick="fnRead('${i.b_num}')">${i.b_name}</a>
+											<a style="cursor:pointer;" onclick="fnRead('${i.b_num}')" id="name${k.index}">${i.b_name}</a>
 										</td>
-										<td>${i.m_id }</td>
-										<td>${i.b_regdate }</td>
-										<td>${i.b_want }</td>
+										<td id="id${k.index}">${i.m_id }</td>
+										<td>${i.bh_regdate }</td>
+										<td id="want${k.index}">${i.bh_want }</td>
+										
+										<c:if test="${i.bh_iscomplete eq 'Y' and i.bh_choice eq 'Y'}">
+											<td>거래완료</td>
+										</c:if>
+										<c:if test="${i.bh_choice eq 'N' and i.bh_iscomplete eq 'N'}">
+											<td>선택X</td>
+										</c:if>
+										<c:if test="${i.bh_choice eq 'Y' and i.bh_iscomplete eq 'N'}">
+											<td><button class="btn btn-success" onclick="fnOk('${k.index}')">수령</button></td>
+										</c:if>
+																	
+										<td>${i.bh_iscomplete }</td>
 									</tr>
 											
 								</c:forEach>
@@ -132,6 +146,12 @@
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
 </form>
 
+<form name="okay" method="post" action="/HarangProject/harangdin?cmd=okay">
+	<input type="hidden" name="m_id" value="">
+	<input type="hidden" name="b_num" value="">
+	<input type="hidden" name="b_name" value="">
+	<input type="hidden" name="bh_want" value="">
+</form>
 <!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
@@ -154,6 +174,20 @@
 	function fnRead(b_num){
 		document.getElementById("b_num").value = b_num;
 		document.read.submit();
+	}
+	
+	function fnOk(index) {
+		okay.m_id.value=$("#id" + index).text();
+		okay.b_num.value=$("#num" + index).text();
+		okay.b_name.value=$("#name" + index).text();
+		okay.bh_want.value=$("#want" + index).text();
+		 	
+		/* alert(okay.m_id.value);
+		alert(okay.b_num.value);
+		alert(okay.b_name.value);
+		alert(okay.bh_want.value); */
+		 
+		okay.submit();
 	}
 </script>
 
