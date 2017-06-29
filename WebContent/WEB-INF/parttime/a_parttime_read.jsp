@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -97,16 +97,27 @@
 		                  <h3 class='box-title'>업무 내용 <small>해야 할 업무에 대한 자세한 내용입니다.</small></h3>		     	               
 		                </div><!-- /.box-header -->
 		                <div class='box-body pad'>
-		                  <form>
-		                    <textarea class="form-control" id="editor1" name="editor1" rows="10" cols="120" readonly="readonly">${info.p_content}</textarea>
-		                  </form>
+		                    <textarea class="form-control" rows="10" readonly="readonly">${info.p_content}</textarea>
 		                </div>
               		</div><!-- /.box -->
 					<div class="row">
-						<div class="col-md-4"></div>
-						<div class="col-md-4">
-							<button class="btn btn-block btn-primary" onclick="fnDelete()">삭제하기</button>
-						</div>					
+						<c:choose>
+							<c:when test="${m_id eq info.m_id}"><!-- 내가 쓴 글일 때 -->
+								<div class="col-md-4"></div>
+								<div class="col-md-2">
+									<button class="btn btn-block btn-primary" onclick="fnUpdate()">수정</button>
+								</div>
+								<div class="col-md-2">
+									<button class="btn btn-block btn-primary" onclick="fnDelete()">삭제</button>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+									<button class="btn btn-block btn-primary" onclick="fnDelete()">삭제하기</button>
+								</div>		
+							</c:otherwise>
+						</c:choose>			
                   	</div>
                   </form>
                 </div><!-- /.box-body -->
@@ -245,10 +256,20 @@
 		<input type="hidden" name="choice" value="Y"/> 
 		<input type="hidden" name="choice_id" value="" id="choice_id"/>
       </form>
+      <form name="update" method="post" action="/HarangProject/parttime">
+      	<input type="hidden" name="cmd" value="PUPDATE"/>
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
+      	<input type="hidden" name="daycode" value="${daycode}"/>
+      	<input type="hidden" name="day" value="${day}"/>
+      	<input type="hidden" name="nowPage" value="${nowPage}"/>
+      	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
+      </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/a_footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
 <script>
+function fnUpdate(){update.submit();}
 function fnList(){
 	document.list.submit();
 }

@@ -26,6 +26,7 @@ public class DaetaMainCommand implements CommandInterface {
 		
 		insert(member.getM_id(),req); // 글이 추가된 경우
 		delete(req); //글이 삭제된 경우
+		reportSolved(req); // 신고 해결
 		getList(member.getM_id(), req); //글목록
 		
 		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_main.jsp
@@ -63,16 +64,9 @@ public class DaetaMainCommand implements CommandInterface {
 			dto.setList_num(list.size() - i); // 글번호
 			dto.setCnt_apply(bean.getDaetaCnt_apply(dto.getD_num())); // 지원자수
 			dto.setD_pick(bean.getPicked(dto.getD_num())); // 채용된 사람 회원번호
-			
-			/** 채용된 사람이 신고 버튼을 누른 상태이면*/
-			D_ApplyDTO apply = bean.getDaetaApply(dto.getD_pick(), dto.getD_num());
-			if(apply.getDm_report() == "Y"){
-				req.setAttribute("dm_report", "OK");
-			}
-			
-			// 거래 상태를 파라미터로 보낸다.
-			req.setAttribute("state", state(dto.getD_pick(), dto.getD_num()));
-			
+			D_ApplyDTO apply = bean.getDaetaApply(dto.getD_pick(), dto.getD_num());// 채용된 사람의 이력서 정보
+			dto.setDm_report(apply.getDm_report()); // 신고내용
+			dto.setState(state(dto.getD_pick(), dto.getD_num()));// 거래 상태
 			
 			if (dto.getM_id().equals("admin02")) {
 				dto.setM_name("관리자");
@@ -181,24 +175,11 @@ public class DaetaMainCommand implements CommandInterface {
 		/** 글이 등록됨과 동시에 준비상태가 된다.*/
 		String state = "prepare";
 		
-		/*
-		if(date.checkDeadline(dto.getD_deadline()) 
-				&& (date.checkDeadline(dto.getD_date()) == false) && (apply.getDm_iscomplete() == null)){
-			/** 마감일이 지나고 대타날짜가 지나지 않았을 때는 진행중인 상태
-			state = "progress";
-		}
-		*/
-		
-		if(date.checkDeadline(dto.getD_date()) && (apply.getDm_iscomplete() == null)
-														&& (date.checkDate(dto.getD_date(), 3)==false)){
-			/** 대타 날짜가 지나고 (대타 날짜 후 3일 미만) 버튼이 아직 눌리지 않았을 때는 대기상태*/
-			state="waiting";
-		}
-		
-		if(date.checkDate(dto.getD_date(), 3)){
+		if(date.checkDate(dto.getD_date(), 3) && (apply.getDm_iscomplete() == null)){
 			/** 대타 날짜가 3일이상 지났지만 버튼이 눌리지 않았을때는 경고상태*/
 			state="warning";
 		}
+	
 		
 		if("Y".equals(apply.getDm_iscomplete())){
 			/** 글 작성자가 확인버튼을 눌러 거래가 완료된 상태*/
@@ -210,6 +191,31 @@ public class DaetaMainCommand implements CommandInterface {
 			state="denied";
 		}
 		
+		if(date.checkDeadline(dto.getD_deadline()) 
+				&& (date.checkDeadline(dto.getD_date()) == false) && (apply.getDm_iscomplete() == null)){
+			/** 마감일이 지나고 대타날짜가 지나지 않았을 때는 진행중인 상태*/
+			state = "progress";
+		}
+		
+		
+		if(date.checkDeadline(dto.getD_date()) && (apply.getDm_iscomplete() == null)
+														&& (date.checkDate(dto.getD_date(), 3)==false)){
+			/** 대타 날짜가 지나고 (대타 날짜 후 3일 미만) 버튼이 아직 눌리지 않았을 때는 대기상태*/
+			state="waiting";
+		}
+		
 		return state;
+	}
+
+	public void reportSolved(HttpServletRequest req){
+		String solved = req.getParameter("solved");
+		String d_num = req.getParameter("d_num");
+		String m_id = req.getParameter("d_picked");
+		
+		//신고 해결 버튼
+		if("OK".equals(solved)){
+			bean.report(m_id, d_num, "Solved");
+		}
+		
 	}
 }

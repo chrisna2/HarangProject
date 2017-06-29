@@ -51,7 +51,7 @@ response.setStatus(HttpServletResponse.SC_OK);
   <div class="wrapper">
    <header class="main-header">
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/HarangProject/login?cmd=logout" class="logo">
         <img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="40" height="40"/>
         &nbsp;<b>하랑</b> 대학교</a>
         <!-- Header Navbar: style can be found in header.less -->

@@ -33,7 +33,7 @@ public class RefreshCommand implements CommandInterface {
 		String m_id = login.getM_id();
 		String url = "";
 		
-		//timetable(request); //현재 학기 시간표정보
+		timetable(request); //현재 학기 시간표정보
 		recentData(request); //최신정보
 		point(request,m_id);//최근 포인트 정보
 		

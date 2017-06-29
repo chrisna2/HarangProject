@@ -112,6 +112,7 @@ public class MyPageCommand implements CommandInterface {
 			dto.setM_name(bean.getMember(dto.getM_id()).getM_name());// 작성자의 회원번호로 검색하여 지원자 이름을 받아온다.
 			dto.setDm_choice(bean.getDaetaApply(m_id, dto.getD_num()).getDm_choice()); //채용선택여부
 			dto.setCheckDeadline(new DateBean().checkDeadline(dto.getD_deadline())); //마감일이 지났는지
+			dto.setDm_iscomplete(bean.getDaetaApply(m_id, dto.getD_num()).getDm_iscomplete());// 
 			d_alist.add(dto);
 		} 
 		paging(4 ,d_alist.size(), req); // 지원자 목록 페이징

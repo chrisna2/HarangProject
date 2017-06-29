@@ -14,7 +14,7 @@
 	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
 	<section class="content-header">
 		<h1>
-			***님의 글 <small>내가 쓴 글과 지원한 항목을 확인하세요.</small>
+			${member.m_name}님의 글 <small>내가 쓴 글과 지원한 항목을 확인하세요.</small>
 		</h1>
 		<ol class="breadcrumb">
 			<!-- 페이지 기록 메인에서 부터 현재 페이지 까지의 경로 나열 -->
@@ -253,18 +253,20 @@
                   <table class="table table-bordered table-striped">
 							<tr>
 								<th style="width: 10px">#</th>
-								<th style="width: 40%">제목</th>
+								<th style="width: 35%">제목</th>
 								<th>작성자</th>
 								<th>작성일</th>
 								<th>이력서</th>
 								<th>지원자 수</th>
 								<th>채용 여부</th>
+								<th>포인트</th>
 							</tr>
 							<c:choose>
 								<c:when test="${fn:length(d_resume) eq 0}">
 								<tr>
 									<td></td>
 									<td>게시물이 없습니다.<td>
+									<td></td>
 									<td></td>
 									<td></td>
 									<td></td>
@@ -290,6 +292,13 @@
 												<c:if test="${list.dm_choice eq 'Y'}"><span class="btn btn-danger btn-xs">채용성공</span></c:if>
 												<c:if test="${list.dm_choice eq 'N' and list.checkDeadline eq true}"><span class="btn btn-default btn-xs">채용실패</span></c:if>
 												<c:if test="${list.dm_choice eq 'N' and list.checkDeadline eq false}"><span class="btn btn-default btn-xs">채용중</span></c:if>
+											</td>
+											<td>
+												<c:choose>
+												<c:when test="${list.dm_iscomplete eq 'N'}"><span class="btn btn-default btn-xs">지급거부</span></c:when>
+												<c:when test="${list.dm_iscomplete eq 'Y'}"><span class="btn btn-danger btn-xs">지급성공</span></c:when>
+												<c:otherwise><span class="btn btn-default btn-xs">대기중</span></c:otherwise>
+												</c:choose>
 											</td>
 										</tr>
 									</c:forEach>

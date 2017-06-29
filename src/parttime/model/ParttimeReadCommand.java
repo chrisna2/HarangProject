@@ -47,6 +47,10 @@ public class ParttimeReadCommand implements CommandInterface {
 		showApply(req); // 지원자목록
 		/** 끝 : Apply */
 		
+		/** Comment!! 댓글 */
+		insertComment(m_id, req);
+		/** 끝 : Comment */
+		
 		/** 페이지 이동 */
 		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_read.jsp로 페이지 이동
 			return "WEB-INF/parttime/a_parttime_read.jsp";
@@ -109,13 +113,13 @@ public class ParttimeReadCommand implements CommandInterface {
 			m_id = member.getM_id();
 		}
 
-		String p_num = (String) req.getParameter("p_num");
+		String p_num = req.getParameter("p_num");
 		ParttimeDTO dto = bean.getParttime(p_num); // 해당 글 정보
 		MemberDTO writer = bean.getMember(dto.getM_id()); // 글쓴이의 회원정보
 
-		String pm_reason = (String) req.getParameter("pm_reason");
-		String pm_career = (String) req.getParameter("pm_career");
-		String pm_wanttime = (String) req.getParameter("pm_wanttime");
+		String pm_reason = req.getParameter("pm_reason");
+		String pm_career = req.getParameter("pm_career");
+		String pm_wanttime = req.getParameter("pm_wanttime");
 
 		// 지원완료 후 이 페이지로 넘어올 경우
 		if (m_id != null && pm_reason != null && pm_career != null && pm_wanttime != null) {
@@ -305,5 +309,9 @@ public class ParttimeReadCommand implements CommandInterface {
 			}
 		}
 		return daycode;
+	}
+
+	public void insertComment(String m_id, HttpServletRequest req){
+		
 	}
 }
