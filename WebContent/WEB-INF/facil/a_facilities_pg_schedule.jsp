@@ -7,10 +7,6 @@
 <head>
 <title>운동장(관리자)</title>
 <style>
-hr {
-	border: none;
-	border: 1px solid #E6E6E6;
-}
 </style>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
@@ -60,26 +56,27 @@ hr {
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>l00001</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<th>공과대학 통합 농구대회</th>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-								<tr>
-									<td>l00001</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<th>공과대학 통합 농구대회</th>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
+
+								<c:forEach items="${requestScope.pglist}" var="p" varStatus="i">
+									<tr class="text-blue">
+										<td>${p.pgm_num}</td>
+										<td>운동장</td>
+										<td>${p.pg_type}</td>
+										<td>${p.pg_name}</td>
+										<td>${p.pgm_date}</td>
+										<td>${p.pgm_issue}</td>
+										<td>
+											<!-- /HarangProject/facil?cmd=AFacilManager --> <input
+											type="button" class="btn btn-primary" value="일정취소"
+											onclick="selectDel('${p.pgm_num}','${p.pg_type}','${p.pg_name}','${p.pgm_date}','${p.pgm_issue}')" />
+
+										</td>
+									</tr>
+								</c:forEach>
+
+
+
+
 							</tbody>
 						</table>
 						<!-- /.테이블 -->
@@ -136,79 +133,87 @@ hr {
 		<!-- 두번째 단시작 [ 2. 일정 취소  확인 ] -->
 		<div class="row">
 			<div class="col-md-12">
-				<!-- 2. 일정취소 확인 -->
-				<div class="box box-primary">
-					<!-- 2.box header-->
-					<div class="box-header">
-						<h3 class="box-title">일정 취소 확인</h3>
-						<div class="box-tools pull-right">
-							<button class="btn btn-box-tool" data-widget="collapse">
-								<i class="fa fa-minus"></i>
-							</button>
+				<form method="POST" action="/HarangProject/facil?cmd=AFacilPG">
+					<!-- 2. 일정취소 확인 -->
+					<div class="box box-primary">
+						<!-- 2.box header-->
+						<div class="box-header">
+							<h3 class="box-title">일정 취소 확인</h3>
+							<div class="box-tools pull-right">
+								<button class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+							</div>
+
 						</div>
 
+						<!-- 2.box body-->
+						<div class="box-body">
+							<!-- 2. 1단 -->
+							<div class="row ">
+								<!-- 일정번호  -->
+								<div class="col-md-3">
+									<label>예약번호</label> <input type="text" class="form-control"
+										style="width: 150px" id="pgm_num" name="pgm_num"
+										readonly="readonly">
+								</div>
+								<!-- 시설종류  -->
+								<div class="col-md-3">
+									<label>시설종류</label> <input type="text" class="form-control"
+										style="width: 100px" value="운동장" readonly="readonly">
+								</div>
+								<!-- 시설명  -->
+								<div class="col-md-3">
+									<label>시설명</label> <input type="text" class="form-control"
+										style="width: 100px" id="pg_type" name="pg_type"
+										readonly="readonly">
+								</div>
+
+								<!-- 호수  -->
+								<div class="col-md-3">
+									<label>호수</label> <input type="text" class="form-control"
+										style="width: 120px" id="pg_name" name="pg_name"
+										readonly="readonly">
+								</div>
+							</div>
+
+							<br> <br>
+							<!-- 2. 2단 -->
+							<div class="row">
+
+								<!-- 시설종류  -->
+								<div class="col-md-3">
+									<label>날짜</label> <input type="text" class="form-control"
+										style="width: 200px" id="pgm_date" name="pgm_date"
+										readonly="readonly">
+								</div>
+
+								<div class="col-md-9">
+									<label>행사내용</label> <input type="text" class="form-control"
+										style="width: 450px" id="pgm_issue" name="pgm_issue"
+										readonly="readonly">
+								</div>
+							</div>
+						</div>
+
+
+						<!-- 2.box footer-->
+						<div class="box-footer">
+							<div class="row" align="center">
+								<div class="col-md-3 btn-group"></div>
+								<div class="col-md-3 btn-group">
+									<input type="hidden" id="delete" name="delete"> <input
+										type="submit" class="btn btn-block btn-primary" value="삭제">
+								</div>
+								<div class="col-md-3 btn-group">
+									<input type="button" class="btn btn-block  btn-primary"
+										value="다시 선택">
+								</div>
+							</div>
+						</div>
 					</div>
 
-					<!-- 2.box body-->
-					<div class="box-body">
-						<!-- 2. 1단 -->
-						<div class="row ">
-							<!-- 일정번호  -->
-							<div class="col-md-3">
-								<label>예약번호</label> <input type="text" class="form-control"
-									placeholder="A71201" style="width: 100px" disabled>
-							</div>
-							<!-- 시설종류  -->
-							<div class="col-md-3">
-								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="운동장" style="width: 100px" disabled>
-							</div>
-							<!-- 시설명  -->
-							<div class="col-md-3">
-								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="농구장" style="width: 100px" disabled>
-							</div>
-
-							<!-- 호수  -->
-							<div class="col-md-3">
-								<label>호수</label> <input type="text" class="form-control"
-									placeholder="광과대학 옆" style="width: 120px" disabled>
-							</div>
-						</div>
-
-						<br> <br>
-						<!-- 2. 2단 -->
-						<div class="row">
-
-							<!-- 시설종류  -->
-							<div class="col-md-3">
-								<label>날짜</label> <input type="text" class="form-control"
-									placeholder="2017.5.12" style="width: 200px" disabled>
-							</div>
-
-							<div class="col-md-9">
-								<label>행사내용</label> <input type="text" class="form-control"
-									placeholder="...." style="width: 450px" disabled>
-							</div>
-						</div>
-					</div>
-
-
-					<!-- 2.box footer-->
-					<div class="box-footer">
-						<div class="row" align="center">
-							<div class="col-md-3 btn-group"></div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
-									value="삭제">
-							</div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block  btn-primary"
-									value="다시 선택">
-							</div>
-						</div>
-					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 
@@ -231,41 +236,6 @@ hr {
 					<!-- 3-1. box-body -->
 					<div class="box-body">
 						<!-- 3-1. 시작 -->
-						<!--첫줄 날짜 선택 -->
-						<!-- 날짜 선택 제목 -->
-						<div class="row">
-							<div class="col-md-12" align="left">
-								<h4>날짜 선택</h4>
-							</div>
-						</div>
-						<div class="row">
-
-							<!-- 월 선택 -->
-							<div class="form-group col-md-4">
-								<label>월 선택</label> <select class="form-control">
-									<option>5</option>
-									<option>6</option>
-								</select>
-							</div>
-
-							<!-- 일 선택 -->
-							<div class="form-group col-md-4">
-								<label>일 선택</label> <select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-								</select>
-							</div>
-
-							<br>
-							<div class="col-md-4">
-								<input type="button" class="btn btn-block btn-primary"
-									value="검색">
-							</div>
-
-						</div>
-
 						<!--검색 결과 테이블 / 기본은 전체 행사 출력 -->
 						<hr />
 						<div class="row">
@@ -280,31 +250,22 @@ hr {
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>행사날짜</th>
+											<th>시작날짜</th>
+											<th>종료날짜</th>
 											<th>행사명</th>
-											<th>시설명</th>
-											<th>호수</th>
+											<th>장소</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>2017.6.13</td>
-											<td>축제 1일차</td>
-											<td>농구장</td>
-											<td>중앙회관옆</td>
-										</tr>
-										<tr>
-											<td>2017.6.13</td>
-											<td>축제 1일차</td>
-											<td>농구장</td>
-											<td>중앙회관옆</td>
-										</tr>
-										<tr>
-											<td>2017.6.13</td>
-											<td>축제 1일차</td>
-											<td>농구장</td>
-											<td>중앙회관옆</td>
-										</tr>
+										<c:forEach items="${requestScope.sclist}" var="s"
+											varStatus="i">
+											<tr class="text-blue">
+												<td>${s.s_dstart}</td>
+												<td>${s.s_dend}</td>
+												<td>${s.s_title}</td>
+												<td>${s.s_location}</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 
@@ -320,6 +281,7 @@ hr {
 
 			<!-- 3-2.시설 학사 일정 추가  행 넓이 설정---->
 			<div class="col-md-6">
+				<form method="POST" action="">
 				<!-- 3-2.시설 학사 일정 추가 List / box -->
 				<div class="box box-primary">
 					<!-- 3-2. box-header -->
@@ -335,13 +297,20 @@ hr {
 					<div class="box-body">
 						<!--  3-2. 선택날짜/시설종류 -->
 						<div class="row">
-							<div class="col-md-4">
-								<label>날짜</label> <input type="text" class="form-control"
-									placeholder="2017년 5월 16일" disabled>
+							<div class="col-md-6 form-group">
+								<label>날짜선택</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="text" class="form-control pull-right"
+										name="p_deadline" required="required" id="datepicker" />
+								</div>
+								<!-- /.input group -->
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6 form-group">
 								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="운동장" disabled>
+									value="운동장" readonly="readonly">
 							</div>
 						</div>
 
@@ -352,24 +321,22 @@ hr {
 						<br>
 						<div class="row">
 							<div class="form-group col-md-4">
-								<label>시설명</label> <select class="form-control">
-									<option>농구장</option>
-									<option>족구장</option>
-									<option>테니스장</option>
+								<label>시설명</label> <select class="form-control" id="addpg_type" onchange="selectfacil()" >
+									<c:forEach items="${ajaxlist}" var="s">
+											<option value="${s.pg_type}">${s.pg_type}</option>
+									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
-								<label>호수</label> <select class="form-control">
-									<option>공과대학 옆</option>
-									<option>조형예술대학 옆</option>
-									<option>중앙회관 옆</option>
+								<label>호수</label> <select class="form-control" id="addpg_name" name="addpg_name">
+									<option>시설을 선택하세요.</option>
 								</select>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<label>행사 내용</label> <input type="text" class="form-control"
-									placeholder="축제 1일차" >
+									placeholder="축제 1일차">
 							</div>
 						</div>
 					</div>
@@ -378,7 +345,7 @@ hr {
 						<div class="row">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
+								<input type="submit" class="btn btn-block btn-primary"
 									value="추가">
 							</div>
 							<div class="col-md-3 btn-group">
@@ -390,6 +357,7 @@ hr {
 					</div>
 				</div>
 				<!-- /. 3-2 box -->
+				</form>
 			</div>
 		</div>
 
@@ -400,3 +368,42 @@ hr {
 
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
 <%@ include file="../include/footer.jsp"%>
+<script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<script>
+	$('#datepicker').datepicker({
+		format : 'yyyy-mm-dd',
+		autoclose : true
+	});
+</script>
+
+<Script type="text/javascript">
+	function selectDel(pgm_num, pg_type, pg_name, pgm_date, pgm_issue) {
+		$("#pgm_num").attr("value", pgm_num);
+		$("#pg_type").attr("value", pg_type);
+		$("#pg_name").attr("value", pg_name);
+		$("#pgm_date").attr("value", pgm_date);
+		$("#pgm_issue").attr("value", pgm_issue);
+		$("#delete").attr("value", "1");
+	}
+	
+	//시설 선택을 셀렉트 생성. pg_type을 바탕으로 pg_name의 list를 출력한다.
+	function selectfacil() {
+
+		var wpg_type = document.getElementById('addpg_type').value;
+		
+		$.getJSON("/HarangProject/ajax?cmd=selectPg", {
+			pg_type : encodeURIComponent(wpg_type)
+		}, function(data) {
+			$("#addpg_name option").remove();
+			$("#addpg_name").append("<option>호수를 입력하세요.</option>");
+			$(data).each(
+					function(index, pglist) {
+						$("#addpg_name").append(
+								"<option value='"+pglist.pg_name+"'>"
+										+ pglist.pg_name + "</option>");
+
+					});
+		});
+	}
+</Script>
+
