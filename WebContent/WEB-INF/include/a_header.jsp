@@ -75,48 +75,42 @@
                     ${admin.m_point} 포인트
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">오늘 3번의 거래 기록이 있습니다.</li>
+                  <li class="header">거래 기록</li>
                   <li>
                     <!-- 내부 메뉴 : 실제 메세지 데이터가 포함 -->
                     <ul class="menu">
                       <!-- 메세지 반복문 지점 시작 -->
-                      <li><!-- 메세지 시작 -->
-                        <a href="#">
-                          <div class="pull-left">
-                            <i class="fa fa-arrow-up text-green"></i>
-                          </div>
-                          <h4>
-                                                         중고도서 거래 완료
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                          </h4>
-                           <p style="color: green">20000 포인트</p>
-                        </a>
-                      </li><!-- end message -->
+                      <c:forEach items="${miniPlistAdmin}" var="ap">
+                           <c:if test="${admin.m_id eq ap.m_giver}">
+                             <li>
+		                        <a href="#">
+		                          <div class="pull-left">
+		                            <i class="fa fa-arrow-down text-red"></i>
+		                          </div>
+		                          <h4>
+		                            ${ap.r_content}
+		                            <small><i class="fa fa-clock-o"></i>${p.r_regdate}</small>
+		                          </h4>
+		                           <p style="color: red">${ap.r_point} 포인트</p>
+		                        </a>
+		                      </li>
+                           </c:if>
+                           <c:if test="${admin.m_id eq ap.m_haver}">
+                              <li>
+		                        <a href="#">
+		                          <div class="pull-left">
+		                            <i class="fa fa-arrow-up text-green"></i>
+		                          </div>
+		                          <h4>
+		                            ${ap.r_content}
+		                            <small><i class="fa fa-clock-o"></i>${p.r_regdate}</small>
+		                          </h4>
+		                           <p style="color: green">${ap.r_point} 포인트</p>
+		                        </a>
+		                      </li>
+                           </c:if>
+                      </c:forEach>
                       <!-- 메세지 반복문 지점 끝-->
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <i class="fa fa-arrow-down text-red"></i>
-                          </div>
-                          <h4>
-                            2017-06-20 식권 구매
-                            <small><i class="fa fa-clock-o"></i> 3 hours</small>
-                          </h4>
-                           <p style="color: red">3000 포인트</p>
-                        </a>
-                      </li>
-                      <li>
-                         <a href="#">
-                          <div class="pull-left">
-                            <i class="fa fa-arrow-up text-green"></i>
-                          </div>
-                          <h4>
-                                                        정보처리기사 포인트 승인
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                          </h4>
-                           <p style="color: green">50000 포인트</p>
-                        </a>
-                      </li>
                     </ul>
                   </li>
                   <li class="footer"><a href="#">모든 거래 기록 보기</a></li>
@@ -129,75 +123,29 @@
                   <span class="label label-success">4</span>
                 </a>
                 <ul class="dropdown-menu">
-                  <li class="header">4 개의 메세지가 도착했습니다.</li>
+                  <li class="header">최근 들어온 메세지</li>
                   <li>
                     <!-- 내부 메뉴 : 실제 메세지 데이터가 포함 -->
                     <ul class="menu">
                       <!-- 메세지 반복문 지점 시작 -->
-                      <li><!-- 메세지 시작 -->
+                      <c:forEach items="${head_msg}" var="msg">
+                        <li><!-- 메세지 시작 -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                            <img src="${msg.s_photo}" class="img-circle" alt="User Image"/>
                           </div>
                           <h4>
-                                                            김성지
-                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                             ${msg.m_sender_name}[${msg.m_sender}]                               
+                            <small><i class="fa fa-clock-o"></i>${msg.t_send_date}</small>
                           </h4>
-                          <p>디자인 다했음?</p>
+                          <p>${msg.t_title}</p>
                         </a>
                       </li><!-- end message -->
+                      </c:forEach>
                       <!-- 메세지 반복문 지점 끝-->
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="dist/img/user3-128x128.jpg" class="img-circle" alt="user image"/>
-                          </div>
-                          <h4>
-                                                        양혜민
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                          </h4>
-                          <p>일 다 끝났는데 집에 가도 되요?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="dist/img/user4-128x128.jpg" class="img-circle" alt="user image"/>
-                          </div>
-                          <h4>
-                                                            서지윤
-                            <small><i class="fa fa-clock-o"></i> Today</small>
-                          </h4>
-                          <p>책 구매 할게요.</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="user image"/>
-                          </div>
-                          <h4>
-                                                           박주선
-                            <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                          </h4>
-                          <p>형 나 집에 가도되?</p>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <div class="pull-left">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="user image"/>
-                          </div>
-                          <h4>
-                                                         김민준
-                            <small><i class="fa fa-clock-o"></i> 2 days</small>
-                          </h4>
-                          <p>주말에 할게.</p>
-                        </a>
-                      </li>
                     </ul>
                   </li>
-                  <li class="footer"><a href="#">모든 메세지 보기</a></li>
+                  <li class="footer"><a href="/HarangProject/message?cmd=INBOX">모든 메세지 보기</a></li>
                 </ul>
               </li>
               <!--회원 개인정보 요약 형태 -->

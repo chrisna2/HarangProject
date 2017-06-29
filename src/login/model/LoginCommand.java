@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import message.model.MessageBean;
+import myPage.model.PointlistCommand;
 
 public class LoginCommand implements CommandInterface {
 	
@@ -42,7 +44,8 @@ public class LoginCommand implements CommandInterface {
 				+ "from tbl_member where m_id = ?";
 		
 		MemberDTO mdto = new MemberDTO();
-		
+		PointlistCommand point = new PointlistCommand();
+		MessageBean messege = new MessageBean();
 		// DB 연결 접속
 		try {
 			con = pool.getConnection();
@@ -81,11 +84,15 @@ public class LoginCommand implements CommandInterface {
 			//일반 회원 일때
 			if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && !m_mail.isEmpty() && !m_tel.isEmpty() && !m_addr.isEmpty()){
 				session.setAttribute("member", mdto);
+				session.setAttribute("miniPlistUser", point.pointListHeaderUser(input_id));
+				session.setAttribute("head_msg", messege.getGivenMessageListMini(input_id));
 				url="/WEB-INF/login/main.jsp";
 			}
 			//관리자 일때.
 			else if(input_pw.equals(m_pw) && m_dept.equals("관리자")){
 				session.setAttribute("admin", mdto);
+				session.setAttribute("miniPlistAdmin", point.pointListHeaderAdmin(input_id));
+				session.setAttribute("head_msg", messege.getGivenMessageListMini(input_id));
 				url="/WEB-INF/login/a_main.jsp";
 			}
 			//신규 회원 일때.
@@ -100,6 +107,7 @@ public class LoginCommand implements CommandInterface {
 			
 		}catch(Exception err){
 			System.out.println( "index.jsp : " + err);
+			err.printStackTrace();
 		}
 		finally{
 			// DBCP 접속해제
