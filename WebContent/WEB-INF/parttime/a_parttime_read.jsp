@@ -42,7 +42,7 @@
                   <h3 class="box-title">채용 정보</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form role="form">
+                  
                     <!-- text input -->
                     <div class="row">
 	                    <div class="col-md-3 form-group">
@@ -127,7 +127,7 @@
 							</c:otherwise>
 						</c:choose>			
                   	</div>
-                  </form>
+                
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
               <div class="row">

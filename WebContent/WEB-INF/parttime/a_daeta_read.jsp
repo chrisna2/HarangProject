@@ -261,8 +261,8 @@
       </form>
       <form name="update" method="post" action="/HarangProject/parttime">
         <input type="hidden" name="tab" value="${tab}"/>
-      	<input type="hidden" name="info" value="${info}"/>
       	<input type="hidden" name="cmd" value="DUPDATE"/>
+      	<input type="hidden" name="d_num" value="${info.d_num}"/>
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
       </form>
