@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import facilities.model.CommandFactory;
 import facilities.model.CommandInterface;
+import login.LoginBean;
 
 
 
@@ -33,6 +34,10 @@ public class FacilitiesServlet extends HttpServlet {
 		CommandInterface command = CommandFactory.newInstance().createCommand(cmd);
 		url = (String)command.processCommand(req, resp);
 
+		//회원정보 세션 최신화
+		LoginBean update = new LoginBean();
+		update.refreshSession(req);
+		
 		RequestDispatcher view = req.getRequestDispatcher(url);
 		view.forward(req, resp);
 	}

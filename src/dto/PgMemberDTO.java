@@ -11,10 +11,19 @@ public class PgMemberDTO {
 	String pg_name;
 	String pgm_point;
 	String pgm_content;
+	String pgm_issue;
 	int pg_point;
 	int payoutpoint;
 
 	
+	public String getPgm_issue() {
+		return pgm_issue;
+	}
+
+	public void setPgm_issue(String pgm_issue) {
+		this.pgm_issue = pgm_issue;
+	}
+
 	public int getPayoutpoint() {
 		return payoutpoint;
 	}
