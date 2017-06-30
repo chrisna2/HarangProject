@@ -54,8 +54,6 @@ public class ApplistCommand implements CommandInterface {
 		
 		pointList(request);
 		
-		LoginBean login = new LoginBean();
-		login.refreshSession(request);
 		
 		return "/WEB-INF/myPage/a_pplist.jsp";
 	}

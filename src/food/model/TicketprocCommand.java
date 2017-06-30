@@ -29,8 +29,6 @@ public class TicketprocCommand implements CommandInterface {
 		
 			buyingTicket(request);
 			
-			LoginBean refresh = new LoginBean();
-			refresh.refreshSession(request);
 		
 		return "/WEB-INF/food/buyComplete.jsp";
 	}

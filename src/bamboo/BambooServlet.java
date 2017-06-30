@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bamboo.model.CommandFactory;
 import bamboo.model.CommandInterface;
+import login.LoginBean;
 
 
 
@@ -32,6 +33,10 @@ public class BambooServlet extends HttpServlet {
 		CommandInterface command = CommandFactory.newInstance().createCommand(cmd);
 		url = (String)command.processCommand(req, resp);
 
+		//세션을 리프레쉬
+		LoginBean refresh = new LoginBean();
+		refresh.refreshSession(req);
+		
 		RequestDispatcher view = req.getRequestDispatcher(url);
 		view.forward(req, resp);
 		

@@ -56,9 +56,6 @@ public class AchallengeCommand implements CommandInterface {
 		
 		challengeList(request);
 		
-		LoginBean login = new LoginBean();
-		login.refreshSession(request);
-		
 		return "/WEB-INF/myPage/a_challenge.jsp";
 	}
 	

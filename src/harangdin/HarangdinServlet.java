@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import harangdin.model.CommandFactory;
 import harangdin.model.CommandInterface;
+import login.LoginBean;
 
 @WebServlet("/harangdin")
 public class HarangdinServlet extends HttpServlet {
@@ -36,6 +37,10 @@ public class HarangdinServlet extends HttpServlet {
 		command = CommandFactory.newInstance().createCommand(cmd);
 		
 		url = (String)command.processCommand(request, response);
+		
+		//세션 초기화
+		LoginBean login = new LoginBean();
+		login.refreshSession(request);
 		
 		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);

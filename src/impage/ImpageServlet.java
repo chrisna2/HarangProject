@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import impage.model.CommandFactory;
 import impage.model.CommandInterface;
+import login.LoginBean;
 
 @WebServlet("/impage")
 public class ImpageServlet extends HttpServlet{
@@ -35,6 +36,10 @@ public class ImpageServlet extends HttpServlet{
 		command = CommandFactory.newInstance().createCommand(cmd);
 		
 		url = (String)command.processCommand(request, response);
+		
+		//세션 초기화
+		LoginBean login = new LoginBean();
+		login.refreshSession(request);
 		
 		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);

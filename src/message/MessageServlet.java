@@ -32,6 +32,8 @@ public class MessageServlet extends HttpServlet {
 		CommandInterface command = CommandFactory.newInstance().createCommand(cmd);
 		
 		url = (String)command.processCommand(req, resp);
+		
+		
 		RequestDispatcher view = req.getRequestDispatcher(url);
 		view.forward(req, resp);
 		

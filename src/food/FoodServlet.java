@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import food.model.CommandFactory;
 import food.model.CommandInterface;
+import login.LoginBean;
 
 
 @WebServlet("/food")
@@ -38,12 +39,11 @@ public class FoodServlet extends HttpServlet {
 		//중복되는 새로 고침을 막기 위함
 		String state =(String)request.getSession().getAttribute("STATE");
 		
-		if(state != null && state.equals("COMPLETE")){
-			url = "/WEB-INF/exam3/alreadyRegister.jsp";
-		}
-		else{
-			url = (String)command.processCommand(request, response);
-		}
+		url = (String)command.processCommand(request, response);
+
+		//세션을 리프레쉬
+		LoginBean refresh = new LoginBean();
+		refresh.refreshSession(request);
 		
 		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);
