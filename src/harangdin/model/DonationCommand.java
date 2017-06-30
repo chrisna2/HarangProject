@@ -18,6 +18,12 @@ import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 학생의 도서기부
+ * @author 서지윤
+ *
+ */
+
 public class DonationCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -37,6 +43,11 @@ public class DonationCommand implements CommandInterface {
 		return "/WEB-INF/harangdin/list_donation.jsp";
 		
 	}
+	
+	/**
+	 * 학생이 기부한 도서 목록을 보여준다
+	 * @param request
+	 */
 	
 	public void list(HttpServletRequest request){
 		

@@ -21,6 +21,12 @@ import paging.PagingBean;
 import paging.dto.PagingDto;
 import point.PointBean;
 
+/**
+ * 도서기부 상세페이지
+ * @author 서지윤
+ *
+ */
+
 public class BookDonateDetailCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -69,6 +75,10 @@ public class BookDonateDetailCommand implements CommandInterface {
 		
 	}
 	
+	/**
+	 * 도서 상세페이지 불러오기. 상세내용을 보여준다.
+	 * @param request
+	 */
 	
 	public void detailpac(HttpServletRequest request){
 		//로그인하는 개인정보 불러오기
@@ -117,6 +127,11 @@ public class BookDonateDetailCommand implements CommandInterface {
 				request.setAttribute("i", dto);
 	}
 	
+	/**
+	 * 학생들이 입력한 포인트 중 가장 높은 포인트를 나타내준다
+	 * @param request
+	 */
+	
 	public void point(HttpServletRequest request){
 		
 		String sql="select max(bh_want) as max_point from tbl_b_hunter where b_num=?;";
@@ -149,7 +164,11 @@ public class BookDonateDetailCommand implements CommandInterface {
 		request.setAttribute("max_point", max_point);
 	}
 	
-	
+	/**
+	 * 도서 기부를 선택할 시, 지급 포인트는 5000포인트로 고정된다.
+	 * @param request
+	 * @return
+	 */
 	
 	public String donate(HttpServletRequest request){
 		
@@ -186,7 +205,11 @@ public class BookDonateDetailCommand implements CommandInterface {
 		return result;
 	}
 	
-	
+	/**
+	 * 기부가 정상적으로 완료되면 기부완료를 알려준다.
+	 * @param request
+	 * @return
+	 */
 	
 	public String completeMessage(HttpServletRequest request){
 		

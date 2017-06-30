@@ -20,6 +20,11 @@ import paging.PagingBean;
 import paging.dto.PagingDto;
 import upload.RandomFileRenamePolicy;
 
+/**
+ * 도서 등록
+ * @author 서지윤
+ *
+ */
 
 public class RegistProcCommand implements CommandInterface {
 	
@@ -70,6 +75,12 @@ public class RegistProcCommand implements CommandInterface {
 		//return "/WEB-INF/harangdin/book_regist.jsp";
 	}
 	
+	/**
+	 * 도서 판매 중 구매자와 거래가 진행 중일때
+	 * @param multi
+	 * @param photoName
+	 * @throws IOException
+	 */
 	
 	public void sellInput(MultipartRequest multi, String photoName) throws IOException{
 		
@@ -107,6 +118,13 @@ public class RegistProcCommand implements CommandInterface {
 		}
 		
 	}
+	
+	/**
+	 * 도서를 기부했을때 관리자의 승인이 나기 전
+	 * @param multi
+	 * @param photoName
+	 */
+	
 	public void donateInput(MultipartRequest multi, String photoName){
 		pool = DBConnectionMgr.getInstance();
 		

@@ -27,9 +27,6 @@ public class CommandFactory {
 		else if(cmd.equals("regist_proc")){
 			return new RegistProcCommand();
 		}
-		else if(cmd.equals("mypage")){
-			return new MyPageCommand();
-		}
 		else if(cmd.equals("adminDonate")){
 			return new AdminDonateCommand();
 		}

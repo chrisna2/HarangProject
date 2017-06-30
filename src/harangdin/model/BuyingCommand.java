@@ -18,6 +18,12 @@ import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 구매자의 도서구매
+ * @author 서지윤
+ *
+ */
+
 public class BuyingCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -37,6 +43,11 @@ public class BuyingCommand implements CommandInterface {
 		return "/WEB-INF/harangdin/list_buying.jsp";
 		
 	}
+	
+	/**
+	 * 구매자의 도서 구매 목록을 불러온다
+	 * @param request
+	 */
 	
 	public void list(HttpServletRequest request){
 		

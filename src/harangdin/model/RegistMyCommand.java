@@ -20,6 +20,11 @@ import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
 import upload.RandomFileRenamePolicy;
 
+/**
+ * 자신이 등록한 도서의 삭제가 가능한 페이지
+ * @author 서지윤
+ *
+ */
 
 public class RegistMyCommand implements CommandInterface {
 	
@@ -50,6 +55,11 @@ public class RegistMyCommand implements CommandInterface {
 		
 		return "/WEB-INF/harangdin/book_regist_my.jsp";
 	}
+	
+	/**
+	 * 도서 상세페이지 불러오기. 상세내용을 보여준다.
+	 * @param request
+	 */
 	
 	public void detailpac(HttpServletRequest request){
 				
@@ -97,6 +107,11 @@ public class RegistMyCommand implements CommandInterface {
 				request.setAttribute("i", dto);
 	}
 	
+	/**
+	 * 학생들이 입력한 포인트 중 가장 높은 포인트를 나타내준다
+	 * @param request
+	 */
+	
 	public void point(HttpServletRequest request){
 		
 		String sql="select max(bh_want) as max_point from tbl_b_hunter where b_num=?;";
@@ -128,6 +143,11 @@ public class RegistMyCommand implements CommandInterface {
 		
 		request.setAttribute("max_point", max_point);
 	}
+	
+	/**
+	 * 해당 도서를 삭제할 수 있는 기능
+	 * @param request
+	 */
 	
 	public void delete(HttpServletRequest request){
 		

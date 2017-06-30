@@ -16,6 +16,12 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 관리자 하랑딘 메인 페이지
+ * @author 서지윤
+ *
+ */
+
 public class AdminMainCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -41,7 +47,10 @@ public class AdminMainCommand implements CommandInterface {
 		
 	}
 
-	
+	/**
+	 * 메인페이지에 도서리스트
+	 * @param request
+	 */
 	public void list(HttpServletRequest request){
 		
 		
@@ -107,12 +116,17 @@ public class AdminMainCommand implements CommandInterface {
 		PagingBean pbean = new PagingBean();
 				
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-		PagingDto paging = pbean.Paging(list.size(),5, nowPage, 3, nowBlock);
+		PagingDto paging = pbean.Paging(list.size(),10, nowPage, 10, nowBlock);
 						
 		// parameter 보내기
 		request.setAttribute("paging", paging);
 		
 	}
+	
+	/**
+	 * 관리자의 리스트 삭제기능
+	 * @param request
+	 */
 	
 	public void delete(HttpServletRequest request){
 		

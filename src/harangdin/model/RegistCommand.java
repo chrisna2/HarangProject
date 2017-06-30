@@ -16,9 +16,13 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-public class RegistCommand implements CommandInterface {
-	
+/**
+ * 도서 등록페이지로 넘겨준다 
+ * @author 서지윤
+ *
+ */
 
+public class RegistCommand implements CommandInterface {
 
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)

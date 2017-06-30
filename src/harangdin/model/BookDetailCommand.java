@@ -18,6 +18,12 @@ import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 학생들이 볼 수 있는 도서 상세페이지
+ * @author 서지윤
+ *
+ */
+
 public class BookDetailCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -41,6 +47,10 @@ public class BookDetailCommand implements CommandInterface {
 		
 	}
 	
+	/**
+	 * 도서 상세페이지 불러오기. 도서 상세 내용을 보여준다.
+	 * @param request
+	 */
 	
 	public void detailpac(HttpServletRequest request){
 		//로그인하는 개인정보 불러오기
@@ -91,6 +101,11 @@ public class BookDetailCommand implements CommandInterface {
 				
 				request.setAttribute("i", dto);
 	}
+	
+	/**
+	 * 학생들이 입력한 포인트 중 가장 높은 포인트를 나타내준다
+	 * @param request
+	 */
 	
 	public void point(HttpServletRequest request){
 		
