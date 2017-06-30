@@ -8,6 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 관리자가 대나무숲 게시판의 글을 지울때를 위한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Bb_Delete_Command implements CommandInterface {
 
 	private Connection con;
@@ -21,7 +28,10 @@ public class A_Bb_Delete_Command implements CommandInterface {
 			System.out.println("DBCP 연결실패 : " + err);
 		}
 	}
-
+	
+	/**
+	 * 관리자가 대나무숲 게시판의 글을 지울때 사용되는 메소드
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 

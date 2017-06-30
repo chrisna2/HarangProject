@@ -15,6 +15,14 @@ import facilities.model.FacilPGreservCommand;
 import facilities.model.FacilSRreservCommand;
 import harang.dbcp.DBConnectionMgr;
 
+
+/**
+ * 
+ * 관리자가 학사일정 관리페이지에서 새로운 학사일정을 등록하기 위해 페이지 이동 할 때 필요한 클래스
+ * 
+ * @author KIM MIN JOON
+ *
+ */
 public class A_Sch_Post_Command implements CommandInterface {
 	
 	private Connection con;

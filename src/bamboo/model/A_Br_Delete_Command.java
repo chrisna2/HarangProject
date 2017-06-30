@@ -8,6 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 관리자가 대나무숲 글에 달아놓은 댓글을 지울 때 필요한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Br_Delete_Command implements CommandInterface {
 
 	private Connection con;

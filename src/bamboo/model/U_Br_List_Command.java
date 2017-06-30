@@ -13,6 +13,13 @@ import dto.BbreplyDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 사용자가 대나무숲 게시판을 이용할 때 댓글 목록을 불러올때 쓰이는 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class U_Br_List_Command implements CommandInterface {
 
 	private Connection con;

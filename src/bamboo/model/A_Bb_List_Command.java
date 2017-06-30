@@ -15,6 +15,14 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+
+/**
+ * 
+ * 관리자가 대나무숲 글들의 목록을 볼때. 대나무숲 페이지에 들어갈 때 필요한 클래스.
+ * 
+ * @author student
+ *
+ */
 public class A_Bb_List_Command implements CommandInterface 
 {
 	
@@ -57,7 +65,13 @@ public class A_Bb_List_Command implements CommandInterface
 		return "/WEB-INF/bamboo/a_bb_list.jsp";
 	}
 	
-	
+	/**
+	 * 
+	 * 관리자가 대나무숲 게시판의 글 목록을 볼 때 글의 목록을 ArrayList에 담아주는 메소드
+	 * 
+	 * @param req
+	 * @return ArrayList
+	 */
 	public ArrayList bblist(HttpServletRequest req){
 		//HttpSession session = req.getSession();
 		
@@ -137,6 +151,14 @@ public class A_Bb_List_Command implements CommandInterface
 		
 		return list;
 	}
+	
+	/**
+	 * 
+	 * 관리자가 대나무숲 게시판의 글 목록을 볼 때 공지사항인 글들의 목록을 ArrayList에 담아주는 메소드
+	 * 
+	 * @param req
+	 * @return ArrayList
+	 */
 	public ArrayList bbnlist(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 

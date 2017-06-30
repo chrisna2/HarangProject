@@ -8,6 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 관리자가 학사일정 관리페이지에서 기존에 입력된 학사일정을 지우고자 할 때 필요한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Sch_Delete_Command implements CommandInterface {
 
 	private Connection con;

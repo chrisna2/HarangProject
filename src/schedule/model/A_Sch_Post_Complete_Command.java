@@ -15,6 +15,15 @@ import dto.PgMemberDTO;
 import dto.SrMemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+
+/**
+ * 
+ * 관리자가 학사일정 페이지에서 새로운 글을 작성하고 등록하기 버튼을 눌렀을 때 DB에 기록하기 위한 클래스
+ * 
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Sch_Post_Complete_Command implements CommandInterface {
 	
 	private Connection con;
@@ -85,7 +94,7 @@ public class A_Sch_Post_Complete_Command implements CommandInterface {
 			s_grade = "1234";
 		}
 		
-		String s_location = "[ " + req.getParameter("pg_type") + " ] [" + req.getParameter("pg_name") + " ]"; 
+		String s_location = "[ "+ req.getParameter("fselect")+ " ] [ " + req.getParameter("pg_type") + " ] [ " + req.getParameter("pg_name") + " ]"; 
 		
 		if("시설을 선택하세요.".equals(req.getParameter("pg_type"))){
 			s_location = null;

@@ -10,6 +10,13 @@ import javax.servlet.http.HttpSession;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/** 
+ * 
+ * 관리자가 대나무숲 댓글을 등록할 때 필요한 클래스
+ * 
+ * @author student
+ *
+ */
 public class A_Bb_Reply_Command implements CommandInterface {
 
 	private Connection con;

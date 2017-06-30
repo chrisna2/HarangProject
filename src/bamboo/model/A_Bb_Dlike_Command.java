@@ -10,6 +10,13 @@ import javax.servlet.http.HttpSession;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 관리자가 대나무숲 글에 비추천을 남겼을 경우 그 비추천을 취소할 때 필요한 클래스
+ * 
+ * @author student
+ *
+ */
 public class A_Bb_Dlike_Command implements CommandInterface {
 
 	private Connection con;

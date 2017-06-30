@@ -3,6 +3,14 @@ package bamboo.model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+/**
+ * 
+ * 관리자가 대나무숲페이지에서 글쓰기를 눌렀을 때 페이지 이동을 위한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Bb_Post_Command implements CommandInterface {
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 

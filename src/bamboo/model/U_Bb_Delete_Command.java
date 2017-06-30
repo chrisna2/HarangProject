@@ -8,6 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 사용자가 대나무숲 게시판에서 자신이 작성한 글을 삭제 할 때 필요한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class U_Bb_Delete_Command implements CommandInterface {
 
 	private Connection con;
