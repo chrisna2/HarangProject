@@ -18,6 +18,11 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 식권을 출력하는 클래스
+ * @author 나현기 
+ * 
+ */
 public class PrintTicketCommand implements CommandInterface {
 	
 	//DB 커넥션 4 대장

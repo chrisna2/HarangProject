@@ -21,6 +21,11 @@ import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 시간표 페이지와 관련한 커맨드 클래스
+ * @author 나현기
+ *
+ */
 public class TimetableCommand implements CommandInterface {
 
 	//DB 커넥션 4 대장
@@ -73,6 +78,10 @@ public class TimetableCommand implements CommandInterface {
 		return "/WEB-INF/myPage/timeTable.jsp";
 	}
 	
+	/**
+	 * 시간표 페이지에 접속시 초기로 표시되는 시간표 출력 메소드.
+	 * @param request
+	 */
 	public void defaultTimeTable(HttpServletRequest request){
 		
 		//로그인 된 세션의 모든 값 불러 오기
@@ -150,6 +159,10 @@ public class TimetableCommand implements CommandInterface {
 				userLessonList(request, tt_grade, tt_term, member.getM_id());
 	}
 	
+	/**
+	 * 시간표의 학년과 학기를 선택 등록한 시간표를 출력하는 메소드
+	 * @param request
+	 */
 	public void timeTableChoice(HttpServletRequest request){
 		
 		//로그인 된 세션의 모든 값 불러 오기
@@ -217,7 +230,13 @@ public class TimetableCommand implements CommandInterface {
 		userLessonList(request, tt_grade, tt_term, member.getM_id());
 		
 	}
-	
+	/**
+	 * 시간표에 등록된 수업 목록을 출력하는 메소드
+	 * @param request
+	 * @param tt_grade
+	 * @param tt_term
+	 * @param m_id
+	 */
 	public void userLessonList(HttpServletRequest request, int tt_grade, int tt_term, String m_id){
 		
 		
@@ -315,6 +334,11 @@ public class TimetableCommand implements CommandInterface {
 		
 	}
 	
+	/**
+	 * 시간표가 중보되었는가 검색하는 메소드
+	 * @param request
+	 * @return
+	 */
 	public String enrollCheck(HttpServletRequest request){
 		
 		//로그인 된 세션의 모든 값 불러 오기
@@ -362,7 +386,10 @@ public class TimetableCommand implements CommandInterface {
 	}
 	
 	
-	
+	/**
+	 * 수업 등록 메소드
+	 * @param request
+	 */
 	public void enrollLesson(HttpServletRequest request){
 		
 		String sql = "INSERT INTO tbl_timetable (tt_grade, tt_term, m_id, l_num, tt_iscomplete) VALUES (?, ?, ?, ?, 'N');";
@@ -396,7 +423,11 @@ public class TimetableCommand implements CommandInterface {
 	}
 	
 	
-	
+	/**
+	 * 이미 수업 평가가 완료된 수업은 시간표에서 지워지지 않게하는 메소드
+	 * @param request
+	 * @return
+	 */
 	public String deleteCheck(HttpServletRequest request){
 		
 		//로그인 된 세션의 모든 값 불러 오기
@@ -440,7 +471,10 @@ public class TimetableCommand implements CommandInterface {
 		return "delete";
 	}
 	
-	
+	/**
+	 * 시간표애서 수업을 지우는 메소드
+	 * @param request
+	 */
 	public void deleteLesson(HttpServletRequest request){
 		
 		String sql = "DELETE FROM tbl_timetable WHERE l_num = ? and m_id = ? and tt_grade = ?";

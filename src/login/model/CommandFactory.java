@@ -1,5 +1,9 @@
 package login.model;
-
+/**
+ * 로그인 관련 커멘드 팩토리 클래스
+ * @author 나현기
+ *
+ */
 public class CommandFactory {
 	
 	private CommandFactory(){}

@@ -56,7 +56,11 @@ public class AnewLessonUpdateCommand implements CommandInterface {
 	}
 	
 	
-	
+	/**
+	 * 수업 신규 등록 메소드
+	 * @param request
+	 * @return
+	 */
 	public String lessonInsert(HttpServletRequest request){
 		
 		String result = "";
@@ -104,6 +108,11 @@ public class AnewLessonUpdateCommand implements CommandInterface {
 		
 	}
 	
+	/**
+	 * 수업 업데이트 메소드
+	 * @param request
+	 * @return 출력 결과 메세지
+	 */
 	public String lessonUpdate(HttpServletRequest request){
 		
 		String l_num = request.getParameter("l_num");

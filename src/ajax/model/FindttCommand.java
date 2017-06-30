@@ -22,7 +22,11 @@ import dto.LessonDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
-
+/**
+ * 시간표 출력 Ajax 클래스
+ * @author 나현기
+ *
+ */
 public class FindttCommand implements CommandInterface {
 	
 	//DB 커넥션 4 대장
@@ -51,7 +55,12 @@ public class FindttCommand implements CommandInterface {
 	
 		return ttlist;
 	}
-	
+	/**
+	 * 교수님의 현재 시간표를 출력하는 메소드
+	 * @param request
+	 * @return ArrayList
+	 * @throws UnsupportedEncodingException
+	 */
 	public ArrayList findTeacherTt(HttpServletRequest request) throws UnsupportedEncodingException{
 				
 		ArrayList ttlist  = new ArrayList();
@@ -97,7 +106,12 @@ public class FindttCommand implements CommandInterface {
 		}
 		return ttlist;
 	}
-	
+	/**
+	 * 수강실의 현재 시간표를 출력 하는 메소드
+	 * @param request
+	 * @return ArrayList 수강실의 시간표 목록 출력
+	 * @throws UnsupportedEncodingException
+	 */
 	public ArrayList findRoomTt(HttpServletRequest request) throws UnsupportedEncodingException{
 		
 		ArrayList ttlist  = new ArrayList();

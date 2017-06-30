@@ -19,7 +19,7 @@ import paging.PagingBean;
 import paging.dto.PagingDto;
 
 /**
- * pointList.jsp 관련 페이지 기능
+ * pointList.jsp 관련 페이지 기능 커멘드 클래스
  * @author 나현기
  *
  */

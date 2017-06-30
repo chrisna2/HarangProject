@@ -15,6 +15,11 @@ import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.model.RegformCommand;
 
+/**
+ * 수업 신규 등록 하는 커멘드 클래스
+ * @author 나현기
+ *
+ */
 public class AnewlessonCommand implements CommandInterface {
 	
 
@@ -40,7 +45,10 @@ public class AnewlessonCommand implements CommandInterface {
 	}
 
 	
-	
+	/**
+	 * 수강실 이름 목록을 출력하는 메소드
+	 * @param request
+	 */
 	public void roomList(HttpServletRequest request){
 		
 		pool = DBConnectionMgr.getInstance();
@@ -68,7 +76,10 @@ public class AnewlessonCommand implements CommandInterface {
 		request.setAttribute("rlist", roomlist);
 	}
 	
-	
+	/**
+	 * 교수님 목록을 출력하는 메소드
+	 * @param request
+	 */
 	public void teacherList(HttpServletRequest request){
 		
 		pool = DBConnectionMgr.getInstance();
@@ -97,7 +108,10 @@ public class AnewlessonCommand implements CommandInterface {
 		request.setAttribute("tlist", teacherlist);
 		
 	}
-	
+	/**
+	 * 수업 학과의 목록을 출력하는 메소드
+	 * @param request
+	 */
 	public void deptList(HttpServletRequest request){
 		
 		pool = DBConnectionMgr.getInstance();

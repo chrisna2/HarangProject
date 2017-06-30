@@ -16,6 +16,11 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 관리자 수업 페이지 목록 출력 클래스
+ * @author 나현기
+ *
+ */
 public class AlessonCommand implements CommandInterface {
 	
 	//DB 커넥션 4 대장
@@ -38,7 +43,10 @@ public class AlessonCommand implements CommandInterface {
 		return "/WEB-INF/myPage/a_lessonList.jsp";
 	}
 
-	
+/**
+ * 관리자 입장에서 수업 목록 출력 메소드	
+ * @param request
+ */
 public void adminLessonList(HttpServletRequest request){
 		
 		ArrayList llist  = new ArrayList();

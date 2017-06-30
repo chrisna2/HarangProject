@@ -13,6 +13,11 @@ import javax.sql.DataSource;
 import dto.FoodMemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 관리자 학식 메뉴 등록 수정 페이지 기능 클래스
+ * @author 나현기
+ *
+ */
 public class AdminMenuCommand implements CommandInterface {
 
 	//DB 커넥션 4 대장
@@ -49,7 +54,10 @@ public class AdminMenuCommand implements CommandInterface {
 		return "/WEB-INF/food/a_menuList.jsp";
 	}
 	
-	
+	/**
+	 * 신규 메뉴 수정 메소드
+	 * @param request
+	 */
 	public void updateFood(HttpServletRequest request){
 		
 		String sql = "UPDATE tbl_food SET f_point = ?, f_title = ?, f_content = ? "
@@ -78,7 +86,10 @@ public class AdminMenuCommand implements CommandInterface {
 		request.setAttribute("result", "update");
 		
 	}
-	
+	/**
+	 * 신규 메뉴 등록 메소드
+	 * @param request
+	 */
 	public void insertFood(HttpServletRequest request){
 		
 		String sql = "INSERT INTO tbl_food (f_point, f_title, f_content, f_selldate) VALUES (?, ?, ?, ?);";
@@ -108,6 +119,10 @@ public class AdminMenuCommand implements CommandInterface {
 		
 	}
 
+	/**
+	 * 기존 메뉴 삭제 메소드
+	 * @param request
+	 */
 	public void deleteFood(HttpServletRequest request){
 		
 		String sql = "DELETE FROM tbl_food WHERE f_num=?";

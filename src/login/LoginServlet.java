@@ -12,7 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import login.model.CommandFactory;
 import login.model.CommandInterface;
 
-
+/**
+ * 로그인 관련 서블릿
+ * @author 나현기
+ *
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -13,7 +13,11 @@ import javax.sql.DataSource;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 로그아웃 커맨드 클래스
+ * @author YOO
+ *
+ */
 public class LogoutCommand implements CommandInterface {
 	
 	

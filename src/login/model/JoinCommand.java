@@ -20,6 +20,10 @@ import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import upload.RandomFileRenamePolicy;
 
+/**
+ * 커뮤니티에 정회원으로 가입하는 커맨드 클래스 
+ * @author 나현기
+ */
 public class JoinCommand implements CommandInterface {
 	
 	

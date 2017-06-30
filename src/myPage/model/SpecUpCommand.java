@@ -18,7 +18,11 @@ import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
-
+/**
+ * 스펙 업! 관련 페이지 커멘드 클래스
+ * @author 나현기
+ *
+ */
 public class SpecUpCommand implements CommandInterface {
 
 	// DB 커넥션 3 대장
@@ -38,6 +42,10 @@ public class SpecUpCommand implements CommandInterface {
 		return "/WEB-INF/myPage/specUp.jsp";
 	}
 
+	/**
+	 * 스펙 목록과 등록 관련 정보를 불러오는 메소드
+	 * @param request
+	 */
 	public void listCommand(HttpServletRequest request) {
 		
 		MemberDTO member = (MemberDTO)request.getSession().getAttribute("member");

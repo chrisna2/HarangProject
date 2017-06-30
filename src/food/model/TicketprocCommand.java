@@ -13,6 +13,11 @@ import javax.sql.DataSource;
 import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
 
+/**
+ * 식권을 결제하는 커맨드 클래스
+ * @author 나현기
+ *
+ */
 public class TicketprocCommand implements CommandInterface {
 
 	//DB 커넥션 3 대장
@@ -33,7 +38,10 @@ public class TicketprocCommand implements CommandInterface {
 		return "/WEB-INF/food/buyComplete.jsp";
 	}
 
-	
+	/**
+	 * 식권을 구매하는 커멘드
+	 * @param request
+	 */
 	public void buyingTicket(HttpServletRequest request){
 		
 		int f_point = Integer.parseInt(request.getParameter("f_point"));

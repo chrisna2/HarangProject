@@ -16,6 +16,11 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 식권의 판매 목록 출력 클래스
+ * @author 나현기
+ *
+ */
 public class AdminTicketCommand implements CommandInterface {
 
 	//DB 커넥션 4 대장
