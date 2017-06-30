@@ -3,19 +3,23 @@ package schedule.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.MemberDTO;
+import dto.PgMemberDTO;
+import dto.SrMemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
 public class A_Sch_Post_Complete_Command implements CommandInterface {
 	
 	private Connection con;
 	private PreparedStatement pstmt;
+	
 	private DBConnectionMgr pool;
 
 	public A_Sch_Post_Complete_Command() {
@@ -27,13 +31,19 @@ public class A_Sch_Post_Complete_Command implements CommandInterface {
 	}
 
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
+		
+		
+		
+		
+		
+		
 
 		try {
 		con = pool.getConnection();
 		
 		//System.out.println(req.getParameter("point"));
 		
-		String sql = "insert into tbl_schedule (s_title, s_dept, s_dstart, s_dend, s_rstart, s_rend, s_point, s_content, s_ispoint, s_grade ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into tbl_schedule (s_title, s_dept, s_dstart, s_dend, s_rstart, s_rend, s_point, s_content, s_ispoint, s_grade, s_location ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		//System.out.println(sql);
 
@@ -74,6 +84,16 @@ public class A_Sch_Post_Complete_Command implements CommandInterface {
 		if("".equals(s_grade)||null==s_grade){
 			s_grade = "1234";
 		}
+		
+		String s_location = "[ " + req.getParameter("pg_type") + " ] [" + req.getParameter("pg_name") + " ]"; 
+		
+		if("시설을 선택하세요.".equals(req.getParameter("pg_type"))){
+			s_location = null;
+		}
+		
+		
+		
+		
 		
 		/*System.out.println("A_Sch_Post_Complete에서 테스트");
 		System.out.println("제목: " + s_title);
@@ -122,6 +142,7 @@ public class A_Sch_Post_Complete_Command implements CommandInterface {
 			pstmt.setString(8, s_content);
 			pstmt.setString(9, s_ispoint);
 			pstmt.setString(10, s_grade);
+			pstmt.setString(11, s_location);
 			
 
 			
@@ -151,4 +172,7 @@ public class A_Sch_Post_Complete_Command implements CommandInterface {
 		//return "/HarangProject/bamboo?cmd=BB_LIST;
 				
 	}
+	
+	
+	
 }

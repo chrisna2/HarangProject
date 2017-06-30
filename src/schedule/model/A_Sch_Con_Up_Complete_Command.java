@@ -30,7 +30,7 @@ public class A_Sch_Con_Up_Complete_Command implements CommandInterface {
 			// System.out.println(m_id);
 
 			String sql = "update tbl_schedule set s_title = ?, s_dept = ?, s_dstart= ?, s_dend = ?, s_rstart = ?, s_rend = ?, "
-					+ "s_point = ?, s_content = ?, s_ispoint = ?, s_grade = ? where s_num=?";
+					+ "s_point = ?, s_content = ?, s_ispoint = ?, s_grade = ?, s_location = ? where s_num=?";
 
 			
 			
@@ -74,6 +74,15 @@ public class A_Sch_Con_Up_Complete_Command implements CommandInterface {
 				s_grade = "1234";
 			}
 			
+			
+			String s_location = "[ " + req.getParameter("pg_type") + " ] [" + req.getParameter("pg_name") + " ]"; 
+			
+			if("시설을 선택하세요.".equals(req.getParameter("pg_type"))){
+				s_location = null;
+			}
+			
+			
+			/*
 			System.out.println("제목: " + s_title);
 			System.out.println("학과: " + s_dept);
 			System.out.println("행사시작일: " + s_dstart);
@@ -83,7 +92,7 @@ public class A_Sch_Con_Up_Complete_Command implements CommandInterface {
 			System.out.println("지급포인트: " + s_point);
 			System.out.println("본문 : " + s_content);
 			System.out.println("포인트 지급: " + s_ispoint);
-			System.out.println("해당학년: " + s_grade);
+			System.out.println("해당학년: " + s_grade);*/
 			
 
 			//System.out.println(bb_notice);
@@ -105,7 +114,8 @@ public class A_Sch_Con_Up_Complete_Command implements CommandInterface {
 			pstmt.setString(8, s_content);
 			pstmt.setString(9, s_ispoint);
 			pstmt.setString(10, s_grade);
-			pstmt.setString(11, s_num);
+			pstmt.setString(11, s_location);
+			pstmt.setString(12, s_num);
 
 			pstmt.executeUpdate();
 

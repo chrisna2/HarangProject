@@ -19,10 +19,9 @@ public class A_Sch_Post_Command implements CommandInterface {
 	
 	private Connection con;
 	private PreparedStatement pstmt;
-	private DataSource ds;
 	private ResultSet rs;
 	
-	DBConnectionMgr pool;
+	private DBConnectionMgr pool;
 	
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 

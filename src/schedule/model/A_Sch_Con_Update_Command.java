@@ -30,6 +30,13 @@ public class A_Sch_Con_Update_Command implements CommandInterface {
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 
+		A_Sch_Post_Command aspc = new A_Sch_Post_Command();
+		
+		aspc.srList(req);
+		aspc.pgList(req);
+		
+		
+		
 		String s_num = req.getParameter("s_num");
 		// System.out.println("U_Bb_Content 에서 테스트 bb_num : " + bb_num);
 

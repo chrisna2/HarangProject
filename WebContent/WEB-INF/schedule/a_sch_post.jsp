@@ -141,7 +141,7 @@ function showKeyCode(event) {
 								<div class="col-md-3 form-group">
 									<label>학과</label> <select class="form-control" name = "s_dept">
 										<option value = "전체">전체</option>
-										<option value = "국문학과">국문학과</option>
+										<option value = "국어국문학과">국어국문학과</option>
 										<option value = "수학과">수학과</option>
 										<option value = "경영학과">경영학과</option>
 										<option value = "시각디자인과">시각디자인과</option>
@@ -240,12 +240,12 @@ function showKeyCode(event) {
 							<div class="row">
 								
 									
-									<span>행사 장소를 선택 해 주세요</span>
+									
 								
 								
 									<div class="form-group col-md-3">
 									<label>시설명</label> <select class="form-control" name="fselect"
-										id="fselect" onchange = "fselect()" >
+										id="fselect" onchange = "javascript:ffselect()" >
 										
 									<option>시설</option>
 
@@ -280,7 +280,7 @@ function showKeyCode(event) {
 								<!-- 호수(두번째 카테고리) 선택 -->
 								<div class="form-group col-md-3">
 									<label>호수</label> <select class="form-control" id="pg_name"
-										name="pg_name" onchange="select02()">
+										name="pg_name" >
 										<option>호수를 선택하세요.</option>
 									</select>
 								</div>
@@ -352,7 +352,7 @@ function showKeyCode(event) {
 	src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"
 	type="text/javascript"></script>
 <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
-    <script>
+    <script type="text/javascript">
     $(function() {
         $( "#date1" ).datepicker({
         	format: 'yyyy-mm-dd',
@@ -381,28 +381,89 @@ function showKeyCode(event) {
 		//bootstrap WYSIHTML5 - text editor
 		$(".textarea").wysihtml5();
 	});
+	</script>
 	
-	function fselect(){
+	<script>
+	
+	function ffselect(){
 		
-		var fvalue = documetn.getElementById("fselect");
+		var fvalue = document.getElementById("fselect").value;
 		
 		if(fvalue == "운동장"){
 			
-			for(int i = 0; i < ${pglist}.size; i++){
-				
-			$(.pg_type).append(<option value = "${pglist}.[i].pg_type">${pglist}.[i].pg_type</option> );
-			}
+			
+			
+			$("#pg_type option").remove();
+			$("#pg_type").append("<option>시설을 선택하세요.</option>");
+			$("#pg_name option").remove();
+			$("#pg_type").append("<c:forEach items='${pglist}' var='s'><option value='${s.pg_type}'>${s.pg_type}</option></c:forEach>");
+			
 			
 		}
 		
 		else if(fvalue == "스터디룸"){
 			
+			$("#pg_type option").remove();
+			$("#pg_type").append("<option>시설을 선택하세요.</option>");
+			$("#pg_name option").remove();
+			$("#pg_type").append("<c:forEach items='${srlist}' var='s'><option value='${s.sr_type}'>${s.sr_type}</option></c:forEach>");
+			
 		}
 		
 		else{
+			$("#pg_type option").remove();
+			$("#pg_type").append("<option>시설을 선택하세요.</option>");
+			$("#pg_name option").remove();
 			alert("시설 선택을 해 주세요");
 		}
 	}
+	
+	
+	function selectfacil() {
+		
+		var fvalue = document.getElementById("fselect").value;
+
+		var wpg_type = document.getElementById('pg_type').value;
+		
+		if(fvalue == "운동장"){	
+		$.getJSON("/HarangProject/ajax?cmd=selectPg", {
+			pg_type : encodeURIComponent(wpg_type)
+		}, function(data) {
+			$("#pg_name option").remove();
+			$("#pg_name").append("<option>호수를 입력하세요.</option>");
+			$(data).each(
+					function(index, pglist) {
+						$("#pg_name").append(
+								"<option value='"+pglist.pg_name+"'>"
+										+ pglist.pg_name + "</option>");
+
+					});
+		});
+		}
+		
+		else{
+			
+			$.getJSON("/HarangProject/ajax?cmd=selectSr", {
+				sr_type : encodeURIComponent(wpg_type)
+			}, function(data) {
+				$("#pg_name option").remove();
+				$("#pg_name").append("<option>호수를 입력하세요.</option>");
+				$(data).each(
+						function(index, srlist) {
+							$("#pg_name").append(
+									"<option value='"+srlist.sr_name+"'>"
+											+ srlist.sr_name + "</option>");
+
+						});
+			});
+
+			
+			
+			
+		}
+	}
+	
+	
 	
 	
 	

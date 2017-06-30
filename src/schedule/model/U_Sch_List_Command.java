@@ -76,14 +76,15 @@ public class U_Sch_List_Command implements CommandInterface {
 			
 			
 
-			 //System.out.println("U_Sch_List에서 테스트. sOption : " + sOption);
-			 //System.out.println("U_Sch_List에서 테스트. table_search : " + table_search);
-			 //System.out.println("U_Sch_List에서 테스트. m_grade : " + m_grade);
+			 System.out.println("U_Sch_List에서 테스트. sOption : " + sOption);
+			 System.out.println("U_Sch_List에서 테스트. table_search : " + table_search);
+			 System.out.println("U_Sch_List에서 테스트. m_grade : " + m_grade);
+			 System.out.println(s_dept);
 
 			if (null == table_search) {
 
 				sql = "select s_num, s_grade, s_ispoint, s_title, s_content, s_dstart, s_dend, s_dept, s_location, s_rstart, s_rend from tbl_schedule where (s_grade like '%"+m_grade+"%' or s_grade = '1234') and (s_dept = '전체' or s_dept = ?) order by s_dstart ";
-				//System.out.println(sql);
+				System.out.println(sql);
 				
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, s_dept);
