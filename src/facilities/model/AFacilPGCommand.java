@@ -37,15 +37,17 @@ public class AFacilPGCommand implements CommandInterface {
 		String check = request.getParameter("delete");
 		loadList(request);
 		
-		System.out.println(check);
+		String check2 = request.getParameter("check");
 		
 		if("1".equals(check)){
 			deletefacil(request);
 			loadList(request);
 		}
 		
+		else if("faciladd".equals(check2)){
+			addDateFacil(request);
+		}
 		
-
 		return "/WEB-INF/facil/a_facilities_pg_schedule.jsp";
 	}
 
@@ -131,6 +133,28 @@ public class AFacilPGCommand implements CommandInterface {
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pgm_num);
+			pstmt.executeUpdate();
+
+
+		} catch (Exception e) {
+			System.out.println(" : " + e);
+
+		} finally {
+			pool.freeConnection(con, pstmt);
+		}
+		
+	}
+	
+	private void addDateFacil(HttpServletRequest request) {
+		String sql = null;
+		String a = "a";
+		
+	/* 작성을 해봅시다. */
+		try {
+			pool = DBConnectionMgr.getInstance();
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,a);
 			pstmt.executeUpdate();
 
 

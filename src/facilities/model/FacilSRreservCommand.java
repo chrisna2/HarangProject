@@ -64,10 +64,6 @@ public class FacilSRreservCommand implements CommandInterface {
 				System.out.println("결제성공");
 				request.setAttribute("tradecheck", checkOut);
 				
-				//회원정보 세션 최신화
-				LoginBean update = new LoginBean();
-				update.refreshSession(request);
-				
 				return "/WEB-INF/facil/facilities_studyroom.jsp";
 			}
 			else{

@@ -281,7 +281,7 @@
 
 			<!-- 3-2.시설 학사 일정 추가  행 넓이 설정---->
 			<div class="col-md-6">
-				<form method="POST" action="">
+				<form method="POST" action="/HarangProject/facil?cmd=AFacilPG">
 				<!-- 3-2.시설 학사 일정 추가 List / box -->
 				<div class="box box-primary">
 					<!-- 3-2. box-header -->
@@ -304,7 +304,7 @@
 										<i class="fa fa-calendar"></i>
 									</div>
 									<input type="text" class="form-control pull-right"
-										name="p_deadline" required="required" id="datepicker" />
+										name="addpgm_date" required="required" id="datepicker" />
 								</div>
 								<!-- /.input group -->
 							</div>
@@ -335,8 +335,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<label>행사 내용</label> <input type="text" class="form-control"
-									placeholder="축제 1일차">
+								<label>행사 내용</label> <input type="text" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -345,6 +344,7 @@
 						<div class="row">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
+								<input type="hidden" id="check" value="faciladd">
 								<input type="submit" class="btn btn-block btn-primary"
 									value="추가">
 							</div>
