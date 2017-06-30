@@ -12,48 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.ParttimeReplyDTO;
 import harang.dbcp.DBConnectionMgr;
+import parttime.model.CommentBean;
+import parttime.model.ParttimeBean;
 
 public class ParttimeReplyCommand implements CommandInterface {
-	
-	private Connection con;
-	private PreparedStatement pstmt;
-	private ResultSet rs;
-	private DBConnectionMgr pool;
-	
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		CommentBean cbean = new CommentBean();
+		ParttimeBean pbean = new ParttimeBean();
 
-		ArrayList prlist = new ArrayList();
 		String p_num = request.getParameter("p_num");
-		
-		try{
-			con = pool.getConnection();
-			
-			String sql="SELECT * FROM tbl_parttime_reply WHERE p_num=? ORDER BY pr_regdate DESC";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, p_num);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				ParttimeReplyDTO dto = new ParttimeReplyDTO();
-				dto.setPr_num(rs.getString("pr_num"));
-				dto.setPr_comment(rs.getString("pr_comment"));
-				dto.setPr_regdate(rs.getString("pr_regdate"));
-				dto.setP_num(rs.getString("p_num"));
-				dto.setM_id(rs.getString("m_id"));
-				
-				prlist.add(dto);
-			}
-			
-		}catch(Exception err){
-			System.out.println("getParttimeReplyList() : " + err);
-			err.printStackTrace();
-		}finally{
-			pool.freeConnection(con,pstmt);
+		ArrayList prlist = cbean.getParttimeReplyList(p_num);
+		for(int i=0; i<prlist.size();i++){
+			ParttimeReplyDTO dto = (ParttimeReplyDTO)prlist.get(i);
+			dto.setM_name((pbean.getMember(dto.getM_id()).getM_name())); //이름저장
 		}
-		
 		return prlist;
 	}
 

@@ -21,7 +21,7 @@ import paging.dto.PagingDto;
 public class ParttimeReadCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 	MessageBean mbean = new MessageBean();
-
+	CommentBean cbean = new CommentBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 		MemberDTO member = bean.getLoginInfo(req); // 로그인 정보
 		String m_id = member.getM_id();
@@ -49,6 +49,7 @@ public class ParttimeReadCommand implements CommandInterface {
 		
 		/** Comment!! 댓글 */
 		insertComment(m_id, req);
+		deleteComment(m_id, req);
 		/** 끝 : Comment */
 		
 		/** 페이지 이동 */
@@ -310,8 +311,37 @@ public class ParttimeReadCommand implements CommandInterface {
 		}
 		return daycode;
 	}
-
+	
+	/**
+	 * 댓글을 등록하는 메서드.
+	 * @param m_id 회원번호
+	 * @param req
+	 */
 	public void insertComment(String m_id, HttpServletRequest req){
+		String comment = req.getParameter("comment");
 		
+		if("insert".equals(comment)){
+			String p_num = req.getParameter("p_num");
+			String pr_comment = req.getParameter("pr_comment");
+			
+			cbean.insertParttimeReply(p_num, m_id, pr_comment);
+			req.setAttribute("result", "success");
+		}
+	}
+	
+	
+	/**
+	 * 댓글을 삭제하는 메서드.
+	 * @param m_id
+	 * @param req
+	 */
+	public void deleteComment(String m_id, HttpServletRequest req){
+		String comment = req.getParameter("comment");
+		
+		if("delete".equals(comment)){
+			String pr_num = req.getParameter("pr_num");
+			
+			cbean.deleteParttimeReply(pr_num);
+		}
 	}
 }
