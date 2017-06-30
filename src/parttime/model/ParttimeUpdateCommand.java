@@ -3,20 +3,27 @@ package parttime.model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.MemberDTO;
 import dto.ParttimeDTO;
 
 public class ParttimeUpdateCommand implements CommandInterface{
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp){
 		ParttimeBean bean = new ParttimeBean();
+		MemberDTO member = bean.getLoginInfo(req);
 		
 		paging(req);
 		String p_num = req.getParameter("p_num"); // 글번호 parameter
 		ParttimeDTO dto = bean.getParttime(p_num); // 글 번호를 매개변수로 하여 글 정보를 받아온다.
 		transCode(dto.getP_daycode(), req); // Daycode 변환해서 parameter 넘기기
 		req.setAttribute("info", dto);		
+		req.setAttribute("tab", req.getParameter("tab"));
 		
-		// parttime_update.jsp 로 페이지 이동
-		return "/WEB-INF/parttime/parttime_update.jsp";
+		
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_daeta_update.jsp
+			return "WEB-INF/parttime/a_parttime_update.jsp";
+		} else { // 회원이면 daeta_update.jsp
+			return "/WEB-INF/parttime/parttime_update.jsp";
+		}
 	}
 	
 	
