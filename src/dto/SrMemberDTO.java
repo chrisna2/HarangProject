@@ -11,7 +11,19 @@ public class SrMemberDTO {
 	String sr_name;
 	String srm_point;
 	String srm_content;
+	String srm_issue;
 	int sr_point;
+	
+
+
+	public String getSrm_issue() {
+		return srm_issue;
+	}
+
+	public void setSrm_issue(String srm_issue) {
+		this.srm_issue = srm_issue;
+	}
+
 	int payoutpoint;
 
 	public String getSrm_regdate() {

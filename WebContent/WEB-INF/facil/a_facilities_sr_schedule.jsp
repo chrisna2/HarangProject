@@ -1,29 +1,29 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<%@ include file="../include/a_header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="../include/a_header.jsp"%>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
-     <title>스터디룸(관리자)</title>
+<title>스터디룸(관리자)</title>
+<style>
+</style>
 </head>
-	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
-      <div class="content-wrapper">
-
-<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
-        <section class="content-header">
-          <h1>
-             	운동장 관리 [페이지 제목]
-            <small>[페이지 소개]</small>
-          </h1>
-          <ol class="breadcrumb">
-          <!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
-            <li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
-            <li class="active">운동장 관리</li>
-          </ol>
-        </section>
-<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
+<!-- 메인 페이지 구역 , 즉 작업 구역 -->
+<div class="content-wrapper">
+	<!----------------------------------- 메인페이지 헤더 [작업 제목] ------------------------------------------------------------->
+	<section class="content-header">
+		<h1>
+			스터디룸 관리
+			<!--  <small>[페이지 소개]</small> -->
+		</h1>
+		<ol class="breadcrumb">
+			<!-- 페이지 기록 : 메인에서 부터 현재 페이지 까지의 경로 나열 -->
+			<li><a href="#"><i class="fa fa-dashboard"></i> 메인</a></li>
+			<li class="active">스터디룸 관리</li>
+		</ol>
+	</section>
+	<!------------------------------------ 메인페이지 바디 [작업 내용] ------------------------------------------------------------>
 	<section class="content">
 
 		<!-- 첫번째 단시작 [ 1. 전체 예약 내역 ]-->
@@ -56,26 +56,27 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>S00001</td>
-									<td>스터디룸[대]</td>
-									<td></td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<th>공과대학 통합 농구대회</th>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
-								<tr>
-									<td>l00001</td>
-									<td>운동장</td>
-									<td>농구장</td>
-									<td>중앙회관옆</td>
-									<td>2017년 5월 25일</td>
-									<th>공과대학 통합 농구대회</th>
-									<td><input type="button" class="btn btn-primary"
-										value="선택"></td>
-								</tr>
+
+								<c:forEach items="${requestScope.srlist}" var="s" varStatus="i">
+									<tr class="text-blue">
+										<td>${s.srm_num}</td>
+										<td>스터디룸</td>
+										<td>${s.sr_type}</td>
+										<td>${s.sr_name}</td>
+										<td>${s.srm_date}</td>
+										<td>${s.srm_issue}</td>
+										<td>
+											<!-- /HarangProject/facil?cmd=AFacilManager --> <input
+											type="button" class="btn btn-primary" value="일정취소"
+											onclick="selectDel('${s.srm_num}','${s.sr_type}','${s.sr_name}','${s.srm_date}','${s.srm_issue}')" />
+
+										</td>
+									</tr>
+								</c:forEach>
+
+
+
+
 							</tbody>
 						</table>
 						<!-- /.테이블 -->
@@ -132,79 +133,87 @@
 		<!-- 두번째 단시작 [ 2. 일정 취소  확인 ] -->
 		<div class="row">
 			<div class="col-md-12">
-				<!-- 2. 일정취소 확인 -->
-				<div class="box box-primary">
-					<!-- 2.box header-->
-					<div class="box-header">
-						<h3 class="box-title">일정 취소 확인</h3>
-						<div class="box-tools pull-right">
-							<button class="btn btn-box-tool" data-widget="collapse">
-								<i class="fa fa-minus"></i>
-							</button>
+				<form method="POST" action="/HarangProject/facil?cmd=AFacilSR">
+					<!-- 2. 일정취소 확인 -->
+					<div class="box box-primary">
+						<!-- 2.box header-->
+						<div class="box-header">
+							<h3 class="box-title">일정 취소 확인</h3>
+							<div class="box-tools pull-right">
+								<button class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+							</div>
+
 						</div>
 
+						<!-- 2.box body-->
+						<div class="box-body">
+							<!-- 2. 1단 -->
+							<div class="row ">
+								<!-- 일정번호  -->
+								<div class="col-md-3">
+									<label>예약번호</label> <input type="text" class="form-control"
+										style="width: 150px" id="srm_num" name="srm_num"
+										readonly="readonly">
+								</div>
+								<!-- 시설종류  -->
+								<div class="col-md-3">
+									<label>시설종류</label> <input type="text" class="form-control"
+										style="width: 100px" value="스터디룸" readonly="readonly">
+								</div>
+								<!-- 시설명  -->
+								<div class="col-md-3">
+									<label>시설명</label> <input type="text" class="form-control"
+										style="width: 100px" id="sr_type" name="sr_type"
+										readonly="readonly">
+								</div>
+
+								<!-- 호수  -->
+								<div class="col-md-3">
+									<label>호수</label> <input type="text" class="form-control"
+										style="width: 120px" id="sr_name" name="sr_name"
+										readonly="readonly">
+								</div>
+							</div>
+
+							<br> <br>
+							<!-- 2. 2단 -->
+							<div class="row">
+
+								<!-- 시설종류  -->
+								<div class="col-md-3">
+									<label>날짜</label> <input type="text" class="form-control"
+										style="width: 200px" id="srm_date" name="srm_date"
+										readonly="readonly">
+								</div>
+
+								<div class="col-md-9">
+									<label>행사내용</label> <input type="text" class="form-control"
+										style="width: 450px" id="srm_issue" name="srm_issue"
+										readonly="readonly">
+								</div>
+							</div>
+						</div>
+
+
+						<!-- 2.box footer-->
+						<div class="box-footer">
+							<div class="row" align="center">
+								<div class="col-md-3 btn-group"></div>
+								<div class="col-md-3 btn-group">
+									<input type="hidden" id="delete" name="delete"> <input
+										type="submit" class="btn btn-block btn-primary" value="삭제">
+								</div>
+								<div class="col-md-3 btn-group">
+									<input type="button" class="btn btn-block  btn-primary"
+										value="다시 선택">
+								</div>
+							</div>
+						</div>
 					</div>
 
-					<!-- 2.box body-->
-					<div class="box-body">
-						<!-- 2. 1단 -->
-						<div class="row ">
-							<!-- 일정번호  -->
-							<div class="col-md-3">
-								<label>예약번호</label> <input type="text" class="form-control"
-									placeholder="A71201" style="width: 100px" disabled>
-							</div>
-							<!-- 시설종류  -->
-							<div class="col-md-3">
-								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="운동장" style="width: 100px" disabled>
-							</div>
-							<!-- 시설명  -->
-							<div class="col-md-3">
-								<label>시설명</label> <input type="text" class="form-control"
-									placeholder="농구장" style="width: 100px" disabled>
-							</div>
-
-							<!-- 호수  -->
-							<div class="col-md-3">
-								<label>호수</label> <input type="text" class="form-control"
-									placeholder="광과대학 옆" style="width: 120px" disabled>
-							</div>
-						</div>
-
-						<br> <br>
-						<!-- 2. 2단 -->
-						<div class="row">
-
-							<!-- 시설종류  -->
-							<div class="col-md-3">
-								<label>날짜</label> <input type="text" class="form-control"
-									placeholder="2017.5.12" style="width: 200px" disabled>
-							</div>
-
-							<div class="col-md-9">
-								<label>행사내용</label> <input type="text" class="form-control"
-									placeholder="...." style="width: 450px" disabled>
-							</div>
-						</div>
-					</div>
-
-
-					<!-- 2.box footer-->
-					<div class="box-footer">
-						<div class="row" align="center">
-							<div class="col-md-3 btn-group"></div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
-									value="삭제">
-							</div>
-							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block  btn-primary"
-									value="다시 선택">
-							</div>
-						</div>
-					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 
@@ -227,41 +236,6 @@
 					<!-- 3-1. box-body -->
 					<div class="box-body">
 						<!-- 3-1. 시작 -->
-						<!--첫줄 날짜 선택 -->
-						<!-- 날짜 선택 제목 -->
-						<div class="row">
-							<div class="col-md-12" align="left">
-								<h4>날짜 선택</h4>
-							</div>
-						</div>
-						<div class="row">
-
-							<!-- 월 선택 -->
-							<div class="form-group col-md-4">
-								<label>월 선택</label> <select class="form-control">
-									<option>5</option>
-									<option>6</option>
-								</select>
-							</div>
-
-							<!-- 일 선택 -->
-							<div class="form-group col-md-4">
-								<label>일 선택</label> <select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-								</select>
-							</div>
-
-							<br>
-							<div class="col-md-4">
-								<input type="button" class="btn btn-block btn-primary"
-									value="검색">
-							</div>
-
-						</div>
-
 						<!--검색 결과 테이블 / 기본은 전체 행사 출력 -->
 						<hr />
 						<div class="row">
@@ -276,31 +250,22 @@
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>행사날짜</th>
+											<th>시작날짜</th>
+											<th>종료날짜</th>
 											<th>행사명</th>
-											<th>시설명</th>
-											<th>호수</th>
+											<th>장소</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>2017.6.13</td>
-											<td>축제 1일차</td>
-											<td>농구장</td>
-											<td>중앙회관옆</td>
-										</tr>
-										<tr>
-											<td>2017.6.13</td>
-											<td>축제 1일차</td>
-											<td>농구장</td>
-											<td>중앙회관옆</td>
-										</tr>
-										<tr>
-											<td>2017.6.13</td>
-											<td>축제 1일차</td>
-											<td>농구장</td>
-											<td>중앙회관옆</td>
-										</tr>
+										<c:forEach items="${requestScope.sclist}" var="s"
+											varStatus="i">
+											<tr class="text-blue">
+												<td>${s.s_dstart}</td>
+												<td>${s.s_dend}</td>
+												<td>${s.s_title}</td>
+												<td>${s.s_location}</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 
@@ -316,6 +281,7 @@
 
 			<!-- 3-2.시설 학사 일정 추가  행 넓이 설정---->
 			<div class="col-md-6">
+				<form method="POST" action="/HarangProject/facil?cmd=AFacilSR">
 				<!-- 3-2.시설 학사 일정 추가 List / box -->
 				<div class="box box-primary">
 					<!-- 3-2. box-header -->
@@ -331,45 +297,58 @@
 					<div class="box-body">
 						<!--  3-2. 선택날짜/시설종류 -->
 						<div class="row">
-							<div class="col-md-4">
-								<label>날짜</label> <input type="text" class="form-control"
-									placeholder="2017년 5월 16일" disabled>
+							<div class="col-md-6 form-group">
+								<label>날짜선택</label>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input type="text" class="form-control pull-right"
+										name="addsrm_date" required="required" id="datepicker" />
+								</div>
+								<!-- /.input group -->
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6 form-group">
 								<label>시설종류</label> <input type="text" class="form-control"
-									placeholder="운동장" disabled>
+									value="스터디룸" readonly="readonly">
 							</div>
 						</div>
 						<br>
 						<div class="row">
 							<div class="form-group col-md-4">
-								<label>시설명</label> <select class="form-control">
-									<option>농구장</option>
-									<option>족구장</option>
-									<option>테니스장</option>
+								<label>시설명</label> <select class="form-control" id="addsr_type" onchange="selectfacil()" >
+									<option>시설 종류를 선택하세요</option>
+									<c:forEach items="${ajaxlist}" var="s">
+											<option value="${s.sr_type}">${s.sr_type}</option>
+									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
-								<label>호수</label> <select class="form-control">
-									<option>공과대학 옆</option>
-									<option>조형예술대학 옆</option>
-									<option>중앙회관 옆</option>
+								<label>호수</label> <select class="form-control" id="addsr_name" name="addsr_name" onchange="select02()">
+									<option>시설 이름을 선택하세요.</option>
 								</select>
 							</div>
+							<div class="form-group col-md-4">
+								<label>시설 번호</label> <input type="text" class="form-control" id="addsr_num" name="addsr_num"
+								readonly="readonly">
+							</div>
+							
 						</div>
 						<div class="row">
-							<div class="col-md-12">
-								<label>행사 내용</label> <input type="text" class="form-control"
-									placeholder="축제 1일차" >
+							<div class="form-group col-md-12">
+								<label>행사 내용</label> <input type="text" class="form-control" id="addsrm_issue" name="addsrm_issue"
+								required="required" />
 							</div>
 						</div>
+
 					</div>
 					<!-- 3-2. box-footer -->
 					<div class="box-footer">
 						<div class="row">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block btn-primary"
+								<input type="hidden" id="check" name="check" value="faciladd">
+								<input type="submit" class="btn btn-block btn-primary"
 									value="추가">
 							</div>
 							<div class="col-md-3 btn-group">
@@ -377,15 +356,78 @@
 									value="다시 선택">
 							</div>
 						</div>
+
 					</div>
 				</div>
 				<!-- /. 3-2 box -->
+				</form>
 			</div>
 		</div>
 
 	</section>
-<!------------------------------------------------------------------------------------------------------------------->        
-      </div><!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
-      
-<!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
-<%@ include file="../include/footer.jsp" %>
+	<!------------------------------------------------------------------------------------------------------------------->
+</div>
+<!-- /. 전체를 감싸주는 틀입니다. 지우지 마세여. -->
+
+<!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------>
+<%@ include file="../include/footer.jsp"%>
+<script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+<script>
+	$('#datepicker').datepicker({
+		format : 'yyyy-mm-dd',
+		autoclose : true
+	});
+</script>
+
+<Script type="text/javascript">
+	function selectDel(srm_num, sr_type, sr_name, srm_date, srm_issue) {
+		$("#srm_num").attr("value", srm_num);
+		$("#sr_type").attr("value", sr_type);
+		$("#sr_name").attr("value", sr_name);
+		$("#srm_date").attr("value", srm_date);
+		$("#srm_issue").attr("value", srm_issue);
+		$("#delete").attr("value", "1");
+	}
+	
+	//시설 선택을 셀렉트 생성. pg_type을 바탕으로 pg_name의 list를 출력한다.
+	function selectfacil() {
+
+		var wsr_type = document.getElementById('addsr_type').value;
+		
+		$.getJSON("/HarangProject/ajax?cmd=selectSr", {
+			sr_type : encodeURIComponent(wsr_type)
+		}, function(data) {
+			$("#addsr_name option").remove();
+			$("#addsr_name").append("<option>호수를 입력하세요.</option>");
+			$(data).each(
+					function(index, srlist) {
+						$("#addsr_name").append(
+								"<option value='"+srlist.sr_name+"'>"
+										+ srlist.sr_name + "</option>");
+					});
+		});
+	}
+	
+	function select02() {
+		var varsr_type = document.getElementById('addsr_type').value;
+		var varsr_name = document.getElementById('addsr_name').value;
+
+
+		$.getJSON("/HarangProject/ajax?cmd=selectSr",
+						{
+							sr_type : encodeURIComponent(varsr_type),
+							sr_name : encodeURIComponent(varsr_name),
+							check : 1
+						},
+						function(data) {
+							$("#addsr_num").attr("value"," ");
+							$(data)
+									.each(
+											function(index, srlist) {
+												$("#addsr_num").attr("value",
+														srlist.sr_num);
+											});
+						});
+	}
+</Script>
+

@@ -38,6 +38,7 @@ public class AFacilPGCommand implements CommandInterface {
 		loadList(request);
 		
 		String check2 = request.getParameter("check");
+		System.out.println(check2 + "인가봄?");
 		
 		if("1".equals(check)){
 			deletefacil(request);
@@ -45,7 +46,9 @@ public class AFacilPGCommand implements CommandInterface {
 		}
 		
 		else if("faciladd".equals(check2)){
+			System.out.println("일정으로 시설추가 도착");
 			addDateFacil(request);
+			loadList(request);
 		}
 		
 		return "/WEB-INF/facil/a_facilities_pg_schedule.jsp";
@@ -59,7 +62,10 @@ public class AFacilPGCommand implements CommandInterface {
 				+ "FROM tbl_pg_member m, tbl_playground p WHERE m.pg_num = p.pg_num "
 				+ "AND pgm_issue !='학생예약' ORDER BY m.pgm_date ASC";
 		
-		String scsql= "SELECT * FROM tbl_schedule WHERE s_location IS NOT NULL;";
+		// s_location값에 '운동장'이 있으면 검색.
+		//String scsql= "SELECT * FROM tbl_schedule WHERE s_location IS NOT NULL";
+		String scsql= "SELECT * FROM tbl_schedule WHERE s_location LIKE '%운동장%'";
+		
 		String ajaxsql = "SELECT * FROM tbl_playground GROUP BY pg_type ";
 		
 		ArrayList pglist = new ArrayList();
@@ -146,8 +152,8 @@ public class AFacilPGCommand implements CommandInterface {
 	}
 	
 	private void addDateFacil(HttpServletRequest request) {
-		String sql = null;
-		String a = "INSERT INTO tbl_pg_member (pgm_date, pgm_timecode, m_id, pg_num, pgm_issue) "
+		
+		String sql = "INSERT INTO tbl_pg_member (pgm_date, pgm_timecode, m_id, pg_num, pgm_issue) "
 				+ "VALUES (?, ?, ?, ?, ?)";
 		
 		String pgm_date = request.getParameter("addpgm_date");
@@ -155,8 +161,8 @@ public class AFacilPGCommand implements CommandInterface {
 		// 타임코드는 고정(하루전체를 블록 하게된다.)
 		String pgm_timecode = "A1111111111111";
 		
-		String pg_num = "";
-		String pgm_issue=request.getParameter("pgm_issue");
+		String pg_num = request.getParameter("addpg_num");
+		String pgm_issue=request.getParameter("addpgm_issue");
 		
 		//시설물 관리자 admin03은 고정이나 변경될 수 있으므로 남겨둠.
 		String m_id = "admin03";
@@ -172,7 +178,8 @@ public class AFacilPGCommand implements CommandInterface {
 			pstmt.setString(5, pgm_issue);
 			pstmt.executeUpdate();
 
-
+			System.out.println("일정추가완료.");
+			
 		} catch (Exception e) {
 			System.out.println(" : " + e);
 

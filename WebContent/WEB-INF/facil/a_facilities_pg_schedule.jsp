@@ -243,7 +243,7 @@
 								<h4>일정 확인</h4>
 							</div>
 						</div>
-
+						
 						<div class="row">
 							<div class="col-md-12">
 								<!-- 검색 결과 테이블 -->
@@ -271,6 +271,7 @@
 
 							</div>
 						</div>
+						
 						<!-- 3-1. 종료  -->
 					</div>
 					<!-- 3-1. box-footer -->
@@ -313,43 +314,44 @@
 									value="운동장" readonly="readonly">
 							</div>
 						</div>
-
-					</div>
-					<!-- 3-2. box-footer -->
-					<div class="box-footer">
-
 						<br>
+						
 						<div class="row">
+						
+								<div class="form-group col-md-4">
+									<label>시설명</label> <select class="form-control" id="addpg_type" onchange="selectfacil()" >
+										<c:forEach items="${ajaxlist}" var="s">
+												<option value="${s.pg_type}">${s.pg_type}</option>
+										</c:forEach>
+									</select>
+								</div>
+							
 							<div class="form-group col-md-4">
-								<label>시설명</label> <select class="form-control" id="addpg_type" onchange="selectfacil()" >
-									<c:forEach items="${ajaxlist}" var="s">
-											<option value="${s.pg_type}">${s.pg_type}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="form-group col-md-4">
-								<label>호수</label> <select class="form-control" id="addpg_name" name="addpg_name" onchange="javascript:tossPg_num()">
+								<label>호수</label> <select class="form-control" id="addpg_name" name="addpg_name" onchange="select02()">
 									<option>시설을 선택하세요.</option>
 								</select>
 							</div>
 							<div class="form-group col-md-4">
-								<label>행사 내용</label> <input type="text" class="form-control" id="addpg_issue" name="addpg_issue">
-							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-md-4">
 								<label>시설 번호</label> <input type="text" class="form-control" id="addpg_num" name="addpg_num"
 								readonly="readonly">
 							</div>
+							
 						</div>
+						
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label>행사 내용</label> <input type="text" class="form-control" id="addpgm_issue" name="addpgm_issue"
+								required="required" />
+							</div>
+						</div>
+
 					</div>
 					<!-- 3-2. box-footer -->
 					<div class="box-footer">
 						<div class="row">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
-								<input type="hidden" id="inpgnum" value="inpgnum">
-								<input type="hidden" id="check" value="faciladd">
+								<input type="hidden" id="check" name="check" value="faciladd">
 								<input type="submit" class="btn btn-block btn-primary"
 									value="추가">
 							</div>
@@ -406,14 +408,32 @@
 						$("#addpg_name").append(
 								"<option value='"+pglist.pg_name+"'>"
 										+ pglist.pg_name + "</option>");
-						$("#inpg_num").attr("value",pglist.pg_num);
 					});
 		});
+		
+		
 	}
 	
-	function tossPg_num(){
-		var pg_num = document.getElementById('inpg_num').value;
-		$("#addpg_num").attr("value", pg_num);
+	function select02() {
+		var varpg_type = document.getElementById('addpg_type').value;
+		var varpg_name = document.getElementById('addpg_name').value;
+
+
+		$.getJSON("/HarangProject/ajax?cmd=selectPg",
+						{
+							pg_type : encodeURIComponent(varpg_type),
+							pg_name : encodeURIComponent(varpg_name),
+							check : 1
+						},
+						function(data) {
+							$("#addpg_num").attr("value"," ");
+							$(data)
+									.each(
+											function(index, pglist) {
+												$("#addpg_num").attr("value",
+														pglist.pg_num);
+											});
+						});
 	}
 </Script>
 

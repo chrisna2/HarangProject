@@ -13,10 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
 import dto.PgMemberDTO;
-import dto.PlaygroundDTO;
 import dto.SrMemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
+
+/**
+ * 
+ * @author 김성지
+ * 관리자가 시설을 추가 및 삭제하는 클래스
+ */
 
 public class FacilMainCommand implements CommandInterface {
 
@@ -29,28 +34,24 @@ public class FacilMainCommand implements CommandInterface {
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * 1.처음 출력시 예약 리스트 출력. 2. 3. 4. 5.
-		 */
+		
+		// 무슨 용무로 자바에 접근하는지 확인하는 변수.
 		String deleteOk = request.getParameter("deleteOk");
-		System.out.println(deleteOk);
 		
 		if (null == deleteOk) {
 			loadlist(request);
-			System.out.println("시설메인에 1번접근");
 		} 
 		
 		else if ("1".equals(deleteOk)) {
-			System.out.println("시설메인에 2번접근");
-			
 			deletelist(request);
-			
 			loadlist(request);
 		}
-
 		return "/WEB-INF/facil/facilities_main.jsp";
 	}
 
+	/*
+	 * 처음 접속시 List를 불러오는 메서드
+	 */
 	public void loadlist(HttpServletRequest request) {
 
 		LoginBean login = new LoginBean();
@@ -158,7 +159,10 @@ public class FacilMainCommand implements CommandInterface {
 		request.setAttribute("srmlist", srmlist);
 	}
 
-	// 예약 삭제 쿼리문.
+	/**
+	 * 예약된 상태를 삭제하는 과정.
+	 * @param request
+	 */
 	private void deletelist(HttpServletRequest request) {
 
 		LoginBean login = new LoginBean();
@@ -177,12 +181,12 @@ public class FacilMainCommand implements CommandInterface {
 		
 		// 운동장일때..
 		if("운동장".equals(facilCheck)){
-			sql = "DELETE FROM harang.tbl_pg_member WHERE pgm_num =?";
+			sql = "DELETE FROM tbl_pg_member WHERE pgm_num =?";
 		}
 		
 		// 스터디룸일때..
 		else if("스터디룸".equals(facilCheck)){
-			sql = "DELETE FROM harang.tbl_sr_member WHERE srm_num =?";
+			sql = "DELETE FROM tbl_sr_member WHERE srm_num =?";
 		}
 			
 		try {
@@ -202,6 +206,12 @@ public class FacilMainCommand implements CommandInterface {
 
 	}
 
+	/**
+	 * 예약 상태를 확인하기위해 '타임코드'를 분석
+	 * 배열상태로 쪼개놓는 과정.
+	 * @param code
+	 * @param req
+	 */
 	public void transCode(String code, HttpServletRequest req) {
 		String timetable[] = { "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" };
 
