@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.DaetaReplyDTO;
+import dto.ParttimeReplyDTO;
 import harang.dbcp.DBConnectionMgr;
+import parttime.model.CommentBean;
+import parttime.model.ParttimeBean;
 
 public class DaetaReplyCommand implements CommandInterface {
 
@@ -25,36 +28,15 @@ public class DaetaReplyCommand implements CommandInterface {
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList drlist = new ArrayList();
+		CommentBean cbean = new CommentBean();
+		ParttimeBean pbean = new ParttimeBean();
+
 		String d_num = request.getParameter("d_num");
-		
-		try{
-			con = pool.getConnection();
-			
-			String sql="SELECT * FROM tbl_daeta_reply WHERE d_num=? ORDER BY dr_regdate DESC";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, d_num);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				DaetaReplyDTO dto = new DaetaReplyDTO();
-				dto.setDr_num(rs.getString("dr_num"));
-				dto.setDr_comment(rs.getString("dr_comment"));
-				dto.setDr_regdate(rs.getString("dr_regdate"));
-				dto.setD_num(rs.getString("d_num"));
-				dto.setM_id(rs.getString("m_id"));
-				
-				drlist.add(dto);
-			}
-			
-		}catch(Exception err){
-			System.out.println("getDaetaReplyList() : " + err);
-			err.printStackTrace();
-		}finally{
-			pool.freeConnection(con,pstmt);
+		ArrayList drlist = cbean.getDaetaReplyList(d_num);
+		for(int i=0; i<drlist.size();i++){
+			DaetaReplyDTO dto = (DaetaReplyDTO)drlist.get(i);
+			dto.setM_name((pbean.getMember(dto.getM_id()).getM_name())); //이름저장
 		}
-		
 		return drlist;
 	}
 

@@ -40,7 +40,7 @@
                     	<small>From:</small> ${msg.m_sender_name} <span class="mailbox-read-time pull-right">${msg.t_send_date}</span></h5>
                   </div><!-- /.mailbox-read-info -->
                   <div class="mailbox-read-message">
-                    <p>${msg.t_content}</p>
+                    <pre>${msg.t_content}</pre>
                     <br><br><br><br>
                   </div><!-- /.mailbox-read-message -->
                 </div><!-- /.box-body -->

@@ -9,6 +9,14 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
      <title>기본 값 페이지</title>
+     <c:if test="${result eq 'success'}">
+    <script type="text/javascript">
+   	window.onload=function(){
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    refresh.submit();
+   	};
+    </script>
+</c:if> 
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -211,14 +219,23 @@
                   </div><!-- /. tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
+                	<!-- 댓글쓰기 -->
+                <form method="post" action="/HarangProject/parttime?cmd=PREAD">
                 	<div class="input-group input-group-sm">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                      <button class="btn btn-success btn-flat" type="button">Go!</button>
-                    </span>
-                  </div><!-- /input-group -->
+                	  	<input type="hidden" name="p_num" value="${info.p_num}" id="p_num"/>
+                	  	<input type="hidden" name="comment" value="insert"/>
+	                   	<input type="text" name="pr_comment" class="form-control">
+	                    <span class="input-group-btn">
+	                    	<button class="btn btn-success btn-flat" type="submit">Go!</button>
+	                    </span>
+	                </div><!-- 댓글쓰기 끝! -->
+	            </form>
+                  	<br>
+                  	<!-- 댓글 목록 들어갈 위치 -->
+                	<div class="input-group" id="ajax"></div>
                 </div>
               </div><!-- /.box -->
+              
 
 
               
@@ -293,4 +310,31 @@ function fnPick(m_id){
 	}
 }
 
+var p_num = $("#p_num").val();
+
+$.getJSON("/HarangProject/ajax?cmd=pReply",{p_num:p_num}, function(data){
+        $("#ajax span").remove();
+        $(data).each(function(index, prlist){
+             $("#ajax").append(
+            		 "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+            		+ "<span class='btn btn-success btn-xs'>" + prlist.m_name + "</span>" 
+            		+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + prlist.pr_comment 
+            		+ "&nbsp;&nbsp;&nbsp;&nbsp;"
+            		+"<small>" + prlist.pr_regdate + "</small>"
+                 	+ "&nbsp;&nbsp;&nbsp;&nbsp;"
+                 	+ "<button class='btn btn-default btn-xs' id='rdel"+prlist.pr_num+"'>삭제</button><br>" 
+                 	+ "<input type='hidden' value='"+prlist.pr_num+"'/>"
+                 	);
+             
+             $("#rdel"+prlist.pr_num).click(function(){
+            	 if(confirm("정말 삭제하시겠습니까?")==true){
+            		 $("#pr_num").val($(this).next().val());
+            		 comdel.submit();
+            	 }else{
+            		 return;
+            	 }
+             });
+             
+        });
+});
 </script>

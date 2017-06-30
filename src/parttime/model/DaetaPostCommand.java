@@ -17,8 +17,11 @@ public class DaetaPostCommand implements CommandInterface{
 		paging(req);
 		req.setAttribute("m_id", member.getM_id());
 		
-		// daeta_post.jsp 로 페이지 이동
-		return "/WEB-INF/parttime/daeta_post.jsp";
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_daeta_post.jsp
+			return "WEB-INF/parttime/a_daeta_post.jsp";
+		} else { // 회원이면 daeta_post.jsp
+			return "/WEB-INF/parttime/daeta_post.jsp";
+		}
 	}
 	
 	/**
@@ -27,9 +30,13 @@ public class DaetaPostCommand implements CommandInterface{
 	 * @param req
 	 */
 	public void paging(HttpServletRequest req) {
-		int nowPage = Integer.parseInt(req.getParameter("nowPage"));
-		int nowBlock = Integer.parseInt(req.getParameter("nowBlock"));
-
+		int nowPage = 0, nowBlock = 0;
+		if (req.getParameter("nowPage") != null) {
+			nowPage = Integer.parseInt(req.getParameter("nowPage"));
+		}
+		if (req.getParameter("nowBlock") != null) {
+			nowBlock = Integer.parseInt(req.getParameter("nowBlock"));
+		}
 		req.setAttribute("nowPage", nowPage);
 		req.setAttribute("nowBlock", nowBlock);
 

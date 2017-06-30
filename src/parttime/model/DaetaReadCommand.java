@@ -22,6 +22,7 @@ public class DaetaReadCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 	MessageBean mbean = new MessageBean();
 	PointBean pbean = new PointBean();
+	CommentBean cbean = new CommentBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 		MemberDTO member = bean.getLoginInfo(req);
 		String m_id = member.getM_id();
@@ -49,6 +50,11 @@ public class DaetaReadCommand implements CommandInterface {
 		isPicked(m_id, req); // 채용이 되었는지
 		showApply(req); // 지원자목록
 		/** 끝 : Apply */
+		
+		/** Comment!! 댓글 */
+		insertComment(m_id, req);
+		deleteComment(m_id, req);
+		/** 끝 : Comment */
 		
 		/** 페이지 이동 */
 		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_read.jsp로 페이지 이동]
@@ -379,6 +385,38 @@ public class DaetaReadCommand implements CommandInterface {
 		
 		if("OK".equals(warning)){
 			bean.report( m_id, d_num, dm_report);
+		}
+	}
+	
+	/**
+	 * 댓글을 등록하는 메서드.
+	 * @param m_id 회원번호
+	 * @param req
+	 */
+	public void insertComment(String m_id, HttpServletRequest req){
+		String comment = req.getParameter("comment");
+		
+		if("insert".equals(comment)){
+			String d_num = req.getParameter("d_num");
+			String dr_comment = req.getParameter("dr_comment");
+			
+			cbean.insertDaetaReply(d_num, m_id, dr_comment);
+			req.setAttribute("result", "success");
+		}
+	}
+	
+	/**
+	 * 댓글을 삭제하는 메서드.
+	 * @param m_id
+	 * @param req
+	 */
+	public void deleteComment(String m_id, HttpServletRequest req){
+		String comment = req.getParameter("comment");
+		
+		if("delete".equals(comment)){
+			String dr_num = req.getParameter("dr_num");
+			
+			cbean.deleteDaetaReply(dr_num);
 		}
 	}
 }
