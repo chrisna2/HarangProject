@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import login.LoginBean;
 import message.model.CommandFactory;
 import message.model.CommandInterface;
 
@@ -33,6 +34,9 @@ public class MessageServlet extends HttpServlet {
 		
 		url = (String)command.processCommand(req, resp);
 		
+		//세션을 리프레쉬
+				LoginBean refresh = new LoginBean();
+				refresh.refreshSession(req);
 		
 		RequestDispatcher view = req.getRequestDispatcher(url);
 		view.forward(req, resp);
