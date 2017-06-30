@@ -147,14 +147,29 @@ public class AFacilPGCommand implements CommandInterface {
 	
 	private void addDateFacil(HttpServletRequest request) {
 		String sql = null;
-		String a = "a";
+		String a = "INSERT INTO tbl_pg_member (pgm_date, pgm_timecode, m_id, pg_num, pgm_issue) "
+				+ "VALUES (?, ?, ?, ?, ?)";
 		
-	/* 작성을 해봅시다. */
+		String pgm_date = request.getParameter("addpgm_date");
+		
+		// 타임코드는 고정(하루전체를 블록 하게된다.)
+		String pgm_timecode = "A1111111111111";
+		
+		String pg_num = "";
+		String pgm_issue=request.getParameter("pgm_issue");
+		
+		//시설물 관리자 admin03은 고정이나 변경될 수 있으므로 남겨둠.
+		String m_id = "admin03";
+		
 		try {
 			pool = DBConnectionMgr.getInstance();
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,a);
+			pstmt.setString(1, pgm_date);
+			pstmt.setString(2, pgm_timecode);
+			pstmt.setString(3, m_id);
+			pstmt.setString(4, pg_num);
+			pstmt.setString(5, pgm_issue);
 			pstmt.executeUpdate();
 
 

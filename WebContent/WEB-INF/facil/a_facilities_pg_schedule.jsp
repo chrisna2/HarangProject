@@ -328,14 +328,18 @@
 								</select>
 							</div>
 							<div class="form-group col-md-4">
-								<label>호수</label> <select class="form-control" id="addpg_name" name="addpg_name">
+								<label>호수</label> <select class="form-control" id="addpg_name" name="addpg_name" onchange="javascript:tossPg_num()">
 									<option>시설을 선택하세요.</option>
 								</select>
 							</div>
+							<div class="form-group col-md-4">
+								<label>행사 내용</label> <input type="text" class="form-control" id="addpg_issue" name="addpg_issue">
+							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-12">
-								<label>행사 내용</label> <input type="text" class="form-control">
+							<div class="form-group col-md-4">
+								<label>시설 번호</label> <input type="text" class="form-control" id="addpg_num" name="addpg_num"
+								readonly="readonly">
 							</div>
 						</div>
 					</div>
@@ -344,6 +348,7 @@
 						<div class="row">
 							<div class="col-md-3 btn-group"></div>
 							<div class="col-md-3 btn-group">
+								<input type="hidden" id="inpgnum" value="inpgnum">
 								<input type="hidden" id="check" value="faciladd">
 								<input type="submit" class="btn btn-block btn-primary"
 									value="추가">
@@ -401,9 +406,14 @@
 						$("#addpg_name").append(
 								"<option value='"+pglist.pg_name+"'>"
 										+ pglist.pg_name + "</option>");
-
+						$("#inpg_num").attr("value",pglist.pg_num);
 					});
 		});
+	}
+	
+	function tossPg_num(){
+		var pg_num = document.getElementById('inpg_num').value;
+		$("#addpg_num").attr("value", pg_num);
 	}
 </Script>
 
