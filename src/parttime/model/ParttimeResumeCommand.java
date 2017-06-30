@@ -17,6 +17,8 @@ public class ParttimeResumeCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
+		MemberDTO member = bean.getLoginInfo(req);
+		
 		String m_id = req.getParameter("m_id");
 		String p_num = req.getParameter("p_num");
 
@@ -29,8 +31,13 @@ public class ParttimeResumeCommand implements CommandInterface {
 		req.setAttribute("resume", resume);
 		req.setAttribute("tab", req.getParameter("tab"));
 
-		// parttime_resume.jsp 로 페이지 이동
-		return "/WEB-INF/parttime/parttime_resume.jsp";
+		
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_resume.jsp
+			return "WEB-INF/parttime/a_parttime_resume.jsp";
+		} else { // 회원이면 parttime_resume.jsp
+			return "/WEB-INF/parttime/parttime_resume.jsp";
+		}
+		
 	}
 	
 	/**

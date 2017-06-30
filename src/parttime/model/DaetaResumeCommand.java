@@ -12,6 +12,7 @@ import dto.P_ApplyDTO;
 public class DaetaResumeCommand implements CommandInterface{
 	ParttimeBean bean = new ParttimeBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp){
+		MemberDTO member = bean.getLoginInfo(req);
 		String m_id = req.getParameter("m_id");
 		String d_num = req.getParameter("d_num");
 
@@ -24,8 +25,13 @@ public class DaetaResumeCommand implements CommandInterface{
 		req.setAttribute("resume", resume);
 		req.setAttribute("tab", req.getParameter("tab"));
 		
-		// daeta_resume.jsp 로 페이지 이동
-		return "/WEB-INF/parttime/daeta_resume.jsp";
+		
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_daeta_resume.jsp
+			return "WEB-INF/parttime/a_daeta_resume.jsp";
+		} else { // 회원이면 daeta_resume.jsp
+			return "/WEB-INF/parttime/daeta_resume.jsp";
+		}
+		
 	}
 	
 	/**
