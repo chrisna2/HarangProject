@@ -333,7 +333,6 @@
                           <input type="hidden" name="term" value="${term}"/>
                           <input type="hidden" name='check' value="search">
                           <select name="keyfield" class="form-control input-sm pull-left" style="width: 150px;">
-                            <option value="l_num" ${keyfield eq 'l_num' ? 'selected' : null }>수업 번호</option>
                             <option value="l_dept" ${keyfield eq 'l_dept' ? 'selected' : null }>주요 학과</option>
                             <option value="l_ismust" ${keyfield eq 'l_ismust' ? 'selected' : null }>필수 여부</option>
                             <option value="l_name" ${keyfield eq 'l_name' ? 'selected' : null }>수업명</option>
