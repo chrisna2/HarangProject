@@ -417,7 +417,6 @@
 																"<textarea readonly='readonly' class='form-control' rows='3' style='width: 250px'>"
 																		+ pglist.pg_content
 																		+ "</textarea>");
-												alert("1");
 												$("#pg_point").attr("value",
 														pglist.pg_point);
 												$("#pg_num").attr("value",
