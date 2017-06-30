@@ -237,17 +237,7 @@
                             <td>${tt.l_teacher}</td>
                             <td>${tt.l_room}</td>
                             <td>${tt.l_credit}</td>
-                            <c:choose>
-                                <c:when test="${tt.m_id eq member.m_id and tt.l_grade == grade and tt.tt_grade == tt.l_grade}">
-                                   <td><input type="button" onclick="deletelesson('${tt.l_num}')"  class="btn btn-danger" value="수강 취소"></td>
-                                </c:when>
-                                <c:when test="${tt.m_id eq member.m_id and tt.l_grade < grade and tt.tt_grade == grade}">
-                                   <td><input type="button" onclick="deletelesson('${tt.l_num}')"  class="btn btn-warning" value="재수강 취소"></td>
-                                </c:when>
-                                <c:when test="${tt.m_id eq member.m_id and tt.l_grade < grade and tt.tt_grade < grade}">
-                                  <td><input type="button" onclick="enroll('${tt.l_num}')"  class="btn btn-info" value="재수강"></td>
-                                </c:when>
-                            </c:choose>
+                            <td><input type="button" onclick="deletelesson('${tt.l_num}')"  class="btn btn-danger" value="수강 취소"></td>
                           </tr>
                             </c:forEach>
                     </tbody>
@@ -306,14 +296,8 @@
 	                        <td>${l.l_room}</td>
 	                        <td>${l.l_credit}</td>
                               <c:choose>
-                                <c:when test="${l.m_id eq member.m_id and l.l_grade == grade and l.tt_grade == l.l_grade}">
+                                <c:when test="${l.m_id eq member.m_id}">
                                    <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-danger" value="수강 취소"></td>
-                                </c:when>
-                                <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade == grade}">
-                                   <td><input type="button" onclick="deletelesson('${l.l_num}')"  class="btn btn-warning" value="재수강 취소"></td>
-                                </c:when>
-                                <c:when test="${l.m_id eq member.m_id and l.l_grade < grade and l.tt_grade < grade}">
-                                  <td><input type="button" onclick="enroll('${l.l_num}')"  class="btn btn-info" value="재수강"></td>
                                 </c:when>
                                 <c:otherwise>
                                    <td><input type="button" onclick="enroll('${l.l_num}')" class="btn btn-primary" value="수업 등록"></td>

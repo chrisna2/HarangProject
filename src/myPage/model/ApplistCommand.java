@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import dto.MemberDTO;
 import dto.RecordDTO;
 import harang.dbcp.DBConnectionMgr;
+import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
@@ -52,6 +53,7 @@ public class ApplistCommand implements CommandInterface {
 			}
 		
 		pointList(request);
+		
 		
 		return "/WEB-INF/myPage/a_pplist.jsp";
 	}

@@ -19,6 +19,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
+import login.model.RefreshCommand;
 import upload.RandomFileRenamePolicy;
 import upload.TimestampFileRenamePolicy;
 
@@ -90,11 +91,10 @@ public class MyinfoUpdateCommand implements CommandInterface {
 			pool.freeConnection(con,pstmt);
 		}
 		
-		//회원정보 세션 최신화
-		LoginBean update = new LoginBean();
-		update.refreshSession(request);
+		RefreshCommand re = new RefreshCommand();
+		String url = (String)re.processCommand(request, response);
 		
-		return "/WEB-INF/login/main.jsp";
+		return url;
 	}
 
 }

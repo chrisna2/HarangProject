@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import login.LoginBean;
 import schedule.model.CommandFactory;
 import schedule.model.CommandInterface;
 
@@ -33,6 +34,10 @@ public class ScheduleServlet extends HttpServlet {
 		CommandInterface command = CommandFactory.newInstance().createCommand(cmd);
 		url = (String)command.processCommand(req, resp);
 
+		//세션 초기화
+		LoginBean login = new LoginBean();
+		login.refreshSession(req);
+		
 		RequestDispatcher view = req.getRequestDispatcher(url);
 		view.forward(req, resp);
 		

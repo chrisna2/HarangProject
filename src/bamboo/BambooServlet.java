@@ -38,6 +38,10 @@ public class BambooServlet extends HttpServlet {
 		update.refreshSession(req);
 		
 
+		//세션을 리프레쉬
+		LoginBean refresh = new LoginBean();
+		refresh.refreshSession(req);
+		
 		RequestDispatcher view = req.getRequestDispatcher(url);
 		view.forward(req, resp);
 		

@@ -47,9 +47,6 @@ public class PointZeroCommand implements CommandInterface {
 			if("complete".equals(result)){
 				//학비 감면 메소드
 				pointZero(r_point, member.getM_id());	
-				//회원정보 세션 최신화
-				LoginBean update = new LoginBean();
-				update.refreshSession(request);
 			}
 			//처리 결과 값 방출
 			request.setAttribute("result", result);

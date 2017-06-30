@@ -58,6 +58,12 @@ public class CommandFactory{
 		else if(cmd.equals("membernum")){
 			return new MembernumCommand();
 		}
+		else if(cmd.equals("pReply")){
+			return new ParttimeReplyCommand();
+		}
+		else if(cmd.equals("dReply")){
+			return new DaetaReplyCommand();
+		}
 		else{
 			return null;
 		}

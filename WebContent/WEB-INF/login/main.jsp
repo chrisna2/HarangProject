@@ -9,6 +9,12 @@
      <title>하랑대학교|학생 메인</title>
      <style>
       #timetable{height:100px}
+      #img {
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+    } 
      </style>
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
@@ -28,8 +34,9 @@
           <div class="row">
            <div class="col-md-9">
 	           	<div class="slider1">
-					<div class="slide"><img src="dist/img/harang1.jpg"></div>
-					<div class="slide"><img src="dist/img/harang2.jpg"></div>
+					<div class="slide"><img id="img" src="dist/img/harang1.jpg"></div>
+					<div class="slide"><img id="img" src="dist/img/harang2.jpg"></div>
+					<div class="slide"><img id="img" src="dist/img/univ.jpg"></div>
 				 </div>
            </div><!-- /.col -->
           </div><!-- /.row -->

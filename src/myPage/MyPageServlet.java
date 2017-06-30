@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import login.LoginBean;
 import myPage.model.CommandFactory;
 import myPage.model.CommandInterface;
 
@@ -37,8 +38,11 @@ public class MyPageServlet extends HttpServlet {
 		
 		url = (String)command.processCommand(request, response);
 		
-		RequestDispatcher view = request.getRequestDispatcher(url);
+		//회원정보 세션 최신화
+		LoginBean update = new LoginBean();
+		update.refreshSession(request);
 		
+		RequestDispatcher view = request.getRequestDispatcher(url);
 		view.forward(request, response);
 		
 	}

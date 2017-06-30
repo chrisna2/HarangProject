@@ -32,6 +32,8 @@ public class LoginCommand implements CommandInterface {
 		
 		HttpSession session = request.getSession();
 		
+		
+		
 		String url = "";
 		
 		pool = DBConnectionMgr.getInstance();
@@ -39,6 +41,8 @@ public class LoginCommand implements CommandInterface {
 		//MemberDto dto = new MemberDto();
 		String input_id = request.getParameter("m_id");
 		String input_pw = request.getParameter("m_pw");
+		
+		
 		
 		String sql = "select m_pw, m_name, m_dept, m_mail, m_tel, m_addr, m_point, m_photo, m_fee, m_grade, m_birth, m_regdate "
 				+ "from tbl_member where m_id = ?";
@@ -56,6 +60,10 @@ public class LoginCommand implements CommandInterface {
 			rs.next();
 			
 			String m_pw = rs.getString("m_pw");
+			//비밀번호가 틀렸을때.
+			if(!input_pw.equals(m_pw)){
+				return "/WEB-INF/login/badinfo.jsp";
+			}
 			String m_name = rs.getString("m_name");
 			String m_dept = rs.getString("m_dept");
 			String m_mail = rs.getString("m_mail");
@@ -84,14 +92,14 @@ public class LoginCommand implements CommandInterface {
 			//일반 회원 일때
 			if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && !m_mail.isEmpty() && !m_tel.isEmpty() && !m_addr.isEmpty()){
 				session.setAttribute("member", mdto);
-				session.setAttribute("miniPlistUser", point.pointListHeaderUser(input_id));
+				session.setAttribute("PLM", point.pointListHeaderUser(input_id));
 				session.setAttribute("head_msg", messege.getGivenMessageListMini(input_id));
 				url="/WEB-INF/login/main.jsp";
 			}
 			//관리자 일때.
 			else if(input_pw.equals(m_pw) && m_dept.equals("관리자")){
 				session.setAttribute("admin", mdto);
-				session.setAttribute("miniPlistAdmin", point.pointListHeaderAdmin(input_id));
+				session.setAttribute("PLA", point.pointListHeaderAdmin(input_id));
 				session.setAttribute("head_msg", messege.getGivenMessageListMini(input_id));
 				url="/WEB-INF/login/a_main.jsp";
 			}
@@ -99,10 +107,6 @@ public class LoginCommand implements CommandInterface {
 			else if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && m_mail.isEmpty() && m_tel.isEmpty() && m_addr.isEmpty()){
 				session.setAttribute("newbee", mdto);
 				url="/WEB-INF/login/newbee.jsp";
-			}
-			//비밀번호가 틀렸을때.
-			else if(!input_pw.equals(m_pw)){
-				url="/WEB-INF/login/badinfo.jsp";
 			}
 			
 		}catch(Exception err){

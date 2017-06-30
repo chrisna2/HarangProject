@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import login.LoginBean;
 import parttime.model.CommandFactory;
 import parttime.model.CommandInterface;
 
@@ -34,6 +35,9 @@ public class ParttimeServlet extends HttpServlet {
 		
 		CommandInterface command = CommandFactory.newInstance().createCommand(cmd);
 		url = (String)command.processCommand(req, resp);
+		
+		LoginBean login = new LoginBean();
+		login.refreshSession(req);
 
 		RequestDispatcher view = req.getRequestDispatcher(url);
 		view.forward(req, resp);

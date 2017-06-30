@@ -80,7 +80,7 @@
                     <!-- 내부 메뉴 : 실제 메세지 데이터가 포함 -->
                     <ul class="menu">
                       <!-- 메세지 반복문 지점 시작 -->
-                      <c:forEach items="${miniPlistAdmin}" var="ap">
+                      <c:forEach items="${PLA}" var="ap">
                            <c:if test="${admin.m_id eq ap.m_giver}">
                              <li>
 		                        <a href="#">
