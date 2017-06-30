@@ -201,11 +201,7 @@ td {
 					</div>
 
 					<div class="box-body" id="bbcontent">
-						${bbcon.bb_content}<br> 테스트용 작성자 m_id : ${bbcon.m_id} <br>
-						테스트용 로그인한 m_id : ${sessionScope.admin.m_id} <br> 테스트용 islike
-						: ${islike } <br> 테스트용 isdlike : ${isdlike } <br> 테스트용
-						관리자 : ${sessionScope.admin.m_dept }<br> 테스트용 공지여부 :
-						${bbcon.bb_notice }<br>
+						${bbcon.bb_content}
 					</div>
 					<!-- /.box-body -->
 					<div class="box-footer ">
