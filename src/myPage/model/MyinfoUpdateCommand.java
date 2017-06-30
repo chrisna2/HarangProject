@@ -60,7 +60,9 @@ public class MyinfoUpdateCommand implements CommandInterface {
 		while(enumer.hasMoreElements()){
 			String name = (String)enumer.nextElement();
 			File file = multi.getFile(name);
-			photoName = "upload/member/"+multi.getFilesystemName(name);
+			if(null != multi.getFilesystemName(name)){
+				photoName = "upload/member/"+multi.getFilesystemName(name);
+			}
 		}			//위에 지정한 realPath와 똑같이 지정..
 		//////////////////request는 사용 할수 없고  multi로 파라미터 받아올수 있음//////////////
 		

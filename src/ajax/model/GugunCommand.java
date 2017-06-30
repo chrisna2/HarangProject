@@ -16,7 +16,11 @@ import javax.sql.DataSource;
 import dto.RecordDTO;
 import dto.ZipDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 도/시를 통해 구/군의 목록을 출력하는 ajax 클래스
+ * @author 나현기
+ *
+ */
 public class GugunCommand implements CommandInterface {
 	
 	//DB 커넥션 4 대장

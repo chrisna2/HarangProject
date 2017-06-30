@@ -15,7 +15,11 @@ import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import message.model.MessageBean;
 import myPage.model.PointlistCommand;
-
+/**
+ * 로그인 커맨드 클래스
+ * @author 나현기
+ *
+ */
 public class LoginCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -88,12 +92,18 @@ public class LoginCommand implements CommandInterface {
 			mdto.setM_grade(m_grade);
 			mdto.setM_birth(m_birth);
 			mdto.setM_regdate(m_regdate);
+			
+			
 		
 			//일반 회원 일때
-			if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && !m_mail.isEmpty() && !m_tel.isEmpty() && !m_addr.isEmpty()){
+			if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && null != m_mail && null != m_tel && null != m_addr){
 				session.setAttribute("member", mdto);
 				session.setAttribute("PLM", point.pointListHeaderUser(input_id));
 				session.setAttribute("head_msg", messege.getGivenMessageListMini(input_id));
+				RefreshCommand refresh = new RefreshCommand();
+				refresh.timetable(request);
+				refresh.recentData(request);
+				refresh.point(request,input_id);
 				url="/WEB-INF/login/main.jsp";
 			}
 			//관리자 일때.
@@ -104,7 +114,7 @@ public class LoginCommand implements CommandInterface {
 				url="/WEB-INF/login/a_main.jsp";
 			}
 			//신규 회원 일때.
-			else if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && m_mail.isEmpty() && m_tel.isEmpty() && m_addr.isEmpty()){
+			else if(input_pw.equals(m_pw)&& null == m_mail && null == m_tel && null == m_addr){
 				session.setAttribute("newbee", mdto);
 				url="/WEB-INF/login/newbee.jsp";
 			}
@@ -118,10 +128,6 @@ public class LoginCommand implements CommandInterface {
 			pool.freeConnection(con,pstmt,rs);
 		}		
 		
-		RefreshCommand refresh = new RefreshCommand();
-		refresh.timetable(request);
-		refresh.recentData(request);
-		refresh.point(request,input_id);
 		
 		return url;
 		

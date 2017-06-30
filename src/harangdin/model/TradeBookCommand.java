@@ -17,6 +17,12 @@ import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
 import point.PointBean;
 
+/**
+ * 판매자와 구매자와의 거래 중 관리자의 중개
+ * @author student
+ *
+ */
+
 public class TradeBookCommand implements CommandInterface{
 
 	//DB 커넥션 3 대장
@@ -64,6 +70,12 @@ public class TradeBookCommand implements CommandInterface{
 		return "/WEB-INF/harangdin/tradeResult.jsp";
 	}
 	
+	/**
+	 * 구매자가 제시한 포인트 중 가장 높은 포인트를 제시한 구매자의 학번을 알려줌
+	 * @param b_num
+	 * @param bh_want
+	 * @return
+	 */
 	
 	public String maxId(String b_num, int bh_want){
 		
@@ -95,7 +107,12 @@ public class TradeBookCommand implements CommandInterface{
 		return m_id;
 	}
 	
-	//판매자의 총 포인트
+	/**
+	 * 판매자의 총 포인트를 알려준다
+	 * @param m_id
+	 * @return
+	 */
+
 	public long maxPoint(String m_id){
 		
 		String sql="SELECT m_point FROM tbl_member WHERE m_id=?";
@@ -126,6 +143,14 @@ public class TradeBookCommand implements CommandInterface{
 		
 		return m_point;
 	}
+	
+	/**
+	 * 구매자가 판매자의 선택을 받을 시, Y가 뜬다
+	 * @param giver_id
+	 * @param b_num
+	 * @param bh_want
+	 * @return
+	 */
 	
 	public String recode(String giver_id, String b_num, int bh_want){
 		String message = null;
@@ -167,6 +192,11 @@ public class TradeBookCommand implements CommandInterface{
 		
 		return message;
 	}
+	
+	/**
+	 * 판매자와 구매자가 서로 거래중일 때는 '거래중'이라는 내용이 뜬다
+	 * @param b_num
+	 */
 	
 	public void tradeCheckBook(String b_num){
 		

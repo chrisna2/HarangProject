@@ -15,6 +15,14 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+
+/**
+ * 
+ * 사용자가 학사일정 페이지에서 게시글 목록을 불러올 때 필요한 클래스
+ * 
+ * @author 김민준
+ *
+ */
 public class U_Sch_List_Command implements CommandInterface {
 
 	private Connection con;

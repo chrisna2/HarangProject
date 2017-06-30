@@ -11,6 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import dto.BambooDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 사용자가 대나무숲에 작성한 글을 수정할 때 수정하기 위한 페이지로 이동할 때 필요한 클래스
+ * 
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class U_Bb_Con_Update_Command implements CommandInterface {
 
 	private Connection con;
@@ -26,6 +34,11 @@ public class U_Bb_Con_Update_Command implements CommandInterface {
 		}
 	}
 
+	/**
+	 * 
+	 * 사용자가 대나무숲에 작성한 긍를 수정할 때 기존에 입력된 글의 내용을 불러오는 메소드
+	 * 
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 		BambooDTO bbdto = null;

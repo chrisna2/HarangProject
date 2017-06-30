@@ -197,10 +197,18 @@
          <!-- 사이드 바 메뉴 항목 -->
           <ul class="sidebar-menu">
             <!-- 상위 메뉴 시작 -->
+              <!-- 상위 메뉴 시작 -->
+            <li class="treeview">
+              <a href="/HarangProject/message?cmd=INBOX">
+                <i class="fa fa-envelope-o"></i>
+                <span>메세지 함</span>
+              </a>
+              <!-- 하위 메뉴 끝 -->
+            </li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-eye"></i>
-                <span>회원 포인트 관리</span>
+                <span>회원 및 포인트 관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <!-- 하위 메뉴 시작 -->
@@ -210,7 +218,6 @@
                 <li><a href="/HarangProject/myPage?cmd=AspecList"><i class="fa fa-circle-o"></i> 스팩 목록 관리</a></li>
                 <li><a href="/HarangProject/myPage?cmd=Alesson"><i class="fa fa-circle-o"></i> 강의 목록 관리</a></li>
                 <li><a href="/HarangProject/myPage?cmd=ApointCheck"><i class="fa fa-circle-o"></i> 포인트 관리 시스템</a></li>
-                <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-circle-o"></i> 관리자 쪽지함</a></li>
               </ul>
               <!-- 하위 메뉴 끝 -->
             </li>

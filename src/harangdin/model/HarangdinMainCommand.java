@@ -16,6 +16,12 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 하랑딘 메인
+ * @author 서지윤
+ *
+ */
+
 public class HarangdinMainCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -35,6 +41,11 @@ public class HarangdinMainCommand implements CommandInterface {
 		return "/WEB-INF/harangdin/harangdin_main.jsp";
 		
 	}
+	
+	/**
+	 * 학생들이 등록한 도서들의 목록이 나타난다
+	 * @param request
+	 */
 	
 	public void list(HttpServletRequest request){
 		
@@ -102,7 +113,7 @@ public class HarangdinMainCommand implements CommandInterface {
 		PagingBean pbean = new PagingBean();
 				
 		// 페이징 관련 정보 셋팅 , 두번째 parameter는 한페이지에 들어갈 글의 개수!!
-		PagingDto paging = pbean.Paging(list.size(),5, nowPage,10, nowBlock);
+		PagingDto paging = pbean.Paging(list.size(),10, nowPage,10, nowBlock);
 						
 		// parameter 보내기
 		request.setAttribute("paging", paging);

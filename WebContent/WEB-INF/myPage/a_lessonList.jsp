@@ -54,54 +54,6 @@
           <div class="row">
            <!-- 너비 사이즈 수정  : col-->
            <div class="col-md-9">
-           
-             <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">수업 목록 조회 / 개설</h3>
-                </div>
-                <div class="box-body">
-                    <form action="">
-                     <div class="input-group">
-                          <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 개설 학기</span>
-                          <select class="form-control input-sm" required="required">
-                            <option></option>
-                            <option value="1">1학기</option>
-                            <option value="2">2학기</option>
-                          </select>
-                    </div>
-                     <br>
-                     <div class="input-group">
-                          <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 개설 학년</span>
-                          <select class="form-control input-sm" required="required">
-                            <option></option>
-                            <option value="0">모든학년</option>
-                            <option value="1">1학년</option>
-                            <option value="2">2학년</option>
-                            <option value="3">3학년</option>
-                            <option value="4">4학년</option>
-                          </select>
-                    </div>
-                     <br>
-                     <div class="input-group">
-                          <span class="input-group-addon bg-gray"><i class="fa fa-sort-numeric-desc"></i> 개설 학과</span>
-                          <select class="form-control input-sm" required="required">
-                            <option></option>
-                            <option value="교양">교양</option>
-                            <option value="국문학과">국문학과</option>
-                            <option value="수학과">수학과</option>
-                            <option value="컴퓨터공학과">컴퓨터공학과</option>
-                            <option value="경영학과">경영학과</option>
-                            <option value="정보통신학과">정보통신학과</option>
-                          </select>
-                    </div>
-                    <br>
-                    </form>
-                </div>
-                <div class="box-footer clearfix" align="right">
-                    <button type="submit" class="btn btn-primary">조회 <i class="fa fa-search"></i></button>
-                </div>
-            </div>
-           
             <!-- 리스트 사용시  -->
              <div class="box">
                 <div class="box-header">

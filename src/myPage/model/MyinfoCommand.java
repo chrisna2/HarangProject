@@ -6,6 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import login.model.RegformCommand;
 
+/**
+ * 내 정보페이지로 접속하는 커맨드 클래스
+ * @author 나현기
+ *
+ */
 public class MyinfoCommand implements CommandInterface {
 	
 

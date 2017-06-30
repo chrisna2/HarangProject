@@ -164,9 +164,9 @@
                         <option value="017">017</option>
                     </select>
                     <span class="input-group-addon bg-gray"> - </span>
-                    <input type="text" name="m_tel2"  class="form-control" required="required">
+                    <input type="text" name="m_tel2"  class="form-control" required="required" onkeydown="return showKeyCode(event)">
                     <span class="input-group-addon bg-gray"> - </span>
-                    <input type="text" name="m_tel3"  class="form-control" required="required">
+                    <input type="text" name="m_tel3"  class="form-control" required="required" onkeydown="return showKeyCode(event)">
                   </div>
                   <br>
                     <div class="input-group">
@@ -276,6 +276,18 @@
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
     <script>
+    function showKeyCode(event) {
+        event = event || window.event;
+        var keyID = (event.which) ? event.which : event.keyCode;
+        if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+        {
+            return;
+        }
+        else
+        {
+            return false;
+        }
+    }
       $(function () {
         //모달 접근 바로 하기
         $("#btnPopup").click(

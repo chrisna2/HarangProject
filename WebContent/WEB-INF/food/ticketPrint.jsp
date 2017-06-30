@@ -81,7 +81,7 @@
                     <h4><i class="fa fa-cutlery"></i> 구매일 : ${food.fm_regdate}</h4>
                     <h4><i class="fa fa-cutlery"></i> 구매자 : ${member.m_name} (${member.m_id})</h4>
                     <h4><i class="fa fa-cutlery"></i> 구매포인트 : ${food.f_point}</h4>
-                    <h4 class="text-danger"><i class="fa fa-warning"></i> 사용 가능 시간 : ${food.f_selldate} 11시 이후 부터 3시 이전까지</h4>
+                    <h4 class="text-danger"><i class="fa fa-warning"></i> 사용 가능 시간 : <b id="selldate">${food.f_selldate}</b> 11시 이후 부터 3시 이전까지</h4>
                     <br>
                     <h4 class="text-danger"><i class="fa fa-warning"></i> 사용시 주의 사항 <i class="fa fa-warning"></i></h4>
                     <p>1. 해당식권은 사용 가능 시간이 지나면 사용할 수 없습니다.</p>
@@ -92,7 +92,7 @@
                 </div><!-- /.box-body -->
 
 					<div class="box-footer clearfix" align="center">
-						<input type="button" class="btn" value="닫기"> 
+						<input type="button" class="btn" value="닫기" id="goback"> 
 						<input type="button" id="use" class="btn btn-success" value="사용 [결제 테스트용]"> 
 					    <input type="button" id="return" class="btn btn-danger" value="환불 처리">
 					</div>
@@ -161,16 +161,57 @@
 
       //티켓 사용 : 결제
     	    $("#use").click(function() {
-    	        $("#check").val("use");
-    	        $("#ticketuse")
-    	        .attr("action", "/HarangProject/food?cmd=ticketuse")
-    	        .submit();
+
+    	    	/*날짜 비교 */
+    	    	var $selldate = $("#selldate").text().split("-");
+    	    	var year = $selldate[0];
+    	    	var month = $selldate[1];
+    	    	var day = $selldate[2];
+    	    	var selldate = new Date();
+    	    	selldate.setFullYear(year, month - 1, day);
+    	    	var today = new Date();
+
+    	    	if(today.getTime()>selldate.getTime()){
+    	    		    alert("이미 사용일이 지난 식권입니다.");
+        	    	}
+    	    	else if(today.getTime()<selldate.getTime()){
+    	    		    alert("식권 사용일 날 사용해 주십시요.");
+        	    	}
+    	    	else if(selldate.getTime()==today.getTime()){
+	                    $("#check").val("use");
+	                    $("#ticketuse")
+	                    .attr("action", "/HarangProject/food?cmd=ticketuse")
+	                    .submit(); 
+        	    	}
     	    });
-     //티켓 환불 	    
+      //티켓 환불 	    
     	    $("#return").click(function() {
-    	        $("#check").val("return");
-    	        $("#ticketuse")
-    	        .attr("action", "/HarangProject/food?cmd=ticketuse")
-    	        .submit();
+
+                /*날짜 비교 */
+                var $selldate = $("#selldate").text().split("-");
+                var year = $selldate[0];
+                var month = $selldate[1];
+                var day = $selldate[2];
+                var selldate = new Date();
+                selldate.setFullYear(year, month - 1, day);
+                var today = new Date();
+
+                if(today.getTime()>selldate.getTime()){
+                        alert("이미 사용일이 지난 식권은 환불 불가합니다.");
+                    }
+                else if(today.getTime()<selldate.getTime()){
+	                    $("#check").val("return");
+	                    $("#ticketuse")
+		                .attr("action", "/HarangProject/food?cmd=ticketuse")
+		                .submit();
+                    }
+                else if(selldate.getTime()==today.getTime()){
+                	   alert("당일날에는 환불이 불가능 합니다.");
+                    }
+    	    });
+
+    	    // 뒤로 가기
+    	    $("#goback").click(function() {
+    	    	   history.go(-1);
     	    });
 </script>

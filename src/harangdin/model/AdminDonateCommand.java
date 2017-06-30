@@ -16,6 +16,12 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 관리자 기부목록 페이지
+ * @author 서지윤
+ *
+ */
+
 public class AdminDonateCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -41,7 +47,10 @@ public class AdminDonateCommand implements CommandInterface {
 		
 	}
 
-	
+	/**
+	 * 학생들의 도서 기부목록
+	 * @param request
+	 */
 	public void list(HttpServletRequest request){
 		
 		
@@ -117,6 +126,10 @@ public class AdminDonateCommand implements CommandInterface {
 		
 	}
 	
+	/**
+	 * 관리자의 기부 도서 목록 삭제
+	 * @param request
+	 */
 	public void delete(HttpServletRequest request){
 		
 		pool = DBConnectionMgr.getInstance();

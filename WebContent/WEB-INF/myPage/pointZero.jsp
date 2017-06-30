@@ -73,7 +73,7 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-black-gradient"><i class="fa fa-money"></i> 등록금 감면</span>
-                    <input type="text" name="r_point" class="form-control" placeholder="당신의 포인트를 입력 하세요" required="required">
+                    <input type="text" name="r_point" class="form-control" placeholder="당신의 포인트를 입력 하세요" required="required" onkeydown="return showKeyCode(event)">
                     <span class="input-group-addon bg-black-gradient">포인트</span>
                   </div>
                   <br>
@@ -94,3 +94,17 @@
       
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
+<script>
+function showKeyCode(event) {
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+    {
+        return;
+    }
+    else
+    {
+        return false;
+    }
+}
+</script>

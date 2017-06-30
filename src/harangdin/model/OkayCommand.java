@@ -16,6 +16,12 @@ import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
 import point.PointBean;
 
+/**
+ * 도서 수령 확인
+ * @author 서지윤
+ *
+ */
+
 public class OkayCommand implements CommandInterface{
 	//DB 커넥션 3 대장
 	Connection con;
@@ -25,8 +31,7 @@ public class OkayCommand implements CommandInterface{
 	//DBCP 사용
 	DBConnectionMgr pool;
 	
-	
-	
+
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -61,6 +66,11 @@ public class OkayCommand implements CommandInterface{
 		return "/WEB-INF/harangdin/tradeComplete.jsp";
 	}
 	
+	/**
+	 * 관리자가 판매자와 구매자 사이 포인트를 중개한다
+	 * @return
+	 */
+	
 	public long pointRecall(){
 		
 		long pointRecall = 0;
@@ -90,6 +100,14 @@ public class OkayCommand implements CommandInterface{
 		
 		return pointRecall;
 	}
+	
+	/**
+	 * 도서 구매자의 수령 후 포인트 지급을 위한 확인
+	 * @param b_num
+	 * @param buyer_id
+	 * @param bh_want
+	 * @return
+	 */
 	
 	public String bookComplete(String b_num, String buyer_id, int bh_want){
 		String sql="UPDATE tbl_b_hunter SET bh_iscomplete='Y' WHERE m_id=? and bh_want = ? and b_num=?";
@@ -131,6 +149,11 @@ public class OkayCommand implements CommandInterface{
 		
 		return msg;
 	}
+	
+	/**
+	 * 포인트 지급까지 완료된 도서는 완료가 된다.
+	 * @param b_num
+	 */
 	
 	public void bookComplete2(String b_num){
 		String sql="UPDATE tbl_book SET b_iscomplete='완료' WHERE b_num=?";

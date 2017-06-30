@@ -12,6 +12,12 @@ import javax.sql.DataSource;
 
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 관리자의 도서 삭제
+ * @author 서지윤
+ *
+ */
+
 public class AdminBookDelete implements CommandInterface  {
 
 	//DB 커넥션 3 대장

@@ -198,6 +198,13 @@
           <ul class="sidebar-menu">
             <!-- 상위 메뉴 시작 -->
             <li class="treeview">
+              <a href="/HarangProject/message?cmd=INBOX">
+                <i class="fa fa-envelope-o"></i>
+                <span>메세지 함</span>
+              </a>
+              <!-- 하위 메뉴 끝 -->
+            </li>
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-eye"></i>
                 <span>마이페이지</span>
@@ -210,7 +217,6 @@
                 <li><a href="/HarangProject/myPage?cmd=timeTable"><i class="fa fa-circle-o"></i> 수강 시간표!</a></li>
                 <li><a href="/HarangProject/myPage?cmd=pointList"><i class="fa fa-circle-o"></i> 포인트 거래 내역</a></li>
                 <li><a href="/HarangProject/myPage?cmd=pointZero"><i class="fa fa-circle-o"></i> 학비 포인트 제로!</a></li>
-                <li><a href="/HarangProject/message?cmd=INBOX"><i class="fa fa-circle-o"></i> 쪽지 함</a></li>
               </ul>
               <!-- 하위 메뉴 끝 -->
             </li>

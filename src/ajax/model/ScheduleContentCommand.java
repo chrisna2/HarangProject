@@ -14,6 +14,14 @@ import javax.sql.DataSource;
 import dto.ScheduleDTO;
 import harang.dbcp.DBConnectionMgr;
 
+
+/**
+ * 
+ * 사용자가 학사일정 페이지에서 글의 목록을 불러오기 필요한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class ScheduleContentCommand implements CommandInterface {
 	
 	//DB 커넥션 4 대장

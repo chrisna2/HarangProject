@@ -24,6 +24,11 @@ import paging.PagingBean;
 import paging.dto.PagingDto;
 import upload.RandomFileRenamePolicy;
 
+/**
+ * 회원 스펙 등록과 관련한 커멘드 클래스
+ * @author 나현기
+ *
+ */
 public class SpecUpProcCommand implements CommandInterface {
 
 	// DB 커넥션 3 대장
@@ -66,7 +71,12 @@ public class SpecUpProcCommand implements CommandInterface {
 		return "/WEB-INF/myPage/specUpComplete.jsp";
 	}
 	
-	
+	/**
+	 * 스펙 신규 등록 메소드
+	 * @param multi
+	 * @param photoName
+	 * @return
+	 */
 	public String challenge(MultipartRequest multi, String photoName) {
 		
 		String msg = "";
@@ -99,7 +109,12 @@ public class SpecUpProcCommand implements CommandInterface {
 		}
 		return msg;
 	}
-	
+	/**
+	 * 스펙업 재도전 메소드
+	 * @param multi
+	 * @param photoName
+	 * @return
+	 */
 	public String rechallenge(MultipartRequest multi, String photoName) {
 		
 		String msg = "";

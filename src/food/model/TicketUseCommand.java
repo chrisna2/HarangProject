@@ -20,8 +20,8 @@ import paging.PagingBean;
 import paging.dto.PagingDto;
 
 /**
- * 티켓구매 및 환불처리.
- * @author YOO
+ * 식권 사용 및 환불 처리 커멘드 클래스.
+ * @author 나현기
  *
  */
 public class TicketUseCommand implements CommandInterface {
@@ -60,6 +60,12 @@ public class TicketUseCommand implements CommandInterface {
 		return "/WEB-INF/food/ticketResult.jsp";
 	}
 
+	/**
+	 * 식권  환불 처리 메소드
+	 * @param f_num 메뉴번호
+	 * @param m_id 구매자 아이디
+	 * @return
+	 */
 	public String returning(String f_num,String m_id){
 		
 		String sql = "UPDATE tbl_food_member SET fm_isuse = 'return', fm_usedate = NOW() WHERE m_id = ? and f_num = ?";
@@ -86,10 +92,15 @@ public class TicketUseCommand implements CommandInterface {
 		return result;
 	}
 	
-	
+	/**
+	 * 식권 사용 메소드
+	 * @param f_num
+	 * @param m_id
+	 * @return
+	 */
 	public String using(String f_num,String m_id){
 		
-		String sql = "UPDATE tbl_food_member SET fm_isuse = 'return', fm_usedate = NOW() WHERE m_id = ? and f_num = ?";
+		String sql = "UPDATE tbl_food_member SET fm_isuse = 'used', fm_usedate = NOW() WHERE m_id = ? and f_num = ?";
 		String result = null;
 		try {
 			
@@ -113,7 +124,13 @@ public class TicketUseCommand implements CommandInterface {
 		return result;
 	}
 	
-	
+	/**
+	 * 식권 포인트 환불 처리 메소드
+	 * @param f_point
+	 * @param f_num
+	 * @param member_id
+	 * @param f_title
+	 */
 	public void returnTicket(int f_point,String f_num,String member_id,String f_title){
 		
 		System.out.println(f_num);

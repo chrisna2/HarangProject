@@ -198,14 +198,23 @@
                   </div><!-- /. tools -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
+                	<!-- 댓글쓰기 -->
+                <form method="post" action="/HarangProject/parttime?cmd=DREAD">
                 	<div class="input-group input-group-sm">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                      <button class="btn btn-success btn-flat" type="button">Go!</button>
-                    </span>
-                  </div><!-- /input-group -->
+                	  	<input type="hidden" name="d_num" value="${info.d_num}" id="d_num"/>
+                	  	<input type="hidden" name="comment" value="insert"/>
+	                   	<input type="text" name="dr_comment" class="form-control">
+	                    <span class="input-group-btn">
+	                    	<button class="btn btn-success btn-flat" type="submit">Go!</button>
+	                    </span>
+	                </div><!-- 댓글쓰기 끝! -->
+	            </form>
+                  	<br>
+                  	<!-- 댓글 목록 들어갈 위치 -->
+                	<div class="input-group" id="ajax"></div>
                 </div>
               </div><!-- /.box -->
+              
               
             </div><!--/.col -->
         </div><!-- /.row -->
@@ -257,6 +266,23 @@
       	<input type="hidden" name="nowPage" value="${nowPage}"/>
       	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
       </form>
+      <form name="comdel" id="commentDel" method="post" action="/HarangProject/parttime">
+      	<input type="hidden" name="cmd" value="DREAD"/>
+      	<input type="hidden" name="comment" value="delete"/>
+      	<input type="hidden" name="dr_num" value="" id="dr_num"/>
+      	<input type="hidden" name="d_num" value="${info.d_num}"/>
+      	<input type="hidden" name="m_id" value="${m_id}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
+      	<input type="hidden" name="a_nowPage" value="${a_paging.nowPage}"/>
+		<input type="hidden" name="a_nowBlock" value="${a_paging.nowBlock}"/>
+		<input type="hidden" name="nowPage" value="${nowPage}"/>
+    	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
+      <form name="refresh" method="post" action="/HarangProject/parttime">
+      	<input type="hidden" name="cmd" value="DREAD"/>
+      	<input type="hidden" name="d_num" value="${info.d_num}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
+      </form>
        
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/a_footer.jsp" %>
@@ -290,4 +316,32 @@ function fnPick(m_id){
 		return;
 	}
 }
+
+//댓글
+var d_num = $("#d_num").val();
+
+$.getJSON("/HarangProject/ajax?cmd=dReply",{d_num:d_num}, function(data){
+        $("#ajax span").remove();
+        $(data).each(function(index, drlist){
+             $("#ajax").append(
+            		 "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+            		+ "<span class='btn btn-success btn-xs'>" + drlist.m_name + "</span>" 
+            		+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + drlist.dr_comment 
+            		+ "&nbsp;&nbsp;&nbsp;&nbsp;"
+            		+"<small>" + drlist.dr_regdate + "</small>"
+                 	+ "&nbsp;&nbsp;&nbsp;&nbsp;"
+                 	+ "<button class='btn btn-default btn-xs' id='rdel"+drlist.dr_num+"'>삭제</button><br>" 
+                 	+ "<input type='hidden' value='"+drlist.dr_num+"'/>"
+                 	);
+             
+             $("#rdel"+drlist.dr_num).click(function(){
+            	 if(confirm("정말 삭제하시겠습니까?")==true){
+            		 $("#dr_num").val($(this).next().val());
+            		 comdel.submit();
+            	 }else{
+            		 return;
+            	 }
+             });
+        });
+});
 </script>

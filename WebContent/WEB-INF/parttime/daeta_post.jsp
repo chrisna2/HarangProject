@@ -154,12 +154,16 @@
     $(".onlynum").keyup(function(){$(this).val( $(this).val().replace(/[^0-9]/g,"") );} );
     	
     function fnPost(){
-    	if(confirm("제출과 동시에 포인트가 빠져나갑니다.\n정말 제출하시겠습니까?") == true){
-    		document.post.submit();
-   		}else{
-   			return;
-   		}
-   		
+    	if ($('input[required]').is(":empty")){
+    		alert("빈 칸을 채워주세요.");
+    		$(this).focus();
+    	}else{
+    		if(confirm("제출과 동시에 포인트가 빠져나갑니다.\n정말 제출하시겠습니까?") == true){
+        		document.post.submit();
+       		}else{
+       			return;
+       		}
+    	}
    	}
     	
    	function fnCancel(){

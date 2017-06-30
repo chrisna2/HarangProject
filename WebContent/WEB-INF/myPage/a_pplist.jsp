@@ -165,7 +165,7 @@
                     <br>
                   <div class="input-group">
                     <span class="input-group-addon bg-gray"><i class="fa fa-location-arrow"></i> 포인트</span>
-                    <input type="text" name="r_point" class="form-control" required="required">
+                    <input type="text" name="r_point" class="form-control" required="required" onkeydown="return showKeyCode(event)">
                     <span class="input-group-addon bg-gray"> 포인트를</span>
                   </div>
                   <br>
@@ -208,6 +208,18 @@
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <script>
+function showKeyCode(event) {
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+    {
+        return;
+    }
+    else
+    {
+        return false;
+    }
+}
 function prevPage() {
     document.getElementById("prevPage").submit();
 }

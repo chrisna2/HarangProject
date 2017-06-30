@@ -20,6 +20,13 @@ import dto.RecordDTO;
 import dto.ZipDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 관리자가 학사일정 관리페이지에서 글의 내용을 불러오기 위해 필요한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_ScheduleCommand implements CommandInterface {
 
 	// DB 커넥션 4 대장

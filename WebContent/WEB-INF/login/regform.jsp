@@ -230,9 +230,9 @@
                         <option value="017">017</option>
                     </select>
                     <span class="input-group-addon bg-gray"> - </span>
-                    <input type="text" name="m_tel2" class="form-control" required="required">
+                    <input type="text" name="m_tel2" class="form-control" required="required" onkeydown="return showKeyCode(event)">
                     <span class="input-group-addon bg-gray"> - </span>
-                    <input type="text" name="m_tel3" class="form-control" required="required">
+                    <input type="text" name="m_tel3" class="form-control" required="required" onkeydown="return showKeyCode(event)">
                     <input type="hidden" name="m_tel">
                   </div>
                   <br>
@@ -345,6 +345,18 @@
     <!-- iCheck -->
     <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
     <script>
+    function showKeyCode(event) {
+        event = event || window.event;
+        var keyID = (event.which) ? event.which : event.keyCode;
+        if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+        {
+            return;
+        }
+        else
+        {
+            return false;
+        }
+    }
       $(function () {
         $('input').iCheck({
           checkboxClass: 'icheckbox_square-blue',

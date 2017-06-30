@@ -8,6 +8,15 @@
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
      <title>기본 값 페이지</title>
+
+<c:if test="${result eq 'success'}">
+    <script type="text/javascript">
+   	window.onload=function(){
+    //새로 접속 해줘야 하는 이유.. forward에 작업 기록이 남는다.
+    refresh.submit();
+   	};
+    </script>
+</c:if>      
 </head>
 	  <!-- 메인 페이지 구역 , 즉 작업 구역 -->
       <div class="content-wrapper">
@@ -236,29 +245,23 @@
                 </div><!-- /.box-header -->
                 <div class="box-body">
                 	<!-- 댓글쓰기 -->
+                <form method="post" action="/HarangProject/parttime?cmd=PREAD">
                 	<div class="input-group input-group-sm">
-                	  <form method="post" action="/HarangProject/parttime?cmd=PREAD">
-                	  	<input type="hidden" name="p_num" value="${info.p_num}"/>
+                	  	<input type="hidden" name="p_num" value="${info.p_num}" id="p_num"/>
                 	  	<input type="hidden" name="comment" value="insert"/>
-	                    <input type="text" name="pr_comment" class="form-control">
+	                   	<input type="text" name="pr_comment" class="form-control">
 	                    <span class="input-group-btn">
 	                    	<button class="btn btn-success btn-flat" type="submit">Go!</button>
 	                    </span>
-	                   </form>
 	                </div><!-- 댓글쓰기 끝! -->
-                  
-                  	<!-- 댓글 목록 -->
-                	<c:forEach items="clist" var="c">
-                		<span class="btn btn-success btn-xs">${c.m_name}</span> 
-                			${c.pr_comment} <small>${c.pr_regdate}</small>
-                			<button class="btn btn-default btn-xs">수정</button>
-                			<button class="btn btn-default btn-xs">삭제</button>
-                		<hr/>
-                	</c:forEach>
-                    <!-- 댓글 목록 끝!! -->	
-                	
+	            </form>
+                  	<br>
+                  	<!-- 댓글 목록 들어갈 위치 -->
+                	<div class="input-group" id="ajax"></div>
                 </div>
               </div><!-- /.box -->
+              
+              
             </div><!--/.col -->
         </div><!-- /.row -->
        </section><!-- /. 작업 공간 끝! -->
@@ -324,6 +327,23 @@
       	<input type="hidden" name="m_id" value="${m_id}"/>
       	<input type="hidden" name="tab" value="${tab}"/>
       </form>
+      <form name="comdel" id="commentDel" method="post" action="/HarangProject/parttime">
+      	<input type="hidden" name="cmd" value="PREAD"/>
+      	<input type="hidden" name="comment" value="delete"/>
+      	<input type="hidden" name="pr_num" value="" id="pr_num"/>
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
+      	<input type="hidden" name="m_id" value="${m_id}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
+      	<input type="hidden" name="a_nowPage" value="${a_paging.nowPage}"/>
+		<input type="hidden" name="a_nowBlock" value="${a_paging.nowBlock}"/>
+		<input type="hidden" name="nowPage" value="${nowPage}"/>
+    	<input type="hidden" name="nowBlock" value="${nowBlock}"/>
+      </form>
+      <form name="refresh" method="post" action="/HarangProject/parttime">
+      	<input type="hidden" name="cmd" value="PREAD"/>
+      	<input type="hidden" name="p_num" value="${info.p_num}"/>
+      	<input type="hidden" name="tab" value="${tab}"/>
+      </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
 <%@ include file="../include/footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
@@ -361,4 +381,36 @@ function fnPick(m_id){
 		return;
 	}
 }
-</script>
+
+
+var p_num = $("#p_num").val();
+          
+$.getJSON("/HarangProject/ajax?cmd=pReply",{p_num:p_num}, function(data){
+        $("#ajax span").remove();
+        $(data).each(function(index, prlist){
+             $("#ajax").append(
+            		 "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+            		+ "<span class='btn btn-success btn-xs'>" + prlist.m_name + "</span>" 
+            		+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + prlist.pr_comment 
+            		+ "&nbsp;&nbsp;&nbsp;&nbsp;"
+            		+"<small>" + prlist.pr_regdate + "</small>"
+                 	+ "<c:if test='${info.m_id eq m_id}'>" 
+                 	+ "&nbsp;&nbsp;&nbsp;&nbsp;"
+                 	+ "<button class='btn btn-default btn-xs' id='rdel"+prlist.pr_num+"'>삭제</button>" 
+                 	+ "<input type='hidden' value='"+prlist.pr_num+"'/>"
+                 	+ "</c:if><br>" 
+                 	);
+             
+             $("#rdel"+prlist.pr_num).click(function(){
+            	 if(confirm("정말 삭제하시겠습니까?")==true){
+            		 $("#pr_num").val($(this).next().val());
+            		 comdel.submit();
+            	 }else{
+            		 return;
+            	 }
+             });
+             
+        });
+});
+     
+     </script>     

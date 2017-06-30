@@ -15,7 +15,11 @@ import dto.ZipDTO;
 import harang.dbcp.DBConnectionMgr;
 
 
-
+/**
+ * 회원 등록 폼으로 이동하는 메소드
+ * @author 나현기
+ *
+ */
 public class RegformCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -35,6 +39,10 @@ public class RegformCommand implements CommandInterface {
 		return"/WEB-INF/login/regform.jsp";
 	}
 	
+	/**
+	 * 초기 시/도의 목록을 불러오는 메소드
+	 * @param request
+	 */
 	public void getSido(HttpServletRequest request){
 
 		String sql = "SELECT sido FROM tbl_zip group by sido";

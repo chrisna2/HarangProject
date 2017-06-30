@@ -11,6 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import dto.BambooDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 대나무숲 관리자가 글을 수정하기 위한 페이지로 이동하는 클래스. 
+ * 
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Bb_Con_Update_Command implements CommandInterface {
 
 	private Connection con;
@@ -25,7 +33,10 @@ public class A_Bb_Con_Update_Command implements CommandInterface {
 			System.out.println("DBCP 연결실패 : " + err);
 		}
 	}
-
+	
+	/**
+	 * 관리자가 대나무숲 글을 수정 할 때 기존에 입력되어 있는 내용을 불러오고, HttpServletRequest에 담아주는 메소드
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 		BambooDTO bbdto = null;

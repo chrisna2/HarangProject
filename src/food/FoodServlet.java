@@ -13,7 +13,11 @@ import food.model.CommandFactory;
 import food.model.CommandInterface;
 import login.LoginBean;
 
-
+/**
+ * 하랑레스토랑(관리자 포함) 관련 서블릿
+ * @author 나현기
+ *
+ */
 @WebServlet("/food")
 public class FoodServlet extends HttpServlet {
 	

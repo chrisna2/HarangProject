@@ -13,6 +13,13 @@ import dto.BbreplyDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+// * 관리자가 대나무숲 글을 볼 때 그 글에 달린 댓글을 불러오기위한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Br_List_Command implements CommandInterface {
 
 	private Connection con;
@@ -34,7 +41,14 @@ public class A_Br_List_Command implements CommandInterface {
 
 		return "/WEB-INF/bamboo/a_bb_list.jsp";
 	}
-
+	
+	/**
+	 * 
+	 * 관리자가 대나무숲 글을 볼 때 그 글에 달린 댓글을 HttpServletRequest에 담아주는 메소드
+	 * 
+	 * @param req
+	 * @return ArrayList
+	 */
 	public ArrayList brlist(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 

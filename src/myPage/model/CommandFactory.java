@@ -1,5 +1,9 @@
 package myPage.model;
-
+/**
+ * 회원 페이지 와 회원 및 포인트 관리 페이지 등록 팩토리 클래스 
+ * @author 나현기
+ *
+ */
 public class CommandFactory {
 
 	private CommandFactory() {

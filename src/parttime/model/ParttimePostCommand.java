@@ -19,8 +19,12 @@ public class ParttimePostCommand implements CommandInterface{
 		String[] day = {"월","화","수","목","금","토","일"};
 		req.setAttribute("day", day);
 		req.setAttribute("m_id", member.getM_id());
-		// parttime_post.jsp 로 페이지 이동
-		return "/WEB-INF/parttime/parttime_post.jsp";
+		
+		if (bean.adminCheck(member.getM_id())) { // 관리자면 a_parttime_post.jsp
+			return "WEB-INF/parttime/a_parttime_post.jsp";
+		} else { // 회원이면 parttime_post.jsp
+			return "/WEB-INF/parttime/parttime_post.jsp";
+		}
 	}
 	
 	/**

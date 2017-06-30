@@ -1,5 +1,9 @@
 package food.model;
-
+/**
+ * 하랑레스토랑 관련 팩토리 클래스
+ * @author 나현기
+ *
+ */
 public class CommandFactory {
 
 	

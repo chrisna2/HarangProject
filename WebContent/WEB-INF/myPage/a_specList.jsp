@@ -181,7 +181,7 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-money"></i> 보상 포인트</span>
-                    <input type="text" name="c_point" class="form-control" required="required">
+                    <input type="text" name="c_point" class="form-control" required="required" onkeydown="return showKeyCode(event)">
                     <span class="input-group-addon">포인트</span>
                   </div>
                   <br>
@@ -235,7 +235,7 @@
                   <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-money"></i> 보상 포인트</span>
-                    <input type="text" name="c_point" class="form-control" value="${read.c_point }" required="required">
+                    <input type="text" name="c_point" class="form-control" value="${read.c_point }" required="required" onkeydown="return showKeyCode(event)">
                     <span class="input-group-addon">포인트</span>
                   </div>
                   <br>
@@ -320,7 +320,18 @@ function goPage(nowPage){
 	document.getElementById("page").value = nowPage;
 	document.getElementById("goPage").submit();
 }
-
+function showKeyCode(event) {
+    event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+    {
+        return;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 
 /////////////////////////////끝//////////////////////////////////

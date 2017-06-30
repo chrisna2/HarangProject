@@ -3,6 +3,14 @@ package bamboo.model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+/**
+ * 
+ * 대나무숲 관리자가 자신이 쓴 글의 수정하기 버튼을 눌렀을 때 페이지 이동을 위한 클래스
+ * 
+ * @author student
+ *
+ */
 public class A_Bb_Update_Command implements CommandInterface {
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 

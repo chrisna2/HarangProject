@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/a_header.jsp" %>
 <!-- 해더  삽입  [지우지마세여]------------------------------------------------------------------------------------------------->
 <!-- 페이지 헤드 라인 : 제목 -->
 <head>
@@ -123,7 +123,7 @@
     <input type="hidden" name="nowBlock" value="${nowBlock}"/>
 </form>
 <!-- 푸터(footer) 삽입 [지우지 마세여] ------------------------------------------------------------------------------------------------------> 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../include/a_footer.jsp" %>
 <!-- ------------------------------------------------------------------------------------------------ -->
 	
     
@@ -163,16 +163,8 @@
     		arr.push($(this).val());
     	});
     	document.getElementById("p_daycode").value = arr;
-    	
-    	if ($('input[required]').is(":empty")){
-    		alert("빈 칸을 채워주세요.");
-    		$(this).focus();
-    	}else{
-    		document.post.submit();
-    	}
-    	
+    	document.post.submit();
     }
-    
     </script>
     
     

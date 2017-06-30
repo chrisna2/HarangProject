@@ -23,6 +23,9 @@
         .wrapper {
             position:relative;
             min-height:100%;
+            background-image:url("dist/img/index_back.jpg");
+            background-position: center;
+            background-size: 100%;
             
         }
         
@@ -56,7 +59,7 @@
     <div class="login-box">
       <div class="login-logo">
          <img src="dist/img/Logo.png" class="img-circle" alt="User Image" width="75" height="75"/><br>
-        <a href="#"><b>하랑</b>대학교</a>
+        <a href="#"><font color="#FFFFFF"><b>하랑</b>대학교</font></a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">커뮤니티에 접속하시려면 로그인을 하세요</p>

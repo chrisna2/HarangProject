@@ -10,6 +10,15 @@ import javax.servlet.http.HttpSession;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+
+/** 
+ * 
+ * 관리자가 대나무숲 글에 추천을 남길 때 필요한 클래스
+ * 
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Bb_Like_Command implements CommandInterface {
 
 	private Connection con;

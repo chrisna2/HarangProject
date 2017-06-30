@@ -96,7 +96,7 @@
                     <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 식권  판매 포인트</span>
-                    <input type="text" name="f_point" class="form-control" required="required">
+                    <input type="text" name="f_point" class="form-control" required="required" onkeydown="return showKeyCode(event)">
                     <span class="input-group-addon bg-gray"> 포인트</span>
                   </div>
                   <br>
@@ -139,7 +139,7 @@
                     <br>
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-location-arrow"></i> 식권  판매 포인트</span>
-                    <input type="text" name="f_point" class="form-control" required="required">
+                    <input type="text" name="f_point" class="form-control" required="required" onkeydown="return showKeyCode(event)">
                     <span class="input-group-addon bg-gray"> 포인트</span>
                   </div>
                   <br>
@@ -170,6 +170,19 @@
 <!-- 날짜 입력  -->
     <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
     <script>
+    function showKeyCode(event) {
+        event = event || window.event;
+        var keyID = (event.which) ? event.which : event.keyCode;
+        if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 ) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 )
+        {
+            return;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     $(function() {
         $( "#date1" ).datepicker({
         	format: 'yyyy-mm-dd',

@@ -18,7 +18,11 @@ import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
-
+/**
+ * 관리자 포인트 관리 페이지 관련 커멘드 클래스
+ * @author 나현기
+ *
+ */
 public class ApplistCommand implements CommandInterface {
 
 	//DB 커넥션 4 대장
@@ -180,6 +184,11 @@ public class ApplistCommand implements CommandInterface {
 		
 	}
 	
+	/**
+	 * 관리자가 회원에게 포인트를 더해주는 메소드
+	 * @param request
+	 * @return
+	 */
 public String plusPoint(HttpServletRequest request){
 		
 		long m_point = Long.parseLong(request.getParameter("m_point"));
@@ -240,6 +249,11 @@ public String plusPoint(HttpServletRequest request){
 		return "plusgo";
 	}
 	
+/**
+ * 관리자가 회원에게 포인트를 뺐는 메소드
+ * @param request
+ * @return
+ */
 	public String minusPoint(HttpServletRequest request){
 		
 		long m_point = Long.parseLong(request.getParameter("m_point"));

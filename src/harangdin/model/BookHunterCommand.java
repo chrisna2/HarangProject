@@ -18,6 +18,12 @@ import login.LoginBean;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 도서 구매자의 판매자선택여부, 포인트지급 여부 등을 알려준다
+ * @author 서지윤
+ *
+ */
+
 public class BookHunterCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장

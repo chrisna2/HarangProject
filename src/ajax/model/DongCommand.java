@@ -16,7 +16,11 @@ import javax.sql.DataSource;
 import dto.RecordDTO;
 import dto.ZipDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 시/도의 정보와 구/군의 정보 그리고 동/면의 정보를 통해 우편번호를 출력하는 ajax클래스
+ * @author 나현기
+ *
+ */
 public class DongCommand implements CommandInterface {
 	
 	//DB 커넥션 4 대장
