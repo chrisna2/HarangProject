@@ -14,7 +14,11 @@ import javax.sql.DataSource;
 import dto.LessonDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 강의평가 작성
+ * @author 박주선
+ *
+ */
 public class InsertCommand implements CommandInterface {
 	// DB 커넥션 3 대장
 			Connection con;
@@ -34,7 +38,10 @@ public class InsertCommand implements CommandInterface {
 		return "/WEB-INF/imPage/imcomplete.jsp";
 	}
 	
-	
+	/**
+	 *  강의평가등록 and 등록시 tt_iscomplete 값 Y로 수정
+	 * @param request
+	 */
 	public void insert(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
 		String sql;

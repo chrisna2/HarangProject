@@ -14,7 +14,11 @@ import javax.sql.DataSource;
 import dto.Im2DTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 강의평가삭제(+신고리스트) 
+ * @author 박주선
+ *
+ */
 public class ImadeleteCommand implements CommandInterface {
 
 	// DB 커넥션 3 대장
@@ -25,7 +29,7 @@ public class ImadeleteCommand implements CommandInterface {
 	ResultSet rs;
 	// DBCP 사용
 	DBConnectionMgr pool;
-
+	
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -34,7 +38,10 @@ public class ImadeleteCommand implements CommandInterface {
 		delete(request);
 		return "/WEB-INF/imPage/imdcomplete.jsp";
 	}
-
+	/**
+	 * 강의평가 삭제
+	 * @param request
+	 */
 	private void delete(HttpServletRequest request) {
 
 		pool = DBConnectionMgr.getInstance();

@@ -14,7 +14,11 @@ import javax.sql.DataSource;
 import dto.Im2DTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 강의평가수정
+ * @author 박주선
+ *
+ */
 public class Immodify2Command implements CommandInterface {
 	// DB 커넥션 3 대장
 				Connection con;
@@ -30,6 +34,10 @@ public class Immodify2Command implements CommandInterface {
 			return "/WEB-INF/imPage/imupdate.jsp";
 		}
 
+		/**
+		 * 강의평가수정 메서드
+		 * @param request
+		 */
 		private void update(HttpServletRequest request) {
 			pool = DBConnectionMgr.getInstance();
 			// id 세션값 받아오기

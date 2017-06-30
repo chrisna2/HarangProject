@@ -14,7 +14,11 @@ import javax.sql.DataSource;
 import dto.Im2DTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 강의평가작성할때 글정보
+ * @author 박주선
+ *
+ */
 public class ImmakeCommand implements CommandInterface {
 
 	// DB 커넥션 3 대장
@@ -42,7 +46,10 @@ public class ImmakeCommand implements CommandInterface {
 	
 	
 
-
+	/**
+	 * 글정보 불러오기
+	 * @param request
+	 */
 	private void read(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 

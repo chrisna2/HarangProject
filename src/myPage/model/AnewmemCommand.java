@@ -12,7 +12,11 @@ import javax.sql.DataSource;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 회원전체리스트 출력 / 회원 상세보기
+ * @author 박주선
+ *
+ */
 public class AnewmemCommand implements CommandInterface {
 
 	
@@ -28,11 +32,11 @@ public class AnewmemCommand implements CommandInterface {
 	@Override
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String mid=request.getParameter("m_id");
+	
 		String m_birth=request.getParameter("m_birth");
-		String num4=request.getParameter("num4");
-		System.out.println(num4);
-		System.out.println(mid);
+	
+	
+
 	
 		
 			
@@ -46,7 +50,10 @@ public class AnewmemCommand implements CommandInterface {
 				return "/WEB-INF/myPage/a_newMember.jsp";
 			}
 	}
-	
+	/**
+	 * 예비회원등록
+	 * @param request
+	 */
 	public void insert(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
 		String sql = null;
@@ -84,7 +91,10 @@ public class AnewmemCommand implements CommandInterface {
 	
 				}	
 	
-	
+	/**
+	 * 예비회원등록시 학번마즈막3자리출력
+	 * @param request
+	 */
 	public void num(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
 		String sql = null;

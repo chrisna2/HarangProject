@@ -65,7 +65,7 @@
                        
                         <option value="c_num"
                         <c:choose>
-                        <c:when test="${requestScope.keyword eq 'c_num' }">
+                        <c:when test="${requestScope.keyword eq 'c_num' or requestScope.keyword eq null }">
                         selected="selected"
                          </c:when>
                          </c:choose>>자격증 번호</option>
@@ -264,16 +264,24 @@
 <form id="prevPage" method="post" action="/HarangProject/myPage?cmd=AspecList">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/>
+	<input type="hidden" name="keyfield" value=${keyfield } /> 
+	<input type="hidden" name="keyword" value=${keyword } />
 </form>
 <!-- 페이징 : 다음 블록으로 이동하는 폼 -->
 <form id="nextPage" method="post" action="/HarangProject/myPage?cmd=AspecList">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
+	<input type="hidden"
+			name="keyfield" value=${keyfield } /> <input type="hidden"
+			name="keyword" value=${keyword } />
 </form>
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/myPage?cmd=AspecList">
 	<input type="hidden" name="nowPage" value="" id="page"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+	<input type="hidden"
+			name="keyfield" value=${keyfield } /> <input type="hidden"
+			name="keyword" value=${keyword } />
 </form>
 
 <!-- 페이징 관련 폼 여기까지입니다. ----------------------------------------------------------------------------------- -->
@@ -282,6 +290,8 @@
 	<input type="hidden" name="c_num" value="${read.c_num }" id="c_num"/>
 	<input type="hidden" name="nowPage" value="${paging.nowPage}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
+	<input type="hidden" name="keyfield" value="keyfield" /> 
+	<input type="hidden" name="keyword" value="keyword" />
 </form>
 
 	

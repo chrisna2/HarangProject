@@ -17,7 +17,11 @@ import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
-
+/**
+ * 강의평가전체리스트
+ * @author 박주선
+ *
+ */
 public class ImalistCommand implements CommandInterface {
 
 	// DB 커넥션 3 대장
@@ -44,8 +48,10 @@ public class ImalistCommand implements CommandInterface {
 			return "/WEB-INF/imPage/a_imlist.jsp";
 		}
 
-
-		// 전체리스트
+		/**
+		 * 강의평가 전체 리스트
+		 * @param request
+		 */
 		void alllistCommand(HttpServletRequest request) {
 			// TODO Auto-generated method stub
 			pool = DBConnectionMgr.getInstance();

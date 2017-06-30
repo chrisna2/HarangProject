@@ -312,22 +312,22 @@ function checkform(){
 <form id="prevPage" method="post" action="/HarangProject/myPage?cmd=AmemList">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/> 
-	<input type="hidden" name="keyfield" value="${keyfield }" /> 
-	<input type="hidden" name="keyword" value="${keyword }" />
+			<input type="hidden" name="keyfield" value=${keyfield } /> 
+	<input type="hidden" name="keyword" value=${keyword } />
 </form>
 <!-- 페이징 : 다음 블록으로 이동하는 폼 -->
 <form id="nextPage" method="post" action="/HarangProject/myPage?cmd=AmemList">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
-	<input type="hidden" name="keyfield" value="${keyfield }" /> 
-	<input type="hidden" name="keyword" value="${keyword }" />
+		<input type="hidden" name="keyfield" value=${keyfield } /> 
+	<input type="hidden" name="keyword" value=${keyword } />
 </form>
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/myPage?cmd=AmemList">
 	<input type="hidden" name="nowPage" value="" id="page"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
-	<input type="hidden" name="keyfield" value="${keyfield }" /> 
-	<input type="hidden" name="keyword" value="${keyword }" />
+		<input type="hidden" name="keyfield" value=${keyfield } /> 
+	<input type="hidden" name="keyword" value=${keyword } />
 </form>   
 
 

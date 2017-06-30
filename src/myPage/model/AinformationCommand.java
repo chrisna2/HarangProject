@@ -18,7 +18,11 @@ import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
-
+/**
+ * 회원전체리스트 출력 / 회원 상세보기
+ * @author 박주선
+ *
+ */
 public class AinformationCommand implements CommandInterface{
 
 	// DB 커넥션 3 대장
@@ -52,8 +56,10 @@ public class AinformationCommand implements CommandInterface{
 		return "/WEB-INF/myPage/a_memList.jsp";
 	}
 
-
-	// 전체리스트
+	/**
+	 * 회원 전체리스트 
+	 * @param request
+	 */
 	void alllistCommand(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		pool = DBConnectionMgr.getInstance();
@@ -67,7 +73,7 @@ public class AinformationCommand implements CommandInterface{
 
 		
 		
-		if (null==(keyfield)) {
+		if (null==(keyfield) || ("").equals(keyfield)) {
 			sql = "select * from tbl_member";
 			} else {
 				
@@ -124,7 +130,10 @@ public class AinformationCommand implements CommandInterface{
 		
 
 	}
-
+	/**
+	 * 회원 상세보기
+	 * @param request
+	 */
 	private void inforread(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 

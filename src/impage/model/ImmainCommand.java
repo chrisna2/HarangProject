@@ -20,7 +20,11 @@ import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
-
+/**
+ * 강의평가메인
+ * @author 박주선
+ *
+ */
 public class ImmainCommand implements CommandInterface {
 
 	// DB 커넥션 3 대장
@@ -48,7 +52,10 @@ public class ImmainCommand implements CommandInterface {
 	}
 
 
-	// 전체리스트
+	/**
+	 * 강의평가전체리스트 메서드
+	 * @param request
+	 */
 	void alllistCommand(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		pool = DBConnectionMgr.getInstance();
@@ -116,7 +123,11 @@ public class ImmainCommand implements CommandInterface {
 
 	}
 
-	// 자신이 수강하고있는 강의 리스트 출력
+
+	/**
+	 * 자신이 수강하고있는 강의 리스트 출력
+	 * @param request
+	 */
 	void imlistCommand(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		pool = DBConnectionMgr.getInstance();

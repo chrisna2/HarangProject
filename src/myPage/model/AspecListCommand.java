@@ -16,7 +16,11 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
-
+/**
+ * 관리자 자격증 리스트출력,상세보기,자격증추가,수정 
+ * @author 박주선
+ *
+ */
 public class AspecListCommand implements CommandInterface {
 	
 	//DB 커넥션 3 대장
@@ -62,7 +66,10 @@ public class AspecListCommand implements CommandInterface {
 		return "/WEB-INF/myPage/a_specList.jsp";
 	}
 	
-	
+	/**
+	 * 자격증 전체목록
+	 * @param request
+	 */
 	public void listCommand(HttpServletRequest request){
 		
 		pool = DBConnectionMgr.getInstance();
@@ -134,7 +141,10 @@ public class AspecListCommand implements CommandInterface {
 		
 		
 	}
-	
+	/**
+	 * 자격증등록
+	 * @param request
+	 */
 	public void insert(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
 		String sql;
@@ -165,7 +175,10 @@ public class AspecListCommand implements CommandInterface {
 					listCommand(request);
 				}
 	}
-	
+	/**
+	 * 자격증상세보기
+	 * @param request
+	 */
 	public void read(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
 		String sql;
@@ -194,7 +207,10 @@ public class AspecListCommand implements CommandInterface {
 		request.setAttribute("read", dto);
 		}
 	
-	
+	/**
+	 * 자격증정보수정
+	 * @param request
+	 */
 	public void update(HttpServletRequest request){
 		
 		pool = DBConnectionMgr.getInstance();

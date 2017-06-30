@@ -163,7 +163,7 @@
                 <div class="box-body">
                  <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-bolt"></i> 신고자 이름</span>
-                    <input type="text" name="m_id" class="form-control" value="${read2.m_id }" required="required">
+                    <input type="text" name="m_id" class="form-control" value="${read2.m_id }" required="required" readonly="readonly">
                   </div>
                   <br>
                   <div class="input-group">
@@ -174,7 +174,7 @@
                 </div><!-- /.box-body -->
                 
                   <div class="box-footer" align="right">
-                    <input type="button" class="btn" value="닫기">
+                   
                     <input type="submit" id="btn1" class="btn btn-primary" value="신고">
                 </div>
                 

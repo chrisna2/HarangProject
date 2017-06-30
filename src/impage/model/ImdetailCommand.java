@@ -14,7 +14,11 @@ import javax.sql.DataSource;
 import dto.Im2DTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 강의평가상세보기
+ * @author 박주선
+ *
+ */
 public class ImdetailCommand implements CommandInterface {
 
 	// DB 커넥션 3 대장
@@ -34,7 +38,10 @@ public class ImdetailCommand implements CommandInterface {
 		read(request);
 		return "/WEB-INF/imPage/imdetail.jsp";
 	}
-	
+	/**
+	 * 강의평가상세보기 메서드
+	 * @param request
+	 */
 	 private void read(HttpServletRequest request) {
 		 
 			pool = DBConnectionMgr.getInstance();

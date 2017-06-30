@@ -13,7 +13,11 @@ import javax.sql.DataSource;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-
+/**
+ * 강의평가 게시글신고 하기
+ * @author 박주선
+ *
+ */
 public class ImwarningCommand implements CommandInterface {
 	// DB 커넥션 3 대장
 	Connection con;
@@ -33,7 +37,10 @@ public class ImwarningCommand implements CommandInterface {
 
 		return "/WEB-INF/imPage/imwaring.jsp";
 	}
-
+	/**
+	 *  신고등록메소드
+	 * @param request
+	 */
 	public void insert(HttpServletRequest request) {
 		pool = DBConnectionMgr.getInstance();
 		String sql;
