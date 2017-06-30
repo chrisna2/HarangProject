@@ -9,6 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 사용자가 작성한 대나무숲 글의 내용을 수정하고, 수정완료 버튼을 눌렀을 때 DB내용을 수정하기 위한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class U_Bb_Con_Up_Complete_Command implements CommandInterface {
 	private Connection con;
 	private PreparedStatement pstmt;

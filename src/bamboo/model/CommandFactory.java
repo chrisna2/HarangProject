@@ -1,5 +1,13 @@
 package bamboo.model;
 
+
+/**
+ * 
+ * 대나무숲 게시판 이용을 위한 커맨드 팩토리 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class CommandFactory 
 {
 	private CommandFactory(){}

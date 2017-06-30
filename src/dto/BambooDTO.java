@@ -2,6 +2,12 @@ package dto;
 
 import java.sql.Date;
 
+
+/**
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class BambooDTO {
 
 	

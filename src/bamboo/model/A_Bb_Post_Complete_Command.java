@@ -12,6 +12,13 @@ import javax.servlet.http.HttpSession;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 관리자가 글쓰기 완료 버튼을 눌렀을 때 필요한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Bb_Post_Complete_Command implements CommandInterface {
 	
 	private Connection con;
@@ -25,7 +32,11 @@ public class A_Bb_Post_Complete_Command implements CommandInterface {
 			System.out.println("DBCP 연결실패 : " + err);
 		}
 	}
-
+	
+	/**
+	 * 관리자가 글쓰기 페이지에서 내용을 모두 입력후 등록 버튼을 눌렀을 때 DB에 입력을 위한 메소드. 
+	 * 다음으로 이동할 페이지의 주소를 리턴 해 준다.
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 		try {

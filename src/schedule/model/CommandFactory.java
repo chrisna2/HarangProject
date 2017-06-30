@@ -1,5 +1,13 @@
 package schedule.model;
 
+
+/**
+ * 
+ * 학사일정 페이지 이동을 위해 필요한 커맨드 팩토리 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class CommandFactory 
 {
 	private CommandFactory(){}

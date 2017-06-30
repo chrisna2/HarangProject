@@ -8,11 +8,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 대나무숲 관리자가 글을 수정하고 수정완료 버튼을 눌러서 DB에 등록을 하고, 대나무숲 글 목록으로 이동하게 하는 클래스.
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Bb_Con_Up_Complete_Command implements CommandInterface {
 	private Connection con;
 	private PreparedStatement pstmt;
 	private DBConnectionMgr pool;
 
+	
 	public A_Bb_Con_Up_Complete_Command() {
 		try {
 			pool = DBConnectionMgr.getInstance();
@@ -20,7 +28,9 @@ public class A_Bb_Con_Up_Complete_Command implements CommandInterface {
 			System.out.println("DBCP 연결실패 : " + err);
 		}
 	}
-
+	/**
+	 *  관리자가 대나무숲 글을 수정하고, 그 수정된 값을 DB에 저장하기 위한 부분.
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 		try {

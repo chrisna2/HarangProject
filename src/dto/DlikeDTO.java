@@ -1,5 +1,12 @@
 package dto;
 
+
+/**
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
+
 public class DlikeDTO {
 
 	

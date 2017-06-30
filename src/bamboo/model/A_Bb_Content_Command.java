@@ -17,6 +17,13 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 
+ * 관리자가 대나무숲 글 리스트에서 제목을 클릭해서 해당 글의 내용을 볼 수 있게 해 주는 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Bb_Content_Command implements CommandInterface {
 
 	private Connection con;
@@ -32,6 +39,9 @@ public class A_Bb_Content_Command implements CommandInterface {
 		}
 	}
 
+	/**
+	 * 글의 내용을 불러 와서 HttpServletRequest에 담는 메소드
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 		// HttpSession session = req.getSession();
@@ -114,6 +124,13 @@ public class A_Bb_Content_Command implements CommandInterface {
 		return "/WEB-INF/bamboo/a_bb_content.jsp";
 	}
 
+	/**
+	 * 대나무숲의 글의 내용을 불러 올 때 해당 글에 달린 '추천'의 목록을 ArrayList에 담아주고, 
+	 * 접속한 사람이 좋아요 버튼을 눌렀는지를 체크 해 주는 메소드
+	 * 
+	 * @param req
+	 * @return ArrayList
+	 */
 	public ArrayList Bb_Like_Cnt(HttpServletRequest req) {
 
 		HttpSession session = req.getSession();
@@ -165,6 +182,14 @@ public class A_Bb_Content_Command implements CommandInterface {
 
 	}
 
+	/**
+	 * 
+	 * 대나무숲의 글의 내용을 불러 올 때 해당 글에 달린 '비추천'의 목록을 ArrayList에 담아주고, 
+	 * 접속한 사람이 좋아요 버튼을 눌렀는지를 체크 해 주는 메소드
+	 * 
+	 * @param req
+	 * @return ArrayList
+	 */
 	public ArrayList Bb_Dlike_Cnt(HttpServletRequest req) {
 
 		HttpSession session = req.getSession();
@@ -216,6 +241,16 @@ public class A_Bb_Content_Command implements CommandInterface {
 
 	}
 
+	
+	/**
+	 * 
+	 * 대나무숲 게시판의 글을 조회 할 때 해당 글의 조회수를 늘려주는 메소드. 
+	 * 만약 로그인 후 처음 글을 읽는 사람이라면 session에 글을 읽었다는 것을 저장 해 준다. 
+	 * 
+	 * @param req
+	 * @param con
+	 * @param bb_number
+	 */
 	private void updateCnt(HttpServletRequest req, Connection con, String bb_number) {
 
 		HttpSession session = req.getSession();

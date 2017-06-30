@@ -10,6 +10,14 @@ import javax.servlet.http.HttpSession;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+
+/**
+ * 
+ * 사용자가 학사일정페이지에서 참가가능한 일정에 참가신청 할 때 필요한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class U_Sch_Join_Command implements CommandInterface {
 
 	private Connection con;

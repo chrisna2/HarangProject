@@ -8,6 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import harang.dbcp.DBConnectionMgr;
 
+
+/**
+ * 
+ * 관리자가 학사일정 관리페이지에서 이미 등록된 글을 수정할 때. 수정 페이지에서 내용을 변경하고 수정하기 버튼을 눌렀을 때
+ * 필요한 클래스. 
+ * 
+ * 
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Sch_Con_Up_Complete_Command implements CommandInterface {
 	private Connection con;
 	private PreparedStatement pstmt;
@@ -75,7 +86,7 @@ public class A_Sch_Con_Up_Complete_Command implements CommandInterface {
 			}
 			
 			
-			String s_location = "[ " + req.getParameter("pg_type") + " ] [" + req.getParameter("pg_name") + " ]"; 
+			String s_location = "[ "+ req.getParameter("fselect")+ " ] [ " + req.getParameter("pg_type") + " ] [ " + req.getParameter("pg_name") + " ]"; 
 			
 			if("시설을 선택하세요.".equals(req.getParameter("pg_type"))){
 				s_location = null;

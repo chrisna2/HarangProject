@@ -12,6 +12,13 @@ import dto.BambooDTO;
 import dto.ScheduleDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ * 
+ * 관리자가 학사일정 관리 페이지에서 작성한 글을 수정하기 위해 수정 페이지로 이동할 때 필요한 클래스 
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class A_Sch_Con_Update_Command implements CommandInterface {
 
 	private Connection con;
@@ -27,6 +34,12 @@ public class A_Sch_Con_Update_Command implements CommandInterface {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * 관리자가 학사일정 관리페이지에서 글 수정페이지로 넘어갈 때 기존에 입력되어 있는 글의 내용을 불러오는 메소드
+	 * 
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 

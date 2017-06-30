@@ -12,6 +12,14 @@ import javax.servlet.http.HttpSession;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+
+/**
+ * 
+ * 대나무숲 사용자가 글작성페이지에서 내용을 입력하고 등록 버튼을 눌렀을 때 DB에 입력하기 위한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class U_Bb_Post_Complete_Command implements CommandInterface {
 	
 	private Connection con;
@@ -45,11 +53,11 @@ public class U_Bb_Post_Complete_Command implements CommandInterface {
 		String bb_content = (String)req.getParameter("bb_content");
 		
 		
-		System.out.println(bb_title);
+		/*System.out.println(bb_title);
 		System.out.println();
 		System.out.println(bb_content);
 		System.out.println();
-		System.out.println(bb_nickname);
+		System.out.println(bb_nickname);*/
 		
 		
 			

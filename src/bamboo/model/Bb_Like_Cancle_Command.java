@@ -10,6 +10,13 @@ import javax.servlet.http.HttpSession;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 
+/**
+ *
+ * 사용자가 대나무숲 글에 추천을 눌렀을 때 추천한 것을 취소할 때 필요한 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class Bb_Like_Cancle_Command implements CommandInterface {
 
 	private Connection con;

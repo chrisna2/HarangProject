@@ -17,6 +17,13 @@ import harang.dbcp.DBConnectionMgr;
 import paging.PagingBean;
 import paging.dto.PagingDto;
 
+/**
+ * 
+ * 사용자가 대나무숲 게시판에서 제목을 클릭해서 본문을 확인하려 할 때 대나무숲 게시판의 글의 내용을 불러오는 클래스
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 public class U_Bb_Content_Command implements CommandInterface {
 
 	private Connection con;
@@ -32,6 +39,11 @@ public class U_Bb_Content_Command implements CommandInterface {
 		}
 	}
 
+	/**
+	 * 
+	 * 대나무숲 게시판의 글의 내용을 불러오는 메소드
+	 * 
+	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {
 
 		// HttpSession session = req.getSession();
@@ -114,6 +126,13 @@ public class U_Bb_Content_Command implements CommandInterface {
 		return "/WEB-INF/bamboo/u_bb_content.jsp";
 	}
 
+	
+	/**
+	 * 
+	 * 대나무숲 글의 추천 목록을 ArrayList에 담고, 자신이 추천한지를 체크 해 주는 메소드
+	 * @param req
+	 * @return ArrayList
+	 */
 	public ArrayList Bb_Like_Cnt(HttpServletRequest req) {
 
 		HttpSession session = req.getSession();
@@ -165,6 +184,13 @@ public class U_Bb_Content_Command implements CommandInterface {
 
 	}
 
+	
+	/**
+	 * 
+	 * 대나무숲 글의 비추천 목록을 ArrayList에 담고, 자신이 비추천한지를 체크 해 주는 메소드
+	 * @param req
+	 * @return ArrayList
+	 */
 	public ArrayList Bb_Dlike_Cnt(HttpServletRequest req) {
 
 		HttpSession session = req.getSession();
@@ -216,6 +242,16 @@ public class U_Bb_Content_Command implements CommandInterface {
 
 	}
 
+	
+	/**
+	 * 
+	 * 사용자가 대나무숲 게시판의 글을 확인 할 때 조회수를 늘려주는 메소드. 
+	 * 이번 접속에서 처음 글을 읽는 경우에는 session 에 값을 넣어주고, 
+	 * 이번 접속에서 두번 이상 글을 읽는 경우에는 session에 입력된 값을 통해서 글의 조회수를 늘려주지 않는다. 
+	 * @param req
+	 * @param con
+	 * @param bb_number
+	 */
 	private void updateCnt(HttpServletRequest req, Connection con, String bb_number) {
 
 		HttpSession session = req.getSession();

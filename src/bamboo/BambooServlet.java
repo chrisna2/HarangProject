@@ -14,7 +14,11 @@ import bamboo.model.CommandInterface;
 import login.LoginBean;
 
 
-
+/**
+ * 
+ * @author 김민준 KIM MIN JOON
+ *
+ */
 @WebServlet("/bamboo")
 public class BambooServlet extends HttpServlet {
 	
