@@ -13,6 +13,12 @@
 	cursor: pointer;
 }
 </style>
+<c:if test="${tradecheck eq 'overpoint'}">
+    <script type="text/javascript">
+    alert("입력 포인트가 보유 포인트를 초과 합니다.");
+    location.href = "/HarangProject/facil?cmd=FacilPGreserv";
+    </script>
+</c:if>    
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
 <div class="content-wrapper">

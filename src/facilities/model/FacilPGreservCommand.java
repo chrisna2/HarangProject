@@ -63,12 +63,12 @@ public class FacilPGreservCommand implements CommandInterface {
 				loadList(request);
 				System.out.println("결제성공");
 				request.setAttribute("tradecheck", checkOut);
-				
-				return "/WEB-INF/facil/facilities_playground.jsp";
 			}
 			else{
 				request.setAttribute("tradecheck", checkOut);
 				System.out.println("결제오류가 발송하였습니다.");
+				reserPg(request, m_id);
+				loadList(request);
 			}
 		}
 		return "/WEB-INF/facil/facilities_playground.jsp";

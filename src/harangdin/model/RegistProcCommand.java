@@ -87,7 +87,7 @@ public class RegistProcCommand implements CommandInterface {
 		pool = DBConnectionMgr.getInstance();
 		
 		String sql="INSERT INTO tbl_book (m_id, b_choice, b_want, b_stock, b_name,  b_writer, b_pub, b_content, b_iscomplete, b_photo) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, '거래중', ?)";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, '거래', ?)";
 		
 		try {
 			

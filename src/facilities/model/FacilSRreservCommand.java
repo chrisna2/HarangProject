@@ -63,11 +63,10 @@ public class FacilSRreservCommand implements CommandInterface {
 				loadList(request);
 				System.out.println("결제성공");
 				request.setAttribute("tradecheck", checkOut);
-				
-				return "/WEB-INF/facil/facilities_studyroom.jsp";
 			}
 			else{
 				request.setAttribute("tradecheck", checkOut);
+				loadList(request);
 				System.out.println("결제오류가 발송하였습니다.");
 			}
 		}
