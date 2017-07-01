@@ -16,6 +16,7 @@ import dto.PgMemberDTO;
 import dto.SrMemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.LoginBean;
+import point.PointBean;
 
 /**
  * 
@@ -168,10 +169,19 @@ public class FacilMainCommand implements CommandInterface {
 		LoginBean login = new LoginBean();
 		MemberDTO member = login.getLoginInfo(request);
 		String m_id = member.getM_id();
+		PointBean point = new PointBean();
 		
 		// 운동장을 예약취소인지, 스터디룸 예약취소인지 체크. mfaciltype 값을 확인한다.
 		String sql = null;
 		String facilCheck = request.getParameter("mfaciltype");
+		int backpoint = Integer.parseInt(request.getParameter("backpoint"));
+		long adminpoint = point.pointInfo("admin03");
+		String mtype = request.getParameter("mfaciltype");
+		String type = request.getParameter("faciltype");
+		String hosu = request.getParameter("facilname");
+		String booktime = request.getParameter("resertime");
+		String content = "[시설 예약 취소] "+booktime+"에 예약한 \n ["+mtype+"/ "+type+"/ "+hosu+"]이(가) 환불되었습니다.";
+		
 		
 		/*resernum은 예약시설번호로 srm_num 혹은 pgm_num을 가지고 있다.
 		 * if문을 통해서 분리후. 보내게된다. 
@@ -203,7 +213,10 @@ public class FacilMainCommand implements CommandInterface {
 			pool.freeConnection(con, pstmt);
 		}
 		
-
+		String result = point.tradePoint(content, adminpoint, backpoint, "admin03", m_id);
+		
+		request.setAttribute("result", result);
+		
 	}
 
 	/**

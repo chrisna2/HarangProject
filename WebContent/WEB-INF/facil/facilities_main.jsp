@@ -39,7 +39,7 @@
 				<!-- 리스트 사용시  -->
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">예약내역</h3>
+						<h3 class="box-title">운동장 예약내역</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
@@ -143,7 +143,7 @@
 				<!-- 리스트 사용시  -->
 				<div class="box">
 					<div class="box-header">
-						<h3 class="box-title">예약내역</h3>
+						<h3 class="box-title">스터디룸 예약내역</h3>
 						<div class="box-tools pull-right">
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
@@ -335,7 +335,7 @@
 <%@ include file="../include/footer.jsp"%>
 <script type="text/javascript">
 	function srSelectDelete(srm_num, sr_type, sr_name, srm_date, payoutpoint){
-		alert(srm_num + sr_type + sr_name + srm_date + payoutpoint);
+		//alert(srm_num + sr_type + sr_name + srm_date + payoutpoint);
 		$("#cancel").slideUp();
 		$("#cancel").slideDown();
 		

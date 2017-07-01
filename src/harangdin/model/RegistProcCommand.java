@@ -128,8 +128,8 @@ public class RegistProcCommand implements CommandInterface {
 	public void donateInput(MultipartRequest multi, String photoName){
 		pool = DBConnectionMgr.getInstance();
 		
-		String sql="INSERT INTO tbl_book (m_id, b_choice, b_want, b_stock, b_name,  b_writer, b_pub, b_content, b_iscomplete) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, '기부중')";
+		String sql="INSERT INTO tbl_book (m_id, b_choice, b_want, b_stock, b_name,  b_writer, b_pub, b_content, b_iscomplete, b_photo) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, '기부중', ?)";
 		
 		try {
 			
@@ -144,6 +144,7 @@ public class RegistProcCommand implements CommandInterface {
 			pstmt.setString(6, multi.getParameter("b_writer"));
 			pstmt.setString(7, multi.getParameter("b_pub"));
 			pstmt.setString(8, multi.getParameter("b_content"));			
+			pstmt.setString(9, photoName);			
 			
 			pstmt.executeUpdate();
 			
@@ -151,6 +152,7 @@ public class RegistProcCommand implements CommandInterface {
 			
 		}catch(Exception err){
 			System.out.println(err);
+			err.printStackTrace();
 		}
 		finally{
 			// DBCP 접속해제
