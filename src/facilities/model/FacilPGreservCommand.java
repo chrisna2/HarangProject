@@ -60,15 +60,17 @@ public class FacilPGreservCommand implements CommandInterface {
 						
 			if("complete" == checkOut){
 				reserPg(request, m_id);
-				loadList(request);
-				System.out.println("결제성공");
 				request.setAttribute("tradecheck", checkOut);
+				request.setAttribute("facheck", "pg");
+				System.out.println("결제성공");
+				return "/WEB-INF/facil/facilresult.jsp";
 			}
 			else{
-				request.setAttribute("tradecheck", checkOut);
-				System.out.println("결제오류가 발송하였습니다.");
 				reserPg(request, m_id);
-				loadList(request);
+				request.setAttribute("tradecheck", checkOut);
+				request.setAttribute("facheck", "pg");
+				System.out.println("결제오류가 발송하였습니다.");
+				return "/WEB-INF/facil/facilresult.jsp";
 			}
 		}
 		return "/WEB-INF/facil/facilities_playground.jsp";

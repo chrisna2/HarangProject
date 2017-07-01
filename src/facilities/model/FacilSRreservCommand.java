@@ -60,14 +60,17 @@ public class FacilSRreservCommand implements CommandInterface {
 						
 			if("complete" == checkOut){
 				reserPg(request, m_id);
-				loadList(request);
-				System.out.println("결제성공");
 				request.setAttribute("tradecheck", checkOut);
+				request.setAttribute("facheck", "sr");
+				System.out.println("결제성공");
+				return "/WEB-INF/facil/facilresult.jsp";
 			}
 			else{
+				reserPg(request, m_id);
 				request.setAttribute("tradecheck", checkOut);
-				loadList(request);
+				request.setAttribute("facheck", "sr");
 				System.out.println("결제오류가 발송하였습니다.");
+				return "/WEB-INF/facil/facilresult.jsp";
 			}
 		}
 		return "/WEB-INF/facil/facilities_studyroom.jsp";

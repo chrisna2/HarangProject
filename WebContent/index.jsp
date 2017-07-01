@@ -135,8 +135,7 @@
                  <li>user side</li>
                  <li><a href="/HarangProject/schedule?cmd=U_SCH_LIST">학사일정 메인 페이지</a></li>
                  <li>admin side</li>
-                 <li><a 
-                 href="/HarangProject/schedule?cmd=A_SCH_LIST">학사일정 관리자 메인</a></li>
+                 <li><a href="/HarangProject/schedule?cmd=A_SCH_LIST">학사일정 관리자 메인</a></li>
               </ul>
                  <h4>강의평가</h4>
                 <ul>

@@ -15,6 +15,28 @@
 	border-radius: 4px
 }
 </style>
+<script type="text/javascript">
+function dateFormCheck(){
+	  /*날짜 비교 */
+    var _reserdate = checkform.resertime.value.split("-");
+    //alert(_reserdate);
+    var year = _reserdate[0];
+    var month = _reserdate[1];
+    var day = _reserdate[2];
+    var reserdate = new Date();
+    reserdate.setFullYear(year, month - 1, day);
+    var today = new Date();
+
+    if(today.getTime()>reserdate.getTime()){
+        alert("이미 예약일을 지난 시설예약은 환불이 불가합니다.");
+        return false;
+    }
+    else{
+        return true;
+    }  
+
+}
+</script>
 </head>
 <!-- 메인 페이지 구역 , 즉 작업 구역 -->
 <div class="content-wrapper">
@@ -260,7 +282,7 @@
 					<!-- /.box-header -->
 
 					<!-- box-body -->
-					<form role="form" method="post" action="/HarangProject/facil?cmd=FacilMain">
+					<form role="form" method="post" name="checkform" action="/HarangProject/facil?cmd=FacilMain" onsubmit="return dateFormCheck()">
 					<input type="hidden" id="deleteOk" name="deleteOk" value="1">
 					<div class="box-body">
 						
@@ -306,10 +328,10 @@
 							<div class="col-md-3 btn-group">
 							</div>
 							<div class="col-md-3 btn-group">
-								<input type="submit" class="btn btn-block btn-primary" value="예약취소">
+								<input type="button" class="btn btn-block btn-primary" value="예약취소" onclick="dateFormCheck()">
 							</div>
 							<div class="col-md-3 btn-group">
-								<input type="button" class="btn btn-block  btn-primary" value="다시 선택">
+								<input type="button" class="btn btn-block  btn-primary" value="다시 선택" onclick="shutdown()">
 							</div>
 						</div>
 						</div>
@@ -335,7 +357,7 @@
 <%@ include file="../include/footer.jsp"%>
 <script type="text/javascript">
 	function srSelectDelete(srm_num, sr_type, sr_name, srm_date, payoutpoint){
-		//alert(srm_num + sr_type + sr_name + srm_date + payoutpoint);
+
 		$("#cancel").slideUp();
 		$("#cancel").slideDown();
 		
@@ -348,6 +370,7 @@
 	}
 	
 	function pgSelectDelete(pgm_num, pg_type, pg_name, pgm_date, payoutpoint){
+
 		$("#cancel").slideUp();
 		$("#cancel").slideDown();
 		
@@ -358,5 +381,8 @@
 		$("#resertime").attr("value",pgm_date);
 		$("#backpoint").attr("value",payoutpoint);
 	}
+	function shutdown(){
+		$("#cancel").slideUp();
+		}
 </script>
 
