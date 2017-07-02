@@ -85,7 +85,7 @@ public class PointBean {
 	
 	/**
 	 * 학번으로 사람의 보유 포인트 출력
-	 * @param m_id
+	 * @param m_id 학번
 	 */
 	public long pointInfo(String m_id){
 		

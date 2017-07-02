@@ -139,7 +139,7 @@ public class LoginBean {
 	/**
 	 * 받은 메시지를 새로고침 하는 메서드. into refreshSession
 	 * @param m_id 학번
-	 * @return 받은 메시지 리스트
+	 * @param session 세션 정보
 	 */
 	public void messageRefresh(String m_id,HttpSession session){
 		

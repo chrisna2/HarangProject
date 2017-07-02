@@ -111,7 +111,7 @@ public class FindttCommand implements CommandInterface {
 	 * 수강실의 현재 시간표를 출력 하는 메소드
 	 * @param request  서블릿 리퀘스트
 	 * @return ArrayList 수강실의 시간표 목록 출력
-	 * @throws UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException ??
 	 */
 	public ArrayList findRoomTt(HttpServletRequest request) throws UnsupportedEncodingException{
 		

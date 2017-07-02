@@ -55,7 +55,7 @@ public class MessageBean {
 	
 	/**
 	 * 관리자인지 아닌지 체크하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return true || false
 	 */
 	public Boolean adminCheck(String m_id){
@@ -111,7 +111,7 @@ public class MessageBean {
 	/**
 	 * 회원이름으로 회원번호를 검색하는 메서드. 
 	 * @param m_name 이름
-	 * @return
+	 * @return 스트링 배열
 	 */
 	public String[] getMember_id(String m_name){
 		String[] arrID = null;
@@ -319,8 +319,7 @@ public class MessageBean {
 
 	/**
 	 * 메시지 번호로 메시지를 검색하는 메서드.
-	 * @param sender 보낸이
-	 * @param reader 받은이
+	 * @param t_num 텍스트 번호
 	 * @return 메시지 정보
 	 */
 	public MessageDTO getMessage(String t_num){
@@ -446,7 +445,7 @@ public class MessageBean {
 
 	/**
 	 * 아직 읽지 않은 메시지의 개수를 검색하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return 읽지 않은 메시지의 개수
 	 */
 	public int getNotReadMessage(String m_id){
@@ -475,7 +474,7 @@ public class MessageBean {
 	
 	/**
 	 * 아직 읽지 않은 내게 보낸 메시지의 개수를 구하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return 내게 보낸 메시지중 아직 읽지 않은 메시지의 개수
 	 */
 	public int getNotReadMessage_toMe(String m_id){

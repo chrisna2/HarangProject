@@ -163,7 +163,7 @@ public class FacilMainCommand implements CommandInterface {
 
 	/**
 	 * 예약된 상태를 삭제하는 과정.
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	private void deletelist(HttpServletRequest request) {
 
@@ -223,8 +223,8 @@ public class FacilMainCommand implements CommandInterface {
 	/**
 	 * 예약 상태를 확인하기위해 '타임코드'를 분석
 	 * 배열상태로 쪼개놓는 과정.
-	 * @param code
-	 * @param req
+	 * @param code 타임 코드
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void transCode(String code, HttpServletRequest req) {
 		String timetable[] = { "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" };

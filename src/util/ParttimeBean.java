@@ -441,7 +441,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 해당 대타 모집 글의 모든 정보를 검색하는 메서드.
-	 * @param p_num 글번호
+	 * @param d_num 글번호
 	 * @return 해당 글의 모든 정보(dto)
 	 */
 	public DaetaDTO getDaeta(String d_num){
@@ -483,7 +483,7 @@ public class ParttimeBean {
 
 	/**
 	 * 조회 수를 1 증가시키는 메서드.
-	 * @param p_num 글번호
+	 * @param pORd_num 글번호
 	 */
 	public void counterUp(String pORd, String pORd_num){
 		try{
@@ -586,7 +586,7 @@ public class ParttimeBean {
 	 * 대타 지원 이력서를 DB에 삽입하는 메서드.
 	 * @param d_num 글번호
 	 * @param m_id 아이디
-	 * @param pdr_reason 이유
+	 * @param dm_reason 이유
 	 */
 	public void createDaetaResume(String d_num, String m_id, String dm_reason){
 		try{
@@ -635,7 +635,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 게시글을 삭제하는 메서드
-	 * @param p_num 알바 번호
+	 * @param d_num 대타 번호
 	 */
 	public void deleteDaeta(String d_num){
 		try{
@@ -679,7 +679,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 게시글을 지우기 이전에 게시글에 지원한 지원자들을 먼저 삭제하는 메서드.
-	 * @param p_num 알바 번호
+	 * @param d_num 알바 번호
 	 */
 	public void deleteDaetaApply(String d_num){
 		try{
@@ -781,7 +781,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 대타 모집 게시글에 지원한 지원자 목록을 검색하는 메서드.
-	 * @param p_num 알바 번호
+	 * @param d_num 알바 번호
 	 * @return 지원자 목록
 	 */
 	public ArrayList getDaetaApplyList(String d_num){
@@ -967,7 +967,7 @@ public class ParttimeBean {
 	/**
 	 * 채용 버튼을 누를 시 DB에 채용여부를 저장하는 메서드.
 	 * @param m_id 학번
-	 * @param p_num 알바 번호
+	 * @param d_num 알바 번호
 	 */
 	public void updateDaetaChoice(String m_id, String d_num){
 		

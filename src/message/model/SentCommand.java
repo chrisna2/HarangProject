@@ -61,8 +61,8 @@ public class SentCommand implements message.CommandInterface{
 	
 	/**
 	 * 메시지를 보내는 메서드.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void postMessage(String m_id, HttpServletRequest req){
 		String t_title = req.getParameter("t_title");
