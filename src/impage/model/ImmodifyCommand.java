@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 import dto.Im2DTO;
 import harang.dbcp.DBConnectionMgr;
+import impage.CommandInterface;
 /**
  * 강의평가수정할때 글정보
  * @author 박주선

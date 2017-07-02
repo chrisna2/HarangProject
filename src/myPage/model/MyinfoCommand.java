@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import login.model.RegformCommand;
+import myPage.CommandInterface;
 
 /**
  * 내 정보페이지로 접속하는 커맨드 클래스

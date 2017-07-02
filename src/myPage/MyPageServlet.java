@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import login.LoginBean;
-import myPage.model.CommandFactory;
-import myPage.model.CommandInterface;
+import util.LoginBean;
 
 /**
  * 회원 페이지 및  (관리자)회원, 포인트 관리 페이지 관련 서블릿

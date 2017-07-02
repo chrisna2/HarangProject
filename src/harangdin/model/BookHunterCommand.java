@@ -13,10 +13,11 @@ import javax.sql.DataSource;
 
 import dto.BookDTO;
 import dto.MemberDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import harangdin.CommandInterface;
+import util.LoginBean;
+import util.PagingBean;
 
 /**
  * 도서 구매자의 판매자선택여부, 포인트지급 여부 등을 알려준다

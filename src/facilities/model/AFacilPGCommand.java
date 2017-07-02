@@ -17,9 +17,10 @@ import dto.PlaygroundDTO;
 import dto.ScheduleDTO;
 import dto.SrMemberDTO;
 import dto.StudyroomDTO;
+import facilities.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import point.PointBean;
+import util.LoginBean;
+import util.PointBean;
 
 public class AFacilPGCommand implements CommandInterface {
 

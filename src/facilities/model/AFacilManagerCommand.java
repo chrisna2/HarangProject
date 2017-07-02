@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import dto.MemberDTO;
 import dto.PgMemberDTO;
 import dto.SrMemberDTO;
+import facilities.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
 
 public class AFacilManagerCommand implements CommandInterface {

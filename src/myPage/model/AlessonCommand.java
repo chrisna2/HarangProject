@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import dto.LessonDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import myPage.CommandInterface;
+import util.PagingBean;
 
 /**
  * 관리자 수업 페이지 목록 출력 클래스

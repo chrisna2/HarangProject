@@ -5,8 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
 import dto.MessageDTO;
+import util.MessageBean;
 
-public class ReadCommand implements message.model.CommandInterface{
+public class ReadCommand implements message.CommandInterface{
 	MessageBean mbean = new MessageBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp){
 		MemberDTO member = mbean.getLoginInfo(req); // 로그인 정보

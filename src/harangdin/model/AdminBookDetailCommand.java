@@ -13,7 +13,8 @@ import javax.sql.DataSource;
 import dto.BookDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
+import harangdin.CommandInterface;
+import util.LoginBean;
 
 /**
  * 관리자의 도서상세페이지 관리

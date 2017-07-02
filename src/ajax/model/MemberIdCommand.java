@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import ajax.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
-import message.model.MessageBean;
+import util.MessageBean;
 
 public class MemberIdCommand implements CommandInterface {
 	// DB 커넥션 4 대장

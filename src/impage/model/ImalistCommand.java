@@ -14,9 +14,10 @@ import javax.sql.DataSource;
 
 import dto.Im2DTO;
 import dto.MemberDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import impage.CommandInterface;
+import util.PagingBean;
 /**
  * 강의평가전체리스트
  * @author 박주선

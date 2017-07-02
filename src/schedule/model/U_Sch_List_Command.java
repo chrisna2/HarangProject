@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.MemberDTO;
+import dto.PagingDto;
 import dto.ScheduleDTO;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import schedule.CommandInterface;
+import util.PagingBean;
 
 
 /**

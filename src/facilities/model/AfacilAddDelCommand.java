@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import dto.PgMemberDTO;
 import dto.PlaygroundDTO;
 import dto.StudyroomDTO;
+import facilities.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
 
 public class AfacilAddDelCommand implements CommandInterface {

@@ -19,10 +19,11 @@ import com.oreilly.servlet.MultipartRequest;
 import dto.CertiDTO;
 import dto.CertiMemberDTO;
 import dto.MemberDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
-import upload.RandomFileRenamePolicy;
+import myPage.CommandInterface;
+import util.PagingBean;
+import util.RandomFileRenamePolicy;
 
 /**
  * 회원 스펙 등록과 관련한 커멘드 클래스

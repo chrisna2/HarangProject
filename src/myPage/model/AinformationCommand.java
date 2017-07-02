@@ -15,9 +15,10 @@ import javax.sql.DataSource;
 import dto.CertiDTO;
 import dto.Im2DTO;
 import dto.MemberDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import myPage.CommandInterface;
+import util.PagingBean;
 /**
  * 회원전체리스트 출력 / 회원 상세보기
  * @author 박주선

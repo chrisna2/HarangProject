@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import login.CommandInterface;
 /**
  * 로그아웃 커맨드 클래스
  * @author YOO

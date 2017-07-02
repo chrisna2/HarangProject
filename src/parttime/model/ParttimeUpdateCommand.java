@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
 import dto.ParttimeDTO;
+import parttime.CommandInterface;
+import util.ParttimeBean;
 
 public class ParttimeUpdateCommand implements CommandInterface{
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp){

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
 import dto.MessageDTO;
+import message.CommandInterface;
+import util.MessageBean;
 
 public class PostCommand implements CommandInterface{
 	MessageBean mbean = new MessageBean();

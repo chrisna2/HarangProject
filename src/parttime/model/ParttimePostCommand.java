@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
+import parttime.CommandInterface;
+import util.ParttimeBean;
 /**
  * 알바 모집 - 글쓰기 페이지에서 처리하는 모든 기능을 구현한 함수.
  * @author 양혜민

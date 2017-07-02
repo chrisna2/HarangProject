@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import food.model.CommandFactory;
-import food.model.CommandInterface;
-import login.LoginBean;
+import util.LoginBean;
 
 /**
  * 하랑레스토랑(관리자 포함) 관련 서블릿

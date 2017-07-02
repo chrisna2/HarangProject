@@ -18,7 +18,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import upload.RandomFileRenamePolicy;
+import login.CommandInterface;
+import util.RandomFileRenamePolicy;
 
 /**
  * 커뮤니티에 정회원으로 가입하는 커맨드 클래스 

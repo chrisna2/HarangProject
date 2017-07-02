@@ -13,11 +13,12 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import dto.MemberDTO;
+import dto.PagingDto;
 import dto.RecordDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import myPage.CommandInterface;
+import util.LoginBean;
+import util.PagingBean;
 /**
  * 관리자 포인트 관리 페이지 관련 커멘드 클래스
  * @author 나현기

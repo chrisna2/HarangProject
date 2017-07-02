@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import impage.model.CommandFactory;
-import impage.model.CommandInterface;
-import login.LoginBean;
+import util.LoginBean;
 
 @WebServlet("/impage")
 public class ImpageServlet extends HttpServlet{

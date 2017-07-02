@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 import dto.D_ApplyDTO;
 import dto.DaetaDTO;
 import dto.MemberDTO;
+import dto.PagingDto;
 import dto.ParttimeDTO;
-import paging.PagingBean;
-import paging.dto.PagingDto;
-import point.PointBean;
+import parttime.CommandInterface;
 import util.DateBean;
+import util.PagingBean;
+import util.ParttimeBean;
+import util.PointBean;
 
 /**
  * 대타 모집 게시판에 필요한 정보를 DB에서 꺼내오고 게시판 페이지로 이동하는 함수

@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 import dto.Im2DTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import impage.CommandInterface;
 /**
  * 관리자 강의평가 글 보기
  * @author 박주선

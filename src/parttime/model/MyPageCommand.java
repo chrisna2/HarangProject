@@ -9,10 +9,12 @@ import dto.D_ApplyDTO;
 import dto.DaetaDTO;
 import dto.MemberDTO;
 import dto.P_ApplyDTO;
+import dto.PagingDto;
 import dto.ParttimeDTO;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import parttime.CommandInterface;
 import util.DateBean;
+import util.PagingBean;
+import util.ParttimeBean;
 
 public class MyPageCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();

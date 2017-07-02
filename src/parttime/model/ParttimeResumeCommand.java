@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
 import dto.P_ApplyDTO;
+import parttime.CommandInterface;
+import util.ParttimeBean;
 
 public class ParttimeResumeCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();

@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import food.CommandInterface;
+
 /**
  * 메뉴 목록으로 페이지 이동하는 클래스
  * @author 나현기

@@ -14,10 +14,11 @@ import javax.sql.DataSource;
 
 import dto.FoodMemberDTO;
 import dto.MemberDTO;
+import dto.PagingDto;
+import food.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import util.LoginBean;
+import util.PagingBean;
 
 /**
  * 식권 사용 및 환불 처리 커멘드 클래스.

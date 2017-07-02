@@ -13,9 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
 import dto.PgMemberDTO;
+import facilities.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import point.PointBean;
+import util.LoginBean;
+import util.PointBean;
 
 public class FacilPGreservCommand implements CommandInterface {
 

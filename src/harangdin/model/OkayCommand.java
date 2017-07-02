@@ -13,8 +13,9 @@ import javax.sql.DataSource;
 import dto.BookDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import point.PointBean;
+import harangdin.CommandInterface;
+import util.LoginBean;
+import util.PointBean;
 
 /**
  * 도서 수령 확인

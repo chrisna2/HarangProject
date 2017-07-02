@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import login.model.CommandFactory;
-import login.model.CommandInterface;
-
 /**
  * 로그인 관련 서블릿
  * @author 나현기

@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import dto.BookDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import harangdin.CommandInterface;
+import util.PagingBean;
 
 /**
  * 도서 등록페이지로 넘겨준다 

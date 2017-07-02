@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import login.LoginBean;
-import message.model.CommandFactory;
-import message.model.CommandInterface;
+import util.LoginBean;
 
 
 

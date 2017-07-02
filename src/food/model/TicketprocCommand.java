@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import food.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
+import util.LoginBean;
 
 /**
  * 식권을 결제하는 커맨드 클래스

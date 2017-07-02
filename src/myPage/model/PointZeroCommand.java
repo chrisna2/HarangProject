@@ -12,9 +12,10 @@ import javax.sql.DataSource;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
 import login.model.LoginCommand;
-import point.PointBean;
+import myPage.CommandInterface;
+import util.LoginBean;
+import util.PointBean;
 /**
  * pointZero.jsp에 사용되는 클래스
  * @author YOO

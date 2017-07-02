@@ -13,10 +13,11 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import dto.MemberDTO;
+import dto.PagingDto;
 import dto.RecordDTO;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import myPage.CommandInterface;
+import util.PagingBean;
 
 /**
  * 관리자 포인트 조회 페이지

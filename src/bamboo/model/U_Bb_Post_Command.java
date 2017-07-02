@@ -3,6 +3,8 @@ package bamboo.model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bamboo.CommandInterface;
+
 /**
  * 
  * 사용자가 대나무숲 게시판에서 글을 작성할 때 페이지 이동을 위한 클래스

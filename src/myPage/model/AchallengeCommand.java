@@ -12,10 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import dto.CertiMemberDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import myPage.CommandInterface;
+import util.LoginBean;
+import util.PagingBean;
 /**
  * 괸리자 스펙 포인트 지급 및 거부 
  * @author 나현기

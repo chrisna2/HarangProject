@@ -15,9 +15,10 @@ import javax.sql.DataSource;
 import dto.CertiDTO;
 import dto.CertiMemberDTO;
 import dto.MemberDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import myPage.CommandInterface;
+import util.PagingBean;
 /**
  * 스펙 업! 관련 페이지 커멘드 클래스
  * @author 나현기

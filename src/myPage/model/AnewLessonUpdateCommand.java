@@ -14,6 +14,7 @@ import dto.LessonDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.model.RegformCommand;
+import myPage.CommandInterface;
 
 /**
  * 수업 등록 업데이트 확인

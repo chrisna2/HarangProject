@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import login.CommandInterface;
+
 
 /**
  * 로그인 창으로 돌아가는 커멘드 클래스

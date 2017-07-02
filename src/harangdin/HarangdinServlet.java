@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import harangdin.model.CommandFactory;
-import harangdin.model.CommandInterface;
-import login.LoginBean;
+import util.LoginBean;
 
 @WebServlet("/harangdin")
 public class HarangdinServlet extends HttpServlet {

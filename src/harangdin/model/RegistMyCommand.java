@@ -17,8 +17,9 @@ import com.oreilly.servlet.MultipartRequest;
 import dto.BookDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import upload.RandomFileRenamePolicy;
+import harangdin.CommandInterface;
+import util.LoginBean;
+import util.RandomFileRenamePolicy;
 
 /**
  * 자신이 등록한 도서의 삭제가 가능한 페이지

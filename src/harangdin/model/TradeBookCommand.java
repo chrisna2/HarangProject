@@ -14,8 +14,9 @@ import dto.BookDTO;
 import dto.MemberDTO;
 import dto.RecordDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import point.PointBean;
+import harangdin.CommandInterface;
+import util.LoginBean;
+import util.PointBean;
 
 /**
  * 판매자와 구매자와의 거래 중 관리자의 중개

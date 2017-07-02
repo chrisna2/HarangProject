@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
+import impage.CommandInterface;
 /**
  * 강의평가 게시글신고 하기
  * @author 박주선

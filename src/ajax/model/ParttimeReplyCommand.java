@@ -10,10 +10,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ajax.CommandInterface;
 import dto.ParttimeReplyDTO;
 import harang.dbcp.DBConnectionMgr;
-import parttime.model.CommentBean;
-import parttime.model.ParttimeBean;
+import util.CommentBean;
+import util.ParttimeBean;
 
 public class ParttimeReplyCommand implements CommandInterface {
 	@Override

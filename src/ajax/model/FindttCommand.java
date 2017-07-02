@@ -17,11 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import ajax.CommandInterface;
 import dto.CalanderDTO;
 import dto.LessonDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
+import util.LoginBean;
 /**
  * 시간표 출력 Ajax 클래스
  * @author 나현기

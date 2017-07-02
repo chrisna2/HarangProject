@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import ajax.CommandInterface;
 import dto.RecordDTO;
 import dto.ZipDTO;
 import harang.dbcp.DBConnectionMgr;

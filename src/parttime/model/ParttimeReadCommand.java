@@ -7,10 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
 import dto.P_ApplyDTO;
+import dto.PagingDto;
 import dto.ParttimeDTO;
-import message.model.MessageBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import parttime.CommandInterface;
+import util.CommentBean;
+import util.MessageBean;
+import util.PagingBean;
+import util.ParttimeBean;
 
 /**
  * 알바 모집 - 글읽기 페이지에서 처리하는 모든 기능을 구현한 함수.

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import harang.dbcp.DBConnectionMgr;
+import harangdin.CommandInterface;
 
 /**
  * 관리자의 도서 삭제

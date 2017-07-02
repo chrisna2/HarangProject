@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import dto.D_ApplyDTO;
 import dto.MemberDTO;
 import dto.P_ApplyDTO;
+import parttime.CommandInterface;
+import util.ParttimeBean;
 
 public class DaetaResumeCommand implements CommandInterface{
 	ParttimeBean bean = new ParttimeBean();

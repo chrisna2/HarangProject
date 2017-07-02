@@ -11,12 +11,15 @@ import dto.D_ApplyDTO;
 import dto.DaetaDTO;
 import dto.MemberDTO;
 import dto.P_ApplyDTO;
+import dto.PagingDto;
 import dto.ParttimeDTO;
-import message.model.MessageBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
-import point.PointBean;
+import parttime.CommandInterface;
+import util.CommentBean;
 import util.DateBean;
+import util.MessageBean;
+import util.PagingBean;
+import util.ParttimeBean;
+import util.PointBean;
 
 public class DaetaReadCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();

@@ -3,6 +3,9 @@ package parttime.model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import parttime.CommandInterface;
+import util.ParttimeBean;
+
 public class ParttimeApplyCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) {

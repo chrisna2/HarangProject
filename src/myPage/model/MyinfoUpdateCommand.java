@@ -18,10 +18,11 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
 import login.model.RefreshCommand;
-import upload.RandomFileRenamePolicy;
-import upload.TimestampFileRenamePolicy;
+import myPage.CommandInterface;
+import util.LoginBean;
+import util.RandomFileRenamePolicy;
+import util.TimestampFileRenamePolicy;
 
 /**
  * 개인정보 수정 클래스

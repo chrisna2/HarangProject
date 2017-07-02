@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.MemberDTO;
+import parttime.CommandInterface;
+import util.ParttimeBean;
 
 public class DaetaApplyCommand implements CommandInterface{
 	ParttimeBean bean = new ParttimeBean();

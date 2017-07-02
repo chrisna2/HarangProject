@@ -14,9 +14,10 @@ import javax.sql.DataSource;
 
 import dto.FoodMemberDTO;
 import dto.MemberDTO;
+import dto.PagingDto;
+import food.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import util.PagingBean;
 
 /**
  * 식권 목록을 출력하는 커맨드 클래스

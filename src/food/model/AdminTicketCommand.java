@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import dto.FoodMemberDTO;
+import dto.PagingDto;
+import food.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import util.PagingBean;
 
 /**
  * 식권의 판매 목록 출력 클래스

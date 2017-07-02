@@ -15,11 +15,12 @@ import javax.sql.DataSource;
 
 import dto.LessonDTO;
 import dto.MemberDTO;
+import dto.PagingDto;
 import dto.RecordDTO;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
+import myPage.CommandInterface;
+import util.LoginBean;
+import util.PagingBean;
 
 /**
  * 시간표 페이지와 관련한 커맨드 클래스

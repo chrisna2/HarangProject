@@ -13,8 +13,9 @@ import javax.sql.DataSource;
 
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
-import message.model.MessageBean;
+import login.CommandInterface;
 import myPage.model.PointlistCommand;
+import util.MessageBean;
 /**
  * 로그인 커맨드 클래스
  * @author 나현기

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import ajax.CommandInterface;
 import dto.CalanderDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;

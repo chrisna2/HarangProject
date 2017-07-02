@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bamboo.CommandInterface;
 import harang.dbcp.DBConnectionMgr;
 
 /**

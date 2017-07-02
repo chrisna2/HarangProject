@@ -15,11 +15,12 @@ import com.mysql.fabric.xmlrpc.base.Member;
 
 import dto.BookDTO;
 import dto.MemberDTO;
+import dto.PagingDto;
 import harang.dbcp.DBConnectionMgr;
-import login.LoginBean;
-import paging.PagingBean;
-import paging.dto.PagingDto;
-import point.PointBean;
+import harangdin.CommandInterface;
+import util.LoginBean;
+import util.PagingBean;
+import util.PointBean;
 
 /**
  * 도서기부 상세페이지

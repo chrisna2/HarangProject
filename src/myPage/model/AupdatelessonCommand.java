@@ -14,6 +14,7 @@ import dto.LessonDTO;
 import dto.MemberDTO;
 import harang.dbcp.DBConnectionMgr;
 import login.model.RegformCommand;
+import myPage.CommandInterface;
 /**
  * 관리자 수업 수정 커멘드 클래스
  * @author 나현기

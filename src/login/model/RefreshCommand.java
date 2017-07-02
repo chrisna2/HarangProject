@@ -12,10 +12,11 @@ import bamboo.model.Bb_List_Command;
 import dto.DaetaDTO;
 import dto.MemberDTO;
 import dto.ParttimeDTO;
-import login.LoginBean;
+import login.CommandInterface;
 import myPage.model.PointlistCommand;
 import myPage.model.TimetableCommand;
-import parttime.model.ParttimeBean;
+import util.LoginBean;
+import util.ParttimeBean;
 /**
  * 로그인을 유지하면서 메인페이지로 이동하는 클래스.
  * @author 양혜민
