@@ -99,37 +99,12 @@ function checkform(){
                     <form action="/HarangProject/myPage?cmd=AmemList" name="search" method="post">
                       <input type="text"  name="keyfield" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                       <select class="form-control input-sm pull-right" name="keyword" style="width: 150px;">
-                        
-                         <option value="m_id"
-                        <c:choose>
-                        <c:when test="${requestScope.keyword eq 'm_id' }">
-                        selected="selected"
-                         </c:when>
-                         </c:choose>>학번 / 관리자 번호</option>
-                        <option value="m_name"   <c:choose>
-                        <c:when test="${requestScope.keyword eq 'm_name' }">
-                        selected="selected"
-                         </c:when>
-                         </c:choose>>이름</option>
-                        <option value="m_dept"   <c:choose>
-                        <c:when test="${requestScope.keyword eq 'm_dept' }">
-                        selected="selected"
-                         </c:when>
-                         </c:choose>>학과</option>
-                         <option value="m_point"   <c:choose>
-                        <c:when test="${requestScope.keyword eq 'm_dept' }">
-                        selected="selected"
-                         </c:when>
-                         </c:choose>>포인트</option>
-                       
-                      
-                        
-                        
-                        
-                        
-                    
+                         <option></option>
+                         <option value="m_id" ${keyword eq 'm_id' ? 'selected' : null}>학번 / 관리자 번호</option>
+                         <option value="m_name" ${keyword eq 'm_name' ? 'selected' : null}>이름</option>
+                         <option value="m_dept" ${keyword eq 'm_dept' ? 'selected' : null}>학과</option>
+                         <option value="m_point" ${keyword eq 'm_dept' ? 'selected' : null}>포인트</option>
                       </select>
-                     
                       <div class="input-group-btn" >
                         <button type="submit" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                       </div>
@@ -312,22 +287,22 @@ function checkform(){
 <form id="prevPage" method="post" action="/HarangProject/myPage?cmd=AmemList">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock-1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock-1}"/> 
-			<input type="hidden" name="keyfield" value=${keyfield } /> 
-	<input type="hidden" name="keyword" value=${keyword } />
+	<input type="hidden" name="keyfield" value="${keyfield }" /> 
+	<input type="hidden" name="keyword" value="${keyword }" />
 </form>
 <!-- 페이징 : 다음 블록으로 이동하는 폼 -->
 <form id="nextPage" method="post" action="/HarangProject/myPage?cmd=AmemList">
 	<input type="hidden" name="nowPage" value="${paging.pagePerBlock * (paging.nowBlock+1)}"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock+1}"/>
-		<input type="hidden" name="keyfield" value=${keyfield } /> 
-	<input type="hidden" name="keyword" value=${keyword } />
+		<input type="hidden" name="keyfield" value="${keyfield}" /> 
+	<input type="hidden" name="keyword" value="${keyword }" />
 </form>
 <!-- 페이징 : 해당 페이지로 이동하는 폼 -->
 <form id="goPage" method="post" action="/HarangProject/myPage?cmd=AmemList">
 	<input type="hidden" name="nowPage" value="" id="page"/>
 	<input type="hidden" name="nowBlock" value="${paging.nowBlock}"/>
-		<input type="hidden" name="keyfield" value=${keyfield } /> 
-	<input type="hidden" name="keyword" value=${keyword } />
+		<input type="hidden" name="keyfield" value="${keyfield }" /> 
+	<input type="hidden" name="keyword" value="${keyword }" />
 </form>   
 
 
