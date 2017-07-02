@@ -50,7 +50,7 @@ public class AdminDonateCommand implements CommandInterface {
 
 	/**
 	 * 학생들의 도서 기부목록
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void list(HttpServletRequest request){
 		
@@ -129,7 +129,7 @@ public class AdminDonateCommand implements CommandInterface {
 	
 	/**
 	 * 관리자의 기부 도서 목록 삭제
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void delete(HttpServletRequest request){
 		

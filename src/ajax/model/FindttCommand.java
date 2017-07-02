@@ -58,9 +58,9 @@ public class FindttCommand implements CommandInterface {
 	}
 	/**
 	 * 교수님의 현재 시간표를 출력하는 메소드
-	 * @param request
-	 * @return ArrayList
-	 * @throws UnsupportedEncodingException
+	 * @param request 서블릿 리퀘스트
+	 * @return ArrayList 교수님 시간표 출력 목록
+	 * @throws UnsupportedEncodingException ??
 	 */
 	public ArrayList findTeacherTt(HttpServletRequest request) throws UnsupportedEncodingException{
 				
@@ -109,7 +109,7 @@ public class FindttCommand implements CommandInterface {
 	}
 	/**
 	 * 수강실의 현재 시간표를 출력 하는 메소드
-	 * @param request
+	 * @param request  서블릿 리퀘스트
 	 * @return ArrayList 수강실의 시간표 목록 출력
 	 * @throws UnsupportedEncodingException
 	 */

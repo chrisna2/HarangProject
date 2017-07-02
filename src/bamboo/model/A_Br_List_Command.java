@@ -47,8 +47,8 @@ public class A_Br_List_Command implements CommandInterface {
 	 * 
 	 * 관리자가 대나무숲 글을 볼 때 그 글에 달린 댓글을 HttpServletRequest에 담아주는 메소드
 	 * 
-	 * @param req
-	 * @return ArrayList
+	 * @param req 서블릿 리퀘스트
+	 * @return ArrayList 댓글 리스트
 	 */
 	public ArrayList brlist(HttpServletRequest req) {
 		HttpSession session = req.getSession();

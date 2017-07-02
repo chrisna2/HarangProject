@@ -59,8 +59,8 @@ public class AnewLessonUpdateCommand implements CommandInterface {
 	
 	/**
 	 * 수업 신규 등록 메소드
-	 * @param request
-	 * @return
+	 * @param request 서블릿 리퀘스트
+	 * @return 출력 결과
 	 */
 	public String lessonInsert(HttpServletRequest request){
 		
@@ -111,7 +111,7 @@ public class AnewLessonUpdateCommand implements CommandInterface {
 	
 	/**
 	 * 수업 업데이트 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 * @return 출력 결과 메세지
 	 */
 	public String lessonUpdate(HttpServletRequest request){

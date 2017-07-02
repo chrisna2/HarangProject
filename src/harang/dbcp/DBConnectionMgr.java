@@ -62,7 +62,7 @@ public class DBConnectionMgr {
      * Use this method to set the maximum number of open connections before
      * unused connections are closed.
      * DBConnectionMgr을 생성해 주는 메소드
-     * -> 싱글턴 패턴
+     * 싱글턴 패턴
      * @return 
      */
     public static DBConnectionMgr getInstance() {

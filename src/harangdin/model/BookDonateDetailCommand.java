@@ -78,7 +78,7 @@ public class BookDonateDetailCommand implements CommandInterface {
 	
 	/**
 	 * 도서 상세페이지 불러오기. 상세내용을 보여준다.
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void detailpac(HttpServletRequest request){
@@ -130,7 +130,7 @@ public class BookDonateDetailCommand implements CommandInterface {
 	
 	/**
 	 * 학생들이 입력한 포인트 중 가장 높은 포인트를 나타내준다
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void point(HttpServletRequest request){
@@ -167,8 +167,8 @@ public class BookDonateDetailCommand implements CommandInterface {
 	
 	/**
 	 * 도서 기부를 선택할 시, 지급 포인트는 5000포인트로 고정된다.
-	 * @param request
-	 * @return
+	 * @param request 서블릿 리퀘스트
+	 * @return 출력 결과
 	 */
 	
 	public String donate(HttpServletRequest request){
@@ -208,8 +208,8 @@ public class BookDonateDetailCommand implements CommandInterface {
 	
 	/**
 	 * 기부가 정상적으로 완료되면 기부완료를 알려준다.
-	 * @param request
-	 * @return
+	 * @param request 서블릿 리퀘스트
+	 * @return 
 	 */
 	
 	public String completeMessage(HttpServletRequest request){

@@ -50,7 +50,7 @@ public class BookDetailCommand implements CommandInterface {
 	
 	/**
 	 * 도서 상세페이지 불러오기. 도서 상세 내용을 보여준다.
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void detailpac(HttpServletRequest request){
@@ -105,7 +105,7 @@ public class BookDetailCommand implements CommandInterface {
 	
 	/**
 	 * 학생들이 입력한 포인트 중 가장 높은 포인트를 나타내준다
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void point(HttpServletRequest request){

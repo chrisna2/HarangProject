@@ -41,7 +41,7 @@ public class TicketprocCommand implements CommandInterface {
 
 	/**
 	 * 식권을 구매하는 커멘드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void buyingTicket(HttpServletRequest request){
 		

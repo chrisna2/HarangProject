@@ -42,7 +42,7 @@ public class RegformCommand implements CommandInterface {
 	
 	/**
 	 * 초기 시/도의 목록을 불러오는 메소드
-	 * @param request
+	 * @param request 서블릿리퀘스트
 	 */
 	public void getSido(HttpServletRequest request){
 

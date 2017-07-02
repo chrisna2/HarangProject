@@ -39,8 +39,8 @@ public class ParttimeBean {
 	
 	/**
 	 * 세션에 저장된 로그인 정보를 가져오는 메서드.
-	 * @param req
-	 * @return
+	 * @param req 서블릿 리퀘스트
+	 * @return MemberDTO 세션의 정보
 	 */
 	public MemberDTO getLoginInfo(HttpServletRequest req){
 		MemberDTO login = null;
@@ -58,7 +58,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 관리자인지 아닌지 체크하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return true || false
 	 */
 	public Boolean adminCheck(String m_id){
@@ -483,7 +483,7 @@ public class ParttimeBean {
 
 	/**
 	 * 조회 수를 1 증가시키는 메서드.
-	 * @param p_num 
+	 * @param p_num 글번호
 	 */
 	public void counterUp(String pORd, String pORd_num){
 		try{
@@ -551,11 +551,11 @@ public class ParttimeBean {
 	
 	/**
 	 * 알바 지원 이력서를 DB에 삽입하는 메서드.
-	 * @param p_num 
-	 * @param m_id 
-	 * @param pm_reason 
-	 * @param pm_career
-	 * @param pm_wanttime
+	 * @param p_num 글번호
+	 * @param m_id 아이디
+	 * @param pm_reason 이유
+	 * @param pm_career 경력
+	 * @param pm_wanttime 원하는 시간
 	 */
 	public void createParttimeResume(String p_num, String m_id, 
 			String pm_reason, String pm_career, String pm_wanttime){
@@ -584,11 +584,9 @@ public class ParttimeBean {
 	
 	/**
 	 * 대타 지원 이력서를 DB에 삽입하는 메서드.
-	 * @param p_num 
-	 * @param m_id 
-	 * @param pm_reason 
-	 * @param pm_career
-	 * @param pm_wanttime
+	 * @param d_num 글번호
+	 * @param m_id 아이디
+	 * @param pdr_reason 이유
 	 */
 	public void createDaetaResume(String d_num, String m_id, String dm_reason){
 		try{
@@ -613,7 +611,7 @@ public class ParttimeBean {
 
 	/**
 	 * 게시글을 삭제하는 메서드
-	 * @param p_num
+	 * @param p_num 알바 번호
 	 */
 	public void deleteParttime(String p_num){
 		try{
@@ -637,7 +635,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 게시글을 삭제하는 메서드
-	 * @param p_num
+	 * @param p_num 알바 번호
 	 */
 	public void deleteDaeta(String d_num){
 		try{
@@ -661,7 +659,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 게시글을 지우기 이전에 게시글에 지원한 지원자들을 먼저 삭제하는 메서드.
-	 * @param p_num
+	 * @param p_num 알바 번호
 	 */
 	public void deleteParttimeApply(String p_num){
 		try{
@@ -681,7 +679,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 게시글을 지우기 이전에 게시글에 지원한 지원자들을 먼저 삭제하는 메서드.
-	 * @param p_num
+	 * @param p_num 알바 번호
 	 */
 	public void deleteDaetaApply(String d_num){
 		try{
@@ -701,7 +699,7 @@ public class ParttimeBean {
 
 	/**
 	 * 알바 모집 게시글에 지원한 지원자 목록을 검색하는 메서드.
-	 * @param p_num
+	 * @param p_num 알바 번호
 	 * @return 지원자 목록
 	 */
 	public ArrayList getParttimeApplyList(String p_num){
@@ -742,7 +740,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 내가 알바 모집 게시글에 지원한 목록을 검색하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return 글 목록
 	 */
 	public ArrayList getMyParttimeApplyList(String m_id){
@@ -783,7 +781,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 대타 모집 게시글에 지원한 지원자 목록을 검색하는 메서드.
-	 * @param p_num
+	 * @param p_num 알바 번호
 	 * @return 지원자 목록
 	 */
 	public ArrayList getDaetaApplyList(String d_num){
@@ -824,7 +822,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 내가 대타 모집 게시글에 지원한 목록을 검색하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return 글 목록
 	 */
 	public ArrayList getMyDaetaApplyList(String m_id){
@@ -865,8 +863,8 @@ public class ParttimeBean {
 	
 	/**
 	 * 해당 게시글에 지원한 지원자의 이력서 정보를 검색하는 메서드.
-	 * @param m_id
-	 * @param p_num
+	 * @param m_id 학번
+	 * @param p_num 알바 번호
 	 * @return 지원자의 이력서 폼
 	 */
 	public P_ApplyDTO getParttimeApply(String m_id, String p_num){
@@ -904,8 +902,8 @@ public class ParttimeBean {
 	
 	/**
 	 * 해당 게시글에 지원한 지원자의 이력서 정보를 검색하는 메서드.
-	 * @param m_id
-	 * @param d_num
+	 * @param m_id 학번
+	 * @param d_num 알바 번호
 	 * @return 지원자의 이력서 폼
 	 */
 	public D_ApplyDTO getDaetaApply(String m_id, String d_num){
@@ -943,8 +941,8 @@ public class ParttimeBean {
 
 	/**
 	 * 채용 버튼을 누를 시 DB에 채용여부를 저장하는 메서드.
-	 * @param m_id
-	 * @param p_num
+	 * @param m_id 학번
+	 * @param p_num 알바 번호
 	 */
 	public void updateParttimeChoice(String m_id, String p_num){
 		
@@ -968,8 +966,8 @@ public class ParttimeBean {
 	
 	/**
 	 * 채용 버튼을 누를 시 DB에 채용여부를 저장하는 메서드.
-	 * @param m_id
-	 * @param p_num
+	 * @param m_id 학번
+	 * @param p_num 알바 번호
 	 */
 	public void updateDaetaChoice(String m_id, String d_num){
 		
@@ -993,8 +991,8 @@ public class ParttimeBean {
 	
 	/**
 	 * 지원 취소한 경우 DB에서 지원 내역 삭제하는 메서드.
-	 * @param m_id
-	 * @param p_num
+	 * @param m_id 학번
+	 * @param p_num 알바 번호
 	 */
 	public void deleteParttimeApply(String m_id, String p_num){
 		try{
@@ -1017,8 +1015,8 @@ public class ParttimeBean {
 	
 	/**
 	 * 지원 취소한 경우 DB에서 지원 내역 삭제하는 메서드.
-	 * @param m_id
-	 * @param d_num
+	 * @param m_id 학번
+	 * @param d_num 알바 번호
 	 */
 	public void deleteDaetaApply(String m_id, String d_num){
 		try{
@@ -1041,7 +1039,7 @@ public class ParttimeBean {
 
 	/**
 	 * 알바 모집 게시판에 글을 추가하는 메서드.
-	 * @param dto
+	 * @param dto ParttimeDTO 항목
 	 */
 	public void insertParttime(ParttimeDTO dto){
 		try{
@@ -1073,7 +1071,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 대타 모집 게시판에 글을 추가하는 메서드.
-	 * @param dto
+	 * @param dto DaetaDTO 항목
 	 */
 	public void insertDaeta(DaetaDTO dto){
 		try{
@@ -1105,7 +1103,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 알바 모집 글을 수정하는 메서드.
-	 * @param dto
+	 * @param dto ParttimeDTO 항목
 	 */
 	public void updateParttime(ParttimeDTO dto){
 		try{
@@ -1139,7 +1137,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 대타 모집 글을 수정하는 메서드.
-	 * @param dto
+	 * @param dto DaetaDTO 항목
 	 */
 	public void updateDaeta(DaetaDTO dto){
 		try{
@@ -1171,8 +1169,8 @@ public class ParttimeBean {
 
 	/**
 	 * 해당글의 대타로 선택된 사람을 검색하는 메서드.
-	 * @param d_num
-	 * @return
+	 * @param d_num 대타 번호
+	 * @return 메세지
 	 */
 	public String getPicked(String d_num){
 		String m_id = null;
@@ -1200,7 +1198,7 @@ public class ParttimeBean {
 	
 	/**
 	 * 대타가 작업을 완료했을 때 처리하는 메서드.
-	 * @param dto
+	 * @param dto D_ApplyDTO항목
 	 */
 	public void updateDaetaMember(D_ApplyDTO dto){
 		try{
@@ -1225,9 +1223,9 @@ public class ParttimeBean {
 	
 	/**
 	 * 대타 신청자가 업무완료 후 신고한 경우 처리하는 메서드.
-	 * @param m_id
-	 * @param d_num
-	 * @param dm_report
+	 * @param m_id 학번
+	 * @param d_num 대타번호
+	 * @param dm_report 신고내용
 	 */
 	public void report(String m_id, String d_num, String dm_report){
 		try{

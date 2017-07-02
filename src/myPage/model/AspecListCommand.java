@@ -69,7 +69,7 @@ public class AspecListCommand implements CommandInterface {
 	
 	/**
 	 * 자격증 전체목록
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void listCommand(HttpServletRequest request){
 		
@@ -144,7 +144,7 @@ public class AspecListCommand implements CommandInterface {
 	}
 	/**
 	 * 자격증등록
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void insert(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
@@ -178,7 +178,7 @@ public class AspecListCommand implements CommandInterface {
 	}
 	/**
 	 * 자격증상세보기
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void read(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
@@ -210,7 +210,7 @@ public class AspecListCommand implements CommandInterface {
 	
 	/**
 	 * 자격증정보수정
-	 * @param request
+	 * @param request  서블릿 리퀘스트
 	 */
 	public void update(HttpServletRequest request){
 		

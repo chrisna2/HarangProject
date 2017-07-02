@@ -20,7 +20,7 @@ import util.PointBean;
 
 /**
  * 판매자와 구매자와의 거래 중 관리자의 중개
- * @author student
+ * @author 서지윤
  *
  */
 
@@ -73,9 +73,9 @@ public class TradeBookCommand implements CommandInterface{
 	
 	/**
 	 * 구매자가 제시한 포인트 중 가장 높은 포인트를 제시한 구매자의 학번을 알려줌
-	 * @param b_num
-	 * @param bh_want
-	 * @return
+	 * @param b_num 책번호
+	 * @param bh_want 책포인트
+	 * @return 메세지
 	 */
 	
 	public String maxId(String b_num, int bh_want){
@@ -110,8 +110,8 @@ public class TradeBookCommand implements CommandInterface{
 	
 	/**
 	 * 판매자의 총 포인트를 알려준다
-	 * @param m_id
-	 * @return
+	 * @param m_id 학번
+	 * @return 포인트
 	 */
 
 	public long maxPoint(String m_id){
@@ -147,9 +147,9 @@ public class TradeBookCommand implements CommandInterface{
 	
 	/**
 	 * 구매자가 판매자의 선택을 받을 시, Y가 뜬다
-	 * @param giver_id
-	 * @param b_num
-	 * @param bh_want
+	 * @param giver_id 구매자 학번
+	 * @param b_num 책번로
+	 * @param bh_want 포인트
 	 * @return
 	 */
 	
@@ -196,7 +196,7 @@ public class TradeBookCommand implements CommandInterface{
 	
 	/**
 	 * 판매자와 구매자가 서로 거래중일 때는 '거래중'이라는 내용이 뜬다
-	 * @param b_num
+	 * @param b_num 책넘버
 	 */
 	
 	public void tradeCheckBook(String b_num){

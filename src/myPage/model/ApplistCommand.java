@@ -65,8 +65,7 @@ public class ApplistCommand implements CommandInterface {
 	
 	/**
 	 * 학번으로 클릭한 사람 이름 확인
-	 * @param checkid
-	 * @return
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void prseonInfo(HttpServletRequest request){
 		
@@ -101,8 +100,7 @@ public class ApplistCommand implements CommandInterface {
 	
 	/**
 	 * 회원 개인의 거래 기록 검색
-	 * @param checkid 학번
-	 * @return
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void pointList(HttpServletRequest request){
 		
@@ -187,8 +185,8 @@ public class ApplistCommand implements CommandInterface {
 	
 	/**
 	 * 관리자가 회원에게 포인트를 더해주는 메소드
-	 * @param request
-	 * @return
+	 * @param request 서블릿 리퀘스트
+	 * @return 출력 결과
 	 */
 public String plusPoint(HttpServletRequest request){
 		
@@ -252,8 +250,8 @@ public String plusPoint(HttpServletRequest request){
 	
 /**
  * 관리자가 회원에게 포인트를 뺐는 메소드
- * @param request
- * @return
+ * @param request 서블릿 리퀘스트
+ * @return 출력결과
  */
 	public String minusPoint(HttpServletRequest request){
 		

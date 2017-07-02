@@ -81,7 +81,7 @@ public class TimetableCommand implements CommandInterface {
 	
 	/**
 	 * 시간표 페이지에 접속시 초기로 표시되는 시간표 출력 메소드.
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void defaultTimeTable(HttpServletRequest request){
 		
@@ -162,7 +162,7 @@ public class TimetableCommand implements CommandInterface {
 	
 	/**
 	 * 시간표의 학년과 학기를 선택 등록한 시간표를 출력하는 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void timeTableChoice(HttpServletRequest request){
 		
@@ -233,10 +233,10 @@ public class TimetableCommand implements CommandInterface {
 	}
 	/**
 	 * 시간표에 등록된 수업 목록을 출력하는 메소드
-	 * @param request
-	 * @param tt_grade
-	 * @param tt_term
-	 * @param m_id
+	 * @param request  서블릿 리퀘스트
+	 * @param tt_grade 시간표 학년
+	 * @param tt_term 시간표 학기
+	 * @param m_id 등록자 학번
 	 */
 	public void userLessonList(HttpServletRequest request, int tt_grade, int tt_term, String m_id){
 		
@@ -337,8 +337,8 @@ public class TimetableCommand implements CommandInterface {
 	
 	/**
 	 * 시간표가 중보되었는가 검색하는 메소드
-	 * @param request
-	 * @return
+	 * @param request 서블릿 리퀘스트
+	 * @return 등록결과
 	 */
 	public String enrollCheck(HttpServletRequest request){
 		
@@ -389,7 +389,7 @@ public class TimetableCommand implements CommandInterface {
 	
 	/**
 	 * 수업 등록 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void enrollLesson(HttpServletRequest request){
 		
@@ -426,8 +426,8 @@ public class TimetableCommand implements CommandInterface {
 	
 	/**
 	 * 이미 수업 평가가 완료된 수업은 시간표에서 지워지지 않게하는 메소드
-	 * @param request
-	 * @return
+	 * @param request 서블릿 리퀘스트
+	 * @return 입력결과
 	 */
 	public String deleteCheck(HttpServletRequest request){
 		
@@ -474,7 +474,7 @@ public class TimetableCommand implements CommandInterface {
 	
 	/**
 	 * 시간표애서 수업을 지우는 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void deleteLesson(HttpServletRequest request){
 		

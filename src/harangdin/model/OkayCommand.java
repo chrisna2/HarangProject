@@ -69,7 +69,7 @@ public class OkayCommand implements CommandInterface{
 	
 	/**
 	 * 관리자가 판매자와 구매자 사이 포인트를 중개한다
-	 * @return
+	 * @return 판매자 보유 포인트 총합
 	 */
 	
 	public long pointRecall(){
@@ -104,10 +104,10 @@ public class OkayCommand implements CommandInterface{
 	
 	/**
 	 * 도서 구매자의 수령 후 포인트 지급을 위한 확인
-	 * @param b_num
-	 * @param buyer_id
-	 * @param bh_want
-	 * @return
+	 * @param b_num 책넘버
+	 * @param buyer_id 구매자 학번
+	 * @param bh_want 구매가격 포인트
+	 * @return 출력 결과
 	 */
 	
 	public String bookComplete(String b_num, String buyer_id, int bh_want){
@@ -153,7 +153,7 @@ public class OkayCommand implements CommandInterface{
 	
 	/**
 	 * 포인트 지급까지 완료된 도서는 완료가 된다.
-	 * @param b_num
+	 * @param b_num 책넘버
 	 */
 	
 	public void bookComplete2(String b_num){

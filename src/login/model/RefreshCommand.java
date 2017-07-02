@@ -53,7 +53,7 @@ public class RefreshCommand implements CommandInterface {
 	
 	/**
 	 * 시간표 정보를 불러오는 메서드.
-	 * @param req
+	 * @param req 서블릿리퀘스트
 	 */
 	public void timetable(HttpServletRequest req){
 		TimetableCommand ttc = new TimetableCommand();
@@ -62,7 +62,7 @@ public class RefreshCommand implements CommandInterface {
 	
 	/**
 	 * 최신글 정보를 불러오는 메서드.
-	 * @param req
+	 * @param req 서블릿리퀘스트
 	 */
 	public void recentData(HttpServletRequest req){
 		ParttimeBean pbean = new ParttimeBean();
@@ -77,7 +77,7 @@ public class RefreshCommand implements CommandInterface {
 	
 	/**
 	 * 포인트 정보를 불러오는 메서드.
-	 * @param req
+	 * @param req 서블릿리퀘스트
 	 */
 	public void point(HttpServletRequest req, String m_id){
 		PointlistCommand plc = new PointlistCommand();

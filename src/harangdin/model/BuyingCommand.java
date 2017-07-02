@@ -47,7 +47,7 @@ public class BuyingCommand implements CommandInterface {
 	
 	/**
 	 * 구매자의 도서 구매 목록을 불러온다
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void list(HttpServletRequest request){

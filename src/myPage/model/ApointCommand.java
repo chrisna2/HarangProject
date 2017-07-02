@@ -45,10 +45,9 @@ public class ApointCommand implements CommandInterface {
 		return "/WEB-INF/myPage/a_pointcheck.jsp";
 	}
 	
-	
 	/**
-	 * 리스트 페이징 검색 기능이 구현된 페이지
-	 * @return
+	 * 멤버 리스트 출력하는 메소드
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void memList(HttpServletRequest request){
 

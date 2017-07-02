@@ -37,8 +37,8 @@ public class MyPageCommand implements CommandInterface {
 	
 	/**
 	 * 내가 쓴 알바 모집 글 목록을 검색하는 메서드.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void getParttimeList(String m_id, HttpServletRequest req) {
 		ArrayList plist = bean.getMyParttimeList(m_id);
@@ -60,8 +60,8 @@ public class MyPageCommand implements CommandInterface {
 	
 	/**
 	 * 내가 쓴 대타 모집 글 목록을 검색하는 메서드.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void getDaetaList(String m_id, HttpServletRequest req) {
 		ArrayList dlist = bean.getMyDaetaList(m_id);
@@ -83,8 +83,9 @@ public class MyPageCommand implements CommandInterface {
 	}
 
 	/**
-	 * 내가 지원한 글 목록을 검색해서 request에 보내는 메서드.
-	 * @param req
+	 * 내가 알바 지원한 글 목록을 검색해서 request에 보내는 메서드.
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void getParttimeApplyList(String m_id, HttpServletRequest req){
 		ArrayList applyList = bean.getMyParttimeApplyList(m_id); //내가 지원한 이력서 목록
@@ -103,6 +104,11 @@ public class MyPageCommand implements CommandInterface {
 		req.setAttribute("p_resume", p_alist); 
 	}
 	
+	/**
+	 * 내가 대타 지원한 글 목록을 검색해서 request에 보내는 메서드.
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
+	 */
 	public void getDaetaApplyList(String m_id, HttpServletRequest req){
 		ArrayList applyList = bean.getMyDaetaApplyList(m_id); // 내가 지원한 이력서 목록
 		ArrayList d_alist = new ArrayList();
@@ -125,8 +131,8 @@ public class MyPageCommand implements CommandInterface {
 	 * 페이징 관련 parameter를 받아서 처리 후 request에 보내는 함수
 	 * 
 	 * @param i 몇번째 페이징
-	 * @param listSize
-	 * @param req
+	 * @param listSize 목록 사이즈
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(int i, int listSize, HttpServletRequest req) {
 		PagingBean pbean = new PagingBean();

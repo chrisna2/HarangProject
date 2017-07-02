@@ -60,9 +60,9 @@ public class CommentBean {
 	
 	/**
 	 * 대타 모집 게시판에 댓글을 등록하는 메서드.
-	 * @param d_num
-	 * @param m_id
-	 * @param dr_comment
+	 * @param d_num 대타번로
+	 * @param m_id 학번
+	 * @param dr_comment 댓글
 	 */
 	public void insertDaetaReply(String d_num, String m_id, String dr_comment){
 		try{
@@ -86,7 +86,7 @@ public class CommentBean {
 	
 	/**
 	 * 알바 모집 게시판에서 댓글을 삭제하는 메서드.
-	 * @param pr_num
+	 * @param pr_num 파트타임 번호
 	 */
 	public void deleteParttimeReply(String pr_num){
 		try{
@@ -154,8 +154,8 @@ public class CommentBean {
 	
 	/**
 	 * 대타 모집 게시판에서 댓글을 수정하는 메서드.
-	 * @param dr_num
-	 * @param dr_comment
+	 * @param dr_num 대타 댓글 번호
+	 * @param dr_comment 대타 댓글 내용
 	 */
 	public void updateDaetaReply(String dr_num, String dr_comment){
 		try{

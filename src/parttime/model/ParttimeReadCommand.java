@@ -70,8 +70,8 @@ public class ParttimeReadCommand implements CommandInterface {
 	/**
 	 * daycode를 받아서 배열로 분리해 parameter로 넘기는 메서드.
 	 * 
-	 * @param code
-	 * @param req
+	 * @param code 시간코드
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void splitCode(String code, HttpServletRequest req) {
 		char[] day = { '월', '화', '수', '목', '금', '토', '일' };
@@ -93,7 +93,7 @@ public class ParttimeReadCommand implements CommandInterface {
 	/**
 	 * 알바 모집 게시판 페이징 관련 매개변수를 처리하는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(HttpServletRequest req) {
 		int nowPage = 0, nowBlock = 0;
@@ -108,7 +108,7 @@ public class ParttimeReadCommand implements CommandInterface {
 	/**
 	 * 지원 완료 후 이 페이지로 넘어올 경우 DB에 이력서를 저장하는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void apply(HttpServletRequest req) {
 		String m_id = "";
@@ -140,7 +140,7 @@ public class ParttimeReadCommand implements CommandInterface {
 	/**
 	 * 지원자 목록을 검색해서 request에 보내는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void showApply(HttpServletRequest req) {
 		String p_num = (String) req.getParameter("p_num"); // 글번호 parameter
@@ -159,8 +159,8 @@ public class ParttimeReadCommand implements CommandInterface {
 	/**
 	 * 지원자 페이징 관련 parameter를 처리하는 메서드.
 	 * 
-	 * @param listSize
-	 * @param req
+	 * @param listSize 목록 사이즈
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void a_paging(int listSize, HttpServletRequest req) {
 		// 페이징 관련 parameter 받아오기
@@ -183,8 +183,8 @@ public class ParttimeReadCommand implements CommandInterface {
 	/**
 	 * 채용 버튼을 눌렀을 때, 채용여부에 관한 정보를 업데이트하고 채용확인 메시지를 보내는 메서드.
 	 * 
-	 * @param login
-	 * @param req
+	 * @param login 로그인 여부
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void choice(String login, HttpServletRequest req) {
 
@@ -216,8 +216,8 @@ public class ParttimeReadCommand implements CommandInterface {
 	/**
 	 * 해당 게시글에 이미 지원을 했는지 안했는지 확인하는 메서드.
 	 * 
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void isApply(String m_id, HttpServletRequest req) {
 		String p_num = req.getParameter("p_num");
@@ -235,8 +235,8 @@ public class ParttimeReadCommand implements CommandInterface {
 	/**
 	 * 지원을 취소하는 경우 실행되는 메서드.
 	 * 
-	 * @param member
-	 * @param req
+	 * @param member 회원세션 정보
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void cancelApply(MemberDTO member, HttpServletRequest req) {
 		if ("OK".equals(req.getParameter("cancel"))) {
@@ -257,8 +257,8 @@ public class ParttimeReadCommand implements CommandInterface {
 	
 	/**
 	 * 알바 게시글을 수정하는 메서드.
-	 * @param member
-	 * @param req
+	 * @param member 회원세션정보
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void update(MemberDTO member, HttpServletRequest req){
 		String update = req.getParameter("update");
@@ -294,6 +294,11 @@ public class ParttimeReadCommand implements CommandInterface {
 		}
 	}
 	
+	/**
+	 * 날짜를 코드로 바꿔주는 메소드
+	 * @param req 서블릿 리퀘스트
+	 * @return 날짜 코드
+	 */
 	public String transCode(HttpServletRequest req) {
 		String daycode = "";
 		String[] day = { "월", "화", "수", "목", "금", "토", "일" };

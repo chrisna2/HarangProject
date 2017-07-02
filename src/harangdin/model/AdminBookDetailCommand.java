@@ -55,7 +55,7 @@ public class AdminBookDetailCommand implements CommandInterface {
 	
 	/**
 	 * 도서 상세페이지 불러오기. 상세내용을 보여준다.
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void detailpac(HttpServletRequest request){
@@ -110,7 +110,7 @@ public class AdminBookDetailCommand implements CommandInterface {
 	
 	/**
 	 * 학생들이 입력한 포인트 중 가장 높은 포인트를 나타내준다
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void point(HttpServletRequest request){
@@ -147,7 +147,7 @@ public class AdminBookDetailCommand implements CommandInterface {
 	
 	/**
 	 * 상세페이지에서 해당 도서를 삭제할 수 있는 기능
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void delete(HttpServletRequest request){

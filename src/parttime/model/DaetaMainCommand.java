@@ -40,8 +40,8 @@ public class DaetaMainCommand implements CommandInterface {
 	
 	/**
 	 * DB에서 게시판에 띄울 글 정보를 받아와서 request에 보내는 함수.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void getList(String m_id, HttpServletRequest req) {
 		String keyword = req.getParameter("keyword");
@@ -87,8 +87,8 @@ public class DaetaMainCommand implements CommandInterface {
 	/**
 	 * 페이징 관련 parameter를 받아서 처리 후 request에 보내는 함수
 	 * 
-	 * @param listSize
-	 * @param req
+	 * @param listSize 페이지 목록의 크기
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(int listSize, HttpServletRequest req) {
 		// 페이징 관련 parameter 받아오기
@@ -110,7 +110,7 @@ public class DaetaMainCommand implements CommandInterface {
 	
 	/**
 	 * 대타 모집 게시판에서 글을 삭제하는 메서드.
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void delete(HttpServletRequest req){
 		String delete = (String)req.getParameter("delete");
@@ -123,8 +123,8 @@ public class DaetaMainCommand implements CommandInterface {
 	
 	/**
 	 * 대타 모집 게시판에서 글을 추가하는 메서드.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void insert(String m_id, HttpServletRequest req) {
 		String insert = req.getParameter("insert");
@@ -153,7 +153,7 @@ public class DaetaMainCommand implements CommandInterface {
 
 	/**
 	 * 마감일이 지나면 자동으로 말머리가 [마감]으로 변경되는 메서드.
-	 * @param d_num
+	 * @param d_num 대타넘버
 	 */
 	public void afterDeadline(String d_num){
 		DaetaDTO dto = bean.getDaeta(d_num);

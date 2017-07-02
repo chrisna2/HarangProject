@@ -65,7 +65,7 @@ public class TicketUseCommand implements CommandInterface {
 	 * 식권  환불 처리 메소드
 	 * @param f_num 메뉴번호
 	 * @param m_id 구매자 아이디
-	 * @return
+	 * @return 입력 결과
 	 */
 	public String returning(String f_num,String m_id){
 		
@@ -95,9 +95,9 @@ public class TicketUseCommand implements CommandInterface {
 	
 	/**
 	 * 식권 사용 메소드
-	 * @param f_num
-	 * @param m_id
-	 * @return
+	 * @param f_num 푸드 넘버
+	 * @param m_id 학번
+	 * @return 입력 결과
 	 */
 	public String using(String f_num,String m_id){
 		
@@ -127,10 +127,10 @@ public class TicketUseCommand implements CommandInterface {
 	
 	/**
 	 * 식권 포인트 환불 처리 메소드
-	 * @param f_point
-	 * @param f_num
-	 * @param member_id
-	 * @param f_title
+	 * @param f_point 식권 포인트
+	 * @param f_num 메뉴번호
+	 * @param member_id 학번
+	 * @param f_title 식권 메뉴제목
 	 */
 	public void returnTicket(int f_point,String f_num,String member_id,String f_title){
 		

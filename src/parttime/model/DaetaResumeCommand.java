@@ -38,7 +38,7 @@ public class DaetaResumeCommand implements CommandInterface{
 	
 	/**
 	 * 페이징 관련 매개변수를 처리하는 메서드.
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(HttpServletRequest req) {
 		// 글 읽기에서 지원자 목록 페이징
@@ -60,8 +60,8 @@ public class DaetaResumeCommand implements CommandInterface{
 	
 	/**
 	 * 지원자의 회원번호로 지원자 정보를 조회하는 메서드.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 * @throws ParseException
 	 */
 	public void applicantInfo(String m_id, HttpServletRequest req){

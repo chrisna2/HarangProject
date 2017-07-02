@@ -46,7 +46,7 @@ public class AlessonCommand implements CommandInterface {
 
 /**
  * 관리자 입장에서 수업 목록 출력 메소드	
- * @param request
+ * @param request 서블릿 리퀘스트
  */
 public void adminLessonList(HttpServletRequest request){
 		

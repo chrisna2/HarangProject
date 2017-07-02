@@ -36,7 +36,7 @@ public class MessageBean {
 	
 	/**
 	 * 로그인 정보를 받아오는 메서드.
-	 * @param req
+	 * @param req 서블릿리퀘스트
 	 * @return 회원 정보
 	 */
 	public MemberDTO getLoginInfo(HttpServletRequest req){
@@ -110,7 +110,7 @@ public class MessageBean {
 
 	/**
 	 * 회원이름으로 회원번호를 검색하는 메서드. 
-	 * @param m_name
+	 * @param m_name 이름
 	 * @return
 	 */
 	public String[] getMember_id(String m_name){
@@ -159,10 +159,10 @@ public class MessageBean {
 	
 	/**
 	 * 메시지를 보내는 메서드.
-	 * @param t_title
-	 * @param t_content
-	 * @param m_sender
-	 * @param m_reader
+	 * @param t_title 문자 제목
+	 * @param t_content 내용
+	 * @param m_sender 보낸이
+	 * @param m_reader 받은이
 	 */
 	public void postMessage(String t_title, String t_content, String m_sender, String m_reader){
 		try{
@@ -188,7 +188,7 @@ public class MessageBean {
 	
 	/**
 	 * 받은 메시지를 모두 검색하는 메서드.
-	 * @param m_id
+	 * @param m_id 아이디
 	 * @return 받은 메시지 리스트
 	 */
 	public ArrayList getGivenMessageList(String m_id){
@@ -232,7 +232,7 @@ public class MessageBean {
 	
 	/**
 	 * 보낸 메시지를 모두 검색하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return 보낸 메시지 리스트
 	 */
 	public ArrayList getSentMessageList(String m_id){
@@ -276,7 +276,7 @@ public class MessageBean {
 	
 	/**
 	 * 내게 쓴 메시지를 모두 검색하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return 내게 쓴 메시지 리스트
 	 */
 	public ArrayList getToMeMessageList(String m_id){
@@ -319,8 +319,8 @@ public class MessageBean {
 
 	/**
 	 * 메시지 번호로 메시지를 검색하는 메서드.
-	 * @param sender
-	 * @param reader
+	 * @param sender 보낸이
+	 * @param reader 받은이
 	 * @return 메시지 정보
 	 */
 	public MessageDTO getMessage(String t_num){
@@ -358,7 +358,7 @@ public class MessageBean {
 	
 	/**
 	 * 보낸 사람이 삭제하지 않았을 때 받은 메시지를 삭제하는 메서드.
-	 * @param t_num
+	 * @param t_num 문자번호
 	 */
 	public void deleteGivenMessage_first(String t_num){
 		try{
@@ -380,7 +380,7 @@ public class MessageBean {
 	
 	/**
 	 * 받은 사람이 삭제하지 않았을 때 보낸 메시지를 삭제하는 메서드.
-	 * @param t_num
+	 * @param t_num 문자번호
 	 */
 	public void deleteSentMessage_first(String t_num){
 		try{
@@ -402,7 +402,7 @@ public class MessageBean {
 	
 	/**
 	 * 메시지를 삭제하는 메서드.
-	 * @param t_num
+	 * @param t_num 문자번호
 	 */
 	public void deleteMessage(String t_num){
 		try{
@@ -424,7 +424,7 @@ public class MessageBean {
 
 	/**
 	 * 메시지를 읽은 시간을 저장하는 메서드.
-	 * @param t_num
+	 * @param t_num 문자번호
 	 */
 	public void readMessage(String t_num){
 		try{
@@ -505,7 +505,7 @@ public class MessageBean {
 
 	/**
 	 * 받은 메시지를 모두 검색하는 메서드.
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return 받은 메시지 리스트
 	 */
 	public ArrayList getGivenMessageListMini(String m_id){

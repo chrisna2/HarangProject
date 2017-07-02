@@ -41,7 +41,7 @@ public class InsertCommand implements CommandInterface {
 	
 	/**
 	 *  강의평가등록 and 등록시 tt_iscomplete 값 Y로 수정
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void insert(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();

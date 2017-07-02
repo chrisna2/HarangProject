@@ -66,8 +66,8 @@ public class Bb_List_Command implements CommandInterface {
 	 * 
 	 * 사용자가 대나무숲 게시판을 이용할 때 대나무숲게시판의 글 목록을 ArrayList에 담아주는 메소드
 	 * 	
-	 * @param req
-	 * @return ArrayList
+	 * @param req 서블릿리퀘스트
+	 * @return ArrayList 대나무 숲 목록
 	 */
 	public ArrayList bblist(HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -151,8 +151,8 @@ public class Bb_List_Command implements CommandInterface {
 	 * 
 	 * 사용자가 대나무숲 게시판을 이용할 때 대나무숲게시판의 공지 글 목록을 ArrayList에 담아주는 메소드
 	 * 	
-	 * @param req
-	 * @return ArrayList
+	 * @param req 서블릿리퀘스트
+	 * @return ArrayList 대나무 숲 목록
 	 */
 	public ArrayList bbnlist(HttpServletRequest req) {
 		HttpSession session = req.getSession();

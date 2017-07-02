@@ -24,8 +24,8 @@ public class ParttimeMainCommand implements CommandInterface {
 	ParttimeBean bean = new ParttimeBean();
 	/**
 	 * 알바 모집 게시판에 필요한 정보를 DB에서 꺼내오고 게시판 페이지로 이동하는 메서드.
-	 * @param req
-	 * @param resp
+	 * @param req 서블릿 리퀘스트
+	 * @param resp 서블릿 리스폰즈
 	 */
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp) throws UnsupportedEncodingException {
 		MemberDTO member = bean.getLoginInfo(req); // 로그인 정보
@@ -45,8 +45,8 @@ public class ParttimeMainCommand implements CommandInterface {
 	/**
 	 * 페이징 관련 parameter를 받아서 처리 후 request에 보내는 메서드
 	 * 
-	 * @param listSize
-	 * @param req
+	 * @param listSize 목록 사이즈
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(int listSize, HttpServletRequest req) {
 		// 페이징 관련 parameter 받아오기
@@ -69,7 +69,7 @@ public class ParttimeMainCommand implements CommandInterface {
 	/**
 	 * DB에서 게시판에 띄울 글 정보를 받아와서 request에 보내는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void getList(HttpServletRequest req) {
 		String keyword = req.getParameter("keyword");
@@ -111,7 +111,7 @@ public class ParttimeMainCommand implements CommandInterface {
 
 	/**
 	 * 알바 모집 게시판에서 글을 삭제하는 메서드.
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void delete(HttpServletRequest req) {
 		String delete = (String) req.getParameter("delete");
@@ -171,7 +171,7 @@ public class ParttimeMainCommand implements CommandInterface {
 	
 	/**
 	 * 마감일이 지나면 자동으로 말머리가 [마감]으로 변경되는 메서드.
-	 * @param d_num
+	 * @param d_num 대타넘버
 	 */
 	public void afterDeadline(String p_num){
 		ParttimeDTO dto = bean.getParttime(p_num);

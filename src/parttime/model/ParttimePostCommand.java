@@ -32,7 +32,7 @@ public class ParttimePostCommand implements CommandInterface{
 	/**
 	 * 페이징 관련 변수 request로 받아서 넘기기
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(HttpServletRequest req) {
 		int nowPage = Integer.parseInt(req.getParameter("nowPage"));

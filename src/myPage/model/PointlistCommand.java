@@ -49,7 +49,6 @@ public class PointlistCommand implements CommandInterface {
 	/**
 	 * 회원 개인의 거래 기록 검색
 	 * @param checkid 학번
-	 * @return
 	 */
 	public void pointList(HttpServletRequest request){
 		

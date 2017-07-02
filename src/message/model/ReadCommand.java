@@ -7,6 +7,11 @@ import dto.MemberDTO;
 import dto.MessageDTO;
 import util.MessageBean;
 
+/**
+ * 메세지 읽기 관련 커멘드
+ * @author 양혜민
+ *
+ */
 public class ReadCommand implements message.CommandInterface{
 	MessageBean mbean = new MessageBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp){
@@ -25,7 +30,7 @@ public class ReadCommand implements message.CommandInterface{
 	
 	/**
 	 * 글 번호로 메시지 정보를 검색하는 메서드.
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void getMessage(HttpServletRequest req){
 		String t_num = req.getParameter("t_num");
@@ -40,7 +45,7 @@ public class ReadCommand implements message.CommandInterface{
 	/**
 	 * 페이징 관련 매개변수를 처리하는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(HttpServletRequest req) {
 		int nowPage = Integer.parseInt(req.getParameter("nowPage"));
@@ -52,7 +57,7 @@ public class ReadCommand implements message.CommandInterface{
 	
 	/**
 	 * 메시지를 읽은 시간을 저장하는 메서드.
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void read(HttpServletRequest req){
 		String t_num = req.getParameter("t_num");

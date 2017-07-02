@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public interface CommandInterface {
+	
 	/**
 	 * 하랑 레스토랑 관련 프로세스 커멘드
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws ServletException
-	 * @throws IOException
+	 * @param request 서블릿 리퀘스트
+	 * @param response 서블릿 리스폰스
+	 * @return Object 모든 형태의 클래스
+	 * @throws ServletException 서블릿 예외 처리
+	 * @throws IOException 입력 예외 처리
 	 */
 	public Object processCommand(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException;

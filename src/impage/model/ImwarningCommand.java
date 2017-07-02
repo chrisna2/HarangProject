@@ -40,7 +40,7 @@ public class ImwarningCommand implements CommandInterface {
 	}
 	/**
 	 *  신고등록메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void insert(HttpServletRequest request) {
 		pool = DBConnectionMgr.getInstance();

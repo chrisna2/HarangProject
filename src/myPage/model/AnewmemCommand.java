@@ -53,7 +53,7 @@ public class AnewmemCommand implements CommandInterface {
 	}
 	/**
 	 * 예비회원등록
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void insert(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();
@@ -94,7 +94,7 @@ public class AnewmemCommand implements CommandInterface {
 	
 	/**
 	 * 예비회원등록시 학번마즈막3자리출력
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void num(HttpServletRequest request){
 		pool = DBConnectionMgr.getInstance();

@@ -47,7 +47,7 @@ public class DonationCommand implements CommandInterface {
 	
 	/**
 	 * 학생이 기부한 도서 목록을 보여준다
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void list(HttpServletRequest request){

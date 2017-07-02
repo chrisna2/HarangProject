@@ -57,7 +57,7 @@ public class AdminMenuCommand implements CommandInterface {
 	
 	/**
 	 * 신규 메뉴 수정 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void updateFood(HttpServletRequest request){
 		
@@ -89,7 +89,7 @@ public class AdminMenuCommand implements CommandInterface {
 	}
 	/**
 	 * 신규 메뉴 등록 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void insertFood(HttpServletRequest request){
 		
@@ -122,7 +122,7 @@ public class AdminMenuCommand implements CommandInterface {
 
 	/**
 	 * 기존 메뉴 삭제 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void deleteFood(HttpServletRequest request){
 		

@@ -74,9 +74,9 @@ public class SpecUpProcCommand implements CommandInterface {
 	
 	/**
 	 * 스펙 신규 등록 메소드
-	 * @param multi
-	 * @param photoName
-	 * @return
+	 * @param multi 멀티 파트 리퀘스트
+	 * @param photoName 사진 저장 경로
+	 * @return 입력결과
 	 */
 	public String challenge(MultipartRequest multi, String photoName) {
 		
@@ -112,9 +112,9 @@ public class SpecUpProcCommand implements CommandInterface {
 	}
 	/**
 	 * 스펙업 재도전 메소드
-	 * @param multi
-	 * @param photoName
-	 * @return
+	 * @param multi 멀티 파트 리퀘스트
+	 * @param photoName 사진 저장 경로
+	 * @return 입력결과
 	 */
 	public String rechallenge(MultipartRequest multi, String photoName) {
 		

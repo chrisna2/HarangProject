@@ -76,7 +76,7 @@ public class DaetaReadCommand implements CommandInterface {
 	/**
 	 * 알바 모집 게시판 페이징 관련 매개변수를 처리하는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(HttpServletRequest req) {
 		int nowPage = 0, nowBlock = 0;
@@ -95,7 +95,7 @@ public class DaetaReadCommand implements CommandInterface {
 	/**
 	 * 지원 완료 후 이 페이지로 넘어올 경우 DB에 이력서를 저장하는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void apply(HttpServletRequest req) {
 		String m_id = "";
@@ -125,7 +125,7 @@ public class DaetaReadCommand implements CommandInterface {
 	/**
 	 * 지원자 목록을 검색해서 request에 보내는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void showApply(HttpServletRequest req) {
 		String d_num = (String) req.getParameter("d_num"); // 글번호 parameter
@@ -144,8 +144,8 @@ public class DaetaReadCommand implements CommandInterface {
 	/**
 	 * 지원자 페이징 관련 parameter를 처리하는 메서드.
 	 * 
-	 * @param listSize
-	 * @param req
+	 * @param listSize 목록의 사이즈
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void a_paging(int listSize, HttpServletRequest req) {
 		// 페이징 관련 parameter 받아오기
@@ -168,8 +168,8 @@ public class DaetaReadCommand implements CommandInterface {
 	/**
 	 * 채용 버튼을 눌렀을 때, 채용여부에 관한 정보를 업데이트하고 채용확인 메시지를 보내는 메서드.
 	 * 
-	 * @param login
-	 * @param req
+	 * @param login 로그인 여부
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void choice(String login, HttpServletRequest req) {
 
@@ -200,8 +200,8 @@ public class DaetaReadCommand implements CommandInterface {
 	/**
 	 * 해당 게시글에 이미 지원을 했는지 안했는지 확인하는 메서드.
 	 * 
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void isApply(String m_id, HttpServletRequest req) {
 		String d_num = req.getParameter("d_num");
@@ -219,8 +219,8 @@ public class DaetaReadCommand implements CommandInterface {
 	/**
 	 * 지원을 취소하는 경우 실행되는 메서드.
 	 * 
-	 * @param member
-	 * @param req
+	 * @param member 회원의 세션 정보
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void cancelApply(MemberDTO member, HttpServletRequest req) {
 		if ("OK".equals(req.getParameter("cancel"))) {
@@ -241,7 +241,7 @@ public class DaetaReadCommand implements CommandInterface {
 	
 	/**
 	 * 마감일이 지났는지 여부를 확인하는 메서드.
-	 * @param d_num
+	 * @param d_num 대타 넘버
 	 * @return true 지남|| false 안 지남
 	 */
 	public boolean checkDeadline(String d_num){
@@ -262,7 +262,7 @@ public class DaetaReadCommand implements CommandInterface {
 	
 	/**
 	 * 대타를 확인 후 포인트를 지급하는 메서드.
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void isComplete(HttpServletRequest req){
 		String d_num = req.getParameter("d_num");
@@ -301,7 +301,7 @@ public class DaetaReadCommand implements CommandInterface {
 	/**
 	 * 대타 날짜가 지난 후 신고버튼이 나타나게 하는 메서드. 
 	 * @param m_id 회원번호
-	 * @param req 
+	 * @param req 서블릿 리퀘스트 
 	 */
 	public void getReportButton(String m_id, HttpServletRequest req){
 		String d_num = req.getParameter("d_num");
@@ -319,8 +319,8 @@ public class DaetaReadCommand implements CommandInterface {
 	
 	/**
 	 * 대타 게시글을 수정하는 메서드.
-	 * @param member
-	 * @param req
+	 * @param member 회원 세션 정보
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void update(MemberDTO member, HttpServletRequest req){
 		String update = req.getParameter("update");
@@ -358,8 +358,8 @@ public class DaetaReadCommand implements CommandInterface {
 	
 	/**
 	 * 채용 선택이 되었는지 확인하는 메서드.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void isPicked(String m_id, HttpServletRequest req){
 		String d_num = req.getParameter("d_num");
@@ -378,8 +378,8 @@ public class DaetaReadCommand implements CommandInterface {
 	
 	/**
 	 * 신고했을 때 처리하는 메서드.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void report(String m_id, HttpServletRequest req){
 		String warning = req.getParameter("warning");
@@ -393,8 +393,8 @@ public class DaetaReadCommand implements CommandInterface {
 	
 	/**
 	 * 댓글을 등록하는 메서드.
-	 * @param m_id 회원번호
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void insertComment(String m_id, HttpServletRequest req){
 		String comment = req.getParameter("comment");
@@ -410,8 +410,8 @@ public class DaetaReadCommand implements CommandInterface {
 	
 	/**
 	 * 댓글을 삭제하는 메서드.
-	 * @param m_id
-	 * @param req
+	 * @param m_id 학번
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void deleteComment(String m_id, HttpServletRequest req){
 		String comment = req.getParameter("comment");

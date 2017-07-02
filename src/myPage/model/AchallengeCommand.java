@@ -62,7 +62,7 @@ public class AchallengeCommand implements CommandInterface {
 	
 	/**
 	 * 도전에 등록한 목록 출력
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void challengeList(HttpServletRequest request){
 		
@@ -147,8 +147,8 @@ public class AchallengeCommand implements CommandInterface {
 	}
 	/**
 	 * 스펙등록시 포인트 지급
-	 * @param request
-	 * @return
+	 * @param request 서블릿 리퀘스트
+	 * @return 출력 결과
 	 */
 	public String challengeComplete(HttpServletRequest request){
 		

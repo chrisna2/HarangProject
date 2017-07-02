@@ -129,8 +129,8 @@ public class A_Bb_Content_Command implements CommandInterface {
 	 * 대나무숲의 글의 내용을 불러 올 때 해당 글에 달린 '추천'의 목록을 ArrayList에 담아주고, 
 	 * 접속한 사람이 좋아요 버튼을 눌렀는지를 체크 해 주는 메소드
 	 * 
-	 * @param req
-	 * @return ArrayList
+	 * @param req 서블릿 리퀘스트
+	 * @return ArrayList 추천 수
 	 */
 	public ArrayList Bb_Like_Cnt(HttpServletRequest req) {
 
@@ -188,8 +188,8 @@ public class A_Bb_Content_Command implements CommandInterface {
 	 * 대나무숲의 글의 내용을 불러 올 때 해당 글에 달린 '비추천'의 목록을 ArrayList에 담아주고, 
 	 * 접속한 사람이 좋아요 버튼을 눌렀는지를 체크 해 주는 메소드
 	 * 
-	 * @param req
-	 * @return ArrayList
+	 * @param req 서블릿 리퀘스트
+	 * @return ArrayList 비추수
 	 */
 	public ArrayList Bb_Dlike_Cnt(HttpServletRequest req) {
 
@@ -248,9 +248,9 @@ public class A_Bb_Content_Command implements CommandInterface {
 	 * 대나무숲 게시판의 글을 조회 할 때 해당 글의 조회수를 늘려주는 메소드. 
 	 * 만약 로그인 후 처음 글을 읽는 사람이라면 session에 글을 읽었다는 것을 저장 해 준다. 
 	 * 
-	 * @param req
-	 * @param con
-	 * @param bb_number
+	 * @param req 서블릿 리퀘스트
+	 * @param con 커낵션 연결
+	 * @param bb_number 대나무 숲 번호
 	 */
 	private void updateCnt(HttpServletRequest req, Connection con, String bb_number) {
 

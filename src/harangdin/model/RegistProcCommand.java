@@ -78,9 +78,9 @@ public class RegistProcCommand implements CommandInterface {
 	
 	/**
 	 * 도서 판매 중 구매자와 거래가 진행 중일때
-	 * @param multi
-	 * @param photoName
-	 * @throws IOException
+	 * @param multi 멀티파트 리퀘스트
+	 * @param photoName 사진이름
+	 * @throws IOException 입력예외 처리
 	 */
 	
 	public void sellInput(MultipartRequest multi, String photoName) throws IOException{
@@ -122,8 +122,8 @@ public class RegistProcCommand implements CommandInterface {
 	
 	/**
 	 * 도서를 기부했을때 관리자의 승인이 나기 전
-	 * @param multi
-	 * @param photoName
+	 * @param multi 멀티파트 리퀘스트
+	 * @param photoName 사진이름
 	 */
 	
 	public void donateInput(MultipartRequest multi, String photoName){

@@ -45,7 +45,7 @@ public class HarangdinMainCommand implements CommandInterface {
 	
 	/**
 	 * 학생들이 등록한 도서들의 목록이 나타난다
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	
 	public void list(HttpServletRequest request){

@@ -48,7 +48,7 @@ public class AnewlessonCommand implements CommandInterface {
 	
 	/**
 	 * 수강실 이름 목록을 출력하는 메소드
-	 * @param request
+	 * @param request  서블릿 리퀘스트
 	 */
 	public void roomList(HttpServletRequest request){
 		
@@ -79,7 +79,7 @@ public class AnewlessonCommand implements CommandInterface {
 	
 	/**
 	 * 교수님 목록을 출력하는 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void teacherList(HttpServletRequest request){
 		
@@ -111,7 +111,7 @@ public class AnewlessonCommand implements CommandInterface {
 	}
 	/**
 	 * 수업 학과의 목록을 출력하는 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void deptList(HttpServletRequest request){
 		

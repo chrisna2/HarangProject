@@ -31,7 +31,7 @@ public class LoginBean {
 	
 	/**
 	 * 세션에 저장된 로그인 정보를 가져오는 메서드.
-	 * @param req 
+	 * @param req  서블릿 리퀘스트
 	 * @return MemberDTO 로그인정보 
 	 */
 	public MemberDTO getLoginInfo(HttpServletRequest req){
@@ -65,7 +65,7 @@ public class LoginBean {
 	 * 자기의 세션을 새로 받는 메소드 
 	 * 용도 : 포인트 거래나 새로운 세션의 정보에 변화가 있을 때 페이지에서 최신화하는 용도
 	 * DB에서 새로 받기 위한 용도 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void refreshSession(HttpServletRequest req){
 		
@@ -138,7 +138,7 @@ public class LoginBean {
 	
 	/**
 	 * 받은 메시지를 새로고침 하는 메서드. into refreshSession
-	 * @param m_id
+	 * @param m_id 학번
 	 * @return 받은 메시지 리스트
 	 */
 	public void messageRefresh(String m_id,HttpSession session){
@@ -182,8 +182,8 @@ public class LoginBean {
 	
 	/**
 	 * 회원의 포인트를 새로고침 하는 메소드 into refreshSession
-	 * @param m_id
-	 * @param session
+	 * @param m_id 학번
+	 * @param session 세션
 	 */
 	public void pointRefreshUser(String m_id,HttpSession session){
 		
@@ -230,8 +230,8 @@ public class LoginBean {
 	
 	/**
 	 * 관리자의 포인트 새로 고침 하는 메소드 into refreshSession
-	 * @param m_id
-	 * @param session
+	 * @param m_id 학번 
+	 * @param session 세션
 	 */
 	public void pointRefreshAdmin(String m_id,HttpSession session){
 		

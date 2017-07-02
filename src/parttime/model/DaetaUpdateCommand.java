@@ -31,7 +31,7 @@ public class DaetaUpdateCommand implements CommandInterface{
 	/**
 	 * 대타 모집 게시판 페이징 관련 매개변수를 처리하는 메서드.
 	 * 
-	 * @param req
+	 * @param req 서블릿 리퀘스트
 	 */
 	public void paging(HttpServletRequest req) {
 		int nowPage = 0, nowBlock = 0;

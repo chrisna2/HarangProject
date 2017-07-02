@@ -45,7 +45,7 @@ public class SpecUpCommand implements CommandInterface {
 
 	/**
 	 * 스펙 목록과 등록 관련 정보를 불러오는 메소드
-	 * @param request
+	 * @param request 서블릿 리퀘스트
 	 */
 	public void listCommand(HttpServletRequest request) {
 		
