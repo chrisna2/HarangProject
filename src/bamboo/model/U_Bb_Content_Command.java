@@ -79,7 +79,7 @@ public class U_Bb_Content_Command implements CommandInterface {
 
 			con = pool.getConnection();
 
-			updateCnt(req, con, bb_num);
+			updateCnt(req, bb_num);
 			req.setAttribute("bblist", bb.bblist(req));
 			req.setAttribute("bbnlist", bb.bbnlist(req));
 
@@ -250,10 +250,9 @@ public class U_Bb_Content_Command implements CommandInterface {
 	 * 이번 접속에서 처음 글을 읽는 경우에는 session 에 값을 넣어주고, 
 	 * 이번 접속에서 두번 이상 글을 읽는 경우에는 session에 입력된 값을 통해서 글의 조회수를 늘려주지 않는다. 
 	 * @param req 서블릿리퀘스트
-	 * @param con 커낵션
 	 * @param bb_number 대나무 숲 번호
 	 */
-	private void updateCnt(HttpServletRequest req, Connection con, String bb_number) {
+	private void updateCnt(HttpServletRequest req,String bb_number) {
 
 		HttpSession session = req.getSession();
 
