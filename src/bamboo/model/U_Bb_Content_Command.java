@@ -79,7 +79,7 @@ public class U_Bb_Content_Command implements CommandInterface {
 
 			con = pool.getConnection();
 
-			updateCnt(req, con, bb_num);
+			updateCnt(req, bb_num);
 			req.setAttribute("bblist", bb.bblist(req));
 			req.setAttribute("bbnlist", bb.bbnlist(req));
 
@@ -253,7 +253,7 @@ public class U_Bb_Content_Command implements CommandInterface {
 	 * @param con 커낵션
 	 * @param bb_number 대나무 숲 번호
 	 */
-	private void updateCnt(HttpServletRequest req, Connection con, String bb_number) {
+	private void updateCnt(HttpServletRequest req, String bb_number) {
 
 		HttpSession session = req.getSession();
 
