@@ -117,12 +117,10 @@ public class LoginBean {
 			//관리자 일때.
 			if(m_dept.equals("관리자")){
 				session.setAttribute("admin", mdto);
-				pointRefreshAdmin(m_id, session);
 			}
 			//일반 회원 일때
 			else{
 				session.setAttribute("member", mdto);
-				pointRefreshUser(m_id, session);
 			}
 			
 		}catch(Exception err){
@@ -133,7 +131,9 @@ public class LoginBean {
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt,rs);
 		}
-		messageRefresh(m_id, session);
+		session.setAttribute("head_msg",messageRefresh(m_id));
+		session.setAttribute("NRM", getNRMRefresh(m_id));
+		session.setAttribute("PLH", pointRefresh(m_id));
 	}
 	
 	/**
@@ -141,7 +141,7 @@ public class LoginBean {
 	 * @param m_id 학번
 	 * @param session 세션 정보
 	 */
-	public void messageRefresh(String m_id,HttpSession session){
+	public ArrayList messageRefresh(String m_id){
 		
 		ArrayList inboxlist = new ArrayList();
 		
@@ -177,7 +177,8 @@ public class LoginBean {
 		}finally{
 			pool.freeConnection(con,pstmt);
 		}
-		session.setAttribute("head_msg",inboxlist);
+		
+		return inboxlist;
 	}
 	
 	/**
@@ -185,7 +186,7 @@ public class LoginBean {
 	 * @param m_id 학번
 	 * @param session 세션
 	 */
-	public void pointRefreshUser(String m_id,HttpSession session){
+	public ArrayList pointRefresh(String m_id){
 		
 		ArrayList plist  = new ArrayList();
 		
@@ -224,59 +225,38 @@ public class LoginBean {
 			// DBCP 접속해제
 			pool.freeConnection(con, pstmt, rs);
 		}
-		session.setAttribute("PLM", plist);
+		return plist;
 	}
-
+	
 	
 	/**
-	 * 관리자의 포인트 새로 고침 하는 메소드 into refreshSession
-	 * @param m_id 학번 
-	 * @param session 세션
+	 * 아직 읽지 않은 메시지의 개수 새로고침
+	 * @param m_id 학번
+	 * @return 읽지 않은 메시지의 개수
 	 */
-	public void pointRefreshAdmin(String m_id,HttpSession session){
-		
-		
-		ArrayList plist  = new ArrayList();
-		
-		String sql  = "select r_regdate, r_content, r_point, m_giver, m_haver, "+
-				"(select m_name from tbl_member where m_id = m_giver) as m_givername, "+
-				"(select m_name from tbl_member where m_id = m_haver) as m_havername  "+
-				"from tbl_record where m_giver = ? or  m_haver = ? order by r_regdate desc limit 5";
-		
-		
-		try {
-			pool = DBConnectionMgr.getInstance();
+	public int getNRMRefresh(String m_id){
+		int notRead=0;
+		try{
 			con = pool.getConnection();
+			
+			String sql="SELECT count(t_num) FROM tbl_text WHERE m_reader = ? "
+					+ "AND t_read_date is null AND NOT m_sender = ?";
+			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, m_id);
 			pstmt.setString(2, m_id);
 			rs = pstmt.executeQuery();
+			rs.next();
+			notRead = rs.getInt(1);
 			
-			while(rs.next()){
-				
-				RecordDTO rdto = new RecordDTO();
-				
-				rdto.setR_regdate(rs.getString("r_regdate"));
-				rdto.setR_content(rs.getString("r_content"));
-				rdto.setR_point(rs.getLong("r_point"));
-				rdto.setM_giver(rs.getString("m_giver"));
-				rdto.setM_haver(rs.getString("m_haver"));
-				rdto.setM_givername(rs.getString("m_givername"));
-				rdto.setM_havername(rs.getString("m_havername"));
-				
-				plist.add(rdto);
-			}
-		} 
-		catch (Exception e) {
-			System.out.println( "header.jsp : " + e);
-		}
-		finally{
-			// DBCP 접속해제
-			pool.freeConnection(con, pstmt, rs);
+		}catch(Exception err){
+			System.out.println("getNotReadMessage() : " + err);
+			err.printStackTrace();
+		}finally{
+			pool.freeConnection(con,pstmt);
 		}
 		
-		session.setAttribute("PLA", plist);
+		return notRead;
 	}
-	
 	
 }

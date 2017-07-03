@@ -12,6 +12,7 @@ import util.MessageBean;
 import util.PagingBean;
 
 public class InboxCommand implements message.CommandInterface{
+	
 	MessageBean mbean = new MessageBean();
 	public String processCommand(HttpServletRequest req, HttpServletResponse resp){
 		MemberDTO member = mbean.getLoginInfo(req); // 로그인 정보

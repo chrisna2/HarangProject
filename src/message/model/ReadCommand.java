@@ -19,7 +19,10 @@ public class ReadCommand implements message.CommandInterface{
 		String m_id = member.getM_id();
 		
 		getMessage(req);
-		paging(req);
+		//헤더에서 접근할때는 페이징 번호 처리 못하게 막음
+		if(null != req.getParameter("nowPage") && null != req.getParameter("nowBlock")){
+			paging(req);
+		}
 		read(req);
 		notRead(m_id, req);
 		

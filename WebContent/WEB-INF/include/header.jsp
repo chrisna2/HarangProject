@@ -79,7 +79,7 @@
                   <li>
                     <!-- 내부 메뉴 : 실제 메세지 데이터가 포함 -->
                     <ul class="menu">
-                       <c:forEach items="${PLM}" var="ap">
+                       <c:forEach items="${PLH}" var="ap">
                            <c:if test="${member.m_id eq ap.m_giver}">
                              <li>
                                 <a href="#">
@@ -119,7 +119,7 @@
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-envelope-o"></i>
-                  <span class="label label-success">4</span>
+                  <span class="label label-success">${NRM}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <li class="header">최근 들어온 메세지</li>
@@ -129,7 +129,7 @@
                       <!-- 메세지 반복문 지점 시작 -->
                       <c:forEach items="${head_msg}" var="msg">
                         <li><!-- 메세지 시작 -->
-                        <a href="#">
+                        <a href="/HarangProject/message?cmd=READ&t_num=${msg.t_num}&tab=INBOX">
                           <div class="pull-left">
                             <img src="${msg.s_photo}" class="img-circle" alt="User Image"/>
                           </div>

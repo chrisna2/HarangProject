@@ -131,7 +131,7 @@ public class PointlistCommand implements CommandInterface {
 	}
 
 	
-	public ArrayList pointListHeaderUser(String m_id){
+	public ArrayList pointListHeader(String m_id){
 		
 		
 		ArrayList plist  = new ArrayList();
@@ -176,49 +176,5 @@ public class PointlistCommand implements CommandInterface {
 		return plist;
 	}
 	
-	public ArrayList pointListHeaderAdmin(String m_id){
-		
-		
-		ArrayList plist  = new ArrayList();
-		
-		String sql  = "select r_regdate, r_content, r_point, m_giver, m_haver, "+
-				"(select m_name from tbl_member where m_id = m_giver) as m_givername, "+
-				"(select m_name from tbl_member where m_id = m_haver) as m_havername  "+
-				"from tbl_record where m_giver = ? or  m_haver = ? order by r_regdate desc limit 5";
-		
-		
-		try {
-			pool = DBConnectionMgr.getInstance();
-			con = pool.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, m_id);
-			pstmt.setString(2, m_id);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()){
-				
-				RecordDTO rdto = new RecordDTO();
-				
-				rdto.setR_regdate(rs.getString("r_regdate"));
-				rdto.setR_content(rs.getString("r_content"));
-				rdto.setR_point(rs.getLong("r_point"));
-				rdto.setM_giver(rs.getString("m_giver"));
-				rdto.setM_haver(rs.getString("m_haver"));
-				rdto.setM_givername(rs.getString("m_givername"));
-				rdto.setM_havername(rs.getString("m_havername"));
-				
-				plist.add(rdto);
-			}
-		} 
-		catch (Exception e) {
-			System.out.println( "header.jsp : " + e);
-		}
-		finally{
-			// DBCP 접속해제
-			pool.freeConnection(con, pstmt, rs);
-		}
-		
-		return plist;
-	}
 	
 }

@@ -37,8 +37,6 @@ public class LoginCommand implements CommandInterface {
 		
 		HttpSession session = request.getSession();
 		
-		
-		
 		String url = "";
 		
 		pool = DBConnectionMgr.getInstance();
@@ -99,8 +97,9 @@ public class LoginCommand implements CommandInterface {
 			//일반 회원 일때
 			if(input_pw.equals(m_pw) && !m_dept.equals("관리자") && null != m_mail && null != m_tel && null != m_addr){
 				session.setAttribute("member", mdto);
-				session.setAttribute("PLM", point.pointListHeaderUser(input_id));
+				session.setAttribute("PLH", point.pointListHeader(input_id));
 				session.setAttribute("head_msg", messege.getGivenMessageListMini(input_id));
+				session.setAttribute("NRM", messege.getNotReadMessage(input_id));
 				RefreshCommand refresh = new RefreshCommand();
 				refresh.timetable(request);
 				refresh.recentData(request);
@@ -110,8 +109,9 @@ public class LoginCommand implements CommandInterface {
 			//관리자 일때.
 			else if(input_pw.equals(m_pw) && m_dept.equals("관리자")){
 				session.setAttribute("admin", mdto);
-				session.setAttribute("PLA", point.pointListHeaderAdmin(input_id));
+				session.setAttribute("PLH", point.pointListHeader(input_id));
 				session.setAttribute("head_msg", messege.getGivenMessageListMini(input_id));
+				session.setAttribute("NRM", messege.getNotReadMessage(input_id));
 				url="/WEB-INF/login/a_main.jsp";
 			}
 			//신규 회원 일때.
@@ -128,7 +128,6 @@ public class LoginCommand implements CommandInterface {
 			// DBCP 접속해제
 			pool.freeConnection(con,pstmt,rs);
 		}		
-		
 		
 		return url;
 		
