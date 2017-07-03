@@ -43,7 +43,7 @@ public class DBConnectionMgr {
 	//드라이버 
     private String _driver = "com.mysql.jdbc.Driver",
     //url		
-	_url = "jdbc:mysql://localhost:3306/harang",
+	_url = "jdbc:mysql://netsong7.synology.me:3306/harang",
 	//user 이름 
     _user = "harang",
     //비밀 번호
