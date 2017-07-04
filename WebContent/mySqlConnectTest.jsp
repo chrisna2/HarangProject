@@ -13,7 +13,7 @@
 //연결 모듈
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/harang";
+		String url = "jdbc:mysql://netsong7.synology.me:3306/harang";
 		Connection con =
 					DriverManager.getConnection(url,"harang","1111");
 		
