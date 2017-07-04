@@ -152,7 +152,7 @@ public class AspecListCommand implements CommandInterface {
 
 			
 			if(request.getParameter("c_name")!=null){
-				sql = "insert into tbl_certificate(c_name,c_agency,c_point) values(?,?,?)";
+				sql = "insert into tbl_certificate(c_name,c_agency,c_point,c_num) values(?,?,?,'')";
 			try {
 			
 			con = pool.getConnection();

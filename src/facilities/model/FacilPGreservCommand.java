@@ -115,8 +115,8 @@ public class FacilPGreservCommand implements CommandInterface {
 		String pgm_timecode = request.getParameter("spgm_timecode");
 		
 		String sql = 
-		"INSERT INTO `harang`.`tbl_pg_member` (`pgm_date`, `pgm_timecode`, `m_id`, `pg_num`, `pgm_issue`) "
-		+ "VALUES (?, ?, ?, ?, '학생예약')";
+		"INSERT INTO `harang`.`tbl_pg_member` (`pgm_date`, `pgm_timecode`, `m_id`, `pg_num`, `pgm_issue`, pgm_num) "
+		+ "VALUES (?, ?, ?, ?, '학생예약', '')";
 		
 		try {
 			pool = DBConnectionMgr.getInstance();

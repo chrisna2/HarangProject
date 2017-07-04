@@ -45,7 +45,7 @@ public class U_Bb_Post_Complete_Command implements CommandInterface {
 		
 		System.out.println(m_id);
 		
-		String sql = "insert into tbl_bamboo (m_id, bb_notice, bb_title, bb_content, bb_count, bb_nickname) values (?,'N',?,?,0,?)";
+		String sql = "insert into tbl_bamboo (m_id, bb_notice, bb_title, bb_content, bb_count, bb_nickname, bb_num) values (?,'N',?,?,0,?,'')";
 		
 		System.out.println(sql);
 

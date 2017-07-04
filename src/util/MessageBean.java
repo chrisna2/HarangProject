@@ -169,7 +169,7 @@ public class MessageBean {
 			con = pool.getConnection();
 			
 			String sql="INSERT INTO tbl_text(t_title, t_content, t_send_del,"
-					+ "t_read_del, m_sender, m_reader) VALUES(?,?,'N','N',?,?)";
+					+ "t_read_del, m_sender, m_reader,t_num) VALUES(?,?,'N','N',?,?,'')";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, t_title);

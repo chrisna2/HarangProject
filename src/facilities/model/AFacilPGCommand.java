@@ -154,8 +154,8 @@ public class AFacilPGCommand implements CommandInterface {
 	
 	private void addDateFacil(HttpServletRequest request) {
 		
-		String sql = "INSERT INTO tbl_pg_member (pgm_date, pgm_timecode, m_id, pg_num, pgm_issue) "
-				+ "VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO tbl_pg_member (pgm_date, pgm_timecode, m_id, pg_num, pgm_issue, pgm_num) "
+				+ "VALUES (?, ?, ?, ?, ?,'')";
 		
 		String pgm_date = request.getParameter("addpgm_date");
 		

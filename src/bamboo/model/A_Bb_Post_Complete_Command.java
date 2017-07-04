@@ -50,7 +50,7 @@ public class A_Bb_Post_Complete_Command implements CommandInterface {
 		
 		System.out.println(req.getParameter("gongji"));
 		
-		String sql = "insert into tbl_bamboo (m_id, bb_notice, bb_title, bb_content, bb_count, bb_nickname) values (?,?,?,?,0,?)";
+		String sql = "insert into tbl_bamboo (m_id, bb_notice, bb_title, bb_content, bb_count, bb_nickname, bb_num) values (?,?,?,?,0,?,'')";
 		
 		System.out.println(sql);
 

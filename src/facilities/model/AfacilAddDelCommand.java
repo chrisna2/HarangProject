@@ -263,7 +263,7 @@ public class AfacilAddDelCommand implements CommandInterface {
 			String pg_content = request.getParameter("facil_content");
 			
 			String sql = 
-			"INSERT INTO tbl_playground (pg_type, pg_name, pg_content) VALUES (?,?,?)";
+			"INSERT INTO tbl_playground (pg_type, pg_name, pg_content, pg_num) VALUES (?,?,?,'')";
 			
 			try {
 				pool = DBConnectionMgr.getInstance();
@@ -289,7 +289,7 @@ public class AfacilAddDelCommand implements CommandInterface {
 			String sr_content = request.getParameter("facil_content");
 			
 			String sql = 
-				"INSERT INTO tbl_studyroom (sr_type, sr_name, sr_content) VALUES (?,?,?)";
+				"INSERT INTO tbl_studyroom (sr_type, sr_name, sr_content, sr_num) VALUES (?,?,?,'')";
 			try {
 				pool = DBConnectionMgr.getInstance();
 				con = pool.getConnection();

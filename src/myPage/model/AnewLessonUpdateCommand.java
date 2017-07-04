@@ -67,8 +67,8 @@ public class AnewLessonUpdateCommand implements CommandInterface {
 		String result = "";
 		
 		String sql = "INSERT INTO tbl_lesson "
-				+ "(l_time, l_day, l_name, l_teacher, l_dept, l_ismust, l_grade, l_term, l_credit, l_room) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(l_time, l_day, l_name, l_teacher, l_dept, l_ismust, l_grade, l_term, l_credit, l_room, l_num) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '')";
 		
 		try {
 			pool = DBConnectionMgr.getInstance();

@@ -65,8 +65,7 @@
             <!-- 포인트 확인 : 현제 보유 포인트와 상세 정보 확인 -->
               <li>
                 <a href="/HarangProject/login?cmd=logout">
-                    <i class="fa fa-sign-out"></i>&nbsp;&nbsp;
-                                        로그아웃
+                    <i class="fa fa-sign-out"></i>
                 </a>
               </li>
               <li class="dropdown messages-menu">

@@ -93,7 +93,7 @@ public class AdminMenuCommand implements CommandInterface {
 	 */
 	public void insertFood(HttpServletRequest request){
 		
-		String sql = "INSERT INTO tbl_food (f_point, f_title, f_content, f_selldate) VALUES (?, ?, ?, ?);";
+		String sql = "INSERT INTO tbl_food (f_point, f_title, f_content, f_selldate, f_num) VALUES (?, ?, ?, ?, '');";
 		
 		try {
 			pool = DBConnectionMgr.getInstance();

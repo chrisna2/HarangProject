@@ -152,8 +152,8 @@ public class AFacilSRCommand implements CommandInterface {
 	
 	private void addDateFacil(HttpServletRequest request) {
 		
-		String sql = "INSERT INTO tbl_sr_member (srm_date, srm_timecode, m_id, sr_num, srm_issue) "
-				+ "VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO tbl_sr_member (srm_date, srm_timecode, m_id, sr_num, srm_issue, srm_num) "
+				+ "VALUES (?, ?, ?, ?, ?, '')";
 		
 		String srm_date = request.getParameter("addsrm_date");
 		

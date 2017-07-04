@@ -563,8 +563,8 @@ public class ParttimeBean {
 			con = pool.getConnection();
 			
 			String sql="INSERT INTO tbl_parttime_member(p_num, m_id, pm_reason, "
-					+ "pm_career, pm_wanttime, pm_choice) "
-					+ "VALUES(?,?,?,?,?,'N')";
+					+ "pm_career, pm_wanttime, pm_choice, pm_num) "
+					+ "VALUES(?,?,?,?,?,'N','')";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, p_num);
@@ -593,7 +593,7 @@ public class ParttimeBean {
 			con = pool.getConnection();
 			
 			String sql="INSERT INTO tbl_daeta_member(d_num, m_id, dm_reason, "
-					+ " dm_choice, dm_report) VALUES(?,?,?,'N','N')";
+					+ " dm_choice, dm_report, dm_num) VALUES(?,?,?,'N','N','')";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, d_num);
@@ -1045,8 +1045,8 @@ public class ParttimeBean {
 		try{
 			con = pool.getConnection();
 			
-			String sql="INSERT INTO tbl_parttime(p_title, p_deadline, p_wage, p_term, p_content, p_tel, p_daycode, p_location, p_header, m_id) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?) ";
+			String sql="INSERT INTO tbl_parttime(p_title, p_deadline, p_wage, p_term, p_content, p_tel, p_daycode, p_location, p_header, m_id,p_num) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?,'') ";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getP_title());
@@ -1077,8 +1077,8 @@ public class ParttimeBean {
 		try{
 			con = pool.getConnection();
 			
-			String sql="INSERT INTO tbl_daeta(d_title, d_deadline, d_wage, d_date, d_content, d_tel, d_deposit, d_location, d_header, m_id) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?) ";
+			String sql="INSERT INTO tbl_daeta(d_title, d_deadline, d_wage, d_date, d_content, d_tel, d_deposit, d_location, d_header, m_id, d_num) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?,'') ";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getD_title());

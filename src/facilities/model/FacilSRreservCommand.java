@@ -115,8 +115,8 @@ public class FacilSRreservCommand implements CommandInterface {
 		String srm_timecode = request.getParameter("ssrm_timecode");
 		
 		String sql = 
-		"INSERT INTO `harang`.`tbl_sr_member` (`srm_date`, `srm_timecode`, `m_id`, `sr_num`, `srm_issue`) "
-		+ "VALUES (?, ?, ?, ?, '학생예약')";
+		"INSERT INTO tbl_sr_member (srm_date, srm_timecode, m_id, sr_num, srm_issue, srm_num) "
+		+ "VALUES (?, ?, ?, ?, '학생예약', '')";
 		
 		try {
 			pool = DBConnectionMgr.getInstance();

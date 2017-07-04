@@ -87,8 +87,8 @@ public class RegistProcCommand implements CommandInterface {
 		
 		pool = DBConnectionMgr.getInstance();
 		
-		String sql="INSERT INTO tbl_book (m_id, b_choice, b_want, b_stock, b_name,  b_writer, b_pub, b_content, b_iscomplete, b_photo) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, '거래', ?)";
+		String sql="INSERT INTO tbl_book (m_id, b_choice, b_want, b_stock, b_name,  b_writer, b_pub, b_content, b_iscomplete, b_photo, b_num) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, '거래', ?, '')";
 		
 		try {
 			
@@ -129,8 +129,8 @@ public class RegistProcCommand implements CommandInterface {
 	public void donateInput(MultipartRequest multi, String photoName){
 		pool = DBConnectionMgr.getInstance();
 		
-		String sql="INSERT INTO tbl_book (m_id, b_choice, b_want, b_stock, b_name,  b_writer, b_pub, b_content, b_iscomplete, b_photo) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, '기부중', ?)";
+		String sql="INSERT INTO tbl_book (m_id, b_choice, b_want, b_stock, b_name,  b_writer, b_pub, b_content, b_iscomplete, b_photo, b_num) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, '기부중', ?, '')";
 		
 		try {
 			

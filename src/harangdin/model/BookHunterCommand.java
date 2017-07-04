@@ -45,7 +45,7 @@ public class BookHunterCommand implements CommandInterface {
 		String b_num = request.getParameter("b_num");
 		String bh_want = request.getParameter("bh_want");
 		
-		String sql = "INSERT INTO tbl_b_hunter (b_num, m_id, bh_want, bh_choice, bh_iscomplete) VALUES ( ?, ?, ?, 'N', 'N')";
+		String sql = "INSERT INTO tbl_b_hunter (b_num, m_id, bh_want, bh_choice, bh_iscomplete, bh_num) VALUES ( ?, ?, ?, 'N', 'N', '')";
 
 		pool = DBConnectionMgr.getInstance();
 		

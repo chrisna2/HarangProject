@@ -53,7 +53,7 @@ public class A_Sch_Post_Complete_Command implements CommandInterface {
 		
 		//System.out.println(req.getParameter("point"));
 		
-		String sql = "insert into tbl_schedule (s_title, s_dept, s_dstart, s_dend, s_rstart, s_rend, s_point, s_content, s_ispoint, s_grade, s_location ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into tbl_schedule (s_title, s_dept, s_dstart, s_dend, s_rstart, s_rend, s_point, s_content, s_ispoint, s_grade, s_location, s_num ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,'')";
 		
 		//System.out.println(sql);
 

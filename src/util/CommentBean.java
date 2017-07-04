@@ -42,7 +42,7 @@ public class CommentBean {
 		try{
 			con = pool.getConnection();
 			
-			String sql="INSERT INTO tbl_parttime_reply(pr_comment, p_num, m_id) VALUES (?,?,?)";
+			String sql="INSERT INTO tbl_parttime_reply(pr_comment,pr_num, p_num, m_id) VALUES (?,'',?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pr_comment);
@@ -68,7 +68,7 @@ public class CommentBean {
 		try{
 			con = pool.getConnection();
 			
-			String sql="INSERT INTO tbl_daeta_reply(dr_comment, d_num, m_id) VALUES (?,?,?)";
+			String sql="INSERT INTO tbl_daeta_reply(dr_comment, d_num, m_id, dr_num) VALUES (?,?,?,'')";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dr_comment);

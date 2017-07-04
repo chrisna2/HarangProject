@@ -56,8 +56,8 @@ public class InsertCommand implements CommandInterface {
 	
 	
 				sql = "INSERT INTO tbl_member_lesson "
-						+ "(m_id, l_num, lm_group, lm_year, lm_term, lm_star, lm_hw, lm_attend, lm_comment) "
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+						+ "(m_id, l_num, lm_group, lm_year, lm_term, lm_star, lm_hw, lm_attend, lm_comment, lm_num) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '')";
 			String sql2= "UPDATE tbl_timetable SET tt_iscomplete='Y' WHERE m_id=? and l_num=?";
 			try {
 			

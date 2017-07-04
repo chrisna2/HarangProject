@@ -175,7 +175,7 @@ public class BookDonateDetailCommand implements CommandInterface {
 		
 		String result = null;
 		
-		String sql="INSERT INTO tbl_b_hunter (b_num, m_id, bh_want, bh_choice, bh_iscomplete) VALUES (?, 'admin05', '5000', 'Y', 'Y')";
+		String sql="INSERT INTO tbl_b_hunter (b_num, m_id, bh_want, bh_choice, bh_iscomplete, bh_num) VALUES (?, 'admin05', '5000', 'Y', 'Y', '')";
 		
 		String b_num=request.getParameter("b_num");
 		

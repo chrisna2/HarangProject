@@ -45,7 +45,7 @@ public class A_Bb_Reply_Command implements CommandInterface {
 
 			//System.out.println(m_id);
 
-			String sql = "insert into tbl_bbreply (br_coment, br_nickname, bb_num, m_id) values (?,?,?,?)";
+			String sql = "insert into tbl_bbreply (br_coment, br_nickname, bb_num, m_id, br_num) values (?,?,?,?,'')";
 
 			//System.out.println(sql);
 
